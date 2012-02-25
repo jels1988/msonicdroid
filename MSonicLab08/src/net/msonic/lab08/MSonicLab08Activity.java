@@ -31,7 +31,7 @@ public class MSonicLab08Activity extends Activity {
         
         takePhoto();
        
-        
+        //Pruebas de clientes
     }
     
     
