@@ -1,0 +1,9 @@
+<resources>
+    <color name="actionbar_separator">#121e56</color>
+    <color name="actionbar_background">#6d1e7e</color>
+    <color name="actionbar_title">#FFFFFF</color>
+    <color name="actionbar_background_start">#6d1e7e</color>
+    <color name="actionbar_background_end">#b78fbf</color>
+    <color name="actionbar_background_item_pressed_start">#fecc00</color>
+    <color name="actionbar_background_item_pressed_end">#EE7600</color>
+</resources>
