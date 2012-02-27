@@ -9,7 +9,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.hardware.Camera;
+import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PreviewCallback;
+import android.os.Build;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -35,9 +37,32 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 		// The Surface has been created, acquire the camera and tell it where
 		// to draw.
 		camera = Camera.open();
+		//camera.setDisplayOrientation(90);
+
+		
+		/*Camera.Parameters p = camera.getParameters();
+		 p.set("orientation", "landscape");
+		 p.set("rotation", 90);
+		 camera.setParameters(p);*/
+		 
 		try {
+			
+		
+			
+		
+			 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO)
+		        {                       
+		         camera.setDisplayOrientation(90);
+		         
+		        } else {
+		          Parameters parameters = camera.getParameters();
+		          parameters.setRotation(90);       
+		          camera.setParameters(parameters); 
+		        }
+			 
 			camera.setPreviewDisplay(holder);
- 
+			
+			
 			camera.setPreviewCallback(new PreviewCallback() {
  
 				public void onPreviewFrame(byte[] data, Camera arg1) {
@@ -75,6 +100,8 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 		// Now that the size is known, set up the camera parameters and begin
 		// the preview.
 		Camera.Parameters parameters = camera.getParameters();
+		
+		
 		parameters.setPreviewSize(w, h);
 		camera.setParameters(parameters);
 		camera.startPreview();
