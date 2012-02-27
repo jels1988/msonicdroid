@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:orientation="vertical"
+  android:layout_height="match_parent">
+
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tableLayoutCda"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0,1,2,3,4,5,6" >
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_span="6"
+                android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/txViewCda"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="CDA" />
+            
+            </LinearLayout>
+            
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dip"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_span="3"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/txViewSuprv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ver_supervisores"
+                    android:gravity="center"
+                    android:clickable="true"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dip"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_span="3"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/txViewTelev"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:text="Televentas" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+        </TableRow>
+
+           <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+           
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+                android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/txViewIndSup1"
+                android:layout_width="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_height="40dip"
+                android:text="" />
+            
+<ImageView
+				android:id="@+id/imageIndSup1"
+				android:gravity="center"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content">				 
+				</ImageView>
+            
+            <TextView
+                android:id="@+id/txViewValSup1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+           <TextView
+                android:id="@+id/txViewIndTlv1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <ImageView
+				android:id="@+id/imageIndTlv1"
+				android:gravity="center"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				>
+				</ImageView>
+
+            <TextView
+                android:id="@+id/txViewValTlv1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/txViewVerInd1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/ver_cda"      
+                
+                android:clickable="true" />
+        </TableRow>
+<View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+            <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/txViewIndSup2"
+                android:layout_width="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_height="40dip"
+                android:text="" />
+
+            <ImageView
+				android:id="@+id/imageIndSup2"
+				android:gravity="center"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				>
+				</ImageView>
+
+            <TextView
+                android:id="@+id/txViewValSup2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+           <TextView
+                android:id="@+id/txViewIndTlv2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <ImageView
+				android:id="@+id/imageIndTlv2"
+				android:gravity="center"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content">
+				</ImageView>
+
+            <TextView
+                android:id="@+id/txViewValTlv2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/txViewVerInd2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"                
+                android:gravity="center_vertical"
+                android:text="@string/ver_cda" 
+                android:clickable="true" />
+        </TableRow>
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+                <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+                android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/txViewIndSup3"
+                android:layout_width="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_height="40dip"
+                android:text="" />
+
+            <ImageView
+				android:id="@+id/imageIndSup3"
+				android:gravity="center"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				>
+				</ImageView>
+
+            <TextView
+                android:id="@+id/txViewValSup3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+           <TextView
+                android:id="@+id/txViewIndTlv3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <ImageView
+				android:id="@+id/imageIndTlv3"
+				android:gravity="center"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content">
+				</ImageView>
+
+            <TextView
+                android:id="@+id/txViewValTlv3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/txViewVerInd3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/ver_cda" 
+                android:clickable="true" />
+        </TableRow>
+                <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+                    <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+                android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/txViewIndSup4"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:text="" />
+
+            <ImageView
+				android:id="@+id/imageIndSup4"
+				android:gravity="center"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				>
+				</ImageView>
+
+            <TextView
+                android:id="@+id/txViewValSup4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+           <TextView
+                android:id="@+id/txViewIndTlv4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <ImageView
+				android:id="@+id/imageIndTlv4"
+				android:gravity="center"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content">
+				</ImageView>
+
+            <TextView
+                android:id="@+id/txViewValTlv4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/txViewVerInd4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/ver_cda" 
+                android:clickable="true"/>
+        </TableRow>
+                
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+    </TableLayout>
+
+</LinearLayout>

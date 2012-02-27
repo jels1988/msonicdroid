@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="pe.lindley.activity"
+      android:versionCode="26"
+      android:versionName="4.2">
+    <uses-sdk android:minSdkVersion="8" />
+
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"></uses-permission>
+	
+    <application android:icon="@drawable/header_logo" 
+    			 android:label="@string/app_name"
+    			 android:theme="@style/CustomTheme"
+    			 android:name=".RTMApplication">
+    			 
+    	<uses-library android:name="com.google.android.maps" android:required="true"/>
+   		 <receiver android:name="ReInstallApp">
+   		     <intent-filter>
+                   <category android:name="android.intent.category.DEFAULT" />
+                        <action android:name="android.intent.action.PACKAGE_CHANGED"/>
+                        <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                        <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                        <action android:name="android.intent.action.PACKAGE_INSTALL"/>
+                        <action android:name="android.intent.action.PACKAGE_REPLACED"/>
+                        <data android:scheme="package"  />
+               </intent-filter>
+   		 </receiver>
+    	
+    	
+
+        <activity android:name="LoginActivity" android:label="@string/app_name" android:configChanges="keyboardHidden|orientation" android:noHistory="true">
+             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+             
+        </activity>
+		
+
+		<activity android:name="MenuInicioActivity" android:configChanges="keyboardHidden|orientation"/>
+		
+		<activity android:name="org.achartengine.GraphicalActivity" android:configChanges="keyboardHidden|orientation"/>
+		
+		<activity android:name="DireccionActivity" android:configChanges="keyboardHidden|orientation"/>
+		<!-- PROSPECTOR -->
+		<activity android:name="pe.lindley.prospector.activity.ConsultarClienteActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.prospector.activity.RegistrarClienteActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.prospector.activity.SeleccionarDireccionActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.prospector.activity.EnviarClientesActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.prospector.activity.DescargarRechazadosActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.prospector.activity.ConsultarClienteLocalActivity" android:configChanges="keyboardHidden|orientation"/>
+		
+		<!-- PROFIT -->
+		<activity android:name="pe.lindley.profit.activity.ProfitHistoryActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.profit.activity.ProfitHistoryBasicoActivity"/>
+		<activity android:name="pe.lindley.profit.activity.ProfitHistoryComparativoActivity"/>
+		<activity android:name="pe.lindley.profit.activity.ProfitHistoryDatosComercialesActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.profit.activity.DescargarParametrosActivity" android:configChanges="keyboardHidden|orientation"/>		
+		<activity android:name="pe.lindley.profit.activity.ProfitHistoryFamMarcaArtActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.profit.activity.ProfitHistoryFamiliaMarcaActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.profit.activity.ProfitHistorySegmentoMarcaActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.profit.activity.ProfitHistorySegMarArtActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.profit.activity.ProfitHistoryArticuloActivity" android:configChanges="keyboardHidden|orientation"/>
+		
+		<!-- EQUIPO FRIO -->
+		<activity android:name="pe.lindley.equipofrio.activity.ConsultarEquipoFrioActivity" android:configChanges="keyboardHidden|orientation"/>
+		
+		
+		<!-- EXPLORADOR MULTIMEDIA -->
+		
+		<activity android:name="pe.lindley.exmedia.activity.ViewVideoActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.exmedia.activity.ViewImageActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.exmedia.activity.ListarFilesMultiActivity" android:configChanges="keyboardHidden|orientation"/>
+		    
+		
+		<!-- OPORTUNIDADES MEJORA -->
+		<activity android:name="pe.lindley.om.activity.ConsultarClienteOMActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.om.activity.DescargarParametrosActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.om.activity.DescargarClientesActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.om.activity.BuscarOrdenesOMActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.om.activity.NuevaOrdenOMActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.om.activity.ListadoEventosOMActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.om.activity.RegistrarEventoOMActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.om.activity.DescargarOrdenesOMActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.om.activity.ListadoOrdenesOMPendientesActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.om.activity.EnviarOrdenesOMActivity" android:configChanges="keyboardHidden|orientation"/>		
+		
+		
+		<!-- RED -->
+		<activity android:name="pe.lindley.red.activity.ConsultarClienteActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.ConsultarEncuestaActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.FichaClienteActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.CoreBrandsMixActivity" android:configChanges="keyboardHidden|orientation"/>
+		
+		
+		<activity android:name="pe.lindley.red.activity.ResumenActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.ResumenActivity1" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.ResumenActivity2" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.ResumenActivity3" android:configChanges="keyboardHidden|orientation"/>
+		
+		<activity android:name="pe.lindley.red.activity.IndiceEjecucionAnioActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.IndiceEjecucionClienteActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.IndiceEjecucionMatrizActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.MixSoviEmpresaActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.SKUsActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.SoviMixPackageActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.SoviMixPuntoContactoActivity" android:configChanges="keyboardHidden|orientation"/>
+		
+		<activity android:name="pe.lindley.red.activity.FotoActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.PreguntaActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.GeneradorActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.ComunicacionActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.SoviCategoriaActivity" android:configChanges="keyboardHidden|orientation"/>		
+		<activity android:name="pe.lindley.red.activity.InventarioPtoContactoActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.InventarioPrecioSugeridoActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.InventarioPrecioMarcadoActivity" android:configChanges="keyboardHidden|orientation"/>
+		
+		<activity android:name="pe.lindley.red.activity.OrdenTrabajoActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.ResumenActivity4" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.red.activity.ResumenActivity5" android:configChanges="keyboardHidden|orientation"/>
+		
+		
+		<!-- FICHA CLIENTE -->
+		<activity android:name="pe.lindley.ficha.activity.ConsultarClienteActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.ficha.activity.FichaClienteActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.ficha.activity.FiguraComercialActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.ficha.activity.ComercialActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.ficha.activity.DescargarParametrosActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.ficha.activity.ConsultarEncuestaActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.ficha.activity.CerrarEncuestaActivity" android:configChanges="keyboardHidden|orientation"/>
+		   
+		
+		<activity android:name="pe.lindley.ficha.activity.FichaEncuestaActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.ficha.activity.MostrarContactoActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.ficha.activity.ActualizarComercialActivity" android:configChanges="keyboardHidden|orientation" />    
+		<activity android:name="pe.lindley.ficha.activity.ActualizarContactoActivity" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name="pe.lindley.ficha.activity.DescargarParametrosActivity" android:configChanges="keyboardHidden|orientation" />
+		
+		<activity android:name="org.achartengine.GraphicalActivity" />
+		
+		<!-- MMIL -->
+		
+		
+		
+		<activity android:name="pe.lindley.mmil.activity.MMILPaisActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.mmil.activity.RegionActivity" android:configChanges="keyboardHidden|orientation"/>
+		      
+		<activity android:name="pe.lindley.mmil.activity.CdaActivity" android:configChanges="keyboardHidden|orientation" />		  
+		<activity android:name="pe.lindley.mmil.activity.MMILCdaActivity" android:configChanges="keyboardHidden|orientation">
+		    <intent-filter>
+		                <action android:name="android.intent.action.VIEW"/>
+		                <category android:name="android.intent.category.DEFAULT"/>
+		                <category android:name="android.intent.category.BROWSABLE"/>
+		                <data android:scheme="mmil" android:host="mmil.region.com" />
+		    </intent-filter>
+		</activity>   
+		<activity android:name="pe.lindley.mmil.activity.MostrarPizarraActivity" android:configChanges="keyboardHidden|orientation">
+		    <intent-filter>
+		                <action android:name="android.intent.action.VIEW"/>
+		                <category android:name="android.intent.category.DEFAULT"/>
+		                <category android:name="android.intent.category.BROWSABLE"/>
+		                <data android:scheme="mmil" android:host="mmil.pizarra.com" />
+		    </intent-filter>
+		</activity> 
+
+		<activity android:name="pe.lindley.mmil.activity.MostrarSupervisorActivity" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="pe.lindley.mmil.activity.MostrarVendedorActivity" android:configChanges="keyboardHidden|orientation" />	  
+		<activity android:name="pe.lindley.mmil.activity.MostrarTeleventaActivity" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="pe.lindley.mmil.activity.MostrarDashBoardActivity" android:configChanges="keyboardHidden|orientation" />   
+		<activity android:name="pe.lindley.mmil.activity.VendedorMapaActivity" android:configChanges="keyboardHidden|orientation">
+		  
+		    </activity> 
+		
+		
+
+		<!-- PLAN DESARROLLO -->
+		<activity android:name="pe.lindley.plandesarrollo.activity.MostrarPlanDesarrolloActivity" android:configChanges="keyboardHidden|orientation" />              
+        <activity android:name="pe.lindley.plandesarrollo.activity.MostrarActividadActivity" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name="pe.lindley.plandesarrollo.activity.DatosPlanActivity" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name="pe.lindley.plandesarrollo.activity.DatosActividadActivity" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name="pe.lindley.plandesarrollo.activity.DatosResponsableActivity" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name="pe.lindley.plandesarrollo.activity.EliminarActividadActivity" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name="pe.lindley.plandesarrollo.activity.DescargarParametrosActivity" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name="pe.lindley.plandesarrollo.activity.MostrarResponsableActivity" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name="pe.lindley.plandesarrollo.activity.EliminarResponsableActivity" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name="pe.lindley.plandesarrollo.activity.MostrarSustentoActivity" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name="pe.lindley.plandesarrollo.activity.DatosSustentoActivity" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name="pe.lindley.plandesarrollo.activity.EliminarSustentoActivity" android:configChanges="keyboardHidden|orientation" />
+
+		        <!-- VENTA CERO -->
+        <activity android:name="pe.lindley.ventacero.activity.VentaCeroActivity" android:configChanges="keyboardHidden|orientation" />		 
+        <activity android:name="pe.lindley.ventacero.activity.MostrarVentaCeroActivity" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name="pe.lindley.ventacero.activity.MostrarFiguraComercialActivity" android:configChanges="keyboardHidden|orientation" />        
+        <activity android:name="pe.lindley.ventacero.activity.DatosVentaCeroActivity" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name="pe.lindley.ventacero.activity.DescargarParametrosActivity" android:configChanges="keyboardHidden|orientation" />
+        
+        <!--SACC-->
+		<activity android:name="pe.lindley.sacc.activity.MostrarEventoActivity" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="pe.lindley.sacc.activity.MostrarContactoActivity" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="pe.lindley.sacc.activity.ConsultarClienteActivity" android:configChanges="keyboardHidden|orientation" />
+		
+		<!--   PUNTOS DE INTERES -->
+		<activity android:name="pe.lindley.puntointeres.activity.ConsultarClienteActivity" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="pe.lindley.puntointeres.activity.DescargarParametrosActivity" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="pe.lindley.puntointeres.activity.PuntosInteresMapActivity" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="pe.lindley.puntointeres.activity.NuevoPuntoInteresActivity" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="pe.lindley.puntointeres.activity.ActualizarPuntoInteresActivity" android:configChanges="keyboardHidden|orientation" />
+		
+		
+    </application>
+</manifest>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/lineItem"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content"
+	android:gravity="center_vertical">
+	 <TableLayout android:stretchColumns="1" android:id="@+id/tableLayout1" android:layout_height="wrap_content" android:layout_width="fill_parent">
+    
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="N° Orden :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtNumeroOrden" android:text="Ruc" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        
+         <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Tipo Contacto :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtTipoContacto" android:text="Ruc" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        
+         <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Tipo :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtTipoOrden" android:text="Ruc" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Sub-Tipo :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtSubTipoOrden" android:text="Ruc" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Motivo :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtMotivo" android:text="Ruc" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Prioridad :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtPrioridad" android:text="Ruc" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Estado :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtEstado" android:text="Ruc" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Asignado :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtAsignado" android:text="Ruc" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Fecha :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtFecha" android:text="Ruc" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+        	<LinearLayout android:layout_span="2" android:orientation="horizontal" android:padding="2dip" android:layout_height="fill_parent" android:layout_width="match_parent">
+        		<ImageButton android:id="@+id/btn_upload"  android:src="@drawable/btn_upload" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+        		<ImageButton android:id="@+id/btn_enviar"  android:src="@drawable/btn_enviar" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+        		
+        	</LinearLayout>
+        </TableRow>
+        
+        
+     </TableLayout>
+
+</RelativeLayout>

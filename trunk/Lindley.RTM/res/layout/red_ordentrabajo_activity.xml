@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.thira.examples.actionbar.widget.ActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="fill_parent"
+        android:layout_height="44dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <!--ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true" >
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"-->
+
+
+                <TableLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/tableLayoutCda"
+                    android:layout_width="wrap_content"
+        			android:layout_height="wrap_content"
+                    android:shrinkColumns="*"
+                    android:stretchColumns="*" >
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="ORDEN DE TRABAJO" />
+                    </TableRow>
+
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:layout_width="200dip"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="" />
+
+                        <TextView
+                            android:layout_width="100dip"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="P. Ejecución" />
+
+                        <TextView
+                            android:layout_width="100dip"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="Puntos Max" />
+                    </TableRow>
+
+
+                </TableLayout>
+
+            <RelativeLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+                <ListView
+                    android:id="@+id/android:list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="1dip"
+                    android:layout_marginTop="1dip"
+                    android:drawSelectorOnTop="false"
+                     android:background="#00000000"
+                    android:cacheColorHint="#00000000"
+                    android:focusable="false" />
+            </RelativeLayout>
+        <!--/HorizontalScrollView>
+    </ScrollView-->
+
+</LinearLayout>

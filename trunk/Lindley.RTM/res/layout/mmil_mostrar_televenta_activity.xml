@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <com.thira.examples.actionbar.widget.ActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="fill_parent"
+        android:layout_height="44dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <ScrollView android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:fillViewport="true">
+            <HorizontalScrollView android:layout_height="fill_parent"
+            android:layout_width="fill_parent" 
+            android:fillViewport="true">
+            
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TableLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/tableLayoutCda"
+        android:layout_width="1800dip"
+        android:layout_height="fill_parent"
+        android:shrinkColumns="*" 
+        android:stretchColumns="*" >
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="50dip"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="Codigo" />
+
+                <TextView
+                    android:layout_width="300dip"
+                    android:layout_height="wrap_content"
+                    android:text="TeleVendedor" />
+                
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="130dip"
+                    android:text="Primer Registro" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="130dip"
+                    android:text="Último Registro" />
+                
+                 <TextView
+                        android:layout_width="10dip"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                     
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:layout_width="70dip"
+                        android:text="Plan Visit." />
+                    
+                <TextView
+                   android:layout_height="wrap_content"
+                    android:layout_width="50dip"
+                    android:gravity="center"
+                    android:text="Clientes" />
+
+                <TextView
+                   android:layout_height="wrap_content"
+                    android:layout_width="50dip"
+                    android:gravity="center"
+                    android:text="Atendidos" />
+
+                <TextView
+                   android:layout_height="wrap_content"
+                    android:layout_width="50dip"
+                    android:gravity="center"
+                    android:text="Sin Pedidos" />
+
+                <TextView
+                     android:layout_width="100dip"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="Importe S/." />
+                
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="50dip"
+                    android:gravity="center"
+                    android:text="Cj. Físicas" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="50dip"
+                    android:gravity="center"
+                    android:text="Cj. Unitarias" />
+                
+                <TextView
+                    android:layout_width="100dip"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="Tiempo Efectivo" />
+
+            </TableRow>
+<View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+
+        </TableLayout>
+        
+             
+
+        <ListView
+            android:id="@+id/android:list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dip"
+            android:layout_marginTop="25dip"
+            android:drawSelectorOnTop="false" />
+</RelativeLayout>
+    </HorizontalScrollView>
+    </ScrollView>
+</LinearLayout>

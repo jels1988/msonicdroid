@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lineItem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical" >
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tableLayoutCda" 
+        android:layout_width="2000dip"
+        android:layout_height="wrap_content" 
+        android:stretchColumns="*"
+        android:shrinkColumns="*">         
+      
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+         
+            <TextView
+                android:id="@+id/txViewCodigo"
+                android:layout_height="40dip"
+                android:layout_width="50dip"
+                android:gravity="center"
+                android:text="" />
+            
+             <TextView
+                 android:id="@+id/txViewCliente"
+                    android:layout_width="220dip"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+            
+                <TextView
+                android:id="@+id/txViewDireccion"                
+                android:layout_height="wrap_content"
+                 android:layout_width="220dip"
+                android:text="" />
+                
+                <TextView
+                android:id="@+id/txViewRuta"
+                android:layout_height="wrap_content"
+                 android:layout_width="30dip"
+                 android:gravity="center"
+                android:text="" />
+                
+                <TextView
+                android:id="@+id/txViewSegmento"
+                android:layout_height="wrap_content"
+                 android:layout_width="60dip"
+                 android:gravity="center"
+                android:text="" />
+                
+                 <TextView
+                android:id="@+id/txViewEqf"
+                android:layout_height="wrap_content"
+                 android:layout_width="30dip"
+                 android:gravity="center"
+                android:text="" />
+                 
+                 <TextView
+                android:id="@+id/txViewCantidad"
+                android:layout_height="wrap_content"
+                 android:layout_width="30dip"
+                 android:gravity="center"
+                android:text="" />
+                 
+                <TextView
+                android:id="@+id/txViewEstado"
+                android:layout_height="wrap_content"
+                 android:layout_width="30dip"
+                 android:gravity="center"
+                android:text="" />
+                
+                 <TextView
+                android:id="@+id/txViewMotivoActual"                
+                android:layout_height="wrap_content"
+                 android:layout_width="220dip"
+                android:text="" />
+                 
+                  <TextView
+                android:id="@+id/txViewObsActual"                
+                android:layout_height="wrap_content"
+                 android:layout_width="220dip"
+                android:text="" />
+                  
+                   <TextView
+                android:id="@+id/txViewMotivoAnterior"                
+                android:layout_height="wrap_content"
+                 android:layout_width="220dip"
+                android:text="" />
+                   
+                    <TextView
+                android:id="@+id/txViewObsAnterior"                
+                android:layout_height="wrap_content"
+                 android:layout_width="220dip"
+                android:text="" />
+                                
+				
+<!-- 				<TextView -->
+<!--                 android:id="@+id/txViewFigCom" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                  android:layout_width="80dip" -->
+<!--                  android:gravity="center" -->
+<!--                 android:text="@string/vtacero_detalle_ver_fig_comercial" /> -->
+                
+                <TextView
+                android:id="@+id/txViewEditar"
+                android:layout_height="wrap_content"
+                 android:layout_width="50dip"
+                 android:gravity="center"
+                android:text="@string/vtacero_detalle_ver_motivo" />
+                               
+                
+        </TableRow>
+        
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+    </TableLayout>
+</LinearLayout>

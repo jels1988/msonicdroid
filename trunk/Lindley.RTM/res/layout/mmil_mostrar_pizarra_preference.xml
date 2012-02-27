@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:layout_height="fill_parent"> 
+
+    
+    <PreferenceCategory 
+        android:title="Dashboard"
+        android:key="mmil_pantalla_1">
+        
+        <CheckBoxPreference 
+            android:key="@string/mmil_pantalla_1_enabled"
+            android:summary="Refrescar automáticamente dashboard"
+            android:title="Refrescar Dashboard" 
+            android:defaultValue="false"
+        />
+        
+        <ListPreference 
+            android:key="@string/mmil_pantalla_1_interval"
+            android:title="Tiempo entre actualización"
+            android:summary="Define el intervalo de tiempo para actualizar"
+            android:defaultValue="60000" 
+            android:entries="@array/mmil_pantalla_1_update_interval"
+            android:entryValues="@array/mmil_pantalla_1_update_interval_values"
+             android:dependency="@string/mmil_pantalla_1_enabled"
+
+        />    
+            
+    </PreferenceCategory>
+
+    
+</PreferenceScreen>

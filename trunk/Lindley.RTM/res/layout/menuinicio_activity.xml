@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:orientation="vertical"
+  android:layout_height="match_parent">
+  
+  
+<com.thira.examples.actionbar.widget.ActionBar
+		android:id="@+id/actionBar" 
+		android:layout_width="fill_parent"
+		android:layout_height="44dip" 
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true" />
+		
+		
+  <TableLayout
+  	android:layout_height="wrap_content" 
+  	android:layout_width="fill_parent"
+  	android:layout_alignParentTop="true">
+  	
+  	<TableRow
+        		android:layout_width="fill_parent" 
+        		android:layout_height="wrap_content">
+		        		
+		        		<ImageView android:id="@+id/imgProspector" 
+		        					android:layout_width="wrap_content" 
+		        					android:layout_height="wrap_content"
+		        					android:src="@drawable/btn_prospector" 
+		        					android:focusable="false"
+		        					android:onClick="btnDesarrollador_onclick"></ImageView>
+		        					
+		        		<ImageView android:id="@+id/imgOm" 
+		        					android:layout_width="wrap_content" 
+		        					android:layout_height="wrap_content"
+		        					android:src="@drawable/btn_om"
+		        					android:focusable="true"
+		        					android:layout_centerInParent="true"
+		        					android:onClick="btnOm_onclick"></ImageView>
+		        		
+		        		<ImageView android:id="@+id/imgRed" 
+		        					android:layout_width="wrap_content" 
+		        					android:layout_height="wrap_content"
+		        					android:src="@drawable/btn_red"
+		        					android:focusable="true"
+		        					android:layout_centerInParent="true"
+		        					android:onClick="btnRed_onclick"></ImageView>
+		        		
+		        		    <ImageView android:id="@+id/imgMultimedia" 
+		        					android:layout_width="wrap_content" 
+		        					android:layout_height="wrap_content"
+		        					android:src="@drawable/btn_multimedia"
+		        					android:focusable="true"
+		        					android:layout_centerInParent="true"
+		        					android:onClick="btnMultimedia_onclick"></ImageView>
+		        		    
+		        		        
+		        		   
+		        		<ImageView android:id="@+id/imgFicha" 
+		        					android:layout_width="wrap_content" 
+		        					android:layout_height="wrap_content"
+		        					android:src="@drawable/btn_ficha" 
+		        					android:focusable="true"
+		        					android:onClick="btnFicha_onclick"></ImageView>
+		        		
+		        		       
+		        		<ImageView android:id="@+id/imgMMil" 
+		        					android:layout_width="wrap_content" 
+		        					android:layout_height="wrap_content"
+		        					android:src="@drawable/btn_mmil" 
+		        					android:focusable="true"
+		        					android:onClick="btnMMil_onclick"></ImageView>
+		        		
+		        		    <ImageView android:id="@+id/imgVentaCero" 
+		        					android:layout_width="wrap_content" 
+		        					android:layout_height="wrap_content"
+		        					android:src="@drawable/btn_ventacero" 
+		        					android:focusable="true"
+		        					android:onClick="btnVentaCero_onclick"></ImageView>
+		        		
+		        		     
+		        		    
+		        		    
+    </TableRow>
+    
+    <TableRow android:id="@+id/tableRow3" 
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content">
+        <TextView android:layout_width="wrap_content" 
+        			android:id="@+id/txtPropspector" 
+        			android:text="@string/menu_inicio_prospector"
+        			android:layout_margin="4dip" 
+        			android:layout_height="wrap_content"/>
+        <TextView android:text="@string/menu_inicio_desarrollador" 
+        		android:id="@+id/txtOM" 
+        		android:layout_width="wrap_content" 
+        		android:layout_margin="4dip" 
+        		android:layout_height="wrap_content"></TextView>
+        
+        <TextView android:text="@string/menu_inicio_red" 
+        		android:id="@+id/txtRed" 
+        		android:layout_width="wrap_content" 
+        		android:layout_margin="4dip" 
+        		android:gravity="center_horizontal"
+        		android:layout_height="wrap_content"></TextView>
+        
+            <TextView android:text="@string/menu_inicio_multimedia" 
+        		android:id="@+id/txtMultimedia" 
+        		android:layout_width="wrap_content" 
+        		android:layout_margin="4dip" 
+        		android:gravity="center_horizontal"
+        		android:layout_height="wrap_content"></TextView>
+            
+            <TextView android:layout_width="wrap_content" 
+        			android:id="@+id/txtFicha" 
+        			android:gravity="center"
+        			android:text="@string/menu_inicio_ficha"
+        			android:layout_margin="4dip" 
+        			android:layout_height="wrap_content"/>
+            
+            <TextView android:layout_width="wrap_content" 
+        			android:id="@+id/txtMil" 
+        			android:gravity="center"
+        			android:text="@string/menu_inicio_mmil"
+        			android:layout_margin="4dip" 
+        			android:layout_height="wrap_content"/>
+            
+             <TextView android:layout_width="wrap_content" 
+        			android:id="@+id/txtVentaCero" 
+        			android:gravity="center"
+        			android:text="@string/menu_inicio_ventacero"
+        			android:layout_margin="4dip" 
+        			android:layout_height="wrap_content"/>
+             
+             
+    </TableRow>
+    
+    	<TableRow
+        		android:layout_width="fill_parent" 
+        		android:layout_height="wrap_content">
+             
+    	     	<ImageView android:id="@+id/imgSacc" 
+		        					android:layout_width="wrap_content" 
+		        					android:layout_height="wrap_content"
+		        					android:src="@drawable/imgsacc" 
+		        					android:focusable="true"
+		        					android:onClick="btnSacc_onclick"></ImageView>  
+		        					
+    	     	<ImageView android:id="@+id/imgPtoInteres" 
+		        					android:layout_width="wrap_content" 
+		        					android:layout_height="wrap_content"
+		        					android:src="@drawable/btn_puntointeres" 
+		        					android:focusable="true"
+		        					android:onClick="btnPuntosInteres_onclick"></ImageView>  
+    	    
+    	    
+        </TableRow>
+        
+    	<TableRow
+        		android:layout_width="fill_parent" 
+        		android:layout_height="wrap_content">
+             
+    	    <TextView android:layout_width="wrap_content" 
+        			android:id="@+id/txtSACC" 
+        			android:gravity="center"
+        			android:text="@string/menu_inicio_sacc"
+        			android:layout_margin="4dip" 
+        			android:layout_height="wrap_content"/>
+    	    
+    	    <TextView android:layout_width="wrap_content" 
+        			android:id="@+id/txtPtoInteres" 
+        			android:gravity="center"
+        			android:text="@string/menu_inicio_ptointeres"
+        			android:layout_margin="4dip" 
+        			android:layout_height="wrap_content"/>
+    	    
+        </TableRow>
+    
+     	
+  </TableLayout>
+    
+</LinearLayout>

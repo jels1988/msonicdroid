@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.thira.examples.actionbar.widget.ActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="fill_parent"
+        android:layout_height="44dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TableLayout
+            android:id="@+id/tableLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:stretchColumns="1" >
+
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="false" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="Codigo :" >
+                </TextView>
+
+                <EditText
+                    android:id="@+id/txtCodigo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Ingresar Código"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:singleLine="true"
+                    android:text="" >
+                </EditText>
+
+                <ImageButton
+                    android:onClick="btnbuscar_onclick"
+                    android:src="@drawable/search" >
+                </ImageButton>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="Ruc :" >
+                </TextView>
+
+                <EditText
+                    android:id="@+id/txtRuc"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Ingresar Ruc"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:singleLine="true"
+                    android:text="" >
+                </EditText>
+
+                <ImageButton
+                    android:onClick="btnbuscar_onclick"
+                    android:src="@drawable/search" >
+                </ImageButton>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="Dni :" >
+                </TextView>
+
+                <EditText
+                    android:id="@+id/txtDni"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Ingresar Dni"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:singleLine="true"
+                    android:text="" >
+                </EditText>
+
+                <ImageButton
+                    android:onClick="btnbuscar_onclick"
+                    android:src="@drawable/search" >
+                </ImageButton>
+            </TableRow>
+        </TableLayout>
+
+        <ListView
+            android:id="@+id/android:list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/tableLayout1"
+            android:layout_marginTop="10dip"
+            android:drawSelectorOnTop="false" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lineItem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical" >
+    
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tableLayoutCda" 
+        android:layout_width="3200dip"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*"
+        android:shrinkColumns="*">         
+      
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+         
+            <TextView
+                android:id="@+id/txViewNum"
+                android:layout_height="40dip"
+                android:layout_width="50dip"
+                android:gravity="center"
+                android:text="" />
+            
+             <TextView
+                 android:id="@+id/txViewIdContacto"
+                    android:layout_width="70dip"
+                    android:gravity="left"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+            
+                <TextView
+                android:id="@+id/txViewDias"                
+                android:layout_height="wrap_content"
+                 android:layout_width="50dip"
+                 android:gravity="left"
+                android:text="" />
+                
+                <TextView
+                android:id="@+id/txViewFecha"
+                android:layout_height="wrap_content"
+                 android:layout_width="80dip"
+                 android:gravity="left"
+                android:text="" />
+                
+                <TextView
+                android:id="@+id/txViewHora"
+                android:layout_height="wrap_content"
+                 android:layout_width="80dip"
+                 android:gravity="left"
+                android:text="" />
+                
+                 <TextView
+                android:id="@+id/txViewTipo"
+                android:layout_height="wrap_content"
+                 android:layout_width="70dip"
+                 android:gravity="left"
+                android:text="" />
+                 
+                 <TextView
+                android:id="@+id/txViewNombre"
+                android:layout_height="wrap_content"
+                 android:layout_width="300dip"
+                 android:gravity="left"
+                android:text="" />
+                 
+                <TextView
+                android:id="@+id/txViewRsp"
+                android:layout_height="wrap_content"
+                 android:layout_width="220dip"
+                 android:gravity="left"
+                android:text="" />
+                
+                 <TextView
+                android:id="@+id/txViewSituacion"                
+                android:layout_height="wrap_content"
+                 android:layout_width="70dip"
+                 android:gravity="left"
+                android:text="" />
+                 
+                  <TextView
+                android:id="@+id/txViewTipoCto"                
+                android:layout_height="wrap_content"
+                 android:layout_width="100dip"
+                android:gravity="left"
+                android:text="" />
+                  
+                   <TextView
+                android:id="@+id/txViewTema"                
+                android:layout_height="wrap_content"
+                 android:layout_width="300dip"
+                 android:gravity="left"
+                android:text="" />
+                   
+                    <TextView
+                android:id="@+id/txViewSubTema"                
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                 android:layout_width="350dip"
+                android:text="" />
+                    
+                     
+                    <TextView
+                android:id="@+id/txViewCanal"                
+                android:layout_height="wrap_content"
+                 android:layout_width="350dip"
+                 android:gravity="left"
+                android:text="" />
+                    
+                     
+                    <TextView
+                android:id="@+id/txViewDireccion"                
+                android:layout_height="wrap_content"
+                 android:layout_width="350dip"
+                 android:gravity="left"
+                android:text="" />
+                    
+                     
+                    <TextView
+                android:id="@+id/txViewPlanta"                
+                android:layout_height="wrap_content"
+                 android:layout_width="150dip"
+                 android:gravity="left"
+                android:text="" />
+                    
+                     
+                    <TextView
+                android:id="@+id/txViewProducto"                
+                android:layout_height="wrap_content"
+                 android:layout_width="150dip"
+                 android:gravity="left"
+                android:text="" />
+                                
+				    <TextView
+                android:id="@+id/txViewEditar"
+                android:layout_height="wrap_content"
+                 android:layout_width="70dip"
+                 android:gravity="center"
+                android:text="@string/sacc_detalle_ver_evento" />
+                                               
+        </TableRow>
+        
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+    </TableLayout>
+</LinearLayout>

@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <!--desa: 0GnqeXeroFjywL9df0WrJpTEwFsWxFYCGqDe6xw-->
+    <!--prod: 0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A-->
+    <string name="app_name">Route to Market</string>
+    <string name="apikey">0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A</string>
+    <!-- GENERAL -->
+    <string name="error_not_network_message">Por favor, verifica tu conexión de datos o intenta en unos minutos.</string>
+    <string name="wait_message">Por favor, espera un momento.</string>
+    <string name="error_generico_process">Ocurrio un error al procesar la operación, por favor vuelve a intentar.</string>
+    <!-- MENU ACTIVITY -->
+    <string name="menu_inicio_prospector">Prospector</string>
+    <string name="menu_inicio_desarrollador">Desarrollador</string>
+    <string name="menu_inicio_red">Red</string>
+    <string name="menu_inicio_multimedia">Multimedia</string>
+    <string name="menu_inicio_ficha">Desarrollo Cliente</string>
+    <string name="menu_inicio_mmil">MMil</string>
+    <string name="menu_inicio_ventacero">Venta Cero</string>
+    <!-- LOGIN ACTIVITY -->
+    <string name="login_activity_title">Corporación Lindley</string>
+    <string name="login_activity_ok">Bienvenido: %s.</string>
+    <string name="login_activity_error">%s</string>
+    <string name="login_activity_txtlogin_empty">Debes ingresar tu usuario</string>
+    <string name="login_activity_txtpassword_empty">Debes ingresar tu password</string>
+    <string name="btnIngresar">Ingresar</string>
+    <!-- CONSULTAR CLIENTE ACTIVITY -->
+    <string name="consultar_cliente_activity_title">Buscar Cliente</string>
+    <string name="consultar_cliente_activity_sub_title">Buscar Cliente</string>
+    <string name="consultar_cliente_activity_empty">Debes ingresar el código o ruc o dni</string>
+    <!-- CONSULTAR CLIENTE LOCAL ACTIVITY -->
+    <string name="consultar_cliente_local_activity_title">Buscar Cliente Local</string>
+    <string name="consultar_cliente_local_activity_empty">Debes ingresar el código o ruc o dni</string>
+    <string name="consultar_cliente_local_activity_delete_confirm_dialog">¿Desea eliminar el cliente seleccionado?</string>
+    <string name="consultar_cliente_local_activity_delete_confirm_dialog_si">Si</string>
+    <string name="consultar_cliente_local_activity_delete_confirm_dialog_no">No</string>
+    <string name="consultar_cliente_local_activity_delete_confirm_eliminada">Ficha Eliminada</string>
+    <!-- REGISTAR CLIENTE ACTIVITY -->
+    <string name="registrar_cliente_activity_title">Registrar Cliente</string>
+    <string name="registrar_cliente_activity_btnDireccion">Direcciones</string>
+    <string name="registrar_cliente_activity_btnDatosGenerales">Datos Generales</string>
+    <string name="registrar_cliente_activity_btnDatosCartera">Datos Cartera</string>
+    <string name="registrar_cliente_activity_btnUbicacion">Ubicación</string>
+    <string name="registrar_cliente_activity_btnGuardar">Guardar</string>
+    <string name="registrar_cliente_activity_datos_basicos_txtrazonsocial_error">Debes ingresar la razón social</string>
+    <string name="registrar_cliente_activity_datos_basicos_txtruc_error">Debes ingresar el ruc</string>
+    <string name="registrar_cliente_activity_datos_basicos_txtruc_no_valido">El ruc ingresado no es válido</string>
+    <string name="registrar_cliente_activity_datos_basicos_txtdni_error">Debes ingresar el dni</string>
+    <string name="registrar_cliente_activity_datos_basicos_txtRucDni_error">Debes ingresar el ruc o dni</string>
+    <string name="registrar_cliente_activity_datos_basicos_txtrepresentante_error">Debes ingresar el representante</string>
+    <string name="registrar_cliente_activity_datos_basicos_subcanal_error">Debes seleccionar un subcanal</string>
+    <string name="registrar_cliente_activity_datos_basicos_direccionfiscal_error">Debes ingresar la dirección fiscal</string>
+    <string name="registrar_cliente_activity_datos_basicos_direccionentrega_error">Debes ingresar la dirección entrega</string>
+    <string name="registrar_cliente_activity_datos_basicos_departamentoentrega_error">Debes seleccionar el departamento de entrega</string>
+    <string name="registrar_cliente_activity_datos_basicos_provinciaentrega_error">Debes seleccionar el departamento de entrega</string>
+    <string name="registrar_cliente_activity_datos_basicos_distritoentrega_error">Debes seleccionar el distrito de entrega</string>
+    <string name="registrar_cliente_activity_datos_basicos_departamentofiscal_error">Debes seleccionar el departamento de fiscal</string>
+    <string name="registrar_cliente_activity_datos_basicos_provinciafiscal_error">Debes seleccionar el departamento de fiscal</string>
+    <string name="registrar_cliente_activity_datos_basicos_distritofiscal_error">Debes seleccionar el distrito de fiscal</string>
+    <string name="registrar_cliente_activity_datos_basicos_subcanal_dialog_ok">OK</string>
+    <string name="registrar_cliente_activity_datos_basicos_tamanio_error">Debes seleccionar un tamaño</string>
+    <string name="registrar_cliente_activity_datos_basicos_tamanio_dialog_ok">OK</string>
+    <string name="registrar_cliente_activity_datos_basicos_confirm_nuevo_dialog">¿Desea registrar el nuevo cliente?</string>
+    <string name="registrar_cliente_activity_datos_basicos_confirm_update_dialog">¿Desea guardar los cambios?</string>
+    <string name="registrar_cliente_activity_datos_basicos_confirm_dialog_si">Si</string>
+    <string name="registrar_cliente_activity_datos_basicos_confirm_dialog_no">No</string>
+    <string name="registrar_cliente_activity_datos_basicos_confirm_registrado">Cliente registrado</string>
+    <string name="registrar_cliente_activity_datos_basicos_confirm_actualizado">Cliente actualizado</string>
+    <string name="registrar_cliente_activity_datos_basicos_distribuidor_error">Debes seleccionar un distribuidor</string>
+    <string name="registrar_cliente_activity_datos_basicos_distritocomercial_error">Debes seleccionar un distrito comercial</string>
+    <string name="registrar_cliente_activity_datos_basicos_distritogeografico_error">Debes seleccionar un distrito geográfico</string>
+    <string name="registrar_cliente_activity_datos_basicos_zona_error">Debes seleccionar una zona</string>
+    <string name="registrar_cliente_activity_datos_basicos_ruta_error">Debes seleccionar una ruta</string>
+    <string name="registrar_cliente_activity_datos_basicos_segmento_error">Debes seleccionar un segmento</string>
+    <string name="registrar_cliente_activity_datos_basicos_ubicacion_error">Debes seleccionar una ubicación</string>
+    <string name="registrar_cliente_activity_datos_basicos_gps_error">Debes seleccionar la ubicación el cliente</string>
+    <!-- SELECCIONAR UBICACION CLIENTE -->
+    <string name="seleccionar_direccion_activity_aceptar">Aceptar</string>
+    <string name="seleccionar_direccion_activity_cancelar">Cancelar</string>
+    <!-- SINCRONIZAR CLIENTE ACTIVITY -->
+    <string name="sincronizar_clientes_activity_title">Sincronizar Clientes</string>
+    <string name="sincronizar_clientes_activity_btnAceptar">Aceptar</string>
+    <string name="sincronizar_clientes_activity_btnCancelar">Cancelar</string>
+    <string name="sincronizar_clientes_activity_texto">Estas a punto de enviar la información de clientes recolectada, una vez enviada la información no podrá revertirse la operación, click en Aceptar para enviar la información o click en Cancelar para salir.</string>
+    <string name="sincronizar_clientes_activity_confirm_dialog_no">No</string>
+    <string name="sincronizar_clientes_activity_confirm_dialog_si">Si</string>
+    <string name="sincronizar_clientes_activity_confirm_dialog_ok">Ok</string>
+    <string name="sincronizar_clientes_activity_confirm_dialog_message">¿Desea enviar la información de clientes?</string>
+    <string name="sincronizar_clientes_activity_confirm_dialog_message_ok">La información de clientes ha sido enviada</string>
+    <string name="sincronizar_clientes_activity_confirm_dialog_message_error">Error enviado la información de clientes, por favor vuelva a intentar</string>
+    <!-- SINCRONIZAR CLIENTE ACTIVITY -->
+    <string name="fichasrechazadas_clientes_activity_title">Descargar Fichas Rechazadas</string>
+    <string name="fichasrechazadas_clientes_activity_btnAceptar">Aceptar</string>
+    <string name="fichasrechazadas_clientes_activity_btnCancelar">Cancelar</string>
+    <string name="fichasrechazadas_clientes_activity_confirm_dialog_no">No</string>
+    <string name="fichasrechazadas_clientes_activity_confirm_dialog_si">Si</string>
+    <string name="fichasrechazadas_clientes_activity_confirm_dialog_ok">Ok</string>
+    <string name="fichasrechazadas_clientes_activity_confirm_dialog_message">¿Desea descargar la ficha de clientes?</string>
+    <string name="fichasrechazadas_clientes_activity_texto">Estas a punto de descargar las fichas rechazadas, click en Aceptar para descargar la información o click en Cancelar para salir.</string>
+    <string name="fichasrechazadas_clientes_activity_confirm_dialog_message_ok">La información de fichas rechazadas ha sido descargada</string>
+    <string name="fichasrechazadas_clientes_activity_confirm_dialog_message_error">Error descargando la información de fichas, por favor vuelva a intentar</string>
+    <!-- PROFIT ACTIVITY -->
+    <string name="profit_clientes_activity_title">Profit</string>
+    <string name="profit_history_basico_activity_title">PROFIT HISTORY %s</string>
+    <string name="profit_history_comparativo_activity_title">PROFIT COMPARATIVO %s</string>
+    <string name="profit_history_semanal_activity_title">PROFIT SEMANAL %s</string>
+    <string name="profit_parametros_activity_btnAceptar">Aceptar</string>
+    <string name="profit_parametros_activity_btnCancelar">Cancelar</string>
+    <string name="profit_descargarparametros_activity_texto">Para descargar la información de parámetros click en Aceptar y click en Cancelar para salir.</string>
+    <string name="profit_descargarparametros_activity_title">Descargar Parámetros Profit</string>
+    <string name="profit_descargarparametros_activity_confirm_dialog_message">¿Desea sincronizar los datos?</string>
+    <string name="profit_descargarparametros_activity_confirm_dialog_no">No</string>
+    <string name="profit_descargarparametros_activity_confirm_dialog_si">Si</string>
+    <string name="profit_descargarparametros_activity_message">¿Desea descargar los parametros?</string>
+    <!-- OM ACTIVITY -->
+    <string name="consultar_cliente_om_activity_title">Buscar Cliente</string>
+    <string name="consultar_cliente_om_activity_empty">Debes ingresar el código o razón</string>
+    <string name="descargarparametros_activity_title">Descargar Parámetros Generales</string>
+    <string name="descargarparametros_activity_texto">Para descargar la información de parámetros click en Aceptar y click en Cancelar para salir.</string>
+    <string name="descargarparametros_activity_message">Se descargo la información de parámetros.</string>
+    <string name="descargarparametros_activity_error">Error descargando información de parámetros.</string>
+    <string name="descargarclientes_activity_title">Descargar Clientes</string>
+    <string name="descargarclientes_activity_texto">Para descargar la información de clientes click en Aceptar y click en Cancelar para salir.</string>
+    <string name="descargarclientes_activity_message">Se descargo la información de clientes.</string>
+    <string name="descargarclientes_activity_error">Error descargando la información de clientes.</string>
+    <string name="buscarordenesom_activity_title">Oportunidades de Mejora</string>
+    <string name="nuevaordenom_activity_title">Nueva Orden</string>
+    <string name="nuevaordenom_activity_guardar">Guardar</string>
+    <string name="nuevaordenom_activity_cancelar">Cancelar</string>
+    <string name="nuevaordenom_activity_guardar_confirm_dialog">¿Desea guardar el evento?</string>
+    <string name="nuevaordenom_activity_guardar_confirm_dialog_si">Si</string>
+    <string name="nuevaordenom_activity_guardar_confirm_dialog_no">No</string>
+    <string name="registrareventoomactivity_title">Nuevo Evento</string>
+    <string name="listadoeventosoma_ctivity_title">Listado Eventos</string>
+    <string name="listadoordenesompendientes_activity_title">Ordenes Pendientes</string>
+    <string name="descargarordenesom_activity_title">Descargar Ordenes</string>
+    <string name="descargarordenesom_activity_texto">Para descargar la información de ordenes click en Aceptar y click en Cancelar para salir.</string>
+    <string name="descargarordenesom_activity_message">Se descargo la información de órdenes.</string>
+    <string name="enviarordenesom_activity_title">Enviar Ordenes</string>
+    <string name="enviarordenesom_activity_texto">Para enviar la información de ordenes click en Aceptar y click en Cancelar para salir.</string>
+    <string name="consultar_encuesta_title">Listar Encuestas</string>
+    <!-- RED -->
+    <string name="red_material_pop_title">Material POP</string>
+    <string name="red_pregunta_title">Preguntas Adicionales</string>
+    <string name="red_generador_title">Preguntas Varias</string>
+    <string name="red_pto_contacto_title">Punto Contacto</string>
+    <string name="red_ficha_cliente_title">Ficha de Red</string>
+    <string name="red_sku_cliente_title">SKU Propietario</string>
+    <string name="red_core_brands_title">%s</string>
+    <string name="red_material_pop_title">Material POP</string>
+    <string name="red_pregunta_title">Preguntas Adicionales</string>
+    <string name="red_generador_title">Preguntas Varias</string>
+    <string name="red_pto_contacto_title">Punto Contacto</string>
+    <string name="red_orden_trabajo_title">Orden de Trabajo</string>
+    <string-array name="oportunidadm_estado">
+        <item>Creado</item>
+        <item>En Proceso</item>
+        <item>Cerrado</item>
+    </string-array>
+    <string-array name="profit_campo">
+        <item>Cajas Físicas Acumuladas</item>
+        <item>Cajas Unitarias Acumuladas</item>
+        <item>Importe Facturado</item>
+        <item>Importe Utilidad</item>
+    </string-array>
+    <string-array name="profit_tipo">
+        <item>Histórico Mensual</item>
+        <item>Histórico Mensual Comparativo</item>
+        <item>Histórico Semanal</item>
+        <item>Hist. Comparativo x Familia-Marca</item>
+        <item>Hist.Comp.x Familia-Marca-Articulo</item>
+        <item>Hist. Comparativo x Segmento-Marca</item>
+        <item>Hist.Comp. x Segmento-Marca-Articulo</item>
+        <item>Hist. Comparativo x Articulos</item>
+    </string-array>
+    <string-array name="meses_array">
+        <item>Enero</item>
+        <item>Febrero</item>
+        <item>Marzo</item>
+        <item>Abril</item>
+        <item>Mayo</item>
+        <item>Junio</item>
+        <item>Julio</item>
+        <item>Agosto</item>
+        <item>Septiembre</item>
+        <item>Octubre</item>
+        <item>Noviembre</item>
+        <item>Diciembre</item>
+    </string-array>
+    <!-- PROFIT RESUMEN COMERCIAL ACTIVITY -->
+    <string name="profit_datoscomerciales_activity_title">Datos Avance Resumen</string>
+    <string name="profit_avanceresumen_activity_title">Datos Comerciales</string>
+    <!-- EQUIPOS FRIO ACTIVITY -->
+    <string name="profit_equiposfrio_activity_title">Equipos de Frio</string>
+    <!-- FILES MULTIMEDIA -->
+    <string name="listar_files_multimedia_activity_title">Buscar de Archivos</string>
+    <!-- COLORES BÁSICOS -->
+    <string name="custom_barras_lila">#6d1e7e</string>
+    <string name="custom_barras_verde">#56a83c</string>
+    <string name="custom_barras_azul_marino">#000066</string>
+    <string name="custom_barras_mostaza">#ff9900</string>
+    <string name="custom_barras_naranja">#ff6600</string>
+    <string name="custom_barras_plomo">#505050</string>
+    <string name="custom_barras_verde_agua">#D4E8C1</string>
+    <string name="red_ejecucion_anio">IE Año - %s.</string>
+    <!--FICHA CLIENTE-->
+    <string name="ficha_consultar_cliente_activity_empty">Debes ingresar el código o ruc o dni</string>
+    <string name="ficha_ficha_cliente_actitivy">Ficha de Cliente</string>
+    <string name="ficha_parametros_activity_btnAceptar">Aceptar</string>
+    <string name="ficha_parametros_activity_btnCancelar">Cancelar</string>
+    <string name="ficha_descargarparametros_activity_texto">Para descargar la información de parámetros click en Aceptar y click en Cancelar para salir.</string>
+    <string name="ficha_descargarparametros_activity_title">Descargar Parámetros Generales</string>
+    <string name="ficha_descargarparametros_activity_message">Se descargo la información de parámetros.</string>
+    <string name="ficha_descargarparametros_activity_error">Error descargando información de parámetros.</string>
+    <string name="ficha_comercial_activity_title">Datos Adicionales - Comercial</string>
+    <string name="ficha_actualizar_comercial_activity_title">Actualizar datos - Comercial</string>
+    <string name="ficha_actualizar_giro_activity_btnGuardar">Guardar</string>
+    <string name="ficha_contacto_activity_title">Datos Adicionales - Contacto</string>
+    <string name="ficha_editar_contacto"><a href="">Editar</a></string>
+    <string name="btnGuardarContacto">Guardar</string>
+    <string name="ficha_actualizar_contacto_activity_title">Datos - Contacto</string>
+    <string name="ficha_contacto_actualizado">Contacto actualizado correctamente</string>
+    <string name="ficha_contacto_guardado">Contacto agregado correctamente</string>
+    <string name="ficha_actualizar_comercial_ok">Contacto guardado correctamente</string>
+    <string name="ficha_cliente_actualizado_ok">Cliente actualizado correctamente</string>
+    <string name="ficha_txtRazonComercial_empty">Debes ingresar la Razón Comercial.</string>
+    <string name="ficha_txtReferencia_empty">Debes ingresar una referencia.</string>
+    <string name="ficha_txtNombre_empty">Debes ingresar el nombre.</string>
+    <string name="ficha_figura_comercial_activity_title">Figuras Comerciales</string>
+    <string name="ficha_guardar_encuesta_ok">La encuesta se guardó correctamente.</string>
+    <string name="ficha_actualizar_encuesta_ok">La encuesta se actualizó correctamente.</string>
+    <string name="ficha_cerrarEncuestaProxy_ok">La encuesta ha sido cerrada !</string>
+    <string name="ficha_txtEmail_empty">Ingrese un e-mail válido.</string>
+    <string name="ficha_descargarparametros_activity_confirm_dialog_message">¿Desea sincronizar los datos?</string>
+    <string name="ficha_descargarparametros_activity_confirm_dialog_no">No</string>
+    <string name="ficha_descargarparametros_activity_confirm_dialog_si">Si</string>
+    <string name="ficha_guardar_contacto_activity_confirm_dialog_message">¿Desea guardar el contacto?</string>
+    <string name="ficha_guardar_contacto_activity_title">Guardar Contacto</string>
+    <string name="ficha_guardar_comercial_activity_confirm_dialog_message">¿Desea guardar los datos comerciales?</string>
+    <string name="ficha_guardar_comercial_activity_title">Guardar Comercial</string>
+    <string name="ficha_cerrar_encuesta_activity_confirm_dialog_message">¿Desea cerrar la encuesta?</string>
+    <string name="ficha_cerrar_encuesta_activity_title">Cerrar Encuesta</string>
+    <string name="ficha_cerrar_encuesta_activity_confirm_dialog_no">No</string>
+    <string name="ficha_cerrar_encuesta_activity_confirm_dialog_si">Si</string>
+    <string name="ficha_guardar_giro_activity_confirm_dialog_message">¿Desea guardar el giro?</string>
+    <string name="ficha_guardar_giro_activity_title">Guardar Giro</string>
+    <!--MMIL-->
+    <string name="mmil_regiones">Regiones</string>
+    <string name="mmil_cdas">CDAs</string>
+    <string name="mostrar_pizarra_activity_title">CDA Ratios</string>
+    <string name="mostrar_supervisor_activity_title">Supervisores</string>
+    <string name="mostrar_vendedor_activity_title">Vendedores</string>
+    <string name="mostrar_Televendedor_activity_title">TeleVendedores</string>
+    <string name="ver_cda"><a href="">Ver</a></string>
+    <string name="ver_supervisores"><u>Supervisores</u></string>
+    <string name="ver_detalle"><a href="">Ver Detalle</a></string>
+    <string name="mmil_pantalla_1_enabled">mmil_pantalla_1_enanled</string>
+    <string name="mmil_pantalla_1_interval">mmil_pantalla_1_interval</string>
+    <string-array name="mmil_pantalla_1_update_interval">
+        <item name="30000">Cada 30 Segundos</item>
+        <item name="60000">Cada 1 Minuto</item>
+        <item name="120000">Cada 2 Minutos</item>
+        <item name="100000">Cada 10 Minutos</item>
+    </string-array>
+    <string-array name="mmil_pantalla_1_update_interval_values">
+        <item name="30000">30000</item>
+        <item name="60000">60000</item>
+        <item name="120000">120000</item>
+        <item name="100000">100000</item>
+    </string-array>
+    <!-- PLAN DE DESARROLLO -->
+    <string name="cabecera_codigo">Código</string>
+    <string name="cabecera_plan">Definición del Plan</string>
+    <string name="cabecera_objetivo">Objetivo a Alcanzar</string>
+    <string name="cabecera_fecha_creacion">Fecha de Creación</string>
+    <string name="cabecera_fecha_inicio">Fecha Inicio</string>
+    <string name="cabecera_fecha_fin">Fecha Fin</string>
+    <string name="cabecera_ver_actividades">Actividades</string>
+    <string name="cabecera_avance">Avance</string>
+    <string name="cabecera_estado">Estado</string>
+    <string name="cabecera_nombre_corto">Nombre Corto</string>
+    <string name="cabecera_sustento">Sustento</string>
+    <string name="cabecera_actividades">Actividades</string>
+    <string name="cabecera_FecTentativa">Fecha Tentativa</string>
+    <string name="cabecera_FecEjecucion">Fecha de Ejecución</string>
+    <string name="cabecera_Terminado">Terminado</string>
+    <string name="cabecera_Motivo">Motivo</string>
+    <string name="cabecera_Observaciones">Observaciones</string>
+    <string name="cabecera_Responsable">Responsable</string>
+    <string name="cabecera_Eliminar">eliminar</string>
+    <string name="cabecera_Editar">editar</string>
+    <string name="cabecera_fecha_visita">Fecha de Visita</string>
+    <string name="cabecera_detalle_labor">Detalle Labor</string>
+    <string name="cabecera_descripcion_labor">Descripción de la labor</string>
+    <string name="cabecera_usuario">Usuario</string>
+    <string name="cabecera_hora">Hora</string>
+    <string name="detalle_actividades"><a href="">Ver</a></string>
+    <string name="detalle_Responsable"><a href="">Ver</a></string>
+    <string name="detalle_Eliminar"><a href="">Eliminar</a></string>
+    <string name="detalle_Editar"><a href="">Editar</a></string>
+    <string name="detalle_sustento"><a href="">Ver Sustento</a></string>
+    <string name="editar_plan"><a href="">Editar</a></string>
+    <string name="pd_mostrar_principal_activity_title">Plan de Desarrollo</string>
+    <string name="pd_mostrar_ctividad_activity_title">Actividades</string>
+    <string name="plandesarrollo_plan_guardado_ok">El plan se guardó correctamente.</string>
+    <string name="plandesarrollo_plan_actualizado_ok">El plan se actualizó correctamente.</string>
+    <string name="pd_txtplan_empty">Debes ingresar el nombre del Plan.</string>
+    <string name="pd_txtobjetivo_empty">Debes ingresar el objetivo.</string>
+    <string name="pd_eliminar_actividad_ok">La actividad se eliminó de forma satisfactoria.</string>
+    <string name="pd_eliminar_responsable_ok">El responsable se eliminó de forma satisfactoria.</string>
+    <string name="pd_eliminar_actividad_error">Solo se permite eliminar las actividades creadas durante el día.</string>
+    <string name="pd_mostrar_actividad_activity_title">Actividades</string>
+    <string name="pd_mostrar_responsableactivity_title">Responsables</string>
+    <string name="pd_mostrar_sustento_activity_title">Sustento</string>
+    <string name="pd_eliminar_sustento_ok">El sustento se eliminó de forma satisfactoria.</string>
+    <string name="plandesarrollo_actividad_guardado_ok">Actividad guardada correctamente.</string>
+    <string name="plandesarrollo_actividad_actualizado_ok">Actividad actualizada correctamente.</string>
+    <string name="plandesarrollo_actividad_txtFechaTentativa_empty">Debes ingresar una fecha tentativa.</string>
+    <string name="plandesarrollo_actividad_txtActividad_empty">Debes ingresar una descripción.</string>
+    <string name="plandesarrollo_descargarparametros_activity_texto">Para descargar la información de parámetros click en Aceptar y click en Cancelar para salir.</string>
+    <string name="plandesarrollo_descargarparametros_activity_title">Descargar Parámetros Plan Desarrollo</string>
+    <string name="plandesarrollo_descargarparametros_activity_message">Se descargo la información de parámetros.</string>
+    <string name="plandesarrollo_descargarparametros_activity_error">Error descargando información de parámetros.</string>
+    <string name="plandesarrollo_parametros_activity_btnAceptar">Aceptar</string>
+    <string name="plandesarrollo_parametros_activity_btnCancelar">Cancelar</string>
+    <string name="plandesarrollo_responsable_guardado_ok">Responsable guardado correctamente.</string>
+    <string name="plandesarrollo_responsable_actualizado_ok">Responsable actualizado correctamente.</string>
+    <string name="plandesarrollo_sustento_guardado_ok">Sustento guardado correctamente.</string>
+    <string name="plandesarrollo_sustento_actualizado_ok">Sustento actualizado correctamente.</string>
+    <string name="plandesarrollo_guardar_actividad_activity_confirm_dialog_no">No</string>
+    <string name="plandesarrollo_guardar_actividad_activity_confirm_dialog_si">Si</string>
+    <string name="plandesarrollo_guardar_actividad_activity_title">Guardar Actividad</string>
+    <string name="plandesarrollo_guardar_actividad_activity_confirm_dialog_message">¿Desea guardar la actividad?</string>
+    <string name="plandesarrollo_guardar_plan_activity_confirm_dialog_no">No</string>
+    <string name="plandesarrollo_guardar_plan_activity_confirm_dialog_si">Si</string>
+    <string name="plandesarrollo_guardar_plan_activity_title">Guardar Plan</string>
+    <string name="plandesarrollo_guardar_plan_activity_confirm_dialog_message">¿Desea guardar el plan?</string>
+    <string name="plandesarrollo_guardar_responsable_activity_confirm_dialog_no">No</string>
+    <string name="plandesarrollo_guardar_responsable_activity_confirm_dialog_si">Si</string>
+    <string name="plandesarrollo_guardar_responsable_activity_title">Guardar Responsable</string>
+    <string name="plandesarrollo_guardar_responsable_activity_confirm_dialog_message">¿Desea guardar el responsable?</string>
+    <string name="plandesarrollo_guardar_sustento_activity_confirm_dialog_no">No</string>
+    <string name="plandesarrollo_guardar_sustento_activity_confirm_dialog_si">Si</string>
+    <string name="plandesarrollo_guardar_sustento_activity_title">Guardar Sustento</string>
+    <string name="plandesarrollo_guardar_sustento_activity_confirm_dialog_message">¿Desea guardar el sustento?</string>
+    <string name="plandesarrollo_eliminar_actividad_activity_confirm_dialog_no">No</string>
+    <string name="plandesarrollo_eliminar_actividad_activity_confirm_dialog_si">Si</string>
+    <string name="plandesarrollo_eliminar_actividad_activity_title">Eliminar Actividad</string>
+    <string name="plandesarrollo_eliminar_actividad_activity_confirm_dialog_message">¿Desea eliminar la actividad?</string>
+    <string name="plandesarrollo_eliminar_responsable_activity_confirm_dialog_no">No</string>
+    <string name="plandesarrollo_eliminar_responsable_activity_confirm_dialog_si">Si</string>
+    <string name="plandesarrollo_eliminar_responsable_activity_title">Eliminar Responsable</string>
+    <string name="plandesarrollo_eliminar_responsable_activity_confirm_dialog_message">¿Desea eliminar el responsable?</string>
+    <!-- VENTA CERO -->
+    <string name="btnBuscarVtaCero">Buscar</string>
+    <string name="btnGuardar_VtaCero">Guardar</string>
+    <string name="ventacero_mostrar_activity_title">Clientes Venta Cero</string>
+    <string name="vtacero_cabecera_deposito">Código</string>
+    <string name="vtacero_cabecera_nombre_cliente">Nombre Cliente</string>
+    <string name="vtacero_cabecera_direccion_cliente">Dirección</string>
+    <string name="vtacero_cabecera_ruta">Ruta</string>
+    <string name="vtacero_cabecera_segmento">Segmento</string>
+    <string name="vtacero_cabecera_eqf">Eqf</string>
+    <string name="vtacero_cabecera_cantidad">Cant</string>
+    <string name="vtacero_cabecera_estado">Estado</string>
+    <string name="vtacero_cabecera_motivo_actual">Motivo Semana Actual</string>
+    <string name="vtacero_cabecera_obs_actual">Obs Semana Actual</string>
+    <string name="vtacero_cabecera_motivo_anterior">Motivo Semana Anterior</string>
+    <string name="vtacero_cabecera_obs_anterior">Obs Semana Anterior</string>
+    <string name="vtacero_detalle_ver_motivo"><a href="">Motivo</a></string>
+    <string name="vtacero_detalle_ver_fig_comercial"><a href="">Fig. Comerciales</a></string>
+    <string name="ventacero_guardado_ok">Motivo guardado correctamente.</string>
+    <string name="vtacero_consultar_activity_title">Busqueda Clientes Venta Cero</string>
+    <string name="vtacero_datos_activity_title">Motivo Venta Cero</string>
+    <string name="ventacero_descargarparametros_activity_texto">Para descargar la información de parámetros click en Aceptar y click en Cancelar para salir.</string>
+    <string name="ventacero_parametros_activity_btnAceptar">Aceptar</string>
+    <string name="ventacero_parametros_activity_btnCancelar">Cancelar</string>
+    <string name="ventacero_descargarparametros_activity_title">Descargar Parámetros Venta Cero</string>
+    <string name="ventacero_descargarparametros_activity_message">Se descargo la información de parámetros.</string>
+    <string name="ventacero_descargarparametros_activity_confirm_dialog_no">No</string>
+    <string name="ventacero_descargarparametros_activity_confirm_dialog_si">Si</string>
+    <string name="ventacero_descargarparametros_activity_confirm_dialog_ok">Ok</string>
+    <string name="ventacero_descargarparametros_activity_confirm_dialog_message">¿Desea sincronizar los datos?</string>
+    <string name="ventacero_guardar_motivo_activity_confirm_dialog_no">No</string>
+    <string name="ventacero_guardar_motivo_activity_confirm_dialog_si">Si</string>
+    <string name="ventacero_guardar_motivo_activity_title">Guardar Motivo</string>
+    <string name="ventacero_guardar_motivo_activity_confirm_dialog_message">¿Desea guardar el motivo?</string>
+    <!-- SACC -->
+    <string name="menu_inicio_sacc">SACC</string>
+    <string name="sacc_detalle_ver_evento"><a href=""><u>Ver Evento</u></a></string>
+    <string name="sacc_mostrar_contacto_title">Consulta de Contactos SACC</string>
+    <string name="sacc_mostrar_evento_title">Lista de Eventos</string>
+    <!-- PUNTOS DE INTERES -->
+    <string name="puntointeres_descargarparametros_activity_texto">Para descargar la información de parámetros click en Aceptar y click en Cancelar para salir.</string>
+    <string name="puntointeres_parametros_activity_btnAceptar">Aceptar</string>
+    <string name="puntointeres_parametros_activity_btnCancelar">Cancelar</string>
+    <string name="puntointeres_descargarparametros_activity_title">Descargar Parámetros Generales</string>
+    <string name="puntointeres_descargarparametros_activity_message">Se descargo la información de parámetros.</string>
+    <string name="puntointeres_descargarparametros_activity_error">Error descargando información de parámetros.</string>
+    <string name="puntointeres_descargarparametros_activity_confirm_dialog_message">Datos sincronizados de forma correcta.</string>
+    <string name="puntointeres_descargarparametros_activity_confirm_dialog_no">No</string>
+    <string name="puntointeres_descargarparametros_activity_confirm_dialog_si">Si</string>
+    <string name="menu_inicio_ptointeres">Puntos Interes</string>
+    <string name="puntointeres_consultar_cliente_activity_empty">Debes ingresar el código o ruc o dni</string>
+    <string name="puntointeres_consultar_cliente_activity_sub_title">Buscar Cliente</string>
+    <string name="puntointeres_consultar_cliente_activity_title">Buscar Cliente</string>
+    <string name="puntointeres_map_activity_title">Puntos de Interes</string>
+    <string name="puntointeres_nuevo_punto_title">Nuevo Punto Interes</string>
+    <string name="puntointeres_actualizar_punto_title">Actualizar Punto Interes</string>
+    <string name="btnGuardarPunto">Guardar</string>
+    <string name="punto_guardar_ok">Guardado correctamente.</string>
+    <string name="puntointeres_descargarparametros_activity_question_dialog_message">¿Desea sincronizar los datos?</string>
+    <string name="punto_actualizar_ok">Actualizado correctamente.</string>
+    <string name="btnActualizarPunto">Actualizar</string>
+    <string name="punto_eliminar_ok">Eliminado correctamente.</string>
+</resources>

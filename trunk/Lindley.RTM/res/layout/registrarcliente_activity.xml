@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content" 
+  android:orientation="vertical">
+  
+  	
+  	
+<com.thira.examples.actionbar.widget.ActionBar
+		android:id="@+id/actionBar" 
+		android:layout_width="fill_parent"
+		android:layout_height="44dip" 
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true" />
+		
+ 
+ <ViewFlipper android:id="@+id/flpRegistrarCliente"
+  				xmlns:android="http://schemas.android.com/apk/res/android"
+  				android:layout_width="fill_parent" 
+  				android:layout_height="fill_parent">
+    
+
+ <TableLayout android:stretchColumns="1" 
+ 				android:id="@+id/tableLayout1" 
+ 				android:layout_height="wrap_content" 
+ 				android:layout_width="fill_parent">
+	
+
+        
+        
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Razón Social :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <EditText android:id="@+id/txtRazonSocial"
+             android:layout_width="fill_parent" 
+             android:layout_height="wrap_content" 
+             android:hint="Ingresar Razon Social" 
+             android:text="" 
+             android:layout_weight="1" 
+             android:inputType="textCapCharacters" 
+             android:maxLength="30"></EditText>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Ruc :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <EditText android:id="@+id/txtRuc"
+             android:layout_width="fill_parent" 
+             android:layout_height="wrap_content" 
+             android:hint="Ingresar Ruc" 
+             android:text="" 
+             android:layout_weight="1" 
+             android:inputType="number" 
+             android:maxLength="11"></EditText>
+        </TableRow>
+       <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Dni :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <EditText android:id="@+id/txtDni"
+             android:layout_width="fill_parent" 
+             android:layout_height="wrap_content" 
+             android:hint="Ingresar Dni" 
+             android:text="" 
+             android:layout_weight="1" 
+             android:inputType="number" 
+             android:maxLength="8"></EditText>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Representante :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <EditText android:id="@+id/txtRepresentante"
+             android:layout_width="fill_parent" 
+             android:layout_height="wrap_content" 
+             android:hint="Ingresar Representante" 
+             android:text="" 
+             android:layout_weight="1" 
+             android:maxLength="30" android:inputType="textCapCharacters"></EditText>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Teléfono 1 :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <EditText android:id="@+id/txtTelefono1"
+             android:layout_width="fill_parent" 
+             android:layout_height="wrap_content" 
+             android:hint="Ingresar Teléfono 1" 
+             android:text="" 
+             android:layout_weight="1" 
+             android:inputType="number" 
+             android:maxLength="8"></EditText>
+        </TableRow>
+        
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Teléfono 2 :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <EditText android:id="@+id/txtTelefono2"
+             android:layout_width="fill_parent" 
+             android:layout_height="wrap_content" 
+             android:hint="Ingresar Teléfono 2" 
+             android:text="" 
+             android:layout_weight="1" 
+             android:inputType="number" 
+             android:maxLength="9"></EditText>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Fax :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <EditText android:id="@+id/txtFax"
+             android:layout_width="fill_parent" 
+             android:layout_height="wrap_content" 
+             android:hint="Ingresar Fax" 
+             android:text="" 
+             android:layout_weight="1" 
+             android:inputType="number" 
+             android:maxLength="9"></EditText>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Sub-Canal :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboSubCanal" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+            
+        </TableRow>
+  
+    
+  
+        
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Email :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <EditText android:id="@+id/txtEmail"
+             android:layout_width="fill_parent" 
+             android:layout_height="wrap_content" 
+             android:hint="Ingresar Email" 
+             android:text="" 
+             android:layout_weight="1" 
+             android:inputType="textEmailAddress|textCapCharacters"
+             android:maxLength="30"></EditText>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Url :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <EditText android:id="@+id/txtUrl"
+             android:layout_width="fill_parent" 
+             android:layout_height="wrap_content" 
+             android:hint="Ingresar Url" 
+             android:text="" 
+             android:layout_weight="1" 
+             android:inputType="textUri|textCapCharacters"
+             
+             android:maxLength="30"></EditText>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Vendedor :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <EditText android:id="@+id/txtVendedor"
+             android:layout_width="fill_parent" 
+             android:layout_height="wrap_content" 
+             android:hint="Ingresar Vendedor" 
+             android:text="" 
+             android:layout_weight="1" 
+             android:inputType="number"
+             android:maxLength="20"></EditText>
+        </TableRow>
+        
+        
+
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Tamaño :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboTamanio" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+            
+        </TableRow>
+        
+
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+        	<Button android:id="@+id/btnDireccion" 
+        	android:layout_span="2" 
+        	android:focusable="false"
+        	android:text="@string/registrar_cliente_activity_btnDireccion" 
+        	android:layout_width="fill_parent" android:onClick="btnDireccion_onclick"/>
+        </TableRow>
+    </TableLayout>
+
+<TableLayout android:stretchColumns="1" 
+ 				android:id="@+id/tableLayout2" 
+ 				android:layout_height="wrap_content" 
+ 				android:layout_width="fill_parent">
+
+
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Dirección Fiscal :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <EditText android:id="@+id/txtDireccionFiscal"
+             android:layout_width="fill_parent" 
+             android:layout_height="wrap_content" 
+             android:hint="Ingresar Dirección Fiscal" 
+             android:text="" 
+             android:layout_weight="1" 
+             android:inputType="textCapCharacters" 
+             android:maxLength="30"></EditText>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Departamento :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboDepartamentoFiscal" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Provincia :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboProvinciaFiscal" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Distrito :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboDistritoFiscal" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+        </TableRow>
+        
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Dirección Entrega :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <EditText android:id="@+id/txtDireccionEntrega"
+             android:layout_width="fill_parent" 
+             android:layout_height="wrap_content" 
+             android:hint="Ingresar Dirección Entrega" 
+             android:text="" 
+             android:layout_weight="1" 
+             android:inputType="textCapCharacters" 
+             android:maxLength="30"></EditText>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Departamento :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboDepartamentoEntrega" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Provincia :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboProvinciaEntrega" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+        </TableRow>
+            
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Distrito :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboDistritoEntrega" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+        </TableRow>
+            
+        <TableRow android:layout_width="fill_parent" android:layout_height="wrap_content" >
+        		
+
+		
+        <LinearLayout android:id="@+id/LinearLayout03"
+			 android:layout_width="fill_parent" 
+			 android:layout_height="fill_parent" 
+			 android:gravity="bottom"
+			 android:layout_span="2">
+			 <Button android:id="@+id/btnDatosGenerales" android:focusable="false"	android:layout_alignParentLeft="true" 	android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/registrar_cliente_activity_btnDatosGenerales" android:onClick="btnDatosGenerales_click"/>
+			 <Button android:id="@+id/btnCartera" 		 android:focusable="false"	android:layout_alignParentRight="true" 	android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/registrar_cliente_activity_btnDatosCartera" android:onClick="btnDatosCartera_click"/>
+		 </LinearLayout>
+        </TableRow>
+</TableLayout>
+
+
+<TableLayout android:stretchColumns="1" 
+ 				android:id="@+id/tableLayout2" 
+ 				android:layout_height="wrap_content" 
+ 				android:layout_width="fill_parent">
+
+	<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Distribuidor :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboDistribuidor" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+        </TableRow>
+            
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Distrito Comercial :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboDistritoComercial" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+        </TableRow>
+            
+		<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Distrito Geográfico :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboDistritoGeografico" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Zona :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboZona" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="RutaIK :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboRutaIK" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Segmento :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboSegmento" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Ubicación :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboUbicacion" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" >
+        	
+        	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" 	android:layout_span="2">
+        		<Button android:id="@+id/btnDatosCarteraPrevius" 	
+        			android:layout_alignParentLeft="true" 	
+        			android:layout_width="wrap_content" 
+        			android:layout_height="wrap_content" 
+        			android:focusable="false"
+        			android:text="@string/registrar_cliente_activity_btnDatosCartera" 
+        			android:onClick="btnDatosCarteraPrevius_click"/>
+        			
+        	<Button android:id="@+id/btnSeleccionarDireccion" 	
+        			android:layout_alignParentLeft="true" 	
+        			android:layout_width="wrap_content" 
+        			android:layout_height="wrap_content" 
+        			android:focusable="false"
+        			android:text="@string/registrar_cliente_activity_btnUbicacion" 
+        			android:onClick="btnSeleccionarDireccion_click"/>
+        	
+        	<Button android:id="@+id/btnGuardar"  
+        			android:text="@string/registrar_cliente_activity_btnGuardar" 
+        			android:focusable="false"
+        			android:layout_width="wrap_content" 
+        			android:layout_height="wrap_content"
+        			android:onClick="btnGuardar_onclick"/>
+        	</LinearLayout>
+        	
+        	
+        </TableRow>
+        
+</TableLayout>
+
+
+</ViewFlipper>
+ 
+ 
+ </LinearLayout>
+	
+	

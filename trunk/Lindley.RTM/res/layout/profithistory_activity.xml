@@ -1,0 +1,863 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.thira.examples.actionbar.widget.ActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="fill_parent"
+        android:layout_height="44dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <Spinner
+        android:id="@+id/cboTipoProfit"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    </Spinner>
+
+    <ViewFlipper
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/flpRegistrarCliente"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        
+              
+        <TableLayout
+            android:id="@+id/tblHistory"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1" >
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Año :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistoryAnio"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Campo :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistoryTipo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ingresar Razon Social" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_span="2" >
+
+                    <Button
+                        android:id="@+id/btnHistoryAceptar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:onClick="btnHistoryAceptar_onclick"
+                        android:text="Aceptar" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/btnAceptar"
+                        android:focusable="false"
+                        android:onClick="btnCancelar_onclick"
+                        android:text="Cancelar" >
+                    </Button>
+                </LinearLayout>
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:id="@+id/tblHistoryComparativo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1" >
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Año :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistoryComparativoAnio"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Campo :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistoryComparativoTipo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ingresar Razon Social" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_span="2" >
+
+                    <Button
+                        android:id="@+id/btnHistoryComparativoAceptar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:onClick="btnHistoryComparativoAceptar_onclick"
+                        android:text="Aceptar" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/btnAceptar"
+                        android:focusable="false"
+                        android:onClick="btnCancelar_onclick"
+                        android:text="Cancelar" >
+                    </Button>
+                </LinearLayout>
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:id="@+id/tblHistorySemanal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1" >
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Año :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistorySemanalAnio"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Mes :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistorySemanalMes"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Campo :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistorySemanalTipo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ingresar Razon Social" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_span="2" >
+
+                    <Button
+                        android:id="@+id/btnHistorySemanalAceptar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:onClick="btnHistorySemanalAceptar_onclick"
+                        android:text="Aceptar" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/btnAceptar"
+                        android:focusable="false"
+                        android:onClick="btnCancelar_onclick"
+                        android:text="Cancelar" >
+                    </Button>
+                </LinearLayout>
+            </TableRow>
+        </TableLayout>
+
+      
+          <TableLayout
+            android:id="@+id/tblHistoryFamiliaMarca"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1" >
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Año :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistoryFamiliaMarcaAnio"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Familia :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistoryFamiliaMarcaFamilia"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+                
+                 
+                    
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Marca :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistoryFamiliaMarca"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Campo :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistoryFamiliaMarcaTipo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ingresar Razon Social" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_span="2" >
+
+                    <Button
+                        android:id="@+id/btnHistoryFamiliaMarcaAceptar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:onClick="btnHistoryFamiliaMarcaAceptar_onclick"
+                        android:text="Aceptar" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/btnAceptar"
+                        android:focusable="false"
+                        android:onClick="btnCancelar_onclick"
+                        android:text="Cancelar" >
+                    </Button>
+                </LinearLayout>
+            </TableRow>
+        </TableLayout>
+        
+            
+            
+        <TableLayout
+            android:id="@+id/tblHistoryFamiliaMarcaArticulo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1" >
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Año :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistoryFamiliaMarcaArticuloAnio"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Familia :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistoryFamiliaMarcaArticuloFamilia"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Marca :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistoryFamiliaMarcaArticuloMarca"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Articulo :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistoryFamiliaMarcaArticulo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Campo :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistoryFamiliaMarcaArticuloTipo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ingresar Razon Social" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_span="2" >
+
+                    <Button
+                        android:id="@+id/btnHistoryFamiliaMarcaArticuloAceptar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:onClick="btnHistoryFamiliaMarcaArticuloAceptar_onclick"
+                        android:text="Aceptar" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/btnAceptar"
+                        android:focusable="false"
+                        android:onClick="btnCancelar_onclick"
+                        android:text="Cancelar" >
+                    </Button>
+                </LinearLayout>
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:id="@+id/tblHistorySegmentoMarca"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1" >
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Año :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistorySegmentoMarcaAnio"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Segmento :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistorySegmentoMarcaSegmento"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Marca :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistorySegmentoMarca"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Campo :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistorySegmentoMarcaTipo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ingresar Razon Social" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_span="2" >
+
+                    <Button
+                        android:id="@+id/btnHistorySegmentoMarcaAceptar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:onClick="btnHistorySegmentoMarcaAceptar_onclick"
+                        android:text="Aceptar" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/btnAceptar"
+                        android:focusable="false"
+                        android:onClick="btnCancelar_onclick"
+                        android:text="Cancelar" >
+                    </Button>
+                </LinearLayout>
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:id="@+id/tblHistorySegmentoMarcaArticulo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1" >
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Año :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistorySegmentoMarcaArticuloAnio"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Segmento :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistorySegmentoMarcaArticuloSegmento"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Marca :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistorySegmentoMarcaArticuloMarca"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Articulo :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistorySegmentoMarcaArticulo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Campo :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistorySegmentoMarcaArticuloTipo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ingresar Razon Social" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_span="2" >
+
+                    <Button
+                        android:id="@+id/btnHistorySegmentoMarcaArticuloAceptar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:onClick="btnHistorySegmentoMarcaArticuloAceptar_onclick"
+                        android:text="Aceptar" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/btnAceptar"
+                        android:focusable="false"
+                        android:onClick="btnCancelar_onclick"
+                        android:text="Cancelar" >
+                    </Button>
+                </LinearLayout>
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:id="@+id/tblHistoryArticulo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1" >
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Año :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistoryArticuloAnio"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Articulo :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistoryArticulo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="Campo :" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/cboHistoryArticuloTipo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_span="2" >
+
+                    <Button
+                        android:id="@+id/btnHistoryArticuloAceptar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:onClick="btnHistoryArticuloAceptar_onclick"
+                        android:text="Aceptar" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/btnAceptar"
+                        android:focusable="false"
+                        android:onClick="btnCancelar_onclick"
+                        android:text="Cancelar" >
+                    </Button>
+                </LinearLayout>
+            </TableRow>
+        </TableLayout>
+    
+    </ViewFlipper>
+
+</LinearLayout>

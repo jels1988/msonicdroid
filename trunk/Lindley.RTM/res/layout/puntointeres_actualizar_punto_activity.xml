@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="1dip" >
+
+    <com.thira.examples.actionbar.widget.ActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="fill_parent"
+        android:layout_height="44dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:focusable="false"
+        android:text="Nombre :" >
+    </TextView>
+
+    <EditText
+        android:id="@+id/txtNombre"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:enabled="true"
+        android:maxLength="40" >
+    </EditText>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:focusable="false"
+        android:text="Dirección  :" >
+    </TextView>
+
+    <EditText
+        android:id="@+id/txtDireccion"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:enabled="true"
+        android:maxLength="40" >
+    </EditText>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:focusable="false"
+        android:text="Descripción :" >
+    </TextView>
+
+    <EditText
+        android:id="@+id/txtDescripcion"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:enabled="true"
+        android:maxLength="50" >
+    </EditText>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:focusable="false"
+        android:text="Ubigeo :" >
+    </TextView>
+
+    <Spinner
+        android:id="@+id/cboUbigeo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    </Spinner>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:focusable="false"
+        android:text="Giro :" >
+    </TextView>
+
+    <Spinner
+        android:id="@+id/cboGiro"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    </Spinner>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:focusable="false"
+        android:text="SubGiro :" >
+    </TextView>
+
+    <Spinner
+        android:id="@+id/cboSubGiro"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    </Spinner>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="20dip"
+        android:focusable="false"
+        android:onClick="btnActualizar_onclick"
+        android:text="@string/btnActualizarPunto" />
+
+</LinearLayout>
