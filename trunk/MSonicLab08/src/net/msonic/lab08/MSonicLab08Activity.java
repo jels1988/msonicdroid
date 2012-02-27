@@ -38,6 +38,12 @@ public class MSonicLab08Activity extends Activity {
     
     private static final int TAKE_PHOTO_CODE = 1;
 
+    
+    private void dispatchTakePictureIntent(int actionCode) {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(takePictureIntent, actionCode);
+    }
+    
     private void takePhoto(){
     final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
     intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(this)) ); 
