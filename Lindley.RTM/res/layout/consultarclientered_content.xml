@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/lineItem"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content"
+	android:gravity="center_vertical">
+	 <TableLayout android:stretchColumns="1" android:id="@+id/tableLayout1" android:layout_height="wrap_content" android:layout_width="fill_parent">
+        <TableRow android:id="@+id/tableRow2" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:id="@+id/txtRazonSocial" android:text="Razon Social" android:layout_span="2" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"/>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+        	
+            <TextView android:text="Ruc :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtRuc" android:text="Ruc" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Dni :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtDni" android:text="Dni" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Código :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtCodigo" android:text="Codigo" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Dirección :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtDireccion" android:text="Dirección" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Cda :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtCda" android:text="Cda" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Representante :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtRepresentante" android:text="Representante" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Sub-Canal :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtSubCanal" android:text="Representante" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Ruta :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtRuta" android:text="Representante" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Fec. Creación :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtFecCreacion" android:text="00/00/0000" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Fec. Actualizacion :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtFecActualizacion" android:text="00/00/0000" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Fec. Suspención :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:id="@+id/txtFecSuspencion" android:text="00/00/0000" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        </TableRow>
+        
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+        	<LinearLayout android:layout_span="2" android:orientation="horizontal" android:padding="2dip" android:layout_height="fill_parent" android:layout_width="match_parent">
+        		<ImageButton android:id="@+id/btn_buscar" android:visibility="gone" android:src="@drawable/btn_direccion" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+        		<ImageButton android:id="@+id/btn_equipofrio" android:src="@drawable/btn_equipofrio" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+        		<ImageButton android:id="@+id/btn_encuesta" android:src="@drawable/btn_encuesta" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+        	</LinearLayout>
+        </TableRow>
+     </TableLayout>
+
+</RelativeLayout>
+

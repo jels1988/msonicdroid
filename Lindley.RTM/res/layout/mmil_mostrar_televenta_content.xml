@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lineItem"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_vertical" >
+
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tableLayoutCda"
+        android:layout_width="1800dip"
+        android:layout_height="fill_parent"
+        android:shrinkColumns="*"
+        android:stretchColumns="*" >
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:id="@+id/txViewCod"
+                android:layout_width="50dip"
+                android:layout_height="40dip"
+                android:gravity="center"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/txViewTlVend"
+                android:layout_width="300dip"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/txViewPrReg"
+                android:layout_width="130dip"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/txViewUltReg"
+                android:layout_width="130dip"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <ImageView
+                android:id="@+id/imagePlVist"
+                android:layout_width="10dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right" >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/txViewPlVist"
+                android:layout_width="70dip"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/txViewCli"
+                android:layout_width="50dip"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/txViewVist"
+                android:layout_width="50dip"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/txViewCPed"
+                android:layout_width="50dip"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/txViewImp"
+                android:layout_width="100dip"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/txViewCjFis"
+                android:layout_width="50dip"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/txViewCjUnit"
+                android:layout_width="50dip"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/txViewTEfc"
+                android:layout_width="100dip"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="" />
+        </TableRow>
+
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+    </TableLayout>
+
+</LinearLayout>

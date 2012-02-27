@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+      <com.thira.examples.actionbar.widget.ActionBar
+		android:id="@+id/actionBar" 
+		android:layout_width="fill_parent"
+		android:layout_height="44dip" 
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true" />
+          
+    <TextView android:text="Contacto :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+
+   
+
+    <EditText android:id="@+id/txtCl"  android:enabled="true" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+       
+    
+    <TextView android:text="Fecha Cumpleaños  :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+ 	<EditText android:id="@+id/txtRazonSocial" android:enabled="true" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+       
+	<TextView android:text="Teléfono :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+ 	<EditText android:id="@+id/txtDireccion" android:enabled="true" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+    
+ 	<TextView android:text="Tipo Contacto :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+ 	<Spinner android:id="@+id/cboGiro" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"></Spinner>
+    
+ 	<TextView android:text="E-mail :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+ 	<EditText android:id="@+id/txtRuc" android:enabled="true" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+    
+ 	 <Button android:layout_marginTop="20dip"
+        android:id="@+id/button1"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnGuardarContacto" 
+        android:focusable="false"
+        android:onClick="btnGuardar_onclick"/>
+
+    
+</LinearLayout>

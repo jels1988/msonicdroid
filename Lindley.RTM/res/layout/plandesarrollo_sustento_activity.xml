@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <com.thira.examples.actionbar.widget.ActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="fill_parent"
+        android:layout_height="44dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <ScrollView android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:fillViewport="true">
+            <HorizontalScrollView android:layout_height="fill_parent"
+            android:layout_width="fill_parent" 
+            android:fillViewport="true">
+            
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TableLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/tableLayoutCda"
+        android:layout_width="1500dip"
+        android:layout_height="fill_parent"
+        android:shrinkColumns="*" 
+        android:stretchColumns="*" >
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="30dip"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cabecera_codigo" />
+                
+                <TextView
+                    android:layout_width="50dip"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cabecera_fecha_visita" />
+
+                <TextView
+                    android:layout_width="70dip"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cabecera_detalle_labor" />
+                
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="300dip"
+                    android:gravity="center"
+                    android:text="cabecera_descripcion_labor" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="100dip"
+                    android:gravity="center"
+                    android:text="@string/cabecera_usuario" />
+                     
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_width="70dip"
+                        android:text="@string/cabecera_hora" />
+                    
+                     <TextView
+                    android:layout_height="wrap_content"
+                     android:gravity="center"
+                    android:layout_width="50dip"
+                    android:text="@string/cabecera_Editar" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                     android:gravity="center"
+                    android:layout_width="50dip"
+                    android:text="@string/cabecera_Eliminar" />
+
+            </TableRow>
+<View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+
+        </TableLayout>
+                   
+
+        <ListView
+            android:id="@+id/android:list"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="50dip"
+            android:layout_marginTop="25dip"
+            android:drawSelectorOnTop="false" />
+
+        <ImageButton
+            android:id="@+id/img_Agregar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:onClick="btnAgregar_click"
+            android:src="@drawable/btn_agregar" />
+
+    </RelativeLayout>
+    </HorizontalScrollView>
+    </ScrollView>
+</LinearLayout>

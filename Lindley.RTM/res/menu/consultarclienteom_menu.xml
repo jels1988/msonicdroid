@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	
+  
+  <item android:id="@+id/mnuSincronizar" android:title="Sincronizar">
+  	<menu>
+  	  <item android:id="@+id/mnuParametrosGenerales" android:title="Parámetros Generales" />
+	  <item android:id="@+id/mnuClientes" android:title="Clientes" />
+	  <item android:id="@+id/mnuOportunidadesMejora" android:title="Oportunidades Mejora" />
+  	</menu>
+  </item>
+
+<item android:id="@+id/mnuPendientes" android:title="Pendientes"/>
+</menu>

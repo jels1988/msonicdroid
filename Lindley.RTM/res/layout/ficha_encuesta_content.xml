@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:stretchColumns="*" >
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/txtPregunta"
+                style="@style/TextViewLabel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:layout_weight="0"
+                android:text="Pregunta" />
+        </TableRow>
+
+        <!-- PUEDE SER NÚMERICO O TEXTO -->
+
+        <TableRow
+            android:id="@+id/trSimple"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" >
+
+            <EditText
+                android:id="@+id/txtSimple"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2" >
+            </EditText>
+        </TableRow>
+
+        <!-- BOOLEAN -->
+
+        <TableRow
+            android:id="@+id/trFlag"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" >
+
+            <CheckBox
+                android:id="@+id/chkFlag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+        <!-- RANGO -->
+
+        <TableRow
+            android:id="@+id/trRango"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" >
+
+            <EditText
+                android:id="@+id/txtMinimo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" >
+            </EditText>
+
+            <EditText
+                android:id="@+id/txtMaximo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" >
+            </EditText>
+        </TableRow>
+
+        <!-- LISTA MULTIPLE -->
+
+        <TableRow
+            android:id="@+id/trLista"
+            android:layout_width="fill_parent" >
+   <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+            
+           
+                <ListView
+                    android:id="@+id/lstOpciones"
+                    android:layout_width="fill_parent"
+                    android:layout_height="450dip"
+                    android:layout_span="2"
+                    android:fadeScrollbars="false"
+                    android:scrollbarStyle="outsideOverlay" />
+          
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.thira.examples.actionbar.widget.ActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="fill_parent"
+        android:layout_height="44dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:focusable="false"
+                android:text="Año :" >
+            </TextView>
+
+            <Spinner
+                android:id="@+id/cboAnio"               
+                android:layout_width="match_parent"
+                android:layout_height="50dip" />
+            
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:focusable="false"
+                android:text="Mes :" >
+            </TextView>
+
+            <Spinner
+                android:id="@+id/cboMes"                
+                android:layout_width="match_parent"
+                android:layout_height="50dip" />
+            
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:focusable="false"
+                android:text="Semana :" >
+            </TextView>
+
+            <Spinner
+                android:id="@+id/cboSemana"                
+                android:layout_width="match_parent"
+                android:layout_height="50dip" />
+            
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:focusable="false"
+                android:text="Ruta :" >
+            </TextView>
+
+            <Spinner
+                android:id="@+id/cboRuta"                
+                android:layout_width="match_parent"
+                android:layout_height="50dip" />
+
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:focusable="false"
+                android:text="Segmento  :" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/txtSegmento"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:enabled="true"
+                android:hint="Ingrese Segmento"
+                android:maxLength="10" >
+            </EditText>
+
+                <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:focusable="false"
+                android:text="Código Cliente  :" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/txtCodCliente"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:enabled="true"
+                android:hint="Ingrese Codigo Cliente"
+                android:maxLength="8" >
+            </EditText>
+
+                
+                 <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:focusable="false"
+                android:text="Razón Social  :" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/txtRazonSocial"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:enabled="true"
+                android:hint="Ingrese Razón Social"
+                android:maxLength="30" >
+            </EditText>
+                
+                <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:focusable="false"
+                android:text="RUC  :" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/txtRuc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:enabled="true"
+                android:hint="Ingrese Ruc"
+                android:maxLength="12" 
+                android:inputType="number">
+            </EditText>
+            
+                <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:focusable="false"
+                android:text="DNI  :" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/txtDni"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:enabled="true"
+                android:hint="Ingrese DNI"
+                android:maxLength="8"
+                android:inputType="number" >
+            </EditText>
+                
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:gravity="center" >
+
+                <Button
+                    android:id="@+id/btnBuscar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:focusable="false"
+                    android:onClick="btnBuscar_onclick"
+                    android:text="@string/btnBuscarVtaCero" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

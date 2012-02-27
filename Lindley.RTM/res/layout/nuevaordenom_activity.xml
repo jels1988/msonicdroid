@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+  
+    <com.thira.examples.actionbar.widget.ActionBar
+		android:id="@+id/actionBar" 
+		android:layout_width="fill_parent"
+		android:layout_height="44dip" 
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true" />
+		
+  
+   <TableLayout android:stretchColumns="1" 
+ 				android:id="@+id/tableLayout1" 
+ 				android:layout_height="wrap_content" 
+ 				android:layout_width="fill_parent">
+  
+  	
+  	<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Tipo Contacto :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboTipoContacto" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+            
+   </TableRow>
+   
+   <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Tipo Orden :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboTipoOrden" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+            
+   </TableRow>
+  
+   <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Sub Tipo Orden :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboSubTipoOrden" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+            
+   </TableRow>
+   
+   <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Motivo :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboMotivo" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+            
+   </TableRow>
+   
+   <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Asginado a :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboAsignadoa" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+            
+   </TableRow>           
+   
+   <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Prioridad :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboPrioridad" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+            
+   </TableRow>           
+  
+  <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Estado :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <Spinner android:id="@+id/cboEstado" 
+            		android:layout_width="fill_parent" 
+            		android:layout_height="wrap_content"
+            		android:focusableInTouchMode="true"
+            		android:drawSelectorOnTop="true"></Spinner>
+            
+   </TableRow> 
+   
+   <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Observacion :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            
+            <EditText android:id="@+id/txtObservacion"
+             android:layout_width="fill_parent" 
+             android:layout_height="wrap_content" 
+             android:hint="Ingresar Observacion" 
+             android:lines="5" android:gravity="top|left" android:inputType="textMultiLine"
+             android:maxLength="80"></EditText>
+            
+   </TableRow>           
+   
+   <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+   
+   	<LinearLayout android:id="@+id/LinearLayout03"
+			 android:layout_width="wrap_content" 
+			 android:layout_height="fill_parent" 
+			 android:layout_gravity="right"
+			  android:padding="1dip"
+			 android:layout_span="2">
+			 
+			 	 <Button android:layout_width="wrap_content" 
+		    android:id="@+id/btnGuardar" 
+		    android:layout_height="wrap_content" 
+		    android:text="@string/nuevaordenom_activity_guardar" 
+		    android:focusable="false"
+		    android:onClick="btnGuardar_click"></Button>
+		    
+	</LinearLayout>
+   	
+   </TableRow>
+  </TableLayout>
+</LinearLayout>
