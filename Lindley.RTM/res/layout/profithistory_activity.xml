@@ -270,7 +270,7 @@
         </TableLayout>
 
       
-          <TableLayout
+        <TableLayout
             android:id="@+id/tblHistoryFamiliaMarca"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -328,12 +328,17 @@
                     android:layout_weight="0"
                     android:text="Marca :" >
                 </TextView>
-
-                <Spinner
-                    android:id="@+id/cboHistoryFamiliaMarca"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" >
-                </Spinner>
+                
+                <Button
+			        android:id="@+id/cboHistoryFamiliaMarca"
+			        android:focusable="false"        
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="--Seleccionar--"
+			        android:enabled="false"			        
+			        android:onClick="btnHistoryFamiliaMarca_onclick"
+			        style="@style/ButtonCustomWhite" >
+			    </Button>
             </TableRow>
 
             <TableRow
@@ -463,11 +468,16 @@
                     android:text="Articulo :" >
                 </TextView>
 
-                <Spinner
-                    android:id="@+id/cboHistoryFamiliaMarcaArticulo"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" >
-                </Spinner>
+                <Button
+			        android:id="@+id/cboHistoryFamiliaMarcaArticulo"
+			        android:focusable="false"        
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="--Seleccionar--"
+			        android:enabled="false"			        
+			        android:onClick="btnHistoryFamiliaMarcaArticulo_onclick"
+			        style="@style/ButtonCustomWhite" >
+			    </Button>
             </TableRow>
 
             <TableRow
@@ -576,11 +586,16 @@
                     android:text="Marca :" >
                 </TextView>
 
-                <Spinner
-                    android:id="@+id/cboHistorySegmentoMarca"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" >
-                </Spinner>
+                <Button
+			        android:id="@+id/cboHistorySegmentoMarca"
+			        android:focusable="false"        
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="--Seleccionar--"
+			        android:enabled="false"			        
+			        android:onClick="btnHistorySegmentoMarca_onclick"
+			        style="@style/ButtonCustomWhite" >
+			    </Button>
             </TableRow>
 
             <TableRow
@@ -708,11 +723,16 @@
                     android:text="Articulo :" >
                 </TextView>
 
-                <Spinner
-                    android:id="@+id/cboHistorySegmentoMarcaArticulo"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" >
-                </Spinner>
+                <Button
+			        android:id="@+id/cboHistorySegmentoMarcaArticulo"
+			        android:focusable="false"        
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="--Seleccionar--"
+			        android:enabled="false"			        
+			        android:onClick="btnHistorySegmentoMarcaArticulo_onclick"
+			        style="@style/ButtonCustomWhite" >
+			    </Button>
             </TableRow>
 
             <TableRow
@@ -801,12 +821,17 @@
                     android:layout_weight="0"
                     android:text="Articulo :" >
                 </TextView>
-
-                <Spinner
-                    android:id="@+id/cboHistoryArticulo"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" >
-                </Spinner>
+                
+                <Button
+			        android:id="@+id/cboHistoryArticulo"
+			        android:focusable="false"        
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="--Seleccionar--"
+			        android:enabled="false"
+			        android:onClick="btnHistoryArticulo_onclick"
+			        style="@style/ButtonCustomWhite" >
+			    </Button>
             </TableRow>
 
             <TableRow

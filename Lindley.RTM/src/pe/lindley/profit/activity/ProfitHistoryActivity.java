@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
-
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.ViewFlipper;
 import pe.lindley.activity.R;
@@ -62,7 +63,7 @@ public class ProfitHistoryActivity extends ActivityBase {
 	@InjectView(R.id.cboHistoryFamiliaMarcaFamilia)
 	Spinner cboHistoryFamiliaMarcaFamilia;
 	@InjectView(R.id.cboHistoryFamiliaMarca)
-	Spinner cboHistoryFamiliaMarca;
+	Button cboHistoryFamiliaMarca;
 	@InjectView(R.id.cboHistoryFamiliaMarcaTipo)
 	Spinner cboHistoryFamiliaMarcaTipo;
 
@@ -74,7 +75,7 @@ public class ProfitHistoryActivity extends ActivityBase {
 	@InjectView(R.id.cboHistoryFamiliaMarcaArticuloMarca)
 	Spinner cboHistoryFamiliaMarcaArticuloMarca;
 	@InjectView(R.id.cboHistoryFamiliaMarcaArticulo)
-	Spinner cboHistoryFamiliaMarcaArticulo;
+	Button cboHistoryFamiliaMarcaArticulo;
 	@InjectView(R.id.cboHistoryFamiliaMarcaArticuloTipo)
 	Spinner cboHistoryFamiliaMarcaArticuloTipo;
 
@@ -84,7 +85,7 @@ public class ProfitHistoryActivity extends ActivityBase {
 	@InjectView(R.id.cboHistorySegmentoMarcaSegmento)
 	Spinner cboHistorySegmentoMarcaSegmento;
 	@InjectView(R.id.cboHistorySegmentoMarca)
-	Spinner cboHistorySegmentoMarca;
+	Button cboHistorySegmentoMarca;
 	@InjectView(R.id.cboHistorySegmentoMarcaTipo)
 	Spinner cboHistorySegmentoMarcaTipo;
 
@@ -96,7 +97,7 @@ public class ProfitHistoryActivity extends ActivityBase {
 	@InjectView(R.id.cboHistorySegmentoMarcaArticuloMarca)
 	Spinner cboHistorySegmentoMarcaArticuloMarca;
 	@InjectView(R.id.cboHistorySegmentoMarcaArticulo)
-	Spinner cboHistorySegmentoMarcaArticulo;
+	Button cboHistorySegmentoMarcaArticulo;
 	@InjectView(R.id.cboHistorySegmentoMarcaArticuloTipo)
 	Spinner cboHistorySegmentoMarcaArticuloTipo;
 
@@ -104,7 +105,7 @@ public class ProfitHistoryActivity extends ActivityBase {
 	@InjectView(R.id.cboHistoryArticuloAnio)
 	Spinner cboHistoryArticuloAnio;
 	@InjectView(R.id.cboHistoryArticulo)
-	Spinner cboHistoryArticulo;
+	Button cboHistoryArticulo;
 	@InjectView(R.id.cboHistoryArticuloTipo)
 	Spinner cboHistoryArticuloTipo;
 
@@ -222,18 +223,37 @@ public class ProfitHistoryActivity extends ActivityBase {
 										View selectedItemView, int position,
 										long id) {
 									// your code here
+									
+									cboHistoryFamiliaMarca.setText("--Seleccionar--");
+							    	selectedFamiliaMarca = new ArrayList<ParametroTO>();							    	
+									
 									if (position <= 0)
-										cboHistoryFamiliaMarca.setAdapter(application
+										familiaMarca = application
+												.getAdapterListParametrosProfit(
+														TABLA_TIPO_LINEA_MARCA,
+														"");
+										/*cboHistoryFamiliaMarca.setAdapter(application
 												.getAdapterParametrosProfit(
 														TABLA_TIPO_LINEA_MARCA,
-														""));
+														""));*/
 									else
-										cboHistoryFamiliaMarca.setAdapter(application
+										familiaMarca = application
+										.getAdapterListParametrosProfit(
+												TABLA_TIPO_LINEA_MARCA,
+												((ParametroTO) cboHistoryFamiliaMarcaFamilia
+														.getSelectedItem())
+														.getCodigo());
+										/*cboHistoryFamiliaMarca.setAdapter(application
 												.getAdapterParametrosProfit(
 														TABLA_TIPO_LINEA_MARCA,
 														((ParametroTO) cboHistoryFamiliaMarcaFamilia
 																.getSelectedItem())
-																.getCodigo()));
+																.getCodigo()));*/
+
+									if(familiaMarca.size() > 0)
+										cboHistoryFamiliaMarca.setEnabled(true);
+							    	else
+							    		cboHistoryFamiliaMarca.setEnabled(false);
 								}
 
 								@Override
@@ -284,19 +304,18 @@ public class ProfitHistoryActivity extends ActivityBase {
 										View selectedItemView, int position,
 										long id) {
 									// your code here
-									cboHistoryFamiliaMarcaArticulo.setAdapter(application
-											.getAdapterParametrosProfit(TABLA_TIPO_ARTICULO));
-									/*if (position <= 0)
-										cboHistoryFamiliaMarcaArticulo.setAdapter(application
-												.getAdapterParametrosProfit(
-														TABLA_TIPO_ARTICULO, ""));
-									else
-										cboHistoryFamiliaMarcaArticulo.setAdapter(application
-												.getAdapterParametrosProfit(
-														TABLA_TIPO_ARTICULO,
-														((ParametroTO) cboHistoryFamiliaMarcaArticuloMarca
-																.getSelectedItem())
-																.getCodigo()));*/
+									
+									cboHistoryFamiliaMarcaArticulo.setText("--Seleccionar--");
+									selectedFamiliaMarcaArticulo = new ArrayList<ParametroTO>();						    	
+																		
+									familiaMarcaArticulo = application
+											.getAdapterListParametrosProfit(
+													TABLA_TIPO_ARTICULO);
+									
+									if(familiaMarcaArticulo.size() > 0)
+										cboHistoryFamiliaMarcaArticulo.setEnabled(true);
+							    	else
+							    		cboHistoryFamiliaMarcaArticulo.setEnabled(false);
 								}
 
 								@Override
@@ -308,15 +327,34 @@ public class ProfitHistoryActivity extends ActivityBase {
 				} else if (arg2 == 5) {
 					cboHistorySegmentoMarcaSegmento.setAdapter(application
 							.getAdapterParametrosProfit(TABLA_TIPO_SEGMENTO));
-					cboHistorySegmentoMarca.setAdapter(application
-							.getAdapterParametrosProfit(TABLA_TIPO_MARCA));
+					segmentoMarca = application
+							.getAdapterListParametrosProfit(TABLA_TIPO_MARCA);
+					
+					cboHistorySegmentoMarca.setText("--Seleccionar--");
+			    	selectedSegmentoMarca = new ArrayList<ParametroTO>();
+			    	if(segmentoMarca.size() > 0)
+			    		cboHistorySegmentoMarca.setEnabled(true);
+			    	else
+			    		cboHistorySegmentoMarca.setEnabled(false);
+					/*cboHistorySegmentoMarca.setAdapter(application
+							.getAdapterParametrosProfit(TABLA_TIPO_MARCA));*/
 				} else if (arg2 == 6) {
 					cboHistorySegmentoMarcaArticuloSegmento.setAdapter(application
 							.getAdapterParametrosProfit(TABLA_TIPO_SEGMENTO));
 					cboHistorySegmentoMarcaArticuloMarca.setAdapter(application
 							.getAdapterParametrosProfit(TABLA_TIPO_MARCA));
-					cboHistorySegmentoMarcaArticulo.setAdapter(application
-							.getAdapterParametrosProfit(TABLA_TIPO_ARTICULO));
+					
+					segmentoMarcaArticulo = application
+							.getAdapterListParametrosProfit(TABLA_TIPO_ARTICULO);
+					
+					cboHistorySegmentoMarcaArticulo.setText("--Seleccionar--");
+			    	selectedSegmentoMarcaArticulo = new ArrayList<ParametroTO>();
+			    	if(segmentoMarcaArticulo.size() > 0)
+			    		cboHistorySegmentoMarcaArticulo.setEnabled(true);
+			    	else
+			    		cboHistorySegmentoMarcaArticulo.setEnabled(false);
+					/*cboHistorySegmentoMarcaArticulo.setAdapter(application
+							.getAdapterParametrosProfit(TABLA_TIPO_ARTICULO));*/
 					
 					/*cboHistorySegmentoMarcaArticuloMarca
 							.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -346,8 +384,15 @@ public class ProfitHistoryActivity extends ActivityBase {
 								}
 							});*/
 				} else if (arg2 == 7) {
-					cboHistoryArticulo.setAdapter(application
-							.getAdapterParametrosProfit(TABLA_TIPO_ARTICULO));
+					articulos = application.getAdapterListParametrosProfit(TABLA_TIPO_ARTICULO);
+					cboHistoryArticulo.setText("--Seleccionar--");
+			    	selectedArticulos = new ArrayList<ParametroTO>();
+			    	if(articulos.size() > 0)
+			    		cboHistoryArticulo.setEnabled(true);
+			    	else
+			    		cboHistoryArticulo.setEnabled(false);
+			    	
+					//cboHistoryArticulo.setAdapter(application.getAdapterParametrosProfit(TABLA_TIPO_ARTICULO));
 				}
 
 				flpRegistrarCliente.setDisplayedChild(arg2);
@@ -404,7 +449,7 @@ public class ProfitHistoryActivity extends ActivityBase {
 
 	// Profit History Familia Marca
 	public void btnHistoryFamiliaMarcaAceptar_onclick(View view) {
-		if(cboHistoryFamiliaMarcaFamilia.getSelectedItemPosition() != 0 && cboHistoryFamiliaMarca.getSelectedItemPosition() != 0)
+		if(cboHistoryFamiliaMarcaFamilia.getSelectedItemPosition() != 0 && selectedFamiliaMarca.size() != 0)
 		{
 			Intent profit = new Intent(this,ProfitHistoryFamiliaMarcaActivity.class);
 			profit.putExtra(ProfitHistoryFamiliaMarcaActivity.CIENTE_KEY, cliente_descripcion);
@@ -414,8 +459,14 @@ public class ProfitHistoryActivity extends ActivityBase {
 			profit.putExtra(ProfitHistoryFamiliaMarcaActivity.CODIDO_FAMILIA, familia.getCodigo());
 			profit.putExtra(ProfitHistoryFamiliaMarcaActivity.NOMBRE_FAMILIA, familia.getDescripcion());
 			profit.putExtra(ProfitHistoryFamiliaMarcaActivity.TIPO_CAMPO, cboHistoryFamiliaMarcaTipo.getSelectedItemPosition());
-			String codMarca[] = new String[1];
-			codMarca[0] = ((ParametroTO) cboHistoryFamiliaMarca.getSelectedItem()).getCodigo();
+			
+			
+			int count = selectedFamiliaMarca.size();
+			String codMarca[] = new String[count];
+			for(int i=0; i<count; i++)
+			{
+				codMarca[i] = ((ParametroTO) selectedFamiliaMarca.get(i)).getCodigo(); 
+			}
 			profit.putExtra(ProfitHistoryFamiliaMarcaActivity.MARCAS, codMarca);
 			// profit.putExtra(MostrarDashBoardActivity.TIPO_DASHBOARD, 1);
 			startActivity(profit);
@@ -433,9 +484,9 @@ public class ProfitHistoryActivity extends ActivityBase {
 		}
 	}
 
-	// Profit History Familia Marca Articulo
+	// Profit History Familia Marca Articulo	
 	public void btnHistoryFamiliaMarcaArticuloAceptar_onclick(View view) {
-		if(cboHistoryFamiliaMarcaArticuloFamilia.getSelectedItemPosition() != 0 && cboHistoryFamiliaMarcaArticuloMarca.getSelectedItemPosition() != 0 && cboHistoryFamiliaMarcaArticulo.getSelectedItemPosition() != 0)
+		if(cboHistoryFamiliaMarcaArticuloFamilia.getSelectedItemPosition() != 0 && cboHistoryFamiliaMarcaArticuloMarca.getSelectedItemPosition() != 0 && selectedFamiliaMarcaArticulo.size() != 0)
 		{
 			// processAsync(PROFIT_FAMILIA_MARCA_ARTICULO);
 			Intent profit = new Intent(this, ProfitHistoryFamMarcaArtActivity.class);
@@ -449,8 +500,14 @@ public class ProfitHistoryActivity extends ActivityBase {
 			profit.putExtra(ProfitHistoryFamMarcaArtActivity.TIPO_CAMPO, cboHistoryFamiliaMarcaArticuloTipo.getSelectedItemPosition());
 			profit.putExtra(ProfitHistoryFamMarcaArtActivity.CODIGO_MARCA, marca.getCodigo());
 			profit.putExtra(ProfitHistoryFamMarcaArtActivity.NOMBRE_MARCA, marca.getDescripcion());
-			String codArticulo[] = new String[1];
-			codArticulo[0] = ((ParametroTO) cboHistoryFamiliaMarcaArticulo.getSelectedItem()).getCodigo(); 
+			
+			int count = selectedFamiliaMarcaArticulo.size();
+			String codArticulo[] = new String[count];
+			for(int i=0; i<count; i++)
+			{
+				codArticulo[i] = ((ParametroTO) selectedFamiliaMarcaArticulo.get(i)).getCodigo(); 
+			}
+			 
 			profit.putExtra(ProfitHistoryFamMarcaArtActivity.ARTICULOS, codArticulo);
 			// profit.putExtra(MostrarDashBoardActivity.TIPO_DASHBOARD, 1);
 			startActivity(profit);
@@ -470,7 +527,7 @@ public class ProfitHistoryActivity extends ActivityBase {
 		
 	// Profit History Segmento Marca
 	public void btnHistorySegmentoMarcaAceptar_onclick(View view) {
-		if(cboHistorySegmentoMarcaSegmento.getSelectedItemPosition() != 0 && cboHistorySegmentoMarca.getSelectedItemPosition() != 0)
+		if(cboHistorySegmentoMarcaSegmento.getSelectedItemPosition() != 0 && selectedSegmentoMarca.size() != 0)
 		{
 			// processAsync(PROFIT_SEGMENTO_MARCA);
 			Intent profit = new Intent(this, ProfitHistorySegmentoMarcaActivity.class);
@@ -481,8 +538,14 @@ public class ProfitHistoryActivity extends ActivityBase {
 			ParametroTO segmento = ((ParametroTO) cboHistorySegmentoMarcaSegmento.getSelectedItem());
 			profit.putExtra(ProfitHistorySegmentoMarcaActivity.CODIGO_SEGMENTO, segmento.getCodigo());
 			profit.putExtra(ProfitHistorySegmentoMarcaActivity.NOMBRE_SEGMENTO, segmento.getDescripcion());
-			String codMarca[] = new String[1];
-			codMarca[0] = ((ParametroTO) cboHistorySegmentoMarca.getSelectedItem()).getCodigo(); 
+			
+			int count = selectedSegmentoMarca.size();
+			String codMarca[] = new String[count];
+			for(int i=0; i<count; i++)
+			{
+				codMarca[i] = ((ParametroTO) selectedSegmentoMarca.get(i)).getCodigo(); 
+			}
+			
 			profit.putExtra(ProfitHistorySegmentoMarcaActivity.MARCAS, codMarca);
 			// profit.putExtra(MostrarDashBoardActivity.TIPO_DASHBOARD, 1);
 			startActivity(profit);
@@ -502,7 +565,7 @@ public class ProfitHistoryActivity extends ActivityBase {
 	
 	// Profit History Segmento Marca Articulo
 	public void btnHistorySegmentoMarcaArticuloAceptar_onclick(View view) {
-		if(cboHistorySegmentoMarcaArticuloSegmento.getSelectedItemPosition() != 0 && cboHistorySegmentoMarcaArticuloMarca.getSelectedItemPosition() != 0 && cboHistorySegmentoMarcaArticulo.getSelectedItemPosition() != 0)
+		if(cboHistorySegmentoMarcaArticuloSegmento.getSelectedItemPosition() != 0 && cboHistorySegmentoMarcaArticuloMarca.getSelectedItemPosition() != 0 && selectedSegmentoMarcaArticulo.size() != 0)
 		{
 			// processAsync(PROFIT_SEGMENTO_MARCA_ARTICULO);
 			Intent profit = new Intent(this, ProfitHistorySegMarArtActivity.class);
@@ -516,8 +579,16 @@ public class ProfitHistoryActivity extends ActivityBase {
 			profit.putExtra(ProfitHistorySegMarArtActivity.CODIGO_MARCA, marca.getCodigo());
 			profit.putExtra(ProfitHistorySegMarArtActivity.NOMBRE_MARCA, marca.getDescripcion());
 			profit.putExtra(ProfitHistorySegMarArtActivity.TIPO_CAMPO, cboHistorySegmentoMarcaArticuloTipo.getSelectedItemPosition());
-			String codArticulo[] = new String[1];
-			codArticulo[0] = ((ParametroTO) cboHistorySegmentoMarcaArticulo.getSelectedItem()).getCodigo(); 
+			
+			int count = selectedSegmentoMarcaArticulo.size();
+			String codArticulo[] = new String[count];
+			for(int i=0; i<count; i++)
+			{
+				codArticulo[i] = ((ParametroTO) selectedSegmentoMarcaArticulo.get(i)).getCodigo(); 
+			}
+			
+			//String codArticulo[] = new String[1];
+			//codArticulo[0] = ((ParametroTO) cboHistorySegmentoMarcaArticulo.getSelectedItem()).getCodigo(); 
 			profit.putExtra(ProfitHistorySegMarArtActivity.ARTICULOS, codArticulo);
 			// profit.putExtra(MostrarDashBoardActivity.TIPO_DASHBOARD, 1);
 			startActivity(profit);
@@ -537,7 +608,7 @@ public class ProfitHistoryActivity extends ActivityBase {
 	
 	// Profit History Articulo
 	public void btnHistoryArticuloAceptar_onclick(View view) {
-		if(cboHistoryArticulo.getSelectedItemPosition() != 0)
+		if(selectedArticulos.size() > 0)
 		{
 			// processAsync(PROFIT_ARTICULO);
 			Intent profit = new Intent(this, ProfitHistoryArticuloActivity.class);
@@ -545,8 +616,16 @@ public class ProfitHistoryActivity extends ActivityBase {
 			profit.putExtra(ProfitHistoryArticuloActivity.CODIGO_CLIENTE_KEY, cliente_codigo);
 			profit.putExtra(ProfitHistoryArticuloActivity.ANIO, Integer.parseInt(cboHistoryArticuloAnio.getSelectedItem().toString()));
 			profit.putExtra(ProfitHistoryArticuloActivity.TIPO_CAMPO, cboHistoryArticuloTipo.getSelectedItemPosition());
-			String codArticulo[] = new String[1];
-			codArticulo[0] = ((ParametroTO) cboHistoryArticulo.getSelectedItem()).getCodigo(); 
+			
+			int count = selectedArticulos.size();
+			String codArticulo[] = new String[count];
+			for(int i=0; i<count; i++)
+			{
+				codArticulo[i] = ((ParametroTO) selectedArticulos.get(i)).getCodigo(); 
+			}
+			
+			
+			//codArticulo[0] = ((ParametroTO) cboHistoryArticulo.getSelectedItem()).getCodigo(); 
 			profit.putExtra(ProfitHistoryArticuloActivity.ARTICULOS, codArticulo);
 			// profit.putExtra(MostrarDashBoardActivity.TIPO_DASHBOARD, 1);
 			startActivity(profit);
@@ -677,5 +756,257 @@ public class ProfitHistoryActivity extends ActivityBase {
 		}
 		super.processOk();
 	}
+	
+	
+	//History Articulo ---------------------------------------------------------
+	protected ArrayList<ParametroTO> articulos;
+	protected ArrayList<ParametroTO> selectedArticulos = new ArrayList<ParametroTO>();
 
+	public void btnHistoryArticulo_onclick(View view)
+	{
+		showSelectHistoryArticuloDialog();
+	}
+	
+	protected void onChangeSelectedHistoryArticulo() {	
+		cboHistoryArticulo.setText(selectedArticulos.size() + " seleccionados.");
+	}
+	
+	protected void showSelectHistoryArticuloDialog() {
+		int count = articulos.size();
+		boolean[] checkedColours = new boolean[count];	
+
+		for(int i = 0; i < count; i++)
+			checkedColours[i] = selectedArticulos.contains((ParametroTO)articulos.get(i));
+
+		DialogInterface.OnMultiChoiceClickListener coloursDialogListener = new DialogInterface.OnMultiChoiceClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				if(isChecked)
+					selectedArticulos.add((ParametroTO)articulos.get(which));
+				else
+					selectedArticulos.remove((ParametroTO)articulos.get(which));
+
+				onChangeSelectedHistoryArticulo();
+			}
+		};
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Seleccionar Articulos");
+				
+		CharSequence[] temp = new CharSequence[count];
+		
+		for(int i=0;i<count;i++)
+		{
+			temp[i] = ((ParametroTO) articulos.get(i)).getDescripcion();
+		}
+		
+		builder.setMultiChoiceItems(temp, checkedColours, coloursDialogListener);
+
+		AlertDialog dialog = builder.create();
+		dialog.show();
+	}
+	
+	//------------------------------------------------------------------
+
+	
+	//History Familia Marca ---------------------------------------------------------
+	protected ArrayList<ParametroTO> familiaMarca;
+	protected ArrayList<ParametroTO> selectedFamiliaMarca = new ArrayList<ParametroTO>();
+
+	public void btnHistoryFamiliaMarca_onclick(View view)
+	{
+		showSelectHistoryFamiliaMarcaDialog();
+	}
+	
+	protected void onChangeSelectedHistoryFamiliaMarca() {	
+		cboHistoryFamiliaMarca.setText(selectedFamiliaMarca.size() + " seleccionados.");
+	}
+	
+	protected void showSelectHistoryFamiliaMarcaDialog() {
+		int count = familiaMarca.size();
+		boolean[] checkedColours = new boolean[count];	
+
+		for(int i = 0; i < count; i++)
+			checkedColours[i] = selectedFamiliaMarca.contains((ParametroTO) familiaMarca.get(i));
+
+		DialogInterface.OnMultiChoiceClickListener familiaMarcaDialogListener = new DialogInterface.OnMultiChoiceClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				if(isChecked)
+					selectedFamiliaMarca.add((ParametroTO) familiaMarca.get(which));
+				else
+					selectedFamiliaMarca.remove((ParametroTO) familiaMarca.get(which));
+
+				onChangeSelectedHistoryFamiliaMarca();
+			}
+		};
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Seleccionar Marcas");
+				
+		CharSequence[] temp = new CharSequence[count];
+		
+		for(int i=0;i<count;i++)
+		{
+			temp[i] = ((ParametroTO) familiaMarca.get(i)).getDescripcion();
+		}
+		
+		builder.setMultiChoiceItems(temp, checkedColours, familiaMarcaDialogListener);
+
+		AlertDialog dialog = builder.create();
+		dialog.show();
+	}
+	
+	//------------------------------------------------------------------
+
+	//History Familia Marca Articulo ---------------------------------------------------------
+	protected ArrayList<ParametroTO> familiaMarcaArticulo;
+	protected ArrayList<ParametroTO> selectedFamiliaMarcaArticulo = new ArrayList<ParametroTO>();
+
+	public void btnHistoryFamiliaMarcaArticulo_onclick(View view)
+	{
+		showSelectHistoryFamiliaMarcaArticuloDialog();
+	}
+	
+	protected void onChangeSelectedHistoryFamiliaMarcArticulo() {	
+		cboHistoryFamiliaMarcaArticulo.setText(selectedFamiliaMarcaArticulo.size() + " seleccionados.");
+	}
+	
+	protected void showSelectHistoryFamiliaMarcaArticuloDialog() {
+		int count = familiaMarcaArticulo.size();
+		boolean[] checkedColours = new boolean[count];	
+
+		for(int i = 0; i < count; i++)
+			checkedColours[i] = selectedFamiliaMarcaArticulo.contains((ParametroTO) familiaMarcaArticulo.get(i));
+
+		DialogInterface.OnMultiChoiceClickListener familiaMarcaArticuloDialogListener = new DialogInterface.OnMultiChoiceClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				if(isChecked)
+					selectedFamiliaMarcaArticulo.add((ParametroTO) familiaMarcaArticulo.get(which));
+				else
+					selectedFamiliaMarcaArticulo.remove((ParametroTO) familiaMarcaArticulo.get(which));
+
+				onChangeSelectedHistoryFamiliaMarcArticulo();
+			}
+		};
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Seleccionar Articulos");
+				
+		CharSequence[] temp = new CharSequence[count];
+		
+		for(int i=0;i<count;i++)
+		{
+			temp[i] = ((ParametroTO) familiaMarcaArticulo.get(i)).getDescripcion();
+		}
+		
+		builder.setMultiChoiceItems(temp, checkedColours, familiaMarcaArticuloDialogListener);
+
+		AlertDialog dialog = builder.create();
+		dialog.show();
+	}
+	
+	//------------------------------------------------------------------
+	
+
+	//History Segmento Marca ---------------------------------------------------------
+	protected ArrayList<ParametroTO> segmentoMarca;
+	protected ArrayList<ParametroTO> selectedSegmentoMarca = new ArrayList<ParametroTO>();
+
+	public void btnHistorySegmentoMarca_onclick(View view)
+	{
+		showSelectHistorySegmentoMarcaDialog();
+	}
+	
+	protected void onChangeSelectedHistorySegmentoMarca() {	
+		cboHistorySegmentoMarca.setText(selectedSegmentoMarca.size() + " seleccionados.");
+	}
+	
+	protected void showSelectHistorySegmentoMarcaDialog() {
+		int count = segmentoMarca.size();
+		boolean[] checkedColours = new boolean[count];	
+
+		for(int i = 0; i < count; i++)
+			checkedColours[i] = selectedSegmentoMarca.contains((ParametroTO)segmentoMarca.get(i));
+
+		DialogInterface.OnMultiChoiceClickListener coloursDialogListener = new DialogInterface.OnMultiChoiceClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				if(isChecked)
+					selectedSegmentoMarca.add((ParametroTO)segmentoMarca.get(which));
+				else
+					selectedSegmentoMarca.remove((ParametroTO)segmentoMarca.get(which));
+
+				onChangeSelectedHistorySegmentoMarca();
+			}
+		};
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Seleccionar Marcas");
+				
+		CharSequence[] temp = new CharSequence[count];
+		
+		for(int i=0;i<count;i++)
+		{
+			temp[i] = ((ParametroTO) segmentoMarca.get(i)).getDescripcion();
+		}
+		
+		builder.setMultiChoiceItems(temp, checkedColours, coloursDialogListener);
+
+		AlertDialog dialog = builder.create();
+		dialog.show();
+	}
+	
+	//------------------------------------------------------------------
+	
+	//History Segmento Marca Articulo ---------------------------------------------------------
+	protected ArrayList<ParametroTO> segmentoMarcaArticulo;
+	protected ArrayList<ParametroTO> selectedSegmentoMarcaArticulo = new ArrayList<ParametroTO>();
+
+	public void btnHistorySegmentoMarcaArticulo_onclick(View view)
+	{
+		showSelectHistorySegmentoMarcaArticuloDialog();
+	}
+	
+	protected void onChangeSelectedHistorySegmentoMarcaArticulo() {	
+		cboHistorySegmentoMarcaArticulo.setText(selectedSegmentoMarcaArticulo.size() + " seleccionados.");
+	}
+	
+	protected void showSelectHistorySegmentoMarcaArticuloDialog() {
+		int count = segmentoMarcaArticulo.size();
+		boolean[] checkedColours = new boolean[count];	
+
+		for(int i = 0; i < count; i++)
+			checkedColours[i] = selectedSegmentoMarcaArticulo.contains((ParametroTO)segmentoMarcaArticulo.get(i));
+
+		DialogInterface.OnMultiChoiceClickListener coloursDialogListener = new DialogInterface.OnMultiChoiceClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				if(isChecked)
+					selectedSegmentoMarcaArticulo.add((ParametroTO)segmentoMarcaArticulo.get(which));
+				else
+					selectedSegmentoMarcaArticulo.remove((ParametroTO)segmentoMarcaArticulo.get(which));
+
+				onChangeSelectedHistorySegmentoMarcaArticulo();
+			}
+		};
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Seleccionar Articulos");
+				
+		CharSequence[] temp = new CharSequence[count];
+		
+		for(int i=0;i<count;i++)
+		{
+			temp[i] = ((ParametroTO) segmentoMarcaArticulo.get(i)).getDescripcion();
+		}
+		
+		builder.setMultiChoiceItems(temp, checkedColours, coloursDialogListener);
+
+		AlertDialog dialog = builder.create();
+		dialog.show();
+	}
+	
+	//------------------------------------------------------------------	
 }
