@@ -446,6 +446,16 @@ public class RTMApplication extends RoboApplication {
 		return adapterVentaCero;
 	}
 	
+	public synchronized ArrayList<pe.lindley.profit.to.ParametroTO> getAdapterListParametrosProfit(String codOpcion){
+		ArrayList<pe.lindley.profit.to.ParametroTO> listaparametro = profitParametroBLL.list(codOpcion);
+		return listaparametro;
+	}
+	
+	public synchronized ArrayList<pe.lindley.profit.to.ParametroTO> getAdapterListParametrosProfit(String codOpcion, String codigo){
+		ArrayList<pe.lindley.profit.to.ParametroTO> listaparametro = profitParametroBLL.list(codOpcion, codigo);
+		return listaparametro;
+	}
+	
 	@Override
 	protected void addApplicationModules(List<Module> modules){	
 		
