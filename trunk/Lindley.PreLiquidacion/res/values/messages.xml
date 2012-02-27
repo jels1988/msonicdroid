@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="msg_usuario_empty">Debes ingresar el usuario</string>
+    <string name="msg_ordenCarga_empty">Debes ingresar la orden de compra</string>
+    <string name="msg_desposito_empty">Debes ingresar la depósito</string>
+    
+    <string name="login_activity_ok">Bienvenido: %s.</string>
+    <string name="login_activity_error">%s</string>
+    
+    <string name="descargardocumento_activity_ok">Doc. Descargados:%1$s  Mot. Descargados:  %2$s</string>
+    <string name="descargardocumento_activity_error">%s</string>
+    
+        <string name="descargardocumento_activity_msg">Espere un momento se esta procediendo a descargar la información.</string>
+</resources>

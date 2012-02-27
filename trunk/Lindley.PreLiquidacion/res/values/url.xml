@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<string name="urlwsLogin">http://java.cdaandino.com/rtm/Preliquidacion/UsuarioService.svc</string>
+<string name="urlwsDocumento">http://java.cdaandino.com/rtm/Preliquidacion/DocumentoService.svc</string>
+<string name="urlwsAvance">http://java.cdaandino.com/rtm/Preliquidacion/AvanceService.svc</string>
+<string name="urlwsCalificar">http://java.cdaandino.com/rtm/Preliquidacion/CalificacionService.svc</string>
+<string name="urlwsCierre">http://java.cdaandino.com/rtm/Preliquidacion/CierreService.svc</string>
+ 
+<!-- 
+ 	<string name="urlwsLogin">http://197.1.1.87/rtm/Preliquidacion/UsuarioService.svc</string>
+    <string name="urlwsDocumento">http://197.1.1.87/rtm/Preliquidacion/DocumentoService.svc</string>
+    <string name="urlwsAvance">http://197.1.1.87/rtm/Preliquidacion/AvanceService.svc</string>
+    <string name="urlwsCalificar">http://197.1.1.87/rtm/Preliquidacion/CalificacionService.svc</string>
+    <string name="urlwsCierre">http://197.1.1.87/rtm/Preliquidacion/CierreService.svc</string>
+    -->
+</resources>

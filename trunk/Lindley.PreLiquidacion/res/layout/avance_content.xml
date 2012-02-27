@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lineItem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:background="@drawable/list_item_selector" >
+
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tableLayoutCda"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:shrinkColumns="*"
+        android:stretchColumns="*" >
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="40dip" >
+            
+            <TextView
+                android:id="@+id/txViewProd"
+                android:layout_width="60dip"
+                android:layout_height="fill_parent"
+                android:gravity="left"
+                android:text="" />
+
+                 <TextView
+                android:id="@+id/txViewCarg"
+                android:layout_width="30dip"
+                android:layout_height="fill_parent"
+                android:gravity="right"
+                android:text="" />
+                 
+                      <TextView
+                android:id="@+id/txViewEntg"
+                android:layout_width="30dip"
+                android:layout_height="fill_parent"
+                android:gravity="right"
+                android:text="" />
+                      
+                           <TextView
+                android:id="@+id/txViewCam"
+                android:layout_width="30dip"
+                android:layout_height="fill_parent"
+                android:gravity="right"
+                android:text="" /> 
+                </TableRow>
+    </TableLayout>
+
+</LinearLayout>

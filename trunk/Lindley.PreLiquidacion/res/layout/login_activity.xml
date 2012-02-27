@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="1dip"
+    android:orientation="vertical" >
+
+    <com.thira.examples.actionbar.widget.ActionBar
+		android:id="@+id/actionBar" 
+		android:layout_width="fill_parent"
+		android:layout_height="44dip" 
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true" />
+		
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_usuario" /> 
+
+    
+    
+    
+
+    <EditText
+        android:id="@+id/txtUsuario"
+        android:hint="Ingresar Usuario"
+        android:inputType="number"
+        android:maxLength="8"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+        <requestFocus/>
+    </EditText>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_ordencarga" />
+
+    <EditText
+        android:id="@+id/txtOrdenCarga"
+        android:hint="Ingresar Orden de Carga"
+        android:layout_width="fill_parent"
+        android:inputType="number"
+        android:maxLength="6"
+        android:layout_height="wrap_content" 
+        >
+    </EditText>
+
+   <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_deposito" />
+        
+    <EditText
+        android:id="@+id/txtDeposito"
+        android:hint="Ingresar Depósito"
+        android:layout_width="fill_parent"
+        android:inputType="textCapWords|textCapCharacters"
+        android:maxLength="2"
+        android:layout_height="wrap_content" >
+    </EditText>   
+    
+       <Button android:layout_width="wrap_content" 
+    android:layout_gravity="right" 
+    android:id="@+id/btnLogin" 
+    android:text="@string/btn_ingresar"
+    android:layout_height="wrap_content" 
+    android:focusable="false"
+    android:onClick="btnLogin_onlick"></Button>
+</LinearLayout>
