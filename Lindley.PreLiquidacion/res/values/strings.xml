@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <string name="login_activity_title">Corporación Lindley</string>
+    <string name="login_activity_sub_title">Preliquidación</string>
+    <string name="hello">Hello World, LoginActivity!</string>
+    <string name="app_name">Lindley.PreLiquidacion</string>
+    <string name="lbl_usuario">Usuario :</string>
+    <string name="lbl_ordencarga">Orden de Carga :</string>
+    <string name="lbl_deposito">Depósito :</string>
+    <string name="btn_ingresar">Ingresar</string>
+    <string name="btn_scanner">1.- Scanner</string>
+    <string name="btn_manual">2.- Manual</string>
+    <string name="btn_avance">3.- Avance</string>
+    <string name="btn_cierre">4.- Cierre</string>
+    <string name="lbl_ingresarcodigo">Ingrese código cliente</string>
+    <string name="btn_buscar">Buscar</string>
+    <string name="calificar_documento_rechazado_title">Rechazar Documento</string>
+    <string name="calificar_documento_rechazado_message">El documento ha sido rechazado.</string>
+    <string name="calificar_documento_entregado_title">Entrega Total - Documento</string>
+    <string name="calificar_documento_entregado_message">El documento se entrego de forma satisfactoria.</string>
+    <string name="calificar_documento_entregado_todos_message">Los documentos se entregaron de forma satisfactoria.</string>
+    <string name="cerrar_documento_title">Cerrar Orden de Carga</string>
+    <string name="cerrar_documento_message">La Orden de carga ha sido cerrada.</string>
+    <string name="calificar_document_activado_title">Reactivar Documento</string>
+    <string name="calificar_documento_activado_message">El documento ha sido reactivado</string>
+</resources>
