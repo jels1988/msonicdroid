@@ -6,9 +6,11 @@ import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.ActivityBase;
 import lindley.desarrolloxcliente.R;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
-public class Login extends ActivityBase {
+public class Login_Activity extends ActivityBase {
 	
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	
@@ -20,5 +22,10 @@ public class Login extends ActivityBase {
         
         mActionBar.setTitle(R.string.login_activity_title);
         mActionBar.setHomeLogo(R.drawable.header_logo);
+    }
+    
+    public void btnLogin_click(View view){
+    	Intent intent = new Intent("lindley.desarrolloxcliente.buscarcliente");
+    	startActivity(intent);
     }
 }

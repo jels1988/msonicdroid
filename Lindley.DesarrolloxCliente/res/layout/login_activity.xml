@@ -16,16 +16,17 @@
   android:layout_height="wrap_content" 
   android:orientation="vertical" android:padding="1dp">
   
-	<TextView android:text="Usuario :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0"  android:layout_width="fill_parent"></TextView>
-	<EditText android:id="@+id/txtUsuario" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Ingresar Usuario" android:text="" android:layout_weight="1" android:inputType="number" android:maxLength="8"></EditText>
+	<TextView android:text="@string/login_activity_usuario" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0"  android:layout_width="fill_parent"></TextView>
+	<EditText android:id="@+id/txtUsuario" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/login_activity_usuario_hint" android:text="" android:layout_weight="1" android:inputType="number" android:maxLength="8"></EditText>
       
-	<TextView android:text="Password :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
-	<EditText android:id="@+id/txtPassword" android:layout_width="fill_parent" android:hint="Ingresar Contraseña" android:layout_height="wrap_content" android:text="" android:layout_weight="1" android:password="true" android:inputType="number|textPassword" android:maxLength="8"></EditText>
+	<TextView android:text="@string/login_activity_password" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+	<EditText android:id="@+id/txtPassword" android:layout_width="fill_parent" android:hint="@string/login_activity_password_hint" android:layout_height="wrap_content" android:text="" android:layout_weight="1" android:password="true" android:inputType="number|textPassword" android:maxLength="8"></EditText>
                
    <Button android:layout_width="wrap_content" 
     android:layout_gravity="right" 
     android:id="@+id/btnLogin" 
     android:layout_height="wrap_content" 
+    android:text="@string/login_activity_ingresar"
     android:focusable="false"
     android:onClick="btnLogin_click"></Button>
     
