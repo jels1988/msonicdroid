@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="app_name">Desarrollo por Cliente</string>
+    
     <string name="login_activity_title">Login</string>
     <string name="login_activity_ingresar">Ingresar</string>
     <string name="login_activity_usuario">Usuario :</string>
     <string name="login_activity_password">Password :</string>
     <string name="login_activity_usuario_hint">Ingresar Usuario</string>
     <string name="login_activity_password_hint">Ingresar Password :</string>
+    
+    
+    <string name="consultarcliente_activity_title">Consultar Cliente</string>
 </resources>
