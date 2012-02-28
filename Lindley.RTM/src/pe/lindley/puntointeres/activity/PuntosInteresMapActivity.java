@@ -63,8 +63,8 @@ public class PuntosInteresMapActivity extends MapActivityBase {
 	};
 	private double longitudSeleccionada;
 	private double latitudSeleccionada;
-	private static double longitudCliente;
-	private static double latitudCliente;
+	public double longitudCliente;
+	public double latitudCliente;
 		
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -441,7 +441,16 @@ public class PuntosInteresMapActivity extends MapActivityBase {
 									actualizarPuntoInteres.putExtra(ActualizarPuntoInteresActivity.LONGITUD, puntoInteresTO.getLongitudDec());
 									actualizarPuntoInteres.putExtra(ActualizarPuntoInteresActivity.CODIGO_PUNTO, puntoInteresTO.getCodPunto());
 									actualizarPuntoInteres.putExtra(ActualizarPuntoInteresActivity.CODIGO_GIRO, puntoInteresTO.getCodGiro());
-									actualizarPuntoInteres.putExtra(ActualizarPuntoInteresActivity.TIPO_GIRO, puntoInteresTO.getTipoGiro());
+									
+									int count = puntoInteresTO.getListSubGiro().size();
+									String[] subGiro = new String[count];
+									for(int i=0; i<count; i++)
+									{
+										subGiro[i] = puntoInteresTO.getListSubGiro().get(i).getCodigo();
+									}
+									
+									actualizarPuntoInteres.putExtra(ActualizarPuntoInteresActivity.TIPO_GIRO, subGiro);
+									//actualizarPuntoInteres.putExtra(ActualizarPuntoInteresActivity.TIPO_GIRO, puntoInteresTO.getTipoGiro());
 									actualizarPuntoInteres.putExtra(ActualizarPuntoInteresActivity.CODIGO_UBIGEO, puntoInteresTO.getCodUbigeo());
 									actualizarPuntoInteres.putExtra(ActualizarPuntoInteresActivity.DESCRIPCION, puntoInteresTO.getDescripcion());
 									actualizarPuntoInteres.putExtra(ActualizarPuntoInteresActivity.DIRECCION, puntoInteresTO.getDireccion());

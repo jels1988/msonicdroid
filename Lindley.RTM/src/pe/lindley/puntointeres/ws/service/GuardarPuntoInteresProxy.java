@@ -1,5 +1,8 @@
 package pe.lindley.puntointeres.ws.service;
 
+import java.util.List;
+
+import pe.lindley.puntointeres.to.SubGiroTO;
 import pe.lindley.puntointeres.ws.bean.GuardarPuntoInteresResponse;
 import pe.lindley.puntointeres.ws.bean.GuardarPuntoInteresRequest;
 import pe.lindley.util.JSONHelper;
@@ -13,7 +16,7 @@ public class GuardarPuntoInteresProxy extends ProxyBase<GuardarPuntoInteresRespo
 	private String codCliente;
 	private String codPunto;
 	private String codGiro;
-	private String tipoGiro;
+	private List<SubGiroTO> listSubGiro;
 	private String nombre;
 	private String direccion;
 	private String codUbigeo;
@@ -48,14 +51,14 @@ public class GuardarPuntoInteresProxy extends ProxyBase<GuardarPuntoInteresRespo
 		this.codGiro = codGiro;
 	}
 
-	public String getTipoGiro() {
-		return tipoGiro;
+	public List<SubGiroTO> getListSubGiro() {
+		return listSubGiro;
 	}
 
-	public void setTipoGiro(String tipoGiro) {
-		this.tipoGiro = tipoGiro;
+	public void setListSubGiro(List<SubGiroTO> listSubGiro) {
+		this.listSubGiro = listSubGiro;
 	}
-
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -149,7 +152,7 @@ public class GuardarPuntoInteresProxy extends ProxyBase<GuardarPuntoInteresRespo
 		guardarPuntoInteresRequest.setLatitudDec(latitudDec);
 		guardarPuntoInteresRequest.setLongitudDec(longitudDec);
 		guardarPuntoInteresRequest.setNombre(nombre);
-		guardarPuntoInteresRequest.setTipoGiro(tipoGiro);
+		guardarPuntoInteresRequest.setListSubGiro(listSubGiro);
 		guardarPuntoInteresRequest.setUsuario(Usuario);
 		String request = JSONHelper.serializar(guardarPuntoInteresRequest);
 		return request;

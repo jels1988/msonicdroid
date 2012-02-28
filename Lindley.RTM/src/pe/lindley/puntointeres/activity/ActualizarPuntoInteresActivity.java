@@ -1,8 +1,14 @@
+
 package pe.lindley.puntointeres.activity;
 
+import java.util.ArrayList;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -14,6 +20,7 @@ import pe.lindley.lanzador.to.ClienteResumenTO;
 import pe.lindley.lanzador.to.UsuarioTO;
 import pe.lindley.puntointeres.negocio.ParametroBLL;
 import pe.lindley.puntointeres.to.ParametroTO;
+import pe.lindley.puntointeres.to.SubGiroTO;
 import pe.lindley.puntointeres.ws.service.ActualizarPuntoInteresProxy;
 import pe.lindley.util.ActivityBase;
 import roboguice.inject.InjectExtra;
@@ -22,6 +29,10 @@ import roboguice.inject.InjectView;
 
 public class ActualizarPuntoInteresActivity extends ActivityBase {
 
+
+	protected ArrayList<ParametroTO> subGiros;
+	protected ArrayList<ParametroTO> selectedsubGiros = new ArrayList<ParametroTO>();
+	
 	public static final String LATITUD = "latitud_punto";
 	public static final String LONGITUD = "longitud_punto";
 	protected static final String CODIGO_PUNTO = "punto_codigo";
@@ -41,22 +52,25 @@ public class ActualizarPuntoInteresActivity extends ActivityBase {
 	@InjectView(R.id.txtDireccion)		TextView 	txtDireccion;
 	@InjectView(R.id.txtDescripcion)	TextView 	txtDescripcion;
 	@InjectView(R.id.cboGiro) 			Spinner 	cboGiro;
-	@InjectView(R.id.cboSubGiro) 		Spinner 	cboSubGiro;
+	@InjectView(R.id.cboSubGiro) 		Button 		cboSubGiro;
 	@InjectView(R.id.cboUbigeo) 		Spinner 	cboUbigeo;
 	
 	@Inject ActualizarPuntoInteresProxy actualizarPuntoInteresProxy;
-	@InjectExtra(LATITUD)  		double latitud_pto;
-	@InjectExtra(LONGITUD) 		double longitud_pto;
-	@InjectExtra(CODIGO_PUNTO) 	String punto_codigo;
-	@InjectExtra(CODIGO_GIRO) 	String giro_codigo;
-	@InjectExtra(TIPO_GIRO) 	String tipo_giro;
-	@InjectExtra(CODIGO_UBIGEO) String codigo_ubigeo;
-	@InjectExtra(DESCRIPCION) 	String descripcion;
-	@InjectExtra(DIRECCION) 	String direccion;
-	@InjectExtra(SLATITUD) 		String pto_slatitud;
-	@InjectExtra(SLONGITUD) 	String pto_slongitud;
-	@InjectExtra(NOMBRE) 		String pto_nombre;
+	@InjectExtra(LATITUD)  		double 	 latitud_pto;
+	@InjectExtra(LONGITUD) 		double 	 longitud_pto;
+	@InjectExtra(CODIGO_PUNTO) 	String 	 punto_codigo;
+	@InjectExtra(CODIGO_GIRO) 	String 	 giro_codigo;
+	@InjectExtra(TIPO_GIRO) 	String[] tipo_giro;
+	@InjectExtra(CODIGO_UBIGEO) String   codigo_ubigeo;
+	@InjectExtra(DESCRIPCION) 	String 	 descripcion;
+	@InjectExtra(DIRECCION) 	String 	 direccion;
+	@InjectExtra(SLATITUD) 		String 	 pto_slatitud;
+	@InjectExtra(SLONGITUD) 	String 	 pto_slongitud;
+	@InjectExtra(NOMBRE) 		String 	 pto_nombre;
 	public String codigo_cliente = "";
+	boolean inicioActivity = true;
+	boolean inicioButton = true;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +90,18 @@ public class ActualizarPuntoInteresActivity extends ActivityBase {
 		    @Override
 		    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 		        // your code here
-		    	cboSubGiro.setAdapter(application.getAdapterParametrosPINT(ParametroBLL.TBL_SUB_GIRO, ((ParametroTO)cboGiro.getSelectedItem()).getCodigo()));		    	
+		    	//cboSubGiro.setAdapter(application.getAdapterParametrosPINT(ParametroBLL.TBL_SUB_GIRO, ((ParametroTO)cboGiro.getSelectedItem()).getCodigo()));
+		    	subGiros = application.getAdapterListParametrosPINT(ParametroBLL.TBL_SUB_GIRO, ((ParametroTO)cboGiro.getSelectedItem()).getCodigo());
+		    	if(inicioActivity)
+		    	{
+		    		cboSubGiro.setText("--Seleccionar--");
+		    		selectedsubGiros = new ArrayList<ParametroTO>();
+		    	}	    	
+		    	inicioActivity = true;
+		    	if(subGiros.size() > 0)
+		    		cboSubGiro.setEnabled(true);
+		    	else
+		    		cboSubGiro.setEnabled(false);
 		    }
 
 		    @Override
@@ -89,15 +114,46 @@ public class ActualizarPuntoInteresActivity extends ActivityBase {
 		txtNombre.setText(pto_nombre);
 		txtDireccion.setText(direccion);
 		txtDescripcion.setText(descripcion);
+		
+		cboUbigeo.setSelection(application.getAdapterParametrosPINT(ParametroBLL.TBL_UBIGEO).findByValue(codigo_ubigeo));
+		
 		if(!giro_codigo.equals(""))			
 		{
 			cboGiro.setSelection(application.getAdapterParametrosPINT(ParametroBLL.TBL_GIRO).findByValue(giro_codigo));
-			cboSubGiro.setAdapter(application.getAdapterParametrosPINT(ParametroBLL.TBL_SUB_GIRO, ((ParametroTO)cboGiro.getSelectedItem()).getCodigo()));		
+			//cboSubGiro.setAdapter(application.getAdapterParametrosPINT(ParametroBLL.TBL_SUB_GIRO, ((ParametroTO)cboGiro.getSelectedItem()).getCodigo()));
+			subGiros = application.getAdapterListParametrosPINT(ParametroBLL.TBL_SUB_GIRO, ((ParametroTO)cboGiro.getSelectedItem()).getCodigo());
+	    	cboSubGiro.setText("--Seleccionar--");
+	    	selectedsubGiros = new ArrayList<ParametroTO>();
+	    	if(subGiros.size() > 0)
+	    		cboSubGiro.setEnabled(true);
+	    	else
+	    		cboSubGiro.setEnabled(false);
+		}		
+		
+		int count = tipo_giro.length;
+		if(count > 0)
+		{			
+			for(int i=0; i<count; i++)
+			{
+				for(ParametroTO param : subGiros)
+				{
+					if(tipo_giro[i].equals(param.getCodigo()))
+						selectedsubGiros.add(param);
+				}
+			}
+			onChangeSelectedSubgiros();
+			//cboSubGiro.setSelection(application.getAdapterParametrosPINT(ParametroBLL.TBL_SUB_GIRO,((ParametroTO)cboGiro.getSelectedItem()).getCodigo()).findByValue(tipo_giro));			
 		}
-		if(!tipo_giro.equals(""))
-			cboSubGiro.setSelection(application.getAdapterParametrosPINT(ParametroBLL.TBL_SUB_GIRO,((ParametroTO)cboGiro.getSelectedItem()).getCodigo()).findByValue(tipo_giro));
 	}
 	
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		inicioActivity = false;
+		inicioButton = false;
+		super.onStart();
+	}
+
 	public void btnActualizar_onclick(View view)
 	{
 		processAsync();		
@@ -111,7 +167,17 @@ public class ActualizarPuntoInteresActivity extends ActivityBase {
 		
 		actualizarPuntoInteresProxy.setCodCliente(codigo_cliente);
 		actualizarPuntoInteresProxy.setCodGiro(((ParametroTO)cboGiro.getSelectedItem()).getCodigo());
-		actualizarPuntoInteresProxy.setTipoGiro(((ParametroTO)cboSubGiro.getSelectedItem()).getCodigo());
+		
+		ArrayList<SubGiroTO> listSubGiro = new ArrayList<SubGiroTO>();
+		for(ParametroTO parametro : selectedsubGiros)
+		{
+			SubGiroTO subGiro = new SubGiroTO();
+			subGiro.setCodigo(parametro.getCodigo());
+			listSubGiro.add(subGiro);
+		}
+		
+		actualizarPuntoInteresProxy.setListSubGiro(listSubGiro);		
+		//actualizarPuntoInteresProxy.setTipoGiro(((ParametroTO)cboSubGiro.getSelectedItem()).getCodigo());
 		actualizarPuntoInteresProxy.setDescripcion(txtDescripcion.getText().toString());
 		actualizarPuntoInteresProxy.setDireccion(txtDireccion.getText().toString());
 		actualizarPuntoInteresProxy.setLatitudDec(latitud_pto);
@@ -155,4 +221,133 @@ public class ActualizarPuntoInteresActivity extends ActivityBase {
 		super.processError();
 		showToast(error_generico_process);
 	}
+	
+	//__----------------------------------------------
+	
+	
+	public void btnSubGiro_onclick(View view)
+	{		
+		showSelectSubGiroDialog();
+	}
+	
+	protected void onChangeSelectedSubgiros() {
+		StringBuilder stringBuilder = new StringBuilder();
+
+		for(ParametroTO parametro : selectedsubGiros)
+			stringBuilder.append(parametro.getDescripcion() + ",");
+		String valueText = stringBuilder.toString().substring(0, stringBuilder.length() - 1);
+		System.out.println(valueText);
+		cboSubGiro.setText(valueText);
+	}
+	
+	
+	protected void showSelectSubGiroDialog() {
+		if(!inicioButton)
+		{
+			int counts = tipo_giro.length;
+			if(counts > 0)
+			{			
+				for(int i=0; i<counts; i++)
+				{
+					for(ParametroTO param : subGiros)
+					{
+						if(tipo_giro[i].equals(param.getCodigo()))
+							selectedsubGiros.add(param);
+					}
+				}
+			}
+			inicioButton = true;
+		}
+		boolean[] checkedColours = new boolean[subGiros.size()];
+		int count = subGiros.size();
+
+		for(int i = 0; i < count; i++)
+		{
+			checkedColours[i] = selectedsubGiros.contains((ParametroTO)subGiros.get(i));
+			System.out.println(checkedColours[i]);
+		}
+
+		DialogInterface.OnMultiChoiceClickListener subGiroDialogListener = new DialogInterface.OnMultiChoiceClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				if(isChecked)
+					selectedsubGiros.add((ParametroTO)subGiros.get(which));
+				else
+					selectedsubGiros.remove((ParametroTO)subGiros.get(which));
+
+				onChangeSelectedSubgiros();
+			}
+		};
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Seleccionar SubGiros");
+		
+		
+		
+		CharSequence[] temp = new CharSequence[count];
+		
+		for(int i=0;i<count;i++)
+		{
+			temp[i] = ((ParametroTO) subGiros.get(i)).getDescripcion();
+		}
+		
+		builder.setMultiChoiceItems(temp, checkedColours, subGiroDialogListener);
+
+		AlertDialog dialog = builder.create();
+		dialog.show();
+	}
+	/*
+	protected void showSelectSubGiroDialogInicio() {
+		int counts = tipo_giro.length;
+		if(counts > 0)
+		{			
+			for(int i=0; i<counts; i++)
+			{
+				for(ParametroTO param : subGiros)
+				{
+					if(tipo_giro[i].equals(param.getCodigo()))
+						selectedsubGiros.add(param);
+				}
+			}
+		}
+		boolean[] checkedColours = new boolean[subGiros.size()];
+		int count = subGiros.size();
+
+		for(int i = 0; i < count; i++)
+		{
+			checkedColours[i] = selectedsubGiros.contains((ParametroTO)subGiros.get(i));
+			System.out.println(checkedColours[i]);
+		}
+
+		DialogInterface.OnMultiChoiceClickListener subGiroDialogListener = new DialogInterface.OnMultiChoiceClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				if(isChecked)
+					selectedsubGiros.add((ParametroTO)subGiros.get(which));
+				else
+					selectedsubGiros.remove((ParametroTO)subGiros.get(which));
+
+				onChangeSelectedSubgiros();
+			}
+		};
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Seleccionar SubGiros");
+		
+		
+		
+		CharSequence[] temp = new CharSequence[count];
+		
+		for(int i=0;i<count;i++)
+		{
+			temp[i] = ((ParametroTO) subGiros.get(i)).getDescripcion();
+		}
+		
+		builder.setMultiChoiceItems(temp, checkedColours, subGiroDialogListener);
+
+		AlertDialog dialog = builder.create();
+		dialog.show();
+	}*/
+	//__----------------------------------------------
+		
 }
