@@ -23,37 +23,29 @@
         		android:layout_width="wrap_content" 
         		android:layout_height="wrap_content">
         		
-            <TextView android:text="Codigo :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
-            <EditText android:id="@+id/txtCodigo" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Ingresar Código" android:text="" android:layout_weight="1" android:inputType="number" android:maxLength="11" android:singleLine="true">
+            <TextView android:text="@string/consultarcliente_activity_codigo" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <EditText android:id="@+id/txtCodigo" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/consultarcliente_activity_codigo_hint" android:text="" android:layout_weight="1" android:inputType="number" android:maxLength="11" android:singleLine="true"/>
             	 
-            </EditText>
-           <ImageButton android:onClick="btnbuscar_onclick" android:src="@drawable/btn_search"></ImageButton>
+           <ImageButton android:onClick="btnbuscar_onclick" android:src="@drawable/btn_search" android:contentDescription="@string/consultarcliente_activity_buscar"></ImageButton>
         </TableRow>
         <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <TextView android:text="Ruc :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:text="@string/consultarcliente_activity_ruc" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
             <EditText android:id="@+id/txtRuc"
-             android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Ingresar Ruc" android:text="" android:layout_weight="1" android:inputType="number" android:maxLength="11" android:singleLine="true"></EditText>
-     		<ImageButton android:onClick="btnbuscar_onclick" android:src="@drawable/btn_search"></ImageButton>
+             android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/consultarcliente_activity_ruc_hint" android:text="" android:layout_weight="1" android:inputType="number" android:maxLength="11" android:singleLine="true"></EditText>
+     		<ImageButton android:onClick="btnbuscar_onclick" android:src="@drawable/btn_search" android:contentDescription="@string/consultarcliente_activity_buscar"></ImageButton>
         </TableRow>
        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <TextView android:text="Dni :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:text="@string/consultarcliente_activity_dni" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
             <EditText android:id="@+id/txtDni"
-             android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Ingresar Dni" android:text="" android:layout_weight="1" android:inputType="number" android:maxLength="11" android:singleLine="true"></EditText>
-        	<ImageButton android:onClick="btnbuscar_onclick" android:src="@drawable/btn_search"></ImageButton>
+             android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/consultarcliente_activity_dni_hint" android:text="" android:layout_weight="1" android:inputType="number" android:maxLength="11" android:singleLine="true"></EditText>
+        	<ImageButton android:onClick="btnbuscar_onclick" android:src="@drawable/btn_search" android:contentDescription="@string/consultarcliente_activity_buscar"></ImageButton>
         </TableRow>
-        
+
        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <TextView android:text="Dni :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
-            <EditText android:id="@+id/txtDni"
-             android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Ingresar Dni" android:text="" android:layout_weight="1" android:inputType="number" android:maxLength="11" android:singleLine="true"></EditText>
-        	<ImageButton android:onClick="btnbuscar_onclick" android:src="@drawable/btn_search"></ImageButton>
-        </TableRow>
-        
-       <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <TextView android:text="Razón Social :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+            <TextView android:text="@string/consultarcliente_activity_razon" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
             <EditText android:id="@+id/txtRazonSocial"
-             android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Ingresar Razón Social" android:text="" android:layout_weight="1" android:inputType="number" android:maxLength="11" android:singleLine="true"></EditText>
-        	<ImageButton android:onClick="btnbuscar_onclick" android:src="@drawable/btn_search"></ImageButton>
+             android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/consultarcliente_activity_razonsocial_hint" android:text="" android:layout_weight="1" android:inputType="number" android:maxLength="11" android:singleLine="true"></EditText>
+        	<ImageButton android:onClick="btnbuscar_onclick" android:src="@drawable/btn_search" android:contentDescription="@string/consultarcliente_activity_buscar"></ImageButton>
         </TableRow>
         
     </TableLayout>
