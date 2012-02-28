@@ -139,10 +139,6 @@
     <string name="enviarordenesom_activity_texto">Para enviar la información de ordenes click en Aceptar y click en Cancelar para salir.</string>
     <string name="consultar_encuesta_title">Listar Encuestas</string>
     <!-- RED -->
-    <string name="red_material_pop_title">Material POP</string>
-    <string name="red_pregunta_title">Preguntas Adicionales</string>
-    <string name="red_generador_title">Preguntas Varias</string>
-    <string name="red_pto_contacto_title">Punto Contacto</string>
     <string name="red_ficha_cliente_title">Ficha de Red</string>
     <string name="red_sku_cliente_title">SKU Propietario</string>
     <string name="red_core_brands_title">%s</string>
