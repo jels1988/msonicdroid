@@ -1,5 +1,8 @@
 package pe.lindley.puntointeres.ws.service;
 
+import java.util.List;
+
+import pe.lindley.puntointeres.to.SubGiroTO;
 import pe.lindley.puntointeres.ws.bean.ActualizarPuntoInteresRequest;
 import pe.lindley.puntointeres.ws.bean.ActualizarPuntoInteresResponse;
 import pe.lindley.util.JSONHelper;
@@ -13,7 +16,7 @@ public class ActualizarPuntoInteresProxy extends ProxyBase<ActualizarPuntoIntere
 	private String codCliente;
 	private String codPunto;
 	private String codGiro;
-	private String tipoGiro;
+	private List<SubGiroTO> listSubGiro;
 	private String nombre;
 	private String direccion;
 	private String codUbigeo;
@@ -48,12 +51,12 @@ public class ActualizarPuntoInteresProxy extends ProxyBase<ActualizarPuntoIntere
 		this.codGiro = codGiro;
 	}
 
-	public String getTipoGiro() {
-		return tipoGiro;
+	public List<SubGiroTO> getListSubGiro() {
+		return listSubGiro;
 	}
 
-	public void setTipoGiro(String tipoGiro) {
-		this.tipoGiro = tipoGiro;
+	public void setListSubGiro(List<SubGiroTO> listSubGiro) {
+		this.listSubGiro = listSubGiro;
 	}
 
 	public String getNombre() {
@@ -149,7 +152,7 @@ public class ActualizarPuntoInteresProxy extends ProxyBase<ActualizarPuntoIntere
 		actualizarPuntoInteresRequest.setLatitudDec(latitudDec);
 		actualizarPuntoInteresRequest.setLongitudDec(longitudDec);
 		actualizarPuntoInteresRequest.setNombre(nombre);
-		actualizarPuntoInteresRequest.setTipoGiro(tipoGiro);
+		actualizarPuntoInteresRequest.setListSubGiro(listSubGiro);
 		actualizarPuntoInteresRequest.setUsuario(Usuario);
 		String request = JSONHelper.serializar(actualizarPuntoInteresRequest);
 		return request;

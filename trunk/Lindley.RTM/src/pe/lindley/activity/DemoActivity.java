@@ -1,14 +1,11 @@
 package pe.lindley.activity;
 
 import android.os.Bundle;
-import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import pe.lindley.util.ActivityBase;
-import roboguice.inject.InjectView;
 
 public class DemoActivity extends ActivityBase {
 

@@ -1,5 +1,7 @@
 package pe.lindley.puntointeres.ws.bean;
 
+import java.util.List;
+import pe.lindley.puntointeres.to.SubGiroTO;
 import com.google.gson.annotations.SerializedName;
 
 public class GuardarPuntoInteresRequest {
@@ -12,9 +14,9 @@ public class GuardarPuntoInteresRequest {
 
 	@SerializedName("GIR")
 	private String codGiro;
-
-	@SerializedName("TGR")
-	private String tipoGiro;
+	
+	@SerializedName("SGRS")
+	private List<SubGiroTO> listSubGiro;
 
 	@SerializedName("NOM")
 	private String nombre;
@@ -66,15 +68,7 @@ public class GuardarPuntoInteresRequest {
 	public void setCodGiro(String codGiro) {
 		this.codGiro = codGiro;
 	}
-
-	public String getTipoGiro() {
-		return tipoGiro;
-	}
-
-	public void setTipoGiro(String tipoGiro) {
-		this.tipoGiro = tipoGiro;
-	}
-
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -145,6 +139,14 @@ public class GuardarPuntoInteresRequest {
 
 	public void setUsuario(String usuario) {
 		Usuario = usuario;
+	}
+
+	public List<SubGiroTO> getListSubGiro() {
+		return listSubGiro;
+	}
+
+	public void setListSubGiro(List<SubGiroTO> listSubGiro) {
+		this.listSubGiro = listSubGiro;
 	}
 	
 }

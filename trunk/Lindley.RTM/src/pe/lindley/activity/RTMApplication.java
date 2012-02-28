@@ -44,8 +44,6 @@ import pe.lindley.prospector.ws.service.DatosClienteProxy;
 import pe.lindley.prospector.ws.service.FichasRechazadasProxy;
 import pe.lindley.prospector.ws.service.GuardarClienteProxy;
 import pe.lindley.provider.DBHelperProvider;
-import pe.lindley.puntointeres.ws.service.ActualizarPuntoInteresProxy;
-import pe.lindley.puntointeres.ws.service.GuardarPuntoInteresProxy;
 import pe.lindley.red.ws.service.ConsultarComunicacionProxy;
 import pe.lindley.red.ws.service.ConsultarEncuestaProxy;
 import pe.lindley.red.ws.service.ConsultarFichaProxy;
@@ -453,6 +451,11 @@ public class RTMApplication extends RoboApplication {
 	
 	public synchronized ArrayList<pe.lindley.profit.to.ParametroTO> getAdapterListParametrosProfit(String codOpcion, String codigo){
 		ArrayList<pe.lindley.profit.to.ParametroTO> listaparametro = profitParametroBLL.list(codOpcion, codigo);
+		return listaparametro;
+	}
+	
+	public synchronized ArrayList<pe.lindley.puntointeres.to.ParametroTO> getAdapterListParametrosPINT(String codOpcion, String codigo){
+		ArrayList<pe.lindley.puntointeres.to.ParametroTO> listaparametro = pintParametroBLL.list(codOpcion, codigo);
 		return listaparametro;
 	}
 	
