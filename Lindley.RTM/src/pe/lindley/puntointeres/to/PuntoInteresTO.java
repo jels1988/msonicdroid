@@ -1,5 +1,7 @@
 package pe.lindley.puntointeres.to;
 
+import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 public class PuntoInteresTO {
@@ -13,8 +15,8 @@ public class PuntoInteresTO {
 	@SerializedName("GIR")
 	private String codGiro;
 	        
-	@SerializedName("TGR")
-	private String tipoGiro;
+	@SerializedName("SGRS")
+	private List<SubGiroTO> listSubGiro;
 	        
 	@SerializedName("NOM")
 	private String nombre;
@@ -70,12 +72,12 @@ public class PuntoInteresTO {
 		this.codGiro = codGiro;
 	}
 
-	public String getTipoGiro() {
-		return tipoGiro;
+	public List<SubGiroTO> getListSubGiro() {
+		return listSubGiro;
 	}
 
-	public void setTipoGiro(String tipoGiro) {
-		this.tipoGiro = tipoGiro;
+	public void setListSubGiro(List<SubGiroTO> listSubGiro) {
+		this.listSubGiro = listSubGiro;
 	}
 
 	public String getNombre() {
