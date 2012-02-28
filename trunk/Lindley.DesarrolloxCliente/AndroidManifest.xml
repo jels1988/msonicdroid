@@ -20,9 +20,9 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="BuscarCliente_Activity">
+        <activity android:name=".activity.ConsultarCliente_Activity">
             <intent-filter>
-                <action android:name="lindley.desarrolloxcliente.buscarcliente" />
+                <action android:name="lindley.desarrolloxcliente.consultarcliente" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

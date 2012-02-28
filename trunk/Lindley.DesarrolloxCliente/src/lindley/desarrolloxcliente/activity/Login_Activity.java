@@ -25,7 +25,7 @@ public class Login_Activity extends ActivityBase {
     }
     
     public void btnLogin_click(View view){
-    	Intent intent = new Intent("lindley.desarrolloxcliente.buscarcliente");
+    	Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
     	startActivity(intent);
     }
 }
