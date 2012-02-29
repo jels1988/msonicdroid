@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+	<!-- java.cdaandino.com -->
+<!-- 	<string name="urlwsLogin">http://java.cdaandino.com/rtm/LanzadorApp/SeguridadService.svc</string> -->
+	<string name="urlwsLogin">http://197.1.1.87/rtm/LanzadorApp/SeguridadService.svc</string>
+	
+	<string name="urlwsDesarrolloxCliente">http://197.1.1.87/rtm/DesarrolloxCliente/FotoExitoService.svc</string>
+	    
+</resources>

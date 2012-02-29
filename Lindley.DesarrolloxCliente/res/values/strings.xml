@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    
     <string name="app_name">Desarrollo por Cliente</string>
+    <string name="apikey">0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A</string>
+    
     <string name="login_activity_title">Login</string>
     <string name="login_activity_ingresar">Ingresar</string>
     <string name="login_activity_usuario">Usuario :</string>
     <string name="login_activity_password">Password :</string>
     <string name="login_activity_usuario_hint">Ingresar Usuario</string>
-    <string name="login_activity_password_hint">Ingresar Password :</string>
+    <string name="login_activity_password_hint">Ingresar Password</string>   
+    <string name="login_activity_ok">Bienvenido: %s.</string>
+    <string name="login_activity_error">%s</string>
+    <string name="login_activity_txtlogin_empty">Debes ingresar tu usuario</string>
+    <string name="login_activity_txtpassword_empty">Debes ingresar tu password</string>        
+        
     
     <string name="consultarcliente_activity_title">Consultar Cliente</string>
     <string name="consultarcliente_activity_codigo">Código :</string>
-    <string name="consultarcliente_activity_codigo_hint">Ingresar Código</string>
-    
+    <string name="consultarcliente_activity_codigo_hint">Ingresar Código</string>    
     <string name="consultarcliente_activity_ruc">Ruc :</string>
-    <string name="consultarcliente_activity_ruc_hint">Ingresar Ruc</string>
-    
+    <string name="consultarcliente_activity_ruc_hint">Ingresar Ruc</string>    
     <string name="consultarcliente_activity_dni">Dni :</string>
-    <string name="consultarcliente_activity_dni_hint">Ingresar Dni</string>
-    
+    <string name="consultarcliente_activity_dni_hint">Ingresar Dni</string>    
     <string name="consultarcliente_activity_razon">Razón Social :</string>
-    <string name="consultarcliente_activity_razonsocial_hint">Ingresar Razón Social</string>
+    <string name="consultarcliente_activity_razonsocial_hint">Ingresar Razón Social</string>    
+    <string name="consultarcliente_activity_buscar">Buscar</string>    
+    <string name="consultarcliente_activity_empty">Debes ingresar un dato de busqueda</string>
     
-    <string name="consultarcliente_activity_buscar">Buscar</string>
+        
+    <string name="ver_detalle"><a href="">Ver Detalle</a></string>
+    <string name="cabeceracliente_activity_title">Evaluación</string>
 </resources>
