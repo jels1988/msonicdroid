@@ -1,7 +1,6 @@
 package lindley.desarrolloxcliente.to;
 
 public class ClienteTO {
-
 	
 	public String fecha;
 	public String codigo;
