@@ -122,7 +122,7 @@ public class NuevoPuntoInteresActivity extends ActivityBase {
 		    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 		        // your code here
 		    	//cboSubGiro.setAdapter(application.getAdapterParametrosPINT(ParametroBLL.TBL_SUB_GIRO, ((ParametroTO)cboGiro.getSelectedItem()).getCodigo()));
-		    	subGiros = application.getAdapterListParametrosPINT(ParametroBLL.TBL_SUB_GIRO, ((ParametroTO)cboGiro.getSelectedItem()).getCodigo());
+		    	//subGiros = application.getAdapterListParametrosPINT(ParametroBLL.TBL_SUB_GIRO, ((ParametroTO)cboGiro.getSelectedItem()).getCodigo());
 		    	cboSubGiro.setText("--Seleccionar--");
 		    	selectedsubGiros = new ArrayList<ParametroTO>();
 		    	if(subGiros.size() > 0)
@@ -166,7 +166,7 @@ public class NuevoPuntoInteresActivity extends ActivityBase {
 			listSubGiro.add(subGiro);
 		}
 		
-		guardarPuntoInteresProxy.setListSubGiro(listSubGiro);		
+		//guardarPuntoInteresProxy.setListSubGiro(listSubGiro);		
 		//guardarPuntoInteresProxy.setTipoGiro(((ParametroTO)cboSubGiro.getSelectedItem()).getCodigo());
 		guardarPuntoInteresProxy.setDescripcion(txtDescripcion.getText().toString());
 		guardarPuntoInteresProxy.setDireccion(txtDireccion.getText().toString());
