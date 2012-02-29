@@ -1,6 +1,6 @@
 package lindley.desarrolloxcliente.to;
 
-public class FichaTO {
+public class ClienteTO {
 
 	
 	public String fecha;
