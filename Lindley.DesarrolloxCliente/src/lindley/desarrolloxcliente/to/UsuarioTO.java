@@ -20,7 +20,7 @@ public class UsuarioTO {
 	}
 
 	public String getCodigoSap() {
-		return codigoSap;
+		return codigoSap; 
 	}
 
 	public void setCodigoSap(String codigoSap) {
