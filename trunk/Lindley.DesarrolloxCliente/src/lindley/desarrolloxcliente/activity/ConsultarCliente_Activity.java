@@ -47,7 +47,7 @@ public class ConsultarCliente_Activity extends ListActivityBase {
         setContentView(R.layout.consultarcliente_activity);
         
         mActionBar.setTitle(R.string.consultarcliente_activity_title);
-        mActionBar.setHomeLogo(R.drawable.header_logo);
+        mActionBar.setHomeLogo(R.drawable.header_logo); 
         
         txtCodigo.addTextChangedListener(txtCodigoTextWatcher);
 		txtRuc.addTextChangedListener(txtRucTextWatcher);
