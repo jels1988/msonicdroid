@@ -19,3 +19,4 @@ public class ConsultarOportunidadResponse extends ResponseBase {
 		this.listaOportunidad = listaOportunidad;
 	}
 }
+ 

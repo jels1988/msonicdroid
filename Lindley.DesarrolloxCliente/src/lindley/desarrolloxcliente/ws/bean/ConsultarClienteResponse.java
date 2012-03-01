@@ -17,3 +17,4 @@ public class ConsultarClienteResponse extends ResponseBase {
 		this.clienteTO = clienteTO;
 	}
 }
+ 

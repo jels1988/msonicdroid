@@ -14,7 +14,7 @@ public class ConsultarCabeceraResponse extends ResponseBase {
 	public List<DesarrolloClienteTO> getListaDesarrolloCliente() {
 		return listaDesarrolloCliente;
 	}
-
+ 
 	public void setListaDesarrolloCliente(
 			List<DesarrolloClienteTO> listaDesarrolloCliente) {
 		this.listaDesarrolloCliente = listaDesarrolloCliente;

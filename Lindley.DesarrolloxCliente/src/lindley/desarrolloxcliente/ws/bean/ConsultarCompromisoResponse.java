@@ -19,3 +19,4 @@ public class ConsultarCompromisoResponse extends ResponseBase {
 		this.listaCompromiso = listaCompromiso;
 	}
 }
+ 
