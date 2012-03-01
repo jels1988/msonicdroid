@@ -75,7 +75,7 @@
                             android:text="Hora Cierre" 
                             style="@style/TextViewLabel"/>
 
-                        <TextView
+                        <TextView 
                             android:layout_width="100dip"
                             android:layout_height="wrap_content"
                             android:text="Cerrado Por"
