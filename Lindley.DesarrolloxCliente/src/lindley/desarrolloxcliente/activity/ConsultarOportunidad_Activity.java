@@ -4,6 +4,7 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.to.AccionTradeTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarOportunidadProxy;
@@ -31,7 +32,9 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarOportunidadProxy consultarOportunidadProxy;
 	private EfficientAdapter adap;
+	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
+	public static MyApplication application;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -40,7 +43,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.consultaroportunidad_activity);        
         mActionBar.setTitle(R.string.oportunidad_activity_title);
-        MyApplication application = (MyApplication)getApplicationContext();
+        application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
         mActionBar.setSubTitle(cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
@@ -63,6 +66,8 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 				List<OportunidadTO> oportunidades = consultarOportunidadProxy
 						.getResponse().getListaOportunidad();
 				adap = new EfficientAdapter(this, oportunidades);
+				if(oportunidades.size()>0)
+				txtViewFecha.setText(oportunidades.get(0).getFecha());
 				setListAdapter(adap);
 			}
 			else  {
@@ -106,7 +111,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	    	ViewHolder holder;
 
 	      if (convertView == null) {
-	        convertView = mInflater.inflate(R.layout.compromisoclose_content, null);
+	        convertView = mInflater.inflate(R.layout.consultaroportunidad_content, null);
 
 	        // Creates a ViewHolder and store references to the two children
 	        // views
@@ -137,8 +142,20 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	      holder.txViewCumPrecio.setText(compromiso.getCumplePrecio());
 	      holder.txViewSabores.setText(compromiso.getNumeroSabores());
 	      holder.txViewPCoca.setText(compromiso.getPuntosCocaCola());
-	      holder.txViewFecha.setText(compromiso.getFecha());
+	      
+	      int mYear,mMonth,mDay;
+	      String fecha = compromiso.getFechaOportunidad();
+	      if(fecha.length() > 7)
+	      {
+	    	  mYear =  Integer.parseInt(fecha.substring(0, 4));
+	    	  mMonth  =  Integer.parseInt(fecha.substring(4, 6));
+	    	  mDay  =  Integer.parseInt(fecha.substring(6));
+	    	  holder.txViewFecha.setText(mDay+"/"+mMonth+"/"+mYear);
+	     }
+	      else
+	    	  holder.txViewFecha.setText("0");
 	      holder.txViewPBonus.setText(compromiso.getPuntosBonus());
+	      holder.cboAccTrade .setAdapter(application.getAdapterAccionTrade(compromiso.getListaAccionesTrade()));
 	      
 	      holder.txViewProfit.setOnClickListener(new OnClickListener() {
 				@Override

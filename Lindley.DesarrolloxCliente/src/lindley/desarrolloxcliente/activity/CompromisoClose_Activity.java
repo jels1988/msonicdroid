@@ -33,6 +33,7 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	@InjectExtra(CODIGO_REGISTRO) String codigoRegistro;
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarCompromisoProxy consultarCompromisoProxy;
+	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	private EfficientAdapter adap;
 	ClienteTO cliente;
 	
@@ -66,6 +67,7 @@ public class CompromisoClose_Activity extends ListActivityBase {
 			if (status == 0) {
 				List<CompromisoTO> compromisos = consultarCompromisoProxy
 						.getResponse().getListaCompromiso();
+				txtViewFecha.setText(compromisos.get(0).getFecha());
 				adap = new EfficientAdapter(this, compromisos);
 				setListAdapter(adap);
 			}
