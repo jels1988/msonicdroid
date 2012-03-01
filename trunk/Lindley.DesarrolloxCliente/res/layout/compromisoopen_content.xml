@@ -23,7 +23,7 @@
                 android:gravity="center"
                 android:text="" />
 
-            <TextView
+            <EditText
                 android:id="@+id/txViewConcrecion"
                 android:layout_width="50dip"
                 android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
 		        android:layout_height="wrap_content"		        
 		        android:text="" />
 
-			<TextView
+			<EditText
                 android:id="@+id/txViewSOVI"
                 android:layout_width="50dip"
                 android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
 		        android:layout_height="wrap_content"		        
 		        android:text="" />
 			
-            <TextView
+            <EditText
                 android:id="@+id/txViewCumPrecio"
                 android:layout_width="70dip"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
 		        android:layout_height="wrap_content"		        
 		        android:text="" />
 
-            <TextView
+            <EditText
                 android:id="@+id/txViewSabores"
                 android:layout_width="70dip"
                 android:layout_height="wrap_content"
