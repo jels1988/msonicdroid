@@ -21,7 +21,7 @@ public class ConsultarCabeceraProxy extends ProxyBase<ConsultarCabeceraResponse>
 		this.codigoCliente = codigoCliente;
 	}
 	
-	@Override
+	@Override 
 	protected String getUrl() {
 		// TODO Auto-generated method stub
 		return urlWS + "/ConsultarCabecera";

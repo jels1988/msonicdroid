@@ -15,7 +15,7 @@ public class ConsultarCompromisoProxy extends ProxyBase<ConsultarCompromisoRespo
 	private String codigoRegistro;
 
 	public String getCodigoCliente() {
-		return codigoCliente;
+		return codigoCliente; 
 	}
 
 	public void setCodigoCliente(String codigoCliente) {

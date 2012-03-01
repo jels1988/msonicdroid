@@ -15,3 +15,4 @@ public class ConsultarOportunidadRequest {
 		this.codigoCliente = codigoCliente;
 	}
 }
+ 

@@ -19,7 +19,7 @@ public class ConsultarOportunidadProxy extends ProxyBase<ConsultarOportunidadRes
 
 	public void setCodigoCliente(String codigoCliente) {
 		this.codigoCliente = codigoCliente;
-	}
+	} 
 	
 	@Override
 	protected String getUrl() {

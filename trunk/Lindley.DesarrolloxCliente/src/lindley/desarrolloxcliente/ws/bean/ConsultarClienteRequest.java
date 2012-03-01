@@ -19,7 +19,7 @@ public class ConsultarClienteRequest {
 	public String getRuc() {
 		return ruc;
 	}
-
+ 
 	public void setRuc(String ruc) {
 		this.ruc = ruc;
 	}

@@ -18,7 +18,7 @@ public class ConsultarCompromisoRequest {
 		this.codigoCliente = codigoCliente;
 	}
 
-	public String getCodigoRegistro() {
+	public String getCodigoRegistro() { 
 		return codigoRegistro;
 	}
 

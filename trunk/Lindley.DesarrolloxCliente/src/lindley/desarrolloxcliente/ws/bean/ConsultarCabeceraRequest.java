@@ -15,3 +15,4 @@ public class ConsultarCabeceraRequest {
 		this.codigoCliente = codigoCliente;
 	}
 }
+ 
