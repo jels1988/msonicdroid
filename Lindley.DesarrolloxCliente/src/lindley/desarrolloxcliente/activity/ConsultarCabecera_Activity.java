@@ -9,6 +9,7 @@ import lindley.desarrolloxcliente.to.DesarrolloClienteTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarCabeceraProxy;
 import roboguice.inject.InjectView;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,13 +82,13 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 	
 	public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
-	    //private Context context;
+	    private Context context;
 	    private List<DesarrolloClienteTO> detalles;
 	    
 	    public EfficientAdapter(Context context, List<DesarrolloClienteTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
-		      //this.context = context;
+		      this.context = context;
 		      this.detalles = valores;
 		    }
 	    
@@ -141,15 +142,22 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 	    	  holder.txViewestado.setText("Cerrado");
 	      
 	      holder.txViewVerDetalle.setOnClickListener(new OnClickListener() {
+	    	  DesarrolloClienteTO desarrolloTemp = (DesarrolloClienteTO) getItem(position);
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					/*Intent profit = new Intent(context,MostrarVendedorActivity.class);
-					profit.putExtra(MostrarVendedorActivity.TIPO_SUPERVISOR, 0);
-					profit.putExtra(MostrarVendedorActivity.CODIGO_CDA, codigo_cda);
-					profit.putExtra(MostrarVendedorActivity.CODIGO_SUPERVISOR, supervisorTemporal.getCodigo());
-					profit.putExtra(MostrarVendedorActivity.NOMBRE_SUPERVISOR, supervisorTemporal.getNombre());
-					context.startActivity(profit);*/
+					if(position == 0)
+					{
+						Intent compromisoOpen = new Intent(context, CompromisoOpen_Activity.class);
+						compromisoOpen.putExtra(CompromisoOpen_Activity.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
+						context.startActivity(compromisoOpen);
+					}
+					else
+					{
+						Intent compromisoClose = new Intent(context, CompromisoClose_Activity.class);
+						compromisoClose.putExtra(CompromisoClose_Activity.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
+						context.startActivity(compromisoClose);
+					}
 				}
 			});
 	      
