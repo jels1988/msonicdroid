@@ -11,27 +11,26 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true" />
 
-        
-        <LinearLayout
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
         <TextView
-                            android:layout_width="50dip"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Fecha: "
-                            style="@style/TextViewLabel" />
+            style="@style/TextViewLabel"
+            android:layout_width="50dip"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Fecha: " />
 
         <TextView
             android:id="@+id/txtViewFecha"
-                            android:layout_width="50dip"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="" />
+            android:layout_width="50dip"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="" />
     </LinearLayout>
-        
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -54,96 +53,96 @@
                     android:layout_height="wrap_content"
                     android:shrinkColumns="*"
                     android:stretchColumns="*" >
-                    
+
                     <TableRow
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" >
 
                         <TextView
+                            style="@style/TextViewLabel"
                             android:layout_width="100dip"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Producto"
-                            style="@style/TextViewLabel" />
+                            android:text="Producto" />
 
                         <TextView
+                            style="@style/TextViewLabel"
                             android:layout_width="50dip"
                             android:layout_height="wrap_content"
-                            android:text="Concreción"
-                            style="@style/TextViewLabel" />
-                        
-                        <TextView
-                            android:layout_width="20dip"
-                            android:layout_height="wrap_content"
-                            android:text=""
-                            style="@style/TextViewLabel" />
+                            android:text="Concreción" />
 
                         <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="20dip"
+                            android:layout_height="wrap_content"
+                            android:text="" />
+
+                        <TextView
+                            style="@style/TextViewLabel"
                             android:layout_width="50dip"
                             android:layout_height="wrap_content"
-                            android:text="SOVI"
-                            style="@style/TextViewLabel" />
-                        
-                        <TextView
-                            android:layout_width="20dip"
-                            android:layout_height="wrap_content"
-                            android:text=""
-                            style="@style/TextViewLabel" />
+                            android:text="SOVI" />
 
                         <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="20dip"
+                            android:layout_height="wrap_content"
+                            android:text="" />
+
+                        <TextView
+                            style="@style/TextViewLabel"
                             android:layout_width="70dip"
                             android:layout_height="wrap_content"
-                            android:text="Cumple Precio"
-                            style="@style/TextViewLabel" />
+                            android:text="Cumple Precio" />
 
                         <TextView
+                            style="@style/TextViewLabel"
                             android:layout_width="20dip"
                             android:layout_height="wrap_content"
-                            android:text=""
-                            style="@style/TextViewLabel" />
-                        
+                            android:text="" />
+
                         <TextView
+                            style="@style/TextViewLabel"
                             android:layout_width="70dip"
                             android:layout_height="wrap_content"
-                            android:text="Número Sabores"
-                            style="@style/TextViewLabel" />
+                            android:text="Número Sabores" />
 
                         <TextView
+                            style="@style/TextViewLabel"
                             android:layout_width="20dip"
                             android:layout_height="wrap_content"
-                            android:text=""
-                            style="@style/TextViewLabel" />
-                        
-                        <TextView
-                            android:layout_width="50dip"
-                            android:layout_height="wrap_content"
-                            android:text="Puntos"
-                            style="@style/TextViewLabel" />
+                            android:text="" />
 
                         <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="50dip"
+                            android:layout_height="wrap_content"
+                            android:text="Puntos" />
+
+                        <TextView
+                            style="@style/TextViewLabel"
                             android:layout_width="100dip"
                             android:layout_height="wrap_content"
-                            android:text="Acciones Trade"
-                            style="@style/TextViewLabel" />
+                            android:text="Acciones Trade" />
 
                         <TextView
+                            style="@style/TextViewLabel"
                             android:layout_width="50dip"
                             android:layout_height="wrap_content"
-                            android:text="Fecha"
-                            style="@style/TextViewLabel" />
-                        
+                            android:text="Fecha" />
+
                         <TextView
+                            style="@style/TextViewLabel"
                             android:layout_width="20dip"
                             android:layout_height="wrap_content"
-                            android:text=""
-                            style="@style/TextViewLabel" />
-                        
+                            android:text="" />
+
                         <TextView
+                            style="@style/TextViewLabel"
                             android:layout_width="40dip"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text=""
-                            style="@style/TextViewLabel" />
+                            android:text="" />
                     </TableRow>
 
                     <View
