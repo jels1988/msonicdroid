@@ -20,7 +20,7 @@ public class DesarrolloClienteTO {
 	private String fechaCierre;
 
 	@SerializedName("HCC")
-	private String horaCierre;
+	private String horaCierre; 
 
 	@SerializedName("UCE")
 	private String userCierra;
