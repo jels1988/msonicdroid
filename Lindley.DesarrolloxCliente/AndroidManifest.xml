@@ -50,6 +50,20 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        
+         <activity android:name=".activity.CompromisoOpen_Activity">
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.consultarcompromisoopen" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+         <activity android:name=".activity.CompromisoClose_Activity">
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.consultarcompromisoclose" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
