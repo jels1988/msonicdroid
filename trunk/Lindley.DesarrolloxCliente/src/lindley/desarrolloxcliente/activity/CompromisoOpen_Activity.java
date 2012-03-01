@@ -32,8 +32,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 public final static String CODIGO_REGISTRO = "codigo_reg";
 	
 	@InjectExtra(CODIGO_REGISTRO) String codigoRegistro;
-	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
+	@InjectView(R.id.actionBar)   ActionBar 	mActionBar;
 	@Inject ConsultarCompromisoProxy consultarCompromisoProxy;
+	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	private EfficientAdapter adap;
 	ClienteTO cliente;
 	
@@ -67,6 +68,8 @@ public final static String CODIGO_REGISTRO = "codigo_reg";
 			if (status == 0) {
 				List<CompromisoTO> compromisos = consultarCompromisoProxy
 						.getResponse().getListaCompromiso();
+				if(compromisos.size()>0)
+					txtViewFecha.setText(compromisos.get(0).getFecha());
 				adap = new EfficientAdapter(this, compromisos);
 				setListAdapter(adap);
 			}
@@ -162,7 +165,17 @@ public final static String CODIGO_REGISTRO = "codigo_reg";
 	      
 	      holder.txViewPuntos.setText(compromiso.getPuntosBonus());
 	      holder.txViewAccTrade.setText(compromiso.getDescripcionAccion());
-	      holder.txViewFecha.setText(compromiso.getFechaCompromiso());
+	      int mYear,mMonth,mDay;
+	      String fecha = compromiso.getFechaCompromiso();
+	      if(fecha.length() > 7)
+	      {
+	    	  mYear =  Integer.parseInt(fecha.substring(0, 4));
+	    	  mMonth  =  Integer.parseInt(fecha.substring(4, 6));
+	    	  mDay  =  Integer.parseInt(fecha.substring(6));
+	    	  holder.txViewFecha.setText(mDay+"/"+mMonth+"/"+mYear);
+	     }
+	      else
+	    	  holder.txViewFecha.setText("0");
 	      
 	      if(compromiso.getCumplio().equals("1")) holder.chkCumplio.setChecked(true);
 	      else holder.chkCumplio.setChecked(false);

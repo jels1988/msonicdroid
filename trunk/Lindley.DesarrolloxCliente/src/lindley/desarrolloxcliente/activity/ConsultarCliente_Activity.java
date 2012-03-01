@@ -381,8 +381,8 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					Intent direccionCliente = new Intent(context, ConsultarCabecera_Activity.class);
-					context.startActivity(direccionCliente);
+					Intent cabecera = new Intent(context, ConsultarCabecera_Activity.class);
+					context.startActivity(cabecera);
 				}
 			});
 			
@@ -391,8 +391,8 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					/*Intent direccionCliente = new Intent(context, ConsultarCabecera_Activity.class);
-					context.startActivity(direccionCliente);*/
+					Intent oportunidad = new Intent(context, ConsultarOportunidad_Activity.class);
+					context.startActivity(oportunidad);
 				}
 			});
 			
