@@ -32,4 +32,7 @@
     <string name="ver_detalle"><a href="">Ver Detalle</a></string>
     <string name="ver_profit"><a href="">Ver Profit</a></string>
     <string name="cabeceracliente_activity_title">Evaluación</string>
+    
+    <string name="compromiso_activity_title">Compromisos</string>
+        
 </resources>
