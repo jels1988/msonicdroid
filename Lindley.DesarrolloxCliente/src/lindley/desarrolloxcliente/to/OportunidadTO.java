@@ -21,7 +21,7 @@ public class OportunidadTO {
 	@SerializedName("SOVI")
 	private String sovi;
 
-	@SerializedName("RPRE")
+	@SerializedName("RPRE") 
 	private String cumplePrecio;
 
 	@SerializedName("NSB")
