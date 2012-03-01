@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tableLayout"
+        android:layout_width="1500dip"
+        android:layout_height="wrap_content"
+        android:shrinkColumns="*"
+        android:stretchColumns="*" >
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/txViewPro"
+                android:layout_width="100dip"
+                android:layout_height="40dip"
+                android:gravity="center"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/txViewConcrecion"
+                android:layout_width="50dip"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="" />
+
+			<TextView
+                android:id="@+id/txViewSOVI"
+                android:layout_width="50dip"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="" />
+			
+            <TextView
+                android:id="@+id/txViewCumPrecio"
+                android:layout_width="70dip"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/txViewSabores"
+                android:layout_width="70dip"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="" />
+
+			<TextView
+                android:id="@+id/txViewPCoca"
+                android:layout_width="50dip"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="" />
+			
+            <TextView
+                android:id="@+id/txViewAccTrade"
+                android:layout_width="100dip"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="" />
+            
+             <TextView
+                android:id="@+id/txViewSN"
+                android:layout_width="30dip"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="" />
+             
+              <TextView
+                android:id="@+id/txViewPBonus"
+                android:layout_width="50dip"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="" />
+             
+            <TextView
+                android:id="@+id/txViewProfit"
+                android:layout_width="40dip"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="@string/ver_profit" />
+        </TableRow>
+
+        <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
+    </TableLayout>
+
+</LinearLayout>
