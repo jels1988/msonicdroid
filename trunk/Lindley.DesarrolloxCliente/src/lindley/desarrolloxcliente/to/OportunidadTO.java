@@ -33,8 +33,11 @@ public class OportunidadTO {
 	@SerializedName("PBN")
 	private String puntosBonus;
 
+	@SerializedName("FECO")
+	private String fechaOportunidad;
+	
 	@SerializedName("TRD")
-	private List<AccionTrade> listaAccionesTrade;
+	private List<AccionTradeTO> listaAccionesTrade;
 
 	public String getFecha() {
 		return fecha;
@@ -108,11 +111,19 @@ public class OportunidadTO {
 		this.puntosBonus = puntosBonus;
 	}
 
-	public List<AccionTrade> getListaAccionesTrade() {
+	public List<AccionTradeTO> getListaAccionesTrade() {
 		return listaAccionesTrade;
 	}
 
-	public void setListaAccionesTrade(List<AccionTrade> listaAccionesTrade) {
+	public void setListaAccionesTrade(List<AccionTradeTO> listaAccionesTrade) {
 		this.listaAccionesTrade = listaAccionesTrade;
+	}
+
+	public String getFechaOportunidad() {
+		return fechaOportunidad;
+	}
+
+	public void setFechaOportunidad(String fechaOportunidad) {
+		this.fechaOportunidad = fechaOportunidad;
 	}
 }

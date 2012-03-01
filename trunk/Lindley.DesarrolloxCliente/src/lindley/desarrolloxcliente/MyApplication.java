@@ -1,8 +1,12 @@
 package lindley.desarrolloxcliente;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.google.inject.Module;
 import com.google.inject.Singleton;
+
+import lindley.desarrolloxcliente.adapter.AccionTradeTOAdapter;
+import lindley.desarrolloxcliente.to.AccionTradeTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarCompromisoProxy;
@@ -32,6 +36,17 @@ public class MyApplication extends RoboApplication {
 
 	public void setClienteTO(ClienteTO clienteTO) {
 		this.clienteTO = clienteTO;
+	}
+	
+	public synchronized lindley.desarrolloxcliente.adapter.AccionTradeTOAdapter getAdapterAccionTrade(List<AccionTradeTO> listaAcciones){
+		ArrayList<AccionTradeTO> listaAccionTrade = new ArrayList<AccionTradeTO>();
+		AccionTradeTO accionTradeTO = new AccionTradeTO();
+		accionTradeTO.setCodigo("0");
+		accionTradeTO.setDescripcion("--Seleccionar--");
+		listaAccionTrade.addAll(listaAcciones);
+		listaAccionTrade.add(0,accionTradeTO);		
+		AccionTradeTOAdapter accionTradeTOAdapter = new AccionTradeTOAdapter( getApplicationContext(), listaAccionTrade);
+		return accionTradeTOAdapter;
 	}
 	
 	@Override
