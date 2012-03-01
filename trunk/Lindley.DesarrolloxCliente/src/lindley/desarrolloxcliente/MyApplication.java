@@ -6,6 +6,7 @@ import com.google.inject.Singleton;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarCompromisoProxy;
+import lindley.desarrolloxcliente.ws.service.ConsultarOportunidadProxy;
 import lindley.desarrolloxcliente.ws.service.LoginProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarClienteProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCabeceraProxy;
@@ -44,6 +45,7 @@ public class MyApplication extends RoboApplication {
 				bind(ConsultarClienteProxy.class).in(Singleton.class);
 				bind(ConsultarCabeceraProxy.class).in(Singleton.class);
 				bind(ConsultarCompromisoProxy.class).in(Singleton.class);
+				bind(ConsultarOportunidadProxy.class).in(Singleton.class);
 			}});
 	}	
 }
