@@ -38,7 +38,7 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
         setContentView(R.layout.cabeceracliente_activity);        
         mActionBar.setTitle(R.string.cabeceracliente_activity_title);
         MyApplication application = (MyApplication)getApplicationContext();
-		cliente = application.getClienteTO();
+		cliente = application.getClienteTO(); 
         mActionBar.setSubTitle(cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
         processAsync();
