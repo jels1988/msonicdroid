@@ -13,7 +13,7 @@ public class ClienteTO {
 	@SerializedName("NOM")
 	private String nombre;
 	
-	@SerializedName("FRE")
+	@SerializedName("FRE") 
 	private String frecuencia;
 	
 	@SerializedName("ALC")
