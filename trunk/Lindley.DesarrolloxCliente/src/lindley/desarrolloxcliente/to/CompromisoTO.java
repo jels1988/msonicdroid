@@ -16,7 +16,7 @@ public class CompromisoTO {
 	@SerializedName("DPRO")
 	private String DescripcionProducto;
 
-	@SerializedName("CNR")
+	@SerializedName("CNR") 
 	private String Concrecion;
 
 	@SerializedName("CCNR")
