@@ -335,7 +335,8 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 				
 				holder.imgDireccion = (ImageButton) convertView.findViewById(R.id.btn_direccion);
 				holder.imgCabecera = (ImageButton) convertView.findViewById(R.id.btn_cabecera);
-				
+				holder.imgNuevo = (ImageButton) convertView.findViewById(R.id.btn_nuevo);
+								
 				convertView.setTag(holder);
 			} else {
 				// Get the ViewHolder back to get fast access to the TextView
@@ -385,6 +386,16 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 				}
 			});
 			
+			holder.imgNuevo.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					/*Intent direccionCliente = new Intent(context, ConsultarCabecera_Activity.class);
+					context.startActivity(direccionCliente);*/
+				}
+			});
+			
 			return convertView;
 		}
 
@@ -401,6 +412,7 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 			TextView txtSigNivel;
 			ImageButton imgDireccion;
 			ImageButton imgCabecera;
+			ImageButton imgNuevo;
 		}
 
 		@Override
@@ -435,4 +447,3 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 	}
 
 }
-
