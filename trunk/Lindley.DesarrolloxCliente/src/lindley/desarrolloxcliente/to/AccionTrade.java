@@ -15,7 +15,7 @@ public class AccionTrade {
 	}
 
 	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+		this.codigo = codigo; 
 	}
 
 	public String getDescripcion() {
