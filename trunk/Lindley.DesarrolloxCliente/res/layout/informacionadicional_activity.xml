@@ -4,4 +4,64 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+     <com.thira.examples.actionbar.widget.ActionBar
+		android:id="@+id/actionBar" 
+		android:layout_width="fill_parent"
+		android:layout_height="44dip" 
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true" />
+          
+     <TextView android:text="¿Tiene Combos SS ?" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+
+     <RadioGroup
+         android:id="@+id/radGrSS"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" >
+
+         <RadioButton
+             android:id="@+id/radSSSi"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:text="SI" />
+
+         <RadioButton
+             android:id="@+id/radSSNo"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="NO" />
+
+     </RadioGroup>
+    
+    <TextView android:text="¿Tiene Combos MS ?" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+     <RadioGroup
+         android:id="@+id/radGrMS"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" >
+
+         <RadioButton
+             android:id="@+id/radMSSi"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:text="SI" />
+
+         <RadioButton
+             android:id="@+id/radMSNo"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="NO" />
+
+     </RadioGroup>
+    <TextView android:text="Observación: " android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+
+    <EditText
+        android:id="@+id/txtObs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine" >
+
+        <requestFocus />
+    </EditText>
+
 </LinearLayout>
