@@ -19,6 +19,8 @@
         android:theme="@style/CustomTheme"
         android:name="MyApplication">
          
+        <uses-library android:name="com.google.android.maps" android:required="true"/>
+        
         <activity android:name="DireccionActivity" android:configChanges="keyboardHidden|orientation"/>
         
         <activity
