@@ -104,8 +104,8 @@
                     android:id="@+id/android:list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="10dip"
-                    android:layout_marginTop="25dip"
+                    android:layout_marginBottom="2dip"
+                    android:layout_marginTop="2dip"
                     android:drawSelectorOnTop="false"
                     android:focusable="false" />
             </RelativeLayout>
