@@ -12,6 +12,7 @@ import lindley.desarrolloxcliente.ws.service.ConsultarOportunidadProxy;
 import roboguice.inject.InjectView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.ListActivityBase;
+import net.msonic.lib.MessageBox;
 
 public class ConsultarOportunidad_Activity extends ListActivityBase {
 
@@ -100,13 +102,13 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
-	    //private Context context;
+	    private Context context;
 	    private List<OportunidadTO> detalles;
 	    
 	    public EfficientAdapter(Context context, List<OportunidadTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
-		      //this.context = context;
+		      this.context = context;
 		      this.detalles = valores;
 		    }
 	    
@@ -175,9 +177,30 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 				public void onItemSelected(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
 					// TODO Auto-generated method stub
-					//if()
-					//oportunidad.setAccioneTrade(((AccionTradeTO)arg0.getSelectedItem()).getCodigo());
-					//finalOportunidades.add(oportunidad);
+					System.out.println(finalOportunidades.size());
+					if(arg2 > 0)
+					{
+						if(finalOportunidades.size() <= 2)
+						{
+							oportunidad.setAccioneTrade(((AccionTradeTO)arg0.getSelectedItem()).getCodigo());
+							finalOportunidades.add(oportunidad);
+						}
+						else
+						{							
+							MessageBox.showSimpleDialog(context, "Mensaje", "Solo debe seleccionar como máximo 3 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+								
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									// TODO Auto-generated method stub
+								}
+								
+							});	
+						}
+					}
+					else
+					{
+						finalOportunidades.remove(oportunidad);
+					}
 				}
 
 				@Override
