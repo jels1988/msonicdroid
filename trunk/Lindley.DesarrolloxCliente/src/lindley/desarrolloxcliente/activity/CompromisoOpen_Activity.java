@@ -333,7 +333,6 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 					    	  CompromisoOpen_Activity.anio = c.get(Calendar.YEAR);        
 					    	  CompromisoOpen_Activity.mes = c.get(Calendar.MONTH);        
 					    	  CompromisoOpen_Activity.dia = c.get(Calendar.DAY_OF_MONTH); 
-					          
 					      }
 					
 					  
