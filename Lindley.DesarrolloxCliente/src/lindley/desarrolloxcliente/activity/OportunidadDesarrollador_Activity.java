@@ -5,23 +5,20 @@ import java.util.List;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.CompromisoTO;
-import lindley.desarrolloxcliente.ws.service.ConsultarCompromisoProxy;
-import roboguice.inject.InjectExtra;
+import lindley.desarrolloxcliente.to.OportunidadTO;
+import lindley.desarrolloxcliente.ws.service.ConsultarOportunidadProxy;
 import roboguice.inject.InjectView;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
@@ -29,56 +26,57 @@ import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.ListActivityBase;
 
-public class CompromisoOpen_Activity extends ListActivityBase {
+public class OportunidadDesarrollador_Activity extends ListActivityBase {
 
-	public final static String CODIGO_REGISTRO = "codigo_reg";
-
-	@InjectExtra(CODIGO_REGISTRO) String codigoRegistro;
-	@InjectView(R.id.actionBar)   ActionBar 	mActionBar;
-	@Inject ConsultarCompromisoProxy consultarCompromisoProxy;
-	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
+	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
+	@Inject ConsultarOportunidadProxy consultarOportunidadProxy;
 	private EfficientAdapter adap;
+	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
 	public static MyApplication application;
 	
 	/** Called when the activity is first created. */
-    @Override 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
     	inicializarRecursos();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.compromisoopen_activity);        
-        mActionBar.setTitle(R.string.compromiso_activity_title);
+        setContentView(R.layout.oportunidaddesarrollador_activity);        
+        mActionBar.setTitle(R.string.oportunidaddesarrollador_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
         mActionBar.setSubTitle(cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
-        processAsync();
+        processAsync(); 
+    }
+    
+    public void btnSiguiente_click(View view)
+    {
+    	Intent intent = new Intent("lindley.desarrolloxcliente.informacionadicional");
+		startActivity(intent);
     }
     
     @Override
 	protected void process() {
-    	consultarCompromisoProxy.setCodigoCliente(cliente.getCodigo());
-    	consultarCompromisoProxy.setCodigoRegistro(codigoRegistro);
-    	consultarCompromisoProxy.execute();
+    	consultarOportunidadProxy.setCodigoCliente(cliente.getCodigo());
+    	consultarOportunidadProxy.execute();
 	}
 
     @Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
-		boolean isExito = consultarCompromisoProxy.isExito();
+		boolean isExito = consultarOportunidadProxy.isExito();
 		if (isExito) {
-			int status = consultarCompromisoProxy.getResponse().getStatus();
+			int status = consultarOportunidadProxy.getResponse().getStatus();
 			if (status == 0) {
-				List<CompromisoTO> compromisos = consultarCompromisoProxy
-						.getResponse().getListaCompromiso();
-				if(compromisos.size()>0)
-					txtViewFecha.setText(compromisos.get(0).getFecha());
-				adap = new EfficientAdapter(this, compromisos);
+				List<OportunidadTO> oportunidades = consultarOportunidadProxy
+						.getResponse().getListaOportunidad();
+				adap = new EfficientAdapter(this, oportunidades);
+				if(oportunidades.size()>0)
+				txtViewFecha.setText(oportunidades.get(0).getFecha());
 				setListAdapter(adap);
 			}
 			else  {
-				showDialog(2);
-				showToast(consultarCompromisoProxy.getResponse().getDescripcion());
+				showToast(consultarOportunidadProxy.getResponse().getDescripcion());
 			}
 		}
 		else{
@@ -97,9 +95,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
 	    //private Context context;
-	    private List<CompromisoTO> detalles;
+	    private List<OportunidadTO> detalles;
 	    
-	    public EfficientAdapter(Context context, List<CompromisoTO> valores) {
+	    public EfficientAdapter(Context context, List<OportunidadTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
 		      //this.context = context;
@@ -114,33 +112,26 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	     *      android.view.ViewGroup)
 	     */
 	    public View getView(final int position, View convertView, ViewGroup parent) {
-	    	CompromisoTO compromiso = (CompromisoTO) getItem(position);
+	    	OportunidadTO compromiso = (OportunidadTO) getItem(position);
 	    	ViewHolder holder;
 
 	      if (convertView == null) {
-	        convertView = mInflater.inflate(R.layout.compromisoopen_content, null);
+	        convertView = mInflater.inflate(R.layout.oportunidaddesarrollador_content, null);
 
 	        // Creates a ViewHolder and store references to the two children
 	        // views
 	        // we want to bind data to.
 	        holder = new ViewHolder();
-	        	        	    		    	
+	        	        	        	    	
 	        holder.txViewPro = (TextView) convertView.findViewById(R.id.txViewPro); 
-	        holder.cboConcrecion = (Spinner) convertView.findViewById(R.id.cboConcrecion);
-	        holder.chkConcrecion = (CheckBox) convertView.findViewById(R.id.chkConcrecion);
-	        holder.txViewSOVI =  (EditText) convertView.findViewById(R.id.txViewSOVI);
-	        holder.chkSOVI = (CheckBox) convertView.findViewById(R.id.chkSOVI);
-	        holder.cboCumPrecio =  (Spinner) convertView.findViewById(R.id.cboCumPrecio);
-	        holder.chkPrecio = (CheckBox) convertView.findViewById(R.id.chkPrecio);
-	        holder.txViewSabores = (EditText) convertView.findViewById(R.id.txViewSabores);
-	        holder.chkSabores = (CheckBox) convertView.findViewById(R.id.chkSabores);
-	        
-	        
-	    	holder.txViewPuntos = (TextView) convertView.findViewById(R.id.txViewPuntos);		    	
-	    	holder.txViewAccTrade = (TextView) convertView.findViewById(R.id.txViewAccTrade);	          	
+	        holder.txViewConcrecion = (TextView) convertView.findViewById(R.id.txViewConcrecion);
+	        holder.txViewSOVI =  (TextView) convertView.findViewById(R.id.txViewSOVI);
+	        holder.txViewCumPrecio =  (TextView) convertView.findViewById(R.id.txViewCumPrecio);   
+	        holder.txViewSabores = (TextView) convertView.findViewById(R.id.txViewSabores);  	    	
+	    	holder.txViewPCoca = (TextView) convertView.findViewById(R.id.txViewPCoca);		    	
+	    	holder.txtAccTrade = (EditText) convertView.findViewById(R.id.txtAccTrade);	          	
 	    	holder.txViewFecha = (TextView) convertView.findViewById(R.id.txViewFecha);	    	
-	    	holder.chkCumplio = (CheckBox) convertView.findViewById(R.id.chkCumplio);
-	    	
+	    	holder.txViewPBonus = (TextView) convertView.findViewById(R.id.txViewPBonus);
 	    	holder.txViewProfit = (TextView) convertView.findViewById(R.id.txViewProfit);
 	        
 	        convertView.setTag(holder);
@@ -151,39 +142,14 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	      }
 	      
 	      holder.txViewPro.setText(compromiso.getDescripcionProducto());
-	      //holder.txViewConcrecion.setText(compromiso.getConcrecion());
-	      ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter
-					.createFromResource(application.getApplicationContext(),
-							R.array.confirmacion,
-							android.R.layout.simple_spinner_item);
-			adapterTipo
-					.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-		  holder.cboConcrecion.setAdapter(adapterTipo);
-		  if(compromiso.getConcrecion().equals("S"))holder.cboConcrecion.setSelection(0);
-		  else holder.cboConcrecion.setSelection(1);
-	      
-	      if(compromiso.getConfirmacionConcrecion().equals("1")) holder.chkConcrecion.setChecked(true);
-	      else holder.chkConcrecion.setChecked(false);
-	      
+	      holder.txViewConcrecion.setText(compromiso.getConcrecion());
 	      holder.txViewSOVI.setText(compromiso.getSovi());
-	      if(compromiso.getConfirmacionSovi().equals("1")) holder.chkSOVI.setChecked(true);
-	      else holder.chkSOVI.setChecked(false);
-	      
-	      holder.cboCumPrecio.setAdapter(adapterTipo);
-		  if(compromiso.getConcrecion().equals("S"))holder.cboConcrecion.setSelection(0);
-		  else holder.cboCumPrecio.setSelection(1);
-	      
-	      if(compromiso.getConfirmacionCumplePrecio().equals("1")) holder.chkPrecio.setChecked(true);
-	      else holder.chkPrecio.setChecked(false);
-	      
+	      holder.txViewCumPrecio.setText(compromiso.getCumplePrecio());
 	      holder.txViewSabores.setText(compromiso.getNumeroSabores());
-	      if(compromiso.getConfirmacionNumeroSabores().equals("1")) holder.chkSabores.setChecked(true);
-	      else holder.chkSabores.setChecked(false);
+	      holder.txViewPCoca.setText(compromiso.getPuntosCocaCola());
 	      
-	      holder.txViewPuntos.setText(compromiso.getPuntosBonus());
-	      holder.txViewAccTrade.setText(compromiso.getDescripcionAccion());
 	      int mYear,mMonth,mDay;
-	      String fecha = compromiso.getFechaCompromiso();
+	      String fecha = compromiso.getFechaOportunidad();
 	      if(fecha.length() > 7)
 	      {
 	    	  mYear =  Integer.parseInt(fecha.substring(0, 4));
@@ -193,17 +159,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	     }
 	      else
 	    	  holder.txViewFecha.setText("0");
-	      
-	      if(compromiso.getCumplio().equals("1")) holder.chkCumplio.setChecked(true);
-	      else holder.chkCumplio.setChecked(false);
-	      
-	      holder.txViewFecha.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					//showDialog(DATE_DIALOG_ID);					
-				}
-			});
-	      
+	      holder.txViewPBonus.setText(compromiso.getPuntosBonus());
+	      	      
 	      holder.txViewProfit.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -222,18 +179,14 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 
 	    static class ViewHolder {   
 	    	TextView txViewPro;
-	    	Spinner cboConcrecion;
-	    	CheckBox chkConcrecion;
-	    	EditText txViewSOVI;
-	    	CheckBox chkSOVI;
-	    	Spinner cboCumPrecio;
-	    	CheckBox chkPrecio;
-	    	EditText txViewSabores;
-	    	CheckBox chkSabores;
-	    	TextView txViewPuntos;   	    	
-	    	TextView txViewAccTrade;    	
+	    	TextView txViewConcrecion;
+	    	TextView txViewSOVI;
+	    	TextView txViewCumPrecio;
+	    	TextView txViewSabores;  	    	
+	    	TextView txViewPCoca;    	
+	    	EditText txtAccTrade;    	
 	    	TextView txViewFecha;
-	    	CheckBox chkCumplio;
+	    	TextView txViewPBonus;
 	    	TextView txViewProfit;
 	    }
 	    
@@ -267,4 +220,5 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	    }
 
 	  }
+
 }

@@ -39,6 +39,8 @@ public class OportunidadTO {
 	@SerializedName("TRD")
 	private List<AccionTradeTO> listaAccionesTrade;
 
+	private String accioneTrade;
+	
 	public String getFecha() {
 		return fecha;
 	}
@@ -126,4 +128,13 @@ public class OportunidadTO {
 	public void setFechaOportunidad(String fechaOportunidad) {
 		this.fechaOportunidad = fechaOportunidad;
 	}
+	
+	public String getAccioneTrade() {
+		return accioneTrade;
+	}
+
+	public void setAccioneTrade(String accioneTrade) {
+		this.accioneTrade = accioneTrade;
+	}
+
 }
