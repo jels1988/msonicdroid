@@ -155,10 +155,32 @@
                     android:id="@+id/android:list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="10dip"
+                    android:layout_marginBottom="50dip"
                     android:layout_marginTop="25dip"
                     android:drawSelectorOnTop="false"
                     android:focusable="false" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true" >
+                
+                 <ImageButton
+                    android:id="@+id/imageButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:onClick="btnGuardar_click" />
+                 
+                  <ImageButton
+                    android:id="@+id/imageButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:onClick="btnCerrar_click" />
+                  </LinearLayout>
             </RelativeLayout>
         </HorizontalScrollView>
     </ScrollView>
