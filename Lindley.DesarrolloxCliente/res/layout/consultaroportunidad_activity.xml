@@ -22,13 +22,14 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Fecha: " />
-
+
         <TextView
             android:id="@+id/txtViewFecha"
-            android:layout_width="50dip"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left"
             android:text="" />
+
     </LinearLayout>
 
     <ScrollView
@@ -101,6 +102,13 @@
                             android:layout_height="wrap_content"
                             android:text="Acciones Trade" />
 
+                        <TextView
+                            style="@style/TextViewLabel"
+			                android:layout_width="2dip"
+			                android:layout_height="wrap_content"
+			                android:clickable="true"
+			                android:text="" />
+                        
                         <TextView
                             style="@style/TextViewLabel"
                             android:layout_width="70dip"
