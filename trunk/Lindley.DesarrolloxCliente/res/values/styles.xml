@@ -23,7 +23,7 @@
 <color name="transparent">#00000000</color>
 
 
-<color name="custom_theme_color_0">#FF1A00</color> 
+<color name="custom_theme_color_0">#C00000</color> 
   
  
  <style name="WindowTitleCustom" parent="android:TextAppearance.WindowTitle">
