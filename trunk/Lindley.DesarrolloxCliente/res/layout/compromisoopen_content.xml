@@ -23,12 +23,10 @@
                 android:gravity="center"
                 android:text="" />
 
-            <EditText
-                android:id="@+id/txViewConcrecion"
+           <Spinner
+                android:id="@+id/cboConcrecion" 
                 android:layout_width="50dip"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="" />
+                android:layout_height="wrap_content"/>
             
             <CheckBox
 		        android:id="@+id/chkConcrecion"
@@ -49,11 +47,10 @@
 		        android:layout_height="wrap_content"		        
 		        android:text="" />
 			
-            <EditText
-                android:id="@+id/txViewCumPrecio"
-                android:layout_width="70dip"
-                android:layout_height="wrap_content"
-                android:text="" />
+            <Spinner
+                android:id="@+id/cboCumPrecio"
+                android:layout_width="50dip"
+                android:layout_height="wrap_content"/>
             
             <CheckBox
 		        android:id="@+id/chkPrecio"
