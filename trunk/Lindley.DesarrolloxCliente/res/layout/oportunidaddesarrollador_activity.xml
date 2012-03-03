@@ -103,6 +103,13 @@
                             android:layout_height="wrap_content"
                             android:text="Accion Trade" />
 
+                        <TextView
+                            style="@style/TextViewLabel"
+			                android:layout_width="1dip"
+			                android:layout_height="wrap_content"
+			                android:clickable="true"
+			                android:text="" />
+                        
 <!--                         <TextView -->
 <!--                             style="@style/TextViewLabel" -->
 <!--                             android:layout_width="70dip" -->
