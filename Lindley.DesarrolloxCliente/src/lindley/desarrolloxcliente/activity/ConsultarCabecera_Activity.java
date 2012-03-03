@@ -136,7 +136,8 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 	      holder.txViewHoraCierre.setText(desarrollo.getHoraCierre());
 	      holder.txViewCerrado.setText(desarrollo.getUserCierra());
 	      
-	      if(position == 0)
+	      //if(position == 0)
+	      if(desarrollo.getEstado().equals("A"))
 	    	  holder.txViewestado.setText("Abierto");
 	      else
 	    	  holder.txViewestado.setText("Cerrado");
@@ -146,7 +147,8 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					if(position == 0)
+					//if(position == 0)
+					if(desarrolloTemp.getEstado().equals("A"))
 					{
 						Intent compromisoOpen = new Intent(context, CompromisoOpen_Activity.class);
 						compromisoOpen.putExtra(CompromisoOpen_Activity.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
