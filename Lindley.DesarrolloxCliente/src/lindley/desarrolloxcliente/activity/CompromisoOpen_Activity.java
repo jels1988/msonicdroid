@@ -329,17 +329,18 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 			});
 	    	
 	    	
-	      /*int mYear,mMonth,mDay;
+	      int mYear,mMonth,mDay;
 	      String fecha = compromiso.getFechaCompromiso();
 	      if(fecha.length() > 7)
 	      {
 	    	  mYear =  Integer.parseInt(fecha.substring(0, 4));
 	    	  mMonth  =  Integer.parseInt(fecha.substring(4, 6));
 	    	  mDay  =  Integer.parseInt(fecha.substring(6));
-	    	  holder.txViewFecha.setText(mDay+"/"+mMonth+"/"+mYear);
+	    	  holder.txViewFecha.setText(pad(mDay)+"/"+ pad(mMonth)+"/"+pad(mYear));
 	     }
-	      else
-	    	  holder.txViewFecha.setText("0");*/
+	      else{
+	    	  holder.txViewFecha.setText("");
+	      }
 	      
 	      if(compromiso.getCumplio().equals("1")) holder.chkCumplio.setChecked(true);
 	      else holder.chkCumplio.setChecked(false);
