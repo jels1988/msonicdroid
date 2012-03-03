@@ -149,6 +149,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentLeft="true"
+                    android:src="@drawable/btn_next_red"
                     android:onClick="btnSiguiente_click" />
                 
             </RelativeLayout>
