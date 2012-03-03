@@ -9,22 +9,30 @@ import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarOportunidadProxy;
 import roboguice.inject.InjectView;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.ListActivityBase;
+import net.msonic.lib.MessageBox;
 
 public class OportunidadDesarrollador_Activity extends ListActivityBase {
 
@@ -34,12 +42,13 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
 	public static MyApplication application;
-	
+	public static int cantOportunidad = 0;
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	inicializarRecursos();
         super.onCreate(savedInstanceState);
+        cantOportunidad = 0;
         setContentView(R.layout.oportunidaddesarrollador_activity);        
         mActionBar.setTitle(R.string.oportunidaddesarrollador_activity_title);
         application = (MyApplication)getApplicationContext();
@@ -94,13 +103,14 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
     
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
-	    //private Context context;
+	    private Context context;
 	    private List<OportunidadTO> detalles;
 	    
 	    public EfficientAdapter(Context context, List<OportunidadTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
+	    	  cantOportunidad = 0;
 		      mInflater = LayoutInflater.from(context);
-		      //this.context = context;
+		      this.context = context;
 		      this.detalles = valores;
 		    }
 	    
@@ -112,7 +122,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	     *      android.view.ViewGroup)
 	     */
 	    public View getView(final int position, View convertView, ViewGroup parent) {
-	    	OportunidadTO compromiso = (OportunidadTO) getItem(position);
+	    	final OportunidadTO oportunidad = (OportunidadTO) getItem(position);
 	    	ViewHolder holder;
 
 	      if (convertView == null) {
@@ -128,7 +138,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	        holder.txViewSOVI =  (TextView) convertView.findViewById(R.id.txViewSOVI);
 	        holder.txViewCumPrecio =  (TextView) convertView.findViewById(R.id.txViewCumPrecio);   
 	        holder.txViewSabores = (TextView) convertView.findViewById(R.id.txViewSabores);  	    	
-	    	holder.txViewPCoca = (TextView) convertView.findViewById(R.id.txViewPCoca);		    	
+	    	holder.cboPCoca = (Spinner) convertView.findViewById(R.id.cboPCoca);		    	
 	    	holder.txtAccTrade = (EditText) convertView.findViewById(R.id.txtAccTrade);	          	
 	    	holder.txViewFecha = (TextView) convertView.findViewById(R.id.txViewFecha);	    	
 	    	holder.txViewPBonus = (TextView) convertView.findViewById(R.id.txViewPBonus);
@@ -141,12 +151,20 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	        holder = (ViewHolder) convertView.getTag();
 	      }
 	      
-	      holder.txViewPro.setText(compromiso.getDescripcionProducto());
-	      holder.txViewConcrecion.setText(compromiso.getConcrecion());
-	      holder.txViewSOVI.setText(compromiso.getSovi());
-	      holder.txViewCumPrecio.setText(compromiso.getCumplePrecio());
-	      holder.txViewSabores.setText(compromiso.getNumeroSabores());
-	      holder.txViewPCoca.setText(compromiso.getPuntosCocaCola());
+	      holder.txViewPro.setText(oportunidad.getDescripcionProducto());
+	      holder.txViewConcrecion.setText(oportunidad.getConcrecion());
+	      holder.txViewSOVI.setText(oportunidad.getSovi());
+	      holder.txViewCumPrecio.setText(oportunidad.getCumplePrecio());
+	      holder.txViewSabores.setText(oportunidad.getNumeroSabores());
+	      //holder.txViewPCoca.setText(oportunidad.getPuntosCocaCola());
+	      
+	      ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter
+					.createFromResource(application.getApplicationContext(),
+							R.array.puntos_desarrollador,
+							android.R.layout.simple_spinner_item);
+			adapterTipo
+					.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+		  holder.cboPCoca.setAdapter(adapterTipo);
 	      
 	      /*int mYear,mMonth,mDay;
 	      String fecha = compromiso.getFechaOportunidad();
@@ -160,7 +178,74 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	      else
 	    	  holder.txViewFecha.setText("0");*/
 	      
-	      holder.txViewPBonus.setText(compromiso.getPuntosBonus());
+	      holder.txViewPBonus.setText(oportunidad.getPuntosBonus());
+	      
+	      holder.txtAccTrade.setText(oportunidad.getAccioneTrade());
+	      holder.txtAccTrade.addTextChangedListener(new TextWatcher() {
+				
+				@Override
+				public void onTextChanged(CharSequence s, int start, int before, int count) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void beforeTextChanged(CharSequence s, int start, int count,
+						int after) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void afterTextChanged(Editable s) {
+					// TODO Auto-generated method stub
+					oportunidad.setAccioneTrade(s.toString());					
+				}
+			});
+	      
+	      holder.cboPCoca.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+				@Override
+				public void onItemSelected(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					// TODO Auto-generated method stub
+					System.out.println("opor: "+ConsultarOportunidad_Activity.finalOportunidades.size());
+					System.out.println("arg: "+arg2);
+					System.out.println("cant: "+cantOportunidad);
+					if(arg2 > 0)
+					{
+						if(cantOportunidad <= 2)
+						{
+							cantOportunidad ++;
+							ConsultarOportunidad_Activity.finalOportunidades.add(oportunidad);
+						}
+						else
+						{			
+							arg0.setSelection(0);
+							MessageBox.showSimpleDialog(context, "Mensaje", "Solo puede ingresar 2 acciones trade.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+								
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									// TODO Auto-generated method stub
+								}
+								
+							});	
+						}
+					}
+					else
+					{
+						cantOportunidad--;
+						ConsultarOportunidad_Activity.finalOportunidades.remove(oportunidad);
+					}
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+			});
 	      	      
 	      holder.txViewProfit.setOnClickListener(new OnClickListener() {
 				@Override
@@ -184,7 +269,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	    	TextView txViewSOVI;
 	    	TextView txViewCumPrecio;
 	    	TextView txViewSabores;  	    	
-	    	TextView txViewPCoca;    	
+	    	Spinner cboPCoca;    	
 	    	EditText txtAccTrade;    	
 	    	TextView txViewFecha;
 	    	TextView txViewPBonus;
