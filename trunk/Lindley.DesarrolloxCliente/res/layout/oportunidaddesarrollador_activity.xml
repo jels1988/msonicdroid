@@ -101,7 +101,7 @@
                             style="@style/TextViewLabel"
                             android:layout_width="100dip"
                             android:layout_height="wrap_content"
-                            android:text="Acciones Trade" />
+                            android:text="Accion Trade" />
 
 <!--                         <TextView -->
 <!--                             style="@style/TextViewLabel" -->
