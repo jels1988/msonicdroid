@@ -97,10 +97,16 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 		public void onDateSet(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
 			// TODO Auto-generated method stub
 
-	    	  txtFecha.setText(String.valueOf(year) + "/" + String.valueOf(monthOfYear+1) + "/" + String.valueOf(dayOfMonth));
+	    	  txtFecha.setText(String.valueOf(pad(dayOfMonth)) + "/"+ String.valueOf(pad(monthOfYear+1)) + "/" + String.valueOf(year));
 		}
 	};
 
+	private static String pad(int c) {
+        if (c >= 10)
+                return String.valueOf(c);
+            else
+                    return "0" + String.valueOf(c);
+            }
     
     @Override
 	protected void process() {
@@ -124,7 +130,6 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 				setListAdapter(adap);
 			}
 			else  {
-				showDialog(2);
 				showToast(consultarCompromisoProxy.getResponse().getDescripcion());
 			}
 		}
