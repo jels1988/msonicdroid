@@ -269,9 +269,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	        
 	    	holder.txViewPuntos = (TextView) convertView.findViewById(R.id.txViewPuntos);		    	
 	    	holder.txViewAccTrade = (TextView) convertView.findViewById(R.id.txViewAccTrade);	          	
-	    	holder.txViewFecha = (EditText) convertView.findViewById(R.id.txtFecha);	    	
+	    	holder.txViewFecha = (EditText) convertView.findViewById(R.id.txViewFecha);	    	
+	    	holder.btnFecha = (ImageButton) convertView.findViewById(R.id.btnFecha);
 	    	holder.chkCumplio = (CheckBox) convertView.findViewById(R.id.chkCumplio);
-	    	
 	    	holder.txViewProfit = (TextView) convertView.findViewById(R.id.txViewProfit);
 	        
 	        convertView.setTag(holder);
