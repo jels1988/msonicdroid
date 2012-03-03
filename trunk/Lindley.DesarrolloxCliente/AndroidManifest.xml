@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".activity.ConsultarCabecera_Activity" android:noHistory="true">
+        <activity android:name=".activity.ConsultarCabecera_Activity">
             <intent-filter>
                 <action android:name="lindley.desarrolloxcliente.consultarcabecera" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
