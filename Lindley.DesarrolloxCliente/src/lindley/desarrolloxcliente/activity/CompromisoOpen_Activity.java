@@ -59,9 +59,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	public static MyApplication application;
 	List<CompromisoTO> compromisos;
 	private static final int DATE_DIALOG_ID = 0;
-	private int anio;    
-	private int mes;  
-	private int dia;
+	static int anio;    
+	static int mes;  
+	static int dia;
 	    
 	
 	
@@ -78,10 +78,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
         mActionBar.setSubTitle(cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
         
-        final Calendar c = Calendar.getInstance();        
-        anio = c.get(Calendar.YEAR);        
-        mes = c.get(Calendar.MONTH);        
-        dia = c.get(Calendar.DAY_OF_MONTH); 
+        
         
         processAsync();
     }
@@ -323,6 +320,25 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
+					
+					   String fecha = compromiso.getFechaCompromiso();
+					      if(fecha.length() > 7)
+					      {
+					    	  CompromisoOpen_Activity.anio =  Integer.parseInt(fecha.substring(0, 4));
+					    	  CompromisoOpen_Activity.mes  =  Integer.parseInt(fecha.substring(4, 6));
+					    	  CompromisoOpen_Activity.dia  =  Integer.parseInt(fecha.substring(6));
+					    	  
+					      }else{
+					    	  final Calendar c = Calendar.getInstance();        
+					    	  CompromisoOpen_Activity.anio = c.get(Calendar.YEAR);        
+					    	  CompromisoOpen_Activity.mes = c.get(Calendar.MONTH);        
+					    	  CompromisoOpen_Activity.dia = c.get(Calendar.DAY_OF_MONTH); 
+					          
+					      }
+					
+					  
+					
+					
 					((CompromisoOpen_Activity)context).txtFecha = holder.txViewFecha;
 					((Activity)context).showDialog(0);
 				}
@@ -336,9 +352,13 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	    	  mYear =  Integer.parseInt(fecha.substring(0, 4));
 	    	  mMonth  =  Integer.parseInt(fecha.substring(4, 6));
 	    	  mDay  =  Integer.parseInt(fecha.substring(6));
+	    	  
+	    	
+	          
 	    	  holder.txViewFecha.setText(pad(mDay)+"/"+ pad(mMonth)+"/"+pad(mYear));
 	     }
 	      else{
+	    	  
 	    	  holder.txViewFecha.setText("");
 	      }
 	      
