@@ -55,14 +55,14 @@ public class InformacionAdicional_Activity extends ActivityBase {
 		informacion= new InformacionAdicionalTO();
 		String estado = "";
 		if(radSSSi.isChecked())
-			estado = "1";
+			estado = "S";
 		else if(radSSNo.isChecked())
-			estado = "0";
+			estado = "N";
 		informacion.setComboSS(estado);
 		if(radMSSi.isChecked())
-			estado = "1";
+			estado = "S";
 		else if(radMSNo.isChecked())
-			estado = "0";
+			estado = "N";
 		informacion.setComboMS(estado);
 		informacion.setObservacion(txtObs.getText().toString());
 		informacion.setCodigoUsuario(usuario.getCodigoSap());
