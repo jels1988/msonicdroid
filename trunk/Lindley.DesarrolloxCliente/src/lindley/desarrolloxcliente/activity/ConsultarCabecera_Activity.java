@@ -41,10 +41,16 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 		cliente = application.getClienteTO(); 
         mActionBar.setSubTitle(cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
-        processAsync();
     }
     
     @Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+    	processAsync();
+		super.onStart();
+	}
+
+	@Override
 	protected void process() {
     	ConsultarCabeceraProxy.setCodigoCliente(cliente.getCodigo());
     	ConsultarCabeceraProxy.execute();
