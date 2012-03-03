@@ -97,6 +97,13 @@
                             android:text="Puntos Coca Cola" />
 
                         <TextView
+			                android:layout_width="1dip"
+			                style="@style/TextViewLabel"
+			                android:layout_height="wrap_content"
+			                android:clickable="true"
+			                android:text="" />
+                        
+                        <TextView
                             style="@style/TextViewLabel"
                             android:layout_width="100dip"
                             android:layout_height="wrap_content"
