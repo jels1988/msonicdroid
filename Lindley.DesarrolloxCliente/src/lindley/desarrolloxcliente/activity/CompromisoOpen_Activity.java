@@ -5,7 +5,6 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
-import lindley.desarrolloxcliente.to.AccionTradeTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.CompromisoTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
@@ -14,7 +13,6 @@ import lindley.desarrolloxcliente.ws.service.ConsultarCompromisoProxy;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
