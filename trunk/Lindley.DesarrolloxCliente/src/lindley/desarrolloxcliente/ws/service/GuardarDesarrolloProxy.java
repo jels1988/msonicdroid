@@ -50,7 +50,7 @@ public class GuardarDesarrolloProxy extends ProxyBase<GuardarDesarrolloResponse>
 	@Override
 	protected String getUrl() {
 		// TODO Auto-generated method stub
-		return urlWS + "/GuardarDesarrollo";
+		return urlWS + "/GuardarCompromiso";
 	}
 
 	@Override
