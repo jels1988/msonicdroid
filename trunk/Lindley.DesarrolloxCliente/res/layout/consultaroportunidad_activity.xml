@@ -142,6 +142,15 @@
                     android:layout_marginTop="25dip"
                     android:drawSelectorOnTop="false"
                     android:focusable="false" />
+                
+                 <ImageButton
+                    android:id="@+id/imageButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:onClick="btnSiguiente_click" />
+                
             </RelativeLayout>
         </HorizontalScrollView>
     </ScrollView>
