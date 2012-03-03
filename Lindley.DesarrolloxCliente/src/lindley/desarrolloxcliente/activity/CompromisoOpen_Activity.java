@@ -1,5 +1,6 @@
 package lindley.desarrolloxcliente.activity;
 
+import java.util.Calendar;
 import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
@@ -9,18 +10,26 @@ import lindley.desarrolloxcliente.to.CompromisoTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarCompromisoProxy;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -37,9 +46,16 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	@InjectView(R.id.actionBar)   ActionBar 	mActionBar;
 	@Inject ConsultarCompromisoProxy consultarCompromisoProxy;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
+	
 	private EfficientAdapter adap;
 	ClienteTO cliente;
+	
 	public static MyApplication application;
+	private static final int DATE_DIALOG_ID = 0;
+	private int anio;    
+	private int mes;  
+	private int dia;
+	    
 	
 	/** Called when the activity is first created. */
     @Override 
@@ -52,8 +68,39 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 		cliente = application.getClienteTO();
         mActionBar.setSubTitle(cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
+        
+        
+        final Calendar c = Calendar.getInstance();        
+        anio = c.get(Calendar.YEAR);        
+        mes = c.get(Calendar.MONTH);        
+        dia = c.get(Calendar.DAY_OF_MONTH); 
+        
         processAsync();
     }
+    
+    public EditText txtFecha;
+    
+    @Override
+    protected Dialog onCreateDialog(int id) {  
+        switch (id) {    
+        case DATE_DIALOG_ID:     
+        	
+            return new DatePickerDialog(this,dateSetListener,anio, mes,dia );    
+        }    
+        return null;
+    }
+    
+   
+    DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+		
+		@Override
+		public void onDateSet(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
+			// TODO Auto-generated method stub
+
+	    	  txtFecha.setText(String.valueOf(year) + "/" + String.valueOf(monthOfYear+1) + "/" + String.valueOf(dayOfMonth));
+		}
+	};
+
     
     @Override
 	protected void process() {
@@ -96,13 +143,13 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
-	    //private Context context;
+	    private Context context;
 	    private List<CompromisoTO> detalles;
 	    
 	    public EfficientAdapter(Context context, List<CompromisoTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
-		      //this.context = context;
+		      this.context = context;
 		      this.detalles = valores;
 		    }
 	    
@@ -115,7 +162,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	     */
 	    public View getView(final int position, View convertView, ViewGroup parent) {
 	    	CompromisoTO compromiso = (CompromisoTO) getItem(position);
-	    	ViewHolder holder;
+	    	final ViewHolder holder;
 
 	      if (convertView == null) {
 	        convertView = mInflater.inflate(R.layout.compromisoopen_content, null);
@@ -138,7 +185,21 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	        
 	    	holder.txViewPuntos = (TextView) convertView.findViewById(R.id.txViewPuntos);		    	
 	    	holder.txViewAccTrade = (TextView) convertView.findViewById(R.id.txViewAccTrade);	          	
-	    	holder.txViewFecha = (TextView) convertView.findViewById(R.id.txViewFecha);	    	
+	    	holder.txViewFecha = (EditText) convertView.findViewById(R.id.txViewFecha);	    
+	    	holder.btnFecha = (ImageButton)convertView.findViewById(R.id.btnFecha);
+	    	
+	    	holder.btnFecha.setOnClickListener(new OnClickListener() {
+				
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					((CompromisoOpen_Activity)context).txtFecha = holder.txViewFecha;
+					((Activity)context).showDialog(0);
+				}
+			});
+	    	
+	    	
 	    	holder.chkCumplio = (CheckBox) convertView.findViewById(R.id.chkCumplio);
 	    	
 	    	holder.txViewProfit = (TextView) convertView.findViewById(R.id.txViewProfit);
@@ -232,7 +293,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	    	CheckBox chkSabores;
 	    	TextView txViewPuntos;   	    	
 	    	TextView txViewAccTrade;    	
-	    	TextView txViewFecha;
+	    	EditText txViewFecha;
+	    	ImageButton btnFecha;
+	    	
 	    	CheckBox chkCumplio;
 	    	TextView txViewProfit;
 	    }
