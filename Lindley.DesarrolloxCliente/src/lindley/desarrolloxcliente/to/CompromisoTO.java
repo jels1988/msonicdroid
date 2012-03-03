@@ -60,6 +60,12 @@ public class CompromisoTO {
 
 	@SerializedName("EST")
 	private String Estado;
+	
+	@SerializedName("AGR")
+	private String agrupacion;
+	
+	@SerializedName("ORG")
+	private String origen;
 
 	public String getCodigoRegistro() {
 		return CodigoRegistro;
@@ -211,5 +217,21 @@ public class CompromisoTO {
 
 	public void setEstado(String estado) {
 		Estado = estado;
+	}
+
+	public String getAgrupacion() {
+		return agrupacion;
+	}
+
+	public void setAgrupacion(String agrupacion) {
+		this.agrupacion = agrupacion;
+	}
+
+	public String getOrigen() {
+		return origen;
+	}
+
+	public void setOrigen(String origen) {
+		this.origen = origen;
 	}
 }

@@ -39,7 +39,11 @@ public class OportunidadTO {
 	@SerializedName("TRD")
 	private List<AccionTradeTO> listaAccionesTrade;
 
+	@SerializedName("CAT")
 	private String accioneTrade;
+	
+	@SerializedName("DAT")
+	private String descripcionAccioneTrade;
 	
 	public String getFecha() {
 		return fecha;
@@ -135,6 +139,14 @@ public class OportunidadTO {
 
 	public void setAccioneTrade(String accioneTrade) {
 		this.accioneTrade = accioneTrade;
+	}
+
+	public String getDescripcionAccioneTrade() {
+		return descripcionAccioneTrade;
+	}
+
+	public void setDescripcionAccioneTrade(String descripcionAccioneTrade) {
+		this.descripcionAccioneTrade = descripcionAccioneTrade;
 	}
 
 }
