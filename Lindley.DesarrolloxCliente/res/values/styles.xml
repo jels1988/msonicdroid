@@ -5,11 +5,16 @@
 <resources>
 
 
+<!--  
 
-<color name="custom_theme_color_amarillo">#fecc00</color> 
+#fecc00
+#C00000 rojo
+242 242 242 #F2F2F2 plomo
+-->
+<color name="custom_theme_color_amarillo">#F2F2F2</color> 
 <color name="custom_theme_color_amarillo_alterno">#ffdd00</color> 
 
-<color name="custom_theme_color_lila">#6d1e7e</color>
+<color name="custom_theme_color_letra">#000000</color>
 <color name="custom_theme_color_blanco">#FFFFFF</color>
 <color name="custom_theme_color_negro">#000000</color>
 <color name="custom_theme_color_rojo">#FF0000</color> 
@@ -27,21 +32,21 @@
 </style>
 
  <style name="WindowTitleBackgroundCustom">
-      <item name="android:background">@color/custom_theme_color_lila</item>
+      <item name="android:background">@color/custom_theme_color_letra</item>
 </style>
 
 <style name="EditTextCustom" parent="@android:style/Widget.EditText">
  	<item name="android:focusable">true</item>
  	<item name="android:focusableInTouchMode">true</item>
  	<item name="android:clickable">true</item>
-	<item name="android:textColor">@color/custom_theme_color_lila</item>
+	<item name="android:textColor">@color/custom_theme_color_letra</item>
 </style>
 
 <style name="TextViewCustom" parent="@android:style/Widget.TextView">
  	<item name="android:focusable">false</item>
  	<item name="android:focusableInTouchMode">false</item>
  	<item name="android:clickable">true</item>
-	<item name="android:textColor">@color/custom_theme_color_lila</item>
+	<item name="android:textColor">@color/custom_theme_color_letra</item>
 	<!--item name="android:textStyle">bold</item-->
 </style>
 
@@ -50,7 +55,7 @@
  	<item name="android:focusableInTouchMode">false</item>
  	<item name="android:clickable">true</item>
 	<item name="android:textColor">@color/custom_theme_color_blanco</item>
-	<item name="android:background">@color/custom_theme_color_lila</item>
+	<item name="android:background">@color/custom_theme_color_letra</item>
 	<item name="android:textStyle">bold</item>
 </style>
 
@@ -90,7 +95,7 @@
 
     <item name="android:windowBackground">@color/custom_theme_color_amarillo</item>
 	<item name="android:colorForegroundInverse">@color/custom_theme_color_amarillo</item>
-	<item name="android:colorBackground">@color/custom_theme_color_lila</item>
+	<item name="android:colorBackground">@color/custom_theme_color_letra</item>
 	<item name="android:disabledAlpha">0.5</item>
 	<item name="android:backgroundDimAmount">0.6</item>
 
@@ -107,7 +112,7 @@
  	<item name="android:editTextStyle">@style/EditTextCustom</item>
  	<item name="android:textViewStyle">@style/TextViewCustom</item>
  	<item name="android:buttonStyle">@style/ButtonCustom</item>
- 	<!-- item name="android:listViewStyle">@style/MyListView</item -->
+ 	<item name="android:listViewStyle">@style/MyListView</item>
 </style>
 
     
@@ -119,7 +124,7 @@
 
     <item name="android:windowBackground">@color/custom_theme_color_blanco</item>
 	<item name="android:colorForegroundInverse">@color/custom_theme_color_blanco</item>
-	<item name="android:colorBackground">@color/custom_theme_color_lila</item>
+	<item name="android:colorBackground">@color/custom_theme_color_letra</item>
 	<item name="android:disabledAlpha">0.5</item>
 	<item name="android:backgroundDimAmount">0.6</item>
 
