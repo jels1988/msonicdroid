@@ -21,9 +21,9 @@
 <color name="custom_theme_color_verde">#dbc7db</color>
 
 <color name="transparent">#00000000</color>
- 
 
 
+<color name="custom_theme_color_0">#FF1A00</color> 
   
  
  <style name="WindowTitleCustom" parent="android:TextAppearance.WindowTitle">
@@ -56,6 +56,15 @@
  	<item name="android:clickable">true</item>
 	<item name="android:textColor">@color/custom_theme_color_blanco</item>
 	<item name="android:background">@color/custom_theme_color_letra</item>
+	<item name="android:textStyle">bold</item>
+</style>
+
+<style name="TextViewHead" parent="@android:style/Widget.TextView">
+ 	<item name="android:focusable">false</item>
+ 	<item name="android:focusableInTouchMode">false</item>
+ 	<item name="android:clickable">true</item>
+	<item name="android:textColor">@color/custom_theme_color_blanco</item>
+	<item name="android:background">@color/custom_theme_color_0</item>
 	<item name="android:textStyle">bold</item>
 </style>
 
