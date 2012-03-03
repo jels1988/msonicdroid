@@ -1,6 +1,7 @@
 package lindley.desarrolloxcliente.activity;
 
 import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
@@ -51,6 +52,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	ClienteTO cliente;
 	
 	public static MyApplication application;
+	List<CompromisoTO> compromisos;
 	private static final int DATE_DIALOG_ID = 0;
 	private int anio;    
 	private int mes;  
