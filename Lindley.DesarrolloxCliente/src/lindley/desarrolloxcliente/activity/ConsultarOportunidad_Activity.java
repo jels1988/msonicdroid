@@ -177,7 +177,8 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 				public void onItemSelected(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
 					// TODO Auto-generated method stub
-					System.out.println(finalOportunidades.size());
+					System.out.println("opor: "+finalOportunidades.size());
+					System.out.println("arg: "+arg2);
 					if(arg2 > 0)
 					{
 						if(finalOportunidades.size() <= 2)
@@ -186,7 +187,8 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 							finalOportunidades.add(oportunidad);
 						}
 						else
-						{							
+						{			
+							arg0.setSelection(0);
 							MessageBox.showSimpleDialog(context, "Mensaje", "Solo debe seleccionar como máximo 3 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
 								
 								@Override
