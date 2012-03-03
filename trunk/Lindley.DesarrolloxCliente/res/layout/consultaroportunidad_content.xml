@@ -68,12 +68,12 @@
                 android:clickable="true"
                 android:text="" />
             
-             <TextView
-                android:id="@+id/txViewFecha"
-                android:layout_width="70dip"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="" />
+<!--              <TextView -->
+<!--                 android:id="@+id/txViewFecha" -->
+<!--                 android:layout_width="70dip" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:clickable="true" -->
+<!--                 android:text="" /> -->
              
               <TextView
                 android:id="@+id/txViewPBonus"
