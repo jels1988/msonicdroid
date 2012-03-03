@@ -37,7 +37,7 @@
 	<string name="oportunidad_activity_title">Oportunidades</string>       
 	
 	<string-array name="puntos_desarrollador">
-	    <item>--Seleccione--</item>
+	    <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
