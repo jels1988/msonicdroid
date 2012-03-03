@@ -189,7 +189,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 						else
 						{			
 							arg0.setSelection(0);
-							MessageBox.showSimpleDialog(context, "Mensaje", "Solo debe seleccionar como máximo 3 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+							MessageBox.showSimpleDialog(context, "Mensaje", "Solo puede seleccionar como máximo 3 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
 								
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
