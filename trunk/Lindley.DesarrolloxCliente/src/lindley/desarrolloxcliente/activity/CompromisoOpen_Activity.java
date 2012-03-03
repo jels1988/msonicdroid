@@ -84,7 +84,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     }
     
     public EditText txtFecha;
-    
+    public CompromisoTO compromisoTO;
     @Override
     protected Dialog onCreateDialog(int id) {  
         switch (id) {    
@@ -109,6 +109,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 			// TODO Auto-generated method stub
 
 	    	  txtFecha.setText(String.valueOf(pad(dayOfMonth)) + "/"+ String.valueOf(pad(monthOfYear+1)) + "/" + String.valueOf(year));
+	    	  if(compromisoTO!=null){
+	    		  compromisoTO.setFechaCompromiso(String.valueOf(year) + String.valueOf(pad(monthOfYear+1)) + String.valueOf(pad(dayOfMonth)) );
+	    	  }
 		}
 	};
     
@@ -321,8 +324,11 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					
+					
+					((CompromisoOpen_Activity)context).compromisoTO = compromiso;
+					
 					   String fecha = compromiso.getFechaCompromiso();
-					      if(fecha.length() > 7)
+					      if(fecha.length() >= 7)
 					      {
 					    	  ((CompromisoOpen_Activity)context).anio =  Integer.parseInt(fecha.substring(0, 4));
 					    	  ((CompromisoOpen_Activity)context).mes  =  Integer.parseInt(fecha.substring(4, 6))-1;
