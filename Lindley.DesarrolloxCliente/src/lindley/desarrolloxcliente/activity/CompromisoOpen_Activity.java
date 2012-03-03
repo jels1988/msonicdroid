@@ -1,6 +1,7 @@
 package lindley.desarrolloxcliente.activity;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
@@ -12,6 +13,9 @@ import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCompromisoProxy;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,9 +26,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -52,6 +58,12 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	ClienteTO cliente;
 	public static MyApplication application;
 	List<CompromisoTO> compromisos;
+	private static final int DATE_DIALOG_ID = 0;
+	private int anio;    
+	private int mes;  
+	private int dia;
+	    
+	
 	
 	/** Called when the activity is first created. */
     @Override 
@@ -65,8 +77,43 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 		cliente = application.getClienteTO();
         mActionBar.setSubTitle(cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
+        
+        final Calendar c = Calendar.getInstance();        
+        anio = c.get(Calendar.YEAR);        
+        mes = c.get(Calendar.MONTH);        
+        dia = c.get(Calendar.DAY_OF_MONTH); 
+        
         processAsync();
     }
+    
+    public EditText txtFecha;
+    
+    @Override
+    protected Dialog onCreateDialog(int id) {  
+        switch (id) {    
+        case DATE_DIALOG_ID:     
+        	
+            return new DatePickerDialog(this,dateSetListener,anio, mes,dia );    
+        }    
+        return null;
+    }
+    
+	private static String pad(int c) {
+        if (c >= 10)
+                return String.valueOf(c);
+            else
+                    return "0" + String.valueOf(c);
+            }
+	
+    DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+		
+		@Override
+		public void onDateSet(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
+			// TODO Auto-generated method stub
+
+	    	  txtFecha.setText(String.valueOf(pad(dayOfMonth)) + "/"+ String.valueOf(pad(monthOfYear+1)) + "/" + String.valueOf(year));
+		}
+	};
     
     public void btnCerrar_click(View view)
     {
@@ -180,13 +227,13 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
-	    //private Context context;
+	    private Context context;
 	    private List<CompromisoTO> detalles;
 	    
 	    public EfficientAdapter(Context context, List<CompromisoTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
-		      //this.context = context;
+		      this.context = context;
 		      this.detalles = valores;
 		    }
 	    
@@ -199,7 +246,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	     */
 	    public View getView(final int position, View convertView, ViewGroup parent) {
 	    	final CompromisoTO compromiso = (CompromisoTO) getItem(position);
-	    	ViewHolder holder;
+	    	final ViewHolder holder;
 
 	      if (convertView == null) {
 	        convertView = mInflater.inflate(R.layout.compromisoopen_content, null);
@@ -222,7 +269,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	        
 	    	holder.txViewPuntos = (TextView) convertView.findViewById(R.id.txViewPuntos);		    	
 	    	holder.txViewAccTrade = (TextView) convertView.findViewById(R.id.txViewAccTrade);	          	
-	    	holder.txViewFecha = (TextView) convertView.findViewById(R.id.txViewFecha);	    	
+	    	holder.txViewFecha = (EditText) convertView.findViewById(R.id.txtFecha);	    	
 	    	holder.chkCumplio = (CheckBox) convertView.findViewById(R.id.chkCumplio);
 	    	
 	    	holder.txViewProfit = (TextView) convertView.findViewById(R.id.txViewProfit);
@@ -266,7 +313,23 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	      
 	      holder.txViewPuntos.setText(compromiso.getPuntosBonus());
 	      holder.txViewAccTrade.setText(compromiso.getDescripcionAccion());
-	      int mYear,mMonth,mDay;
+	      
+	      
+	      holder.btnFecha = (ImageButton)convertView.findViewById(R.id.btnFecha);
+	    	
+	    	holder.btnFecha.setOnClickListener(new OnClickListener() {
+				
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					((CompromisoOpen_Activity)context).txtFecha = holder.txViewFecha;
+					((Activity)context).showDialog(0);
+				}
+			});
+	    	
+	    	
+	      /*int mYear,mMonth,mDay;
 	      String fecha = compromiso.getFechaCompromiso();
 	      if(fecha.length() > 7)
 	      {
@@ -276,7 +339,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	    	  holder.txViewFecha.setText(mDay+"/"+mMonth+"/"+mYear);
 	     }
 	      else
-	    	  holder.txViewFecha.setText("0");
+	    	  holder.txViewFecha.setText("0");*/
 	      
 	      if(compromiso.getCumplio().equals("1")) holder.chkCumplio.setChecked(true);
 	      else holder.chkCumplio.setChecked(false);
@@ -338,7 +401,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	    	CheckBox chkSabores;
 	    	TextView txViewPuntos;   	    	
 	    	TextView txViewAccTrade;    	
-	    	TextView txViewFecha;
+	    	EditText txViewFecha;
+	    	ImageButton btnFecha;
 	    	CheckBox chkCumplio;
 	    	TextView txViewProfit;
 	    }
