@@ -33,7 +33,6 @@ import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.ListActivityBase;
-import net.msonic.lib.MessageBox;
 
 public class CompromisoOpen_Activity extends ListActivityBase {
 
