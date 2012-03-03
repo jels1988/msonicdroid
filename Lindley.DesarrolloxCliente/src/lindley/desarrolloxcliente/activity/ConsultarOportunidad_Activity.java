@@ -154,7 +154,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	      holder.txViewSabores.setText(oportunidad.getNumeroSabores());
 	      holder.txViewPCoca.setText(oportunidad.getPuntosCocaCola());
 	      
-	      int mYear,mMonth,mDay;
+	      /*int mYear,mMonth,mDay;
 	      String fecha = oportunidad.getFechaOportunidad();
 	      if(fecha.length() > 7)
 	      {
@@ -164,7 +164,8 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	    	  holder.txViewFecha.setText(mDay+"/"+mMonth+"/"+mYear);
 	     }
 	      else
-	    	  holder.txViewFecha.setText("0");
+	    	  holder.txViewFecha.setText("0");*/
+	      
 	      holder.txViewPBonus.setText(oportunidad.getPuntosBonus());
 	      holder.cboAccTrade.setAdapter(application.getAdapterAccionTrade(oportunidad.getListaAccionesTrade()));
 	      
