@@ -50,9 +50,13 @@
                 android:clickable="true"
                 android:text="" />
 
-			<TextView
-                android:id="@+id/txViewPCoca"
+            <Spinner 
+                android:id="@+id/cboPCoca"
                 android:layout_width="50dip"
+                android:layout_height="wrap_content" />
+            
+            <TextView
+                android:layout_width="1dip"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:text="" />
