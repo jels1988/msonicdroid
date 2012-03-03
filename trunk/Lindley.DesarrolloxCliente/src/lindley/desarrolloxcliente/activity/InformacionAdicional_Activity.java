@@ -84,9 +84,9 @@ public class InformacionAdicional_Activity extends ActivityBase {
 			if (status == 0) {
 				String idRegistro = guardarDesarrolloProxy.getResponse().getCodCabecera();
 				System.out.println(idRegistro);
-				//Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.consultarcompromisoopen");
-				//compromisoOpen.putExtra(CompromisoOpen_Activity.CODIGO_REGISTRO, idRegistro);
-				//startActivity(compromisoOpen);
+				Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.consultarcompromisoopen");
+				compromisoOpen.putExtra(CompromisoOpen_Activity.CODIGO_REGISTRO, idRegistro);
+				startActivity(compromisoOpen);
 			}
 			else  {
 				showToast(guardarDesarrolloProxy.getResponse().getDescripcion());
