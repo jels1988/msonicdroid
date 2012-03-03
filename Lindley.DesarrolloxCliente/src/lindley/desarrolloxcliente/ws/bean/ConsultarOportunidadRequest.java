@@ -6,6 +6,9 @@ public class ConsultarOportunidadRequest {
 
 	@SerializedName("COD")
 	private String codigoCliente;
+	
+	@SerializedName("TIP")
+	private String tipoOportunidad;
 
 	public String getCodigoCliente() {
 		return codigoCliente;
@@ -13,6 +16,14 @@ public class ConsultarOportunidadRequest {
 
 	public void setCodigoCliente(String codigoCliente) {
 		this.codigoCliente = codigoCliente;
+	}
+
+	public String getTipoOportunidad() {
+		return tipoOportunidad;
+	}
+
+	public void setTipoOportunidad(String tipoOportunidad) {
+		this.tipoOportunidad = tipoOportunidad;
 	}
 }
  

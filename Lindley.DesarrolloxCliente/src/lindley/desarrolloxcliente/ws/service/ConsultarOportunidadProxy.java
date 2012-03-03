@@ -12,7 +12,8 @@ public class ConsultarOportunidadProxy extends ProxyBase<ConsultarOportunidadRes
 	@InjectResource(R.string.urlwsDesarrolloxCliente)protected String urlWS;
 	
 	private String codigoCliente;
-
+	private String tipoOportunidad;
+	
 	public String getCodigoCliente() {
 		return codigoCliente;
 	}
@@ -20,6 +21,14 @@ public class ConsultarOportunidadProxy extends ProxyBase<ConsultarOportunidadRes
 	public void setCodigoCliente(String codigoCliente) {
 		this.codigoCliente = codigoCliente;
 	} 
+	
+	public String getTipoOportunidad() {
+		return tipoOportunidad;
+	}
+
+	public void setTipoOportunidad(String tipoOportunidad) {
+		this.tipoOportunidad = tipoOportunidad;
+	}
 	
 	@Override
 	protected String getUrl() {
@@ -32,6 +41,7 @@ public class ConsultarOportunidadProxy extends ProxyBase<ConsultarOportunidadRes
 		// TODO Auto-generated method stub
 		ConsultarOportunidadRequest consultarOportunidadRequest = new ConsultarOportunidadRequest();
 		consultarOportunidadRequest.setCodigoCliente(this.codigoCliente);
+		consultarOportunidadRequest.setTipoOportunidad(this.tipoOportunidad);
 		
 		String request = JSONHelper.serializar(consultarOportunidadRequest);
 		return request;

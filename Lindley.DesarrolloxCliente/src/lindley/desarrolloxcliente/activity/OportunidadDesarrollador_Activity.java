@@ -42,6 +42,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
+	public final String OPORTUNIDAD_DESARROLLADOR = "0";
 	public static MyApplication application;
 	public static ArrayList<OportunidadTO> oportunidadesDesarrollador = new ArrayList<OportunidadTO>();
 	
@@ -68,6 +69,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
     @Override
 	protected void process() {
     	consultarOportunidadProxy.setCodigoCliente(cliente.getCodigo());
+    	consultarOportunidadProxy.setTipoOportunidad(OPORTUNIDAD_DESARROLLADOR);
     	consultarOportunidadProxy.execute();
 	}
 
