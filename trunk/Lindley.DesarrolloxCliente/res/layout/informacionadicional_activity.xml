@@ -59,9 +59,17 @@
         android:id="@+id/txtObs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine" >
-
+        android:inputType="textMultiLine"
+        android:maxLength="200" >		
         <requestFocus />
     </EditText>
+    
+    <Button android:layout_width="wrap_content" 
+    android:layout_gravity="right" 
+    android:id="@+id/btnGuardar" 
+    android:layout_height="wrap_content" 
+    android:text="@string/btnguardar"
+    android:focusable="false"
+    android:onClick="btnGuardar_click"></Button>
 
 </LinearLayout>
