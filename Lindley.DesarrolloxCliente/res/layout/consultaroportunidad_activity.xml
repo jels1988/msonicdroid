@@ -109,11 +109,11 @@
 			                android:clickable="true"
 			                android:text="" />
                         
-                        <TextView
-                            style="@style/TextViewLabel"
-                            android:layout_width="70dip"
-                            android:layout_height="wrap_content"
-                            android:text="Fecha Compromiso" />
+<!--                         <TextView -->
+<!--                             style="@style/TextViewLabel" -->
+<!--                             android:layout_width="70dip" -->
+<!--                             android:layout_height="wrap_content" -->
+<!--                             android:text="Fecha Compromiso" /> -->
 
                         <TextView
                             style="@style/TextViewLabel"
