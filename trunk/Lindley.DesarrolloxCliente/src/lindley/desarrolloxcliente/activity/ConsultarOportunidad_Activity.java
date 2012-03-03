@@ -1,5 +1,6 @@
 package lindley.desarrolloxcliente.activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
@@ -11,11 +12,14 @@ import lindley.desarrolloxcliente.ws.service.ConsultarOportunidadProxy;
 import roboguice.inject.InjectView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -35,6 +39,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
 	public static MyApplication application;
+	public static ArrayList<OportunidadTO> finalOportunidades = new ArrayList<OportunidadTO>();
 	
 	/** Called when the activity is first created. */
     @Override
@@ -48,6 +53,12 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
         mActionBar.setSubTitle(cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
         processAsync(); 
+    }
+    
+    public void btnSiguiente_click(View view)
+    {
+    	Intent intent = new Intent("lindley.desarrolloxcliente.oportunidaddesarrollador");
+		startActivity(intent);
     }
     
     @Override
@@ -107,7 +118,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	     *      android.view.ViewGroup)
 	     */
 	    public View getView(final int position, View convertView, ViewGroup parent) {
-	    	OportunidadTO compromiso = (OportunidadTO) getItem(position);
+	    	final OportunidadTO oportunidad = (OportunidadTO) getItem(position);
 	    	ViewHolder holder;
 
 	      if (convertView == null) {
@@ -136,15 +147,15 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	        holder = (ViewHolder) convertView.getTag();
 	      }
 	      
-	      holder.txViewPro.setText(compromiso.getDescripcionProducto());
-	      holder.txViewConcrecion.setText(compromiso.getConcrecion());
-	      holder.txViewSOVI.setText(compromiso.getSovi());
-	      holder.txViewCumPrecio.setText(compromiso.getCumplePrecio());
-	      holder.txViewSabores.setText(compromiso.getNumeroSabores());
-	      holder.txViewPCoca.setText(compromiso.getPuntosCocaCola());
+	      holder.txViewPro.setText(oportunidad.getDescripcionProducto());
+	      holder.txViewConcrecion.setText(oportunidad.getConcrecion());
+	      holder.txViewSOVI.setText(oportunidad.getSovi());
+	      holder.txViewCumPrecio.setText(oportunidad.getCumplePrecio());
+	      holder.txViewSabores.setText(oportunidad.getNumeroSabores());
+	      holder.txViewPCoca.setText(oportunidad.getPuntosCocaCola());
 	      
 	      int mYear,mMonth,mDay;
-	      String fecha = compromiso.getFechaOportunidad();
+	      String fecha = oportunidad.getFechaOportunidad();
 	      if(fecha.length() > 7)
 	      {
 	    	  mYear =  Integer.parseInt(fecha.substring(0, 4));
@@ -154,8 +165,27 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	     }
 	      else
 	    	  holder.txViewFecha.setText("0");
-	      holder.txViewPBonus.setText(compromiso.getPuntosBonus());
-	      holder.cboAccTrade .setAdapter(application.getAdapterAccionTrade(compromiso.getListaAccionesTrade()));
+	      holder.txViewPBonus.setText(oportunidad.getPuntosBonus());
+	      holder.cboAccTrade.setAdapter(application.getAdapterAccionTrade(oportunidad.getListaAccionesTrade()));
+	      
+	      holder.cboAccTrade.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+				@Override
+				public void onItemSelected(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					// TODO Auto-generated method stub
+					//if()
+					//oportunidad.setAccioneTrade(((AccionTradeTO)arg0.getSelectedItem()).getCodigo());
+					//finalOportunidades.add(oportunidad);
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+			});
 	      
 	      holder.txViewProfit.setOnClickListener(new OnClickListener() {
 				@Override
