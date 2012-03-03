@@ -325,13 +325,13 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 					      if(fecha.length() > 7)
 					      {
 					    	  CompromisoOpen_Activity.anio =  Integer.parseInt(fecha.substring(0, 4));
-					    	  CompromisoOpen_Activity.mes  =  Integer.parseInt(fecha.substring(4, 6));
+					    	  CompromisoOpen_Activity.mes  =  Integer.parseInt(fecha.substring(4, 6))-1;
 					    	  CompromisoOpen_Activity.dia  =  Integer.parseInt(fecha.substring(6));
 					    	  
 					      }else{
 					    	  final Calendar c = Calendar.getInstance();        
 					    	  CompromisoOpen_Activity.anio = c.get(Calendar.YEAR);        
-					    	  CompromisoOpen_Activity.mes = c.get(Calendar.MONTH);        
+					    	  CompromisoOpen_Activity.mes = c.get(Calendar.MONTH)-1;        
 					    	  CompromisoOpen_Activity.dia = c.get(Calendar.DAY_OF_MONTH); 
 					      }
 					
