@@ -100,7 +100,7 @@
                             style="@style/TextViewLabel"
                             android:layout_width="100dip"
                             android:layout_height="wrap_content"
-                            android:text="Acciones Trade" />
+                            android:text="Accion Trade" />
 
                         <TextView
                             style="@style/TextViewLabel"
@@ -138,7 +138,7 @@
                     android:id="@+id/android:list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="10dip"
+                    android:layout_marginBottom="50dip"
                     android:layout_marginTop="25dip"
                     android:drawSelectorOnTop="false"
                     android:focusable="false" />
