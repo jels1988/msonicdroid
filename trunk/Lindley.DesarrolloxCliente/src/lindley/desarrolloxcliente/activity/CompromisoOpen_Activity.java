@@ -58,12 +58,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	ClienteTO cliente;
 	public static MyApplication application;
 	List<CompromisoTO> compromisos;
-	private static final int DATE_DIALOG_ID = 0;
-	 int anio;    
-	 int mes;  
-	 int dia;
-	    
 	
+	    
+;
 	
 	/** Called when the activity is first created. */
     @Override 
@@ -83,17 +80,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
         processAsync();
     }
     
-    public EditText txtFecha;
-    public CompromisoTO compromisoTO;
-    @Override
-    protected Dialog onCreateDialog(int id) {  
-        switch (id) {    
-        case DATE_DIALOG_ID:     
-        	
-            return new DatePickerDialog(this,dateSetListener,anio, mes,dia );    
-        }    
-        return null;
-    }
+
     
 	private static String pad(int c) {
         if (c >= 10)
@@ -102,18 +89,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
                     return "0" + String.valueOf(c);
             }
 	
-    DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-		
-		@Override
-		public void onDateSet(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
-			// TODO Auto-generated method stub
-
-	    	  txtFecha.setText(String.valueOf(pad(dayOfMonth)) + "/"+ String.valueOf(pad(monthOfYear+1)) + "/" + String.valueOf(year));
-	    	  if(compromisoTO!=null){
-	    		  compromisoTO.setFechaCompromiso(String.valueOf(year) + String.valueOf(pad(monthOfYear+1)) + String.valueOf(pad(dayOfMonth)) );
-	    	  }
-		}
-	};
+	
+ 
     
     public void btnCerrar_click(View view)
     {
@@ -226,6 +203,25 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	}
     
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
+    	
+    	   public static EditText txtFecha;
+    	   public static CompromisoTO compromisoTO;
+    	 
+    		 
+    		 
+    	    DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+    			
+    			@Override
+    			public void onDateSet(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
+    				// TODO Auto-generated method stub
+
+    				//EfficientAdapter.txtFecha.setText(String.valueOf(pad(dayOfMonth)) + "/"+ String.valueOf(pad(monthOfYear+1)) + "/" + String.valueOf(year));
+    		    	  if(EfficientAdapter.compromisoTO!=null){
+    		    		  EfficientAdapter.compromisoTO.setFechaCompromiso(String.valueOf(year) + String.valueOf(pad(monthOfYear+1)) + String.valueOf(pad(dayOfMonth)) );
+    		    	  }
+    			}
+    		};
+    		
 	    private LayoutInflater mInflater;
 	    private Context context;
 	    private List<CompromisoTO> detalles;
@@ -318,34 +314,39 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	      holder.btnFecha = (ImageButton)convertView.findViewById(R.id.btnFecha);
 	    	
 	    	holder.btnFecha.setOnClickListener(new OnClickListener() {
-				
+	    		
 				
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					
-					
-					((CompromisoOpen_Activity)context).compromisoTO = compromiso;
-					
+				
+					   int anio;    
+			    	    int mes;  
+			    	    int dia;
+			    	   
 					   String fecha = compromiso.getFechaCompromiso();
 					      if(fecha.length() >= 7)
 					      {
-					    	  ((CompromisoOpen_Activity)context).anio =  Integer.parseInt(fecha.substring(0, 4));
-					    	  ((CompromisoOpen_Activity)context).mes  =  Integer.parseInt(fecha.substring(4, 6))-1;
-					    	  ((CompromisoOpen_Activity)context).dia  =  Integer.parseInt(fecha.substring(6));
+					    	  anio =  Integer.parseInt(fecha.substring(0, 4));
+					    	  mes  =  Integer.parseInt(fecha.substring(4, 6))-1;
+					    	 dia  =  Integer.parseInt(fecha.substring(6));
 					    	  
 					      }else{
 					    	  final Calendar c = Calendar.getInstance();        
-					    	  ((CompromisoOpen_Activity)context).anio = c.get(Calendar.YEAR);        
-					    	  ((CompromisoOpen_Activity)context).mes = c.get(Calendar.MONTH)-1;        
-					    	  ((CompromisoOpen_Activity)context).dia = c.get(Calendar.DAY_OF_MONTH); 
+					    	  anio = c.get(Calendar.YEAR);        
+					    	  mes = c.get(Calendar.MONTH)-1;        
+					    	  dia = c.get(Calendar.DAY_OF_MONTH); 
 					      }
+					      
+					      
+					      EfficientAdapter.txtFecha = holder.txViewFecha;
+					      EfficientAdapter.compromisoTO = compromiso;
+				    	   //public CompromisoTO compromisoTO;
 					
-					  
-					
-					
-					((CompromisoOpen_Activity)context).txtFecha = holder.txViewFecha;
-					((Activity)context).showDialog(0);
+					      DatePickerDialog p = new DatePickerDialog(context, dateSetListener, anio,mes, dia);
+					      p.show();
+					//((CompromisoOpen_Activity)context).txtFecha = holder.txViewFecha;
+					//((Activity)context).showDialog(0);
 				}
 			});
 	    	
