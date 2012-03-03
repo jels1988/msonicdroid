@@ -59,9 +59,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	public static MyApplication application;
 	List<CompromisoTO> compromisos;
 	private static final int DATE_DIALOG_ID = 0;
-	static int anio;    
-	static int mes;  
-	static int dia;
+	 int anio;    
+	 int mes;  
+	 int dia;
 	    
 	
 	
@@ -324,15 +324,15 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 					   String fecha = compromiso.getFechaCompromiso();
 					      if(fecha.length() > 7)
 					      {
-					    	  CompromisoOpen_Activity.anio =  Integer.parseInt(fecha.substring(0, 4));
-					    	  CompromisoOpen_Activity.mes  =  Integer.parseInt(fecha.substring(4, 6))-1;
-					    	  CompromisoOpen_Activity.dia  =  Integer.parseInt(fecha.substring(6));
+					    	  ((CompromisoOpen_Activity)context).anio =  Integer.parseInt(fecha.substring(0, 4));
+					    	  ((CompromisoOpen_Activity)context).mes  =  Integer.parseInt(fecha.substring(4, 6))-1;
+					    	  ((CompromisoOpen_Activity)context).dia  =  Integer.parseInt(fecha.substring(6));
 					    	  
 					      }else{
 					    	  final Calendar c = Calendar.getInstance();        
-					    	  CompromisoOpen_Activity.anio = c.get(Calendar.YEAR);        
-					    	  CompromisoOpen_Activity.mes = c.get(Calendar.MONTH)-1;        
-					    	  CompromisoOpen_Activity.dia = c.get(Calendar.DAY_OF_MONTH); 
+					    	  ((CompromisoOpen_Activity)context).anio = c.get(Calendar.YEAR);        
+					    	  ((CompromisoOpen_Activity)context).mes = c.get(Calendar.MONTH)-1;        
+					    	  ((CompromisoOpen_Activity)context).dia = c.get(Calendar.DAY_OF_MONTH); 
 					      }
 					
 					  
