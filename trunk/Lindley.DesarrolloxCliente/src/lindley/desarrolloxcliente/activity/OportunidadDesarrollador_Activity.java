@@ -1,5 +1,6 @@
 package lindley.desarrolloxcliente.activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
@@ -42,13 +43,13 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
 	public static MyApplication application;
-	public static int cantOportunidad = 0;
+	public static ArrayList<OportunidadTO> oportunidadesDesarrollador = new ArrayList<OportunidadTO>();
+	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	inicializarRecursos();
         super.onCreate(savedInstanceState);
-        cantOportunidad = 0;
         setContentView(R.layout.oportunidaddesarrollador_activity);        
         mActionBar.setTitle(R.string.oportunidaddesarrollador_activity_title);
         application = (MyApplication)getApplicationContext();
@@ -108,7 +109,6 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	    
 	    public EfficientAdapter(Context context, List<OportunidadTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
-	    	  cantOportunidad = 0;
 		      mInflater = LayoutInflater.from(context);
 		      this.context = context;
 		      this.detalles = valores;
@@ -204,25 +204,20 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 			});
 	      
 	      holder.cboPCoca.setOnItemSelectedListener(new OnItemSelectedListener() {
-
 				@Override
 				public void onItemSelected(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
 					// TODO Auto-generated method stub
-					System.out.println("opor: "+ConsultarOportunidad_Activity.finalOportunidades.size());
-					System.out.println("arg: "+arg2);
-					System.out.println("cant: "+cantOportunidad);
 					if(arg2 > 0)
 					{
-						if(cantOportunidad <= 2)
+						if(oportunidadesDesarrollador.size() <= 1)
 						{
-							cantOportunidad ++;
-							ConsultarOportunidad_Activity.finalOportunidades.add(oportunidad);
+							oportunidadesDesarrollador.add(oportunidad);
 						}
 						else
 						{			
 							arg0.setSelection(0);
-							MessageBox.showSimpleDialog(context, "Mensaje", "Solo puede ingresar 2 acciones trade.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+							MessageBox.showSimpleDialog(context, "Mensaje", "Solo puede ingresar como máximo 2 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
 								
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
@@ -234,8 +229,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 					}
 					else
 					{
-						cantOportunidad--;
-						ConsultarOportunidad_Activity.finalOportunidades.remove(oportunidad);
+						oportunidadesDesarrollador.remove(oportunidad);
 					}
 				}
 

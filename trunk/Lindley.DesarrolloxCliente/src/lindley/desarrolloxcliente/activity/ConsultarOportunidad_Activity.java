@@ -177,8 +177,6 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 				public void onItemSelected(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
 					// TODO Auto-generated method stub
-					System.out.println("opor: "+finalOportunidades.size());
-					System.out.println("arg: "+arg2);
 					if(arg2 > 0)
 					{
 						if(finalOportunidades.size() <= 2)
