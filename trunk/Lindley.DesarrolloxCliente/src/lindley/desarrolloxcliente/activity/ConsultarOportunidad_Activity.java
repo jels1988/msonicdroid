@@ -122,8 +122,6 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	     *      android.view.ViewGroup)
 	     */
 	    public View getView(final int position, View convertView, ViewGroup parent) {
-	    	  
-
 	    	final OportunidadTO oportunidad = (OportunidadTO) getItem(position);
 	    	ViewHolder holder;
 
@@ -152,14 +150,6 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	        // and the ImageView.
 	        holder = (ViewHolder) convertView.getTag();
 	      }
-	      //convertView.setBackgroundColor(R.color.custom_theme_color_2);
-	      /*
-	      if(position % 2 == 0){
-	    	  convertView.setBackgroundColor(R.color.custom_theme_color_1);
-	      }else{
-	    	  convertView.setBackgroundColor(R.color.custom_theme_color_2);
-	      }*/
-	  
 	      
 	      holder.txViewPro.setText(oportunidad.getDescripcionProducto());
 	      holder.txViewConcrecion.setText(oportunidad.getConcrecion());
@@ -193,13 +183,14 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 					{
 						if(finalOportunidades.size() <= 2)
 						{
+							oportunidad.setDescripcionAccioneTrade(((AccionTradeTO)arg0.getSelectedItem()).getDescripcion());
 							oportunidad.setAccioneTrade(((AccionTradeTO)arg0.getSelectedItem()).getCodigo());
 							finalOportunidades.add(oportunidad);
 						}
 						else
 						{			
 							arg0.setSelection(0);
-							MessageBox.showSimpleDialog(context, "Mensaje", "Solo puede seleccionar como m‡ximo 3 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+							MessageBox.showSimpleDialog(context, "Mensaje", "Solo puede seleccionar como máximo 3 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
 								
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
