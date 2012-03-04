@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Filter;
@@ -130,8 +129,8 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	    	holder.txViewPCoca = (TextView) convertView.findViewById(R.id.txViewPCoca);		    	
 	    	holder.txViewAccTrade = (TextView) convertView.findViewById(R.id.txViewAccTrade);	          	
 	    	holder.txViewSN = (TextView) convertView.findViewById(R.id.txViewSN);	    	
-	    	holder.txViewPBonus = (TextView) convertView.findViewById(R.id.btnProfit);
-	    	holder.btnProfit = (Button) convertView.findViewById(R.id.txViewProfit);
+	    	holder.txViewPBonus = (TextView) convertView.findViewById(R.id.txViewPBonus);
+	    	holder.btnProfit = (Button) convertView.findViewById(R.id.btnProfit);
 	        
 	        convertView.setTag(holder);
 	      } else {
