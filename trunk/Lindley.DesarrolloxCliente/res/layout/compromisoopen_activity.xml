@@ -18,39 +18,36 @@
 
         <TextView
             style="@style/TextViewLabel"
-            android:layout_width="50dip"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="Fecha: " />
-
+
         <TextView
             android:id="@+id/txtViewFecha"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="left"
             android:text="" />
-
+    
     </LinearLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true" >
 
         <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true" >
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:fillViewport="true">
 
-            <RelativeLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+            <LinearLayout
+                android:layout_height="wrap_content" 
+               android:layout_width="wrap_content"
+                android:orientation="vertical" >
 
-                <TableLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/tableLayout"
-                    android:layout_width="1500dip"
+
+                  <TableLayout
+                     android:layout_width="1500dip"
                     android:layout_height="wrap_content"
                     android:shrinkColumns="*"
                     android:stretchColumns="*" >
@@ -152,33 +149,53 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="2dip"
-                    android:layout_marginTop="20dip"
+                    android:layout_marginTop="2dip"
                     android:drawSelectorOnTop="false"
-                    android:focusable="false" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true" >
+                    android:focusable="false" />
+<!--                 <LinearLayout -->
+<!--                     android:layout_width="wrap_content" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:layout_alignParentBottom="true" > -->
                 
-                 <ImageButton
-                    android:id="@+id/imageButton1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:onClick="btnGuardar_click" />
+<!--                  <ImageButton -->
+<!--                     android:id="@+id/imageButton1" -->
+<!--                     android:layout_width="wrap_content" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:layout_alignParentBottom="true" -->
+<!--                     android:layout_alignParentLeft="true" -->
+<!--                     android:onClick="btnGuardar_click" /> -->
                  
-                  <ImageButton
-                    android:id="@+id/imageButton1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:onClick="btnCerrar_click" />
-                  </LinearLayout>
-            </RelativeLayout>
+<!--                   <ImageButton -->
+<!--                     android:id="@+id/imageButton1" -->
+<!--                     android:layout_width="wrap_content" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:layout_alignParentBottom="true" -->
+<!--                     android:layout_alignParentLeft="true" -->
+<!--                     android:onClick="btnCerrar_click" /> -->
+<!--                   </LinearLayout> -->
+           </LinearLayout>
         </HorizontalScrollView>
-    </ScrollView>
+        
+        <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="1dip">
+                    
+                     <Button android:layout_width="wrap_content" 
+			    android:layout_gravity="left" 
+			    android:layout_height="wrap_content" 
+			    android:text="@string/compromiso_open_guardar"
+			    android:focusable="false"
+
+			    android:onClick="btnGuardar_click"></Button>
+                     
+                      <Button android:layout_width="wrap_content" 
+			    android:layout_gravity="right" 
+			    android:layout_height="wrap_content" 
+			    android:text="@string/compromiso_open_cerrar"
+			    android:focusable="false"
+
+			    android:onClick="btnCerrar_click"></Button>
+            </LinearLayout>
 
 </LinearLayout>
