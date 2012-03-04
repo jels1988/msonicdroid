@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
@@ -125,7 +126,7 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 	    	holder.txViewHoraCierre = (TextView) convertView.findViewById(R.id.txViewHoraCierre);		    	
 	    	holder.txViewCerrado = (TextView) convertView.findViewById(R.id.txViewCerrado);	          	
 	    	holder.txViewestado = (TextView) convertView.findViewById(R.id.txViewestado);	    	
-	    	holder.txViewVerDetalle = (TextView) convertView.findViewById(R.id.txViewVerDetalle);	  
+	    	holder.txViewVerDetalle = (Button) convertView.findViewById(R.id.txViewVerDetalle);	  
 	        
 	        convertView.setTag(holder);
 	      } else {
@@ -181,7 +182,7 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 	    	TextView txViewHoraCierre;    	
 	    	TextView txViewCerrado;    	
 	    	TextView txViewestado;
-	    	TextView txViewVerDetalle;	    	
+	    	Button txViewVerDetalle;	    	
 	    }
 	    
 	    @Override
