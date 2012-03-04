@@ -6,7 +6,6 @@
 
      <TableLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/tableLayout"
         android:layout_width="1500dip"
         android:layout_height="wrap_content"
         android:shrinkColumns="*"
@@ -73,14 +72,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:text="" />
-            
-<!--              <TextView -->
-<!--                 android:id="@+id/txViewFecha" -->
-<!--                 android:layout_width="70dip" -->
-<!--                 android:layout_height="wrap_content" -->
-<!--                 android:clickable="true" -->
-<!--                 android:text="" /> -->
-             
+			
               <TextView
                 android:id="@+id/txViewPBonus"
                 android:layout_width="50dip"
@@ -88,13 +80,14 @@
                 android:clickable="true"
                 android:text="" />
              
-            <TextView
-                android:id="@+id/txViewProfit"
+                 <Button
+                android:id="@+id/btnProfit"
                 android:layout_width="40dip"
                 android:layout_height="wrap_content"
-                android:clickable="true"
+                android:focusable="false"
                 android:gravity="center"
                 android:text="@string/ver_profit" />
+                 
         </TableRow>
 
         <View
