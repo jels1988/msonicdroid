@@ -296,7 +296,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 					compromiso.setConcrecion("N");
 				}
 				
-				notifyDataSetChanged();
+				//notifyDataSetChanged();
 			}
 
 			@Override
