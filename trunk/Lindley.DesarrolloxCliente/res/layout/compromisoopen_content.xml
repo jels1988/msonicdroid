@@ -40,6 +40,7 @@
                 android:layout_width="50dip"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                android:maxLength="5"
                 android:text="" />
 			
 			<CheckBox
@@ -56,7 +57,7 @@
             <CheckBox
 		        android:id="@+id/chkPrecio"
 		        android:layout_width="20dip"
-		        android:layout_height="wrap_content"		        
+		        android:layout_height="wrap_content"
 		        android:text="" />
 
             <EditText
@@ -65,6 +66,7 @@
                 android:inputType="number"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                android:maxLength="5"
                 android:text="" />
             
             <CheckBox
