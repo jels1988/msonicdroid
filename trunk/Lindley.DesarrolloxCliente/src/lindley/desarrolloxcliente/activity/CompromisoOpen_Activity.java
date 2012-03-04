@@ -24,6 +24,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -269,7 +270,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	    	holder.txViewFecha = (EditText) convertView.findViewById(R.id.txViewFecha);	    	
 	    	holder.btnFecha = (ImageButton) convertView.findViewById(R.id.btnFecha);
 	    	holder.chkCumplio = (CheckBox) convertView.findViewById(R.id.chkCumplio);
-	    	holder.txViewProfit = (TextView) convertView.findViewById(R.id.txViewProfit);
+	    	holder.btnProfit = (Button) convertView.findViewById(R.id.btnProfit);
 	        
 	        convertView.setTag(holder);
 	      } else {
@@ -532,19 +533,19 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 				
 			});
 	      
-	      
+	      /*
 	      holder.txViewProfit.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					/*Intent profit = new Intent(context,MostrarVendedorActivity.class);
+					Intent profit = new Intent(context,MostrarVendedorActivity.class);
 					profit.putExtra(MostrarVendedorActivity.TIPO_SUPERVISOR, 0);
 					profit.putExtra(MostrarVendedorActivity.CODIGO_CDA, codigo_cda);
 					profit.putExtra(MostrarVendedorActivity.CODIGO_SUPERVISOR, supervisorTemporal.getCodigo());
 					profit.putExtra(MostrarVendedorActivity.NOMBRE_SUPERVISOR, supervisorTemporal.getNombre());
-					context.startActivity(profit);*/
+					context.startActivity(profit);
 				}
-			});
+			});*/
 	      
 	      return convertView;
 	    }
@@ -564,7 +565,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	    	EditText txViewFecha;
 	    	ImageButton btnFecha;
 	    	CheckBox chkCumplio;
-	    	TextView txViewProfit;
+	    	Button btnProfit;
 	    }
 	    
 	    @Override
