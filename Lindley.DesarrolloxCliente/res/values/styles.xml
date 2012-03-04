@@ -9,9 +9,9 @@
 
 #fecc00
 #C00000 rojo
-242 242 242 #F2F2F2 plomo
+242 242 242 #F2F2F2 plomo 
 -->
-<color name="custom_theme_color_amarillo">#F2F2F2</color> 
+<color name="custom_theme_color_amarillo">#C0C0C0</color> 
 <color name="custom_theme_color_amarillo_alterno">#ffdd00</color> 
 
 <color name="custom_theme_color_letra">#000000</color>

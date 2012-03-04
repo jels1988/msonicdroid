@@ -10,17 +10,16 @@ import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarOportunidadProxy;
 import roboguice.inject.InjectView;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -32,7 +31,6 @@ import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.ListActivityBase;
-import net.msonic.lib.MessageBox;
 
 public class OportunidadDesarrollador_Activity extends ListActivityBase {
 
@@ -105,13 +103,13 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
     
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
-	    private Context context;
+	    //private Context context;
 	    private List<OportunidadTO> detalles;
 	    
 	    public EfficientAdapter(Context context, List<OportunidadTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
-		      this.context = context;
+		      //this.context = context;
 		      this.detalles = valores;
 		    }
 	    
@@ -143,7 +141,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	    	holder.txtAccTrade = (EditText) convertView.findViewById(R.id.txtAccTrade);	          	
 	    	holder.txViewFecha = (TextView) convertView.findViewById(R.id.txViewFecha);	    	
 	    	holder.txViewPBonus = (TextView) convertView.findViewById(R.id.txViewPBonus);
-	    	holder.txViewProfit = (TextView) convertView.findViewById(R.id.txViewProfit);
+	    	holder.btnProfit = (Button) convertView.findViewById(R.id.btnProfit);
 	        
 	        convertView.setTag(holder);
 	      } else {
@@ -252,19 +250,20 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 				}
 				
 			});
-	      	      
+	      	     
+	      /*
 	      holder.txViewProfit.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					/*Intent profit = new Intent(context,MostrarVendedorActivity.class);
+					Intent profit = new Intent(context,MostrarVendedorActivity.class);
 					profit.putExtra(MostrarVendedorActivity.TIPO_SUPERVISOR, 0);
 					profit.putExtra(MostrarVendedorActivity.CODIGO_CDA, codigo_cda);
 					profit.putExtra(MostrarVendedorActivity.CODIGO_SUPERVISOR, supervisorTemporal.getCodigo());
 					profit.putExtra(MostrarVendedorActivity.NOMBRE_SUPERVISOR, supervisorTemporal.getNombre());
-					context.startActivity(profit);*/
+					context.startActivity(profit);
 				}
-			});
+			});*/
 	      
 	      return convertView;
 	    }
@@ -279,7 +278,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	    	EditText txtAccTrade;    	
 	    	TextView txViewFecha;
 	    	TextView txViewPBonus;
-	    	TextView txViewProfit;
+	    	Button btnProfit;
 	    }
 	    
 	    @Override

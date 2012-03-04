@@ -18,10 +18,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Spinner;
@@ -142,7 +142,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	    	holder.cboAccTrade = (Spinner) convertView.findViewById(R.id.cboAccTrade);	          	
 	    	holder.txViewFecha = (TextView) convertView.findViewById(R.id.txViewFecha);	    	
 	    	holder.txViewPBonus = (TextView) convertView.findViewById(R.id.txViewPBonus);
-	    	holder.txViewProfit = (TextView) convertView.findViewById(R.id.txViewProfit);
+	    	holder.btnProfit = (Button) convertView.findViewById(R.id.btnProfit);
 	        
 	        convertView.setTag(holder);
 	      } else {
@@ -214,18 +214,19 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 				
 			});
 	      
+	      /*
 	      holder.txViewProfit.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					/*Intent profit = new Intent(context,MostrarVendedorActivity.class);
+					Intent profit = new Intent(context,MostrarVendedorActivity.class);
 					profit.putExtra(MostrarVendedorActivity.TIPO_SUPERVISOR, 0);
 					profit.putExtra(MostrarVendedorActivity.CODIGO_CDA, codigo_cda);
 					profit.putExtra(MostrarVendedorActivity.CODIGO_SUPERVISOR, supervisorTemporal.getCodigo());
 					profit.putExtra(MostrarVendedorActivity.NOMBRE_SUPERVISOR, supervisorTemporal.getNombre());
-					context.startActivity(profit);*/
+					context.startActivity(profit);
 				}
-			});
+			});*/
 	      
 	      return convertView;
 	    }
@@ -240,7 +241,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	    	Spinner cboAccTrade;    	
 	    	TextView txViewFecha;
 	    	TextView txViewPBonus;
-	    	TextView txViewProfit;
+	    	Button btnProfit;
 	    }
 	    
 	    @Override

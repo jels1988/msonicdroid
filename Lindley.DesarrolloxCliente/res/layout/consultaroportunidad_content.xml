@@ -68,12 +68,6 @@
                 android:clickable="true"
                 android:text="" />
             
-<!--              <TextView -->
-<!--                 android:id="@+id/txViewFecha" -->
-<!--                 android:layout_width="70dip" -->
-<!--                 android:layout_height="wrap_content" -->
-<!--                 android:clickable="true" -->
-<!--                 android:text="" /> -->
              
               <TextView
                 android:id="@+id/txViewPBonus"
@@ -82,13 +76,14 @@
                 android:clickable="true"
                 android:text="" />
              
-            <TextView
-                android:id="@+id/txViewProfit"
+            <Button
+                android:id="@+id/btnProfit"
                 android:layout_width="40dip"
                 android:layout_height="wrap_content"
-                android:clickable="true"
+                android:focusable="false"
                 android:gravity="center"
                 android:text="@string/ver_profit" />
+            
         </TableRow>
 
         <View
