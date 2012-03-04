@@ -167,7 +167,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 			
 		  holder.cboPCoca.setAdapter(adapterTipo);
 	      
-
+		  /*
 		  holder.cboPCoca.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 				@Override
@@ -184,6 +184,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 				}
 			});
 		  
+		  */
 		  
 		  if(oportunidad.getPuntosCocaCola().compareTo("")==0){
 			  holder.cboPCoca.setSelection(0);
@@ -215,12 +216,15 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 					// TODO Auto-generated method stub
 					if(arg2 > 0)
 					{
+						
 						if(oportunidadesDesarrollador.size() <= 1)
 						{
+							oportunidad.setPuntosCocaCola(String.valueOf(arg2));
 							oportunidadesDesarrollador.add(oportunidad);
 						}
 						else
 						{			
+							oportunidad.setPuntosCocaCola("0");
 							arg0.setSelection(0);
 							MessageBox.showSimpleDialog(context, "Mensaje", "Solo puede ingresar como máximo 2 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
 								
@@ -234,6 +238,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 					}
 					else
 					{
+						oportunidad.setPuntosCocaCola("0");
 						oportunidadesDesarrollador.remove(oportunidad);
 					}
 				}
