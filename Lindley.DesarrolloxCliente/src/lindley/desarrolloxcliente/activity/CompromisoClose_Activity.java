@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
@@ -129,8 +130,8 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	    	holder.txViewPCoca = (TextView) convertView.findViewById(R.id.txViewPCoca);		    	
 	    	holder.txViewAccTrade = (TextView) convertView.findViewById(R.id.txViewAccTrade);	          	
 	    	holder.txViewSN = (TextView) convertView.findViewById(R.id.txViewSN);	    	
-	    	holder.txViewPBonus = (TextView) convertView.findViewById(R.id.txViewPBonus);
-	    	holder.txViewProfit = (TextView) convertView.findViewById(R.id.txViewProfit);
+	    	holder.txViewPBonus = (TextView) convertView.findViewById(R.id.btnProfit);
+	    	holder.btnProfit = (Button) convertView.findViewById(R.id.txViewProfit);
 	        
 	        convertView.setTag(holder);
 	      } else {
@@ -150,18 +151,19 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	      else holder.txViewSN.setText("1");
 	      holder.txViewPBonus.setText(compromiso.getPuntosBonus());
 	      
+	      /*
 	      holder.txViewProfit.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					/*Intent profit = new Intent(context,MostrarVendedorActivity.class);
+					Intent profit = new Intent(context,MostrarVendedorActivity.class);
 					profit.putExtra(MostrarVendedorActivity.TIPO_SUPERVISOR, 0);
 					profit.putExtra(MostrarVendedorActivity.CODIGO_CDA, codigo_cda);
 					profit.putExtra(MostrarVendedorActivity.CODIGO_SUPERVISOR, supervisorTemporal.getCodigo());
 					profit.putExtra(MostrarVendedorActivity.NOMBRE_SUPERVISOR, supervisorTemporal.getNombre());
-					context.startActivity(profit);*/
+					context.startActivity(profit);
 				}
-			});
+			});*/
 	      
 	      return convertView;
 	    }
@@ -176,7 +178,7 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	    	TextView txViewAccTrade;    	
 	    	TextView txViewSN;
 	    	TextView txViewPBonus;
-	    	TextView txViewProfit;
+	    	TextView btnProfit;
 	    }
 	    
 	    @Override
