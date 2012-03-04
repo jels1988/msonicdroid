@@ -96,6 +96,7 @@
                 android:layout_width="100dip"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                android:editable="false"
                 android:maxLength="10"
                 android:text="" />    
                 
