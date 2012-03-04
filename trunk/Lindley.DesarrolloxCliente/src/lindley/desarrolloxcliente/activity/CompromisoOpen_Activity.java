@@ -216,7 +216,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     			public void onDateSet(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
     				// TODO Auto-generated method stub
 
-    				//EfficientAdapter.txtFecha.setText(String.valueOf(pad(dayOfMonth)) + "/"+ String.valueOf(pad(monthOfYear+1)) + "/" + String.valueOf(year));
+    					EfficientAdapter.txtFecha.setText(String.valueOf(pad(dayOfMonth)) + "/"+ String.valueOf(pad(monthOfYear+1)) + "/" + String.valueOf(year));
     		    	  if(EfficientAdapter.compromisoTO!=null){
     		    		  EfficientAdapter.compromisoTO.setFechaCompromiso(String.valueOf(year) + String.valueOf(pad(monthOfYear+1)) + String.valueOf(pad(dayOfMonth)) );
     		    	  }
@@ -465,12 +465,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 					      
 					      EfficientAdapter.txtFecha = holder.txViewFecha;
 					      EfficientAdapter.compromisoTO = compromiso;
-				    	   //public CompromisoTO compromisoTO;
 					
 					      DatePickerDialog p = new DatePickerDialog(context, dateSetListener, anio,mes, dia);
 					      p.show();
-					//((CompromisoOpen_Activity)context).txtFecha = holder.txViewFecha;
-					//((Activity)context).showDialog(0);
 				}
 			});
 	    	
