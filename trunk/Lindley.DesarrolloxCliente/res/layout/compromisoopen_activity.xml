@@ -186,7 +186,7 @@
 			    android:layout_height="wrap_content" 
 			    android:text="@string/compromiso_open_guardar"
 			    android:focusable="false"
-
+				android:layout_weight="1"
 			    android:onClick="btnGuardar_click"></Button>
                      
                       <Button android:layout_width="wrap_content" 
@@ -194,7 +194,8 @@
 			    android:layout_height="wrap_content" 
 			    android:text="@string/compromiso_open_cerrar"
 			    android:focusable="false"
-
+			    
+				android:layout_weight="1"
 			    android:onClick="btnCerrar_click"></Button>
             </LinearLayout>
 
