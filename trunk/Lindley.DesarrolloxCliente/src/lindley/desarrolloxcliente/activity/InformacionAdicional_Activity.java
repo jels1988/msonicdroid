@@ -64,7 +64,10 @@ public class InformacionAdicional_Activity extends ActivityBase {
 		else if(radMSNo.isChecked())
 			estado = "N";
 		informacion.setComboMS(estado);
-		informacion.setObservacion(txtObs.getText().toString());
+		if(txtObs.getText().toString().equals(""))
+			informacion.setObservacion(" ");
+		else
+			informacion.setObservacion(txtObs.getText().toString());
 		informacion.setCodigoUsuario(usuario.getCodigoSap());
 		informacion.setCodigoCliente(cliente.getCodigo());
 		informacion.setTipoAgrupacion(AGRUPACION_INVENTARIO);
