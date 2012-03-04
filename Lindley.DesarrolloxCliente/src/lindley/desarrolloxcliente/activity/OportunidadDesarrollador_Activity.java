@@ -13,12 +13,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
@@ -125,7 +124,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	     */
 	    public View getView(final int position, View convertView, ViewGroup parent) {
 	    	final OportunidadTO oportunidad = (OportunidadTO) getItem(position);
-	    	ViewHolder holder;
+	    	final ViewHolder holder;
 
 	      if (convertView == null) {
 	        convertView = mInflater.inflate(R.layout.oportunidaddesarrollador_content, null);
@@ -164,47 +163,51 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 					.createFromResource(application.getApplicationContext(),
 							R.array.puntos_desarrollador,
 							android.R.layout.simple_spinner_item);
-			adapterTipo
-					.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+			adapterTipo.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+			
 		  holder.cboPCoca.setAdapter(adapterTipo);
 	      
-	      /*int mYear,mMonth,mDay;
-	      String fecha = compromiso.getFechaOportunidad();
-	      if(fecha.length() > 7)
-	      {
-	    	  mYear =  Integer.parseInt(fecha.substring(0, 4));
-	    	  mMonth  =  Integer.parseInt(fecha.substring(4, 6));
-	    	  mDay  =  Integer.parseInt(fecha.substring(6));
-	    	  holder.txViewFecha.setText(mDay+"/"+mMonth+"/"+mYear);
-	     }
-	      else
-	    	  holder.txViewFecha.setText("0");*/
-	      
-	      holder.txViewPBonus.setText(oportunidad.getPuntosBonus());
-	      
-	      holder.txtAccTrade.setText(oportunidad.getAccioneTrade());
-	      holder.txtAccTrade.addTextChangedListener(new TextWatcher() {
-				
+
+		  holder.cboPCoca.setOnItemSelectedListener(new OnItemSelectedListener() {
+
 				@Override
-				public void onTextChanged(CharSequence s, int start, int before, int count) {
+				public void onItemSelected(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					// TODO Auto-generated method stub
+					oportunidad.setPuntosCocaCola(String.valueOf(arg2));
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> arg0) {
 					// TODO Auto-generated method stub
 					
-				}
-				
-				@Override
-				public void beforeTextChanged(CharSequence s, int start, int count,
-						int after) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void afterTextChanged(Editable s) {
-					// TODO Auto-generated method stub
-					oportunidad.setAccioneTrade(s.toString());					
 				}
 			});
+		  
+		  
+		  if(oportunidad.getPuntosCocaCola().compareTo("")==0){
+			  holder.cboPCoca.setSelection(0);
+		  }else{
+			  holder.cboPCoca.setSelection(Integer.parseInt(oportunidad.getPuntosCocaCola()));
+		  }
+	    
+		
+	
+	      holder.txViewPBonus.setText(oportunidad.getPuntosBonus());
 	      
+	      
+	      holder.txtAccTrade.setOnFocusChangeListener(new OnFocusChangeListener() {
+				
+					@Override
+					public void onFocusChange(View v, boolean hasFocus) {
+						// TODO Auto-generated method stub
+						oportunidad.setAccioneTrade(holder.txtAccTrade.getText().toString());
+					}
+				});
+		      
+	      
+	      holder.txtAccTrade.setText(oportunidad.getAccioneTrade());
+	     
 	      holder.cboPCoca.setOnItemSelectedListener(new OnItemSelectedListener() {
 				@Override
 				public void onItemSelected(AdapterView<?> arg0, View arg1,
