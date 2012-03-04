@@ -11,20 +11,18 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true" >
+   
  
-        <HorizontalScrollView
+             <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true" >
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:fillViewport="true">
 
-            <RelativeLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+            <LinearLayout
+                android:layout_height="wrap_content" 
+               android:layout_width="wrap_content"
+                android:orientation="vertical" >
 
                 <TableLayout
                     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -99,12 +97,11 @@
                     android:id="@+id/android:list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="2dip"
-                    android:layout_marginTop="20dip"
+                    android:layout_marginBottom="1dip"
+                    android:layout_marginTop="1dip"
                     android:drawSelectorOnTop="false"
                     android:focusable="false" />
-            </RelativeLayout>
+            </LinearLayout>
         </HorizontalScrollView>
-    </ScrollView>
 
 </LinearLayout>
