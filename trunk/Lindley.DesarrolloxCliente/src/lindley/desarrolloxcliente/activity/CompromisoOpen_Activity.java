@@ -357,16 +357,80 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	      if(compromiso.getConfirmacionSovi().equals("S")) holder.chkSOVI.setChecked(true);
 	      else holder.chkSOVI.setChecked(false);
 	      
+	      
+		  holder.cboCumPrecio.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				if(arg2==0){
+					compromiso.setCumplePrecio("S");
+				}else{
+					compromiso.setCumplePrecio("N");
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		  
+	
 	      holder.cboCumPrecio.setAdapter(adapterTipo);
-		  if(compromiso.getConcrecion().equals("S"))holder.cboConcrecion.setSelection(0);
+		  if(compromiso.getCumplePrecio().equals("S"))holder.cboConcrecion.setSelection(0);
 		  else holder.cboCumPrecio.setSelection(1);
 	      
-	      if(compromiso.getConfirmacionCumplePrecio().equals("1")) holder.chkPrecio.setChecked(true);
+		  holder.chkPrecio.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					// TODO Auto-generated method stub
+					if(isChecked){
+						compromiso.setConfirmacionCumplePrecio("S");
+					}else{
+						compromiso.setConfirmacionCumplePrecio("N");
+					}
+				}
+			});
+		  
+		  
+	      if(compromiso.getConfirmacionCumplePrecio().equals("S")) holder.chkPrecio.setChecked(true);
 	      else holder.chkPrecio.setChecked(false);
 	      
+	      //===============================
+	      
+	      holder.txViewSabores.setOnFocusChangeListener(new OnFocusChangeListener() {
+				
+				@Override
+				public void onFocusChange(View v, boolean hasFocus) {
+					// TODO Auto-generated method stub
+					compromiso.setNumeroSabores(holder.txViewSabores.getText().toString());
+				}
+			});
 	      holder.txViewSabores.setText(compromiso.getNumeroSabores());
-	      if(compromiso.getConfirmacionNumeroSabores().equals("1")) holder.chkSabores.setChecked(true);
+	      
+	      //=================================
+	      
+	      holder.chkSabores.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					// TODO Auto-generated method stub
+					if(isChecked){
+						compromiso.setConfirmacionNumeroSabores("S");
+					}else{
+						compromiso.setConfirmacionNumeroSabores("N");
+					}
+				}
+			});
+	      
+	      if(compromiso.getConfirmacionNumeroSabores().equals("S")) holder.chkSabores.setChecked(true);
 	      else holder.chkSabores.setChecked(false);
+	      
+	    //=================================
 	      
 	      holder.txViewPuntos.setText(compromiso.getPuntosBonus());
 	      holder.txViewAccTrade.setText(compromiso.getDescripcionAccion());
@@ -375,8 +439,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	      holder.btnFecha = (ImageButton)convertView.findViewById(R.id.btnFecha);
 	    	
 	    	holder.btnFecha.setOnClickListener(new OnClickListener() {
-	    		
-				
+
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
@@ -429,16 +492,26 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	    	  holder.txViewFecha.setText("");
 	      }
 	      
-	      if(compromiso.getCumplio().equals("1")) holder.chkCumplio.setChecked(true);
-	      else holder.chkCumplio.setChecked(false);
+	      //============================
 	      
-	      holder.txViewFecha.setOnClickListener(new OnClickListener() {
+	      holder.chkCumplio.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				
 				@Override
-				public void onClick(View v) {
-					//showDialog(DATE_DIALOG_ID);					
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					// TODO Auto-generated method stub
+					if(isChecked){
+						compromiso.setCumplio("S");
+					}else{
+						compromiso.setCumplio("N");
+					}
 				}
 			});
 	      
+	      
+	      if(compromiso.getCumplio().equals("S")) holder.chkCumplio.setChecked(true);
+	      else holder.chkCumplio.setChecked(false);
+	      
+	    //============================
 	      
 	      holder.cboConcrecion.setOnItemSelectedListener(new OnItemSelectedListener() {
 
