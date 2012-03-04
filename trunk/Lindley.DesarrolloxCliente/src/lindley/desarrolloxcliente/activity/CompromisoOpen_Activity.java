@@ -13,19 +13,20 @@ import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCompromisoProxy;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
-import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Filter;
@@ -279,21 +280,81 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	      
 	      holder.txViewPro.setText(compromiso.getDescripcionProducto());
 	      //holder.txViewConcrecion.setText(compromiso.getConcrecion());
-	      ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter
-					.createFromResource(application.getApplicationContext(),
-							R.array.confirmacion,
-							android.R.layout.simple_spinner_item);
-			adapterTipo
-					.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+	      ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter.createFromResource(application.getApplicationContext(),R.array.confirmacion,android.R.layout.simple_spinner_item);
+			adapterTipo.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 		  holder.cboConcrecion.setAdapter(adapterTipo);
-		  if(compromiso.getConcrecion().equals("S"))holder.cboConcrecion.setSelection(0);
-		  else holder.cboConcrecion.setSelection(1);
+		  
+		  holder.cboConcrecion.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				if(arg2==0){
+					compromiso.setConcrecion("S");
+				}else{
+					compromiso.setConcrecion("N");
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		  
+		  
+		  if(compromiso.getConcrecion().equals("S"))
+			  holder.cboConcrecion.setSelection(0);
+		  else 
+			  holder.cboConcrecion.setSelection(1);
 	      
-	      if(compromiso.getConfirmacionConcrecion().equals("1")) holder.chkConcrecion.setChecked(true);
+		  
+		  holder.chkConcrecion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				if(isChecked){
+					compromiso.setConfirmacionConcrecion("S");
+				}else{
+					compromiso.setConfirmacionConcrecion("N");
+				}
+			}
+		});
+		  
+		  
+	      if(compromiso.getConfirmacionConcrecion().equals("S")) holder.chkConcrecion.setChecked(true);
 	      else holder.chkConcrecion.setChecked(false);
 	      
+	      
+	      holder.txViewSOVI.setOnFocusChangeListener(new OnFocusChangeListener() {
+			
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				// TODO Auto-generated method stub
+				compromiso.setSovi(holder.txViewSOVI.getText().toString());
+			}
+		});
+	      
 	      holder.txViewSOVI.setText(compromiso.getSovi());
-	      if(compromiso.getConfirmacionSovi().equals("1")) holder.chkSOVI.setChecked(true);
+	      
+	      
+	      holder.chkSOVI.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					// TODO Auto-generated method stub
+					if(isChecked){
+						compromiso.setConfirmacionSovi("S");
+					}else{
+						compromiso.setConfirmacionSovi("N");
+					}
+				}
+			});
+	      
+	      if(compromiso.getConfirmacionSovi().equals("S")) holder.chkSOVI.setChecked(true);
 	      else holder.chkSOVI.setChecked(false);
 	      
 	      holder.cboCumPrecio.setAdapter(adapterTipo);
