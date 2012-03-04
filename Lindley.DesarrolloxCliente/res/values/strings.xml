@@ -25,7 +25,7 @@
     <string name="consultarcliente_activity_buscar">Buscar</string>
     <string name="consultarcliente_activity_empty">Debes ingresar un dato de busqueda</string>
     <string name="ver_detalle">Ver Detalle</string>
-    <string name="ver_profit"><a href="">Ver Profit</a></string>
+    <string name="ver_profit">Ver Profit</string>
     <string name="cabeceracliente_activity_title">Evaluación</string>
     <string name="compromiso_activity_title">Compromisos</string>
     <string name="oportunidad_activity_title">Oportunidades</string>
