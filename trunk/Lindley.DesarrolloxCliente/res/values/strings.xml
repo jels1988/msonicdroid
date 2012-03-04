@@ -12,10 +12,7 @@
     <string name="login_activity_error">%s</string>
     <string name="login_activity_txtlogin_empty">Debes ingresar tu usuario</string>
     <string name="login_activity_txtpassword_empty">Debes ingresar tu password</string>
-    
-    
     <string name="oportunidad_activity_boton_siguiente">Siguiente</string>
-    
     <string name="consultarcliente_activity_title">Consultar Cliente</string>
     <string name="consultarcliente_activity_codigo">Código :</string>
     <string name="consultarcliente_activity_codigo_hint">Ingresar Código</string>
@@ -27,7 +24,7 @@
     <string name="consultarcliente_activity_razonsocial_hint">Ingresar Razón Social</string>
     <string name="consultarcliente_activity_buscar">Buscar</string>
     <string name="consultarcliente_activity_empty">Debes ingresar un dato de busqueda</string>
-    <string name="ver_detalle"><a href="">Ver Detalle</a></string>
+    <string name="ver_detalle">Ver Detalle</string>
     <string name="ver_profit"><a href="">Ver Profit</a></string>
     <string name="cabeceracliente_activity_title">Evaluación</string>
     <string name="compromiso_activity_title">Compromisos</string>
