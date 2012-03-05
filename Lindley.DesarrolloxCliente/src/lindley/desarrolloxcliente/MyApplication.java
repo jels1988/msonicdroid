@@ -27,7 +27,8 @@ public class MyApplication extends RoboApplication {
 	private ClienteTO clienteTO;
 	
 	private ArrayList<OportunidadTO> oportunidadesDesarrollador; 
-	 
+	private ArrayList<OportunidadTO> oportunidades;
+	
 	public UsuarioTO getUsuarioTO() {
 		return usuarioTO;
 	}
@@ -80,5 +81,13 @@ public class MyApplication extends RoboApplication {
 	public void setOportunidadesDesarrollador(
 			ArrayList<OportunidadTO> oportunidadesDesarrollador) {
 		this.oportunidadesDesarrollador = oportunidadesDesarrollador;
+	}
+
+	public ArrayList<OportunidadTO> getOportunidades() {
+		return oportunidades;
+	}
+
+	public void setOportunidades(ArrayList<OportunidadTO> oportunidades) {
+		this.oportunidades = oportunidades;
 	}	
 }
