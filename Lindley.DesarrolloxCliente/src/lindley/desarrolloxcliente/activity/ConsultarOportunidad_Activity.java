@@ -211,15 +211,16 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 						oportunidad.setDescripcionAccioneTrade(((AccionTradeTO)arg0.getSelectedItem()).getDescripcion());
 						oportunidad.setAccioneTrade(((AccionTradeTO)arg0.getSelectedItem()).getCodigo());
 					}else{
-						oportunidad.setDescripcionAccioneTrade("");
-						oportunidad.setAccioneTrade("");
+						oportunidad.setDescripcionAccioneTrade(" ");
+						oportunidad.setAccioneTrade("0");
 					}
 				}
 
 				@Override
 				public void onNothingSelected(AdapterView<?> arg0) {
 					// TODO Auto-generated method stub
-					
+					oportunidad.setDescripcionAccioneTrade(" ");
+					oportunidad.setAccioneTrade("0");
 				}
 				
 			});
