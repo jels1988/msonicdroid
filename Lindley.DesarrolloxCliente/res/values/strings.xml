@@ -54,4 +54,5 @@
     <string name="btnguardar">Guardar</string>
     <string name="compromiso_open_cerrar">Cerrar</string>
     <string name="compromiso_open_guardar">Guardar</string>
+    <string name="btnSiguiente">Siguiente</string>
 </resources>

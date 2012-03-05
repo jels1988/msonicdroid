@@ -153,10 +153,9 @@
                      <Button android:layout_width="wrap_content" 
 			    android:layout_gravity="right" 
 			    android:layout_height="wrap_content" 
-			    android:text="@string/oportunidad_activity_boton_siguiente"
+			    android:text="@string/btnguardar"
 			    android:focusable="false"
-
-			    android:onClick="btnSiguiente_click"></Button>
+			    android:onClick="btnGuardar_click"></Button>
             </LinearLayout>
          
 </LinearLayout>
