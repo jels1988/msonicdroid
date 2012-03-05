@@ -45,13 +45,10 @@ public class InformacionAdicional_Activity extends ActivityBase {
         mActionBar.setHomeLogo(R.drawable.header_logo);
 	}
 	
-	public void btnGuardar_click(View view)
+	public void btnSiguiente_click(View view)
 	{
-		processAsync();
-	}
-	
-	@Override
-	protected void process() {
+		//processAsync();
+		
 		informacion= new InformacionAdicionalTO();
 		String estado = "";
 		if(radSSSi.isChecked())
@@ -71,41 +68,9 @@ public class InformacionAdicional_Activity extends ActivityBase {
 		informacion.setCodigoUsuario(usuario.getCodigoSap());
 		informacion.setCodigoCliente(cliente.getCodigo());
 		informacion.setTipoAgrupacion(AGRUPACION_INVENTARIO);
+		application.setInformacionAdicional(informacion);
 		
-		guardarDesarrolloProxy.setOportunidadSistema(application.getOportunidades());
-		guardarDesarrolloProxy.setOportunidadDesarrollador(application.getOportunidadesDesarrollador());
-		guardarDesarrolloProxy.setInformacion(informacion);
-		guardarDesarrolloProxy.execute();
+		Intent intent = new Intent("lindley.desarrolloxcliente.oportunidaddesarrollador");
+		startActivity(intent);
 	}
-
-	@Override
-	protected void processOk() {
-		// TODO Auto-generated method stub
-		boolean isExito = guardarDesarrolloProxy.isExito();
-		if (isExito) {
-			int status = guardarDesarrolloProxy.getResponse().getStatus();
-			if (status == 0) {
-				String idRegistro = guardarDesarrolloProxy.getResponse().getCodCabecera();
-				
-				Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.consultarcompromisoopen");
-				compromisoOpen.putExtra(CompromisoOpen_Activity.CODIGO_REGISTRO, idRegistro);
-				startActivity(compromisoOpen);
-			}
-			else  {
-				showToast(guardarDesarrolloProxy.getResponse().getDescripcion());
-			}
-		}
-		else{
-			processError();
-		}
-		super.processOk();
-	}
-
-	@Override
-	protected void processError() {
-		// TODO Auto-generated method stub
-		super.processError();
-		showToast(error_generico_process);
-	}
-	
 }
