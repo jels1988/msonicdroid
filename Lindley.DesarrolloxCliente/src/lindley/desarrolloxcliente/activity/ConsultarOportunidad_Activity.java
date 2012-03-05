@@ -5,7 +5,6 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
-import lindley.desarrolloxcliente.activity.OportunidadDesarrollador_Activity.EfficientAdapter;
 import lindley.desarrolloxcliente.to.AccionTradeTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
@@ -136,14 +135,14 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
-	    private Context context;
+	    //private Context context;
 	    private List<OportunidadTO> detalles;
 	    private MyApplication application;
 	    
 	    public EfficientAdapter(Context context, List<OportunidadTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
-		      this.context = context;
+		      //this.context = context;
 		      this.detalles = valores;
 		      this.application = (MyApplication)context.getApplicationContext();
 		    }
