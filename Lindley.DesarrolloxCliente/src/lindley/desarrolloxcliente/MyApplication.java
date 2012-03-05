@@ -8,6 +8,7 @@ import com.google.inject.Singleton;
 import lindley.desarrolloxcliente.adapter.AccionTradeTOAdapter;
 import lindley.desarrolloxcliente.to.AccionTradeTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
+import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
@@ -24,7 +25,9 @@ public class MyApplication extends RoboApplication {
 
 	private UsuarioTO usuarioTO;
 	private ClienteTO clienteTO;
-
+	
+	private ArrayList<OportunidadTO> oportunidadesDesarrollador; 
+	 
 	public UsuarioTO getUsuarioTO() {
 		return usuarioTO;
 	}
@@ -68,5 +71,14 @@ public class MyApplication extends RoboApplication {
 				bind(GuardarDesarrolloProxy.class).in(Singleton.class);
 				bind(CerrarCompromisoProxy.class).in(Singleton.class);
 			}});
+	}
+
+	public ArrayList<OportunidadTO> getOportunidadesDesarrollador() {
+		return oportunidadesDesarrollador;
+	}
+
+	public void setOportunidadesDesarrollador(
+			ArrayList<OportunidadTO> oportunidadesDesarrollador) {
+		this.oportunidadesDesarrollador = oportunidadesDesarrollador;
 	}	
 }
