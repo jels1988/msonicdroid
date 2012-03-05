@@ -91,7 +91,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 				
 			});	
     	}else{
-    		application.setOportunidades(oportunidadesDesarrollador);
+    		application.setOportunidadesDesarrollador(oportunidadesDesarrollador);
     		Intent intent = new Intent("lindley.desarrolloxcliente.informacionadicional");
     		startActivity(intent);
     	}
