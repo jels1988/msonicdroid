@@ -58,6 +58,20 @@
 
                         <TextView
                             style="@style/TextViewLabel"
+                            android:layout_width="20dip"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Selección" />
+                        
+                        <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="40dip"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="" />
+                        
+                        <TextView
+                            style="@style/TextViewLabel"
                             android:layout_width="100dip"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -113,12 +127,7 @@
                             android:layout_height="wrap_content"
                             android:text="Puntos Bonus" />
 
-                        <TextView
-                            style="@style/TextViewLabel"
-                            android:layout_width="40dip"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="" />
+                        
                     </TableRow>
 
                     <View

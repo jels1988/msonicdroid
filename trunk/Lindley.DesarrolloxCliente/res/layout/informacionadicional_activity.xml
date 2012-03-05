@@ -19,18 +19,17 @@
          android:layout_height="wrap_content" >
 
          <RadioButton
-             android:id="@+id/radSSSi"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:checked="true"
-             android:text="SI" />
-
-         <RadioButton
              android:id="@+id/radSSNo"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
+             android:checked="true"
              android:text="NO" />
-
+         
+         <RadioButton
+             android:id="@+id/radSSSi"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"             
+             android:text="SI" />
      </RadioGroup>
     
     <TextView android:text="¿Tiene Combos MS ?" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
@@ -40,17 +39,17 @@
          android:layout_height="wrap_content" >
 
          <RadioButton
-             android:id="@+id/radMSSi"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:checked="true"
-             android:text="SI" />
-
-         <RadioButton
              android:id="@+id/radMSNo"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
+             android:checked="true"
              android:text="NO" />
+         
+         <RadioButton
+             android:id="@+id/radMSSi"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"             
+             android:text="SI" />
 
      </RadioGroup>
     <TextView android:text="Observación: " android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
@@ -68,8 +67,8 @@
     android:layout_gravity="right" 
     android:id="@+id/btnGuardar" 
     android:layout_height="wrap_content" 
-    android:text="@string/btnguardar"
+    android:text="@string/btnSiguiente"
     android:focusable="false"
-    android:onClick="btnGuardar_click"></Button>
+    android:onClick="btnSiguiente_click"></Button>
 
 </LinearLayout>
