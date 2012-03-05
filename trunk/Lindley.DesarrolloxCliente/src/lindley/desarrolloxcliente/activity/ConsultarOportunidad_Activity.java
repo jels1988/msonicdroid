@@ -73,16 +73,15 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
     	
     	for (OportunidadTO oportunidad : adap.detalles) {
-    		if(Integer.parseInt(oportunidad.getPuntosCocaCola())>0){
+    		if(oportunidad.getAccioneTrade().compareTo("")!=0){
     			oportunidades.add(oportunidad);
-    			//filasSeleccionadas++;
     		}
 		}
     	
 
     	int filasSeleccionadas=oportunidades.size();
-    	if(filasSeleccionadas>3){
-    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede seleccionar como máximo 3 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+    	if(filasSeleccionadas>2){
+    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede seleccionar como m‡ximo 3 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -91,6 +90,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 				
 			});
     	}else{
+    		application.setOportunidades(oportunidades);
     		Intent intent = new Intent("lindley.desarrolloxcliente.oportunidaddesarrollador");
     		startActivity(intent);
     	}
