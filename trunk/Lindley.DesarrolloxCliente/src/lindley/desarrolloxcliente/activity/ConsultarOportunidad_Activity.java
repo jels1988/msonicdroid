@@ -20,9 +20,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Spinner;
@@ -73,7 +75,10 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
     	
     	for (OportunidadTO oportunidad : adap.detalles) {
-    		if(oportunidad.getAccioneTrade().compareTo("")!=0){
+    		/*if(oportunidad.getAccioneTrade().compareTo("")!=0){
+    			oportunidades.add(oportunidad);
+    		}*/
+    		if(oportunidad.isSeleccionado()){
     			oportunidades.add(oportunidad);
     		}
 		}
@@ -177,7 +182,8 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	    	holder.txViewFecha = (TextView) convertView.findViewById(R.id.txViewFecha);	    	
 	    	holder.txViewPBonus = (TextView) convertView.findViewById(R.id.txViewPBonus);
 	    	holder.btnProfit = (Button) convertView.findViewById(R.id.btnProfit);
-	        
+	        holder.chkSeleccion = (CheckBox) convertView.findViewById(R.id.chkSeleccion);
+	    	
 	        convertView.setTag(holder);
 	      } else {
 	        // Get the ViewHolder back to get fast access to the TextView
@@ -216,6 +222,19 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 					
 				}
 				
+			});
+	      
+	      holder.chkSeleccion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					// TODO Auto-generated method stub
+					if(isChecked){
+						oportunidad.setSeleccionado(true);
+					}else{
+						oportunidad.setSeleccionado(false);
+					}
+				}
 			});
 	      
 	      /*

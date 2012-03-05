@@ -45,6 +45,8 @@ public class OportunidadTO {
 	@SerializedName("DAT")
 	private String descripcionAccioneTrade;
 	
+	private boolean seleccionado;
+	
 	public String getFecha() {
 		return fecha;
 	}
@@ -147,6 +149,14 @@ public class OportunidadTO {
 
 	public void setDescripcionAccioneTrade(String descripcionAccioneTrade) {
 		this.descripcionAccioneTrade = descripcionAccioneTrade;
+	}
+
+	public boolean isSeleccionado() {
+		return seleccionado;
+	}
+
+	public void setSeleccionado(boolean seleccionado) {
+		this.seleccionado = seleccionado;
 	}
 
 }
