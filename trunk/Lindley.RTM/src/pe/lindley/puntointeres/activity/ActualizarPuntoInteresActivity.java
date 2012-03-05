@@ -91,7 +91,7 @@ public class ActualizarPuntoInteresActivity extends ActivityBase {
 		    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 		        // your code here
 		    	//cboSubGiro.setAdapter(application.getAdapterParametrosPINT(ParametroBLL.TBL_SUB_GIRO, ((ParametroTO)cboGiro.getSelectedItem()).getCodigo()));
-		    	//subGiros = application.getAdapterListParametrosPINT(ParametroBLL.TBL_SUB_GIRO, ((ParametroTO)cboGiro.getSelectedItem()).getCodigo());
+		    	subGiros = application.getAdapterListParametrosPINT(ParametroBLL.TBL_SUB_GIRO, ((ParametroTO)cboGiro.getSelectedItem()).getCodigo());
 		    	if(inicioActivity)
 		    	{
 		    		cboSubGiro.setText("--Seleccionar--");
@@ -121,7 +121,7 @@ public class ActualizarPuntoInteresActivity extends ActivityBase {
 		{
 			cboGiro.setSelection(application.getAdapterParametrosPINT(ParametroBLL.TBL_GIRO).findByValue(giro_codigo));
 			//cboSubGiro.setAdapter(application.getAdapterParametrosPINT(ParametroBLL.TBL_SUB_GIRO, ((ParametroTO)cboGiro.getSelectedItem()).getCodigo()));
-			//subGiros = application.getAdapterListParametrosPINT(ParametroBLL.TBL_SUB_GIRO, ((ParametroTO)cboGiro.getSelectedItem()).getCodigo());
+			subGiros = application.getAdapterListParametrosPINT(ParametroBLL.TBL_SUB_GIRO, ((ParametroTO)cboGiro.getSelectedItem()).getCodigo());
 	    	cboSubGiro.setText("--Seleccionar--");
 	    	selectedsubGiros = new ArrayList<ParametroTO>();
 	    	if(subGiros.size() > 0)
@@ -176,7 +176,7 @@ public class ActualizarPuntoInteresActivity extends ActivityBase {
 			listSubGiro.add(subGiro);
 		}
 		
-		//actualizarPuntoInteresProxy.setListSubGiro(listSubGiro);		
+		actualizarPuntoInteresProxy.setListSubGiro(listSubGiro);		
 		//actualizarPuntoInteresProxy.setTipoGiro(((ParametroTO)cboSubGiro.getSelectedItem()).getCodigo());
 		actualizarPuntoInteresProxy.setDescripcion(txtDescripcion.getText().toString());
 		actualizarPuntoInteresProxy.setDireccion(txtDireccion.getText().toString());
@@ -232,12 +232,15 @@ public class ActualizarPuntoInteresActivity extends ActivityBase {
 	
 	protected void onChangeSelectedSubgiros() {
 		StringBuilder stringBuilder = new StringBuilder();
-
+		String valueText = "";
 		for(ParametroTO parametro : selectedsubGiros)
 			stringBuilder.append(parametro.getDescripcion() + ",");
-		String valueText = stringBuilder.toString().substring(0, stringBuilder.length() - 1);
-		System.out.println(valueText);
-		cboSubGiro.setText(valueText);
+		if(stringBuilder.toString().length()>0)
+		{
+			valueText = stringBuilder.toString().substring(0, stringBuilder.length() - 1);
+			System.out.println(valueText);
+			cboSubGiro.setText(valueText);
+		}
 	}
 	
 	
