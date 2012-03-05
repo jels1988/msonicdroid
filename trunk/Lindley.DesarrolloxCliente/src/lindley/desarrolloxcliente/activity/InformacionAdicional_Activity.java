@@ -22,7 +22,7 @@ public class InformacionAdicional_Activity extends ActivityBase {
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	ClienteTO cliente;
 	UsuarioTO usuario;
-	public static MyApplication application;
+	private  MyApplication application;
 	InformacionAdicionalTO informacion;
 	@InjectView(R.id.txtObs) EditText txtObs;
 	@InjectView(R.id.radSSSi) RadioButton radSSSi;
@@ -73,7 +73,7 @@ public class InformacionAdicional_Activity extends ActivityBase {
 		informacion.setTipoAgrupacion(AGRUPACION_INVENTARIO);
 		
 		guardarDesarrolloProxy.setOportunidadSistema(ConsultarOportunidad_Activity.finalOportunidades);
-		guardarDesarrolloProxy.setOportunidadDesarrollador(OportunidadDesarrollador_Activity.oportunidadesDesarrollador);
+		guardarDesarrolloProxy.setOportunidadDesarrollador(application.getOportunidadesDesarrollador());
 		guardarDesarrolloProxy.setInformacion(informacion);
 		guardarDesarrolloProxy.execute();
 	}

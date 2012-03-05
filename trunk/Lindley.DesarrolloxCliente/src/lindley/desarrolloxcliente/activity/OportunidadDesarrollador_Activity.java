@@ -14,7 +14,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +43,8 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
 	public final String OPORTUNIDAD_DESARROLLADOR = "0";
-	public static MyApplication application;
-	public static ArrayList<OportunidadTO> oportunidadesDesarrollador = new ArrayList<OportunidadTO>();
+	public  MyApplication application;
+	//public static ArrayList<OportunidadTO> oportunidadesDesarrollador = new ArrayList<OportunidadTO>();
 	
 	/** Called when the activity is first created. */
     @Override
@@ -63,14 +62,25 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
     
     public void btnSiguiente_click(View view)
     {
-    	int filasSeleccionadas=0;
+    	ArrayList<OportunidadTO> oportunidadesDesarrollador = application.getOportunidadesDesarrollador();
+    	
+    	if(oportunidadesDesarrollador==null){
+    		oportunidadesDesarrollador = new ArrayList<OportunidadTO>();
+    	}else{
+    		oportunidadesDesarrollador.clear();
+    	}
+    	
+    	
     	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
     	
     	for (OportunidadTO oportunidad : adap.detalles) {
     		if(Integer.parseInt(oportunidad.getPuntosCocaCola())>0){
-    			filasSeleccionadas++;
+    			oportunidadesDesarrollador.add(oportunidad);
+    			//filasSeleccionadas++;
     		}
 		}
+    	
+    	int filasSeleccionadas=oportunidadesDesarrollador.size();
     	
     	if(filasSeleccionadas>2){
     		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede ingresar como m‡ximo 2 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
@@ -130,14 +140,14 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
     
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
-	    //private Context context;
+	    private Context context;
 	    public List<OportunidadTO> detalles;
 	    //public int oportunidades=0;
 	    
 	    public EfficientAdapter(Context context, List<OportunidadTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
-		      //this.context = context;
+		      this.context = context;
 		      this.detalles = valores;
 		    }
 	    
@@ -186,7 +196,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	      //holder.txViewPCoca.setText(oportunidad.getPuntosCocaCola());
 	      
 	      ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter
-					.createFromResource(application.getApplicationContext(),
+					.createFromResource(context,
 							R.array.puntos_desarrollador,
 							android.R.layout.simple_spinner_item);
 			adapterTipo.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
