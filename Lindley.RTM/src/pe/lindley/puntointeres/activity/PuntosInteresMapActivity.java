@@ -441,9 +441,6 @@ public class PuntosInteresMapActivity extends MapActivityBase {
 									actualizarPuntoInteres.putExtra(ActualizarPuntoInteresActivity.LONGITUD, puntoInteresTO.getLongitudDec());
 									actualizarPuntoInteres.putExtra(ActualizarPuntoInteresActivity.CODIGO_PUNTO, puntoInteresTO.getCodPunto());
 									actualizarPuntoInteres.putExtra(ActualizarPuntoInteresActivity.CODIGO_GIRO, puntoInteresTO.getCodGiro());
-
-									//actualizarPuntoInteres.putExtra(ActualizarPuntoInteresActivity.TIPO_GIRO, puntoInteresTO.getTipoGiro());
-
 									
 									int count = puntoInteresTO.getListSubGiro().size();
 									String[] subGiro = new String[count];
@@ -454,7 +451,6 @@ public class PuntosInteresMapActivity extends MapActivityBase {
 									
 									actualizarPuntoInteres.putExtra(ActualizarPuntoInteresActivity.TIPO_GIRO, subGiro);
 									//actualizarPuntoInteres.putExtra(ActualizarPuntoInteresActivity.TIPO_GIRO, puntoInteresTO.getTipoGiro());
-
 									actualizarPuntoInteres.putExtra(ActualizarPuntoInteresActivity.CODIGO_UBIGEO, puntoInteresTO.getCodUbigeo());
 									actualizarPuntoInteres.putExtra(ActualizarPuntoInteresActivity.DESCRIPCION, puntoInteresTO.getDescripcion());
 									actualizarPuntoInteres.putExtra(ActualizarPuntoInteresActivity.DIRECCION, puntoInteresTO.getDireccion());
