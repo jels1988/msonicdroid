@@ -10,8 +10,11 @@ import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarOportunidadProxy;
 import roboguice.inject.InjectView;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +34,7 @@ import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.ListActivityBase;
+import net.msonic.lib.MessageBox;
 
 public class OportunidadDesarrollador_Activity extends ListActivityBase {
 
@@ -59,8 +63,28 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
     
     public void btnSiguiente_click(View view)
     {
-    	Intent intent = new Intent("lindley.desarrolloxcliente.informacionadicional");
-		startActivity(intent);
+    	int filasSeleccionadas=0;
+    	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
+    	
+    	for (OportunidadTO oportunidad : adap.detalles) {
+    		if(Integer.parseInt(oportunidad.getPuntosCocaCola())>0){
+    			filasSeleccionadas++;
+    		}
+		}
+    	
+    	if(filasSeleccionadas>2){
+    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede ingresar como m‡ximo 2 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+				}
+				
+			});	
+    	}else{
+    		Intent intent = new Intent("lindley.desarrolloxcliente.informacionadicional");
+    		startActivity(intent);
+    	}
+    	
     }
     
     @Override
@@ -80,9 +104,12 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 				List<OportunidadTO> oportunidades = consultarOportunidadProxy
 						.getResponse().getListaOportunidad();
 				adap = new EfficientAdapter(this, oportunidades);
-				if(oportunidades.size()>0)
-				txtViewFecha.setText(oportunidades.get(0).getFecha());
+				
+				if(oportunidades.size()>0){
+					txtViewFecha.setText(oportunidades.get(0).getFecha());
+				}
 				setListAdapter(adap);
+				//adap.oportunidades=0;
 			}
 			else  {
 				showToast(consultarOportunidadProxy.getResponse().getDescripcion());
@@ -104,7 +131,8 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
 	    //private Context context;
-	    private List<OportunidadTO> detalles;
+	    public List<OportunidadTO> detalles;
+	    //public int oportunidades=0;
 	    
 	    public EfficientAdapter(Context context, List<OportunidadTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
@@ -165,30 +193,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 			
 		  holder.cboPCoca.setAdapter(adapterTipo);
 	      
-		  /*
-		  holder.cboPCoca.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-				@Override
-				public void onItemSelected(AdapterView<?> arg0, View arg1,
-						int arg2, long arg3) {
-					// TODO Auto-generated method stub
-					oportunidad.setPuntosCocaCola(String.valueOf(arg2));
-				}
-
-				@Override
-				public void onNothingSelected(AdapterView<?> arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
-		  
-		  */
-		  
-		  if(oportunidad.getPuntosCocaCola().compareTo("")==0){
-			  holder.cboPCoca.setSelection(0);
-		  }else{
-			  holder.cboPCoca.setSelection(Integer.parseInt(oportunidad.getPuntosCocaCola()));
-		  }
+		 
 	    
 		
 	
@@ -208,49 +213,31 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	      holder.txtAccTrade.setText(oportunidad.getAccioneTrade());
 	     
 	      holder.cboPCoca.setOnItemSelectedListener(new OnItemSelectedListener() {
-				@Override
-				public void onItemSelected(AdapterView<?> arg0, View arg1,
-						int arg2, long arg3) {
-					oportunidad.setPuntosCocaCola(String.valueOf(arg2));
-					//notifyDataSetChanged();
-					// TODO Auto-generated method stub
-					/*if(arg2 > 0)
-					{
-						
-						if(oportunidadesDesarrollador.size() <= 1)
-						{
-							oportunidad.setPuntosCocaCola(String.valueOf(arg2));
-							oportunidadesDesarrollador.add(oportunidad);
-						}
-						else
-						{			
-							oportunidad.setPuntosCocaCola("0");
-							arg0.setSelection(0);
-							MessageBox.showSimpleDialog(context, "Mensaje", "Solo puede ingresar como máximo 2 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
-								
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									// TODO Auto-generated method stub
-								}
-								
-							});	
-						}
-					}
-					else
-					{
-						oportunidad.setPuntosCocaCola("0");
-						oportunidadesDesarrollador.remove(oportunidad);
-					}*/
-				}
 
-				@Override
-				public void onNothingSelected(AdapterView<?> arg0) {
-					// TODO Auto-generated method stub
-					
-				}
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				oportunidad.setPuntosCocaCola(String.valueOf(arg2));
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
 				
-			});
-	      	     
+			}
+		});
+	      
+
+	      
+
+	      	  
+	      if(oportunidad.getPuntosCocaCola().compareTo("")==0){
+			  holder.cboPCoca.setSelection(0);
+		  }else{
+			  holder.cboPCoca.setSelection(Integer.parseInt(oportunidad.getPuntosCocaCola()));
+		  }
+	      
 	      /*
 	      holder.txViewProfit.setOnClickListener(new OnClickListener() {
 				@Override
