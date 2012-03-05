@@ -159,6 +159,7 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 					{
 						Intent compromisoOpen = new Intent(context, CompromisoOpen_Activity.class);
 						compromisoOpen.putExtra(CompromisoOpen_Activity.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
+						compromisoOpen.putExtra(CompromisoOpen_Activity.FLAG_FECHA, CompromisoOpen_Activity.FLAG_OPEN_FECHA_CERRADA);
 						context.startActivity(compromisoOpen);
 					}
 					else

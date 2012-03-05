@@ -8,6 +8,7 @@ import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarOportunidadProxy;
+import lindley.desarrolloxcliente.ws.service.GuardarDesarrolloProxy;
 import roboguice.inject.InjectView;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,8 +38,10 @@ import net.msonic.lib.MessageBox;
 
 public class OportunidadDesarrollador_Activity extends ListActivityBase {
 
+	private static final int ACCION_GUARDAR = 1;
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarOportunidadProxy consultarOportunidadProxy;
+	@Inject GuardarDesarrolloProxy guardarDesarrolloProxy;
 	private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
@@ -60,7 +63,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
         processAsync(); 
     }
     
-    public void btnSiguiente_click(View view)
+    public void btnGuardar_click(View view)
     {
     	ArrayList<OportunidadTO> oportunidadesDesarrollador = application.getOportunidadesDesarrollador();
     	
@@ -92,12 +95,57 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 			});	
     	}else{
     		application.setOportunidadesDesarrollador(oportunidadesDesarrollador);
-    		Intent intent = new Intent("lindley.desarrolloxcliente.informacionadicional");
-    		startActivity(intent);
+    		//Intent intent = new Intent("lindley.desarrolloxcliente.oportunidaddesarrollador");    		
+    		//startActivity(intent);
+    		processAsync(ACCION_GUARDAR);
     	}
-    	
     }
     
+    @Override
+	protected void process(int accion) {
+    	if(accion == ACCION_GUARDAR)
+    	{
+    		guardarDesarrolloProxy.setOportunidadSistema(application.getOportunidades());
+    		guardarDesarrolloProxy.setOportunidadDesarrollador(application.getOportunidadesDesarrollador());
+    		guardarDesarrolloProxy.setInformacion(application.getInformacionAdicional());
+    		guardarDesarrolloProxy.execute();
+    	}
+	}
+
+	@Override
+	protected void processOk(int accion) {
+		// TODO Auto-generated method stub
+		if(accion == ACCION_GUARDAR)
+    	{
+			boolean isExito = guardarDesarrolloProxy.isExito();
+			if (isExito) {
+				int status = guardarDesarrolloProxy.getResponse().getStatus();
+				if (status == 0) {
+					String idRegistro = guardarDesarrolloProxy.getResponse().getCodCabecera();
+					
+					Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.consultarcompromisoopen");
+					compromisoOpen.putExtra(CompromisoOpen_Activity.CODIGO_REGISTRO, idRegistro);
+					compromisoOpen.putExtra(CompromisoOpen_Activity.FLAG_FECHA, CompromisoOpen_Activity.FLAG_OPEN_FECHA_ABIERTO);
+					startActivity(compromisoOpen);
+				}
+				else  {
+					showToast(guardarDesarrolloProxy.getResponse().getDescripcion());
+				}
+			}
+			else{
+				processError();
+			}
+			super.processOk();
+    	}
+	}
+
+	@Override
+	protected void processError(int accion) {
+		// TODO Auto-generated method stub
+		super.processError();
+		showToast(error_generico_process);
+	}
+	
     @Override
 	protected void process() {
     	consultarOportunidadProxy.setCodigoCliente(cliente.getCodigo());

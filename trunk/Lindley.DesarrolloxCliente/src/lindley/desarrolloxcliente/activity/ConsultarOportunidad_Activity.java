@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Spinner;
@@ -89,8 +90,8 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 				
 			});
     	}else{
-    		application.setOportunidades(oportunidades);
-    		Intent intent = new Intent("lindley.desarrolloxcliente.oportunidaddesarrollador");
+    		application.setOportunidades(oportunidades);    		
+    		Intent intent = new Intent("lindley.desarrolloxcliente.informacionadicional");
     		startActivity(intent);
     	}
     }
@@ -235,6 +236,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	    }
 
 	    static class ViewHolder {   
+	    	CheckBox chkSeleccion;
 	    	TextView txViewPro;
 	    	TextView txViewConcrecion;
 	    	TextView txViewSOVI;

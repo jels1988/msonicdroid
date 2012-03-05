@@ -15,6 +15,7 @@ import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,12 +46,17 @@ import net.msonic.lib.ListActivityBase;
 public class CompromisoOpen_Activity extends ListActivityBase {
 
 	public final static String CODIGO_REGISTRO = "codigo_reg";
+	public final static String FLAG_FECHA = "fecha_flag";
 
 	private static final int ACCION_CERRAR = 1;
 
 	private static final int ACCION_ACTUALIZAR = 2;
+	
+	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
+	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
 
 	@InjectExtra(CODIGO_REGISTRO) String codigoRegistro;
+	@InjectExtra(FLAG_FECHA) static String flagFecha;
 	@InjectView(R.id.actionBar)   ActionBar 	mActionBar;
 	@Inject ConsultarCompromisoProxy consultarCompromisoProxy;
 	@Inject CerrarCompromisoProxy cerrarCompromisoProxy;
@@ -160,7 +166,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
        			int status = cerrarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
        				showToast("Los registros se cerrarón satisfactoriamente.");
-       				finish();
+       				Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
+					startActivity(cabecera);
        			}
        			else  {
        				showToast(cerrarCompromisoProxy.getResponse().getDescripcion());
@@ -255,19 +262,20 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	        holder = new ViewHolder();
 	        	        	    		    	
 	        holder.txViewPro = (TextView) convertView.findViewById(R.id.txViewPro); 
-	        holder.cboConcrecion = (Spinner) convertView.findViewById(R.id.cboConcrecion);
+	        holder.cboConcrecion = (TextView) convertView.findViewById(R.id.cboConcrecion);
 	        holder.chkConcrecion = (CheckBox) convertView.findViewById(R.id.chkConcrecion);
 	        holder.txViewSOVI =  (EditText) convertView.findViewById(R.id.txViewSOVI);
 	        holder.chkSOVI = (CheckBox) convertView.findViewById(R.id.chkSOVI);
 	        holder.cboCumPrecio =  (Spinner) convertView.findViewById(R.id.cboCumPrecio);
 	        holder.chkPrecio = (CheckBox) convertView.findViewById(R.id.chkPrecio);
-	        holder.txViewSabores = (EditText) convertView.findViewById(R.id.txViewSabores);
+	        holder.txViewSabores = (TextView) convertView.findViewById(R.id.txViewSabores);
 	        holder.chkSabores = (CheckBox) convertView.findViewById(R.id.chkSabores);
 	        
 	        
 	    	holder.txViewPuntos = (TextView) convertView.findViewById(R.id.txViewPuntos);		    	
 	    	holder.txViewAccTrade = (TextView) convertView.findViewById(R.id.txViewAccTrade);	          	
-	    	holder.txViewFecha = (EditText) convertView.findViewById(R.id.txViewFecha);	    	
+	    	holder.txViewFecha = (TextView) convertView.findViewById(R.id.txViewFecha);
+	    	holder.txEditFecha = (EditText) convertView.findViewById(R.id.txEditFecha);	    	
 	    	holder.btnFecha = (ImageButton) convertView.findViewById(R.id.btnFecha);
 	    	holder.chkCumplio = (CheckBox) convertView.findViewById(R.id.chkCumplio);
 	    	holder.btnProfit = (Button) convertView.findViewById(R.id.btnProfit);
@@ -283,9 +291,10 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	      //holder.txViewConcrecion.setText(compromiso.getConcrecion());
 	      ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter.createFromResource(application.getApplicationContext(),R.array.confirmacion,android.R.layout.simple_spinner_item);
 			adapterTipo.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-		  holder.cboConcrecion.setAdapter(adapterTipo);
+		  //holder.cboConcrecion.setAdapter(adapterTipo);
+			holder.cboConcrecion.setText(compromiso.getConcrecion());
 		  
-		  holder.cboConcrecion.setOnItemSelectedListener(new OnItemSelectedListener() {
+		  /*holder.cboConcrecion.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
@@ -312,7 +321,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 			  holder.cboConcrecion.setSelection(0);
 		  else 
 			  holder.cboConcrecion.setSelection(1);
-	      
+	      */
 		  
 		  holder.chkConcrecion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
@@ -381,9 +390,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 			}
 		});
 		  
-	
+			  
 	      holder.cboCumPrecio.setAdapter(adapterTipo);
-		  if(compromiso.getCumplePrecio().equals("S"))holder.cboConcrecion.setSelection(0);
+		  if(compromiso.getCumplePrecio().equals("S"))holder.cboCumPrecio.setSelection(0);
 		  else holder.cboCumPrecio.setSelection(1);
 	      
 		  holder.chkPrecio.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -405,14 +414,14 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	      
 	      //===============================
 	      
-	      holder.txViewSabores.setOnFocusChangeListener(new OnFocusChangeListener() {
+	      /*holder.txViewSabores.setOnFocusChangeListener(new OnFocusChangeListener() {
 				
 				@Override
 				public void onFocusChange(View v, boolean hasFocus) {
 					// TODO Auto-generated method stub
 					compromiso.setNumeroSabores(holder.txViewSabores.getText().toString());
 				}
-			});
+			});*/
 	      holder.txViewSabores.setText(compromiso.getNumeroSabores());
 	      
 	      //=================================
@@ -438,6 +447,18 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	      holder.txViewPuntos.setText(compromiso.getPuntosBonus());
 	      holder.txViewAccTrade.setText(compromiso.getDescripcionAccion());
 	      
+	      if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
+	      {
+	    	  holder.txEditFecha.setVisibility(View.GONE);	    	  
+	    	  holder.btnFecha.setVisibility(View.GONE);
+	    	  holder.txViewFecha.setVisibility(View.VISIBLE);
+	      }
+	      else
+	      {
+	    	  holder.txEditFecha.setVisibility(View.VISIBLE);	    	  
+	    	  holder.btnFecha.setVisibility(View.VISIBLE);
+	    	  holder.txViewFecha.setVisibility(View.GONE);
+	      }
 	      
 	      holder.btnFecha = (ImageButton)convertView.findViewById(R.id.btnFecha);
 	    	
@@ -466,7 +487,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 					      }
 					      
 					      
-					      EfficientAdapter.txtFecha = holder.txViewFecha;
+					      EfficientAdapter.txtFecha = holder.txEditFecha;
 					      EfficientAdapter.compromisoTO = compromiso;
 					
 					      DatePickerDialog p = new DatePickerDialog(context, dateSetListener, anio,mes, dia);
@@ -513,7 +534,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	      
 	    //============================
 	      
-	      holder.cboConcrecion.setOnItemSelectedListener(new OnItemSelectedListener() {
+	      /*holder.cboConcrecion.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 				@Override
 				public void onItemSelected(AdapterView<?> arg0, View arg1,
@@ -531,7 +552,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 					
 				}
 				
-			});
+			});*/
 	      
 	      /*
 	      holder.txViewProfit.setOnClickListener(new OnClickListener() {
@@ -552,17 +573,18 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 
 	    static class ViewHolder {   
 	    	TextView txViewPro;
-	    	Spinner cboConcrecion;
+	    	TextView cboConcrecion;
 	    	CheckBox chkConcrecion;
 	    	EditText txViewSOVI;
 	    	CheckBox chkSOVI;
 	    	Spinner cboCumPrecio;
 	    	CheckBox chkPrecio;
-	    	EditText txViewSabores;
+	    	TextView txViewSabores;
 	    	CheckBox chkSabores;
 	    	TextView txViewPuntos;   	    	
 	    	TextView txViewAccTrade;    	
-	    	EditText txViewFecha;
+	    	EditText txEditFecha;
+	    	TextView txViewFecha;
 	    	ImageButton btnFecha;
 	    	CheckBox chkCumplio;
 	    	Button btnProfit;
