@@ -83,7 +83,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
     	int filasSeleccionadas=oportunidadesDesarrollador.size();
     	
     	if(filasSeleccionadas>2){
-    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede ingresar como m‡ximo 2 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede ingresar como máximo 2 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
