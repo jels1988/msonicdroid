@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="1dip" >
+    android:orientation="vertical" >
 
     <com.thira.examples.actionbar.widget.ActionBar
         android:id="@+id/actionBar"
@@ -96,17 +95,22 @@
         android:text="SubGiro :" >
     </TextView>
 
-    <Spinner
+    <Button
         android:id="@+id/cboSubGiro"
+        android:focusable="false"        
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-    </Spinner>
+        android:layout_height="wrap_content"
+        android:text="--Seleccionar--"
+        android:enabled="false"
+        android:onClick="btnSubGiro_onclick"
+        style="@style/ButtonCustomWhite" >
+    </Button>
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_gravity="center"
         android:layout_marginTop="20dip"
         android:focusable="false"
         android:onClick="btnActualizar_onclick"
