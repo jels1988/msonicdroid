@@ -78,7 +78,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     		/*if(oportunidad.getAccioneTrade().compareTo("")!=0){
     			oportunidades.add(oportunidad);
     		}*/
-    		if(oportunidad.isSeleccionado()){
+    		if(oportunidad.isSeleccionado()){    			    			
     			oportunidades.add(oportunidad);
     		}
 		}

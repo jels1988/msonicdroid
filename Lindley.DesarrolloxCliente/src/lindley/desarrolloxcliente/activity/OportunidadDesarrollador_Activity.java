@@ -105,8 +105,18 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	protected void process(int accion) {
     	if(accion == ACCION_GUARDAR)
     	{
-    		guardarDesarrolloProxy.setOportunidadSistema(application.getOportunidades());
-    		guardarDesarrolloProxy.setOportunidadDesarrollador(application.getOportunidadesDesarrollador());
+    		List<OportunidadTO> oportunidadSistema = application.getOportunidades();
+    		for(OportunidadTO op : oportunidadSistema)
+    		{    		
+    			op.setListaAccionesTrade(null);
+    		}
+    		List<OportunidadTO> oportunidadDesarrollador = application.getOportunidadesDesarrollador();
+    		for(OportunidadTO op : oportunidadDesarrollador)
+    		{    		
+    			op.setListaAccionesTrade(null);
+    		}		
+    		guardarDesarrolloProxy.setOportunidadSistema(oportunidadSistema);
+    		guardarDesarrolloProxy.setOportunidadDesarrollador(oportunidadDesarrollador);
     		guardarDesarrolloProxy.setInformacion(application.getInformacionAdicional());
     		guardarDesarrolloProxy.execute();
     	}
