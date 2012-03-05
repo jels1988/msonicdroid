@@ -184,7 +184,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
        			int status = actualizarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
        				showToast("Los registros se actualizaron correctamente.");
-       				finish();
+       				Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.consultarcabecera");
+					startActivity(compromisoOpen);
        			}
        			else  {
        				showToast(actualizarCompromisoProxy.getResponse().getDescripcion());
