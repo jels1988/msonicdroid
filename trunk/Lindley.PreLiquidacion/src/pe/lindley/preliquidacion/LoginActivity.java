@@ -40,7 +40,6 @@ public class LoginActivity extends ActivityBase {
         setContentView(R.layout.login_activity);
         
         mActionBar.setTitle(R.string.login_activity_sub_title);
-        //mActionBar.setSubTitle(getString(R.string.login_activity_sub_title));
         mActionBar.setHomeLogo(R.drawable.header_logo);
     	
     		
