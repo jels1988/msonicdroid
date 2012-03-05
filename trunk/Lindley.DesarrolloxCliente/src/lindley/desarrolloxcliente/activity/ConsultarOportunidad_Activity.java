@@ -81,8 +81,8 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     	
 
     	int filasSeleccionadas=oportunidades.size();
-    	if(filasSeleccionadas>2){
-    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede seleccionar como m‡ximo 3 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+    	if(filasSeleccionadas>3){
+    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede seleccionar como máximo 3 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
