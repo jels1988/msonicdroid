@@ -95,11 +95,16 @@
         android:text="SubGiro :" >
     </TextView>
 
-    <Spinner
+    <Button
         android:id="@+id/cboSubGiro"
+        android:focusable="false"        
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-    </Spinner>
+        android:layout_height="wrap_content"
+        android:text="--Seleccionar--"
+        android:enabled="false"
+        android:onClick="btnSubGiro_onclick"
+        style="@style/ButtonCustomWhite" >
+    </Button>
 
     <Button
         android:id="@+id/button1"
