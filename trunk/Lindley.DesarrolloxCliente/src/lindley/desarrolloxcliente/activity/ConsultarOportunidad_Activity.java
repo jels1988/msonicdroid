@@ -5,6 +5,7 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.activity.OportunidadDesarrollador_Activity.EfficientAdapter;
 import lindley.desarrolloxcliente.to.AccionTradeTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
@@ -41,8 +42,8 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
 	public final String OPORTUNIDAD_SISTEMA = "1";
-	public static MyApplication application;
-	public static ArrayList<OportunidadTO> finalOportunidades = new ArrayList<OportunidadTO>();
+	private MyApplication application;
+	
 	
 	/** Called when the activity is first created. */
     @Override
@@ -60,8 +61,39 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     
     public void btnSiguiente_click(View view)
     {
-    	Intent intent = new Intent("lindley.desarrolloxcliente.oportunidaddesarrollador");
-		startActivity(intent);
+    	ArrayList<OportunidadTO> oportunidades = application.getOportunidades();
+    	
+    	if(oportunidades==null){
+    		oportunidades = new ArrayList<OportunidadTO>();
+    	}else{
+    		oportunidades.clear();
+    	}
+    	
+    	
+    	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
+    	
+    	for (OportunidadTO oportunidad : adap.detalles) {
+    		if(Integer.parseInt(oportunidad.getPuntosCocaCola())>0){
+    			oportunidades.add(oportunidad);
+    			//filasSeleccionadas++;
+    		}
+		}
+    	
+
+    	int filasSeleccionadas=oportunidades.size();
+    	if(filasSeleccionadas>2){
+    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede seleccionar como m‡ximo 3 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+				}
+				
+			});
+    	}else{
+    		Intent intent = new Intent("lindley.desarrolloxcliente.oportunidaddesarrollador");
+    		startActivity(intent);
+    	}
     }
     
     @Override
@@ -106,12 +138,14 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	    private LayoutInflater mInflater;
 	    private Context context;
 	    private List<OportunidadTO> detalles;
+	    private MyApplication application;
 	    
 	    public EfficientAdapter(Context context, List<OportunidadTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
 		      this.context = context;
 		      this.detalles = valores;
+		      this.application = (MyApplication)context.getApplicationContext();
 		    }
 	    
 
@@ -158,18 +192,6 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	      holder.txViewSabores.setText(oportunidad.getNumeroSabores());
 	      holder.txViewPCoca.setText(oportunidad.getPuntosCocaCola());
 	      
-	      /*int mYear,mMonth,mDay;
-	      String fecha = oportunidad.getFechaOportunidad();
-	      if(fecha.length() > 7)
-	      {
-	    	  mYear =  Integer.parseInt(fecha.substring(0, 4));
-	    	  mMonth  =  Integer.parseInt(fecha.substring(4, 6));
-	    	  mDay  =  Integer.parseInt(fecha.substring(6));
-	    	  holder.txViewFecha.setText(mDay+"/"+mMonth+"/"+mYear);
-	     }
-	      else
-	    	  holder.txViewFecha.setText("0");*/
-	      
 	      holder.txViewPBonus.setText(oportunidad.getPuntosBonus());
 	      holder.cboAccTrade.setAdapter(application.getAdapterAccionTrade(oportunidad.getListaAccionesTrade()));
 	      
@@ -179,30 +201,12 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 				public void onItemSelected(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
 					// TODO Auto-generated method stub
-					if(arg2 > 0)
-					{
-						if(finalOportunidades.size() <= 2)
-						{
-							oportunidad.setDescripcionAccioneTrade(((AccionTradeTO)arg0.getSelectedItem()).getDescripcion());
-							oportunidad.setAccioneTrade(((AccionTradeTO)arg0.getSelectedItem()).getCodigo());
-							finalOportunidades.add(oportunidad);
-						}
-						else
-						{			
-							arg0.setSelection(0);
-							MessageBox.showSimpleDialog(context, "Mensaje", "Solo puede seleccionar como máximo 3 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
-								
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									// TODO Auto-generated method stub
-								}
-								
-							});	
-						}
-					}
-					else
-					{
-						finalOportunidades.remove(oportunidad);
+					if(arg2 > 0){
+						oportunidad.setDescripcionAccioneTrade(((AccionTradeTO)arg0.getSelectedItem()).getDescripcion());
+						oportunidad.setAccioneTrade(((AccionTradeTO)arg0.getSelectedItem()).getCodigo());
+					}else{
+						oportunidad.setDescripcionAccioneTrade("");
+						oportunidad.setAccioneTrade("");
 					}
 				}
 

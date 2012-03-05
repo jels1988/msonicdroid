@@ -72,7 +72,7 @@ public class InformacionAdicional_Activity extends ActivityBase {
 		informacion.setCodigoCliente(cliente.getCodigo());
 		informacion.setTipoAgrupacion(AGRUPACION_INVENTARIO);
 		
-		guardarDesarrolloProxy.setOportunidadSistema(ConsultarOportunidad_Activity.finalOportunidades);
+		guardarDesarrolloProxy.setOportunidadSistema(application.getOportunidades());
 		guardarDesarrolloProxy.setOportunidadDesarrollador(application.getOportunidadesDesarrollador());
 		guardarDesarrolloProxy.setInformacion(informacion);
 		guardarDesarrolloProxy.execute();
