@@ -17,10 +17,11 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 import pe.lindley.activity.R;
+import pe.lindley.activity.RTMApplication;
+import pe.lindley.lanzador.to.ClienteResumenTO;
 import pe.lindley.sacc.to.ContactoTO;
 import pe.lindley.sacc.ws.service.ObtenerContactoProxy;
 import pe.lindley.util.ListActivityBase;
-import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
 public class MostrarContactoActivity extends ListActivityBase{
@@ -29,10 +30,10 @@ public class MostrarContactoActivity extends ListActivityBase{
 	protected static final String NOMBRE_CLIENTE = "nom_cliente";
 	private EfficientAdapter adap;
 	
-	@InjectExtra(CODIGO_CLIENTE)	int	codigo_client;
-	@InjectExtra(NOMBRE_CLIENTE)	static String	nombre_client;
 	@Inject ObtenerContactoProxy obtenerContactoProxy;
 	@InjectView(R.id.actionBar)ActionBar mActionBar;
+	RTMApplication application;
+	public static ClienteResumenTO cliente;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,9 @@ public class MostrarContactoActivity extends ListActivityBase{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sacc_mostrar_contacto_activity);
 		mActionBar.setTitle(R.string.sacc_mostrar_contacto_title);
-		mActionBar.setSubTitle(nombre_client);
+		application = (RTMApplication)contextProvider.get().getApplicationContext();
+		cliente = application.getClienteTO();
+		mActionBar.setSubTitle(cliente.getNombreCliente());
 		mActionBar.setHomeLogo(R.drawable.header_logo);
 	}
 
@@ -54,7 +57,7 @@ public class MostrarContactoActivity extends ListActivityBase{
 	@Override
 	protected void process() {
 		// TODO Auto-generated method stub
-		obtenerContactoProxy.setIdCliente(codigo_client);
+		obtenerContactoProxy.setIdCliente(Integer.parseInt(cliente.getCodigoCliente()));
 		obtenerContactoProxy.execute();
 	}
 
@@ -167,7 +170,7 @@ public class MostrarContactoActivity extends ListActivityBase{
 					// TODO Auto-generated method stub
 					Intent evento = new Intent(context,MostrarEventoActivity.class);
 					evento.putExtra(MostrarEventoActivity.CODIGO_CONTACTO, contactoTemp.getIdContacto());
-					evento.putExtra(MostrarEventoActivity.NOMBRE_CLIENTE, nombre_client + "  -  NRO CONTACTO:" + contactoTemp.getIdContacto());
+					evento.putExtra(MostrarEventoActivity.NOMBRE_CLIENTE, cliente.getNombreCliente() + "  -  NRO CONTACTO:" + contactoTemp.getIdContacto());
 					context.startActivity(evento);			
 				}
 			});
