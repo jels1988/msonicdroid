@@ -339,14 +339,12 @@ public View getView(final int position, View convertView,
 	});
 
 	holder.imgSACC.setOnClickListener(new OnClickListener() {
-		ClienteResumenTO clienteTemporal = (ClienteResumenTO) getItem(position);
+		//ClienteResumenTO clienteTemporal = (ClienteResumenTO) getItem(position);
 
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			Intent fichaCliente = new Intent(context,MostrarContactoActivity.class);
-			fichaCliente.putExtra(MostrarContactoActivity.CODIGO_CLIENTE, Integer.parseInt(clienteTemporal.getCodigoCliente()));
-			fichaCliente.putExtra(MostrarContactoActivity.NOMBRE_CLIENTE, clienteTemporal.getRazonSocial());
 			context.startActivity(fichaCliente);
 		}
 	});
