@@ -29,7 +29,6 @@ import roboguice.inject.InjectView;
 
 public class ActualizarPuntoInteresActivity extends ActivityBase {
 
-
 	protected ArrayList<ParametroTO> subGiros;
 	protected ArrayList<ParametroTO> selectedsubGiros = new ArrayList<ParametroTO>();
 	
@@ -141,8 +140,7 @@ public class ActualizarPuntoInteresActivity extends ActivityBase {
 						selectedsubGiros.add(param);
 				}
 			}
-			onChangeSelectedSubgiros();
-			//cboSubGiro.setSelection(application.getAdapterParametrosPINT(ParametroBLL.TBL_SUB_GIRO,((ParametroTO)cboGiro.getSelectedItem()).getCodigo()).findByValue(tipo_giro));			
+			onChangeSelectedSubgiros();		
 		}
 	}
 	
@@ -176,8 +174,7 @@ public class ActualizarPuntoInteresActivity extends ActivityBase {
 			listSubGiro.add(subGiro);
 		}
 		
-		actualizarPuntoInteresProxy.setListSubGiro(listSubGiro);		
-		//actualizarPuntoInteresProxy.setTipoGiro(((ParametroTO)cboSubGiro.getSelectedItem()).getCodigo());
+		actualizarPuntoInteresProxy.setListSubGiro(listSubGiro);
 		actualizarPuntoInteresProxy.setDescripcion(txtDescripcion.getText().toString());
 		actualizarPuntoInteresProxy.setDireccion(txtDireccion.getText().toString());
 		actualizarPuntoInteresProxy.setLatitudDec(latitud_pto);
@@ -221,10 +218,7 @@ public class ActualizarPuntoInteresActivity extends ActivityBase {
 		super.processError();
 		showToast(error_generico_process);
 	}
-	
-	//__----------------------------------------------
-	
-	
+		
 	public void btnSubGiro_onclick(View view)
 	{		
 		showSelectSubGiroDialog();
@@ -299,58 +293,4 @@ public class ActualizarPuntoInteresActivity extends ActivityBase {
 		AlertDialog dialog = builder.create();
 		dialog.show();
 	}
-	/*
-	protected void showSelectSubGiroDialogInicio() {
-		int counts = tipo_giro.length;
-		if(counts > 0)
-		{			
-			for(int i=0; i<counts; i++)
-			{
-				for(ParametroTO param : subGiros)
-				{
-					if(tipo_giro[i].equals(param.getCodigo()))
-						selectedsubGiros.add(param);
-				}
-			}
-		}
-		boolean[] checkedColours = new boolean[subGiros.size()];
-		int count = subGiros.size();
-
-		for(int i = 0; i < count; i++)
-		{
-			checkedColours[i] = selectedsubGiros.contains((ParametroTO)subGiros.get(i));
-			System.out.println(checkedColours[i]);
-		}
-
-		DialogInterface.OnMultiChoiceClickListener subGiroDialogListener = new DialogInterface.OnMultiChoiceClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-				if(isChecked)
-					selectedsubGiros.add((ParametroTO)subGiros.get(which));
-				else
-					selectedsubGiros.remove((ParametroTO)subGiros.get(which));
-
-				onChangeSelectedSubgiros();
-			}
-		};
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Seleccionar SubGiros");
-		
-		
-		
-		CharSequence[] temp = new CharSequence[count];
-		
-		for(int i=0;i<count;i++)
-		{
-			temp[i] = ((ParametroTO) subGiros.get(i)).getDescripcion();
-		}
-		
-		builder.setMultiChoiceItems(temp, checkedColours, subGiroDialogListener);
-
-		AlertDialog dialog = builder.create();
-		dialog.show();
-	}*/
-	//__----------------------------------------------
-		
 }
