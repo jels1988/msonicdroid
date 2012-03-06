@@ -74,14 +74,14 @@
                         android:layout_height="2dip"
                         android:background="#FF909090" />
                      </TableLayout>
-<!--                 <ListView -->
-<!--                     android:id="@+id/android:list" -->
-<!--                     android:layout_width="match_parent" -->
-<!--                     android:layout_height="match_parent" -->
-<!--                     android:layout_marginBottom="10dip" -->
-<!--                     android:layout_marginTop="40dip" -->
-<!--                     android:drawSelectorOnTop="false" -->
-<!--                     android:focusable="false" /> -->
+                <ListView
+                    android:id="@+id/android:list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dip"
+                    android:layout_marginTop="40dip"
+                    android:drawSelectorOnTop="false"
+                    android:focusable="false" />
             </RelativeLayout>
         </HorizontalScrollView>
     </ScrollView>
