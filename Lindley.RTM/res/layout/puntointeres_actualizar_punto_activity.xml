@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.thira.examples.actionbar.widget.ActionBar
+    <com.thira.examples.actionbar.widget.ActionBar 
         android:id="@+id/actionBar"
         android:layout_width="fill_parent"
         android:layout_height="44dip"
@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:focusable="false"
-        android:text="Nombre :" >
+        android:text="Nombre:" >
     </TextView>
 
     <EditText
