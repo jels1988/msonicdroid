@@ -40,16 +40,12 @@ public class NuevoPuntoInteresActivity extends ActivityBase {
 	@InjectView(R.id.cboUbigeo) 		Spinner 	cboUbigeo;
 
 	@InjectView(R.id.cboSubGiro) 		Button 	cboSubGiro;
-	//@InjectView(R.id.cboSubGiro) 		Spinner 	cboSubGiro;
 	
 	@Inject GuardarPuntoInteresProxy guardarPuntoInteresProxy;
 	@InjectExtra(LATITUD)  double latitud_pto;
 	@InjectExtra(LONGITUD) double longitud_pto;
 	public String codigo_cliente = "";
-	
-	
-	//__----------------------------------------------
-	
+		
 	protected ArrayList<ParametroTO> subGiros;
 	protected ArrayList<ParametroTO> selectedsubGiros = new ArrayList<ParametroTO>();
 	
@@ -99,7 +95,6 @@ public class NuevoPuntoInteresActivity extends ActivityBase {
 		AlertDialog dialog = builder.create();
 		dialog.show();
 	}
-	//__----------------------------------------------
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -167,7 +162,6 @@ public class NuevoPuntoInteresActivity extends ActivityBase {
 		}
 		
 		guardarPuntoInteresProxy.setListSubGiro(listSubGiro);		
-		//guardarPuntoInteresProxy.setTipoGiro(((ParametroTO)cboSubGiro.getSelectedItem()).getCodigo());
 		guardarPuntoInteresProxy.setDescripcion(txtDescripcion.getText().toString());
 		guardarPuntoInteresProxy.setDireccion(txtDireccion.getText().toString());
 		guardarPuntoInteresProxy.setLatitudDec(latitud_pto);
