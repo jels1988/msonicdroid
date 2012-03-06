@@ -73,7 +73,7 @@
                     <View
                         android:layout_height="2dip"
                         android:background="#FF909090" />
-                     </TableLayout>
+                     </TableLayout> 
                 <ListView
                     android:id="@+id/android:list"
                     android:layout_width="match_parent"
