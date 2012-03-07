@@ -20,7 +20,7 @@ public class ActionBar extends RelativeLayout {
 	/**
 	 * Holds the home-icon logo
 	 */
-	private ImageView mLogoView;
+	//private ImageView mLogoView;
 	/**
 	 * Displays the {@link Activity} text
 	 */
@@ -44,7 +44,7 @@ public class ActionBar extends RelativeLayout {
 		RelativeLayout barView = (RelativeLayout) mInflater.inflate(R.layout.actionbar, null);
 		addView(barView);
 
-		mLogoView = (ImageView) barView.findViewById(R.id.actionbar_home_logo);
+		//mLogoView = (ImageView) barView.findViewById(R.id.actionbar_home_logo);
 		mProgress = (ProgressBar) barView.findViewById(R.id.actionbar_progress);
 		mTitleView = (TextView) barView.findViewById(R.id.actionbar_title);
 		mSubTitleView = (TextView) barView.findViewById(R.id.actionbar_subtitle);
@@ -58,11 +58,11 @@ public class ActionBar extends RelativeLayout {
 	}
 	
 	public void setHomeLogo(int resId, OnClickListener onClickListener) {
-		mLogoView.setImageResource(resId);
+		/*mLogoView.setImageResource(resId);
 		mLogoView.setVisibility(View.VISIBLE);
 		mLogoView.setOnClickListener(onClickListener);
 		if (onClickListener != null) {
-		}
+		}*/
 	}
 
 	public void setTitle(CharSequence title) {
