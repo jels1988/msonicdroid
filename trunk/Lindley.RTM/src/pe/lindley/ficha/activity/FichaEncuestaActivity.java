@@ -8,13 +8,12 @@ import com.thira.examples.actionbar.widget.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnFocusChangeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -373,25 +372,12 @@ public static class EfficientAdapter extends BaseAdapter{
 					holder.txtSimple.setText(subSeccionTO.getRespuesta1());
 				if(tipo.compareTo(SubSeccionTO.TIPO_NUMERICO_SIMPLE)==0)
 					holder.txtSimple.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
-				holder.txtSimple.addTextChangedListener(new TextWatcher() {
+				holder.txtSimple.setOnFocusChangeListener(new OnFocusChangeListener() {
 					
 					@Override
-					public void onTextChanged(CharSequence s, int start, int before, int count) {
+					public void onFocusChange(View v, boolean hasFocus) {
 						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void beforeTextChanged(CharSequence s, int start, int count,
-							int after) {
-						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void afterTextChanged(Editable s) {
-						// TODO Auto-generated method stub
-						subSeccionTO.setRespuesta1(s.toString());
+						subSeccionTO.setRespuesta1(holder.txtSimple.getText().toString());
 					}
 				});
 				
@@ -554,46 +540,21 @@ public static class EfficientAdapter extends BaseAdapter{
 					holder.txtRp1.setFilters(FilterArrayRp2);  
 				}
 				
-				holder.txtRp1.addTextChangedListener(new TextWatcher() {
+				holder.txtRp1.setOnFocusChangeListener(new OnFocusChangeListener() {
 					
 					@Override
-					public void onTextChanged(CharSequence s, int start, int before, int count) {
+					public void onFocusChange(View v, boolean hasFocus) {
 						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void beforeTextChanged(CharSequence s, int start, int count,
-							int after) {
-						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void afterTextChanged(Editable s) {
-						// TODO Auto-generated method stub
-						subSeccionTO.setRespuesta1(s.toString());
+						subSeccionTO.setRespuesta2(holder.txtRp1.getText().toString());
 					}
 				});
-				holder.txtRp2.addTextChangedListener(new TextWatcher() {
+				
+				holder.txtRp2.setOnFocusChangeListener(new OnFocusChangeListener() {
 					
 					@Override
-					public void onTextChanged(CharSequence s, int start, int before, int count) {
+					public void onFocusChange(View v, boolean hasFocus) {
 						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void beforeTextChanged(CharSequence s, int start, int count,
-							int after) {
-						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void afterTextChanged(Editable s) {
-						// TODO Auto-generated method stub
-						subSeccionTO.setRespuesta2(s.toString());
+						subSeccionTO.setRespuesta2(holder.txtRp2.getText().toString());
 					}
 				});
 				
@@ -624,5 +585,6 @@ public static class EfficientAdapter extends BaseAdapter{
 			TableRow trRango;
 			TableRow trLista;			
 		}
+
 	}
 }
