@@ -3,6 +3,7 @@ package pe.lindley.prospector.dao;
 import java.util.ArrayList;
 import pe.lindley.lanzador.to.UsuarioTO;
 import pe.lindley.prospector.to.ClienteTO;
+import pe.lindley.prospector.to.DocumentoTO;
 import pe.lindley.util.DBHelper;
 
 import android.content.ContentValues;
@@ -15,6 +16,36 @@ public class ClienteDAO {
 	@Inject
 	protected DBHelper dbHelper;
 
+	
+	
+	public ArrayList<DocumentoTO> listarDocumentos(int id){
+		
+		String SQL = "SELECT TD.documentoId,TD.descripcion,TD.obligatorio,nullif(CD.nombrearchivo,'') as nombrearchivo " +
+					"FROM cliente_tipo_documento TD left join cliente_documento CD on TD.DocumentoId = CD.DocumentoId " +
+					"and CD.ClienteId = ?";
+		
+		
+		String[] parametros = new String[] { String.valueOf(id) };
+		
+		Cursor cursor = dbHelper.getDataBase().rawQuery(SQL, parametros);
+		
+		ArrayList<DocumentoTO> documentos = new ArrayList<DocumentoTO>();
+		
+		DocumentoTO documentoTO;
+
+		while (cursor.moveToNext()) {
+			documentoTO = new DocumentoTO();
+			documentoTO.setDocumentoId(cursor.getInt(cursor.getColumnIndex("documentoId")));
+			documentoTO.setDescripcion(cursor.getString(cursor.getColumnIndex("descripcion")));
+			documentoTO.setObligatorio(cursor.getInt(cursor.getColumnIndex("obligatorio")));
+			documentoTO.setNombreArchivo(cursor.getString(cursor.getColumnIndex("nombrearchivo")));
+			documentos.add(documentoTO);
+		}
+		
+		cursor.close();
+		
+		return documentos;
+	}
 	
 
 	public void deleteRechazadas() {

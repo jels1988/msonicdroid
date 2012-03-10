@@ -773,6 +773,8 @@ public class RegistrarClienteActivity extends ActivityBase {
 
 	public final void terminar(DialogInterface dialog, int which) {
 		// TODO Auto-generated method stub
+		Intent intent = new Intent(this, RegistrarDocumentosActivity.class);
+		startActivity(intent);
 		finish();
 		
 	}
