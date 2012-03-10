@@ -2,6 +2,7 @@ package pe.lindley.prospector.to;
 
 public class DocumentoTO {
 
+	private long id;
 	
 	private int documentoId;
 	private String descripcion;
@@ -31,6 +32,12 @@ public class DocumentoTO {
 	}
 	public void setNombreArchivo(String nombreArchivo) {
 		this.nombreArchivo = nombreArchivo;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 }

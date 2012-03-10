@@ -19,6 +19,24 @@ public class ClienteBLL {
 	@Inject protected ClienteDAO clienteDAO;
 
 	
+	public long guardarDocumento(int clienteId,DocumentoTO documentoTO){
+		long id = documentoTO.getId();
+		
+		try {
+			dbHelper.openDataBase();
+			if(id==0){
+				id = clienteDAO.insertDocumento(clienteId, documentoTO);
+				documentoTO.setId(id);
+			}else{
+				clienteDAO.updateDocumento(clienteId, documentoTO);
+			}
+		} catch (Exception e) {
+			Log.e(TAG_LOG, "guardarDocumento", e);
+		} finally {
+			dbHelper.close();
+		}
+		return id;
+	}
 	public ArrayList<DocumentoTO> listarDocumentos(int id){
 		ArrayList<DocumentoTO> documentos = new ArrayList<DocumentoTO>();
 		
@@ -26,7 +44,7 @@ public class ClienteBLL {
 			dbHelper.openDataBase();
 			documentos = clienteDAO.listarDocumentos(id);
 		} catch (Exception e) {
-			Log.e(TAG_LOG, "listById", e);
+			Log.e(TAG_LOG, "listarDocumentos", e);
 		} finally {
 			dbHelper.close();
 		}
