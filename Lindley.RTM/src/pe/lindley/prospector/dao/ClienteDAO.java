@@ -16,11 +16,33 @@ public class ClienteDAO {
 	@Inject
 	protected DBHelper dbHelper;
 
+
+	public long updateDocumento(int clienteId,DocumentoTO documentoTO){
+		
+		ContentValues parametros = new ContentValues();
+		parametros.put("nombreArchivo", documentoTO.getNombreArchivo());
+		
+		String[] valores = new String[] { String.valueOf(documentoTO.getId()) };
+
+		dbHelper.getDataBase().update("cliente_documento", parametros, "clienteDocumentoId = ?",valores);
+		
+		return documentoTO.getId();
+	}
 	
+	public long insertDocumento(int clienteId,DocumentoTO documentoTO){
+		
+		ContentValues parametros = new ContentValues();
+		parametros.put("clienteId", clienteId);
+		parametros.put("documentoId", documentoTO.getDocumentoId());
+		parametros.put("nombreArchivo", documentoTO.getNombreArchivo());
+		
+		long id =dbHelper.getDataBase().insertOrThrow("cliente_documento", null, parametros);
+		return id;
+	}
 	
 	public ArrayList<DocumentoTO> listarDocumentos(int id){
 		
-		String SQL = "SELECT TD.documentoId,TD.descripcion,TD.obligatorio,nullif(CD.nombrearchivo,'') as nombrearchivo " +
+		String SQL = "SELECT ifnull(CD.clienteDocumentoId,0) as id,TD.documentoId,TD.descripcion,TD.obligatorio,ifnull(CD.nombrearchivo,'') as nombrearchivo " +
 					"FROM cliente_tipo_documento TD left join cliente_documento CD on TD.DocumentoId = CD.DocumentoId " +
 					"and CD.ClienteId = ?";
 		
@@ -35,6 +57,7 @@ public class ClienteDAO {
 
 		while (cursor.moveToNext()) {
 			documentoTO = new DocumentoTO();
+			documentoTO.setId(cursor.getInt(cursor.getColumnIndex("id")));
 			documentoTO.setDocumentoId(cursor.getInt(cursor.getColumnIndex("documentoId")));
 			documentoTO.setDescripcion(cursor.getString(cursor.getColumnIndex("descripcion")));
 			documentoTO.setObligatorio(cursor.getInt(cursor.getColumnIndex("obligatorio")));
