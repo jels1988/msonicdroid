@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import pe.lindley.lanzador.to.UsuarioTO;
 import pe.lindley.prospector.dao.ClienteDAO;
 import pe.lindley.prospector.to.ClienteTO;
+import pe.lindley.prospector.to.DocumentoTO;
 import pe.lindley.util.DBHelper;
 
 import android.util.Log;
@@ -17,6 +18,23 @@ public class ClienteBLL {
 	@Inject protected DBHelper dbHelper;
 	@Inject protected ClienteDAO clienteDAO;
 
+	
+	public ArrayList<DocumentoTO> listarDocumentos(int id){
+		ArrayList<DocumentoTO> documentos = new ArrayList<DocumentoTO>();
+		
+		try {
+			dbHelper.openDataBase();
+			documentos = clienteDAO.listarDocumentos(id);
+		} catch (Exception e) {
+			Log.e(TAG_LOG, "listById", e);
+		} finally {
+			dbHelper.close();
+		}
+		
+		return documentos;
+		
+	}
+	
 	public ClienteTO listById(int id) {
 		ClienteTO clienteTOBD=null;
 		try {

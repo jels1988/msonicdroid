@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="pe.lindley.activity"
-      android:versionCode="26"
-      android:versionName="4.2">
+      android:versionCode="27"
+      android:versionName="4.3">
     <uses-sdk android:minSdkVersion="8" />
 
 	<uses-permission android:name="android.permission.INTERNET" />
@@ -33,10 +33,7 @@
     	
 
         <activity android:name="LoginActivity" android:label="@string/app_name" android:configChanges="keyboardHidden|orientation" android:noHistory="true">
-             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-          </intent-filter>
+            
              
         </activity>
 		
@@ -49,10 +46,18 @@
 		<!-- PROSPECTOR -->
 		<activity android:name="pe.lindley.prospector.activity.ConsultarClienteActivity" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="pe.lindley.prospector.activity.RegistrarClienteActivity" android:configChanges="keyboardHidden|orientation"/>
+		    	
 		<activity android:name="pe.lindley.prospector.activity.SeleccionarDireccionActivity" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="pe.lindley.prospector.activity.EnviarClientesActivity" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="pe.lindley.prospector.activity.DescargarRechazadosActivity" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="pe.lindley.prospector.activity.ConsultarClienteLocalActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="pe.lindley.prospector.activity.RegistrarDocumentosActivity" android:configChanges="keyboardHidden|orientation">
+		     <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+		</activity>
+		
 		
 		<!-- PROFIT -->
 		<activity android:name="pe.lindley.profit.activity.ProfitHistoryActivity" android:configChanges="keyboardHidden|orientation"/>
