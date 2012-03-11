@@ -3,11 +3,11 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="lib" path="C:/Users/Joseph/M-SONIC/ANDROID_IDE/Proyectos/Lindley/RTM/Android/Librerias/google-gson-1.7.1/gson-1.7.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Joseph/M-SONIC/ANDROID_IDE/Proyectos/Lindley/RTM/Android/Librerias/robotguice/guice-2.0-no_aop.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Joseph/M-SONIC/ANDROID_IDE/Proyectos/Lindley/RTM/Android/Librerias/robotguice/roboguice-1.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Joseph/M-SONIC/ANDROID_IDE/Proyectos/Lindley/RTM/Android/Librerias/chartdroid/achartengine-0.7.0.jar"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" path="C:/Users/Joseph/M-SONIC/ANDROID_IDE/Proyectos/Lindley/RTM/Android/Librerias/TeeChart/TeeChart.Android.jar"/>
+	<classpathentry kind="lib" path="/Users/Manuel/Proyectos/Lindley/RTM/Android/Librerias/robotguice/guice-2.0-no_aop.jar"/>
+	<classpathentry kind="lib" path="/Users/Manuel/Proyectos/Lindley/RTM/Android/Librerias/robotguice/roboguice-1.1.2.jar"/>
+	<classpathentry kind="lib" path="/Users/Manuel/Proyectos/Lindley/RTM/Android/Librerias/TeeChart/TeeChart.Android.jar"/>
+	<classpathentry kind="lib" path="/Users/Manuel/Proyectos/Lindley/RTM/Android/Librerias/chartdroid/achartengine-0.7.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Manuel/Proyectos/Lindley/RTM/Android/Librerias/google-gson-1.7.1/gson-1.7.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
