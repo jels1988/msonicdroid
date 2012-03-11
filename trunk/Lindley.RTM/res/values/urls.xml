@@ -3,7 +3,10 @@
     
 	<!-- java.cdaandino.com -->
 	<string name="urlwsLogin">http://java.cdaandino.com/rtm/LanzadorApp/SeguridadService.svc</string>
+	<!--string name="urlwsCliente">http://java.cdaandino.com/rtm/prospector2/SincronizarCliente.svc</string-->
 	<string name="urlwsCliente">http://java.cdaandino.com/rtm/prospector2/SincronizarCliente.svc</string>
+	
+	
 	<string name="urlwsProfit">http://java.cdaandino.com/rtm/Profit/ProfitHistoryService.svc</string>
 	<string name="urlwsEquipoFrio">http://java.cdaandino.com/rtm/EquiposFrio/EquiposFrioService.svc</string>
 	<string name="urlwsOMParametros">http://java.cdaandino.com/rtm/ordenest/SincronizarService.svc</string>

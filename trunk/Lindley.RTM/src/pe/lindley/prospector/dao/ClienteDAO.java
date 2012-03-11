@@ -42,6 +42,33 @@ public class ClienteDAO {
 		return id;
 	}
 	
+	
+	public ArrayList<DocumentoTO> listarDocumentos(){
+		String SQL = "SELECT CD.clienteId,ifnull(CD.clienteDocumentoId,0) as id,TD.documentoId,TD.descripcion,TD.obligatorio,ifnull(CD.nombrearchivo,'') as nombrearchivo " +
+				"FROM cliente_tipo_documento TD inner join cliente_documento CD on TD.DocumentoId = CD.DocumentoId";
+	
+	
+	Cursor cursor = dbHelper.getDataBase().rawQuery(SQL, null);
+	
+	ArrayList<DocumentoTO> documentos = new ArrayList<DocumentoTO>();
+	
+	DocumentoTO documentoTO;
+
+	while (cursor.moveToNext()) {
+		documentoTO = new DocumentoTO();
+		documentoTO.setId(cursor.getInt(cursor.getColumnIndex("id")));
+		documentoTO.setClienteId(cursor.getInt(cursor.getColumnIndex("clienteId")));
+		documentoTO.setDocumentoId(cursor.getInt(cursor.getColumnIndex("documentoId")));
+		documentoTO.setDescripcion(cursor.getString(cursor.getColumnIndex("descripcion")));
+		documentoTO.setObligatorio(cursor.getInt(cursor.getColumnIndex("obligatorio")));
+		documentoTO.setNombreArchivo(cursor.getString(cursor.getColumnIndex("nombrearchivo")));
+		documentos.add(documentoTO);
+	}
+	
+	cursor.close();
+	
+	return documentos;
+	}
 	public ArrayList<DocumentoTO> listarDocumentos(int id){
 		
 		String SQL = "SELECT ifnull(CD.clienteDocumentoId,0) as id,TD.documentoId,TD.descripcion,TD.obligatorio,ifnull(CD.nombrearchivo,'') as nombrearchivo " +
