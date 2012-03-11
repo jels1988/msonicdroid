@@ -774,6 +774,8 @@ public class RegistrarClienteActivity extends ActivityBase {
 	public final void terminar(DialogInterface dialog, int which) {
 		// TODO Auto-generated method stub
 		Intent intent = new Intent(this, RegistrarDocumentosActivity.class);
+		intent.putExtra(RegistrarDocumentosActivity.CLIENTE_ID, clienteTO.getClienteId());
+		intent.putExtra(RegistrarDocumentosActivity.CLIENTE_NOMBRES, clienteTO.getRazonSocial());
 		startActivity(intent);
 		finish();
 		

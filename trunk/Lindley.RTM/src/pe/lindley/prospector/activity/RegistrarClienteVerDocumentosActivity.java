@@ -4,18 +4,15 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.Rect;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.widget.ImageView;
 import pe.lindley.activity.R;
-import pe.lindley.prospector.activity.RegistrarDocumentosActivity.EfficientAdapter;
 import pe.lindley.util.ActivityBase;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
@@ -40,31 +37,6 @@ public class RegistrarClienteVerDocumentosActivity extends ActivityBase {
 	
 	 @Override
 	protected void process() {
-		 /*
-		 File path = new File( Environment.getExternalStorageDirectory(), this.getPackageName() );
-		 String file = new File(path, fileName).getAbsolutePath();
-		 BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
-	        bmpFactoryOptions.inJustDecodeBounds = true;
-	        Bitmap bitmap = BitmapFactory.decodeFile(file, bmpFactoryOptions);
-	         
-	        int heightRatio = (int)Math.ceil(bmpFactoryOptions.outHeight/(float)300);
-	        int widthRatio = (int)Math.ceil(bmpFactoryOptions.outWidth/(float)300);
-	         
-	        if (heightRatio > 1 || widthRatio > 1)
-	        {
-	         if (heightRatio > widthRatio)
-	         {
-	          bmpFactoryOptions.inSampleSize = heightRatio;
-	         } else {
-	          bmpFactoryOptions.inSampleSize = widthRatio; 
-	         }
-	        }
-	         
-	        bmpFactoryOptions.inJustDecodeBounds = false;
-	        bitmap = BitmapFactory.decodeFile(file, bmpFactoryOptions);
-	    */
-		 
-		 
 		 
 		// TODO Auto-generated method stub
 		 File path = new File( Environment.getExternalStorageDirectory(), this.getPackageName() );

@@ -73,6 +73,7 @@
     <string name="registrar_cliente_activity_datos_basicos_segmento_error">Debes seleccionar un segmento</string>
     <string name="registrar_cliente_activity_datos_basicos_ubicacion_error">Debes seleccionar una ubicación</string>
     <string name="registrar_cliente_activity_datos_basicos_gps_error">Debes seleccionar la ubicación el cliente</string>
+    <string name="registrar_documentos_activity_title">Adjuntar Documentos</string>
     <!-- SELECCIONAR UBICACION CLIENTE -->
     <string name="seleccionar_direccion_activity_aceptar">Aceptar</string>
     <string name="seleccionar_direccion_activity_cancelar">Cancelar</string>
