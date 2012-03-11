@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.inject.Inject;
+import com.thira.examples.actionbar.widget.ActionBar;
 
 
 import android.app.Activity;
@@ -15,7 +16,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,12 +28,21 @@ import pe.lindley.activity.R;
 import pe.lindley.prospector.negocio.ClienteBLL;
 import pe.lindley.prospector.to.DocumentoTO;
 import pe.lindley.util.ListActivityBase;
+import roboguice.inject.InjectExtra;
+import roboguice.inject.InjectView;
 
 public class RegistrarDocumentosActivity extends ListActivityBase {
+	
+	public static final String CLIENTE_ID="CLIENTE_ID";
+	public static final String CLIENTE_NOMBRES="CLIENTE";
 	
 	private static final int TAKE_PHOTO_CODE = 1;
 	private  String file_name="";
 	private DocumentoTO documentoTO;
+	
+	@InjectView(R.id.actionBar)ActionBar mActionBar;
+	@InjectExtra(CLIENTE_ID) int clienteId;
+	@InjectExtra(CLIENTE_NOMBRES) String clienteNombre;
 	
 	@Inject ClienteBLL clienteBLL;
 	private ArrayList<DocumentoTO> documentos;
@@ -45,6 +54,9 @@ public class RegistrarDocumentosActivity extends ListActivityBase {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.registro_cliente_documentos_activity);
 		
+		mActionBar.setTitle(R.string.registrar_documentos_activity_title);
+		mActionBar.setSubTitle(clienteNombre);
+		mActionBar.setHomeLogo(R.drawable.header_logo);
 		processAsync();
 	}
 	
@@ -143,7 +155,17 @@ public class RegistrarDocumentosActivity extends ListActivityBase {
 						((RegistrarDocumentosActivity)context).takePhoto((DocumentoTO)viewHolder.imgObligatorio.getTag());
 					}
 				});
+				
+				
+				DocumentoTO documento = (DocumentoTO)viewHolder.imgObligatorio.getTag();
+				if(documento.getNombreArchivo().compareTo("")==0){
+					viewHolder.btnVerFoto.setVisibility(View.INVISIBLE);
+				}else{
+					viewHolder.btnVerFoto.setVisibility(View.VISIBLE);
+				}
+				
 				viewHolder.btnVerFoto = (Button)view.findViewById(R.id.btnVerFoto);
+				
 				viewHolder.btnVerFoto.setOnClickListener(new OnClickListener() {
 					
 					@Override
@@ -153,6 +175,7 @@ public class RegistrarDocumentosActivity extends ListActivityBase {
 						Intent intent = new Intent(context,RegistrarClienteVerDocumentosActivity.class);
 						intent.putExtra(RegistrarClienteVerDocumentosActivity.FILE_NAME, documento.getNombreArchivo());
 						context.startActivity(intent);
+						
 					}
 				});
 				

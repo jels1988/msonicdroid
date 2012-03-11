@@ -435,7 +435,9 @@ public class ClienteDAO {
 
 		parametros.put("TieneCambios", clienteTO.getTieneCambios());
 
-		dbHelper.getDataBase().insertOrThrow("Cliente", null, parametros);
+		long id = dbHelper.getDataBase().insertOrThrow("Cliente", null, parametros);
+		
+		clienteTO.setClienteId((int)id);
 
 	}
 
