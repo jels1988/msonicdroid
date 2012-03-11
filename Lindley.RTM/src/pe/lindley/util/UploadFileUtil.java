@@ -10,6 +10,7 @@ import android.util.Base64;
 public class UploadFileUtil {
 
 	
+	
     public static String FileToByteArray(String fileName){
         File file = new File(fileName);
 
