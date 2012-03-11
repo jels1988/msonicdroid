@@ -7,6 +7,7 @@ public class DocumentoTO {
 	public static final int SERVER=1;
 	
 	private long id;
+	private int clienteId;
 	private int documentoId;
 	private String descripcion;
 	private int obligatorio;
@@ -48,6 +49,12 @@ public class DocumentoTO {
 	}
 	public void setEsLocal(int esLocal) {
 		this.esLocal = esLocal;
+	}
+	public int getClienteId() {
+		return clienteId;
+	}
+	public void setClienteId(int clienteId) {
+		this.clienteId = clienteId;
 	}
 	
 }

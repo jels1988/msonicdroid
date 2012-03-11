@@ -37,6 +37,23 @@ public class ClienteBLL {
 		}
 		return id;
 	}
+	
+	public ArrayList<DocumentoTO> listarDocumentos(){
+		ArrayList<DocumentoTO> documentos = new ArrayList<DocumentoTO>();
+		
+		try {
+			dbHelper.openDataBase();
+			documentos = clienteDAO.listarDocumentos();
+		} catch (Exception e) {
+			Log.e(TAG_LOG, "listarDocumentosTodos", e);
+		} finally {
+			dbHelper.close();
+		}
+		
+		return documentos;
+		
+	}
+	
 	public ArrayList<DocumentoTO> listarDocumentos(int id){
 		ArrayList<DocumentoTO> documentos = new ArrayList<DocumentoTO>();
 		
