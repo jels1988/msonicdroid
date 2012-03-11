@@ -21,6 +21,7 @@ public class ClienteDAO {
 		
 		ContentValues parametros = new ContentValues();
 		parametros.put("nombreArchivo", documentoTO.getNombreArchivo());
+		parametros.put("islocal", documentoTO.getEsLocal());
 		
 		String[] valores = new String[] { String.valueOf(documentoTO.getId()) };
 
@@ -35,6 +36,7 @@ public class ClienteDAO {
 		parametros.put("clienteId", clienteId);
 		parametros.put("documentoId", documentoTO.getDocumentoId());
 		parametros.put("nombreArchivo", documentoTO.getNombreArchivo());
+		parametros.put("islocal", documentoTO.getEsLocal());
 		
 		long id =dbHelper.getDataBase().insertOrThrow("cliente_documento", null, parametros);
 		return id;
