@@ -2,12 +2,16 @@ package pe.lindley.prospector.to;
 
 public class DocumentoTO {
 
-	private long id;
 	
+	public static final int LOCAL=0;
+	public static final int SERVER=1;
+	
+	private long id;
 	private int documentoId;
 	private String descripcion;
 	private int obligatorio;
 	private String nombreArchivo;
+	private int esLocal;
 	
 	public int getDocumentoId() {
 		return documentoId;
@@ -38,6 +42,12 @@ public class DocumentoTO {
 	}
 	public void setId(long id) {
 		this.id = id;
+	}
+	public int getEsLocal() {
+		return esLocal;
+	}
+	public void setEsLocal(int esLocal) {
+		this.esLocal = esLocal;
 	}
 	
 }
