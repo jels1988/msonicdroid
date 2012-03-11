@@ -58,6 +58,7 @@ public class RegistrarDocumentosActivity extends ListActivityBase {
 		mActionBar.setSubTitle(clienteNombre);
 		mActionBar.setHomeLogo(R.drawable.header_logo);
 		processAsync();
+		
 	}
 	
 	public void takePhoto(DocumentoTO documentoTO){
@@ -71,7 +72,7 @@ public class RegistrarDocumentosActivity extends ListActivityBase {
 	
 	public void savePhoto(){
 		documentoTO.setNombreArchivo(file_name);
-		clienteBLL.guardarDocumento(1, documentoTO);
+		clienteBLL.guardarDocumento(clienteId, documentoTO);
 	}
 
 	
@@ -94,6 +95,8 @@ public class RegistrarDocumentosActivity extends ListActivityBase {
 	    		switch(requestCode){
 	    			case TAKE_PHOTO_CODE:{
 	    				savePhoto();
+	    				//adap.notifyDataSetChanged();
+	    				processAsync();
 	    				break;
 	    			}
 	    		}
@@ -105,7 +108,7 @@ public class RegistrarDocumentosActivity extends ListActivityBase {
 	@Override
 	protected void process() {
 		// TODO Auto-generated method stub
-		documentos = clienteBLL.listarDocumentos(1);
+		documentos = clienteBLL.listarDocumentos(clienteId);
 	}
 
 	@Override
@@ -156,15 +159,15 @@ public class RegistrarDocumentosActivity extends ListActivityBase {
 					}
 				});
 				
-				
-				DocumentoTO documento = (DocumentoTO)viewHolder.imgObligatorio.getTag();
+				viewHolder.btnVerFoto = (Button)view.findViewById(R.id.btnVerFoto);
+				DocumentoTO documento = documentos.get(position);
 				if(documento.getNombreArchivo().compareTo("")==0){
 					viewHolder.btnVerFoto.setVisibility(View.INVISIBLE);
 				}else{
 					viewHolder.btnVerFoto.setVisibility(View.VISIBLE);
 				}
 				
-				viewHolder.btnVerFoto = (Button)view.findViewById(R.id.btnVerFoto);
+				
 				
 				viewHolder.btnVerFoto.setOnClickListener(new OnClickListener() {
 					
