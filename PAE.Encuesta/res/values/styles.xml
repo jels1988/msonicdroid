@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<resources>
+
+
+<!--  
+
+#fecc00
+#C00000 rojo
+242 242 242 #F2F2F2 plomo 
+-->
+<color name="custom_theme_color_amarillo">#C0C0C0</color> 
+<color name="custom_theme_color_amarillo_alterno">#ffdd00</color> 
+
+<color name="custom_theme_color_letra">#000000</color>
+<color name="custom_theme_color_blanco">#FFFFFF</color>
+<color name="custom_theme_color_negro">#000000</color>
+<color name="custom_theme_color_rojo">#FF0000</color> 
+<color name="custom_theme_color_verde">#dbc7db</color>
+
+<color name="transparent">#00000000</color>
+
+
+<color name="custom_theme_color_0">#C00000</color> 
+<color name="custom_theme_color_1">#00FF00</color> 
+<color name="custom_theme_color_2">#00FF00</color> 
+  
+ 
+ <style name="WindowTitleCustom" parent="android:TextAppearance.WindowTitle">
+ 	   <item name="android:textColor">@color/custom_theme_color_blanco</item>
+       <item name="android:textStyle">bold</item>
+</style>
+
+ <style name="WindowTitleBackgroundCustom">
+      <item name="android:background">@color/custom_theme_color_letra</item>
+</style>
+
+<style name="EditTextCustom" parent="@android:style/Widget.EditText">
+ 	<item name="android:focusable">true</item>
+ 	<item name="android:focusableInTouchMode">true</item>
+ 	<item name="android:clickable">true</item>
+	<item name="android:textColor">@color/custom_theme_color_letra</item>
+</style>
+
+<style name="TextViewCustom" parent="@android:style/Widget.TextView">
+ 	<item name="android:focusable">false</item>
+ 	<item name="android:focusableInTouchMode">false</item>
+ 	<item name="android:clickable">true</item>
+	<item name="android:textColor">@color/custom_theme_color_letra</item>
+	<!--item name="android:textStyle">bold</item-->
+</style>
+
+<style name="TextViewLabel" parent="@android:style/Widget.TextView">
+ 	<item name="android:focusable">false</item>
+ 	<item name="android:focusableInTouchMode">false</item>
+ 	<item name="android:clickable">true</item>
+	<item name="android:textColor">@color/custom_theme_color_blanco</item>
+	<item name="android:background">@color/custom_theme_color_0</item>
+	<item name="android:textStyle">bold</item>
+</style>
+
+<style name="TextViewLabel2" parent="@android:style/Widget.TextView">
+ 	<item name="android:focusable">false</item>
+ 	<item name="android:focusableInTouchMode">false</item>
+ 	<item name="android:clickable">true</item>
+	<item name="android:textColor">@color/custom_theme_color_letra</item>
+	<item name="android:background">@color/transparent</item>
+	<item name="android:textStyle">bold</item>
+	<item name="android:textSize">15dip</item>
+</style>
+
+<style name="TextViewHead" parent="@android:style/Widget.TextView">
+ 	<item name="android:focusable">false</item>
+ 	<item name="android:focusableInTouchMode">false</item>
+ 	<item name="android:clickable">true</item>
+	<item name="android:textColor">@color/custom_theme_color_blanco</item>
+	<item name="android:background">@color/custom_theme_color_0</item>
+	<item name="android:textStyle">bold</item>
+</style>
+
+<style name="TextViewCustomHight" parent="@android:style/Widget.TextView">
+ 	<item name="android:focusable">false</item>
+ 	<item name="android:focusableInTouchMode">false</item>
+ 	<item name="android:clickable">true</item>
+	<item name="android:textColor">@color/custom_theme_color_rojo</item>
+	<item name="android:textStyle">bold</item>
+</style>
+
+<style name="ButtonCustom" parent="@android:style/Widget.Button">
+ 	<item name="android:focusable">true</item>
+ 	<item name="android:focusableInTouchMode">true</item>
+ 	<item name="android:clickable">true</item>
+	<item name="android:textColor">@color/custom_theme_color_blanco</item>
+	<item name="android:background">@drawable/button_selector</item>
+</style>
+
+<style name="TextViewCustom2" parent="@android:style/Widget.TextView">
+ 	<item name="android:focusable">true</item>
+ 	<item name="android:focusableInTouchMode">true</item>
+ 	<item name="android:clickable">true</item>
+	<item name="android:textColor">@color/custom_theme_color_blanco</item>
+	<item name="android:textStyle">bold</item>
+</style>
+
+<style name="MyListView" parent="@android:style/Widget.ListView">
+ 	<!-- item name="android:listSelector">@drawable/list_selector</item-->
+ 	<item name="android:cacheColorHint">#00000000</item>
+ 	 
+</style>
+
+
+
+<style name="CustomTheme">
+
+    <item name="android:windowBackground">@drawable/fondo_selector</item>
+	<item name="android:colorForegroundInverse">@color/custom_theme_color_amarillo</item>
+	<item name="android:colorBackground">@color/custom_theme_color_letra</item>
+	<item name="android:disabledAlpha">0.5</item>
+	<item name="android:backgroundDimAmount">0.6</item>
+
+  <!-- Window attributes -->
+     <item name="android:windowFrame">@null</item>
+     <item name="android:windowNoTitle">true</item>
+     <item name="android:windowFullscreen">false</item>
+     <item name="android:windowIsFloating">false</item>
+	 <item name="android:windowTitleSize">35dip</item>
+	 <item name="android:windowTitleStyle">@style/WindowTitleCustom</item>
+	 <item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackgroundCustom</item>
+     <item name="android:windowSoftInputMode">stateUnspecified|adjustUnspecified</item>
+     
+ 	<item name="android:editTextStyle">@style/EditTextCustom</item>
+ 	<item name="android:textViewStyle">@style/TextViewCustom</item>
+ 	<item name="android:buttonStyle">@style/ButtonCustom</item>
+ 	<item name="android:listViewStyle">@style/MyListView</item>
+</style>
+
+    
+    
+
+
+    
+<style name="CustomThemeWhite">
+
+    <item name="android:windowBackground">@color/custom_theme_color_blanco</item>
+	<item name="android:colorForegroundInverse">@color/custom_theme_color_blanco</item>
+	<item name="android:colorBackground">@color/custom_theme_color_letra</item>
+	<item name="android:disabledAlpha">0.5</item>
+	<item name="android:backgroundDimAmount">0.6</item>
+
+  <!-- Window attributes -->
+     <item name="android:windowFrame">@null</item>
+     <item name="android:windowNoTitle">true</item>
+     <item name="android:windowFullscreen">false</item>
+     <item name="android:windowIsFloating">false</item>
+	 <item name="android:windowTitleSize">35dip</item>
+	 <item name="android:windowTitleStyle">@style/WindowTitleCustom</item>
+	 <item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackgroundCustom</item>
+     <item name="android:windowSoftInputMode">stateUnspecified|adjustUnspecified</item>
+     
+ 	<item name="android:editTextStyle">@style/EditTextCustom</item>
+ 	<item name="android:textViewStyle">@style/TextViewCustom</item>
+ 	<item name="android:buttonStyle">@style/ButtonCustom</item>
+ 	
+</style>
+
+</resources>

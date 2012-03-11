@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+      <com.thira.examples.actionbar.widget.ActionBar
+		android:id="@+id/actionBar" 
+		android:layout_width="fill_parent"
+		android:layout_height="44dip" 
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true" />
+      
+      
+      <TableLayout android:stretchColumns="1" 
+  	android:id="@+id/tableLayout1" 
+  	android:layout_height="wrap_content" 
+  	android:layout_width="fill_parent"
+  	android:layout_alignParentTop="true">
+        <TableRow>
+            <TextView android:text="@string/producto_buscar_activity_descripcion" android:layout_height="wrap_content" android:layout_weight="0"  android:layout_width="fill_parent"></TextView>
+            <EditText android:id="@+id/txtCodigo" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/producto_buscar_activity_descripcion_hint" android:text="" android:layout_weight="1" android:inputType="number" android:maxLength="11" android:singleLine="true"/>
+            <ImageButton android:src="@drawable/btn_buscar" android:onClick="btnBuscar_onclick"/>
+        </TableRow>
+
+    </TableLayout>
+      
+	
+       	<ListView android:id="@+id/android:list" 
+    	android:layout_width="fill_parent"
+		android:layout_height="fill_parent" 
+		android:layout_marginTop="2dip"
+		 android:drawSelectorOnTop="false"
+		android:layout_marginBottom="2dip" />
+       	
+</LinearLayout>

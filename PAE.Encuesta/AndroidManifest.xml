@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="pe.pae.encuesta"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="7" />
+
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+         android:name="pe.pae.encuesta.activity.MiApp"
+         android:theme="@style/CustomTheme">
+         
+        <activity
+            android:name=".activity.Login_Activity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                               <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".activity.Tienda_Seleccionar_Activity">
+            
+            <intent-filter>
+                
+                <action android:name="pae.activity.seleccionarTienda"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".activity.Producto_Buscar_Activity">
+            
+            <intent-filter>
+                
+                <action android:name="pae.activity.buscarProducto"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".activity.Cuestionario_Activity">
+            
+            <intent-filter>
+                
+                <action android:name="pae.activity.custionarioProducto"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                 
+                
+            </intent-filter>
+        </activity>
+        
+        
+        
+    </application>
+
+</manifest>

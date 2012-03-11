@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+
+        <com.thira.examples.actionbar.widget.ActionBar
+		android:id="@+id/actionBar" 
+		android:layout_width="fill_parent"
+		android:layout_height="44dip" 
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true" />
+        
+         <LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content" 
+  android:orientation="vertical" android:padding="1dp">
+  
+	<TextView android:text="@string/tienda_seleccionar_activity_cliente" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0"  android:layout_width="fill_parent"></TextView>
+	<Spinner android:id="@+id/cboCliente" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+	
+      
+	<TextView android:text="@string/tienda_seleccionar_activity_tienda" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+	<Spinner android:id="@+id/cboTienda" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+               
+   <Button android:layout_width="wrap_content" 
+    android:layout_gravity="right" 
+    android:id="@+id/btnIngresar" 
+    android:layout_height="wrap_content" 
+    android:text="@string/tienda_seleccionar_activity_ingresar"
+    android:focusable="false"
+    android:onClick="btnIngresar_onclick"></Button>
+    
+</LinearLayout>
+
+</LinearLayout>

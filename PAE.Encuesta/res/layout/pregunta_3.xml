@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+    
+    
+    <TextView
+    android:id="@+id/lblPregunta"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="0"
+    android:text="¿Desea Preguntar?"
+    style="@style/TextViewLabel2">
+</TextView>
+
+    <ListView android:id="@+id/lstOpciones" android:layout_width="fill_parent" android:layout_height="wrap_content"></ListView>
+
+    
+
+     
+
+ <TextView
+    android:id="@+id/textView1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="0"
+    android:text="Comentarios:"
+    style="@style/TextViewLabel2"/>
+ 
+  <EditText
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="0"/>
+
+</LinearLayout>

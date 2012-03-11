@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <!--desa: 0GnqeXeroFjywL9df0WrJpTEwFsWxFYCGqDe6xw-->
+    <!--prod: 0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A-->
+    <string name="app_name">Encuesta</string>
+    <string name="apikey">0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A</string>
+    <string name="login_activity_title">Login</string>
+    <string name="login_activity_ingresar">Ingresar</string>
+    <string name="login_activity_usuario">Usuario :</string>
+    <string name="login_activity_password">Password :</string>
+    <string name="login_activity_usuario_hint">Ingresar Usuario</string>
+    <string name="login_activity_password_hint">Ingresar Password</string>
+    <string name="tienda_seleccionar_activity_title">Seleccionar Tienda</string>
+    <string name="tienda_seleccionar_activity_cliente">Cliente :</string>
+    <string name="tienda_seleccionar_activity_tienda">Tienda :</string>
+    <string name="tienda_seleccionar_activity_ingresar">Ingresar</string>
+    <string name="producto_buscar_activity_title">Buscar Producto</string>
+    <string name="producto_buscar_activity_descripcion">Descripción</string>
+    <string name="producto_buscar_activity_descripcion_hint">Ingresar Descripción</string>
+    
+    
+    <string name="cuestionario_activity_title">Cuestionario</string>
+    
+</resources>
