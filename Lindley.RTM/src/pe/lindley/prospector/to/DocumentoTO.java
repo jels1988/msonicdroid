@@ -13,6 +13,7 @@ public class DocumentoTO {
 	private int obligatorio;
 	private String nombreArchivo;
 	private int esLocal;
+	private int servidorId;
 	
 	public int getDocumentoId() {
 		return documentoId;
@@ -55,6 +56,12 @@ public class DocumentoTO {
 	}
 	public void setClienteId(int clienteId) {
 		this.clienteId = clienteId;
+	}
+	public int getServidorId() {
+		return servidorId;
+	}
+	public void setServidorId(int servidorId) {
+		this.servidorId = servidorId;
 	}
 	
 }

@@ -6,22 +6,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class UploadFileRequest {
 
-	@SerializedName("Cli")
-	private int clienteId;
-	
 	
 	@SerializedName("Fil")
 	private FileTO file;
 
-
-	public int getClienteId() {
-		return clienteId;
-	}
-
-
-	public void setClienteId(int clienteId) {
-		this.clienteId = clienteId;
-	}
 
 
 	public FileTO getFile() {

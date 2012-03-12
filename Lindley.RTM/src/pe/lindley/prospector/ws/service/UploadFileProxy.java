@@ -13,7 +13,24 @@ public class UploadFileProxy extends ProxyBase<UploadFileResponse> {
 	@InjectResource(pe.lindley.activity.R.string.urlwsCliente)protected String urlWS;
 	
 	
-	private int clienteId;
+	private int servidorId;
+	private int tipoDocumentoId;
+	public int getServidorId() {
+		return servidorId;
+	}
+
+	public void setServidorId(int servidorId) {
+		this.servidorId = servidorId;
+	}
+
+	public int getTipoDocumentoId() {
+		return tipoDocumentoId;
+	}
+
+	public void setTipoDocumentoId(int tipoDocumentoId) {
+		this.tipoDocumentoId = tipoDocumentoId;
+	}
+
 	private String fileName;
 	private String filePath;
 	
@@ -28,9 +45,11 @@ public class UploadFileProxy extends ProxyBase<UploadFileResponse> {
 		// TODO Auto-generated method stub
 		
 		UploadFileRequest uploadFileRequest = new UploadFileRequest();
-		uploadFileRequest.setClienteId(clienteId);
+		
 		
 		FileTO file = new FileTO();
+		file.setServidorId(servidorId);
+		file.setTipoDocumento(tipoDocumentoId);
 		file.setFile(UploadFileUtil.FileToByteArray(getFilePath()));
 		file.setNombre(fileName);
 		
@@ -55,13 +74,7 @@ public class UploadFileProxy extends ProxyBase<UploadFileResponse> {
 		this.fileName = fileName;
 	}
 
-	public int getClienteId() {
-		return clienteId;
-	}
-
-	public void setClienteId(int clienteId) {
-		this.clienteId = clienteId;
-	}
+	
 
 	public String getFilePath() {
 		return filePath;
