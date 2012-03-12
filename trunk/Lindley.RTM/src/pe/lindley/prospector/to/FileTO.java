@@ -6,12 +6,20 @@ public class FileTO {
 	
 	
 	@SerializedName("nom")
-    public String nombre;
+	private String nombre;
 
 
 	@SerializedName("fil")
-    public String file;
+    private String file;
 
+	@SerializedName("serId")
+	private int servidorId;
+	
+	
+
+	@SerializedName("Tdoc")
+	private int tipoDocumento;
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -35,6 +43,31 @@ public class FileTO {
 	}
 
 
+
+	public int getServidorId() {
+		return servidorId;
+	}
+
+
+
+	public void setServidorId(int servidorId) {
+		this.servidorId = servidorId;
+	}
+
+
+
+	public int getTipoDocumento() {
+		return tipoDocumento;
+	}
+
+
+
+	public void setTipoDocumento(int tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
+	}
+
+
+	
 
 	
 }

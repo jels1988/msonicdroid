@@ -1,7 +1,9 @@
 package pe.lindley.prospector.dao;
 
 import java.util.ArrayList;
+
 import pe.lindley.lanzador.to.UsuarioTO;
+import pe.lindley.prospector.to.ClienteIdTO;
 import pe.lindley.prospector.to.ClienteTO;
 import pe.lindley.prospector.to.DocumentoTO;
 import pe.lindley.util.DBHelper;
@@ -16,7 +18,18 @@ public class ClienteDAO {
 	@Inject
 	protected DBHelper dbHelper;
 
+	
+	public void updateIdGenerados(ClienteIdTO clienteIdTO){
+		
+		String[] valores = new String[] { String.valueOf(clienteIdTO.getClienteId()) };
 
+		ContentValues parametros = new ContentValues();
+		parametros.put("servidorId", clienteIdTO.getIdBd());
+		
+		dbHelper.getDataBase().update("cliente_documento", parametros, "clienteId = ?",
+				valores);
+		
+	}
 	public long updateDocumento(int clienteId,DocumentoTO documentoTO){
 		
 		ContentValues parametros = new ContentValues();
@@ -44,7 +57,7 @@ public class ClienteDAO {
 	
 	
 	public ArrayList<DocumentoTO> listarDocumentos(){
-		String SQL = "SELECT CD.clienteId,ifnull(CD.clienteDocumentoId,0) as id,TD.documentoId,TD.descripcion,TD.obligatorio,ifnull(CD.nombrearchivo,'') as nombrearchivo " +
+		String SQL = "SELECT CD.clienteId,CD.servidorId,ifnull(CD.clienteDocumentoId,0) as id,TD.documentoId,TD.descripcion,TD.obligatorio,ifnull(CD.nombrearchivo,'') as nombrearchivo " +
 				"FROM cliente_tipo_documento TD inner join cliente_documento CD on TD.DocumentoId = CD.DocumentoId";
 	
 	
@@ -62,6 +75,8 @@ public class ClienteDAO {
 		documentoTO.setDescripcion(cursor.getString(cursor.getColumnIndex("descripcion")));
 		documentoTO.setObligatorio(cursor.getInt(cursor.getColumnIndex("obligatorio")));
 		documentoTO.setNombreArchivo(cursor.getString(cursor.getColumnIndex("nombrearchivo")));
+		documentoTO.setServidorId(cursor.getInt(cursor.getColumnIndex("servidorId")));
+		
 		documentos.add(documentoTO);
 	}
 	
@@ -268,7 +283,7 @@ public class ClienteDAO {
 
 		ArrayList<ClienteTO> listado = new ArrayList<ClienteTO>();
 
-		String SQL = "SELECT accion,nullif(codigo,0) as codigo,nullif(Ruc,'') as Ruc,nullif(Dni,'') as Dni,nullif(RazonSocial,'') as  RazonSocial,nullif(NombreComercial,'') as NombreComercial,"
+		String SQL = "SELECT clienteId,accion,nullif(codigo,0) as codigo,nullif(Ruc,'') as Ruc,nullif(Dni,'') as Dni,nullif(RazonSocial,'') as  RazonSocial,nullif(NombreComercial,'') as NombreComercial,"
 				+ "nullif(DireccionFiscal,'') as DireccionFiscal,nullif(CodUbigeoFiscal,'') as CodUbigeoFiscal,nullif(DireccionEntrega,'') as DireccionEntrega,"
 				+ "nullif(CodUbigeoEntrega,'') as CodUbigeoEntrega,nullif(SubCanal,'') as SubCanal,nullif(Fax,'') as Fax,nullif(Distribuidor,'') as Distribuidor,"
 				+ "nullif(DistritoComercial,'') as DistritoComercial,nullif(DistritoGeografico,'') as DistritoGeografico,nullif(Zona,'') as Zona,nullif(RutaIK,'') as RutaIK,"
@@ -317,7 +332,8 @@ public class ClienteDAO {
 			clienteTO.setVendedor(cursor.getString(cursor.getColumnIndex("Vendedor")));
 			clienteTO.setTamanio(cursor.getString(cursor.getColumnIndex("TamanioCliente")));
 			clienteTO.setIdBd(cursor.getInt(cursor.getColumnIndex("IdReg")));
-
+			clienteTO.setClienteId(cursor.getInt(cursor.getColumnIndex("clienteId")));
+			
 			listado.add(clienteTO);
 		}
 

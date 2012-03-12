@@ -26,6 +26,9 @@ import roboguice.inject.InjectView;
 
 public class EnviarClientesActivity extends ActivityBase {
 	
+	
+	private static int UPLOAD_DOCUMENTOS=0;
+	
 	@InjectView(R.id.actionBar)  	ActionBar 			mActionBar;
 	@Inject 						ClienteBLL 			clienteBLL;
 	@Inject 						GuardarClienteProxy guardarClienteProxy;
@@ -47,7 +50,7 @@ public class EnviarClientesActivity extends ActivityBase {
         mActionBar.setTitle(R.string.sincronizar_clientes_activity_title);
         mActionBar.setHomeLogo(R.drawable.header_logo); 
         
-        processAsync(0);
+        
 	}
 
 	public void btnAceptar_onclick(View view){
@@ -84,8 +87,6 @@ public class EnviarClientesActivity extends ActivityBase {
         guardarClienteProxy.setClientes(clientes);
         guardarClienteProxy.execute();
         
-        
-        
 	}
 
 	
@@ -93,43 +94,76 @@ public class EnviarClientesActivity extends ActivityBase {
 	protected void process(int accion) {
 		// TODO Auto-generated method stub
 		
-		File path = new File( Environment.getExternalStorageDirectory(), this.getPackageName() );
-		ArrayList<DocumentoTO> documentos = clienteBLL.listarDocumentos();
-		String fileName;
-        for (DocumentoTO documentoTO : documentos) {
-        	uploadFileProxy.setClienteId(documentoTO.getClienteId());
-        	fileName = documentoTO.getNombreArchivo();
-        	uploadFileProxy.setFilePath(new File(path, fileName).getAbsolutePath());
-        	uploadFileProxy.setFileName(fileName);
-        	uploadFileProxy.execute();
+		
+		if(UPLOAD_DOCUMENTOS==accion){
+			
+			boolean isExito = guardarClienteProxy.isExito();
+			if (isExito) {
+				int status = guardarClienteProxy.getResponse().getStatus();
+				
+				if (status == 0) {
+					
+				   if((guardarClienteProxy.getResponse()!=null) && (guardarClienteProxy.getResponse().getIdGenerados())!=null){
+			        	clienteBLL.updateIdGenerados(guardarClienteProxy.getResponse().getIdGenerados());
+			        }
+				   
+					clienteBLL.deleteAll();
+					
+					File path = new File( Environment.getExternalStorageDirectory(), this.getPackageName() );
+					ArrayList<DocumentoTO> documentos = clienteBLL.listarDocumentos();
+					String fileName;
+			        for (DocumentoTO documentoTO : documentos) {
+			        	fileName = documentoTO.getNombreArchivo();
+			        	uploadFileProxy.setFilePath(new File(path, fileName).getAbsolutePath());
+			        	uploadFileProxy.setFileName(fileName);
+			        	uploadFileProxy.setServidorId(documentoTO.getServidorId());
+			        	uploadFileProxy.setTipoDocumentoId(documentoTO.getDocumentoId());
+			        	uploadFileProxy.execute();
+					}
+			        
+				}else{
+					super.processOk();
+					MessageBox.showSimpleDialog(this, sincronizar_cliente_title, confirm_message_error, confirm_ok, null);
+				}
+			}
+			
+			
+			
 		}
 	}
 	@Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
-		boolean isExito = guardarClienteProxy.isExito();
-		final Context context = this;
-		if (isExito) {
-			int status = guardarClienteProxy.getResponse().getStatus();
-			
-			if (status == 0) {
-				clienteBLL.deleteAll();
-				super.processOk();
-				MessageBox.showSimpleDialog(context, sincronizar_cliente_title, confirm_message_ok, confirm_ok, new OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-						finish();
-					}
-				});
-			}else{
-				super.processOk();
-				MessageBox.showSimpleDialog(context, sincronizar_cliente_title, confirm_message_error, confirm_ok, null);
-			}
-		}
-				
+		super.processOk();
 		
+		processAsync(UPLOAD_DOCUMENTOS);
+		
+				
+	}
+	
+	
+
+	@Override
+	protected void processOk(int accion) {
+		// TODO Auto-generated method stub
+	
+		final Context context = this;
+		MessageBox.showSimpleDialog(context, sincronizar_cliente_title, confirm_message_ok, confirm_ok, new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
+		
+		super.processOk(accion);
+	}
+
+	@Override
+	protected void processError(int accion) {
+		// TODO Auto-generated method stub
+		super.processError(accion);
 	}
 
 	@Override
