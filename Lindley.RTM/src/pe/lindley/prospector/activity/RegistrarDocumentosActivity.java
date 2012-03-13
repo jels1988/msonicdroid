@@ -72,6 +72,7 @@ public class RegistrarDocumentosActivity extends ListActivityBase {
 	
 	public void savePhoto(){
 		documentoTO.setNombreArchivo(file_name);
+		documentoTO.setEsLocal(DocumentoTO.LOCAL);
 		clienteBLL.guardarDocumento(clienteId, documentoTO);
 	}
 
@@ -113,10 +114,11 @@ public class RegistrarDocumentosActivity extends ListActivityBase {
 
 	@Override
 	protected void processOk() {
-		adap = new EfficientAdapter(this, documentos);
+		adap = new EfficientAdapter(this, documentos,clienteNombre);
 		setListAdapter(adap);
 		super.processOk();
 	}
+	
 	 public static class EfficientAdapter extends ArrayAdapter<DocumentoTO> {
 
 		 static class ViewHolder {
@@ -128,11 +130,13 @@ public class RegistrarDocumentosActivity extends ListActivityBase {
 		
 		private Activity context;
 		private List<DocumentoTO> documentos;
+		private String nombreCliente;
 		
-		public EfficientAdapter(Activity context,List<DocumentoTO> documentos){
+		public EfficientAdapter(Activity context,List<DocumentoTO> documentos,String nombreCliente){
 			super(context, R.layout.registro_cliente_documentos_content, documentos);
 			this.context=context;
 			this.documentos=documentos;
+			this.nombreCliente=nombreCliente;
 		}
 		
 
@@ -141,6 +145,8 @@ public class RegistrarDocumentosActivity extends ListActivityBase {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
+		
+			
 			View view = null;
 			if (convertView == null) {
 				LayoutInflater inflator = context.getLayoutInflater();
@@ -169,6 +175,7 @@ public class RegistrarDocumentosActivity extends ListActivityBase {
 				
 				
 				
+				
 				viewHolder.btnVerFoto.setOnClickListener(new OnClickListener() {
 					
 					@Override
@@ -176,6 +183,9 @@ public class RegistrarDocumentosActivity extends ListActivityBase {
 						// TODO Auto-generated method stub
 						DocumentoTO documento = (DocumentoTO)viewHolder.imgObligatorio.getTag();
 						Intent intent = new Intent(context,RegistrarClienteVerDocumentosActivity.class);
+						
+						
+						intent.putExtra(RegistrarClienteVerDocumentosActivity.CLIENTE_NOMBRES, nombreCliente);
 						intent.putExtra(RegistrarClienteVerDocumentosActivity.FILE_NAME, documento.getNombreArchivo());
 						context.startActivity(intent);
 						
