@@ -49,6 +49,7 @@
         	<LinearLayout android:layout_span="2" android:orientation="horizontal" android:padding="2dip" android:layout_height="fill_parent" android:layout_width="match_parent">
         		<ImageButton android:id="@+id/btn_eliminar" android:src="@drawable/btn_cancelar" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
         		<ImageButton android:id="@+id/btn_editar"  android:src="@drawable/btn_editar" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+        		<ImageButton android:id="@+id/btn_documentos"  android:src="@drawable/btn_documentos" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
         	</LinearLayout>
         </TableRow>
      </TableLayout>

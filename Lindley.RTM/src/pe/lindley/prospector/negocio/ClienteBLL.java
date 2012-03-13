@@ -8,8 +8,8 @@ import pe.lindley.prospector.dao.ClienteDAO;
 import pe.lindley.prospector.to.ClienteIdTO;
 import pe.lindley.prospector.to.ClienteTO;
 import pe.lindley.prospector.to.DocumentoTO;
+import pe.lindley.prospector.to.FileTO;
 import pe.lindley.util.DBHelper;
-
 import android.util.Log;
 
 import com.google.inject.Inject;
@@ -37,6 +37,17 @@ public class ClienteBLL {
 			Log.e(TAG_LOG, "updateIdGenerados", e);
 		} finally {
 			dbHelper.endTransaction();
+			dbHelper.close();
+		}
+	}
+	
+	public void deleteAllDocumentos(long id){
+		try {
+			dbHelper.openDataBase();
+			clienteDAO.deleteDocumentos(id);
+		} catch (Exception e) {
+			Log.e(TAG_LOG, "deleteAllDocumentos", e);
+		} finally {
 			dbHelper.close();
 		}
 	}
@@ -188,6 +199,19 @@ public class ClienteBLL {
 				clienteTO.setAccion(ClienteTO.ACCION_RECHAZO);
 				clienteTO.setTieneCambios(ClienteTO.FICHA_SIN_CAMBIOS);
 				clienteDAO.save(clienteTO,usuarioTO);
+				
+ 
+				 
+				for (FileTO fileTO : clienteTO.getDocumentos()) {
+					DocumentoTO doc = new DocumentoTO();
+					doc.setClienteId(clienteTO.getClienteId());
+					doc.setDocumentoId(fileTO.getTipoDocumento());
+					doc.setNombreArchivo(fileTO.getNombre());
+					doc.setEsLocal(DocumentoTO.SERVER);
+					doc.setServidorId(fileTO.getServidorId());
+					
+					clienteDAO.insertDocumento(clienteTO.getClienteId(),doc);
+				}
 			}
 			
 			dbHelper.setTransactionSuccessful();

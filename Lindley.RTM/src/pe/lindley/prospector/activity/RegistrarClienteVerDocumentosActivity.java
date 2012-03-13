@@ -4,6 +4,8 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 
+import com.thira.examples.actionbar.widget.ActionBar;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -19,7 +21,14 @@ import roboguice.inject.InjectView;
 
 public class RegistrarClienteVerDocumentosActivity extends ActivityBase {
 	
+	public static final String CLIENTE_ID="CLIENTE_ID";
+	public static final String CLIENTE_NOMBRES="CLIENTE";
 	public static final String FILE_NAME="FILE_NAME";
+	
+	
+	@InjectExtra(CLIENTE_ID) int clienteId;
+	@InjectExtra(CLIENTE_NOMBRES) String clienteNombre;
+	@InjectView(R.id.actionBar)ActionBar mActionBar;
 	@InjectExtra(FILE_NAME) String fileName;
 	@InjectView(R.id.imgFoto) ImageView imgVer;
 	private Bitmap bitmap ;
@@ -30,6 +39,10 @@ public class RegistrarClienteVerDocumentosActivity extends ActivityBase {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.registro_cliente_ver_documentos_activity);
+		
+		mActionBar.setTitle(R.string.registrar_documentos_activity_title);
+		mActionBar.setSubTitle(clienteNombre);
+		
 		processAsync();
 	}
 
