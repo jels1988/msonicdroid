@@ -26,10 +26,10 @@ public class RegistrarClienteVerDocumentosActivity extends ActivityBase {
 	public static final String FILE_NAME="FILE_NAME";
 	
 	
-	@InjectExtra(CLIENTE_ID) int clienteId;
 	@InjectExtra(CLIENTE_NOMBRES) String clienteNombre;
 	@InjectView(R.id.actionBar)ActionBar mActionBar;
 	@InjectExtra(FILE_NAME) String fileName;
+	
 	@InjectView(R.id.imgFoto) ImageView imgVer;
 	private Bitmap bitmap ;
 	private Bitmap bitmapTemp1 ;
