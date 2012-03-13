@@ -1,6 +1,5 @@
 package pe.lindley.mmil.ws.service;
 
-import pe.lindley.mmil.ws.bean.MostrarPizarraCdaRequest;
 import pe.lindley.mmil.ws.bean.MostrarPizarraRequest;
 import pe.lindley.mmil.ws.bean.MostrarPizarraResponse;
 import pe.lindley.util.JSONHelper;
