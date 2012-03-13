@@ -30,6 +30,12 @@ public class ClienteDAO {
 				valores);
 		
 	}
+	
+	public void deleteDocumentos(long id){
+		String[] valores = new String[] { String.valueOf(id) };
+		dbHelper.getDataBase().execSQL("delete from cliente_documento where clienteDocumentoId = ?",valores);
+	}
+	
 	public long updateDocumento(int clienteId,DocumentoTO documentoTO){
 		
 		ContentValues parametros = new ContentValues();
@@ -50,6 +56,10 @@ public class ClienteDAO {
 		parametros.put("documentoId", documentoTO.getDocumentoId());
 		parametros.put("nombreArchivo", documentoTO.getNombreArchivo());
 		parametros.put("islocal", documentoTO.getEsLocal());
+		
+		if(documentoTO.getServidorId()!=0){
+			parametros.put("servidorId", documentoTO.getServidorId());
+		}
 		
 		long id =dbHelper.getDataBase().insertOrThrow("cliente_documento", null, parametros);
 		return id;

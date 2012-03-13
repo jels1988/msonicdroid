@@ -1,8 +1,14 @@
 package pe.lindley.prospector.to;
 
+import java.util.ArrayList;
+
 import com.google.gson.annotations.SerializedName;
 
 public class ClienteTO {
+	
+	public ClienteTO(){
+		setDocumentos(new ArrayList<FileTO>());
+	}
 	
 	public static final int ESTADO_PENDIENTE = 0;
     public static final int ESTADO_CONFIRMADO = 1;
@@ -170,6 +176,9 @@ public class ClienteTO {
      @SerializedName("IdRef")
      public int idRef;
 
+     @SerializedName("docs")
+     private ArrayList<FileTO> documentos;
+     
 	public String getCodigo() {
 		return codigo;
 	}
@@ -520,6 +529,14 @@ public class ClienteTO {
 
 	public void setIdRef(int idRef) {
 		this.idRef = idRef;
+	}
+
+	public ArrayList<FileTO> getDocumentos() {
+		return documentos;
+	}
+
+	public void setDocumentos(ArrayList<FileTO> documentos) {
+		this.documentos = documentos;
 	}
 
 	    

@@ -113,12 +113,19 @@ public class EnviarClientesActivity extends ActivityBase {
 					ArrayList<DocumentoTO> documentos = clienteBLL.listarDocumentos();
 					String fileName;
 			        for (DocumentoTO documentoTO : documentos) {
+			        	
 			        	fileName = documentoTO.getNombreArchivo();
-			        	uploadFileProxy.setFilePath(new File(path, fileName).getAbsolutePath());
+			        	File f = new File(path, fileName);
+			        	uploadFileProxy.setFilePath(f.getAbsolutePath());
 			        	uploadFileProxy.setFileName(fileName);
 			        	uploadFileProxy.setServidorId(documentoTO.getServidorId());
 			        	uploadFileProxy.setTipoDocumentoId(documentoTO.getDocumentoId());
 			        	uploadFileProxy.execute();
+			        	
+			        	if((uploadFileProxy.getResponse()!=null) && (uploadFileProxy.getResponse().getStatus()==0)){
+			        		clienteBLL.deleteAllDocumentos(documentoTO.getId());
+			        		f.delete();
+			        	}
 					}
 			        
 				}else{

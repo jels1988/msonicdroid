@@ -187,6 +187,7 @@ public class ConsultarClienteLocalActivity extends ListActivityBase {
 				holder.txtObservacion = (TextView) convertView.findViewById(R.id.txtObservacion);
 				holder.imgEliminar = (ImageButton) convertView.findViewById(R.id.btn_eliminar);
 				holder.imgEditar = (ImageButton) convertView.findViewById(R.id.btn_editar);
+				holder.imgDocumentos = (ImageButton) convertView.findViewById(R.id.btn_documentos);
 		
 				convertView.setTag(holder);
 			} else {
@@ -208,6 +209,18 @@ public class ConsultarClienteLocalActivity extends ListActivityBase {
 			final String pregunta = ((ConsultarClienteLocalActivity)this.context).consultar_cliente_local_delete;
 			final String pregunta_si = ((ConsultarClienteLocalActivity)this.context).confirm_si;
 			final String pregunta_no = ((ConsultarClienteLocalActivity)this.context).confirm_no;
+			
+			holder.imgDocumentos.setOnClickListener(new OnClickListener() {
+				ClienteTO clienteTemporal = (ClienteTO) getItem(position);
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Intent verDocumentos = new Intent(context, RegistrarDocumentosActivity.class);
+					verDocumentos.putExtra(RegistrarDocumentosActivity.CLIENTE_ID, clienteTemporal.getClienteId());
+					verDocumentos.putExtra(RegistrarDocumentosActivity.CLIENTE_NOMBRES, clienteTemporal.getRazonSocial());
+					context.startActivity(verDocumentos);
+				}
+			});
 			
 			holder.imgEliminar.setOnClickListener(new OnClickListener() {
 				ClienteTO clienteTemporal = (ClienteTO) getItem(position);
@@ -267,7 +280,9 @@ public class ConsultarClienteLocalActivity extends ListActivityBase {
 			
 			ImageButton imgEliminar;
 			ImageButton imgEditar;
-		
+			ImageButton imgDocumentos;
+			
+			
 		}
 		
 		@Override
