@@ -2,32 +2,6 @@ package pe.lindley.ficha.activity;
 
 import java.util.List;
 
-import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
-
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.InputFilter;
-import android.text.InputType;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnFocusChangeListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.CheckedTextView;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TableRow;
-import android.widget.TextView;
-import android.widget.ViewFlipper;
 import pe.lindley.activity.R;
 import pe.lindley.activity.RTMApplication;
 import pe.lindley.ficha.to.EncuestaTO;
@@ -39,9 +13,37 @@ import pe.lindley.ficha.ws.service.GuardarEncuestaProxy;
 import pe.lindley.ficha.ws.service.ObtenerEncuestaProxy;
 import pe.lindley.lanzador.to.UsuarioTO;
 import pe.lindley.util.ActivityBase;
+
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.InputType;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnFocusChangeListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CheckedTextView;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TableRow;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
+
+import com.google.inject.Inject;
+import com.thira.examples.actionbar.widget.ActionBar;
+
 
 public class FichaEncuestaActivity extends ActivityBase {
 
@@ -238,37 +240,44 @@ public class FichaEncuestaActivity extends ActivityBase {
 	@Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
-		encuestaTO = obtenerEncuestaProxy.getResponse().getEncuesta();
-	
-		LayoutInflater mInflater = LayoutInflater.from(getApplicationContext());
-		
-		for (SeccionTO seccion : encuestaTO.getDetalleSeccion()) {
-			View convertView = mInflater.inflate(R.layout.ficha_encuesta_activity_content,null);
-			
-			TextView txtPrueba = (TextView)convertView.findViewById(R.id.txtPrueba);
-			ListView lstSeccion = (ListView)convertView.findViewById(R.id.lstSecciones);
-			//lstSeccion.setFocusable(false);
-//lstSeccion.setDrawSelectorOnTop(false);
-			txtPrueba.setText(seccion.getDescripcionSeccion());
-			
-			EfficientAdapter f = new EfficientAdapter(getApplicationContext(), seccion.getDetalleSubseccion());
-			lstSeccion.setAdapter(f);
-			//lstSeccion.setFocusable(false);
-			lstSeccion.setDrawSelectorOnTop(false);
-			viewFlipper.addView(convertView);
+		boolean isExito = obtenerEncuestaProxy.isExito();
+		if (isExito) {
+			int status = obtenerEncuestaProxy.getResponse().getStatus();
+			if (status == 0) {
+				encuestaTO = obtenerEncuestaProxy.getResponse().getEncuesta();
+				
+				LayoutInflater mInflater = LayoutInflater.from(getApplicationContext());
+				
+				for (SeccionTO seccion : encuestaTO.getDetalleSeccion()) {
+					View convertView = mInflater.inflate(R.layout.ficha_encuesta_activity_content,null);
+					
+					TextView txtPrueba = (TextView)convertView.findViewById(R.id.txtPrueba);
+					ListView lstSeccion = (ListView)convertView.findViewById(R.id.lstSecciones);
+					//lstSeccion.setFocusable(false);
+		//lstSeccion.setDrawSelectorOnTop(false);
+					txtPrueba.setText(seccion.getDescripcionSeccion());
+					
+					EfficientAdapter f = new EfficientAdapter(getApplicationContext(), seccion.getDetalleSubseccion());
+					lstSeccion.setAdapter(f);
+					//lstSeccion.setFocusable(false);
+					lstSeccion.setDrawSelectorOnTop(false);
+					viewFlipper.addView(convertView);
+				}
+			}
+			else  {
+				showToast(obtenerEncuestaProxy.getResponse().getDescripcion());
+			}
 		}
-		
-		
-		
-		
-		
+		else{
+			processError();
+		}
 		super.processOk();
 	}
 
 	
 
 
-public static class EfficientAdapter extends BaseAdapter{
+public static class EfficientAdapter extends BaseAdapter {
 
 	
 	/* public  void setListViewHeightBasedOnChildren(ListView listView) {
@@ -372,6 +381,12 @@ public static class EfficientAdapter extends BaseAdapter{
 					holder.txtSimple.setText(subSeccionTO.getRespuesta1());
 				if(tipo.compareTo(SubSeccionTO.TIPO_NUMERICO_SIMPLE)==0)
 					holder.txtSimple.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
+				
+				if(estado_encuesta.equals("2"))
+				{
+					holder.txtSimple.setKeyListener(null);
+				}
+				
 				holder.txtSimple.setOnFocusChangeListener(new OnFocusChangeListener() {
 					
 					@Override
@@ -381,10 +396,7 @@ public static class EfficientAdapter extends BaseAdapter{
 					}
 				});
 				
-				if(estado_encuesta.equals("2"))
-				{
-					holder.txtSimple.setKeyListener(null);
-				}
+				
 			}else if ((tipo.compareTo(SubSeccionTO.TIPO_LISTA_MULTIPLE)==0) || (tipo.compareTo(SubSeccionTO.TIPO_LISTA_SIMPLE)==0)){
 				
 				holder.trLista.setVisibility(View.VISIBLE);
@@ -539,6 +551,12 @@ public static class EfficientAdapter extends BaseAdapter{
 					FilterArrayRp2[0] = new InputFilter.LengthFilter(maxLengthRp2);  
 					holder.txtRp1.setFilters(FilterArrayRp2);  
 				}
+
+				if(estado_encuesta.equals("2"))
+				{
+					holder.txtRp1.setKeyListener(null);
+					holder.txtRp2.setKeyListener(null);
+				}
 				
 				holder.txtRp1.setOnFocusChangeListener(new OnFocusChangeListener() {
 					
@@ -558,11 +576,6 @@ public static class EfficientAdapter extends BaseAdapter{
 					}
 				});
 				
-				if(estado_encuesta.equals("2"))
-				{
-					holder.txtRp1.setKeyListener(null);
-					holder.txtRp2.setKeyListener(null);
-				}
 			}
 			
 			//holder.lstOpciones.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
