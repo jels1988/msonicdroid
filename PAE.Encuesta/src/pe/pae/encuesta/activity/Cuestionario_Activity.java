@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -143,17 +144,25 @@ public class Cuestionario_Activity extends ActivityBase {
 				break;
 			case 3:
 				viewPreguntaActual = layoutInflater.inflate(R.layout.pregunta_3, lnCuestionario,false);
-				ListView lstOpciones1 =  (ListView)viewPreguntaActual.findViewById(R.id.lstOpciones);
-				//SingleOpcion_Adapter opciones1 = new SingleOpcion_Adapter(this, preguntaTO.opciones);	
+				//ListView lstOpciones1 =  (ListView)viewPreguntaActual.findViewById(R.id.lstOpciones);
+				SingleOpcion_Adapter opciones1 = new SingleOpcion_Adapter(this, preguntaTO.opciones);	
 				//lstOpciones1.setAdapter(opciones1);
-				lstOpciones1.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+				//lstOpciones1.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+				
+				
+				GridView gr = (GridView)viewPreguntaActual.findViewById(R.id.gridview);
+				gr.setAdapter(opciones1);
 				break;
 			case 4:
+				//viewPreguntaActual = layoutInflater.inflate(R.layout.pregunta_3, lnCuestionario,false);
+				//ListView lstOpciones2 =  (ListView)viewPreguntaActual.findViewById(R.id.lstOpciones);
 				viewPreguntaActual = layoutInflater.inflate(R.layout.pregunta_3, lnCuestionario,false);
-				ListView lstOpciones2 =  (ListView)viewPreguntaActual.findViewById(R.id.lstOpciones);
+				GridView gr2 = (GridView)viewPreguntaActual.findViewById(R.id.gridview);
 				MultipleOpcion_Adapter opciones2 = new MultipleOpcion_Adapter(this, preguntaTO.opciones);
-				lstOpciones2.setAdapter(opciones2);
-				lstOpciones2.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+				gr2.setAdapter(opciones2);
+				
+				//lstOpciones2.setAdapter(opciones2);
+				//lstOpciones2.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 				break;
 			default:
 				break;

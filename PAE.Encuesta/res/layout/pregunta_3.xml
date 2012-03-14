@@ -15,8 +15,19 @@
     style="@style/TextViewLabel2">
 </TextView>
 
-    <ListView android:id="@+id/lstOpciones" android:layout_width="fill_parent" android:layout_height="wrap_content"></ListView>
+    <!--ListView android:id="@+id/lstOpciones" android:layout_width="fill_parent" android:layout_height="wrap_content"></ListView-->
 
+<GridView xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:id="@+id/gridview"
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+    android:columnWidth="250dp"
+    android:numColumns="auto_fit"
+    android:verticalSpacing="0dp"
+    android:horizontalSpacing="0dp"
+    android:stretchMode="columnWidth"
+    android:gravity="center"
+/>
     
 
      

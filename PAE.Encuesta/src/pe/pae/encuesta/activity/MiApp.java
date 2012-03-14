@@ -1,6 +1,9 @@
 package pe.pae.encuesta.activity;
 
 import java.util.List;
+
+import net.msonic.lib.DBHelper;
+import net.msonic.lib.DBHelperProvider;
 import pe.pae.encuesta.to.UsuarioTO;
 import pe.pae.encuesta.ws.service.LoginProxy;
 
@@ -35,6 +38,8 @@ public class MiApp extends RoboApplication {
 				
 				// TODO Auto-generated method stub
 				bind(LoginProxy.class).in(Singleton.class);
+				bind(DBHelper.class).toProvider(DBHelperProvider.class).in(Singleton.class);
+				
 			}
 		});
 	}

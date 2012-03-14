@@ -68,9 +68,9 @@ public final class R {
         public static final int cboCliente=0x7f080014;
         public static final int cboTienda=0x7f080015;
         public static final int chkOpcion=0x7f080010;
+        public static final int gridview=0x7f08000f;
         public static final int lblPregunta=0x7f08000b;
         public static final int lnCuestionario=0x7f080007;
-        public static final int lstOpciones=0x7f08000f;
         public static final int radioButton1=0x7f08000c;
         public static final int radioButton2=0x7f08000d;
         public static final int rdOption=0x7f080011;
