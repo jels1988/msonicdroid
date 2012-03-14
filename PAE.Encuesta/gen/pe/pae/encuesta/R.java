@@ -114,6 +114,7 @@ prod: 0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A
         public static final int tienda_seleccionar_activity_ingresar=0x7f06000c;
         public static final int tienda_seleccionar_activity_tienda=0x7f06000b;
         public static final int tienda_seleccionar_activity_title=0x7f060009;
+        public static final int urlLoginWS=0x7f060011;
     }
     public static final class style {
         public static final int ButtonCustom=0x7f070008;

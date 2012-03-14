@@ -1,4 +1,4 @@
-package pe.pae.encuesta.ws.service;
+package pe.pae.encuesta.ws.bean;
 
 import com.google.gson.annotations.SerializedName;
 
