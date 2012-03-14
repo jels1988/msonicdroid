@@ -10,12 +10,10 @@
     <string name="login_activity_password">Password :</string>
     <string name="login_activity_usuario_hint">Ingresar Usuario</string>
     <string name="login_activity_password_hint">Ingresar Password</string>
-    
     <string name="login_activity_txtlogin_empty">Debes ingresar tu usuario</string>
     <string name="login_activity_txtpassword_empty">Debes ingresar tu password</string>
     <string name="login_activity_ok">Bienvenido: %s.</string>
     <string name="login_activity_error">%s</string>
-    
     <string name="tienda_seleccionar_activity_title">Seleccionar Tienda</string>
     <string name="tienda_seleccionar_activity_cliente">Cliente :</string>
     <string name="tienda_seleccionar_activity_tienda">Tienda :</string>

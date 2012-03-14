@@ -1,5 +1,7 @@
 package pe.pae.encuesta.ws.bean;
 
+import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 import pe.pae.encuesta.to.ClienteTO;
@@ -13,5 +15,5 @@ public class LoginResponse extends ResponseBase {
 	public UsuarioTO usuario;
 	
 	@SerializedName("cli")
-	public ClienteTO cliente;
+	public List<ClienteTO> clientes;
 }
