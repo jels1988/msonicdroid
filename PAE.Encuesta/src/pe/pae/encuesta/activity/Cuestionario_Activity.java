@@ -144,8 +144,8 @@ public class Cuestionario_Activity extends ActivityBase {
 			case 3:
 				viewPreguntaActual = layoutInflater.inflate(R.layout.pregunta_3, lnCuestionario,false);
 				ListView lstOpciones1 =  (ListView)viewPreguntaActual.findViewById(R.id.lstOpciones);
-				SingleOpcion_Adapter opciones1 = new SingleOpcion_Adapter(this, preguntaTO.opciones);	
-				lstOpciones1.setAdapter(opciones1);
+				//SingleOpcion_Adapter opciones1 = new SingleOpcion_Adapter(this, preguntaTO.opciones);	
+				//lstOpciones1.setAdapter(opciones1);
 				lstOpciones1.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 				break;
 			case 4:

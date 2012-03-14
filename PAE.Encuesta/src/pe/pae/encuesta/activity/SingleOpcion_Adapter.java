@@ -3,6 +3,7 @@ package pe.pae.encuesta.activity;
 import java.util.ArrayList;
 
 import pe.pae.encuesta.R;
+import pe.pae.encuesta.to.OpcionTO;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
