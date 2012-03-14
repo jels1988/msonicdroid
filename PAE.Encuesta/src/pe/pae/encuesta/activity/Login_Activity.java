@@ -1,6 +1,7 @@
 package pe.pae.encuesta.activity;
 
 import pe.pae.encuesta.R;
+import pe.pae.encuesta.negocio.ClienteBLL;
 import pe.pae.encuesta.to.UsuarioTO;
 import pe.pae.encuesta.ws.service.LoginProxy;
 import roboguice.inject.InjectResource;
@@ -20,7 +21,7 @@ public class Login_Activity extends ActivityBase {
 	
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject 						LoginProxy 	loginProxy;
-	
+	@Inject 						ClienteBLL 	clienteBLL; 
 	
 	@InjectView(R.id.txtUsuario) 	TextView 	txtUsuario;
 	@InjectView(R.id.txtPassword) 	TextView 	txtPassword;
@@ -97,9 +98,10 @@ public class Login_Activity extends ActivityBase {
 		int status = loginProxy.getResponse().getStatus();
 			if (status == 0) {
 				
+				
 				UsuarioTO usuarioTO = loginProxy.getResponse().usuario;
 				message = String.format(login_ok,usuarioTO.nombres);
-				
+				clienteBLL.saveCliente(loginProxy.getResponse().clientes);
 				Intent i = new Intent("pae.activity.seleccionarTienda");
 		    	startActivity(i);
 		    	
