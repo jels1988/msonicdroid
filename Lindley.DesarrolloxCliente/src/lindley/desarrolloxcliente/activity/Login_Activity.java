@@ -1,14 +1,14 @@
 package lindley.desarrolloxcliente.activity;
 
+import lindley.desarrolloxcliente.MyApplication;
+import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.to.UsuarioTO;
+import lindley.desarrolloxcliente.ws.service.LoginProxy;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 import net.msonic.lib.ActivityBase;
-import lindley.desarrolloxcliente.MyApplication;
-import lindley.desarrolloxcliente.R;
-import lindley.desarrolloxcliente.to.UsuarioTO;
-import lindley.desarrolloxcliente.ws.service.LoginProxy;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +27,7 @@ public class Login_Activity extends ActivityBase {
 	@Inject 						LoginProxy 	loginProxy;
 
 	@InjectView(R.id.btnLogin) 	Button 	btnLogin;
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
