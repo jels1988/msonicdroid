@@ -55,4 +55,5 @@
     <string name="compromiso_open_cerrar">Cerrar</string>
     <string name="compromiso_open_guardar">Guardar</string>
     <string name="btnSiguiente">Siguiente</string>
+    <string name="ver_SKU">SKU Prioritarios</string>
 </resources>
