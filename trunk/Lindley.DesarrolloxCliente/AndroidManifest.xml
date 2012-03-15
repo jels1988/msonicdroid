@@ -81,7 +81,49 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-             
+        
+        <activity android:name=".activity.ConsultarPosicion_Activity">
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.consultarposicion" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".activity.ConsultarPresentacion_Activity" >
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.consultarpresentacion" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".activity.CompromisoPosicionClose_Activity" >
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.compromisoposicionclose" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".activity.CompromisoPosicionOpen_Activity" >
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.compromisoposicionopen" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".activity.CompromisoPresentacionClose_Activity" >
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.compromisopresentacionclose" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".activity.CompromisoPresentacionOpen_Activity" >
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.compromisopresentacionopen" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+           
     </application>
 
 </manifest>
