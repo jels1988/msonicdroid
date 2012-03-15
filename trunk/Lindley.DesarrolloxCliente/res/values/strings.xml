@@ -56,4 +56,6 @@
     <string name="compromiso_open_guardar">Guardar</string>
     <string name="btnSiguiente">Siguiente</string>
     <string name="ver_SKU">SKU Prioritarios</string>
+    <string name="consultarposicion_activity_title">Posición</string>
+    <string name="consultarpresentacion_activity_title">Presentación</string>
 </resources>
