@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName;
 
 import lindley.desarrolloxcliente.to.InformacionAdicionalTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
+import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
+import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 
 public class GuardarDesarrolloRequest {
 	
@@ -17,6 +19,12 @@ public class GuardarDesarrolloRequest {
 
 	@SerializedName("INF")
 	private InformacionAdicionalTO informacion;
+	
+	@SerializedName("CDES")
+	private List<PosicionCompromisoTO> compromisoPosicion;
+
+	@SerializedName("CDES")
+	private List<PresentacionCompromisoTO> compromisoPresentacion;
 
 	public List<OportunidadTO> getOportunidadSistema() {
 		return oportunidadSistema;
@@ -41,5 +49,22 @@ public class GuardarDesarrolloRequest {
 
 	public void setInformacion(InformacionAdicionalTO informacion) {
 		this.informacion = informacion;
+	}
+
+	public List<PosicionCompromisoTO> getCompromisoPosicion() {
+		return compromisoPosicion;
+	}
+
+	public void setCompromisoPosicion(List<PosicionCompromisoTO> compromisoPosicion) {
+		this.compromisoPosicion = compromisoPosicion;
+	}
+
+	public List<PresentacionCompromisoTO> getCompromisoPresentacion() {
+		return compromisoPresentacion;
+	}
+
+	public void setCompromisoPresentacion(
+			List<PresentacionCompromisoTO> compromisoPresentacion) {
+		this.compromisoPresentacion = compromisoPresentacion;
 	}
 }
