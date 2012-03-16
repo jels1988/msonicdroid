@@ -4,6 +4,120 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    
+    <com.thira.examples.actionbar.widget.ActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="fill_parent"
+        android:layout_height="44dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/TextViewLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Fecha: " />
+
+        <TextView
+            android:id="@+id/txtViewFecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="" />
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:fillViewport="true" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TableLayout
+                android:layout_width="1000dip"
+                android:layout_height="wrap_content"
+                android:shrinkColumns="*"
+                android:stretchColumns="*" >
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        style="@style/TextViewLabel"
+                        android:layout_width="100dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Variable" />
+
+                    <TextView
+                        style="@style/TextViewLabel"
+                        android:layout_width="40dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Puntos" />
+
+                    <TextView
+                        style="@style/TextViewLabel"
+                        android:layout_width="70dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="" />
+
+                    <TextView
+                        style="@style/TextViewLabel"
+                        android:layout_width="60dip"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha Compromiso" />
+
+                    <TextView
+                        style="@style/TextViewLabel"
+                        android:layout_width="60dip"
+                        android:layout_height="wrap_content"
+                        android:text="Confirmación" />
+                </TableRow>
+
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF909090" />
+            </TableLayout>
+
+            <ListView
+                android:id="@+id/android:list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="2dip"
+                android:layout_marginTop="2dip"
+                android:drawSelectorOnTop="false"
+                android:focusable="false" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="1dip" >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:focusable="false"
+            android:onClick="btnSiguiente_click"
+            android:text="@string/oportunidad_activity_boton_siguiente" >
+        </Button>
+    </LinearLayout>
 
 </LinearLayout>
