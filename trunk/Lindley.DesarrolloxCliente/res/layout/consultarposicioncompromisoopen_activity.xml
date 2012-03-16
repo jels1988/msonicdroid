@@ -55,13 +55,6 @@
                     <TableRow
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" >
-
-                        <TextView
-                            style="@style/TextViewLabel"
-                            android:layout_width="20dip"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Selección" />
                         
                         <TextView
                             style="@style/TextViewLabel"
@@ -96,6 +89,42 @@
                             android:layout_height="wrap_content"
                             android:text="Puntos" />
                         
+                        <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="60dip"
+                            android:layout_height="wrap_content"
+                            android:text="" />
+                        
+                        <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="60dip"
+                            android:layout_height="wrap_content"
+                            android:text="" />
+                        
+                        <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="60dip"
+                            android:layout_height="wrap_content"
+                            android:text="Acc. Compromiso" />
+                        
+                        <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="60dip"
+                            android:layout_height="wrap_content"
+                            android:text="Fecha Compromiso" />
+                        
+                        <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="60dip"
+                            android:layout_height="wrap_content"
+                            android:text="" />
+                        
+                        <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="60dip"
+                            android:layout_height="wrap_content"
+                            android:text="Confirmación" />
+                         
                     </TableRow>
 
                     <View

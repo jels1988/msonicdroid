@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-     <TableLayout
+    <TableLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/tableLayout"
         android:layout_width="1000dip"
@@ -12,10 +12,10 @@
         android:shrinkColumns="*"
         android:stretchColumns="*" >
 
-        <TableRow 
+        <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-            
+
             <TextView
                 android:id="@+id/txViewVariable"
                 android:layout_width="100dip"
@@ -30,13 +30,13 @@
                 android:clickable="true"
                 android:text="" />
 
-			<TextView
+            <TextView
                 android:id="@+id/txViewMaximo"
                 android:layout_width="40dip"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:text="" />
-			
+
             <TextView
                 android:id="@+id/txViewDiferencia"
                 android:layout_width="40dip"
@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:text="" />
-            
+
             <Button
                 android:id="@+id/btnFotoInicial"
                 android:layout_width="40dip"
@@ -58,12 +58,47 @@
                 android:gravity="center"
                 android:onClick="btnFotoInicial_onClick"
                 android:text="@string/ver_fotoInicial" />
-                         
+
+            <Button
+                android:id="@+id/btnFotoInicial"
+                android:layout_width="40dip"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:gravity="center"
+                android:onClick="btnFotoExito_onClick"
+                android:text="@string/ver_fotoExito" />
+
+            <TextView
+                android:id="@+id/txViewAccComp"
+                android:layout_width="60dip"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/txViewFecComp"
+                android:layout_width="60dip"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <Button
+                android:id="@+id/btnFotoFinal"
+                android:layout_width="40dip"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:gravity="center"
+                android:onClick="btnFotoFinal_onClick"
+                android:text="@string/ver_fotoFinal" />
+
+            <TextView
+                android:id="@+id/txViewCnfComp"
+                android:layout_width="60dip"
+                android:layout_height="wrap_content"
+                android:text="" />
         </TableRow>
 
         <View
             android:layout_height="2dip"
             android:background="#FF909090" />
     </TableLayout>
-    
+
 </LinearLayout>

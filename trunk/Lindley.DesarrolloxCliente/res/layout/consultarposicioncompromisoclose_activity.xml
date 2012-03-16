@@ -124,7 +124,7 @@
                             android:layout_width="60dip"
                             android:layout_height="wrap_content"
                             android:text="Confirmación" />
-                        
+                         
                     </TableRow>
 
                     <View
