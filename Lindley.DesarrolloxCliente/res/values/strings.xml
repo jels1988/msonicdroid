@@ -59,4 +59,6 @@
     <string name="consultarposicion_activity_title">Posición</string>
     <string name="consultarpresentacion_activity_title">Presentación</string>
     <string name="ver_fotoInicial">Foto Inicial</string>
+    <string name="ver_fotoExito">Foto Exito</string>
+    <string name="ver_fotoFinal">Foto Final</string>
 </resources>
