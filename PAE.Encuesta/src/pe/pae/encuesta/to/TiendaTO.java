@@ -13,4 +13,14 @@ public class TiendaTO {
 	@SerializedName("Dir")
 	public String direccion;
 
+	@Override
+    public String toString() {
+		if(this.direccion==null){
+			return this.nombre;
+		}else{
+			return this.nombre + "(" + this.direccion + ")";
+		}
+        
+    }
+	
 }
