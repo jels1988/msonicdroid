@@ -5,8 +5,6 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
-import lindley.desarrolloxcliente.activity.ConsultarPosicion_Activity.EfficientAdapter;
-import lindley.desarrolloxcliente.activity.ConsultarPosicion_Activity.EfficientAdapter.ViewHolder;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.PosicionTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarPosicionProxy;
