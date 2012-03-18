@@ -95,9 +95,11 @@ public class Tienda_Seleccionar_Activity extends ActivityBase {
 		// TODO Auto-generated method stub
 		
 		ClienteTO clienteTO = ((ClienteTO) cboCliente.getSelectedItem());
+		TiendaTO tiendaTO = ((TiendaTO) cboTienda.getSelectedItem());
+		
 		MiApp miApp = (MiApp)getApplication();
 		
-		
+		miApp.tiendaTO = tiendaTO;
 		encuestaProxy.clienteId=clienteTO.clienteId;
 		encuestaProxy.usuarioId=miApp.getUsuarioTO().usuarioId;
 		encuestaProxy.execute();

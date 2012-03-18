@@ -47,6 +47,7 @@ public class EncuestaBLL {
 				
 				if(respuestaPreguntaId==0){
 					respuestaPreguntaId = encuestaDAO.insertEncuestaPreguntaRespuesta(respuestaId, preguntaTO);
+					preguntaTO.respuestaOpcionId=respuestaPreguntaId;
 				}else{
 					 encuestaDAO.updateEncuestaPreguntaRespuesta(preguntaTO);
 				}

@@ -30,6 +30,7 @@ public class Cuestionario_Activity extends ActivityBase {
 	@InjectView(R.id.actionBar)  		ActionBar 		mActionBar;
 	@InjectView(R.id.lnCuestionario)  	LinearLayout 	lnCuestionario;
 	@InjectExtra("ENCUESTAID") 	int 				encuestaId;
+	@InjectExtra("PRODUCTOID") 	int 				productoId;
 	@InjectExtra("PRODUCTO") 	String 				producto;
 	
 	
@@ -40,12 +41,17 @@ public class Cuestionario_Activity extends ActivityBase {
 	private View viewPreguntaActual;
 	private ArrayList<PreguntaTO> preguntas;
 	private RespuestaTO respuestaTO=null;
-	
+	MiApp app = null;
 	
 	@Override
 	protected void process() {
 		// TODO Auto-generated method stub
 		respuestaTO.preguntas=encuestaBLL.listarPreguntas(encuestaId);
+		respuestaTO.encuestaId=encuestaId;
+		respuestaTO.productoId=productoId;
+		
+		respuestaTO.tiendaId=app.tiendaTO.tiendaId;
+		
 		preguntas = respuestaTO.preguntas;//encuestaBLL.listarPreguntas(encuestaId);
 		super.process();
 	}
@@ -71,6 +77,8 @@ public class Cuestionario_Activity extends ActivityBase {
 	        setContentView(R.layout.cuestionario_activity);
 	        mActionBar.setTitle(R.string.cuestionario_activity_title);
 	        mActionBar.setSubTitle(producto);
+	        app=(MiApp)getApplication();
+	        
 	        respuestaTO = new RespuestaTO();
 	        
 	        

@@ -37,7 +37,9 @@ public class Producto_Buscar_Activity extends ListActivityBase {
 	        
 	        setContentView(R.layout.producto_buscar_activity);
 	        mActionBar.setTitle(R.string.producto_buscar_activity_title);
-	        mActionBar.setSubTitle("RIPLEY-SAN MIGUEL");
+	        
+	        MiApp miApp = (MiApp)getApplication();
+	        mActionBar.setSubTitle(miApp.tiendaTO.toString());
 	    }
 	   
 	   
@@ -140,7 +142,9 @@ public class Producto_Buscar_Activity extends ListActivityBase {
 							ProductoTO productoTO = (ProductoTO) holder.txtProducto.getTag();
 							Intent intent = new Intent("pae.activity.custionarioProducto");
 							intent.putExtra("ENCUESTAID", productoTO.encuestaId);
+							intent.putExtra("PRODUCTOID", productoTO.productoId);
 							intent.putExtra("PRODUCTO", productoTO.descripcion);
+							
 							context.startActivity(intent);
 							//MiApp miApp = (MiApp)context.getApplication();
 							//miApp.preguntas = 
