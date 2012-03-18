@@ -20,6 +20,32 @@ public class EncuestaDAO {
 	@Inject protected DBHelper dbHelper;
 	
 	
+	public ArrayList<PreguntaTO> listarPreguntas(int encuestaId){
+		String SQL = "select * from pregunta where encuestaid = ?";
+		String[] parametros = new String[] { String.valueOf(encuestaId)};
+		
+		ArrayList<PreguntaTO> preguntas = new ArrayList<PreguntaTO>();
+		Cursor cursor = dbHelper.getDataBase().rawQuery(SQL,parametros);
+		
+		PreguntaTO preguntaTO;
+		
+		while(cursor.moveToNext()){
+			preguntaTO = new PreguntaTO();
+			preguntaTO.preguntaId = cursor.getInt(cursor.getColumnIndex("preguntaid"));
+			preguntaTO.pregunta = cursor.getString(cursor.getColumnIndex("pregunta"));
+			preguntaTO.tipoPregunta = cursor.getInt(cursor.getColumnIndex("tipopregunta"));
+			preguntaTO.tieneFoto = cursor.getInt(cursor.getColumnIndex("tienefoto"));
+			preguntaTO.tieneObservacion = cursor.getInt(cursor.getColumnIndex("tieneobservacion"));
+			preguntaTO.comentario = cursor.getString(cursor.getColumnIndex("comentario"));
+			preguntas.add(preguntaTO);
+			
+		}
+		
+		cursor.close();
+		
+		return preguntas;
+	}
+	
 	public ArrayList<ProductoTO> buscarProducto(String descripcion){
 
 		String SQL = "select * from producto where descripcion like ?";

@@ -3,19 +3,19 @@ package pe.pae.encuesta.activity;
 import java.util.ArrayList;
 
 import pe.pae.encuesta.R;
-import pe.pae.encuesta.to.OpcionTO;
+import pe.pae.encuesta.negocio.EncuestaBLL;
 import pe.pae.encuesta.to.PreguntaTO;
+import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.ActivityBase;
@@ -25,19 +25,52 @@ public class Cuestionario_Activity extends ActivityBase {
 	
 	@InjectView(R.id.actionBar)  		ActionBar 		mActionBar;
 	@InjectView(R.id.lnCuestionario)  	LinearLayout 	lnCuestionario;
-	int index=0;
-	View viewPreguntaActual;
+	@InjectExtra("ENCUESTAID") 	int 				encuestaId;
+	@InjectExtra("PRODUCTO") 	String 				producto;
 	
-	private ArrayList<PreguntaTO> preguntas = new ArrayList<PreguntaTO>();
 	
-	   @Override
+	@Inject 					EncuestaBLL 		encuestaBLL;
+	
+	
+	private int index=0;
+	private View viewPreguntaActual;
+	private ArrayList<PreguntaTO> preguntas;
+	
+	
+	
+	@Override
+	protected void process() {
+		// TODO Auto-generated method stub
+		preguntas = encuestaBLL.listarPreguntas(encuestaId);
+		super.process();
+	}
+	
+	
+	
+	
+	@Override
+	protected void processOk() {
+		// TODO Auto-generated method stub
+		cargarPregunta();
+		super.processOk();
+	}
+
+
+
+
+	@Override
 	    public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        
 	        
 	        setContentView(R.layout.cuestionario_activity);
 	        mActionBar.setTitle(R.string.cuestionario_activity_title);
-	        mActionBar.setSubTitle("KONZIL SH RIZOS x200ML");
+	        mActionBar.setSubTitle(producto);
+	        
+	        processAsync();
+	        
+	        /*
+	        
 	        
 	        PreguntaTO p1=new PreguntaTO();
 	        p1.pregunta="Pregunta 1";
@@ -130,8 +163,10 @@ public class Cuestionario_Activity extends ActivityBase {
 	        preguntas.add(p1);
 	        preguntas.add(p2);
 	        
-	        
 	        cargarPregunta();
+	        */
+	        
+	        
 	        
 	        
 	    }

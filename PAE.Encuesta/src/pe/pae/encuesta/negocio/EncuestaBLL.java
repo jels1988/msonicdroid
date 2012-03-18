@@ -6,6 +6,7 @@ import java.util.List;
 import net.msonic.lib.DBHelper;
 import pe.pae.encuesta.dao.EncuestaDAO;
 import pe.pae.encuesta.to.EncuestaTO;
+import pe.pae.encuesta.to.PreguntaTO;
 import pe.pae.encuesta.to.ProductoTO;
 
 import android.util.Log;
@@ -19,6 +20,23 @@ public class EncuestaBLL {
 	private static final String TAG_LOG = ClienteBLL.class.getCanonicalName();
 	@Inject protected DBHelper dbHelper;
 	@Inject protected EncuestaDAO encuestaDAO;
+	
+	
+	public ArrayList<PreguntaTO> listarPreguntas(int encuestaId){
+		ArrayList<PreguntaTO> preguntas=null;
+		
+		try {
+			dbHelper.openDataBase();
+			preguntas = encuestaDAO.listarPreguntas(encuestaId);
+		} catch (Exception e) {
+			Log.e(TAG_LOG, "listarPreguntas", e);
+		} finally {
+			dbHelper.close();
+		}
+		
+		return preguntas;
+		
+	}
 	
 	public ArrayList<ProductoTO> buscarProducto(String descripcion){
 		ArrayList<ProductoTO> productos=null;

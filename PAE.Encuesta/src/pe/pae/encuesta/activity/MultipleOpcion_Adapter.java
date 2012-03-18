@@ -19,6 +19,7 @@ public class MultipleOpcion_Adapter extends ArrayAdapter<OpcionTO> {
 	private final ArrayList<OpcionTO> opciones;
 	private final Activity context;
 	
+	
 	public MultipleOpcion_Adapter(Activity context,ArrayList<OpcionTO> opciones){
 		super(context, R.layout.pregunta_multi_content, opciones);
 		this.opciones = opciones;

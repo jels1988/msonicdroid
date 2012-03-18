@@ -1,5 +1,6 @@
 package pe.pae.encuesta.activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.msonic.lib.DBHelper;
@@ -8,6 +9,7 @@ import pe.pae.encuesta.dao.ClienteDAO;
 import pe.pae.encuesta.dao.EncuestaDAO;
 import pe.pae.encuesta.negocio.ClienteBLL;
 import pe.pae.encuesta.negocio.EncuestaBLL;
+import pe.pae.encuesta.to.PreguntaTO;
 import pe.pae.encuesta.to.UsuarioTO;
 import pe.pae.encuesta.ws.service.EncuestaProxy;
 import pe.pae.encuesta.ws.service.LoginProxy;
@@ -20,6 +22,9 @@ import roboguice.config.AbstractAndroidModule;
 
 public class MiApp extends RoboApplication {
 
+	
+	public ArrayList<PreguntaTO> preguntas;
+	
 	private UsuarioTO usuarioTO;
 	
 
