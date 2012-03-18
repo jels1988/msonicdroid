@@ -9,6 +9,7 @@ public class OpcionTO {
 	
 	@SerializedName("Des")
 	public String descripcion;
+	
 	public boolean seleccionado;
 
 }

@@ -2,6 +2,7 @@ package pe.pae.encuesta.ws.bean;
 
 import java.util.List;
 
+import pe.pae.encuesta.to.EncuestaTO;
 import pe.pae.encuesta.to.ProductoTO;
 
 import com.google.gson.annotations.SerializedName;
@@ -12,4 +13,7 @@ public class EncuestaResponse extends ResponseBase {
 
 	@SerializedName("pro")
 	public List<ProductoTO> productos;
+	
+	@SerializedName("enc")
+	public List<EncuestaTO> encuestas;
 }
