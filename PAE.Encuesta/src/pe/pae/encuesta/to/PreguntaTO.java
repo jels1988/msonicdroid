@@ -13,6 +13,12 @@ public class PreguntaTO {
 	public final static int TIENE_FOTO_SI=1;
 	public final static int TIENE_FOTO_NO=0;
 	
+	
+	public final static int PREGUNTA_PLANTILLA_NUMERICA=1;
+	public final static int PREGUNTA_PLANTILLA_TEXTO=2;
+	public final static int PREGUNTA_PLANTILLA_LISTA_MULTIPLE=3;
+	public final static int PREGUNTA_PLANTILLA_LISTA_SIMPLE=4;
+	
 	public PreguntaTO(){
 		opciones = new ArrayList<OpcionTO>();
 	}
@@ -41,6 +47,10 @@ public class PreguntaTO {
 	public ArrayList<OpcionTO> opciones;
 	
 	
+	
+	public long respuestaOpcionId;
+	public String observacion;
+	public String respuesta_1;
 	
 	
 }

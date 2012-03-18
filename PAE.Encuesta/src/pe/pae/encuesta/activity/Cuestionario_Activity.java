@@ -10,8 +10,12 @@ import roboguice.inject.InjectView;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -83,9 +87,52 @@ public class Cuestionario_Activity extends ActivityBase {
 	        switch (preguntaTO.tipoPregunta) {
 			case 1:
 				viewPreguntaActual = layoutInflater.inflate(R.layout.pregunta_1, lnCuestionario,false);
+				
+				TextView txtNumero= (TextView)viewPreguntaActual.findViewById(R.id.txtNumero);
+				txtNumero.setText(preguntaTO.respuesta_1);
+				
+				txtNumero.addTextChangedListener(new TextWatcher() {
+					
+					public void onTextChanged(CharSequence s, int start, int before, int count) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					public void beforeTextChanged(CharSequence s, int start, int count,
+							int after) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					public void afterTextChanged(Editable s) {
+						// TODO Auto-generated method stub
+						preguntas.get(index).respuesta_1 = s.toString();
+					}
+				});
+				
 				break;
 			case 2:
 				viewPreguntaActual = layoutInflater.inflate(R.layout.pregunta_2, lnCuestionario,false);
+				TextView txtTexto = (TextView)viewPreguntaActual.findViewById(R.id.txtTexto);
+				txtTexto.setText(preguntaTO.respuesta_1);
+				txtTexto.addTextChangedListener(new TextWatcher() {
+					
+					public void onTextChanged(CharSequence s, int start, int before, int count) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					public void beforeTextChanged(CharSequence s, int start, int count,
+							int after) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					public void afterTextChanged(Editable s) {
+						// TODO Auto-generated method stub
+						preguntas.get(index).respuesta_1 = s.toString();
+					}
+				});
 				break;
 			case 3:
 				viewPreguntaActual = layoutInflater.inflate(R.layout.pregunta_3, lnCuestionario,false);
@@ -119,7 +166,31 @@ public class Cuestionario_Activity extends ActivityBase {
 	        
 	        //OBSERVACION
 	        LinearLayout lnlObservacion = (LinearLayout)viewPreguntaActual.findViewById(R.id.lnlObservacion);
+	        
 	        if(preguntaTO.tieneObservacion==PreguntaTO.TIENE_OBSERVACION_SI){
+	        	
+	        	final EditText txtObservacion= (EditText)viewPreguntaActual.findViewById(R.id.txtObservacion);
+	        	txtObservacion.setText(preguntaTO.observacion);
+	        	
+	        	txtObservacion.addTextChangedListener(new TextWatcher() {
+					
+					public void onTextChanged(CharSequence s, int start, int before, int count) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					public void beforeTextChanged(CharSequence s, int start, int count,
+							int after) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					public void afterTextChanged(Editable s) {
+						// TODO Auto-generated method stub
+						preguntas.get(index).observacion=s.toString();
+					}
+				});
+	        	
 	        	lnlObservacion.setVisibility(View.VISIBLE);
 	        }else{
 	        	lnlObservacion.setVisibility(View.GONE);
@@ -137,13 +208,23 @@ public class Cuestionario_Activity extends ActivityBase {
 	        
 	   }
 	   public void btnSiguiente_onclick(View v){
+		   if(preguntas==null) return;
+		   
 		   lnCuestionario.removeViewAt(lnCuestionario.getChildCount()-1);
 		   index++;
+		   
+		   int size = preguntas.size();
+		   if(index>=size) index=0;
+			   
 		   cargarPregunta();
 	   }
 	   public void btnAnterior_onclick(View v){
+		   if(preguntas==null) return;
+		   
 		   lnCuestionario.removeViewAt(lnCuestionario.getChildCount()-1);
 		   index--;
+		   if(index==-1)index=preguntas.size()-1;
+		   
 		   cargarPregunta();
 	   }
 }

@@ -7,6 +7,7 @@ import pe.pae.encuesta.to.EncuestaTO;
 import pe.pae.encuesta.to.OpcionTO;
 import pe.pae.encuesta.to.PreguntaTO;
 import pe.pae.encuesta.to.ProductoTO;
+import pe.pae.encuesta.to.RespuestaTO;
 import net.msonic.lib.DBHelper;
 
 import android.content.ContentValues;
@@ -18,6 +19,56 @@ public class EncuestaDAO {
 
 
 	@Inject protected DBHelper dbHelper;
+	
+	
+	public long insertEncuestaRespuesta(RespuestaTO respuesta){
+		
+		ContentValues parametros = new ContentValues();
+		parametros.put("tiendaid", respuesta.tiendaId);
+		parametros.put("productoid", respuesta.productoId);
+		parametros.put("encuestaid", respuesta.encuestaId);
+		parametros.put("fecharegistro", respuesta.fechaRegistro);
+		parametros.put("horaregistro", respuesta.horaRegistro);
+		
+		long id  = dbHelper.getDataBase().insertOrThrow("respuesta", null, parametros);
+		return id;
+	}
+	
+	
+	public long insertEncuestaPreguntaRespuesta(long respuestaId,PreguntaTO preguntaTO){
+		ContentValues parametros = new ContentValues();
+		parametros.put("respuestaid", respuestaId);
+		parametros.put("preguntaid", preguntaTO.preguntaId);
+		parametros.put("observacion", preguntaTO.observacion);
+		parametros.put("respuesta_1", preguntaTO.respuesta_1);
+		
+		long id  = dbHelper.getDataBase().insertOrThrow("respuesta_pregunta", null, parametros);
+		return id;
+	}
+	
+	public long updateEncuestaPreguntaRespuesta(PreguntaTO preguntaTO){
+		ContentValues parametros = new ContentValues();
+		parametros.put("preguntaid", preguntaTO.preguntaId);
+		parametros.put("observacion", preguntaTO.observacion);
+		parametros.put("respuesta_1", preguntaTO.respuesta_1);
+		
+		String[] valores = new String[] { String.valueOf(preguntaTO.respuestaOpcionId) };
+		dbHelper.getDataBase().update("respuesta_pregunta", parametros, "respuestaOpcionId=?", valores);
+		return preguntaTO.respuestaOpcionId;
+	}
+	
+	
+	public void deleteEncuestaPreguntaOpcion(long respuestapreguntaid){
+		String[] valores = new String[] { String.valueOf(respuestapreguntaid) };
+		dbHelper.getDataBase().delete("respuesta_opcion", "respuestapreguntaid=?", valores);
+	}
+	
+	public void guardarEncuestaPreguntaOpcion(long respuestapreguntaid,OpcionTO opcionTO){
+		ContentValues parametros = new ContentValues();
+		parametros.put("respuestapreguntaid", respuestapreguntaid);
+		parametros.put("preguntaid", opcionTO.opcionId);
+		dbHelper.getDataBase().insertOrThrow("respuesta_opcion", null, parametros);
+	}
 	
 	
 	public ArrayList<OpcionTO> listarOpciones(int preguntaId){

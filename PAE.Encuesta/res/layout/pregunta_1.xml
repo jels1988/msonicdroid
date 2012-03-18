@@ -32,12 +32,11 @@
     android:id="@+id/lblPregunta"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    style="@style/TextViewLabel2">
-    
-</TextView>
+    style="@style/TextViewLabel2"/>
 
 
       <EditText android:layout_width="fill_parent"
+          android:id="@+id/txtNumero"
         android:layout_height="0dip"
     android:layout_weight="1"
         android:inputType="numberDecimal"/>    

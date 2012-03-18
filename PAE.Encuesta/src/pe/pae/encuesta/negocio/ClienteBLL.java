@@ -19,6 +19,11 @@ public class ClienteBLL {
 	@Inject protected DBHelper dbHelper;
 	@Inject protected ClienteDAO clienteDAO;
 	
+	
+	
+	
+	
+	
 	public ArrayList<ClienteTO> listarClientes(){
 		ArrayList<ClienteTO> clientes=null;
 		

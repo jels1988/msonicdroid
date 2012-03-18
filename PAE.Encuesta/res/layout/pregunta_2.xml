@@ -6,98 +6,78 @@
     
     
     
+      <LinearLayout
+    android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="right"
+    android:id="@+id/lnlFoto"
+    android:orientation="horizontal" >
+
+        
+         <ImageButton 
+             android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content" 
+	    android:contentDescription="@string/cuestionario_activity_ver_foto"
+	    android:src="@drawable/btn_verfoto"/>
+         
+          <ImageButton 
+             android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content" 
+	    
+	    android:contentDescription="@string/cuestionario_activity_tomar_foto"
+	    android:src="@drawable/btn_tomarfoto"/>
+ </LinearLayout>
+    
     <TextView
     android:id="@+id/lblPregunta"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_weight="0"
-    android:text="¿Desea Preguntar?"
-    style="@style/TextViewLabel2">
-    
-</TextView>
-
-
-    
-        <RadioGroup android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" >
-        <RadioButton
-        android:id="@+id/radioButton1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:text="Si" />
-    
-	    <RadioButton
-	    android:id="@+id/radioButton2"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_weight="0.5"
-	    android:text="No" />
-    
-        </RadioGroup>
-
-    <LinearLayout android:layout_weight="0"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:id="@+id/lnlComentario"
-    android:orientation="vertical" >
-    
-           <TextView
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="0"
-    android:text="@string/cuestionario_activity_comentario"
     style="@style/TextViewLabel2"/>
-           
- <TextView
+
+
+      <EditText android:layout_width="fill_parent"
+          android:id="@+id/txtTexto"
+        android:layout_height="0dip"
+    android:layout_weight="1"
+        android:inputType="text"/>    
+    
+    
+     <TextView
      android:id="@+id/txtComentario"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_weight="0"
     android:text="@string/cuestionario_activity_comentario"
     style="@style/TextViewLabel2"/>
+     
+    
+    
 
 
-  </LinearLayout>
-  
-  <LinearLayout
+     
+      <LinearLayout
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+          android:layout_height="wrap_content"
     android:id="@+id/lnlObservacion"
     android:orientation="vertical" >
     
          <TextView
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="0.5"
-    android:text="@string/cuestionario_activity_observacion"
-    style="@style/TextViewLabel2"/>
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/cuestionario_activity_observacion"
+		    style="@style/TextViewLabel2"/>
          
- <EditText
-     android:id="@+id/txtObservacion"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="0.5"
-    android:text="@string/cuestionario_activity_comentario"/>
+	 <EditText
+	     android:id="@+id/txtObservacion"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:lines="3"
+	    android:maxLines="3"
+	    android:hint="@string/cuestionario_activity_observacion"/>
 
+
+	 
   </LinearLayout>
-  
-     <LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/lnlFoto"
-    android:gravity="right"
-    android:orientation="horizontal" >
- 
-         <Button android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
-    android:text="@string/cuestionario_activity_tomar_foto"
-    android:focusable="false"></Button>
-         
-         <Button android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
-    android:text="@string/cuestionario_activity_ver_foto"
-    android:focusable="false"/>
-        
- </LinearLayout>
- 
+     
+     
+       
 </LinearLayout>

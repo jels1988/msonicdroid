@@ -6,8 +6,10 @@ import java.util.List;
 import net.msonic.lib.DBHelper;
 import pe.pae.encuesta.dao.EncuestaDAO;
 import pe.pae.encuesta.to.EncuestaTO;
+import pe.pae.encuesta.to.OpcionTO;
 import pe.pae.encuesta.to.PreguntaTO;
 import pe.pae.encuesta.to.ProductoTO;
+import pe.pae.encuesta.to.RespuestaTO;
 
 import android.util.Log;
 
@@ -20,6 +22,54 @@ public class EncuestaBLL {
 	private static final String TAG_LOG = ClienteBLL.class.getCanonicalName();
 	@Inject protected DBHelper dbHelper;
 	@Inject protected EncuestaDAO encuestaDAO;
+	
+	
+	
+	
+	public void guardarEncuestaRespuesta(RespuestaTO respuesta){
+		
+		respuesta.fechaRegistro = "010101";
+		respuesta.horaRegistro = "0202";
+		long respuestaId=respuesta.respuestaId;
+		long respuestaPreguntaId=0;
+		try {
+			dbHelper.openDataBase();
+			
+			if(respuestaId==0){
+				respuestaId = encuestaDAO.insertEncuestaRespuesta(respuesta);
+				respuesta.respuestaId=respuestaId;
+			}
+		
+			
+			for (PreguntaTO preguntaTO : respuesta.preguntas) {
+				
+				respuestaPreguntaId = preguntaTO.respuestaOpcionId;
+				
+				if(respuestaPreguntaId==0){
+					respuestaPreguntaId = encuestaDAO.insertEncuestaPreguntaRespuesta(respuestaId, preguntaTO);
+				}else{
+					 encuestaDAO.updateEncuestaPreguntaRespuesta(preguntaTO);
+				}
+				
+				
+				//ELIMINAMOS TODAS LAS OPCIONES
+				if(respuestaPreguntaId!=0){
+					encuestaDAO.deleteEncuestaPreguntaOpcion(respuestaPreguntaId);
+				}
+				
+				for(OpcionTO opcionTO : preguntaTO.opciones){
+					encuestaDAO.guardarEncuestaPreguntaOpcion(respuestaPreguntaId, opcionTO);
+				}
+				
+			}
+		} catch (Exception e) {
+			Log.e(TAG_LOG, "guardarEncuestaRespuesta", e);
+		} finally {
+			dbHelper.close();
+		}
+	}
+	
+	
 	
 	
 	public ArrayList<PreguntaTO> listarPreguntas(int encuestaId){
