@@ -6,6 +6,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class PreguntaTO {
 	
+	
+	public final static int TIENE_OBSERVACION_SI=1;
+	public final static int TIENE_OBSERVACION_NO=0;
+	
+	public final static int TIENE_FOTO_SI=1;
+	public final static int TIENE_FOTO_NO=0;
+	
 	public PreguntaTO(){
 		opciones = new ArrayList<OpcionTO>();
 	}
@@ -32,5 +39,8 @@ public class PreguntaTO {
 	
 	@SerializedName("Opc")
 	public ArrayList<OpcionTO> opciones;
+	
+	
+	
 	
 }

@@ -13,34 +13,55 @@
       
 
 
-
-
-	    
-
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal" >
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Anterior"
-    android:onClick="btnAnterior_onclick"
-    android:focusable="false" />
-
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Siguiente" android:onClick="btnSiguiente_onclick" android:focusable="false" />
-</LinearLayout>
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
       	android:id="@+id/lnCuestionario" 
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+      android:layout_height="0dip"
+    android:layout_weight="1"
     android:orientation="vertical" >
 </LinearLayout>
+
+
+<LinearLayout
+    android:gravity="right"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+    
+    
+      
+         <ImageButton 
+             android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content" 
+	    android:contentDescription="@string/cuestionario_activity_ver_foto"
+	    android:layout_gravity="left"
+	    android:src="@drawable/btn_first"/>
+         
+    <ImageButton 
+             android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content" 
+	    android:contentDescription="@string/cuestionario_activity_ver_foto"
+	    android:src="@drawable/btn_previous"
+	    android:layout_gravity="left"
+	    android:onClick="btnAnterior_onclick"/>
+    
+    <ImageButton 
+             android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content" 
+	    android:contentDescription="@string/cuestionario_activity_ver_foto"
+	    android:layout_gravity="right"
+	    android:src="@drawable/btn_next"
+	     android:onClick="btnSiguiente_onclick"/>
+         
+    <ImageButton 
+             android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content" 
+	    android:layout_gravity="right"
+	    android:contentDescription="@string/cuestionario_activity_ver_foto"
+	    android:src="@drawable/btn_last"/>
+         
+
+</LinearLayout>
+
 
 </LinearLayout>

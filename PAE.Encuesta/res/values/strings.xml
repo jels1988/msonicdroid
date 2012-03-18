@@ -22,4 +22,9 @@
     <string name="producto_buscar_activity_descripcion">Descripción</string>
     <string name="producto_buscar_activity_descripcion_hint">Ingresar Descripción</string>
     <string name="cuestionario_activity_title">Cuestionario</string>
+    <string name="cuestionario_activity_comentario">Comentario:</string>
+    <string name="cuestionario_activity_observacion">Observación:</string>
+    <string name="cuestionario_activity_observacion_hint">Ingresar Observación</string>
+    <string name="cuestionario_activity_tomar_foto">Tomar Foto</string>
+    <string name="cuestionario_activity_ver_foto">Ver Foto</string>
 </resources>

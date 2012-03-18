@@ -7,6 +7,7 @@ import pe.pae.encuesta.negocio.EncuestaBLL;
 import pe.pae.encuesta.to.PreguntaTO;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,8 +26,10 @@ public class Cuestionario_Activity extends ActivityBase {
 	
 	@InjectView(R.id.actionBar)  		ActionBar 		mActionBar;
 	@InjectView(R.id.lnCuestionario)  	LinearLayout 	lnCuestionario;
-	@InjectExtra("ENCUESTAID") 	int 				encuestaId;
-	@InjectExtra("PRODUCTO") 	String 				producto;
+	//@InjectExtra("ENCUESTAID") 
+	int 				encuestaId=1;
+	//@InjectExtra("PRODUCTO") 	
+	String 				producto="1";
 	
 	
 	@Inject 					EncuestaBLL 		encuestaBLL;
@@ -69,105 +72,6 @@ public class Cuestionario_Activity extends ActivityBase {
 	        
 	        processAsync();
 	        
-	        /*
-	        
-	        
-	        PreguntaTO p1=new PreguntaTO();
-	        p1.pregunta="Pregunta 1";
-	        p1.preguntaId=1;
-	        p1.tipoPregunta=3;
-	        
-	        OpcionTO op1=new OpcionTO();
-	        op1.opcionId=1;
-	        op1.descripcion="SI";
-	        
-	        OpcionTO op2=new OpcionTO();
-	        op2.opcionId=2;
-	        op2.descripcion="NO";
-	        
-	        OpcionTO op3=new OpcionTO();
-	        op3.opcionId=2;
-	        op3.descripcion="otro valor";
-	        
-	        
-	        OpcionTO op4=new OpcionTO();
-	        op4.opcionId=2;
-	        op4.descripcion="xxxx";
-	        
-	        
-	        OpcionTO op5=new OpcionTO();
-	        op5.opcionId=2;
-	        op5.descripcion="tttt";
-	        
-	        
-	        
-	        p1.opciones.add(op1);
-	        p1.opciones.add(op2);
-	        p1.opciones.add(op3);
-	        p1.opciones.add(op4);
-	        p1.opciones.add(op5);
-	        
-	        
-	        PreguntaTO p2=new PreguntaTO();
-	        p2.pregunta="Pregunta 2 pres de casfsffsdfsda";
-	        p2.preguntaId=2;
-	        p2.tipoPregunta=4;
-	        
-	        OpcionTO op21=new OpcionTO();
-	        op21.opcionId=1;
-	        op21.descripcion="1";
-	        
-	        OpcionTO op22=new OpcionTO();
-	        op22.opcionId=2;
-	        op22.descripcion="2";
-	        
-	        OpcionTO op23=new OpcionTO();
-	        op23.opcionId=3;
-	        op23.descripcion="3";
-	        
-	        
-	        OpcionTO op24 =new OpcionTO();
-	        op24.opcionId=2;
-	        op24.descripcion="2";
-	        
-	        
-	        OpcionTO op25=new OpcionTO();
-	        op25.opcionId=2;
-	        op25.descripcion="2";
-
-	        OpcionTO op26=new OpcionTO();
-	        op26.opcionId=2;
-	        op26.descripcion="2";
-
-	        
-	        OpcionTO op27=new OpcionTO();
-	        op27.opcionId=2;
-	        op27.descripcion="2";
-
-	        
-
-	        OpcionTO op28=new OpcionTO();
-	        op28.opcionId=2;
-	        op28.descripcion="234";
-	        
-	        
-	        p2.opciones.add(op21);
-	        p2.opciones.add(op22);
-	        p2.opciones.add(op23);
-	        p2.opciones.add(op24);
-	        p2.opciones.add(op25);
-	        p2.opciones.add(op27);
-	        p2.opciones.add(op26);
-	        p2.opciones.add(op28);
-	        
-	        preguntas.add(p1);
-	        preguntas.add(p2);
-	        
-	        cargarPregunta();
-	        */
-	        
-	        
-	        
 	        
 	    }
 	   
@@ -185,33 +89,50 @@ public class Cuestionario_Activity extends ActivityBase {
 				break;
 			case 3:
 				viewPreguntaActual = layoutInflater.inflate(R.layout.pregunta_3, lnCuestionario,false);
-				//ListView lstOpciones1 =  (ListView)viewPreguntaActual.findViewById(R.id.lstOpciones);
 				SingleOpcion_Adapter opciones1 = new SingleOpcion_Adapter(this, preguntaTO.opciones);	
-				//lstOpciones1.setAdapter(opciones1);
-				//lstOpciones1.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-				
-				
 				GridView gr = (GridView)viewPreguntaActual.findViewById(R.id.gridview);
 				gr.setAdapter(opciones1);
 				break;
 			case 4:
-				//viewPreguntaActual = layoutInflater.inflate(R.layout.pregunta_3, lnCuestionario,false);
-				//ListView lstOpciones2 =  (ListView)viewPreguntaActual.findViewById(R.id.lstOpciones);
 				viewPreguntaActual = layoutInflater.inflate(R.layout.pregunta_3, lnCuestionario,false);
 				GridView gr2 = (GridView)viewPreguntaActual.findViewById(R.id.gridview);
 				MultipleOpcion_Adapter opciones2 = new MultipleOpcion_Adapter(this, preguntaTO.opciones);
 				gr2.setAdapter(opciones2);
-				
-				//lstOpciones2.setAdapter(opciones2);
-				//lstOpciones2.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 				break;
 			default:
 				break;
 			}
 	        
 	        
+	       //PREGUNTA
 	        TextView lblPregunta = (TextView)viewPreguntaActual.findViewById(R.id.lblPregunta);
 	        lblPregunta.setText(preguntaTO.pregunta);
+	        
+	        //COMENTARIO
+	        TextView txtComentario= (TextView)viewPreguntaActual.findViewById(R.id.txtComentario);
+	        if(preguntaTO.comentario.trim().compareTo("")==0){
+	        	txtComentario.setVisibility(View.GONE);
+	        }else{
+	        	txtComentario.setVisibility(View.VISIBLE);
+	        	txtComentario.setText(preguntaTO.comentario);
+	        }
+	        
+	        //OBSERVACION
+	        LinearLayout lnlObservacion = (LinearLayout)viewPreguntaActual.findViewById(R.id.lnlObservacion);
+	        if(preguntaTO.tieneObservacion==PreguntaTO.TIENE_OBSERVACION_SI){
+	        	lnlObservacion.setVisibility(View.VISIBLE);
+	        }else{
+	        	lnlObservacion.setVisibility(View.GONE);
+	        }
+	        
+	        //FOTO
+	        LinearLayout lnlFoto = (LinearLayout)viewPreguntaActual.findViewById(R.id.lnlFoto);
+	        if(preguntaTO.tieneFoto==PreguntaTO.TIENE_FOTO_SI){
+	        	lnlFoto.setVisibility(View.VISIBLE);
+	        }else{
+	        	lnlFoto.setVisibility(View.GONE);
+	        }
+	        
 			lnCuestionario.addView(viewPreguntaActual);
 	        
 	   }

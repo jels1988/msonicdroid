@@ -6,31 +6,79 @@
     
     
     
+      <LinearLayout
+    android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="right"
+    android:id="@+id/lnlFoto"
+    android:orientation="horizontal" >
+
+        
+         <ImageButton 
+             android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content" 
+	    android:contentDescription="@string/cuestionario_activity_ver_foto"
+	    android:src="@drawable/btn_verfoto"/>
+         
+          <ImageButton 
+             android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content" 
+	    
+	    android:contentDescription="@string/cuestionario_activity_tomar_foto"
+	    android:src="@drawable/btn_tomarfoto"/>
+ </LinearLayout>
+    
     <TextView
     android:id="@+id/lblPregunta"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_weight="0"
     style="@style/TextViewLabel2">
+    
 </TextView>
 
 
+      <EditText android:layout_width="fill_parent"
+        android:layout_height="0dip"
+    android:layout_weight="1"
+        android:inputType="numberDecimal"/>    
     
-    <EditText android:layout_weight="1" android:layout_width="fill_parent"
-        android:layout_height="wrap_content" android:inputType="numberDecimal"/>    
-       
-
- <TextView
-    android:id="@+id/textView1"
+    
+     <TextView
+     android:id="@+id/txtComentario"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_weight="0"
-    android:text="Comentarios:"
+    android:text="@string/cuestionario_activity_comentario"
     style="@style/TextViewLabel2"/>
- 
-  <EditText
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="0"/>
+     
+    
+    
 
+
+     
+      <LinearLayout
+    android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+    android:id="@+id/lnlObservacion"
+    android:orientation="vertical" >
+    
+         <TextView
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/cuestionario_activity_observacion"
+		    style="@style/TextViewLabel2"/>
+         
+	 <EditText
+	     android:id="@+id/txtObservacion"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:lines="3"
+	    android:maxLines="3"
+	    android:hint="@string/cuestionario_activity_observacion"/>
+
+
+	 
+  </LinearLayout>
+     
+     
+       
 </LinearLayout>
