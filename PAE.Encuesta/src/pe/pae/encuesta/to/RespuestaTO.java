@@ -1,6 +1,6 @@
 package pe.pae.encuesta.to;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class RespuestaTO {
 	
@@ -12,6 +12,6 @@ public class RespuestaTO {
 	public String fechaRegistro;
 	public String horaRegistro;
 	
-	public List<PreguntaTO> preguntas;
+	public ArrayList<PreguntaTO> preguntas;
 	 
 }

@@ -50,6 +50,14 @@
 	    android:layout_height="wrap_content" 
 	    android:contentDescription="@string/cuestionario_activity_ver_foto"
 	    android:layout_gravity="right"
+	    android:src="@drawable/btn_save"
+	     android:onClick="btnSave_onclick"/>
+    
+    <ImageButton 
+             android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content" 
+	    android:contentDescription="@string/cuestionario_activity_ver_foto"
+	    android:layout_gravity="right"
 	    android:src="@drawable/btn_next"
 	     android:onClick="btnSiguiente_onclick"/>
          

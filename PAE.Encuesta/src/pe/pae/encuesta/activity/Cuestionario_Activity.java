@@ -5,16 +5,15 @@ import java.util.ArrayList;
 import pe.pae.encuesta.R;
 import pe.pae.encuesta.negocio.EncuestaBLL;
 import pe.pae.encuesta.to.PreguntaTO;
+import pe.pae.encuesta.to.RespuestaTO;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -30,10 +29,8 @@ public class Cuestionario_Activity extends ActivityBase {
 	
 	@InjectView(R.id.actionBar)  		ActionBar 		mActionBar;
 	@InjectView(R.id.lnCuestionario)  	LinearLayout 	lnCuestionario;
-	//@InjectExtra("ENCUESTAID") 
-	int 				encuestaId=1;
-	//@InjectExtra("PRODUCTO") 	
-	String 				producto="1";
+	@InjectExtra("ENCUESTAID") 	int 				encuestaId;
+	@InjectExtra("PRODUCTO") 	String 				producto;
 	
 	
 	@Inject 					EncuestaBLL 		encuestaBLL;
@@ -42,13 +39,14 @@ public class Cuestionario_Activity extends ActivityBase {
 	private int index=0;
 	private View viewPreguntaActual;
 	private ArrayList<PreguntaTO> preguntas;
-	
+	private RespuestaTO respuestaTO=null;
 	
 	
 	@Override
 	protected void process() {
 		// TODO Auto-generated method stub
-		preguntas = encuestaBLL.listarPreguntas(encuestaId);
+		respuestaTO.preguntas=encuestaBLL.listarPreguntas(encuestaId);
+		preguntas = respuestaTO.preguntas;//encuestaBLL.listarPreguntas(encuestaId);
 		super.process();
 	}
 	
@@ -73,6 +71,8 @@ public class Cuestionario_Activity extends ActivityBase {
 	        setContentView(R.layout.cuestionario_activity);
 	        mActionBar.setTitle(R.string.cuestionario_activity_title);
 	        mActionBar.setSubTitle(producto);
+	        respuestaTO = new RespuestaTO();
+	        
 	        
 	        processAsync();
 	        
@@ -209,6 +209,7 @@ public class Cuestionario_Activity extends ActivityBase {
 	   }
 	   public void btnSiguiente_onclick(View v){
 		   if(preguntas==null) return;
+		
 		   
 		   lnCuestionario.removeViewAt(lnCuestionario.getChildCount()-1);
 		   index++;
@@ -221,10 +222,16 @@ public class Cuestionario_Activity extends ActivityBase {
 	   public void btnAnterior_onclick(View v){
 		   if(preguntas==null) return;
 		   
+		  
 		   lnCuestionario.removeViewAt(lnCuestionario.getChildCount()-1);
 		   index--;
 		   if(index==-1)index=preguntas.size()-1;
 		   
 		   cargarPregunta();
+	   }
+	   
+	   public void btnSave_onclick(View v){
+		   encuestaBLL.guardarEncuestaRespuesta(respuestaTO);
+		   
 	   }
 }

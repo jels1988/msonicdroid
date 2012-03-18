@@ -66,7 +66,7 @@ public class EncuestaDAO {
 	public void guardarEncuestaPreguntaOpcion(long respuestapreguntaid,OpcionTO opcionTO){
 		ContentValues parametros = new ContentValues();
 		parametros.put("respuestapreguntaid", respuestapreguntaid);
-		parametros.put("preguntaid", opcionTO.opcionId);
+		parametros.put("opcionid", opcionTO.opcionId);
 		dbHelper.getDataBase().insertOrThrow("respuesta_opcion", null, parametros);
 	}
 	

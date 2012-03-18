@@ -69,6 +69,47 @@ public class EncuestaBLL {
 		}
 	}
 	
+	public void guardarEncuestaRespuesta(RespuestaTO respuesta,PreguntaTO preguntaTO){
+		
+		respuesta.fechaRegistro = "010101";
+		respuesta.horaRegistro = "0202";
+		long respuestaId=respuesta.respuestaId;
+		long respuestaPreguntaId=0;
+		try {
+			dbHelper.openDataBase();
+			
+			if(respuestaId==0){
+				respuestaId = encuestaDAO.insertEncuestaRespuesta(respuesta);
+				respuesta.respuestaId=respuestaId;
+			}
+		
+		
+				
+			respuestaPreguntaId = preguntaTO.respuestaOpcionId;
+			
+			if(respuestaPreguntaId==0){
+				respuestaPreguntaId = encuestaDAO.insertEncuestaPreguntaRespuesta(respuestaId, preguntaTO);
+			}else{
+				 encuestaDAO.updateEncuestaPreguntaRespuesta(preguntaTO);
+			}
+				
+				
+				//ELIMINAMOS TODAS LAS OPCIONES
+				if(respuestaPreguntaId!=0){
+					encuestaDAO.deleteEncuestaPreguntaOpcion(respuestaPreguntaId);
+				}
+				
+				for(OpcionTO opcionTO : preguntaTO.opciones){
+					encuestaDAO.guardarEncuestaPreguntaOpcion(respuestaPreguntaId, opcionTO);
+				}
+
+		} catch (Exception e) {
+			Log.e(TAG_LOG, "guardarEncuestaRespuesta x Pregunta", e);
+		} finally {
+			dbHelper.close();
+		}
+	}
+	
 	
 	
 	
