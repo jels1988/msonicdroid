@@ -112,6 +112,11 @@ public class Cuestionario_Activity extends ActivityBase {
 	        op27.descripcion="2";
 
 	        
+
+	        OpcionTO op28=new OpcionTO();
+	        op28.opcionId=2;
+	        op28.descripcion="234";
+	        
 	        
 	        p2.opciones.add(op21);
 	        p2.opciones.add(op22);
@@ -120,6 +125,7 @@ public class Cuestionario_Activity extends ActivityBase {
 	        p2.opciones.add(op25);
 	        p2.opciones.add(op27);
 	        p2.opciones.add(op26);
+	        p2.opciones.add(op28);
 	        
 	        preguntas.add(p1);
 	        preguntas.add(p2);

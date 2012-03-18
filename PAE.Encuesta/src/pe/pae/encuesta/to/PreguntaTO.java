@@ -2,20 +2,35 @@ package pe.pae.encuesta.to;
 
 import java.util.ArrayList;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PreguntaTO {
 	
 	public PreguntaTO(){
 		opciones = new ArrayList<OpcionTO>();
 	}
-	public int preguntaId;
-	public int tipoPregunta;
-	public String pregunta;
-	//OPCIONES
-	public ArrayList<OpcionTO> opciones;
 	
-	//ALMACENAR LA RESPUESTA
+	@SerializedName("Id")
+	public int preguntaId;
+	
+	@SerializedName("Des")
+	public String pregunta;
+	
+	@SerializedName("Tip")
+	public int tipoPregunta;
+	
+	
+	@SerializedName("Fot")
+	public int tieneFoto;
+	
+	@SerializedName("Obs")
+	public int tieneObservacion;
+	
+	@SerializedName("Com")
 	public String comentario;
 	
-		
+	
+	@SerializedName("Opc")
+	public ArrayList<OpcionTO> opciones;
 	
 }

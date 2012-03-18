@@ -2,13 +2,17 @@ package pe.pae.encuesta.to;
 
 import com.google.gson.annotations.SerializedName;
 
-public class OpcionTO {
+public class ProductoTO {
 
+	
 	@SerializedName("Id")
-	public int opcionId;
+	public int productoId;
 	
 	@SerializedName("Des")
 	public String descripcion;
-	public boolean seleccionado;
+	
+	@SerializedName("EnId")
+	public int encuestaId;
+	
 
 }
