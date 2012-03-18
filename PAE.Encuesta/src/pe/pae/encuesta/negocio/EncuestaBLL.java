@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.msonic.lib.DBHelper;
 import pe.pae.encuesta.dao.EncuestaDAO;
+import pe.pae.encuesta.to.EncuestaTO;
 import pe.pae.encuesta.to.ProductoTO;
 
 import android.util.Log;
@@ -20,15 +21,12 @@ public class EncuestaBLL {
 	
 	
 	public void saveProductos(List<ProductoTO> productos){
-		
-		
-
 		try {
 			dbHelper.openDataBase();
 			dbHelper.beginTransaction();
 			
 			for (ProductoTO productoTO : productos) {
-				encuestaDAO.guardar(productoTO);
+				encuestaDAO.guardarProducto(productoTO);
 			}
 			
 			dbHelper.setTransactionSuccessful();
@@ -39,6 +37,24 @@ public class EncuestaBLL {
 			dbHelper.endTransaction();
 			dbHelper.close();
 		}
-		
+	}
+	
+	public void saveEncuestas(List<EncuestaTO> encuestas){
+		try {
+			dbHelper.openDataBase();
+			dbHelper.beginTransaction();
+			
+			for (EncuestaTO encuestaTO : encuestas) {
+				encuestaDAO.guardarEncuesta(encuestaTO);
+			}
+			
+			dbHelper.setTransactionSuccessful();
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e(TAG_LOG,"saveEncuestas", e);
+		}finally{
+			dbHelper.endTransaction();
+			dbHelper.close();
+		}
 	}
 }

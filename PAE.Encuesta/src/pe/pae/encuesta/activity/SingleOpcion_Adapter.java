@@ -2,6 +2,7 @@ package pe.pae.encuesta.activity;
 
 import java.util.ArrayList;
 
+
 import pe.pae.encuesta.R;
 import pe.pae.encuesta.to.OpcionTO;
 import android.app.Activity;
@@ -15,6 +16,8 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
 
 public class SingleOpcion_Adapter extends ArrayAdapter<OpcionTO> {
+	
+	
 	
 	private final ArrayList<OpcionTO> opciones;
 	private final Activity context;

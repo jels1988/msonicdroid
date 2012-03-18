@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 import pe.pae.encuesta.R;
 import pe.pae.encuesta.negocio.ClienteBLL;
+import pe.pae.encuesta.negocio.EncuestaBLL;
 import pe.pae.encuesta.to.ClienteTO;
 import pe.pae.encuesta.to.TiendaTO;
 import pe.pae.encuesta.ws.service.EncuestaProxy;
 import roboguice.inject.InjectView;
-import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,6 +27,7 @@ public class Tienda_Seleccionar_Activity extends ActivityBase {
 
 @InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 @Inject 						ClienteBLL 	clienteBLL; 
+@Inject 						EncuestaBLL encuestaBLL;
 @InjectView(R.id.cboCliente)   	Spinner 	cboCliente;
 @InjectView(R.id.cboTienda)   	Spinner 	cboTienda;
 
@@ -86,9 +87,6 @@ public class Tienda_Seleccionar_Activity extends ActivityBase {
     }
     
     public void btnIngresar_onclick(View v){
-    	/*
-    	Intent i = new Intent("pae.activity.buscarProducto");
-    	startActivity(i);*/
     	processAsync();
     }
 
@@ -115,9 +113,12 @@ public class Tienda_Seleccionar_Activity extends ActivityBase {
 		if (isExito) {
 			int status = encuestaProxy.getResponse().getStatus();
 				if (status == 0) {
-					int x = encuestaProxy.getResponse().productos.size();
-					int y = encuestaProxy.getResponse().encuestas.size();
-					Log.d("","");
+					
+					encuestaBLL.saveProductos(encuestaProxy.getResponse().productos);
+					encuestaBLL.saveEncuestas(encuestaProxy.getResponse().encuestas);
+					
+					Intent i = new Intent("pae.activity.buscarProducto");
+			    	startActivity(i);
 				}
 		}
 		

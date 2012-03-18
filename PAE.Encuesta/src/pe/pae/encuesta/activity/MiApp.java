@@ -5,7 +5,9 @@ import java.util.List;
 import net.msonic.lib.DBHelper;
 import net.msonic.lib.DBHelperProvider;
 import pe.pae.encuesta.dao.ClienteDAO;
+import pe.pae.encuesta.dao.EncuestaDAO;
 import pe.pae.encuesta.negocio.ClienteBLL;
+import pe.pae.encuesta.negocio.EncuestaBLL;
 import pe.pae.encuesta.to.UsuarioTO;
 import pe.pae.encuesta.ws.service.EncuestaProxy;
 import pe.pae.encuesta.ws.service.LoginProxy;
@@ -47,6 +49,9 @@ public class MiApp extends RoboApplication {
 				
 				bind(ClienteDAO.class).in(Singleton.class);
 				bind(ClienteBLL.class).in(Singleton.class);
+				
+				bind(EncuestaDAO.class).in(Singleton.class);
+				bind(EncuestaBLL.class).in(Singleton.class);
 				
 			}
 		});

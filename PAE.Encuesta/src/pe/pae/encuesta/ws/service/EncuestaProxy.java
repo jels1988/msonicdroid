@@ -1,5 +1,6 @@
 package pe.pae.encuesta.ws.service;
 
+
 import pe.pae.encuesta.R;
 import pe.pae.encuesta.ws.bean.EncuestaRequest;
 import pe.pae.encuesta.ws.bean.EncuestaResponse;
@@ -10,7 +11,7 @@ import net.msonic.lib.ProxyBase;
 public class EncuestaProxy extends ProxyBase<EncuestaResponse> {
 
 	@InjectResource(R.string.urlLoginWS)protected String urlWS;
-	
+
 	
 	public int usuarioId;
 	public int clienteId;
