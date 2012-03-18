@@ -63,12 +63,12 @@ public class ClienteBLL {
 			}
 			
 			dbHelper.setTransactionSuccessful();
-	} catch (Exception e) {
-		// TODO: handle exception
-		Log.e(ClienteBLL.class.toString(),"saveCliente", e);
-	}finally{
-		dbHelper.endTransaction();
-		dbHelper.close();
-	}
+			} catch (Exception e) {
+				// TODO: handle exception
+				Log.e(TAG_LOG,"saveCliente", e);
+			}finally{
+				dbHelper.endTransaction();
+				dbHelper.close();
+			}
 	}
 }

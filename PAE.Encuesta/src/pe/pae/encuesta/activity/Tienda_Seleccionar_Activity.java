@@ -116,6 +116,7 @@ public class Tienda_Seleccionar_Activity extends ActivityBase {
 			int status = encuestaProxy.getResponse().getStatus();
 				if (status == 0) {
 					int x = encuestaProxy.getResponse().productos.size();
+					int y = encuestaProxy.getResponse().encuestas.size();
 					Log.d("","");
 				}
 		}

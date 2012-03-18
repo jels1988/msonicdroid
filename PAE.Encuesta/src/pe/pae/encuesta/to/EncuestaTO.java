@@ -11,8 +11,8 @@ public class EncuestaTO {
 	public int encuestaId;
 	
 	@SerializedName("Des")
-	public int descripcion;
+	public String descripcion;
 	
 	@SerializedName("Prg")
-	public List<OpcionTO> preguntas;
+	public List<PreguntaTO> preguntas;
 }
