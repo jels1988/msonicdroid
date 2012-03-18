@@ -20,6 +20,26 @@ public class EncuestaDAO {
 	@Inject protected DBHelper dbHelper;
 	
 	
+	public ArrayList<OpcionTO> listarOpciones(int preguntaId){
+		String SQL = "select * from opcion where preguntaid = ?";
+		String[] parametros = new String[] { String.valueOf(preguntaId)};
+		
+		ArrayList<OpcionTO> opciones = new ArrayList<OpcionTO>();
+		Cursor cursor = dbHelper.getDataBase().rawQuery(SQL,parametros);
+		
+		OpcionTO opcionTO;
+		while(cursor.moveToNext()){
+			opcionTO = new OpcionTO();
+			opcionTO.opcionId = cursor.getInt(cursor.getColumnIndex("opcionid"));
+			opcionTO.descripcion = cursor.getString(cursor.getColumnIndex("descripcion"));
+			opciones.add(opcionTO);
+		}
+		
+		cursor.close();
+		
+		return opciones;
+	}
+	
 	public ArrayList<PreguntaTO> listarPreguntas(int encuestaId){
 		String SQL = "select * from pregunta where encuestaid = ?";
 		String[] parametros = new String[] { String.valueOf(encuestaId)};
@@ -37,6 +57,7 @@ public class EncuestaDAO {
 			preguntaTO.tieneFoto = cursor.getInt(cursor.getColumnIndex("tienefoto"));
 			preguntaTO.tieneObservacion = cursor.getInt(cursor.getColumnIndex("tieneobservacion"));
 			preguntaTO.comentario = cursor.getString(cursor.getColumnIndex("comentario"));
+			preguntaTO.opciones = listarOpciones(preguntaTO.preguntaId);
 			preguntas.add(preguntaTO);
 			
 		}

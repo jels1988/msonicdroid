@@ -11,28 +11,14 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_weight="0"
-    android:text="¿Desea Preguntar?"
     style="@style/TextViewLabel2">
 </TextView>
 
 
     
-        <RadioGroup android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" >
-        <RadioButton
-        android:id="@+id/radioButton1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:text="Si" />
-    
-	    <RadioButton
-	    android:id="@+id/radioButton2"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_weight="0.5"
-	    android:text="No" />
-    
-        </RadioGroup>
+    <EditText android:layout_weight="1" android:layout_width="fill_parent"
+        android:layout_height="wrap_content" android:inputType="numberDecimal"/>    
+       
 
  <TextView
     android:id="@+id/textView1"
