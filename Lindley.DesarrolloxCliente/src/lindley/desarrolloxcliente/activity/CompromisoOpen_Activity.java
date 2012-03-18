@@ -254,7 +254,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	    	final CompromisoTO compromiso = (CompromisoTO) getItem(position);
 	    	final ViewHolder holder;
 
-	      if (convertView == null) {
+	      //if (convertView == null) {
 	        convertView = mInflater.inflate(R.layout.compromisoopen_content, null);
 
 	        // Creates a ViewHolder and store references to the two children
@@ -282,11 +282,11 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	    	holder.btnProfit = (Button) convertView.findViewById(R.id.btnProfit);
 	        
 	        convertView.setTag(holder);
-	      } else {
+	     // } else {
 	        // Get the ViewHolder back to get fast access to the TextView
 	        // and the ImageView.
-	        holder = (ViewHolder) convertView.getTag();
-	      }
+	      //  holder = (ViewHolder) convertView.getTag();
+	     // }
 	      
 	      holder.txViewPro.setText(compromiso.getDescripcionProducto());
 	      //holder.txViewConcrecion.setText(compromiso.getConcrecion());
