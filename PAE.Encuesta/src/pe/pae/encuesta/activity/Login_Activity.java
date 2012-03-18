@@ -98,8 +98,9 @@ public class Login_Activity extends ActivityBase {
 		int status = loginProxy.getResponse().getStatus();
 			if (status == 0) {
 				
-				
+				MiApp miApp = (MiApp)getApplication();
 				UsuarioTO usuarioTO = loginProxy.getResponse().usuario;
+				miApp.setUsuarioTO(usuarioTO);
 				message = String.format(login_ok,usuarioTO.nombres);
 				clienteBLL.saveCliente(loginProxy.getResponse().clientes);
 				Intent i = new Intent("pae.activity.seleccionarTienda");

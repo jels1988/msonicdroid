@@ -6,10 +6,12 @@ import pe.pae.encuesta.R;
 import pe.pae.encuesta.negocio.ClienteBLL;
 import pe.pae.encuesta.to.ClienteTO;
 import pe.pae.encuesta.to.TiendaTO;
+import pe.pae.encuesta.ws.service.EncuestaProxy;
 import roboguice.inject.InjectView;
+import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,19 +29,16 @@ public class Tienda_Seleccionar_Activity extends ActivityBase {
 @Inject 						ClienteBLL 	clienteBLL; 
 @InjectView(R.id.cboCliente)   	Spinner 	cboCliente;
 @InjectView(R.id.cboTienda)   	Spinner 	cboTienda;
+
+@Inject 						EncuestaProxy 	encuestaProxy;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+        inicializarRecursos();
         
         setContentView(R.layout.tienda_seleccionar_activity);
         mActionBar.setTitle(R.string.tienda_seleccionar_activity_title);
-        
-        /*
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-        		android.R.layout.simple_spinner_item, list);
-        	dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
-        
+     
         
         ArrayList<ClienteTO> clientes = clienteBLL.listarClientes();
         ClienteTO clienteTO = new ClienteTO();
@@ -87,7 +86,49 @@ public class Tienda_Seleccionar_Activity extends ActivityBase {
     }
     
     public void btnIngresar_onclick(View v){
+    	/*
     	Intent i = new Intent("pae.activity.buscarProducto");
-    	startActivity(i);
+    	startActivity(i);*/
+    	processAsync();
     }
+
+	@Override
+	protected void process() {
+		// TODO Auto-generated method stub
+		
+		ClienteTO clienteTO = ((ClienteTO) cboCliente.getSelectedItem());
+		MiApp miApp = (MiApp)getApplication();
+		
+		
+		encuestaProxy.clienteId=clienteTO.clienteId;
+		encuestaProxy.usuarioId=miApp.getUsuarioTO().usuarioId;
+		encuestaProxy.execute();
+		
+		super.process();
+	}
+
+	@Override
+	protected void processOk() {
+		// TODO Auto-generated method stub
+		
+		boolean isExito = encuestaProxy.isExito();
+		if (isExito) {
+			int status = encuestaProxy.getResponse().getStatus();
+				if (status == 0) {
+					int x = encuestaProxy.getResponse().productos.size();
+					Log.d("","");
+				}
+		}
+		
+		
+		super.processOk();
+	}
+
+	@Override
+	protected void processError() {
+		// TODO Auto-generated method stub
+		super.processError();
+	}
+    
+    
 }
