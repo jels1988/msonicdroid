@@ -1,12 +1,16 @@
 package pe.pae.encuesta.dao;
 
 
+import java.util.ArrayList;
+
 import pe.pae.encuesta.to.EncuestaTO;
+import pe.pae.encuesta.to.OpcionTO;
 import pe.pae.encuesta.to.PreguntaTO;
 import pe.pae.encuesta.to.ProductoTO;
 import net.msonic.lib.DBHelper;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 
 import com.google.inject.Inject;
 
@@ -14,6 +18,30 @@ public class EncuestaDAO {
 
 
 	@Inject protected DBHelper dbHelper;
+	
+	
+	public ArrayList<ProductoTO> buscarProducto(String descripcion){
+
+		String SQL = "select * from producto where descripcion like ?";
+		String[] parametros = new String[] { "%" + descripcion + "%"};
+
+		
+		ArrayList<ProductoTO>  productos = new ArrayList<ProductoTO>();
+		Cursor cursor = dbHelper.getDataBase().rawQuery(SQL,parametros);
+		
+		ProductoTO productoTO;
+		while(cursor.moveToNext()){
+			productoTO=new ProductoTO();
+			productoTO.productoId = cursor.getInt(cursor.getColumnIndex("productoid"));
+			productoTO.descripcion = cursor.getString(cursor.getColumnIndex("descripcion"));	
+			productoTO.encuestaId = cursor.getInt(cursor.getColumnIndex("encuestaid"));
+			productos.add(productoTO);
+		}
+		cursor.close();
+		
+		return productos;
+	}
+	
 	
 	public void guardarProducto(ProductoTO producto){
 		
@@ -51,5 +79,19 @@ public class EncuestaDAO {
 		
 		dbHelper.getDataBase().insertOrThrow("pregunta", null, parametros);
 		
+		for (OpcionTO opcionTO : preguntaTO.opciones) {
+			guardarOpcion(preguntaTO.preguntaId,opcionTO);
+		}
+		
+	}
+	
+	public void guardarOpcion(int preguntaId,OpcionTO opcionTO){
+		ContentValues parametros = new ContentValues();
+		parametros.put("opcionid", opcionTO.opcionId);
+		parametros.put("descripcion", opcionTO.descripcion);
+		parametros.put("seleccionado", (opcionTO.seleccionado?1:0));
+		parametros.put("preguntaid", preguntaId);
+		
+		dbHelper.getDataBase().insertOrThrow("opcion", null, parametros);
 	}
 }

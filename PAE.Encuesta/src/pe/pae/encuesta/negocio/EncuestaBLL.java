@@ -1,5 +1,6 @@
 package pe.pae.encuesta.negocio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.msonic.lib.DBHelper;
@@ -19,6 +20,21 @@ public class EncuestaBLL {
 	@Inject protected DBHelper dbHelper;
 	@Inject protected EncuestaDAO encuestaDAO;
 	
+	public ArrayList<ProductoTO> buscarProducto(String descripcion){
+		ArrayList<ProductoTO> productos=null;
+		
+		
+		try {
+			dbHelper.openDataBase();
+			productos = encuestaDAO.buscarProducto(descripcion);
+		} catch (Exception e) {
+			Log.e(TAG_LOG, "buscarProducto", e);
+		} finally {
+			dbHelper.close();
+		}
+		
+		return productos;
+	}
 	
 	public void saveProductos(List<ProductoTO> productos){
 		try {

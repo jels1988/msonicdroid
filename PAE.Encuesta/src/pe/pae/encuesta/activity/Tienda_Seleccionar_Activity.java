@@ -102,6 +102,20 @@ public class Tienda_Seleccionar_Activity extends ActivityBase {
 		encuestaProxy.usuarioId=miApp.getUsuarioTO().usuarioId;
 		encuestaProxy.execute();
 		
+		
+		
+		boolean isExito = encuestaProxy.isExito();
+		if (isExito) {
+			int status = encuestaProxy.getResponse().getStatus();
+				if (status == 0) {
+					
+					encuestaBLL.saveProductos(encuestaProxy.getResponse().productos);
+					encuestaBLL.saveEncuestas(encuestaProxy.getResponse().encuestas);
+					
+					
+				}
+		}
+		
 		super.process();
 	}
 
@@ -113,10 +127,6 @@ public class Tienda_Seleccionar_Activity extends ActivityBase {
 		if (isExito) {
 			int status = encuestaProxy.getResponse().getStatus();
 				if (status == 0) {
-					
-					encuestaBLL.saveProductos(encuestaProxy.getResponse().productos);
-					encuestaBLL.saveEncuestas(encuestaProxy.getResponse().encuestas);
-					
 					Intent i = new Intent("pae.activity.buscarProducto");
 			    	startActivity(i);
 				}
