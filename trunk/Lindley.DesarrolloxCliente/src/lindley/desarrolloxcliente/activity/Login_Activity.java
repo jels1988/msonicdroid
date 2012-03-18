@@ -105,7 +105,6 @@ public class Login_Activity extends ActivityBase {
 				
 				Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
 				startActivity(intent);
-				
 			}else{
 				message = String.format(
 						login_error,
