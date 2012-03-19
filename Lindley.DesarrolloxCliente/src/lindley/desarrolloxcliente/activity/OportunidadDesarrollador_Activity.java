@@ -63,6 +63,44 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
         processAsync(); 
     }
     
+    public void btnSiguiente_click(View view)
+    {
+    	ArrayList<OportunidadTO> oportunidadesDesarrollador = application.getOportunidadesDesarrollador();
+    	
+    	if(oportunidadesDesarrollador==null){
+    		oportunidadesDesarrollador = new ArrayList<OportunidadTO>();
+    	}else{
+    		oportunidadesDesarrollador.clear();
+    	}
+    	
+    	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
+    	
+    	for (OportunidadTO oportunidad : adap.detalles) {
+    		if(Integer.parseInt(oportunidad.getPuntosCocaCola())>0){
+    			oportunidadesDesarrollador.add(oportunidad);
+    			//filasSeleccionadas++;
+    		}
+		}
+    	
+    	int filasSeleccionadas=oportunidadesDesarrollador.size();
+    	
+    	if(filasSeleccionadas>2){
+    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede ingresar como m‡ximo 2 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+				}
+				
+			});	
+    	}else{
+    		application.setOportunidadesDesarrollador(oportunidadesDesarrollador); 		
+    		Intent intent = new Intent("lindley.desarrolloxcliente.consultarposicion");
+    		startActivity(intent);
+    		//processAsync(ACCION_GUARDAR);
+    	}
+    	
+    }
+    
     public void btnGuardar_click(View view)
     {
     	ArrayList<OportunidadTO> oportunidadesDesarrollador = application.getOportunidadesDesarrollador();
