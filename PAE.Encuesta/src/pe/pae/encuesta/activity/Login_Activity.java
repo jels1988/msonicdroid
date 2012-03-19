@@ -11,8 +11,11 @@ import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.ActivityBase;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.TextView;
 
@@ -93,7 +96,7 @@ public class Login_Activity extends ActivityBase {
 	// TODO Auto-generated method stub
 	boolean isExito = loginProxy.isExito();
 	String message;
-	
+	Context ctx=this;
 	if (isExito) {
 		int status = loginProxy.getResponse().getStatus();
 			if (status == 0) {
@@ -103,8 +106,27 @@ public class Login_Activity extends ActivityBase {
 				miApp.setUsuarioTO(usuarioTO);
 				message = String.format(login_ok,usuarioTO.nombres);
 				clienteBLL.saveCliente(loginProxy.getResponse().clientes);
-				Intent i = new Intent("pae.activity.seleccionarTienda");
-		    	startActivity(i);
+				
+				
+				SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(ctx);
+				int ENCUESTA_INICIO = settings.getInt("ENCUESTA_INICIO",0);
+				
+				if(ENCUESTA_INICIO==0){
+					Intent i = new Intent("pae.activity.seleccionarTienda");
+			    	startActivity(i);
+				}else{
+					
+					int CLIENTE_ID = settings.getInt("CLIENTE_ID",0);
+					int TIENDA_ID = settings.getInt("TIENDA_ID",0);
+					String TIENDA = settings.getString("TIENDA","");
+					
+					 miApp.tiendaId=TIENDA_ID;
+				     miApp.tienda=TIENDA;
+				     miApp.clienteId=CLIENTE_ID;
+				     
+					Intent i = new Intent("pae.activity.buscarProducto");
+			    	startActivity(i);
+				}
 		    	
 			}else{
 				message = String.format(

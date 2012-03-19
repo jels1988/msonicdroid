@@ -14,6 +14,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -41,12 +43,7 @@ public class Producto_Buscar_Activity extends ListActivityBase {
 	        MiApp miApp = (MiApp)getApplication();
 	        mActionBar.setSubTitle(miApp.tienda);
 	    }
-	   
-	   
-	   
-	   
-	   
-	   
+
 	   
 	   @Override
 	protected void process() {
@@ -67,6 +64,16 @@ public class Producto_Buscar_Activity extends ListActivityBase {
 
 
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = new MenuInflater(this);
+		inflater.inflate(R.menu.producto_buscar_menu,menu);
+		return true;
+	}
+
+
+	@Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
 		setListAdapter(adap);
@@ -81,8 +88,6 @@ public class Producto_Buscar_Activity extends ListActivityBase {
 
 	public void btnBuscar_onclick(View v){
 			processAsync();
-		   /*Intent i = new Intent("pae.activity.custionarioProducto");
-	       startActivity(i);*/
 	   }
 	   
 	   

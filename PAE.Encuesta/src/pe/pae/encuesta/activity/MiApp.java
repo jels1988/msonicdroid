@@ -8,7 +8,6 @@ import pe.pae.encuesta.dao.ClienteDAO;
 import pe.pae.encuesta.dao.EncuestaDAO;
 import pe.pae.encuesta.negocio.ClienteBLL;
 import pe.pae.encuesta.negocio.EncuestaBLL;
-import pe.pae.encuesta.to.TiendaTO;
 import pe.pae.encuesta.to.UsuarioTO;
 import pe.pae.encuesta.ws.service.EncuestaProxy;
 import pe.pae.encuesta.ws.service.LoginProxy;
@@ -23,7 +22,7 @@ public class MiApp extends RoboApplication {
 
 	
 	
-	//public TiendaTO tiendaTO;
+	public int clienteId;
 	public int tiendaId;
 	public String tienda;
 	
