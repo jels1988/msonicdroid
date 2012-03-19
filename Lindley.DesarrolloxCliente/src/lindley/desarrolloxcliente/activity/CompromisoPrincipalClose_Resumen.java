@@ -45,7 +45,7 @@ public class CompromisoPrincipalClose_Resumen extends TabActivity {
 		tabview = createTabView(mTabHost.getContext(), "POSICION");
 		Intent posicion = new Intent(this, CompromisoPosicionClose_Activity.class);
 		posicion.putExtra(CompromisoPosicionClose_Activity.COD_GESTION, codigoRegistro);
-		posicion.putExtra(CompromisoPosicionClose_Activity.RESPUESTA, "N");		
+		//posicion.putExtra(CompromisoPosicionClose_Activity.RESPUESTA, "N");		
 		setContent = mTabHost.newTabSpec("POSICION").setIndicator(tabview).setContent(posicion);
 		mTabHost.addTab(setContent);
 		

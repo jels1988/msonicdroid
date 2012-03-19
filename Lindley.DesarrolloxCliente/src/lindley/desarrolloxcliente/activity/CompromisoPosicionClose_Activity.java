@@ -27,7 +27,7 @@ import com.thira.examples.actionbar.widget.ActionBar;
 
 public class CompromisoPosicionClose_Activity extends ListActivityBase {
 
-	public static final String RESPUESTA = "rspta";
+	//public static final String RESPUESTA = "rspta";
 	public static final String COD_GESTION = "codGestion";
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarPosicionCompromisoProxy consultarPosicionCompromisoProxy;
@@ -35,7 +35,7 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 	ClienteTO cliente;
 	private EfficientAdapter adap;	
 	private MyApplication application;
-	@InjectExtra(RESPUESTA) String respuesta;
+	//@InjectExtra(RESPUESTA) String respuesta;
 	@InjectExtra(COD_GESTION) String codigoGestion;
 	
 	/** Called when the activity is first created. */
@@ -55,7 +55,7 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
     @Override
    	protected void process() {
     	consultarPosicionCompromisoProxy.setCodigoCliente(cliente.getCodigo());
-    	consultarPosicionCompromisoProxy.setRespuesta(respuesta);       	
+    	//consultarPosicionCompromisoProxy.setRespuesta(respuesta);       	
     	consultarPosicionCompromisoProxy.setCodigoGestion(codigoGestion);
     	consultarPosicionCompromisoProxy.execute();
    	}

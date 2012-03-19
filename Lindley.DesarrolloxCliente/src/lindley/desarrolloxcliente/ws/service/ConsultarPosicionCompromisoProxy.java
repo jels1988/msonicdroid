@@ -14,7 +14,7 @@ public class ConsultarPosicionCompromisoProxy extends ProxyBase<ConsultarPosicio
 	
 	private String codigoCliente;
 	private String codigoGestion;
-	private String respuesta;
+	//private String respuesta;
 
 	public String getCodigoCliente() {
 		return codigoCliente;
@@ -32,13 +32,13 @@ public class ConsultarPosicionCompromisoProxy extends ProxyBase<ConsultarPosicio
 		this.codigoGestion = codigoGestion;
 	}
 
-	public String getRespuesta() {
+	/*public String getRespuesta() {
 		return respuesta;
 	}
 
 	public void setRespuesta(String respuesta) {
 		this.respuesta = respuesta;
-	}
+	}*/
 	
 	@Override
 	protected String getUrl() {
@@ -52,7 +52,7 @@ public class ConsultarPosicionCompromisoProxy extends ProxyBase<ConsultarPosicio
 		ConsultarPosicionCompromisoRequest consultarPosicionCompromisoRequest = new ConsultarPosicionCompromisoRequest();
 		consultarPosicionCompromisoRequest.setCodigoCliente(this.codigoCliente);
 		consultarPosicionCompromisoRequest.setCodigoGestion(this.codigoGestion);
-		consultarPosicionCompromisoRequest.setRespuesta(this.respuesta);
+		//consultarPosicionCompromisoRequest.setRespuesta(this.respuesta);
 		
 		String request = JSONHelper.serializar(consultarPosicionCompromisoRequest);
 		return request;

@@ -46,6 +46,9 @@ public class PosicionCompromisoTO {
 
     @SerializedName("PTO")
     private String puntosSugeridos;
+    
+    @SerializedName("RSPT")
+    public String respuesta;
 
 	public String getCodigoVariable() {
 		return codigoVariable;
