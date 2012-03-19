@@ -20,7 +20,16 @@ public class EncuestaDAO {
 
 	@Inject protected DBHelper dbHelper;
 	
-	
+	public long inserImagen(long respuestaId,PreguntaTO preguntaTO){
+		
+		ContentValues parametros = new ContentValues();
+		parametros.put("respuestaid", respuestaId);
+		parametros.put("preguntaid", preguntaTO.preguntaId);
+		parametros.put("imagen", preguntaTO.foto);
+		
+		
+		return 0;
+	}
 	public long insertEncuestaRespuesta(RespuestaTO respuesta){
 		
 		ContentValues parametros = new ContentValues();
@@ -41,6 +50,9 @@ public class EncuestaDAO {
 		parametros.put("preguntaid", preguntaTO.preguntaId);
 		parametros.put("observacion", preguntaTO.observacion);
 		parametros.put("respuesta_1", preguntaTO.respuesta_1);
+		parametros.put("foto", preguntaTO.foto);
+		parametros.put("idservidor", 0);
+		
 		
 		long id  = dbHelper.getDataBase().insertOrThrow("respuesta_pregunta", null, parametros);
 		return id;
@@ -51,6 +63,8 @@ public class EncuestaDAO {
 		parametros.put("preguntaid", preguntaTO.preguntaId);
 		parametros.put("observacion", preguntaTO.observacion);
 		parametros.put("respuesta_1", preguntaTO.respuesta_1);
+		parametros.put("foto", preguntaTO.foto);
+		parametros.put("idservidor", preguntaTO.servidorId);
 		
 		String[] valores = new String[] { String.valueOf(preguntaTO.respuestaOpcionId) };
 		dbHelper.getDataBase().update("respuesta_pregunta", parametros, "respuestapreguntaid=?", valores);
@@ -119,7 +133,7 @@ public class EncuestaDAO {
 		
 		
 		
-		SQL = "select p.preguntaid,p.pregunta,p.tipopregunta,p.tienefoto,p.tieneobservacion,p.comentario,rp.respuestapreguntaid,rp.observacion,rp.respuesta_1 from pregunta p left join respuesta_pregunta rp on p.preguntaid = rp.preguntaid and respuestaid = ? where encuestaid = ?";
+		SQL = "select p.preguntaid,p.pregunta,p.tipopregunta,p.tienefoto,p.tieneobservacion,p.comentario,rp.respuestapreguntaid,rp.observacion,rp.respuesta_1,rp.foto,ifnull(rp.idservidor,0) as idservidor from pregunta p left join respuesta_pregunta rp on p.preguntaid = rp.preguntaid and respuestaid = ? where encuestaid = ?";
 		parametros = new String[] { String.valueOf(respuestaTO.respuestaId),String.valueOf(encuestaId)};
 		
 		respuestaTO.preguntas = new ArrayList<PreguntaTO>();
@@ -142,6 +156,8 @@ public class EncuestaDAO {
 				preguntaTO.observacion = cursor.getString(cursor.getColumnIndex("observacion"));
 				preguntaTO.respuesta_1 = cursor.getString(cursor.getColumnIndex("respuesta_1"));
 				preguntaTO.opciones = listarOpciones(preguntaTO.respuestaOpcionId,preguntaTO.preguntaId);
+				preguntaTO.foto = cursor.getString(cursor.getColumnIndex("foto"));
+				preguntaTO.servidorId = cursor.getInt(cursor.getColumnIndex("idservidor"));
 			}else{
 				preguntaTO.opciones = listarOpciones(0,preguntaTO.preguntaId);
 			}

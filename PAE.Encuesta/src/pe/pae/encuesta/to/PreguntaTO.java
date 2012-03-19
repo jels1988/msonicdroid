@@ -52,5 +52,6 @@ public class PreguntaTO {
 	public String observacion;
 	public String respuesta_1;
 	public String foto;
+	public int servidorId;
 	
 }

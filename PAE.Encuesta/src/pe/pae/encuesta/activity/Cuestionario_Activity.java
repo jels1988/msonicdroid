@@ -266,7 +266,7 @@ public class Cuestionario_Activity extends ActivityBase {
 		   Random randInt = new Random();
 		   int numero = randInt.nextInt(32000);
 		   
-	    	file_name = String.format("%d_%d.jpg",numero,  System.currentTimeMillis());
+	    	file_name = String.format("%d_%d.txt",numero,  System.currentTimeMillis());
 	    	
 	    	 Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
 	    	
