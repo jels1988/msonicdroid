@@ -12,17 +12,18 @@ import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.content.Context;
 import android.content.Intent;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -220,6 +221,15 @@ public class Cuestionario_Activity extends ActivityBase {
 	        }
 	        
 	        
+	        ImageButton cmdVerFoto = (ImageButton)viewPreguntaActual.findViewById(R.id.cmdVerFoto); 
+	        String foto = preguntas.get(index).foto;
+	        
+	        if((foto!=null) && foto.compareTo("")!=0){
+	        	cmdVerFoto.setVisibility(View.VISIBLE);
+	        }else{
+	        	cmdVerFoto.setVisibility(View.GONE);
+	        }
+	        
 			lnCuestionario.addView(viewPreguntaActual);
 	        
 	   }
@@ -258,7 +268,8 @@ public class Cuestionario_Activity extends ActivityBase {
 		   
 	    	file_name = String.format("%d_%d.jpg",numero,  System.currentTimeMillis());
 	    	
-	    	 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	    	 Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+	    	
 	    	intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(this)) ); 
 	    	intent.putExtra(MediaStore.EXTRA_MEDIA_TITLE, "TITULO");
 	    	startActivityForResult(intent, TAKE_PHOTO_CODE);
@@ -272,8 +283,9 @@ public class Cuestionario_Activity extends ActivityBase {
 		    	path.mkdir();
 		    }
 		    
+		   
 		    
-		    return new File(path, file_name); 
+		    return new File(path, file_name);
 		    }
 	   
 	   @Override
@@ -282,8 +294,6 @@ public class Cuestionario_Activity extends ActivityBase {
 	    		switch(requestCode){
 	    			case TAKE_PHOTO_CODE:{
 	    				savePhoto();
-	    				//adap.notifyDataSetChanged();
-	    				processAsync();
 	    				break;
 	    			}
 	    		}
@@ -294,16 +304,30 @@ public class Cuestionario_Activity extends ActivityBase {
 	  }
 	   
 	   public void savePhoto(){
-			/*documentoTO.setNombreArchivo(file_name);
-			documentoTO.setEsLocal(DocumentoTO.LOCAL);
-			clienteBLL.guardarDocumento(clienteId, documentoTO);*/
+		   preguntas.get(index).foto=file_name;
+		   
+		   ImageButton cmdVerFoto = (ImageButton)viewPreguntaActual.findViewById(R.id.cmdVerFoto); 
+	        String foto = preguntas.get(index).foto;
+	        
+	        if((foto!=null) && foto.compareTo("")!=0){
+	        	cmdVerFoto.setVisibility(View.VISIBLE);
+	        }else{
+	        	cmdVerFoto.setVisibility(View.GONE);
+	        }
+	        
 		}
 	   
 	   public void btnVerFoto_onclick(View v){
-		   Log.d("Cuestionario_Activity", "pruebas");
+		  Intent intent = new Intent("pae.activity.verFoto");
+		  intent.putExtra(VerFotoActivity.FILE_NAME, preguntas.get(index).foto);
+		  intent.putExtra(VerFotoActivity.PREGUNTA, preguntas.get(index).pregunta);
+		  startActivity(intent);
 	   }
 	   
 	   public void btnTomarFoto_onclick(View v){
 		   takePhoto();
 	   }
+	   
+	   
+
 }

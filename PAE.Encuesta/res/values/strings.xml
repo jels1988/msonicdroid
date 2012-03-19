@@ -27,7 +27,7 @@
     <string name="cuestionario_activity_observacion_hint">Ingresar Observación</string>
     <string name="cuestionario_activity_tomar_foto">Tomar Foto</string>
     <string name="cuestionario_activity_ver_foto">Ver Foto</string>
-    
-    
     <string name="buscar_producto_menu_cerrar">Cerrar</string>
+    
+    <string name="ver_foto_title">Ver Foto</string>
 </resources>

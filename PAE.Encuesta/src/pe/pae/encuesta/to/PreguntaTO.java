@@ -51,6 +51,6 @@ public class PreguntaTO {
 	public long respuestaOpcionId;
 	public String observacion;
 	public String respuesta_1;
-	
+	public String foto;
 	
 }

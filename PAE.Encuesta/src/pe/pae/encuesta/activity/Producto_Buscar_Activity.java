@@ -13,11 +13,13 @@ import com.thira.examples.actionbar.widget.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -42,6 +44,17 @@ public class Producto_Buscar_Activity extends ListActivityBase {
 	        
 	        MiApp miApp = (MiApp)getApplication();
 	        mActionBar.setSubTitle(miApp.tienda);
+	        
+	        
+	        txtProducto.setOnKeyListener(new OnKeyListener() {			
+				public boolean onKey(View v, int keyCode, KeyEvent event) {
+					// TODO Auto-generated method stub
+					if(keyCode == KeyEvent.KEYCODE_ENTER){  
+						btnBuscar_onclick(null);
+					}
+					return false;
+				}
+			});
 	    }
 
 	   
