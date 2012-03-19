@@ -114,19 +114,19 @@ public class EncuestaBLL {
 	
 	
 	
-	public ArrayList<PreguntaTO> listarPreguntas(int encuestaId){
-		ArrayList<PreguntaTO> preguntas=null;
+	public RespuestaTO listarPreguntas(int tiendaid, int productoid, int encuestaId){
+		RespuestaTO respuestaTO=null;
 		
 		try {
 			dbHelper.openDataBase();
-			preguntas = encuestaDAO.listarPreguntas(encuestaId);
+			respuestaTO = encuestaDAO.listarPreguntas(tiendaid,productoid,encuestaId);
 		} catch (Exception e) {
 			Log.e(TAG_LOG, "listarPreguntas", e);
 		} finally {
 			dbHelper.close();
 		}
 		
-		return preguntas;
+		return respuestaTO;
 		
 	}
 	

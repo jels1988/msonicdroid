@@ -53,7 +53,7 @@ public class EncuestaDAO {
 		parametros.put("respuesta_1", preguntaTO.respuesta_1);
 		
 		String[] valores = new String[] { String.valueOf(preguntaTO.respuestaOpcionId) };
-		dbHelper.getDataBase().update("respuesta_pregunta", parametros, "respuestaOpcionId=?", valores);
+		dbHelper.getDataBase().update("respuesta_pregunta", parametros, "respuestapreguntaid=?", valores);
 		return preguntaTO.respuestaOpcionId;
 	}
 	
@@ -71,9 +71,13 @@ public class EncuestaDAO {
 	}
 	
 	
-	public ArrayList<OpcionTO> listarOpciones(int preguntaId){
-		String SQL = "select * from opcion where preguntaid = ?";
-		String[] parametros = new String[] { String.valueOf(preguntaId)};
+	public ArrayList<OpcionTO> listarOpciones(long respuestaPreguntaId, int preguntaId){
+		//String SQL = "select * from opcion where preguntaid = ?";
+		String SQL = "select o.opcionid,o.descripcion,o.seleccionado,o.preguntaid,ifnull(ro.respuestaOpcionId,0) as respuestaOpcionId from opcion "+
+						" o left join respuesta_opcion ro on o.opcionid = ro.opcionid and ro.respuestapreguntaid = ?" +
+						" where o.preguntaid=?";
+		
+		String[] parametros = new String[] { String.valueOf(respuestaPreguntaId),String.valueOf(preguntaId)};
 		
 		ArrayList<OpcionTO> opciones = new ArrayList<OpcionTO>();
 		Cursor cursor = dbHelper.getDataBase().rawQuery(SQL,parametros);
@@ -83,6 +87,7 @@ public class EncuestaDAO {
 			opcionTO = new OpcionTO();
 			opcionTO.opcionId = cursor.getInt(cursor.getColumnIndex("opcionid"));
 			opcionTO.descripcion = cursor.getString(cursor.getColumnIndex("descripcion"));
+			opcionTO.seleccionado = (cursor.getInt(cursor.getColumnIndex("respuestaOpcionId"))>0?true:false);
 			opciones.add(opcionTO);
 		}
 		
@@ -91,12 +96,34 @@ public class EncuestaDAO {
 		return opciones;
 	}
 	
-	public ArrayList<PreguntaTO> listarPreguntas(int encuestaId){
-		String SQL = "select * from pregunta where encuestaid = ?";
-		String[] parametros = new String[] { String.valueOf(encuestaId)};
+	
+	public RespuestaTO listarPreguntas(int tiendaid, int productoid, int encuestaId){
 		
-		ArrayList<PreguntaTO> preguntas = new ArrayList<PreguntaTO>();
+		
+		RespuestaTO respuestaTO = new RespuestaTO();
+		respuestaTO.tiendaId=tiendaid;
+		respuestaTO.productoId=productoid;
+		respuestaTO.encuestaId=encuestaId;
+		respuestaTO.respuestaId = 0;
+		
+		//	VERIFICAR SI TIENE RESPUESTAS
+		String SQL = "select respuestaid from respuesta where tiendaid=? and productoid=? and encuestaid=?";
+		String[] parametros = new String[] { String.valueOf(tiendaid),String.valueOf(productoid),String.valueOf(encuestaId)};
 		Cursor cursor = dbHelper.getDataBase().rawQuery(SQL,parametros);
+		if(cursor.moveToNext()){
+			
+			respuestaTO.respuestaId = cursor.getInt(cursor.getColumnIndex("respuestaid"));
+		}
+		cursor.close();
+		 
+		
+		
+		
+		SQL = "select p.preguntaid,p.pregunta,p.tipopregunta,p.tienefoto,p.tieneobservacion,p.comentario,rp.respuestapreguntaid,rp.observacion,rp.respuesta_1 from pregunta p left join respuesta_pregunta rp on p.preguntaid = rp.preguntaid and respuestaid = ? where encuestaid = ?";
+		parametros = new String[] { String.valueOf(respuestaTO.respuestaId),String.valueOf(productoid)};
+		
+		respuestaTO.preguntas = new ArrayList<PreguntaTO>();
+		cursor = dbHelper.getDataBase().rawQuery(SQL,parametros);
 		
 		PreguntaTO preguntaTO;
 		
@@ -108,14 +135,24 @@ public class EncuestaDAO {
 			preguntaTO.tieneFoto = cursor.getInt(cursor.getColumnIndex("tienefoto"));
 			preguntaTO.tieneObservacion = cursor.getInt(cursor.getColumnIndex("tieneobservacion"));
 			preguntaTO.comentario = cursor.getString(cursor.getColumnIndex("comentario"));
-			preguntaTO.opciones = listarOpciones(preguntaTO.preguntaId);
-			preguntas.add(preguntaTO);
+			
+			
+			if(respuestaTO.respuestaId>0){
+				preguntaTO.respuestaOpcionId=cursor.getInt(cursor.getColumnIndex("respuestapreguntaid"));
+				preguntaTO.observacion = cursor.getString(cursor.getColumnIndex("observacion"));
+				preguntaTO.respuesta_1 = cursor.getString(cursor.getColumnIndex("respuesta_1"));
+				preguntaTO.opciones = listarOpciones(preguntaTO.respuestaOpcionId,preguntaTO.preguntaId);
+			}else{
+				preguntaTO.opciones = listarOpciones(0,preguntaTO.preguntaId);
+			}
+			
+			respuestaTO.preguntas.add(preguntaTO);
 			
 		}
 		
 		cursor.close();
 		
-		return preguntas;
+		return respuestaTO;
 	}
 	
 	public ArrayList<ProductoTO> buscarProducto(String descripcion){

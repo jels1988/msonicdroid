@@ -46,13 +46,16 @@ public class Cuestionario_Activity extends ActivityBase {
 	@Override
 	protected void process() {
 		// TODO Auto-generated method stub
-		respuestaTO.preguntas=encuestaBLL.listarPreguntas(encuestaId);
+		//respuestaTO.preguntas=encuestaBLL.listarPreguntas(encuestaId);
+		/*
 		respuestaTO.encuestaId=encuestaId;
 		respuestaTO.productoId=productoId;
-		
 		respuestaTO.tiendaId=app.tiendaTO.tiendaId;
+		preguntas = respuestaTO.preguntas;//encuestaBLL.listarPreguntas(encuestaId);*/
 		
-		preguntas = respuestaTO.preguntas;//encuestaBLL.listarPreguntas(encuestaId);
+		respuestaTO = encuestaBLL.listarPreguntas(app.tiendaTO.tiendaId, productoId, encuestaId);
+		preguntas = respuestaTO.preguntas;
+		
 		super.process();
 	}
 	
