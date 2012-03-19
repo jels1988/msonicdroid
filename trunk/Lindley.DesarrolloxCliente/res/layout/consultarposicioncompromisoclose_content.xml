@@ -60,7 +60,7 @@
                 android:text="@string/ver_fotoInicial" />
 
             <Button
-                android:id="@+id/btnFotoInicial"
+                android:id="@+id/btnFotoExito"
                 android:layout_width="40dip"
                 android:layout_height="wrap_content"
                 android:focusable="false"
