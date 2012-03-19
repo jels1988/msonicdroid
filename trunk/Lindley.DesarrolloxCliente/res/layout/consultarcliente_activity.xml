@@ -44,7 +44,7 @@
        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
             <TextView android:text="@string/consultarcliente_activity_razon" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
             <EditText android:id="@+id/txtRazonSocial"
-             android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/consultarcliente_activity_razonsocial_hint" android:text="" android:layout_weight="1" android:inputType="number" android:maxLength="11" android:singleLine="true"></EditText>
+             android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/consultarcliente_activity_razonsocial_hint" android:text="" android:layout_weight="1" android:inputType="text" android:maxLength="11" android:singleLine="true"></EditText>
         	<ImageButton android:onClick="btnbuscar_onclick" android:src="@drawable/btn_search" android:contentDescription="@string/consultarcliente_activity_buscar"></ImageButton>
         </TableRow>
         
