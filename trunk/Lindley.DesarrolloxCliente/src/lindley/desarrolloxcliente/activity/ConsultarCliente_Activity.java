@@ -389,9 +389,9 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					//Intent cabecera = new Intent(context, ConsultarCabecera_Activity.class);
-					//context.startActivity(cabecera);
-					((ConsultarCliente_Activity)context).takePhoto();					
+					Intent cabecera = new Intent(context, ConsultarCabecera_Activity.class);
+					context.startActivity(cabecera);
+					//((ConsultarCliente_Activity)context).takePhoto();					
 				}
 			});
 			
@@ -400,11 +400,11 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					//Intent oportunidad = new Intent(context, ConsultarOportunidad_Activity.class);
-					//context.startActivity(oportunidad);
-					Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
-					intent.putExtra(VerFoto_Activity.FILE_NAME, file_name);
-					context.startActivity(intent);
+					Intent oportunidad = new Intent(context, ConsultarOportunidad_Activity.class);
+					context.startActivity(oportunidad);
+					//Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
+					//intent.putExtra(VerFoto_Activity.FILE_NAME, file_name);
+					//context.startActivity(intent);
 					
 				}
 			});
@@ -485,7 +485,6 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 	    		switch(requestCode){
 	    			case TAKE_PHOTO_CODE:{
 	    				savePhoto();
-	    				//adap.notifyDataSetChanged();
 	    				//processAsync();
 	    				break;
 	    			}
