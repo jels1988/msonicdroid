@@ -132,7 +132,20 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-           
+              
+        <activity android:name=".activity.CompromisoPrincipalOpen_Resumen" >
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.compromisoprincipalopen" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".activity.CompromisoPrincipalClose_Resumen" >
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.compromisoprincipalclose" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
