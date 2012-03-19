@@ -61,4 +61,15 @@
     <string name="ver_fotoInicial">Foto Inicial</string>
     <string name="ver_fotoExito">Foto Exito</string>
     <string name="ver_fotoFinal">Foto Final</string>
+    <string name="consultarposicioncompromisoclose_activity_title">Compromisos Posición</string>
+    <string name="consultarpresentacioncompromisoclose_activity_title">Compromisos Presentación</string>
+    <string name="ver_foto_activity_title">Foto</string>
+    <string name="ver_compromisos">Compromisos : </string>
+    <string name="guardar_compromiso">Guardar</string>
+    <string name="sku_prioritario">SKU Prioritario</string>
+    <string name="sku_valor_actual">Marc Actual</string>
+    <string name="sku_valor_compromiso">Compromiso</string>
+    <string name="sku_valor_confirmacion">Confirmación</string>
+    <string name="skuprioritario_activity_boton_guardar">Guardar</string>
+    
 </resources>
