@@ -38,6 +38,7 @@
                 android:gravity="center"
                 android:text="@string/ver_SKU" />
             
+            
             <TextView
                 android:id="@+id/txViewFecComp"
                 android:layout_width="60dip"
@@ -48,8 +49,9 @@
                 android:id="@+id/txViewCnfComp"
                 android:layout_width="60dip"
                 android:layout_height="wrap_content"
-                android:text="" />
+                android:text="" />            
             
+                        
         </TableRow>
 
         <View
