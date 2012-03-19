@@ -25,7 +25,13 @@ public class GuardarDesarrolloRequest {
 
 	@SerializedName("CDES")
 	private List<PresentacionCompromisoTO> compromisoPresentacion;
+	
+	@SerializedName("POS")
+	public List<PosicionCompromisoTO> listPosicion;
 
+	@SerializedName("PRE")
+	public List<PresentacionCompromisoTO> listPresentacion;
+	
 	public List<OportunidadTO> getOportunidadSistema() {
 		return oportunidadSistema;
 	}

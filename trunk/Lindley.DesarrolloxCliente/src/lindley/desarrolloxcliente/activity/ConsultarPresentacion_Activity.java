@@ -7,9 +7,11 @@ import java.util.List;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
+import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarPresentacionProxy;
+import lindley.desarrolloxcliente.ws.service.GuardarDesarrolloProxy;
 import net.msonic.lib.ListActivityBase;
 import roboguice.inject.InjectView;
 import android.content.Context;
@@ -32,6 +34,9 @@ import com.thira.examples.actionbar.widget.ActionBar;
 
 public class ConsultarPresentacion_Activity extends ListActivityBase {
 
+	@Inject GuardarDesarrolloProxy guardarDesarrolloProxy;
+	private static final int ACCION_GUARDAR = 1;
+	
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarPresentacionProxy consultarPresentacionProxy;
 	private EfficientAdapter adap;
@@ -39,6 +44,52 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
 	ClienteTO cliente;
 	private MyApplication application;
 	
+	public void btnGuardar_click(View view)
+    {
+		ArrayList<PresentacionCompromisoTO> presentaciones = application.listPresentacionCompromiso;
+    	
+    	if(presentaciones==null){
+    		presentaciones = new ArrayList<PresentacionCompromisoTO>();
+    	}else{
+    		presentaciones.clear();
+    	}
+    	
+    	
+    	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
+    	
+    	for (PresentacionTO presentacion : adap.detalles) {
+    		/*if(oportunidad.getAccioneTrade().compareTo("")!=0){
+    			oportunidades.add(oportunidad);
+    		}*/
+    		if(presentacion.isSeleccionado()){
+    			PresentacionCompromisoTO compromiso = new PresentacionCompromisoTO();
+    			
+    			compromiso.setCodigoVariable(presentacion.getCodigoVariable());
+    			compromiso.setPuntosSugeridos(presentacion.getPuntosSugeridos());
+    			    			
+    			presentaciones.add(compromiso);
+    		}
+		}
+    	
+    	/*   	
+    	if(filasSeleccionadas>2){
+    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede ingresar como m‡ximo 2 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+				}
+				
+			});	
+    	}else{
+    		application.setOportunidadesDesarrollador(oportunidadesDesarrollador);
+    		//Intent intent = new Intent("lindley.desarrolloxcliente.oportunidaddesarrollador");    		
+    		//startActivity(intent);
+    		processAsync(ACCION_GUARDAR);
+    	}*/
+    	
+    	processAsync(ACCION_GUARDAR);
+    }
+    	
 	public void btnSiguiente_click(View view)
     {
     	ArrayList<PresentacionCompromisoTO> presentaciones = application.listPresentacionCompromiso;
@@ -140,6 +191,65 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
 		showToast(error_generico_process);
 	}
     
+    @Override
+    protected void process(int accion) {
+    	// TODO Auto-generated method stub
+    	if(accion == ACCION_GUARDAR)
+    	{
+    		List<OportunidadTO> oportunidadSistema = application.getOportunidades();
+    		for(OportunidadTO op : oportunidadSistema)
+    		{    		
+    			op.setListaAccionesTrade(null);
+    		}
+    		List<OportunidadTO> oportunidadDesarrollador = application.getOportunidadesDesarrollador();
+    		for(OportunidadTO op : oportunidadDesarrollador)
+    		{    		
+    			op.setListaAccionesTrade(null);
+    		}		
+    		guardarDesarrolloProxy.listPosicion = application.listPosicionCompromiso;
+    		guardarDesarrolloProxy.listPresentacion = application.listPresentacionCompromiso;
+    		guardarDesarrolloProxy.setOportunidadSistema(oportunidadSistema);
+    		guardarDesarrolloProxy.setOportunidadDesarrollador(oportunidadDesarrollador);
+    		guardarDesarrolloProxy.setInformacion(application.getInformacionAdicional());
+    		guardarDesarrolloProxy.execute();
+    	}
+    }
+    
+    @Override
+	protected void processOk(int accion) {
+		// TODO Auto-generated method stub
+		if(accion == ACCION_GUARDAR)
+    	{
+			boolean isExito = guardarDesarrolloProxy.isExito();
+			if (isExito) {
+				int status = guardarDesarrolloProxy.getResponse().getStatus();
+				if (status == 0) {
+					String idRegistro = guardarDesarrolloProxy.getResponse().getCodCabecera();
+					
+					Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.consultarcompromisoopen");
+					compromisoOpen.putExtra(CompromisoOpen_Activity.CODIGO_REGISTRO, idRegistro);
+					compromisoOpen.putExtra(CompromisoOpen_Activity.FLAG_FECHA, CompromisoOpen_Activity.FLAG_OPEN_FECHA_ABIERTO);
+					startActivity(compromisoOpen);
+				}
+				else  {
+					showToast(guardarDesarrolloProxy.getResponse().getDescripcion());
+				}
+			}
+			else{
+				processError();
+			}
+			super.processOk();
+    	}
+	}
+
+	@Override
+	protected void processError(int accion) {
+		// TODO Auto-generated method stub
+		super.processError();
+		showToast(error_generico_process);
+	}
+
+	
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
 	    //private Context context;

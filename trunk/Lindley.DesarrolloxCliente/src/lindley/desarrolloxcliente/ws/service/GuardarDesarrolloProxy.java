@@ -7,6 +7,8 @@ import roboguice.inject.InjectResource;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.InformacionAdicionalTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
+import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
+import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.ws.bean.GuardarDesarrolloRequest;
 import lindley.desarrolloxcliente.ws.bean.GuardarDesarrolloResponse;
 import net.msonic.lib.JSONHelper;
@@ -22,6 +24,10 @@ public class GuardarDesarrolloProxy extends ProxyBase<GuardarDesarrolloResponse>
 	
 	private InformacionAdicionalTO informacion;
 
+	public List<PosicionCompromisoTO> listPosicion;
+
+	public List<PresentacionCompromisoTO> listPresentacion;
+	
 	public List<OportunidadTO> getOportunidadSistema() {
 		return oportunidadSistema;
 	}
@@ -57,6 +63,8 @@ public class GuardarDesarrolloProxy extends ProxyBase<GuardarDesarrolloResponse>
 	protected String requestText() {
 		// TODO Auto-generated method stub
 		GuardarDesarrolloRequest guardarDesarrolloRequest = new GuardarDesarrolloRequest();
+		guardarDesarrolloRequest.listPosicion = this.listPosicion;
+		guardarDesarrolloRequest.listPresentacion = this.listPresentacion;
 		guardarDesarrolloRequest.setInformacion(this.informacion);
 		guardarDesarrolloRequest.setOportunidadDesarrollador(this.oportunidadDesarrollador);
 		guardarDesarrolloRequest.setOportunidadSistema(this.oportunidadSistema);

@@ -89,7 +89,7 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
     	}*/
     	
     	application.listPosicionCompromiso = posiciones;   		
-		Intent intent = new Intent("lindley.desarrolloxcliente.informacionadicional");
+		Intent intent = new Intent("lindley.desarrolloxcliente.consultarpresentacion");
 		startActivity(intent);
     }
     
