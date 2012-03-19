@@ -150,7 +150,7 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
 		cliente = application.getClienteTO();
         mActionBar.setSubTitle(cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
-        processAsync(); 
+        //processAsync(); 
     }
 	
     @Override
