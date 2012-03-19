@@ -17,7 +17,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
@@ -115,16 +117,22 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				viewHolder.txViewDiferencia = (TextView) view.findViewById(R.id.txViewDiferencia);
 				viewHolder.txViewPuntos = (TextView) view.findViewById(R.id.txViewPuntos);
 				
-				viewHolder.chkSeleccion = (CheckBox) view.findViewById(R.id.chkSeleccion);
-		        				
+				viewHolder.btnFotoInicial = (Button) view.findViewById(R.id.btnFotoInicial);
+				viewHolder.btnFotoExito = (Button) view.findViewById(R.id.btnFotoExito);
+				viewHolder.btnFotoFinal = (Button) view.findViewById(R.id.btnFotoFinal);
+				viewHolder.btnFecha = (Button) view.findViewById(R.id.btnFecha);
+				viewHolder.txViewFecha = (TextView) view.findViewById(R.id.txViewFecha);
 				
+				viewHolder.txViewAccComp = (EditText) view.findViewById(R.id.txViewAccComp);
+				viewHolder.txEditFecha = (EditText) view.findViewById(R.id.txEditFecha);
+				
+				viewHolder.chkCumplio = (CheckBox) view.findViewById(R.id.chkCumplio);
+						    	
 				view.setTag(viewHolder);
-				viewHolder.chkSeleccion.setTag(posiciones.get(position));
-				
 				
 			}else{
 				view = convertView;
-				((ViewHolder) view.getTag()).chkSeleccion.setTag(posiciones.get(position));
+				
 			}
 			
 			ViewHolder holder = (ViewHolder) view.getTag();
@@ -136,19 +144,53 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 			holder.txViewDiferencia.setText(posicionTO.getDiferencia());
 			holder.txViewPuntos.setText(posicionTO.getPuntosSugeridos());
 
+			int mYear, mMonth, mDay;
+			String fecha = posicionTO.getFechaCompromiso();
+			if (fecha.length() > 7) {
+				mYear = Integer.parseInt(fecha.substring(0, 4));
+				mMonth = Integer.parseInt(fecha.substring(4, 6));
+				mDay = Integer.parseInt(fecha.substring(6));
+
+				holder.txViewFecha.setText(pad(mDay) + "/" + pad(mMonth) + "/"
+						+ pad(mYear));
+			} else {
+
+				holder.txViewFecha.setText("");
+			}
+
+			if(posicionTO.getConfirmacion().equals("S"))
+				holder.chkCumplio.setSelected(true);
+			else
+				holder.chkCumplio.setSelected(false);				
+				
 			return view;
 		}
 
 	    static class ViewHolder {   
-	    	CheckBox chkSeleccion;
 	    	TextView txViewVariable;
 	    	TextView txViewRed;
 	    	TextView txViewMaximo;
 	    	TextView txViewDiferencia;
 	    	TextView txViewPuntos;  	
+	    	Button   btnFotoInicial;
+	    	Button 	 btnFotoExito;
+	    	EditText txViewAccComp;
+	    	EditText txEditFecha;
+	    	TextView txViewFecha;
+	    	Button 	 btnFecha;
+	    	Button 	 btnFotoFinal;
+	    	CheckBox chkCumplio;
 	    }
 	    
 	  }
+    
+	private static String pad(int c) {
+		if (c >= 10)
+			return String.valueOf(c);
+		else
+			return "0" + String.valueOf(c);
+	}
+
     /*public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
 	    //private Context context;
