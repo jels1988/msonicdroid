@@ -2,35 +2,30 @@ package lindley.desarrolloxcliente.activity;
 
 import java.util.Calendar;
 import java.util.List;
-
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.PosicionTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarPosicionProxy;
+import net.msonic.lib.ListActivityBase;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
-import android.content.Context;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-
+import android.widget.TextView;
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
-import net.msonic.lib.ListActivityBase;
-
 public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 
-	private static final String RESPUESTA = "rspta";
+	public static final String RESPUESTA = "rspta";
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarPosicionProxy consultarPosicionProxy;
 	private EfficientAdapter adap;
@@ -92,7 +87,79 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		showToast(error_generico_process);
 	}
     
-    public static class EfficientAdapter extends BaseAdapter implements Filterable {
+    public static class EfficientAdapter extends ArrayAdapter<PosicionTO> {
+    	private Activity context;
+		private List<PosicionTO> posiciones;
+
+		public EfficientAdapter(Activity context,List<PosicionTO> posiciones ){
+			super(context, R.layout.consultarposicion_content, posiciones);
+			this.context=context;
+			this.posiciones=posiciones;
+		}
+		
+		public View getView(int position, View convertView, ViewGroup parent) {
+			// TODO Auto-generated method stub
+		
+			
+			View view = null;
+			if (convertView == null) {
+				LayoutInflater inflator = context.getLayoutInflater();
+				view = inflator.inflate(R.layout.consultarposicion_content, null);
+				final ViewHolder viewHolder = new ViewHolder();
+				viewHolder.txViewVariable = (TextView) view.findViewById(R.id.txViewVariable);
+				viewHolder.txViewRed = (TextView) view.findViewById(R.id.txViewRed);
+				viewHolder.txViewMaximo = (TextView) view.findViewById(R.id.txViewMaximo);
+				viewHolder.txViewDiferencia = (TextView) view.findViewById(R.id.txViewDiferencia);
+				viewHolder.txViewPuntos = (TextView) view.findViewById(R.id.txViewPuntos);
+				
+				viewHolder.chkSeleccion = (CheckBox) view.findViewById(R.id.chkSeleccion);
+		        				
+				
+				view.setTag(viewHolder);
+				viewHolder.chkSeleccion.setTag(posiciones.get(position));
+				
+				
+			}else{
+				view = convertView;
+				((ViewHolder) view.getTag()).chkSeleccion.setTag(posiciones.get(position));
+			}
+			
+			ViewHolder holder = (ViewHolder) view.getTag();
+			final PosicionTO posicionTO = posiciones.get(position);
+			
+			holder.txViewVariable.setText(posicionTO.getDescripcionVariable());
+			holder.txViewRed.setText(posicionTO.getRed());
+			holder.txViewMaximo.setText(posicionTO.getPtoMaximo());
+			holder.txViewDiferencia.setText(posicionTO.getDiferencia());
+			holder.txViewPuntos.setText(posicionTO.getPuntosSugeridos());
+
+			holder.chkSeleccion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+					
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						// TODO Auto-generated method stub
+						if(isChecked){
+							posicionTO.setSeleccionado(true);
+						}else{
+							posicionTO.setSeleccionado(false);
+						}
+					}
+				});
+		      
+			return view;
+		}
+
+	    static class ViewHolder {   
+	    	CheckBox chkSeleccion;
+	    	TextView txViewVariable;
+	    	TextView txViewRed;
+	    	TextView txViewMaximo;
+	    	TextView txViewDiferencia;
+	    	TextView txViewPuntos;  	
+	    }
+	    
+	  }
+    /*public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
 	    //private Context context;
 	    private List<PosicionTO> detalles;
@@ -105,12 +172,6 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		    }
 	    
 
-	    /**
-	     * Make a view to hold each row.
-	     * 
-	     * @see android.widget.ListAdapter#getView(int, android.view.View,
-	     *      android.view.ViewGroup)
-	     */
 	    public View getView(final int position, View convertView, ViewGroup parent) {
 	    	final PosicionTO posicionTO = (PosicionTO) getItem(position);
 	    	ViewHolder holder;
@@ -197,5 +258,5 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	    	return detalles.get(position);
 	    }
 
-	  }
+	  }*/
 }
