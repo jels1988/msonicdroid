@@ -15,17 +15,20 @@
 
         
          <ImageButton 
+             android:id="@+id/cmdVerFoto"
              android:layout_width="wrap_content" 
 	    android:layout_height="wrap_content" 
 	    android:contentDescription="@string/cuestionario_activity_ver_foto"
+	    android:onClick="btnVerFoto_onclick"
 	    android:src="@drawable/btn_verfoto"/>
          
           <ImageButton 
-             android:layout_width="wrap_content" 
-	    android:layout_height="wrap_content" 
-	    
-	    android:contentDescription="@string/cuestionario_activity_tomar_foto"
-	    android:src="@drawable/btn_tomarfoto"/>
+              android:id="@+id/cmdTomarFoto"
+            android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content" 
+	    	android:contentDescription="@string/cuestionario_activity_tomar_foto"
+	    	android:onClick="btnTomarFoto_onclick"
+	    	android:src="@drawable/btn_tomarfoto"/>
  </LinearLayout>
     
     <TextView

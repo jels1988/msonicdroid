@@ -1,6 +1,8 @@
 package pe.pae.encuesta.activity;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Random;
 
 import pe.pae.encuesta.R;
 import pe.pae.encuesta.negocio.EncuestaBLL;
@@ -9,9 +11,14 @@ import pe.pae.encuesta.to.RespuestaTO;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -42,6 +49,8 @@ public class Cuestionario_Activity extends ActivityBase {
 	private ArrayList<PreguntaTO> preguntas;
 	private RespuestaTO respuestaTO=null;
 	MiApp app = null;
+	private static final int TAKE_PHOTO_CODE = 1;
+	private  String file_name="";
 	
 	@Override
 	protected void process() {
@@ -210,6 +219,7 @@ public class Cuestionario_Activity extends ActivityBase {
 	        	lnlFoto.setVisibility(View.GONE);
 	        }
 	        
+	        
 			lnCuestionario.addView(viewPreguntaActual);
 	        
 	   }
@@ -239,5 +249,61 @@ public class Cuestionario_Activity extends ActivityBase {
 	   public void btnSave_onclick(View v){
 		   encuestaBLL.guardarEncuestaRespuesta(respuestaTO);
 		   
+	   }
+	   
+	   public void takePhoto(){
+		   
+		   Random randInt = new Random();
+		   int numero = randInt.nextInt(32000);
+		   
+	    	file_name = String.format("%d_%d.jpg",numero,  System.currentTimeMillis());
+	    	
+	    	 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	    	intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(this)) ); 
+	    	intent.putExtra(MediaStore.EXTRA_MEDIA_TITLE, "TITULO");
+	    	startActivityForResult(intent, TAKE_PHOTO_CODE);
+	    }
+	   
+	   private File getTempFile(Context context){
+		    
+		   final File path = new File( Environment.getExternalStorageDirectory(), context.getPackageName() );
+		   
+		    if(!path.exists()){
+		    	path.mkdir();
+		    }
+		    
+		    
+		    return new File(path, file_name); 
+		    }
+	   
+	   @Override
+	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    if (resultCode == RESULT_OK) {
+	    		switch(requestCode){
+	    			case TAKE_PHOTO_CODE:{
+	    				savePhoto();
+	    				//adap.notifyDataSetChanged();
+	    				processAsync();
+	    				break;
+	    			}
+	    		}
+
+	    }
+	    
+	   
+	  }
+	   
+	   public void savePhoto(){
+			/*documentoTO.setNombreArchivo(file_name);
+			documentoTO.setEsLocal(DocumentoTO.LOCAL);
+			clienteBLL.guardarDocumento(clienteId, documentoTO);*/
+		}
+	   
+	   public void btnVerFoto_onclick(View v){
+		   Log.d("Cuestionario_Activity", "pruebas");
+	   }
+	   
+	   public void btnTomarFoto_onclick(View v){
+		   takePhoto();
 	   }
 }
