@@ -6,13 +6,15 @@
 
     <uses-sdk android:minSdkVersion="8" />
     
-    <uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"></uses-permission>
-
+	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.CAMERA"/>
+		    
     <application
         android:icon="@drawable/header_logo"
         android:label="@string/app_name" 
@@ -120,6 +122,13 @@
         <activity android:name=".activity.CompromisoPresentacionOpen_Activity" >
             <intent-filter>
                 <action android:name="lindley.desarrolloxcliente.compromisopresentacionopen" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".activity.VerFoto_Activity" >
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.verfoto" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
