@@ -23,7 +23,9 @@ public class MiApp extends RoboApplication {
 
 	
 	
-	public TiendaTO tiendaTO;
+	//public TiendaTO tiendaTO;
+	public int tiendaId;
+	public String tienda;
 	
 	private UsuarioTO usuarioTO;
 	

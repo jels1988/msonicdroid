@@ -46,14 +46,8 @@ public class Cuestionario_Activity extends ActivityBase {
 	@Override
 	protected void process() {
 		// TODO Auto-generated method stub
-		//respuestaTO.preguntas=encuestaBLL.listarPreguntas(encuestaId);
-		/*
-		respuestaTO.encuestaId=encuestaId;
-		respuestaTO.productoId=productoId;
-		respuestaTO.tiendaId=app.tiendaTO.tiendaId;
-		preguntas = respuestaTO.preguntas;//encuestaBLL.listarPreguntas(encuestaId);*/
 		
-		respuestaTO = encuestaBLL.listarPreguntas(app.tiendaTO.tiendaId, productoId, encuestaId);
+		respuestaTO = encuestaBLL.listarPreguntas(app.tiendaId, productoId, encuestaId);
 		preguntas = respuestaTO.preguntas;
 		
 		super.process();
@@ -76,6 +70,7 @@ public class Cuestionario_Activity extends ActivityBase {
 	    public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        
+	        inicializarRecursos();
 	        
 	        setContentView(R.layout.cuestionario_activity);
 	        mActionBar.setTitle(R.string.cuestionario_activity_title);

@@ -1,6 +1,7 @@
 package pe.pae.encuesta.negocio;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import net.msonic.lib.DBHelper;
@@ -28,8 +29,15 @@ public class EncuestaBLL {
 	
 	public void guardarEncuestaRespuesta(RespuestaTO respuesta){
 		
-		respuesta.fechaRegistro = "010101";
-		respuesta.horaRegistro = "0202";
+		Calendar c = Calendar.getInstance();
+		String mes = "0" + c.get(Calendar.MONTH);
+		String dia = "0" + c.get(Calendar.DAY_OF_MONTH);
+		respuesta.fechaRegistro = c.get(Calendar.YEAR) + mes.substring(1, 2) + dia.substring(1,2);
+		
+		String hora = "0" + c.get(Calendar.HOUR_OF_DAY);
+		String minuto = "0" + c.get(Calendar.MINUTE);
+		
+		respuesta.horaRegistro = hora.substring(1, 2) + minuto.substring(1,2);;
 		long respuestaId=respuesta.respuestaId;
 		long respuestaPreguntaId=0;
 		try {
@@ -59,7 +67,9 @@ public class EncuestaBLL {
 				}
 				
 				for(OpcionTO opcionTO : preguntaTO.opciones){
-					encuestaDAO.guardarEncuestaPreguntaOpcion(respuestaPreguntaId, opcionTO);
+					if(opcionTO.seleccionado){
+						encuestaDAO.guardarEncuestaPreguntaOpcion(respuestaPreguntaId, opcionTO);
+					}
 				}
 				
 			}

@@ -19,7 +19,7 @@
   	android:layout_alignParentTop="true">
         <TableRow>
             <TextView android:text="@string/producto_buscar_activity_descripcion" android:layout_height="wrap_content" android:layout_weight="0"  android:layout_width="fill_parent"></TextView>
-            <EditText android:id="@+id/txtProducto" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/producto_buscar_activity_descripcion_hint" android:text="" android:layout_weight="1" android:inputType="number" android:maxLength="11" android:singleLine="true"/>
+            <EditText android:id="@+id/txtProducto" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/producto_buscar_activity_descripcion_hint" android:text="" android:layout_weight="1" android:inputType="text" android:maxLength="20" android:singleLine="true"/>
             <ImageButton android:src="@drawable/btn_buscar" android:onClick="btnBuscar_onclick"/>
         </TableRow>
 

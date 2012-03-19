@@ -39,7 +39,7 @@ public class Producto_Buscar_Activity extends ListActivityBase {
 	        mActionBar.setTitle(R.string.producto_buscar_activity_title);
 	        
 	        MiApp miApp = (MiApp)getApplication();
-	        mActionBar.setSubTitle(miApp.tiendaTO.toString());
+	        mActionBar.setSubTitle(miApp.tienda);
 	    }
 	   
 	   

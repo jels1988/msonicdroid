@@ -11,7 +11,10 @@ import pe.pae.encuesta.ws.service.EncuestaProxy;
 import roboguice.inject.InjectView;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -99,12 +102,14 @@ public class Tienda_Seleccionar_Activity extends ActivityBase {
 		
 		MiApp miApp = (MiApp)getApplication();
 		
-		miApp.tiendaTO = tiendaTO;
+		miApp.tiendaId = tiendaTO.tiendaId;
+		miApp.tienda = tiendaTO.nombre + "(" + tiendaTO.direccion + ")";
+		
 		encuestaProxy.clienteId=clienteTO.clienteId;
 		encuestaProxy.usuarioId=miApp.getUsuarioTO().usuarioId;
 		encuestaProxy.execute();
 		
-		
+		Context ctx=this;
 		
 		boolean isExito = encuestaProxy.isExito();
 		if (isExito) {
@@ -114,7 +119,13 @@ public class Tienda_Seleccionar_Activity extends ActivityBase {
 					encuestaBLL.saveProductos(encuestaProxy.getResponse().productos);
 					encuestaBLL.saveEncuestas(encuestaProxy.getResponse().encuestas);
 					
-					
+					SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(ctx);
+					Editor editor = settings.edit();
+					editor.putInt("ENCUESTA_INICIO", 1);
+					editor.putInt("CLIENTE_ID", clienteTO.clienteId);
+					editor.putInt("TIENDA_ID", tiendaTO.tiendaId);
+					editor.putString("TIENDA", miApp.tienda);
+					editor.commit();
 				}
 		}
 		

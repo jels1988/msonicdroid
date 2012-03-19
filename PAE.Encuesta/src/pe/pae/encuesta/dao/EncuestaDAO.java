@@ -120,7 +120,7 @@ public class EncuestaDAO {
 		
 		
 		SQL = "select p.preguntaid,p.pregunta,p.tipopregunta,p.tienefoto,p.tieneobservacion,p.comentario,rp.respuestapreguntaid,rp.observacion,rp.respuesta_1 from pregunta p left join respuesta_pregunta rp on p.preguntaid = rp.preguntaid and respuestaid = ? where encuestaid = ?";
-		parametros = new String[] { String.valueOf(respuestaTO.respuestaId),String.valueOf(productoid)};
+		parametros = new String[] { String.valueOf(respuestaTO.respuestaId),String.valueOf(encuestaId)};
 		
 		respuestaTO.preguntas = new ArrayList<PreguntaTO>();
 		cursor = dbHelper.getDataBase().rawQuery(SQL,parametros);
