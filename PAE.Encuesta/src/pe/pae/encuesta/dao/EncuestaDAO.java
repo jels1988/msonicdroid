@@ -157,7 +157,7 @@ public class EncuestaDAO {
 	
 	public ArrayList<ProductoTO> buscarProducto(String descripcion){
 
-		String SQL = "select * from producto where descripcion like ?";
+		String SQL = "select p.*,ifnull(r.respuestaid,0) as respuestaid from producto p left join respuesta r on p.productoid = r.productoid where p.descripcion like ?";
 		String[] parametros = new String[] { "%" + descripcion + "%"};
 
 		
@@ -170,6 +170,7 @@ public class EncuestaDAO {
 			productoTO.productoId = cursor.getInt(cursor.getColumnIndex("productoid"));
 			productoTO.descripcion = cursor.getString(cursor.getColumnIndex("descripcion"));	
 			productoTO.encuestaId = cursor.getInt(cursor.getColumnIndex("encuestaid"));
+			productoTO.tieneRespuesta=cursor.getInt(cursor.getColumnIndex("respuestaid"));
 			productos.add(productoTO);
 		}
 		cursor.close();

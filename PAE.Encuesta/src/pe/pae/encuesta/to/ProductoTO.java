@@ -14,5 +14,6 @@ public class ProductoTO {
 	@SerializedName("EnId")
 	public int encuestaId;
 	
+	public int tieneRespuesta;
 
 }

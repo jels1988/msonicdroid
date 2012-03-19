@@ -19,6 +19,7 @@
     <string name="tienda_seleccionar_activity_tienda">Tienda :</string>
     <string name="tienda_seleccionar_activity_ingresar">Ingresar</string>
     <string name="producto_buscar_activity_title">Buscar Producto</string>
+    <string name="producto_buscar_activity_responder">Rp.</string>
     <string name="producto_buscar_activity_descripcion">Descripción</string>
     <string name="producto_buscar_activity_descripcion_hint">Ingresar Descripción</string>
     <string name="cuestionario_activity_title">Cuestionario</string>

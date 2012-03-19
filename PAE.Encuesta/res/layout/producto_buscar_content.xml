@@ -1,20 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal" >
-
-
+    android:layout_height="fill_parent">
+    <TableRow 
+    android:layout_height="fill_parent">
+        
+       
+    <ImageView
+        android:id="@+id/imgIndicador" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="1dip"
+        android:src="@drawable/icon_verde"
+        android:contentDescription="@string/app_name"/>
+    
+     <Button
+        android:id="@+id/btnCuestionario"
+        android:focusable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:layout_margin="1dip"
+        android:text="@string/producto_buscar_activity_responder"/>
+     
     <TextView
+         android:layout_margin="1dip"
         android:id="@+id/txtProducto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     
-        <Button
-        android:id="@+id/btnCuestionario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button" />
-    
+   
         
-</LinearLayout>
+      
+    </TableRow>
+</TableLayout>
+

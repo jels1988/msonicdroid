@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import net.msonic.lib.ListActivityBase;
 
@@ -73,7 +74,12 @@ public class Producto_Buscar_Activity extends ListActivityBase {
 
 
 
-
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		processAsync();
+		super.onStart();
+	}
 
 
 	@Override
@@ -92,11 +98,6 @@ public class Producto_Buscar_Activity extends ListActivityBase {
 		setListAdapter(adap);
 		super.processOk();
 	}
-
-
-
-
-
 
 
 	public void btnBuscar_onclick(View v){
@@ -151,8 +152,10 @@ public class Producto_Buscar_Activity extends ListActivityBase {
 					
 					final ViewHolder holder = new ViewHolder();
 					
+					holder.imgIndicador = (ImageView)view.findViewById(R.id.imgIndicador);
 					holder.txtProducto = (TextView) view.findViewById(R.id.txtProducto);
 					holder.btnCuestionario = (Button)view.findViewById(R.id.btnCuestionario);
+					
 					holder.btnCuestionario.setOnClickListener(new OnClickListener() {
 						
 						public void onClick(View v) {
@@ -179,12 +182,17 @@ public class Producto_Buscar_Activity extends ListActivityBase {
 				
 				ViewHolder holder = (ViewHolder) view.getTag();
 				holder.txtProducto.setText(this.productos.get(position).descripcion);
-				//holder.chkSeleccion.setChecked(this.opciones.get(position).seleccionado);
+				if(this.productos.get(position).tieneRespuesta==0){
+					holder.imgIndicador.setImageResource(R.drawable.icon_rojo);
+				}else{
+					holder.imgIndicador.setImageResource(R.drawable.icon_verde);
+				}
 				
 				return view;
 			}
 
 			class ViewHolder {
+				 public ImageView imgIndicador;
 				 public TextView txtProducto;
 				 public Button btnCuestionario;
 					 
