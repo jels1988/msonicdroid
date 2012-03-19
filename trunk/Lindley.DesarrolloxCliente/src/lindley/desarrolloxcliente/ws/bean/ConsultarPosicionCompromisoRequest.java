@@ -10,8 +10,8 @@ public class ConsultarPosicionCompromisoRequest {
 	@SerializedName("CODR")
 	private String codigoGestion;
 
-	@SerializedName("RSP")
-	private String respuesta;
+	//@SerializedName("RSP")
+	//private String respuesta;
 
 	public String getCodigoCliente() {
 		return codigoCliente;
@@ -29,6 +29,7 @@ public class ConsultarPosicionCompromisoRequest {
 		this.codigoGestion = codigoGestion;
 	}
 
+	/*
 	public String getRespuesta() {
 		return respuesta;
 	}
@@ -36,4 +37,5 @@ public class ConsultarPosicionCompromisoRequest {
 	public void setRespuesta(String respuesta) {
 		this.respuesta = respuesta;
 	}
+	*/
 }

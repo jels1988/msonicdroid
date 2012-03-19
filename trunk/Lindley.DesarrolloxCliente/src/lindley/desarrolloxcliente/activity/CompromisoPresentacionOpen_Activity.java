@@ -6,8 +6,10 @@ import java.util.List;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
+import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionTO;
-import lindley.desarrolloxcliente.ws.service.ConsultarPresentacionProxy;
+import lindley.desarrolloxcliente.ws.service.ConsultarPresentacionCompromisoProxy;
+import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.content.Context;
 import android.os.Bundle;
@@ -30,8 +32,11 @@ import net.msonic.lib.ListActivityBase;
 
 public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 
+	public static final String COD_GESTION = "codGestion";
+	@InjectExtra(COD_GESTION) String codigoGestion;
+	
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
-	@Inject ConsultarPresentacionProxy consultarPresentacionProxy;
+	@Inject ConsultarPresentacionCompromisoProxy consultarPresentacionProxy;
 	private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
@@ -54,6 +59,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
     @Override
    	protected void process() {
     	consultarPresentacionProxy.setCodigoCliente(cliente.getCodigo());
+    	consultarPresentacionProxy.setCodigoRegistro(codigoGestion);
     	consultarPresentacionProxy.execute();
    	}
     
@@ -64,8 +70,8 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 		if (isExito) {
 			int status = consultarPresentacionProxy.getResponse().getStatus();
 			if (status == 0) {
-				List<PresentacionTO> presentaciones = consultarPresentacionProxy
-						.getResponse().getListaPresentacion();
+				List<PresentacionCompromisoTO> presentaciones = consultarPresentacionProxy
+						.getResponse().getListaCompromisos();
 				adap = new EfficientAdapter(this, presentaciones);				
 				final Calendar c = Calendar.getInstance();      
 				if(presentaciones.size()>0)
@@ -92,9 +98,9 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
 	    //private Context context;
-	    private List<PresentacionTO> detalles;
+	    private List<PresentacionCompromisoTO> detalles;
 	    
-	    public EfficientAdapter(Context context, List<PresentacionTO> valores) {
+	    public EfficientAdapter(Context context, List<PresentacionCompromisoTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
 		      //this.context = context;

@@ -2,11 +2,12 @@ package lindley.desarrolloxcliente.activity;
 
 import java.util.Calendar;
 import java.util.List;
+
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.PosicionTO;
-import lindley.desarrolloxcliente.ws.service.ConsultarPosicionProxy;
+import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
+import lindley.desarrolloxcliente.ws.service.ConsultarPosicionCompromisoProxy;
 import net.msonic.lib.ListActivityBase;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
@@ -17,17 +18,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
+
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
 public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 
+	public static final String COD_GESTION = "codGestion";
+	@InjectExtra(COD_GESTION) String codigoGestion;
+	
 	public static final String RESPUESTA = "rspta";
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
-	@Inject ConsultarPosicionProxy consultarPosicionProxy;
+	@Inject ConsultarPosicionCompromisoProxy consultarPosicionProxy;
 	private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
@@ -51,7 +54,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
     @Override
    	protected void process() {
     	consultarPosicionProxy.setCodigoCliente(cliente.getCodigo());
-    	consultarPosicionProxy.setRespuesta(respuesta);       	
+    	consultarPosicionProxy.setCodigoGestion(codigoGestion);    	
     	consultarPosicionProxy.execute();
    	}
     
@@ -62,8 +65,8 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		if (isExito) {
 			int status = consultarPosicionProxy.getResponse().getStatus();
 			if (status == 0) {
-				List<PosicionTO> posiciones = consultarPosicionProxy
-						.getResponse().getListaPosicion();
+				List<PosicionCompromisoTO> posiciones = consultarPosicionProxy
+						.getResponse().getListaCompromisos();
 				adap = new EfficientAdapter(this, posiciones);				
 				final Calendar c = Calendar.getInstance();      
 				if(posiciones.size()>0)
@@ -87,11 +90,11 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		showToast(error_generico_process);
 	}
     
-    public static class EfficientAdapter extends ArrayAdapter<PosicionTO> {
+    public static class EfficientAdapter extends ArrayAdapter<PosicionCompromisoTO> {
     	private Activity context;
-		private List<PosicionTO> posiciones;
+		private List<PosicionCompromisoTO> posiciones;
 
-		public EfficientAdapter(Activity context,List<PosicionTO> posiciones ){
+		public EfficientAdapter(Activity context,List<PosicionCompromisoTO> posiciones ){
 			super(context, R.layout.consultarposicion_content, posiciones);
 			this.context=context;
 			this.posiciones=posiciones;
@@ -125,7 +128,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 			}
 			
 			ViewHolder holder = (ViewHolder) view.getTag();
-			final PosicionTO posicionTO = posiciones.get(position);
+			final PosicionCompromisoTO posicionTO = posiciones.get(position);
 			
 			holder.txViewVariable.setText(posicionTO.getDescripcionVariable());
 			holder.txViewRed.setText(posicionTO.getRed());
@@ -133,19 +136,6 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 			holder.txViewDiferencia.setText(posicionTO.getDiferencia());
 			holder.txViewPuntos.setText(posicionTO.getPuntosSugeridos());
 
-			holder.chkSeleccion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-					
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						// TODO Auto-generated method stub
-						if(isChecked){
-							posicionTO.setSeleccionado(true);
-						}else{
-							posicionTO.setSeleccionado(false);
-						}
-					}
-				});
-		      
 			return view;
 		}
 
