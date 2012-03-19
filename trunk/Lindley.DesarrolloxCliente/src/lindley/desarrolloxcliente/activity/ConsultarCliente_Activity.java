@@ -1,7 +1,9 @@
 package lindley.desarrolloxcliente.activity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
@@ -10,7 +12,10 @@ import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -38,6 +43,9 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 	@InjectView(R.id.txtRazonSocial)TextView txtRazonSocial;
 	@InjectResource(R.string.consultarcliente_activity_empty) String parametros_empty;
 	private EfficientAdapter adap;
+	
+	public static String file_name="";
+	private static final int TAKE_PHOTO_CODE = 1;
 	
     /** Called when the activity is first created. */
     @Override
@@ -381,8 +389,9 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					Intent cabecera = new Intent(context, ConsultarCabecera_Activity.class);
-					context.startActivity(cabecera);
+					//Intent cabecera = new Intent(context, ConsultarCabecera_Activity.class);
+					//context.startActivity(cabecera);
+					((ConsultarCliente_Activity)context).takePhoto();					
 				}
 			});
 			
@@ -391,8 +400,12 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					Intent oportunidad = new Intent(context, ConsultarOportunidad_Activity.class);
-					context.startActivity(oportunidad);
+					//Intent oportunidad = new Intent(context, ConsultarOportunidad_Activity.class);
+					//context.startActivity(oportunidad);
+					Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
+					intent.putExtra(VerFoto_Activity.FILE_NAME, file_name);
+					context.startActivity(intent);
+					
 				}
 			});
 			
@@ -444,6 +457,47 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 			return clientes.get(position);
 		}
 
+	}
+	
+	public void takePhoto(){
+    	file_name = String.format("%d.jpg", System.currentTimeMillis());
+    	 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+    	intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(this)) ); 
+    	intent.putExtra(MediaStore.EXTRA_MEDIA_TITLE, "TITULO");
+    	startActivityForResult(intent, TAKE_PHOTO_CODE);
+    }
+
+	 private File getTempFile(Context context){
+		    
+		   final File path = new File( Environment.getExternalStorageDirectory(), context.getPackageName() );
+		   
+		    if(!path.exists()){
+		    	path.mkdir();
+		    }
+		    
+		    
+		    return new File(path, file_name); 
+		    }
+	 
+	 @Override
+	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    if (resultCode == RESULT_OK) {
+	    		switch(requestCode){
+	    			case TAKE_PHOTO_CODE:{
+	    				savePhoto();
+	    				//adap.notifyDataSetChanged();
+	    				//processAsync();
+	    				break;
+	    			}
+	    		}
+
+	    }
+	  }
+	 
+	public void savePhoto(){
+		//documentoTO.setNombreArchivo(file_name);
+		//documentoTO.setEsLocal(DocumentoTO.LOCAL);
+		//clienteBLL.guardarDocumento(clienteId, documentoTO);
 	}
 
 }

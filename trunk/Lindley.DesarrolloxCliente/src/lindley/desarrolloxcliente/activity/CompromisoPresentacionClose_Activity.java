@@ -6,8 +6,10 @@ import java.util.List;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.PresentacionTO;
-import lindley.desarrolloxcliente.ws.service.ConsultarPresentacionProxy;
+import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
+import lindley.desarrolloxcliente.ws.service.ConsultarPresentacionCompromisoProxy;
+import net.msonic.lib.ListActivityBase;
+import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.content.Context;
 import android.os.Bundle;
@@ -16,34 +18,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
-import net.msonic.lib.ListActivityBase;
-
 public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 
+	public static final String COD_GESTION = "codGestion";
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
-	@Inject ConsultarPresentacionProxy consultarPresentacionProxy;
+	@Inject ConsultarPresentacionCompromisoProxy consultarPresentacionCompromisoProxy;
 	private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
 	private MyApplication application;
+	@InjectExtra(COD_GESTION) String codigoGestion;
 	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	inicializarRecursos();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.consultarpresentacion_activity);        
-        mActionBar.setTitle(R.string.consultarpresentacion_activity_title);
+        setContentView(R.layout.consultarpresentacioncompromisoclose_activity);        
+        mActionBar.setTitle(R.string.consultarpresentacioncompromisoclose_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
         mActionBar.setSubTitle(cliente.getNombre());
@@ -53,19 +52,20 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 	
     @Override
    	protected void process() {
-    	consultarPresentacionProxy.setCodigoCliente(cliente.getCodigo());
-    	consultarPresentacionProxy.execute();
+    	consultarPresentacionCompromisoProxy.setCodigoCliente(cliente.getCodigo());
+    	consultarPresentacionCompromisoProxy.setCodigoRegistro(codigoGestion);
+    	consultarPresentacionCompromisoProxy.execute();
    	}
     
     @Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
-		boolean isExito = consultarPresentacionProxy.isExito();
+		boolean isExito = consultarPresentacionCompromisoProxy.isExito();
 		if (isExito) {
-			int status = consultarPresentacionProxy.getResponse().getStatus();
+			int status = consultarPresentacionCompromisoProxy.getResponse().getStatus();
 			if (status == 0) {
-				List<PresentacionTO> presentaciones = consultarPresentacionProxy
-						.getResponse().getListaPresentacion();
+				List<PresentacionCompromisoTO> presentaciones = consultarPresentacionCompromisoProxy
+						.getResponse().getListaCompromisos();
 				adap = new EfficientAdapter(this, presentaciones);				
 				final Calendar c = Calendar.getInstance();      
 				if(presentaciones.size()>0)
@@ -73,7 +73,7 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 				setListAdapter(adap);
 			}
 			else  {
-				showToast(consultarPresentacionProxy.getResponse().getDescripcion());
+				showToast(consultarPresentacionCompromisoProxy.getResponse().getDescripcion());
 			}
 		}
 		else{
@@ -92,9 +92,9 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
 	    //private Context context;
-	    private List<PresentacionTO> detalles;
+	    private List<PresentacionCompromisoTO> detalles;
 	    
-	    public EfficientAdapter(Context context, List<PresentacionTO> valores) {
+	    public EfficientAdapter(Context context, List<PresentacionCompromisoTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
 		      //this.context = context;
@@ -109,7 +109,7 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 	     *      android.view.ViewGroup)
 	     */
 	    public View getView(final int position, View convertView, ViewGroup parent) {
-	    	final PresentacionTO presentacionTO = (PresentacionTO) getItem(position);
+	    	final PresentacionCompromisoTO presentacionTO = (PresentacionCompromisoTO) getItem(position);
 	    	ViewHolder holder;
 
 	      if (convertView == null) {
@@ -120,11 +120,12 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 	        // we want to bind data to.
 	        holder = new ViewHolder();
 	        	        	        	    	
-	        holder.chkSeleccion = (CheckBox) convertView.findViewById(R.id.chkSeleccion);
 	        holder.txViewVariable = (TextView) convertView.findViewById(R.id.txViewVariable);
 	        holder.txViewPuntos = (TextView) convertView.findViewById(R.id.txViewPuntos);
-	        holder.btnSKU = (Button) convertView.findViewById(R.id.btnSKU);        
-	    	
+	        holder.btnSKU = (Button) convertView.findViewById(R.id.btnSKU);       
+	        holder.txViewFecComp = (TextView) convertView.findViewById(R.id.txViewFecComp);
+	        holder.txViewCnfComp = (TextView) convertView.findViewById(R.id.txViewCnfComp);
+	        	    	
 	        convertView.setTag(holder);
 	      } else {
 	        // Get the ViewHolder back to get fast access to the TextView
@@ -134,28 +135,18 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 	      
 	      holder.txViewVariable.setText(presentacionTO.getDescripcionVariable());
 	      holder.txViewPuntos.setText(presentacionTO.getPuntosSugeridos());
-	      
-	      holder.chkSeleccion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-				
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					// TODO Auto-generated method stub
-					if(isChecked){
-						presentacionTO.setSeleccionado(true);
-					}else{
-						presentacionTO.setSeleccionado(false);
-					}
-				}
-			});
-	      	      
+	      holder.txViewFecComp.setText(presentacionTO.getFechaCompromiso());
+	      holder.txViewCnfComp.setText(presentacionTO.getConfirmacion());
+	      	      	      
 	      return convertView;
 	    }
 
 	    static class ViewHolder {   
-	    	CheckBox chkSeleccion;
 	    	TextView txViewVariable;
 	    	TextView txViewPuntos;  	
 	    	Button   btnSKU;
+	    	TextView txViewFecComp;
+	    	TextView txViewCnfComp;
 	    }
 	    
 	    @Override

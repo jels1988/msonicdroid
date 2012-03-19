@@ -6,8 +6,9 @@ import java.util.List;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.PosicionTO;
-import lindley.desarrolloxcliente.ws.service.ConsultarPosicionProxy;
+import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
+import lindley.desarrolloxcliente.ws.service.ConsultarPosicionCompromisoProxy;
+import net.msonic.lib.ListActivityBase;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.content.Context;
@@ -16,36 +17,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
-import net.msonic.lib.ListActivityBase;
-
 public class CompromisoPosicionClose_Activity extends ListActivityBase {
 
-	private static final String RESPUESTA = "rspta";
+	public static final String RESPUESTA = "rspta";
+	public static final String COD_GESTION = "codGestion";
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
-	@Inject ConsultarPosicionProxy consultarPosicionProxy;
-	private EfficientAdapter adap;
+	@Inject ConsultarPosicionCompromisoProxy consultarPosicionCompromisoProxy;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
+	private EfficientAdapter adap;	
 	private MyApplication application;
 	@InjectExtra(RESPUESTA) String respuesta;
+	@InjectExtra(COD_GESTION) String codigoGestion;
 	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	inicializarRecursos();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.consultarposicion_activity);        
-        mActionBar.setTitle(R.string.consultarposicion_activity_title);
+        setContentView(R.layout.consultarposicioncompromisoclose_activity);        
+        mActionBar.setTitle(R.string.consultarposicioncompromisoclose_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
         mActionBar.setSubTitle(cliente.getNombre());
@@ -55,20 +54,21 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
     
     @Override
    	protected void process() {
-    	consultarPosicionProxy.setCodigoCliente(cliente.getCodigo());
-    	consultarPosicionProxy.setRespuesta(respuesta);       	
-    	consultarPosicionProxy.execute();
+    	consultarPosicionCompromisoProxy.setCodigoCliente(cliente.getCodigo());
+    	consultarPosicionCompromisoProxy.setRespuesta(respuesta);       	
+    	consultarPosicionCompromisoProxy.setCodigoGestion(codigoGestion);
+    	consultarPosicionCompromisoProxy.execute();
    	}
     
     @Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
-		boolean isExito = consultarPosicionProxy.isExito();
+		boolean isExito = consultarPosicionCompromisoProxy.isExito();
 		if (isExito) {
-			int status = consultarPosicionProxy.getResponse().getStatus();
+			int status = consultarPosicionCompromisoProxy.getResponse().getStatus();
 			if (status == 0) {
-				List<PosicionTO> posiciones = consultarPosicionProxy
-						.getResponse().getListaPosicion();
+				List<PosicionCompromisoTO> posiciones = consultarPosicionCompromisoProxy
+						.getResponse().getListaCompromisos();
 				adap = new EfficientAdapter(this, posiciones);				
 				final Calendar c = Calendar.getInstance();      
 				if(posiciones.size()>0)
@@ -76,7 +76,7 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 				setListAdapter(adap);
 			}
 			else  {
-				showToast(consultarPosicionProxy.getResponse().getDescripcion());
+				showToast(consultarPosicionCompromisoProxy.getResponse().getDescripcion());
 			}
 		}
 		else{
@@ -95,9 +95,9 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
 	    //private Context context;
-	    private List<PosicionTO> detalles;
+	    private List<PosicionCompromisoTO> detalles;
 	    
-	    public EfficientAdapter(Context context, List<PosicionTO> valores) {
+	    public EfficientAdapter(Context context, List<PosicionCompromisoTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
 		      //this.context = context;
@@ -112,24 +112,30 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 	     *      android.view.ViewGroup)
 	     */
 	    public View getView(final int position, View convertView, ViewGroup parent) {
-	    	final PosicionTO posicionTO = (PosicionTO) getItem(position);
+	    	final PosicionCompromisoTO posicionTO = (PosicionCompromisoTO) getItem(position);
 	    	ViewHolder holder;
 
 	      if (convertView == null) {
-	        convertView = mInflater.inflate(R.layout.consultarposicion_content, null);
+	        convertView = mInflater.inflate(R.layout.consultarposicioncompromisoclose_content, null);
 
 	        // Creates a ViewHolder and store references to the two children
 	        // views
 	        // we want to bind data to.
 	        holder = new ViewHolder();
-	        	        	        	    	
-	        holder.chkSeleccion = (CheckBox) convertView.findViewById(R.id.chkSeleccion);
+	        
 	        holder.txViewVariable = (TextView) convertView.findViewById(R.id.txViewVariable);
-	        holder.txViewRed = (TextView) convertView.findViewById(R.id.txViewRed);
-	        holder.txViewMaximo = (TextView) convertView.findViewById(R.id.txViewMaximo);
-	        holder.txViewDiferencia = (TextView) convertView.findViewById(R.id.txViewDiferencia);
-	        holder.txViewPuntos = (TextView) convertView.findViewById(R.id.txViewPuntos);	        
-	    	
+			holder.txViewRed = (TextView) convertView.findViewById(R.id.txViewRed);
+			holder.txViewMaximo = (TextView) convertView.findViewById(R.id.txViewMaximo);
+			holder.txViewDiferencia = (TextView) convertView.findViewById(R.id.txViewDiferencia);
+			holder.txViewPuntos = (TextView) convertView.findViewById(R.id.txViewPuntos);
+			holder.txViewAccComp = (TextView) convertView.findViewById(R.id.txViewAccComp);
+			holder.txViewFecComp = (TextView) convertView.findViewById(R.id.txViewFecComp);
+			holder.txViewCnfComp = (TextView) convertView.findViewById(R.id.txViewCnfComp);
+			
+			holder.btnFotoInicial = (Button) convertView.findViewById(R.id.btnFotoInicial);
+			holder.btnFotoExito = (Button) convertView.findViewById(R.id.btnFotoExito);
+			holder.btnFotoFinal = (Button) convertView.findViewById(R.id.btnFotoFinal);
+			
 	        convertView.setTag(holder);
 	      } else {
 	        // Get the ViewHolder back to get fast access to the TextView
@@ -142,30 +148,25 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 	      holder.txViewMaximo.setText(posicionTO.getPtoMaximo());
 	      holder.txViewDiferencia.setText(posicionTO.getDiferencia());
 	      holder.txViewPuntos.setText(posicionTO.getPuntosSugeridos());
-	      
-	      holder.chkSeleccion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-				
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					// TODO Auto-generated method stub
-					if(isChecked){
-						posicionTO.setSeleccionado(true);
-					}else{
-						posicionTO.setSeleccionado(false);
-					}
-				}
-			});
-	      	      
+	      holder.txViewAccComp.setText(posicionTO.getAccionCompromiso());
+	      holder.txViewFecComp.setText(posicionTO.getFechaCompromiso());
+	      holder.txViewCnfComp.setText(posicionTO.getConfirmacion());
+	      	      	      
 	      return convertView;
 	    }
 
 	    static class ViewHolder {   
-	    	CheckBox chkSeleccion;
-	    	TextView txViewVariable;
-	    	TextView txViewRed;
-	    	TextView txViewMaximo;
-	    	TextView txViewDiferencia;
-	    	TextView txViewPuntos;  	
+	    	public TextView txViewVariable;
+	    	public TextView txViewRed;
+	    	public TextView txViewMaximo;
+	    	public TextView txViewDiferencia;
+	    	public TextView txViewPuntos;
+	    	public Button btnFotoInicial;
+	    	public Button btnFotoExito;
+	    	public TextView txViewAccComp;
+	    	public TextView txViewFecComp;
+	    	public Button btnFotoFinal;
+	    	public TextView txViewCnfComp;	
 	    }
 	    
 	    @Override
@@ -198,4 +199,5 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 	    }
 
 	  }
+    
 }

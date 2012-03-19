@@ -1,16 +1,19 @@
 package lindley.desarrolloxcliente.activity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
+import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarPresentacionProxy;
 import net.msonic.lib.ListActivityBase;
 import roboguice.inject.InjectView;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +38,55 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
 	private MyApplication application;
+	
+	public void btnSiguiente_click(View view)
+    {
+    	ArrayList<PresentacionCompromisoTO> presentaciones = application.listPresentacionCompromiso;
+    	
+    	if(presentaciones==null){
+    		presentaciones = new ArrayList<PresentacionCompromisoTO>();
+    	}else{
+    		presentaciones.clear();
+    	}
+    	
+    	
+    	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
+    	
+    	for (PresentacionTO presentacion : adap.detalles) {
+    		/*if(oportunidad.getAccioneTrade().compareTo("")!=0){
+    			oportunidades.add(oportunidad);
+    		}*/
+    		if(presentacion.isSeleccionado()){
+    			PresentacionCompromisoTO compromiso = new PresentacionCompromisoTO();
+    			
+    			compromiso.setCodigoVariable(presentacion.getCodigoVariable());
+    			compromiso.setPuntosSugeridos(presentacion.getPuntosSugeridos());
+    			    			
+    			presentaciones.add(compromiso);
+    		}
+		}
+    	
+
+    	/*int filasSeleccionadas=oportunidades.size();
+    	if(filasSeleccionadas>3){
+    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede seleccionar como m‡ximo 3 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+				}
+				
+			});
+    	}else{
+    		application.setOportunidades(oportunidades);    		
+    		Intent intent = new Intent("lindley.desarrolloxcliente.informacionadicional");
+    		startActivity(intent);
+    	}*/
+    	
+    	application.listPresentacionCompromiso = presentaciones;   		
+		Intent intent = new Intent("lindley.desarrolloxcliente.informacionadicional");
+		startActivity(intent);
+    }
 	
 	/** Called when the activity is first created. */
     @Override

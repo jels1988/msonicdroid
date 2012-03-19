@@ -1,16 +1,20 @@
 package lindley.desarrolloxcliente.activity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
+import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PosicionTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarPosicionProxy;
+import net.msonic.lib.ListActivityBase;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,15 +22,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
-
-import net.msonic.lib.ListActivityBase;
 
 public class ConsultarPosicion_Activity extends ListActivityBase {
 
@@ -38,6 +40,59 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
 	ClienteTO cliente;
 	private MyApplication application;
 	@InjectExtra(RESPUESTA) String respuesta;
+	
+	public void btnSiguiente_click(View view)
+    {
+    	ArrayList<PosicionCompromisoTO> posiciones = application.listPosicionCompromiso;
+    	
+    	if(posiciones==null){
+    		posiciones = new ArrayList<PosicionCompromisoTO>();
+    	}else{
+    		posiciones.clear();
+    	}
+    	
+    	
+    	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
+    	
+    	for (PosicionTO posicion : adap.detalles) {
+    		/*if(oportunidad.getAccioneTrade().compareTo("")!=0){
+    			oportunidades.add(oportunidad);
+    		}*/
+    		if(posicion.isSeleccionado()){
+    			PosicionCompromisoTO compromiso = new PosicionCompromisoTO();
+    			
+    			compromiso.setCodigoVariable(posicion.getCodigoVariable());
+    			compromiso.setRed(posicion.getRed());
+    			compromiso.setPtoMaximo(posicion.getPtoMaximo());
+    			compromiso.setDiferencia(posicion.getDiferencia());
+    			compromiso.setPuntosSugeridos(posicion.getPuntosSugeridos());
+    			    			
+    			posiciones.add(compromiso);
+    		}
+		}
+    	
+
+    	/*int filasSeleccionadas=oportunidades.size();
+    	if(filasSeleccionadas>3){
+    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede seleccionar como m‡ximo 3 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+				}
+				
+			});
+    	}else{
+    		application.setOportunidades(oportunidades);    		
+    		Intent intent = new Intent("lindley.desarrolloxcliente.informacionadicional");
+    		startActivity(intent);
+    	}*/
+    	
+    	application.listPosicionCompromiso = posiciones;   		
+		Intent intent = new Intent("lindley.desarrolloxcliente.informacionadicional");
+		startActivity(intent);
+    }
+    
 	
 	/** Called when the activity is first created. */
     @Override
