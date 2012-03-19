@@ -95,6 +95,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
     	}else{
     		application.setOportunidadesDesarrollador(oportunidadesDesarrollador); 		
     		Intent intent = new Intent("lindley.desarrolloxcliente.consultarposicion");
+    		intent.putExtra(ConsultarPosicion_Activity.RESPUESTA, "S");
     		startActivity(intent);
     		//processAsync(ACCION_GUARDAR);
     	}

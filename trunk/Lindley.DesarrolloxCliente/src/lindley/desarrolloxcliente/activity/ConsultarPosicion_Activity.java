@@ -32,7 +32,7 @@ import com.thira.examples.actionbar.widget.ActionBar;
 
 public class ConsultarPosicion_Activity extends ListActivityBase {
 
-	private static final String RESPUESTA = "rspta";
+	public static final String RESPUESTA = "rspta";
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarPosicionProxy consultarPosicionProxy;
 	private EfficientAdapter adap;
@@ -55,9 +55,7 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
     	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
     	
     	for (PosicionTO posicion : adap.detalles) {
-    		/*if(oportunidad.getAccioneTrade().compareTo("")!=0){
-    			oportunidades.add(oportunidad);
-    		}*/
+    		
     		if(posicion.isSeleccionado()){
     			PosicionCompromisoTO compromiso = new PosicionCompromisoTO();
     			
@@ -105,7 +103,7 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
 		cliente = application.getClienteTO();
         mActionBar.setSubTitle(cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
-        processAsync(); 
+        //processAsync(); 
     }
     
     @Override
