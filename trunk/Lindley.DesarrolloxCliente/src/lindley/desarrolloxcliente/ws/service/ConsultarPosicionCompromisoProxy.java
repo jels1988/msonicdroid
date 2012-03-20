@@ -43,7 +43,7 @@ public class ConsultarPosicionCompromisoProxy extends ProxyBase<ConsultarPosicio
 	@Override
 	protected String getUrl() {
 		// TODO Auto-generated method stub
-		return urlWS + "/ConsultarPosicionSugerido";
+		return urlWS + "/ConsultarPosicionCompromiso";
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class ConsultarPosicionCompromisoProxy extends ProxyBase<ConsultarPosicio
 	@Override
 	protected ConsultarPosicionCompromisoResponse responseText(String json) {
 		// TODO Auto-generated method stub
-		ConsultarPosicionCompromisoResponse response = JSONHelper.desSerializar(json, ConsultarOportunidadResponse.class);
+		ConsultarPosicionCompromisoResponse response = JSONHelper.desSerializar(json, ConsultarPosicionCompromisoResponse.class);
 		return response;
 	}
 

@@ -36,6 +36,13 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 	private MyApplication application;
 	@InjectExtra(COD_GESTION) String codigoGestion;
 	
+	private static String pad(int c) {
+		if (c >= 10)
+			return String.valueOf(c);
+		else
+			return "0" + String.valueOf(c);
+	}
+	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -113,7 +120,7 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 	    	ViewHolder holder;
 
 	      if (convertView == null) {
-	        convertView = mInflater.inflate(R.layout.consultarpresentacion_content, null);
+	        convertView = mInflater.inflate(R.layout.consultarpresentacioncompromisoclose_content, null);
 
 	        // Creates a ViewHolder and store references to the two children
 	        // views
@@ -133,9 +140,19 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 	        holder = (ViewHolder) convertView.getTag();
 	      }
 	      
+	      int mYear, mMonth, mDay;
+			String fecha = presentacionTO.getFechaCompromiso();
+			if (fecha.length() > 7) {
+				mYear = Integer.parseInt(fecha.substring(0, 4));
+				mMonth = Integer.parseInt(fecha.substring(4, 6));
+				mDay = Integer.parseInt(fecha.substring(6));
+
+				holder.txViewFecComp.setText(pad(mDay) + "/" + pad(mMonth) + "/" + pad(mYear));
+			} else {
+				holder.txViewFecComp.setText("");
+			}
 	      holder.txViewVariable.setText(presentacionTO.getDescripcionVariable());
 	      holder.txViewPuntos.setText(presentacionTO.getPuntosSugeridos());
-	      holder.txViewFecComp.setText(presentacionTO.getFechaCompromiso());
 	      holder.txViewCnfComp.setText(presentacionTO.getConfirmacion());
 	      	      	      
 	      return convertView;

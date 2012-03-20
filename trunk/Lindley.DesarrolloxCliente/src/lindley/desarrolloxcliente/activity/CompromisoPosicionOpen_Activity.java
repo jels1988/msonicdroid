@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
@@ -30,21 +31,21 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	public static final String COD_GESTION = "codGestion";
 	@InjectExtra(COD_GESTION) String codigoGestion;
 	
-	public static final String RESPUESTA = "rspta";
+	//public static final String RESPUESTA = "rspta";
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarPosicionCompromisoProxy consultarPosicionProxy;
 	private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
 	private MyApplication application;
-	@InjectExtra(RESPUESTA) String respuesta;
+	//@InjectExtra(RESPUESTA) String respuesta;
 	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	inicializarRecursos();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.consultarposicion_activity);        
+        setContentView(R.layout.consultarposicioncompromisoopen_activity);        
         mActionBar.setTitle(R.string.consultarposicion_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
@@ -97,7 +98,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		private List<PosicionCompromisoTO> posiciones;
 
 		public EfficientAdapter(Activity context,List<PosicionCompromisoTO> posiciones ){
-			super(context, R.layout.consultarposicion_content, posiciones);
+			super(context, R.layout.consultarposicioncompromisoopen_content, posiciones);
 			this.context=context;
 			this.posiciones=posiciones;
 		}
@@ -109,8 +110,9 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 			View view = null;
 			if (convertView == null) {
 				LayoutInflater inflator = context.getLayoutInflater();
-				view = inflator.inflate(R.layout.consultarposicion_content, null);
+				view = inflator.inflate(R.layout.consultarposicioncompromisoopen_content, null);
 				final ViewHolder viewHolder = new ViewHolder();
+				viewHolder.TextViewRpsta = (TextView) view.findViewById(R.id.TextViewRpsta);
 				viewHolder.txViewVariable = (TextView) view.findViewById(R.id.txViewVariable);
 				viewHolder.txViewRed = (TextView) view.findViewById(R.id.txViewRed);
 				viewHolder.txViewMaximo = (TextView) view.findViewById(R.id.txViewMaximo);
@@ -120,7 +122,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				viewHolder.btnFotoInicial = (Button) view.findViewById(R.id.btnFotoInicial);
 				viewHolder.btnFotoExito = (Button) view.findViewById(R.id.btnFotoExito);
 				viewHolder.btnFotoFinal = (Button) view.findViewById(R.id.btnFotoFinal);
-				viewHolder.btnFecha = (Button) view.findViewById(R.id.btnFecha);
+				viewHolder.btnFecha = (ImageButton) view.findViewById(R.id.btnFecha);
 				viewHolder.txViewFecha = (TextView) view.findViewById(R.id.txViewFecha);
 				
 				viewHolder.txViewAccComp = (EditText) view.findViewById(R.id.txViewAccComp);
@@ -138,6 +140,10 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 			ViewHolder holder = (ViewHolder) view.getTag();
 			final PosicionCompromisoTO posicionTO = posiciones.get(position);
 			
+			if(posicionTO.respuesta.equals("S"))
+		    	  holder.TextViewRpsta.setText("SI");
+		      else
+		    	  holder.TextViewRpsta.setText("NO");
 			holder.txViewVariable.setText(posicionTO.getDescripcionVariable());
 			holder.txViewRed.setText(posicionTO.getRed());
 			holder.txViewMaximo.setText(posicionTO.getPtoMaximo());
@@ -167,6 +173,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		}
 
 	    static class ViewHolder {   
+	    	TextView TextViewRpsta;
 	    	TextView txViewVariable;
 	    	TextView txViewRed;
 	    	TextView txViewMaximo;
@@ -177,7 +184,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	    	EditText txViewAccComp;
 	    	EditText txEditFecha;
 	    	TextView txViewFecha;
-	    	Button 	 btnFecha;
+	    	ImageButton 	 btnFecha;
 	    	Button 	 btnFotoFinal;
 	    	CheckBox chkCumplio;
 	    }

@@ -38,7 +38,7 @@ public class CompromisoPrincipalClose_Resumen extends TabActivity {
 	private void setupTab(final View view) {
 		View tabview = createTabView(mTabHost.getContext(), "INVENTARIO");
 		Intent oportunidad = new Intent(this, CompromisoClose_Activity.class);
-		oportunidad.putExtra(CompromisoClose_Activity.CODIGO_REGISTRO, codigoRegistro);		
+		oportunidad.putExtra(CompromisoClose_Activity.CODIGO_REGISTRO, codigoRegistro);
 		TabSpec setContent = mTabHost.newTabSpec("INVENTARIO").setIndicator(tabview).setContent(oportunidad);
 		mTabHost.addTab(setContent);
 				

@@ -48,12 +48,14 @@ public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 		
 		tabview = createTabView(mTabHost.getContext(), "POSICION");
 		Intent posicion = new Intent(this, CompromisoPosicionOpen_Activity.class);
-		posicion.putExtra(CompromisoPosicionOpen_Activity.RESPUESTA, "S");		
+		posicion.putExtra(CompromisoPosicionOpen_Activity.COD_GESTION, codigoRegistro);
+		//posicion.putExtra(CompromisoPosicionOpen_Activity.RESPUESTA, "S");		
 		setContent = mTabHost.newTabSpec("POSICION").setIndicator(tabview).setContent(posicion);
 		mTabHost.addTab(setContent);
 		
 		tabview = createTabView(mTabHost.getContext(), "PRESENTACION");
-		Intent presentacion = new Intent(this, CompromisoPresentacionOpen_Activity.class);				
+		Intent presentacion = new Intent(this, CompromisoPresentacionOpen_Activity.class);
+		presentacion.putExtra(CompromisoPresentacionOpen_Activity.COD_GESTION, codigoRegistro);
 		setContent = mTabHost.newTabSpec("PRESENTACION").setIndicator(tabview).setContent(presentacion);
 		mTabHost.addTab(setContent);		
 	}
