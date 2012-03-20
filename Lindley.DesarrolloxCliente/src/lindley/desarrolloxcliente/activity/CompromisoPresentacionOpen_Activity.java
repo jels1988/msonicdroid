@@ -22,6 +22,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
@@ -48,7 +49,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 	public void onCreate(Bundle savedInstanceState) {
 		inicializarRecursos();
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.consultarpresentacion_activity);
+		setContentView(R.layout.consultarpresentacioncompromisoopen_activity);
 		mActionBar.setTitle(R.string.consultarpresentacion_activity_title);
 		application = (MyApplication) getApplicationContext();
 		cliente = application.getClienteTO();
@@ -124,7 +125,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 
 			if (convertView == null) {
 				convertView = mInflater.inflate(
-						R.layout.consultarpresentacion_content, null);
+						R.layout.consultarpresentacioncompromisoopen_content, null);
 
 				// Creates a ViewHolder and store references to the two children
 				// views
@@ -139,7 +140,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 
 				holder.txEditFecha = (EditText) convertView
 						.findViewById(R.id.txEditFecha);
-				holder.btnFecha = (Button) convertView
+				holder.btnFecha = (ImageButton) convertView
 						.findViewById(R.id.btnFecha);
 				holder.txViewFecha = (TextView) convertView
 						.findViewById(R.id.txViewFecha);
@@ -186,7 +187,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 
 			EditText txEditFecha;
 			TextView txViewFecha;
-			Button btnFecha;
+			ImageButton btnFecha;
 			CheckBox chkCnfComp;
 		}
 

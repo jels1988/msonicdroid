@@ -38,6 +38,13 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 	//@InjectExtra(RESPUESTA) String respuesta;
 	@InjectExtra(COD_GESTION) String codigoGestion;
 	
+	private static String pad(int c) {
+		if (c >= 10)
+			return String.valueOf(c);
+		else
+			return "0" + String.valueOf(c);
+	}
+	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -123,6 +130,7 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 	        // we want to bind data to.
 	        holder = new ViewHolder();
 	        
+	        holder.TextViewRpsta = (TextView) convertView.findViewById(R.id.TextViewRpsta);
 	        holder.txViewVariable = (TextView) convertView.findViewById(R.id.txViewVariable);
 			holder.txViewRed = (TextView) convertView.findViewById(R.id.txViewRed);
 			holder.txViewMaximo = (TextView) convertView.findViewById(R.id.txViewMaximo);
@@ -135,7 +143,7 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 			holder.btnFotoInicial = (Button) convertView.findViewById(R.id.btnFotoInicial);
 			holder.btnFotoExito = (Button) convertView.findViewById(R.id.btnFotoExito);
 			holder.btnFotoFinal = (Button) convertView.findViewById(R.id.btnFotoFinal);
-			
+						
 	        convertView.setTag(holder);
 	      } else {
 	        // Get the ViewHolder back to get fast access to the TextView
@@ -143,19 +151,38 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 	        holder = (ViewHolder) convertView.getTag();
 	      }
 	      
+	      if(posicionTO.respuesta.equals("S"))
+	    	  holder.TextViewRpsta.setText("SI");
+	      else
+	    	  holder.TextViewRpsta.setText("NO");
 	      holder.txViewVariable.setText(posicionTO.getDescripcionVariable());
 	      holder.txViewRed.setText(posicionTO.getRed());
 	      holder.txViewMaximo.setText(posicionTO.getPtoMaximo());
 	      holder.txViewDiferencia.setText(posicionTO.getDiferencia());
 	      holder.txViewPuntos.setText(posicionTO.getPuntosSugeridos());
-	      holder.txViewAccComp.setText(posicionTO.getAccionCompromiso());
-	      holder.txViewFecComp.setText(posicionTO.getFechaCompromiso());
+	      holder.txViewAccComp.setText(posicionTO.getAccionCompromiso());	      
 	      holder.txViewCnfComp.setText(posicionTO.getConfirmacion());
+	      
+	      int mYear,mMonth,mDay;
+	      String fecha = posicionTO.getFechaCompromiso();
+	      if(fecha.length() > 7)
+	      {
+	    	  mYear =  Integer.parseInt(fecha.substring(0, 4));
+	    	  mMonth  =  Integer.parseInt(fecha.substring(4, 6));
+	    	  mDay  =  Integer.parseInt(fecha.substring(6));
+	    	  
+	    	  holder.txViewFecComp.setText(pad(mDay)+"/"+ pad(mMonth)+"/"+pad(mYear));
+	     }
+	      else{
+	    	  
+	    	  holder.txViewFecComp.setText("");
+	      }
 	      	      	      
 	      return convertView;
 	    }
 
 	    static class ViewHolder {   
+	    	public TextView TextViewRpsta;
 	    	public TextView txViewVariable;
 	    	public TextView txViewRed;
 	    	public TextView txViewMaximo;

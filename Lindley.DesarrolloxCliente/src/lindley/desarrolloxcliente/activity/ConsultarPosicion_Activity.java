@@ -64,7 +64,7 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
     			compromiso.setPtoMaximo(posicion.getPtoMaximo());
     			compromiso.setDiferencia(posicion.getDiferencia());
     			compromiso.setPuntosSugeridos(posicion.getPuntosSugeridos());
-    			    			
+    			compromiso.respuesta = respuesta;			
     			posiciones.add(compromiso);
     		}
 		}
@@ -103,7 +103,7 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
 		cliente = application.getClienteTO();
         mActionBar.setSubTitle(cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
-        //processAsync(); 
+        processAsync(); 
     }
     
     @Override
@@ -117,6 +117,7 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
 	protected void processOk() {
 		// TODO Auto-generated method stub
 		boolean isExito = consultarPosicionProxy.isExito();
+		System.out.println(isExito);
 		if (isExito) {
 			int status = consultarPosicionProxy.getResponse().getStatus();
 			if (status == 0) {

@@ -51,7 +51,7 @@ public class ConsultarPresentacionCompromisoProxy extends ProxyBase<ConsultarPre
 	@Override
 	protected ConsultarPresentacionCompromisoResponse responseText(String json) {
 		// TODO Auto-generated method stub
-		ConsultarPresentacionCompromisoResponse response = JSONHelper.desSerializar(json, ConsultarOportunidadResponse.class);
+		ConsultarPresentacionCompromisoResponse response = JSONHelper.desSerializar(json, ConsultarPresentacionCompromisoResponse.class);
 		return response;
 	}
 

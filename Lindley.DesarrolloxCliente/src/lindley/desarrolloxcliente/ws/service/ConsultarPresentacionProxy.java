@@ -2,7 +2,6 @@ package lindley.desarrolloxcliente.ws.service;
 
 import roboguice.inject.InjectResource;
 import lindley.desarrolloxcliente.R;
-import lindley.desarrolloxcliente.ws.bean.ConsultarOportunidadResponse;
 import lindley.desarrolloxcliente.ws.bean.ConsultarPresentacionSugeridoRequest;
 import lindley.desarrolloxcliente.ws.bean.ConsultarPresentacionSugeridoResponse;
 import net.msonic.lib.JSONHelper;
@@ -41,7 +40,7 @@ public class ConsultarPresentacionProxy extends ProxyBase<ConsultarPresentacionS
 	@Override
 	protected ConsultarPresentacionSugeridoResponse responseText(String json) {
 		// TODO Auto-generated method stub
-		ConsultarPresentacionSugeridoResponse response = JSONHelper.desSerializar(json, ConsultarOportunidadResponse.class);
+		ConsultarPresentacionSugeridoResponse response = JSONHelper.desSerializar(json, ConsultarPresentacionSugeridoResponse.class);
 		return response;
 	}
 
