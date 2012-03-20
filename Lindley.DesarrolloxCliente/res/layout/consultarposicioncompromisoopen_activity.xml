@@ -58,6 +58,13 @@
                         
                         <TextView
                             style="@style/TextViewLabel"
+                            android:layout_width="20dip"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Repuesta" />
+                        
+                        <TextView
+                            style="@style/TextViewLabel"
                             android:layout_width="100dip"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -123,7 +130,7 @@
                             style="@style/TextViewLabel"
                             android:layout_width="60dip"
                             android:layout_height="wrap_content"
-                            android:text="Confirmación" />
+                            android:text="Cumplio" />
                          
                     </TableRow>
 
