@@ -56,6 +56,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" >
                         
+                         <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="20dip"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Repuesta" />
+                         
                         <TextView
                             style="@style/TextViewLabel"
                             android:layout_width="100dip"
@@ -81,49 +88,57 @@
                             style="@style/TextViewLabel"
                             android:layout_width="40dip"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:text="Diferencia" />
 
                         <TextView
                             style="@style/TextViewLabel"
                             android:layout_width="40dip"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:text="Puntos" />
                         
                         <TextView
                             style="@style/TextViewLabel"
                             android:layout_width="60dip"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:text="" />
                         
                         <TextView
                             style="@style/TextViewLabel"
                             android:layout_width="60dip"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:text="" />
                         
                         <TextView
                             style="@style/TextViewLabel"
+                            android:gravity="center"
                             android:layout_width="60dip"
                             android:layout_height="wrap_content"
                             android:text="Acc. Compromiso" />
                         
                         <TextView
+                            android:gravity="center"
                             style="@style/TextViewLabel"
                             android:layout_width="60dip"
                             android:layout_height="wrap_content"
                             android:text="Fecha Compromiso" />
                         
                         <TextView
+                            android:gravity="center"
                             style="@style/TextViewLabel"
                             android:layout_width="60dip"
                             android:layout_height="wrap_content"
                             android:text="" />
                         
                         <TextView
+                            android:gravity="center"
                             style="@style/TextViewLabel"
                             android:layout_width="60dip"
                             android:layout_height="wrap_content"
-                            android:text="Confirmación" />
+                            android:text="Cumplio" />
                          
                     </TableRow>
 
@@ -143,19 +158,5 @@
                 
             </LinearLayout>
         </HorizontalScrollView>
-
-        <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" android:padding="1dip">
-                    
-                     <Button android:layout_width="wrap_content" 
-			    android:layout_gravity="right" 
-			    android:layout_height="wrap_content" 
-			    android:text="@string/oportunidad_activity_boton_siguiente"
-			    android:focusable="false"
-
-			    android:onClick="btnSiguiente_click"></Button>
-            </LinearLayout>
 
 </LinearLayout>

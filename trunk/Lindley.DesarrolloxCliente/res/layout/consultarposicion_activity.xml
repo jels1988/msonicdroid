@@ -87,11 +87,13 @@
                         <TextView
                             style="@style/TextViewLabel"
                             android:layout_width="40dip"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:text="Diferencia" />
 
                         <TextView
                             style="@style/TextViewLabel"
+                            android:gravity="center"
                             android:layout_width="40dip"
                             android:layout_height="wrap_content"
                             android:text="Puntos" />
