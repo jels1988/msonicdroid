@@ -8,6 +8,7 @@ import com.google.inject.Singleton;
 import lindley.desarrolloxcliente.adapter.AccionTradeTOAdapter;
 import lindley.desarrolloxcliente.to.AccionTradeTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
+import lindley.desarrolloxcliente.to.CompromisoTO;
 import lindley.desarrolloxcliente.to.InformacionAdicionalTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
@@ -36,6 +37,7 @@ public class MyApplication extends RoboApplication {
 	
 	public ArrayList<PosicionCompromisoTO> listPosicionCompromiso;
 	public ArrayList<PresentacionCompromisoTO> listPresentacionCompromiso;
+	public ArrayList<CompromisoTO> listInventarioCompromiso;
 	
 	public UsuarioTO getUsuarioTO() {
 		return usuarioTO;

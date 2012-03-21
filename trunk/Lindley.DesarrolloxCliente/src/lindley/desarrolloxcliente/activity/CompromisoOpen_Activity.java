@@ -11,6 +11,7 @@ import lindley.desarrolloxcliente.to.CompromisoTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCompromisoProxy;
+import net.msonic.lib.ListActivityBase;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.app.DatePickerDialog;
@@ -19,10 +20,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -36,12 +38,9 @@ import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
-
-import net.msonic.lib.ListActivityBase;
 
 public class CompromisoOpen_Activity extends ListActivityBase {
 
@@ -66,6 +65,24 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	ClienteTO cliente;
 	public static MyApplication application;
 	List<CompromisoTO> compromisos;
+	
+	/*
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		System.out.println("onPause");
+		ArrayList<CompromisoTO> compromisos = application.listInventarioCompromiso;
+    	
+    	if(compromisos==null){
+    		compromisos = new ArrayList<CompromisoTO>();
+    	}else{
+    		compromisos.clear();
+    	}
+    	
+    	application.listInventarioCompromiso = compromisos;
+		super.onPause();
+	}
+	*/
 	
 	/** Called when the activity is first created. */
     @Override 

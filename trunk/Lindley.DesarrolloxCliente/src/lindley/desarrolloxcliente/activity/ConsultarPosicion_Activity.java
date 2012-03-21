@@ -68,7 +68,6 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
     			posiciones.add(compromiso);
     		}
 		}
-    	
 
     	/*int filasSeleccionadas=oportunidades.size();
     	if(filasSeleccionadas>3){
