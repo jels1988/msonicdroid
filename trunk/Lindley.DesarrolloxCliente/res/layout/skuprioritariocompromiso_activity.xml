@@ -23,7 +23,7 @@
             android:orientation="vertical" >
 
             <TableLayout
-                android:layout_width="wrap_content"
+                android:layout_width="500dip"
                 android:layout_height="wrap_content"
                 android:shrinkColumns="*"
                 android:stretchColumns="*" >
@@ -34,11 +34,34 @@
 
                     <TextView
                         style="@style/TextViewLabel"
-                        android:layout_width="wrap_content"
+                        android:layout_width="150dip"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="@string/sku_prioritario" />
-                    
+
+                    <TextView
+                        style="@style/TextViewLabel"
+                        android:layout_width="100dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:text="@string/sku_valor_actual" />
+
+                    <TextView
+                        style="@style/TextViewLabel"
+                        android:layout_width="100dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:text="@string/sku_valor_compromiso" />
+
+                    <TextView
+                        style="@style/TextViewLabel"
+                        android:layout_width="100dip"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:gravity="center"
+                        android:text="@string/sku_valor_confirmacion" />
                 </TableRow>
 
                 <View

@@ -7,7 +7,7 @@
     <TableLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/tableLayout"
-        android:layout_width="500dip"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:shrinkColumns="*"
         android:stretchColumns="*" >
@@ -18,31 +18,11 @@
 
             <TextView
                 android:id="@+id/txViewSKU"
-                android:layout_width="100dip"
+                android:layout_width="wrap_content"
                 android:layout_height="40dip"
                 android:gravity="center"
                 android:text="" />
 
-            <CheckBox
-                android:id="@+id/chkValActual"
-                android:layout_width="100dip"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:text="" />
-
-            <CheckBox
-                android:id="@+id/chkValComp"
-                android:layout_width="100dip"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:text="" />
-
-            <CheckBox
-                android:id="@+id/chkValConf"
-                android:layout_width="100dip"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:text="" />
         </TableRow>
 
         <View
