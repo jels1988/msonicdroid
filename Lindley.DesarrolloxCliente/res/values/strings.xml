@@ -70,7 +70,8 @@
     <string name="sku_valor_actual">Marc Actual</string>
     <string name="sku_valor_compromiso">Compromiso</string>
     <string name="sku_valor_confirmacion">Confirmación</string>
-    <string name="skuprioritario_activity_boton_guardar">Guardar</string>
+    <string name="skuprioritario_activity_boton_ok">OK</string>
     <string name="oportunidad_activity_boton_siguiente">Siguiente</string>
+    <string name="skuprioritario_activity_title">SKU Prioritarios</string>
     
 </resources>
