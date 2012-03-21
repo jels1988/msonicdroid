@@ -7,11 +7,14 @@ import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
+import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
+import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarPosicionCompromisoProxy;
 import net.msonic.lib.ListActivityBase;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,10 +39,14 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	
 	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
 	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
+	private static final int ACCION_CERRAR = 1;
+	private static final int ACCION_ACTUALIZAR = 2;
 	
 	//public static final String RESPUESTA = "rspta";
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarPosicionCompromisoProxy consultarPosicionProxy;
+	@Inject CerrarCompromisoProxy cerrarCompromisoProxy;
+	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
 	private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
@@ -94,6 +101,75 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
     
     @Override
 	protected void processError() {
+		// TODO Auto-generated method stub
+		super.processError();
+		showToast(error_generico_process);
+	}
+    
+    public void btnCerrar_click(View view)
+    {
+    	processAsync(ACCION_CERRAR);
+    }
+    
+    @Override
+   	protected void process(int accion) {
+       	if(accion == ACCION_CERRAR)
+       	{
+       		cerrarCompromisoProxy.setCodigoCabecera(codigoGestion);
+       		cerrarCompromisoProxy.execute();
+       	}
+       	else if(accion == ACCION_ACTUALIZAR)
+       	{
+       		//actualizarCompromisoProxy.setCompromisos(compromisos);
+       		actualizarCompromisoProxy.setCompromisos(null);
+       		actualizarCompromisoProxy.execute();
+       	}
+       		
+   	}
+    
+    protected void processOk(int accion) {
+   		// TODO Auto-generated method stub
+    	if(accion == ACCION_CERRAR)
+    	{
+    		boolean isExito = cerrarCompromisoProxy.isExito();
+       		if (isExito) {
+       			int status = cerrarCompromisoProxy.getResponse().getStatus();
+       			if (status == 0) {
+       				showToast("Los registros se cerrarón satisfactoriamente.");
+       				Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
+					startActivity(cabecera);
+       			}
+       			else  {
+       				showToast(cerrarCompromisoProxy.getResponse().getDescripcion());
+       			}
+       		}
+       		else{
+       			processError();
+       		}
+    	}
+    	else if(accion == ACCION_ACTUALIZAR)
+    	{
+    		boolean isExito = actualizarCompromisoProxy.isExito();
+       		if (isExito) {
+       			int status = actualizarCompromisoProxy.getResponse().getStatus();
+       			if (status == 0) {
+       				showToast("Los registros se actualizaron correctamente.");
+       				Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.consultarcabecera");
+					startActivity(compromisoOpen);
+       			}
+       			else  {
+       				showToast(actualizarCompromisoProxy.getResponse().getDescripcion());
+       			}
+       		}
+       		else{
+       			processError();
+       		}	
+    	}   		
+   		super.processOk();
+   	} 
+    
+    @Override
+	protected void processError(int accion) {
 		// TODO Auto-generated method stub
 		super.processError();
 		showToast(error_generico_process);
