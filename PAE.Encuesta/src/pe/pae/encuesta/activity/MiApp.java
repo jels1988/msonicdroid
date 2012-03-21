@@ -6,10 +6,13 @@ import net.msonic.lib.DBHelper;
 import net.msonic.lib.DBHelperProvider;
 import pe.pae.encuesta.dao.ClienteDAO;
 import pe.pae.encuesta.dao.EncuestaDAO;
+import pe.pae.encuesta.dao.RespuestaDAO;
 import pe.pae.encuesta.negocio.ClienteBLL;
 import pe.pae.encuesta.negocio.EncuestaBLL;
+import pe.pae.encuesta.negocio.RespuestaBLL;
 import pe.pae.encuesta.to.UsuarioTO;
 import pe.pae.encuesta.ws.service.EncuestaProxy;
+import pe.pae.encuesta.ws.service.GuardarRespuestaProxy;
 import pe.pae.encuesta.ws.service.LoginProxy;
 
 import com.google.inject.Module;
@@ -50,6 +53,7 @@ public class MiApp extends RoboApplication {
 				// TODO Auto-generated method stub
 				bind(LoginProxy.class).in(Singleton.class);
 				bind(EncuestaProxy.class).in(Singleton.class);
+				bind(GuardarRespuestaProxy.class).in(Singleton.class);
 				
 				bind(DBHelper.class).toProvider(DBHelperProvider.class).in(Singleton.class);
 				
@@ -58,6 +62,9 @@ public class MiApp extends RoboApplication {
 				
 				bind(EncuestaDAO.class).in(Singleton.class);
 				bind(EncuestaBLL.class).in(Singleton.class);
+				
+				bind(RespuestaDAO.class).in(Singleton.class);
+				bind(RespuestaBLL.class).in(Singleton.class);
 				
 			}
 		});

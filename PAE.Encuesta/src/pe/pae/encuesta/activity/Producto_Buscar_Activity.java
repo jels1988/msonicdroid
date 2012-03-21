@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import pe.pae.encuesta.R;
 import pe.pae.encuesta.negocio.EncuestaBLL;
+import pe.pae.encuesta.negocio.RespuestaBLL;
 import pe.pae.encuesta.to.ProductoTO;
+import pe.pae.encuesta.ws.service.GuardarRespuestaProxy;
 import roboguice.inject.InjectView;
 
 import com.google.inject.Inject;
@@ -17,6 +19,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
@@ -32,7 +35,11 @@ public class Producto_Buscar_Activity extends ListActivityBase {
 
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@InjectView(R.id.txtProducto) 	EditText 	txtProducto;
-	@Inject 	EncuestaBLL encuestaBLL;
+	@Inject 	EncuestaBLL 	encuestaBLL;
+	@Inject 	RespuestaBLL 	respuestaBLL;
+	@Inject		GuardarRespuestaProxy	guardarRespuestaProxy;
+	public  final static int ENVIAR_RESPUESTAS=0;
+	
 	private Producto_Buscar_Adapter adap;
 	
 	   @Override
@@ -75,6 +82,17 @@ public class Producto_Buscar_Activity extends ListActivityBase {
 
 
 	@Override
+	protected void process(int accion) {
+		// TODO Auto-generated method stub
+		if(accion==ENVIAR_RESPUESTAS){
+			guardarRespuestaProxy.respuestas = respuestaBLL.listarRespuesta();
+			guardarRespuestaProxy.execute();
+		}
+		
+	}
+
+
+	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		processAsync();
@@ -89,6 +107,20 @@ public class Producto_Buscar_Activity extends ListActivityBase {
 		MenuInflater inflater = new MenuInflater(this);
 		inflater.inflate(R.menu.producto_buscar_menu,menu);
 		return true;
+	}
+	
+	
+
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		if(item.getItemId() == R.id.mnuEnviar){
+			process(ENVIAR_RESPUESTAS);
+		}
+		
+		return super.onOptionsItemSelected(item);
 	}
 
 
