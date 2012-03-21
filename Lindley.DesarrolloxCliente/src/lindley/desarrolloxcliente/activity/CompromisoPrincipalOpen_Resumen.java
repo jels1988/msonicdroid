@@ -1,5 +1,6 @@
 package lindley.desarrolloxcliente.activity;
 
+import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import android.app.TabActivity;
 import android.content.Context;
@@ -23,6 +24,8 @@ public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 	public String codigoRegistro;
 	public String flagFecha;
 	
+	public static MyApplication application;
+	
 	private void setupTabHost() {		
 		mTabHost = (TabHost) findViewById(android.R.id.tabhost);
 		mTabHost.setup();
@@ -32,6 +35,9 @@ public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
+		application.listInventarioCompromiso = null;
+		application.listPosicionCompromiso = null;
+		application.listPresentacionCompromiso = null;
 		setContentView(R.layout.compromisoprincipal_activity);
 		Intent intent = this.getIntent();
 		codigoRegistro = intent.getStringExtra(CODIGO_REGISTRO);
