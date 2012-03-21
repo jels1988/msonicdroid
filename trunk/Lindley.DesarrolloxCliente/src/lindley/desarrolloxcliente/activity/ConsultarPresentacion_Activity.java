@@ -226,9 +226,9 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
 				if (status == 0) {
 					String idRegistro = guardarDesarrolloProxy.getResponse().getCodCabecera();
 					
-					Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.consultarcompromisoopen");
-					compromisoOpen.putExtra(CompromisoOpen_Activity.CODIGO_REGISTRO, idRegistro);
-					compromisoOpen.putExtra(CompromisoOpen_Activity.FLAG_FECHA, CompromisoOpen_Activity.FLAG_OPEN_FECHA_ABIERTO);
+					Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.compromisoprincipalopen");
+					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, idRegistro);
+					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.FLAG_FECHA, CompromisoPrincipalOpen_Resumen.FLAG_OPEN_FECHA_ABIERTO);
 					startActivity(compromisoOpen);
 				}
 				else  {

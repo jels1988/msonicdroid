@@ -14,11 +14,14 @@ import android.widget.TabHost.TabSpec;
 public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 
 	public final static String CODIGO_REGISTRO = "codigo_reg";
-	//private static final String RESPUESTA = "rspta";
-	//@InjectExtra(CODIGO_REGISTRO) static String codigoRegistro;
-	//@InjectExtra(RESPUESTA) String respuesta;
+	public final static String FLAG_FECHA = "fecha_flag";
+	
+	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
+	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
+	
 	private TabHost mTabHost;
 	public String codigoRegistro;
+	public String flagFecha;
 	
 	private void setupTabHost() {		
 		mTabHost = (TabHost) findViewById(android.R.id.tabhost);
@@ -32,6 +35,7 @@ public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 		setContentView(R.layout.compromisoprincipal_activity);
 		Intent intent = this.getIntent();
 		codigoRegistro = intent.getStringExtra(CODIGO_REGISTRO);
+		flagFecha = intent.getStringExtra(FLAG_FECHA);
 		setupTabHost();
 		//mTabHost.getTabWidget().setDividerDrawable(R.drawable.tab_bg_selector);		
 		setupTab(new TextView(this));
@@ -42,20 +46,21 @@ public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 		View tabview = createTabView(mTabHost.getContext(), "INVENTARIO");
 		Intent oportunidad = new Intent(this, CompromisoOpen_Activity.class);
 		oportunidad.putExtra(CompromisoOpen_Activity.CODIGO_REGISTRO, codigoRegistro);
-		oportunidad.putExtra(CompromisoOpen_Activity.FLAG_FECHA, CompromisoOpen_Activity.FLAG_OPEN_FECHA_CERRADA);
+		oportunidad.putExtra(CompromisoOpen_Activity.FLAG_FECHA, flagFecha);
 		TabSpec setContent = mTabHost.newTabSpec("INVENTARIO").setIndicator(tabview).setContent(oportunidad);
 		mTabHost.addTab(setContent);
 		
 		tabview = createTabView(mTabHost.getContext(), "POSICION");
 		Intent posicion = new Intent(this, CompromisoPosicionOpen_Activity.class);
 		posicion.putExtra(CompromisoPosicionOpen_Activity.COD_GESTION, codigoRegistro);
-		//posicion.putExtra(CompromisoPosicionOpen_Activity.RESPUESTA, "S");		
+		posicion.putExtra(CompromisoPosicionOpen_Activity.FLAG_FECHA, flagFecha);
 		setContent = mTabHost.newTabSpec("POSICION").setIndicator(tabview).setContent(posicion);
 		mTabHost.addTab(setContent);
 		
 		tabview = createTabView(mTabHost.getContext(), "PRESENTACION");
 		Intent presentacion = new Intent(this, CompromisoPresentacionOpen_Activity.class);
 		presentacion.putExtra(CompromisoPresentacionOpen_Activity.COD_GESTION, codigoRegistro);
+		presentacion.putExtra(CompromisoPresentacionOpen_Activity.FLAG_FECHA, flagFecha);
 		setContent = mTabHost.newTabSpec("PRESENTACION").setIndicator(tabview).setContent(presentacion);
 		mTabHost.addTab(setContent);		
 	}
@@ -68,3 +73,4 @@ public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 	}	
 
 }
+
