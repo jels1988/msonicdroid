@@ -146,6 +146,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        
+        <activity android:name=".activity.SKUPrioritario_Activity" >
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.skuprioritario" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
