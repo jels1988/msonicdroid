@@ -2,7 +2,6 @@ package lindley.desarrolloxcliente.ws.service;
 
 import roboguice.inject.InjectResource;
 import lindley.desarrolloxcliente.R;
-import lindley.desarrolloxcliente.ws.bean.ConsultarOportunidadResponse;
 import lindley.desarrolloxcliente.ws.bean.ConsultarPosicionCompromisoRequest;
 import lindley.desarrolloxcliente.ws.bean.ConsultarPosicionCompromisoResponse;
 import net.msonic.lib.JSONHelper;

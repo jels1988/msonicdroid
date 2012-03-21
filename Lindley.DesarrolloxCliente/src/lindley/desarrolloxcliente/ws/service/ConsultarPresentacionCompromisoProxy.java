@@ -3,7 +3,6 @@ package lindley.desarrolloxcliente.ws.service;
 import roboguice.inject.InjectResource;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.ws.bean.ConsultarCompromisoRequest;
-import lindley.desarrolloxcliente.ws.bean.ConsultarOportunidadResponse;
 import lindley.desarrolloxcliente.ws.bean.ConsultarPresentacionCompromisoResponse;
 import net.msonic.lib.JSONHelper;
 import net.msonic.lib.ProxyBase;
