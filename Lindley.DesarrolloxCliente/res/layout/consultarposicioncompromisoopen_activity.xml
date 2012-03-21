@@ -135,7 +135,7 @@
                         
                         <TextView
                             style="@style/TextViewLabel"
-                            android:layout_width="30dip"
+                            android:layout_width="20dip"
                             android:gravity="center"
                             android:layout_height="wrap_content"
                             android:text="Cumplio" />

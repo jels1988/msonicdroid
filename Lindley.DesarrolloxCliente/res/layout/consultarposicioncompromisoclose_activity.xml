@@ -47,7 +47,7 @@
                 android:orientation="vertical" >
 
                 <TableLayout
-                    android:layout_width="1000dip"
+                    android:layout_width="2000dip"
                     android:layout_height="wrap_content"
                     android:shrinkColumns="*"
                     android:stretchColumns="*" >
@@ -56,16 +56,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" >
                         
-                         <TextView
+                        <TextView
                             style="@style/TextViewLabel"
-                            android:layout_width="20dip"
+                            android:layout_width="40dip"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="Repuesta" />
                          
                         <TextView
                             style="@style/TextViewLabel"
-                            android:layout_width="100dip"
+                            android:layout_width="120dip"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="Variable" />
@@ -79,14 +79,14 @@
                         
                         <TextView
                             style="@style/TextViewLabel"
-                            android:layout_width="40dip"
+                            android:layout_width="50dip"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="Pto. Máximo" />
 
                         <TextView
                             style="@style/TextViewLabel"
-                            android:layout_width="40dip"
+                            android:layout_width="50dip"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="Diferencia" />
@@ -94,49 +94,49 @@
                         <TextView
                             style="@style/TextViewLabel"
                             android:layout_width="40dip"
-                            android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:layout_height="wrap_content"
                             android:text="Puntos" />
                         
-                        <TextView
+                         <TextView
                             style="@style/TextViewLabel"
                             android:layout_width="60dip"
-                            android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:layout_height="wrap_content"
                             android:text="" />
                         
                         <TextView
                             style="@style/TextViewLabel"
                             android:layout_width="60dip"
-                            android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:layout_height="wrap_content"
                             android:text="" />
                         
                         <TextView
                             style="@style/TextViewLabel"
+                            android:layout_width="120dip"
                             android:gravity="center"
-                            android:layout_width="60dip"
                             android:layout_height="wrap_content"
                             android:text="Acc. Compromiso" />
                         
                         <TextView
-                            android:gravity="center"
                             style="@style/TextViewLabel"
-                            android:layout_width="60dip"
+                            android:layout_width="120dip"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:text="Fecha Compromiso" />
                         
-                        <TextView
-                            android:gravity="center"
+                       <TextView
                             style="@style/TextViewLabel"
                             android:layout_width="60dip"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:text="" />
                         
                         <TextView
-                            android:gravity="center"
                             style="@style/TextViewLabel"
-                            android:layout_width="60dip"
+                            android:layout_width="20dip"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:text="Cumplio" />
                          
