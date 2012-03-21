@@ -67,9 +67,6 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	public static MyApplication application;
 	List<CompromisoTO> compromisos;
 	
-	    
-;
-	
 	/** Called when the activity is first created. */
     @Override 
     public void onCreate(Bundle savedInstanceState) {
@@ -81,24 +78,17 @@ public class CompromisoOpen_Activity extends ListActivityBase {
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
         mActionBar.setSubTitle(cliente.getNombre());
-        mActionBar.setHomeLogo(R.drawable.header_logo);
-        
-        
+        mActionBar.setHomeLogo(R.drawable.header_logo);        
         
         processAsync();
     }
     
-
-    
 	private static String pad(int c) {
-        if (c >= 10)
-                return String.valueOf(c);
-            else
-                    return "0" + String.valueOf(c);
-            }
-	
-	
- 
+		if (c >= 10)
+			return String.valueOf(c);
+		else
+			return "0" + String.valueOf(c);
+	}
     
     public void btnCerrar_click(View view)
     {
