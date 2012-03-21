@@ -31,8 +31,13 @@ import com.thira.examples.actionbar.widget.ActionBar;
 public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 
 	public static final String COD_GESTION = "codGestion";
-	@InjectExtra(COD_GESTION)
-	String codigoGestion;
+	@InjectExtra(COD_GESTION) String codigoGestion;
+	
+	public final static String FLAG_FECHA = "fecha_flag";
+	@InjectExtra(FLAG_FECHA) static String flagFecha;
+	
+	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
+	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
 
 	@InjectView(R.id.actionBar)
 	ActionBar mActionBar;
@@ -177,6 +182,19 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 			else
 				holder.chkCnfComp.setSelected(false);
 
+			if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
+		      {
+		    	  holder.txEditFecha.setVisibility(View.GONE);	    	  
+		    	  holder.btnFecha.setVisibility(View.GONE);
+		    	  holder.txViewFecha.setVisibility(View.VISIBLE);
+		      }
+		      else
+		      {
+		    	  holder.txEditFecha.setVisibility(View.VISIBLE);	    	  
+		    	  holder.btnFecha.setVisibility(View.VISIBLE);
+		    	  holder.txViewFecha.setVisibility(View.GONE);
+		      }
+			
 			return convertView;
 		}
 

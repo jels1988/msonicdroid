@@ -159,7 +159,8 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 					{
 						Intent compromisoOpen = new Intent(context, CompromisoPrincipalOpen_Resumen.class);
 						System.out.println("cabecera .... "+desarrolloTemp.getCodigo());
-						compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, desarrolloTemp.getCodigo());						
+						compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
+						compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.FLAG_FECHA, CompromisoPrincipalOpen_Resumen.FLAG_OPEN_FECHA_CERRADA);
 						context.startActivity(compromisoOpen);
 						//Intent compromisoOpen = new Intent(context, CompromisoOpen_Activity.class);
 						//compromisoOpen.putExtra(CompromisoOpen_Activity.CODIGO_REGISTRO, desarrolloTemp.getCodigo());

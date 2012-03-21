@@ -13,10 +13,9 @@ import android.widget.TabHost.TabSpec;
 
 public class CompromisoPrincipalClose_Resumen extends TabActivity {
 	
-	public final static String CODIGO_REGISTRO = "codigo_reg";
-	//@InjectExtra(CODIGO_REGISTRO) String codigoRegistro;
+	public final static String CODIGO_REGISTRO = "codigo_reg";	
 	public String codigoRegistro;
-	private TabHost mTabHost;
+	private TabHost mTabHost;	
 	
 	private void setupTabHost() {
 		mTabHost = (TabHost) findViewById(android.R.id.tabhost);
@@ -38,14 +37,13 @@ public class CompromisoPrincipalClose_Resumen extends TabActivity {
 	private void setupTab(final View view) {
 		View tabview = createTabView(mTabHost.getContext(), "INVENTARIO");
 		Intent oportunidad = new Intent(this, CompromisoClose_Activity.class);
-		oportunidad.putExtra(CompromisoClose_Activity.CODIGO_REGISTRO, codigoRegistro);
+		oportunidad.putExtra(CompromisoClose_Activity.CODIGO_REGISTRO, codigoRegistro);		
 		TabSpec setContent = mTabHost.newTabSpec("INVENTARIO").setIndicator(tabview).setContent(oportunidad);
 		mTabHost.addTab(setContent);
 				
 		tabview = createTabView(mTabHost.getContext(), "POSICION");
 		Intent posicion = new Intent(this, CompromisoPosicionClose_Activity.class);
-		posicion.putExtra(CompromisoPosicionClose_Activity.COD_GESTION, codigoRegistro);
-		//posicion.putExtra(CompromisoPosicionClose_Activity.RESPUESTA, "N");		
+		posicion.putExtra(CompromisoPosicionClose_Activity.COD_GESTION, codigoRegistro);		
 		setContent = mTabHost.newTabSpec("POSICION").setIndicator(tabview).setContent(posicion);
 		mTabHost.addTab(setContent);
 		
