@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -167,7 +168,7 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
 			int status = consultarPresentacionProxy.getResponse().getStatus();
 			if (status == 0) {
 				List<PresentacionTO> presentaciones = consultarPresentacionProxy
-						.getResponse().getListaPresentacion();
+						.getResponse().getListaPresentacion();			
 				adap = new EfficientAdapter(this, presentaciones);				
 				final Calendar c = Calendar.getInstance();      
 				if(presentaciones.size()>0)
@@ -252,13 +253,13 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
 	
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
-	    //private Context context;
+	    private Context context;
 	    private List<PresentacionTO> detalles;
 	    
 	    public EfficientAdapter(Context context, List<PresentacionTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
-		      //this.context = context;
+		      this.context = context;
 		      this.detalles = valores;
 		    }
 	    
@@ -306,6 +307,17 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
 					}else{
 						presentacionTO.setSeleccionado(false);
 					}
+				}
+			});
+	      
+	      holder.btnSKU.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					MyApplication application = (MyApplication) context.getApplicationContext();
+					application.listSKUPresentacion = presentacionTO.getListaSKU();
+					Intent skuPresentacion = new Intent(context, SKUPrioritario_Activity.class);					
+					context.startActivity(skuPresentacion);
 				}
 			});
 	      	      
