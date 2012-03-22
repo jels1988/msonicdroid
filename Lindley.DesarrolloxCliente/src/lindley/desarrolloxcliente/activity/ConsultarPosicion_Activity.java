@@ -65,10 +65,10 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
     			compromiso.setDiferencia(posicion.getDiferencia());
     			compromiso.setPuntosSugeridos(posicion.getPuntosSugeridos());
     			compromiso.respuesta = respuesta;
-    			compromiso.setDescripcionVariable("");
+    			compromiso.setDescripcionVariable(" ");
     			compromiso.setFechaCompromiso("0");
-    			compromiso.setConfirmacion("");
-    			compromiso.setAccionCompromiso("");
+    			compromiso.setConfirmacion("N");
+    			compromiso.setAccionCompromiso(" ");
     			
     			posiciones.add(compromiso);
     		}
