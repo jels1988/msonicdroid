@@ -1,5 +1,6 @@
 package lindley.desarrolloxcliente.activity;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 
@@ -14,14 +15,21 @@ import net.msonic.lib.ListActivityBase;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -53,6 +61,9 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	private MyApplication application;
 	//@InjectExtra(RESPUESTA) String respuesta;
 	
+	public static String file_name="";
+	private static final int TAKE_PHOTO_CODE = 1;
+		
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -175,10 +186,67 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		showToast(error_generico_process);
 	}
     
+    public void takePhoto(){
+    	file_name = String.format("%d.jpg", System.currentTimeMillis());
+    	 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+    	intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(this)) ); 
+    	intent.putExtra(MediaStore.EXTRA_MEDIA_TITLE, "TITULO");
+    	startActivityForResult(intent, TAKE_PHOTO_CODE);
+    }
+
+	 private File getTempFile(Context context){
+		    
+		   final File path = new File( Environment.getExternalStorageDirectory(), context.getPackageName() );
+		   
+		    if(!path.exists()){
+		    	path.mkdir();
+		    }
+		    
+		    
+		    return new File(path, file_name); 
+		    }
+	 
+	 @Override
+	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    if (resultCode == RESULT_OK) {
+	    		switch(requestCode){
+	    			case TAKE_PHOTO_CODE:{
+	    				savePhoto();
+	    				//processAsync();
+	    				break;
+	    			}
+	    		}
+
+	    }
+	  }
+	 
+	public void savePhoto(){
+		//documentoTO.setNombreArchivo(file_name);
+		//documentoTO.setEsLocal(DocumentoTO.LOCAL);
+		//clienteBLL.guardarDocumento(clienteId, documentoTO);
+	}
+	
     public static class EfficientAdapter extends ArrayAdapter<PosicionCompromisoTO> {
+    	
+    	public static EditText txEditFecha;
+		public static PosicionCompromisoTO compromisoTO;
+
+		DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+			
+			@Override
+			public void onDateSet(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
+				// TODO Auto-generated method stub
+
+					EfficientAdapter.txEditFecha.setText(String.valueOf(pad(dayOfMonth)) + "/"+ String.valueOf(pad(monthOfYear+1)) + "/" + String.valueOf(year));
+		    	  if(EfficientAdapter.compromisoTO!=null){
+		    		  EfficientAdapter.compromisoTO.setFechaCompromiso(String.valueOf(year) + String.valueOf(pad(monthOfYear+1)) + String.valueOf(pad(dayOfMonth)) );
+		    	  }
+			}
+		};
+		
     	private Activity context;
 		private List<PosicionCompromisoTO> posiciones;
-
+		
 		public EfficientAdapter(Activity context,List<PosicionCompromisoTO> posiciones ){
 			super(context, R.layout.consultarposicioncompromisoopen_content, posiciones);
 			this.context=context;
@@ -219,7 +287,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				
 			}
 			
-			ViewHolder holder = (ViewHolder) view.getTag();
+			final ViewHolder holder = (ViewHolder) view.getTag();
 			final PosicionCompromisoTO posicionTO = posiciones.get(position);
 			
 			if(posicionTO.respuesta.equals("S"))
@@ -231,7 +299,40 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 			holder.txViewMaximo.setText(posicionTO.getPtoMaximo());
 			holder.txViewDiferencia.setText(posicionTO.getDiferencia());
 			holder.txViewPuntos.setText(posicionTO.getPuntosSugeridos());
+				    	
+	    	holder.btnFecha.setOnClickListener(new OnClickListener() {
 
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+				
+					   int anio;    
+			    	    int mes;  
+			    	    int dia;
+			    	   
+					   String fecha = posicionTO.getFechaCompromiso();
+					      if(fecha.length() >= 7)
+					      {
+					    	  anio =  Integer.parseInt(fecha.substring(0, 4));
+					    	  mes  =  Integer.parseInt(fecha.substring(4, 6))-1;
+					    	 dia  =  Integer.parseInt(fecha.substring(6));
+					    	  
+					      }else{
+					    	  final Calendar c = Calendar.getInstance();        
+					    	  anio = c.get(Calendar.YEAR);        
+					    	  mes = c.get(Calendar.MONTH)-1;        
+					    	  dia = c.get(Calendar.DAY_OF_MONTH); 
+					      }
+					      
+					      
+					      EfficientAdapter.txEditFecha = holder.txEditFecha;
+					      EfficientAdapter.compromisoTO = posicionTO;
+					
+					      DatePickerDialog p = new DatePickerDialog(context, dateSetListener, anio,mes, dia);
+					      p.show();
+				}
+			});
+	    	
 			int mYear, mMonth, mDay;
 			String fecha = posicionTO.getFechaCompromiso();
 			if (fecha.length() > 7) {
@@ -256,6 +357,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		    	  holder.txEditFecha.setVisibility(View.GONE);	    	  
 		    	  holder.btnFecha.setVisibility(View.GONE);
 		    	  holder.txViewFecha.setVisibility(View.VISIBLE);
+		    	  //holder.btnFotoFinal.setEnabled(false);
 		      }
 		      else
 		      {
@@ -263,6 +365,26 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		    	  holder.btnFecha.setVisibility(View.VISIBLE);
 		    	  holder.txViewFecha.setVisibility(View.GONE);
 		      }
+			
+			holder.btnFotoInicial.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					((CompromisoPosicionOpen_Activity)context).takePhoto();					
+				}
+			});
+			
+			holder.btnFotoFinal.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
+					intent.putExtra(VerFoto_Activity.FILE_NAME, file_name);
+					context.startActivity(intent);				
+				}
+			});
 			
 			return view;
 		}

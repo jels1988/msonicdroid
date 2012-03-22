@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import net.msonic.lib.ListActivityBase;
 
@@ -64,7 +65,7 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 				final ViewHolder viewHolder = new ViewHolder();
 				
 				viewHolder.txViewSKU = (TextView) view.findViewById(R.id.txViewSKU);
-				//viewHolder.chkValActual = (CheckBox) view.findViewById(R.id.chkValActual);
+				viewHolder.chkValActual = (CheckBox) view.findViewById(R.id.chkValActual);
 				//viewHolder.chkValComp = (CheckBox) view.findViewById(R.id.chkValComp);
 				//viewHolder.chkValConf = (CheckBox) view.findViewById(R.id.chkValConf);
 						    	
@@ -79,13 +80,24 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 			
 			holder.txViewSKU.setText(skuPresentacion.getDescripcionSKU());
 			
+			holder.txViewSKU.setText(skuPresentacion.getDescripcionSKU());
+			//if(skuPresentacion.valorActual.compareToIgnoreCase("S") == 0)
+			if("S".compareToIgnoreCase("S") == 0)
+			{
+				holder.chkValActual.setChecked(true);
+			}
+			else
+			{
+				holder.chkValActual.setChecked(false);
+			}
+			holder.chkValActual.setEnabled(false);
 			
 			return view;
 		}
 
 	    static class ViewHolder {   
 	    	TextView txViewSKU;
-	    	//CheckBox chkValActual;
+	    	CheckBox chkValActual;
 	    	//CheckBox chkValComp;
 	    	//CheckBox chkValConf;
 	    }

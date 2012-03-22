@@ -10,6 +10,8 @@ import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionTO;
+import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
+import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarPresentacionProxy;
 import lindley.desarrolloxcliente.ws.service.GuardarDesarrolloProxy;
 import net.msonic.lib.ListActivityBase;
@@ -70,7 +72,20 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
     			compromiso.setDescripcionVariable(" ");
     			compromiso.setCodigoFDE(presentacion.getCodigoFDE());
     			compromiso.setFechaCompromiso("0");
-    			compromiso.setConfirmacion("N");
+    			compromiso.setConfirmacion("N");    	
+    			ArrayList<SKUPresentacionCompromisoTO> listSku = new ArrayList<SKUPresentacionCompromisoTO>();
+    			for(SKUPresentacionTO sku : presentacion.getListaSKU())
+    			{
+    				SKUPresentacionCompromisoTO compromisoSKU = new SKUPresentacionCompromisoTO();
+    				compromisoSKU.setCodigoSKU(sku.getCodigoSKU());
+    				compromisoSKU.setDescripcionSKU(" ");
+    				//compromisoSKU.setActual(sku.valorActual);
+    				compromisoSKU.setActual("S");
+    				compromisoSKU.setCompromiso("S");
+    				compromisoSKU.setConfirmacion("S");
+    				listSku.add(compromisoSKU);
+    			}
+    			compromiso.setListaSKU(listSku);
     			
     			presentaciones.add(compromiso);
     		}

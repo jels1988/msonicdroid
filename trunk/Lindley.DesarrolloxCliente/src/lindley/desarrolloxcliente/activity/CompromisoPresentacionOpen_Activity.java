@@ -13,15 +13,18 @@ import lindley.desarrolloxcliente.ws.service.ConsultarPresentacionCompromisoProx
 import net.msonic.lib.ListActivityBase;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -178,15 +181,32 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 	
 	public static class EfficientAdapter extends BaseAdapter implements
 			Filterable {
+				
+		public static EditText txEditFecha;
+		public static PresentacionCompromisoTO compromisoTO;
+
+		DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+			
+			@Override
+			public void onDateSet(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
+				// TODO Auto-generated method stub
+
+					EfficientAdapter.txEditFecha.setText(String.valueOf(pad(dayOfMonth)) + "/"+ String.valueOf(pad(monthOfYear+1)) + "/" + String.valueOf(year));
+		    	  if(EfficientAdapter.compromisoTO!=null){
+		    		  EfficientAdapter.compromisoTO.setFechaCompromiso(String.valueOf(year) + String.valueOf(pad(monthOfYear+1)) + String.valueOf(pad(dayOfMonth)) );
+		    	  }
+			}
+		};
+		
 		private LayoutInflater mInflater;
-		// private Context context;
+		private Context context;
 		private List<PresentacionCompromisoTO> detalles;
 
 		public EfficientAdapter(Context context,
 				List<PresentacionCompromisoTO> valores) {
 			// Cache the LayoutInflate to avoid asking for a new one each time.
 			mInflater = LayoutInflater.from(context);
-			// this.context = context;
+			this.context = context;
 			this.detalles = valores;
 		}
 
@@ -199,7 +219,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 		public View getView(final int position, View convertView,
 				ViewGroup parent) {
 			final PresentacionCompromisoTO presentacionTO = (PresentacionCompromisoTO) getItem(position);
-			ViewHolder holder;
+			final ViewHolder holder;
 
 			if (convertView == null) {
 				convertView = mInflater.inflate(
@@ -237,6 +257,39 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 					.getDescripcionVariable());
 			holder.txViewPuntos.setText(presentacionTO.getPuntosSugeridos());
 
+			holder.btnFecha.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+				
+					   int anio;    
+			    	    int mes;  
+			    	    int dia;
+			    	   
+					   String fecha = presentacionTO.getFechaCompromiso();
+					      if(fecha.length() >= 7)
+					      {
+					    	  anio =  Integer.parseInt(fecha.substring(0, 4));
+					    	  mes  =  Integer.parseInt(fecha.substring(4, 6))-1;
+					    	 dia  =  Integer.parseInt(fecha.substring(6));
+					    	  
+					      }else{
+					    	  final Calendar c = Calendar.getInstance();        
+					    	  anio = c.get(Calendar.YEAR);        
+					    	  mes = c.get(Calendar.MONTH)-1;        
+					    	  dia = c.get(Calendar.DAY_OF_MONTH); 
+					      }
+					      
+					      
+					      EfficientAdapter.txEditFecha = holder.txEditFecha;
+					      EfficientAdapter.compromisoTO = presentacionTO;
+					
+					      DatePickerDialog p = new DatePickerDialog(context, dateSetListener, anio,mes, dia);
+					      p.show();
+				}
+			});
+			
 			int mYear, mMonth, mDay;
 			String fecha = presentacionTO.getFechaCompromiso();
 			if (fecha.length() > 7) {
@@ -267,7 +320,19 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 		    	  holder.btnFecha.setVisibility(View.VISIBLE);
 		    	  holder.txViewFecha.setVisibility(View.GONE);
 		      }
-			
+			 
+			 holder.btnSKU.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						MyApplication application = (MyApplication) context.getApplicationContext();
+						application.listSKUPresentacionCompromiso = presentacionTO.getListaSKU();
+						Intent skuPresentacion = new Intent(context, SKUPrioritarioCompromiso_Activity.class);
+						skuPresentacion.putExtra(SKUPrioritarioCompromiso_Activity.FLAG_ESTADO, SKUPrioritarioCompromiso_Activity.FLAG_OPEN_ESTADO_ABIERTO);
+						context.startActivity(skuPresentacion);
+					}
+				});
+			 
 			return convertView;
 		}
 
