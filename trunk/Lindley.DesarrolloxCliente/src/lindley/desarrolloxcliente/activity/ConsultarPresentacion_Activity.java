@@ -67,10 +67,10 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
     			
     			compromiso.setCodigoVariable(presentacion.getCodigoVariable());
     			compromiso.setPuntosSugeridos(presentacion.getPuntosSugeridos());
-    			compromiso.setDescripcionVariable("");
+    			compromiso.setDescripcionVariable(" ");
     			compromiso.setCodigoFDE(presentacion.getCodigoFDE());
     			compromiso.setFechaCompromiso("0");
-    			compromiso.setConfirmacion("");
+    			compromiso.setConfirmacion("N");
     			
     			presentaciones.add(compromiso);
     		}
