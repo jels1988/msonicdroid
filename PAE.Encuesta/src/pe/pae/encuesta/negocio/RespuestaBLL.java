@@ -18,13 +18,27 @@ public class RespuestaBLL {
 	@Inject protected DBHelper dbHelper;
 	@Inject protected RespuestaDAO respuestaDAO;
 	
+	
+	public void terminarEncuesta(){
+		try {
+			dbHelper.openDataBase();
+			dbHelper.beginTransaction();
+			respuestaDAO.terminarEncuesta();
+			dbHelper.setTransactionSuccessful();
+		} catch (Exception e) {
+			Log.e(TAG_LOG, "iniciarEncuesta", e);
+		} finally {
+			dbHelper.endTransaction();
+			dbHelper.close();
+		}
+	}
 	public  ArrayList<RespuestaDataTO> listarRespuesta(){
 		ArrayList<RespuestaDataTO> respuestas = null;
 		try {
 			dbHelper.openDataBase();
 			respuestas = respuestaDAO.listarRespuesta();
 		} catch (Exception e) {
-			Log.e(TAG_LOG, "listarClientes", e);
+			Log.e(TAG_LOG, "listarRespuesta", e);
 		} finally {
 			dbHelper.close();
 		}

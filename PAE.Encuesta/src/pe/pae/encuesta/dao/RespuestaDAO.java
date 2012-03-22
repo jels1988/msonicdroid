@@ -15,6 +15,17 @@ public class RespuestaDAO {
 
 	@Inject protected DBHelper dbHelper;
 	
+	public void terminarEncuesta(){
+		
+		dbHelper.getDataBase().delete("respuesta", null, null);
+		dbHelper.getDataBase().delete("respuesta_pregunta", null, null);
+		dbHelper.getDataBase().delete("respuesta_opcion", null, null);	
+		dbHelper.getDataBase().delete("producto", null, null);	
+		dbHelper.getDataBase().delete("encuesta", null, null);	
+		dbHelper.getDataBase().delete("pregunta", null, null);	
+		dbHelper.getDataBase().delete("opcion", null, null);	
+	}
+	
 	public ArrayList<RespuestaDataTO> listarRespuesta(){
 		
 		String SQL = "select respuestaid,tiendaid,productoid,encuestaid,fecharegistro,horaregistro from respuesta";

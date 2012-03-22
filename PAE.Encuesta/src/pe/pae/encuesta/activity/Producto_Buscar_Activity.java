@@ -13,8 +13,12 @@ import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,6 +34,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import net.msonic.lib.ListActivityBase;
+import net.msonic.lib.MessageBox;
 
 public class Producto_Buscar_Activity extends ListActivityBase {
 
@@ -90,12 +95,66 @@ public class Producto_Buscar_Activity extends ListActivityBase {
 		}
 		
 	}
+	
+
+	
+
+
+
+	@Override
+	protected void processOk(int accion) {
+		// TODO Auto-generated method stub
+		
+		String message;
+		
+		if(accion==ENVIAR_RESPUESTAS){
+			
+				boolean isExito = guardarRespuestaProxy.isExito();
+				
+				if (isExito) {
+					int status = guardarRespuestaProxy.getResponse().getStatus();
+					
+					message = guardarRespuestaProxy.getResponse().getDescripcion();
+					
+						if (status == 0) {
+							
+							
+							SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+							Editor editor = settings.edit();
+							editor.putInt("ENCUESTA_INICIO", 0);
+							editor.putInt("CLIENTE_ID", 0);
+							editor.putInt("TIENDA_ID", 0);
+							editor.putString("TIENDA", "");
+							editor.commit();
+							
+							Intent intent = new Intent("pae.activity.seleccionarTienda");
+							startActivity(intent);
+						}
+				
+				super.processOk();
+				showToast(message);
+			}else{
+				processError();
+			}
+		}
+		
+		super.processOk(accion);
+	}
+
+
+	@Override
+	protected void processError(int accion) {
+		// TODO Auto-generated method stub
+		super.processError(accion);
+	}
 
 
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		processAsync();
+		
+		
 		super.onStart();
 	}
 
@@ -117,7 +176,18 @@ public class Producto_Buscar_Activity extends ListActivityBase {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		if(item.getItemId() == R.id.mnuEnviar){
-			process(ENVIAR_RESPUESTAS);
+			
+			 MessageBox.showConfirmDialog(this, "Confirmar", "ÀDeseas enviar las respuestas?", "Si", 
+					   new android.content.DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+								
+								processAsync(ENVIAR_RESPUESTAS);
+								
+							}
+			   		}, "No", null);
+			 
+			
 		}
 		
 		return super.onOptionsItemSelected(item);

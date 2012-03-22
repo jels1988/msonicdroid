@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import pe.pae.encuesta.R;
 import pe.pae.encuesta.negocio.ClienteBLL;
 import pe.pae.encuesta.negocio.EncuestaBLL;
+import pe.pae.encuesta.negocio.RespuestaBLL;
 import pe.pae.encuesta.to.ClienteTO;
 import pe.pae.encuesta.to.TiendaTO;
 import pe.pae.encuesta.ws.service.EncuestaProxy;
@@ -31,6 +32,8 @@ public class Tienda_Seleccionar_Activity extends ActivityBase {
 @InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 @Inject 						ClienteBLL 	clienteBLL; 
 @Inject 						EncuestaBLL encuestaBLL;
+@Inject							RespuestaBLL respuestaBLL;
+
 @InjectView(R.id.cboCliente)   	Spinner 	cboCliente;
 @InjectView(R.id.cboTienda)   	Spinner 	cboTienda;
 
@@ -96,6 +99,9 @@ public class Tienda_Seleccionar_Activity extends ActivityBase {
 	@Override
 	protected void process() {
 		// TODO Auto-generated method stub
+		
+		
+		respuestaBLL.terminarEncuesta();
 		
 		ClienteTO clienteTO = ((ClienteTO) cboCliente.getSelectedItem());
 		TiendaTO tiendaTO = ((TiendaTO) cboTienda.getSelectedItem());

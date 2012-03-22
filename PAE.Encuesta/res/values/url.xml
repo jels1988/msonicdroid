@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="urlLoginWS">http://192.168.0.11/PAE2/UsuarioService.svc</string>
+    <string name="urlLoginWS">http://192.168.56.101/PAE2/UsuarioService.svc</string>
 </resources>

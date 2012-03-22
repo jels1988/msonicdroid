@@ -11,7 +11,9 @@ import pe.pae.encuesta.to.RespuestaTO;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,6 +33,7 @@ import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.ActivityBase;
+import net.msonic.lib.MessageBox;
 
 public class Cuestionario_Activity extends ActivityBase {
 
@@ -51,6 +54,7 @@ public class Cuestionario_Activity extends ActivityBase {
 	private RespuestaTO respuestaTO=null;
 	MiApp app = null;
 	private static final int TAKE_PHOTO_CODE = 1;
+	private static final int SAVE_CUESTIONARIO_CODE = 2;
 	private  String file_name="";
 	
 	@Override
@@ -67,10 +71,59 @@ public class Cuestionario_Activity extends ActivityBase {
 	
 	
 	@Override
+	protected void process(int accion) {
+		// TODO Auto-generated method stub
+		if(SAVE_CUESTIONARIO_CODE==accion){
+			encuestaBLL.guardarEncuestaRespuesta(respuestaTO);
+		}
+		super.process(accion);
+	}
+
+
+
+
+	@Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
 		cargarPregunta();
 		super.processOk();
+	}
+
+
+
+
+	@Override
+	protected void processOk(int accion) {
+		// TODO Auto-generated method stub
+		
+		
+		super.processOk(accion);
+		 
+		if(SAVE_CUESTIONARIO_CODE==accion){
+			
+			MessageBox.showSimpleDialog(this, "Confirmaci—n", "Encuesta Guardada", "Ok", new OnClickListener() {
+				
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					finish();
+				}
+			});
+			
+		}
+		
+	}
+
+
+
+
+	@Override
+	protected void processError(int accion) {
+		// TODO Auto-generated method stub
+		super.processError(accion);
+		if(SAVE_CUESTIONARIO_CODE==accion){
+			MessageBox.showSimpleDialog(this, "Confirmaci—n", "Error guardando encuesta, por favor vuelva a intentar.", "Ok", null);
+		}
+		
 	}
 
 
@@ -126,6 +179,8 @@ public class Cuestionario_Activity extends ActivityBase {
 					}
 				});
 				
+				txtNumero.requestFocus();
+				
 				break;
 			case 2:
 				viewPreguntaActual = layoutInflater.inflate(R.layout.pregunta_2, lnCuestionario,false);
@@ -149,18 +204,21 @@ public class Cuestionario_Activity extends ActivityBase {
 						preguntas.get(index).respuesta_1 = s.toString();
 					}
 				});
+				txtTexto.requestFocus();
 				break;
 			case 3:
 				viewPreguntaActual = layoutInflater.inflate(R.layout.pregunta_3, lnCuestionario,false);
 				SingleOpcion_Adapter opciones1 = new SingleOpcion_Adapter(this, preguntaTO.opciones);	
 				GridView gr = (GridView)viewPreguntaActual.findViewById(R.id.gridview);
 				gr.setAdapter(opciones1);
+				gr.requestFocus();
 				break;
 			case 4:
 				viewPreguntaActual = layoutInflater.inflate(R.layout.pregunta_3, lnCuestionario,false);
 				GridView gr2 = (GridView)viewPreguntaActual.findViewById(R.id.gridview);
 				MultipleOpcion_Adapter opciones2 = new MultipleOpcion_Adapter(this, preguntaTO.opciones);
 				gr2.setAdapter(opciones2);
+				gr2.requestFocus();
 				break;
 			default:
 				break;
@@ -257,8 +315,20 @@ public class Cuestionario_Activity extends ActivityBase {
 	   }
 	   
 	   public void btnSave_onclick(View v){
-		   encuestaBLL.guardarEncuestaRespuesta(respuestaTO);
 		   
+		   final Context context = this;
+		   
+		   
+		   MessageBox.showConfirmDialog(context, "Confirmar", "ÀDesea guardar la encuesta?", "Si", 
+				   new OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							processAsync(SAVE_CUESTIONARIO_CODE);
+						}
+		   		}, "No", null);
+		   
+		   
+			
 	   }
 	   
 	   public void takePhoto(){
