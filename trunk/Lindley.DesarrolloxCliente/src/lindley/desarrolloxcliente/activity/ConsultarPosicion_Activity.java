@@ -64,7 +64,12 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
     			compromiso.setPtoMaximo(posicion.getPtoMaximo());
     			compromiso.setDiferencia(posicion.getDiferencia());
     			compromiso.setPuntosSugeridos(posicion.getPuntosSugeridos());
-    			compromiso.respuesta = respuesta;			
+    			compromiso.respuesta = respuesta;
+    			compromiso.setDescripcionVariable("");
+    			compromiso.setFechaCompromiso("0");
+    			compromiso.setConfirmacion("");
+    			compromiso.setAccionCompromiso("");
+    			
     			posiciones.add(compromiso);
     		}
 		}
