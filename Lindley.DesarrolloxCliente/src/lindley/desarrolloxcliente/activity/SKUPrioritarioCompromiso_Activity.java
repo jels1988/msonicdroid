@@ -5,6 +5,7 @@ import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
+import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import com.thira.examples.actionbar.widget.ActionBar;
 import android.app.Activity;
@@ -14,7 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import net.msonic.lib.ListActivityBase;
 
 public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
@@ -23,6 +26,14 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 	private EfficientAdapter adap;
 	private MyApplication application;
 	ClienteTO cliente;
+	
+	public final static String FLAG_ESTADO = "fecha_flag";
+	
+	public static final String FLAG_OPEN_ESTADO_ABIERTO = "1";
+	public static final String FLAG_OPEN_ESTADO_CERRADO = "2";
+	
+	
+	@InjectExtra(FLAG_ESTADO) static String flagEstado;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,11 +116,45 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 			{
 				holder.chkValConf.setChecked(false);
 			}
-
-			holder.chkValActual.setEnabled(false);
-			holder.chkValComp.setEnabled(false);
-			holder.chkValConf.setEnabled(false);
 			
+			holder.chkValActual.setEnabled(false);
+			if(flagEstado.compareToIgnoreCase(FLAG_OPEN_ESTADO_CERRADO) == 0)
+			{				
+				holder.chkValComp.setEnabled(false);
+				holder.chkValConf.setEnabled(false);
+			}
+			else
+			{
+				holder.chkValComp.setEnabled(true);
+				holder.chkValConf.setEnabled(true);
+			}
+			
+			holder.chkValComp.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					// TODO Auto-generated method stub
+					if(isChecked){
+						skuPresentacion.setCompromiso("S");
+					}else{
+						skuPresentacion.setCompromiso("N");
+					}
+				}
+			});
+			
+			holder.chkValConf.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					// TODO Auto-generated method stub
+					if(isChecked){
+						skuPresentacion.setConfirmacion("S");
+					}else{
+						skuPresentacion.setConfirmacion("N");
+					}
+				}
+			});
+
 			return view;
 		}
 
