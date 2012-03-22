@@ -23,7 +23,7 @@
             android:orientation="vertical" >
 
             <TableLayout
-                android:layout_width="wrap_content"
+                android:layout_width="500dip"
                 android:layout_height="wrap_content"
                 android:shrinkColumns="*"
                 android:stretchColumns="*" >
@@ -34,10 +34,17 @@
 
                     <TextView
                         style="@style/TextViewLabel"
-                        android:layout_width="wrap_content"
+                        android:layout_width="250dip"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="@string/sku_prioritario" />
+                    
+                    <TextView
+                        style="@style/TextViewLabel"
+                        android:layout_width="30dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/sku_valor_actual" />
                     
                 </TableRow>
 
