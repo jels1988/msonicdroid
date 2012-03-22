@@ -77,7 +77,7 @@
             </intent-filter>
         </activity>
          
-        <activity android:name=".activity.InformacionAdicional_Activity" android:noHistory="true">
+        <activity android:name=".activity.InformacionAdicional_Activity">
             <intent-filter>
                 <action android:name="lindley.desarrolloxcliente.informacionadicional" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
