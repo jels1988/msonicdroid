@@ -13,6 +13,7 @@ import lindley.desarrolloxcliente.to.InformacionAdicionalTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
+import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
@@ -41,6 +42,7 @@ public class MyApplication extends RoboApplication {
 	public ArrayList<CompromisoTO> listInventarioCompromiso;
 	
 	public ArrayList<SKUPresentacionTO> listSKUPresentacion;
+	public ArrayList<SKUPresentacionCompromisoTO> listSKUPresentacionCompromiso;
 	
 	public UsuarioTO getUsuarioTO() {
 		return usuarioTO;

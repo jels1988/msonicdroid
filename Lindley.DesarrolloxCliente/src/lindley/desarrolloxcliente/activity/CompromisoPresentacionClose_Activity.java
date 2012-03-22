@@ -12,10 +12,12 @@ import net.msonic.lib.ListActivityBase;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Filter;
@@ -98,13 +100,13 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
     
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
-	    //private Context context;
+	    private Context context;
 	    private List<PresentacionCompromisoTO> detalles;
 	    
 	    public EfficientAdapter(Context context, List<PresentacionCompromisoTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
-		      //this.context = context;
+		      this.context = context;
 		      this.detalles = valores;
 		    }
 	    
@@ -154,7 +156,18 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 	      holder.txViewVariable.setText(presentacionTO.getDescripcionVariable());
 	      holder.txViewPuntos.setText(presentacionTO.getPuntosSugeridos());
 	      holder.txViewCnfComp.setText(presentacionTO.getConfirmacion());
-	      	      	      
+	      	      	     
+	      holder.btnSKU.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					MyApplication application = (MyApplication) context.getApplicationContext();
+					application.listSKUPresentacionCompromiso = presentacionTO.getListaSKU();
+					Intent skuPresentacion = new Intent(context, SKUPrioritarioCompromiso_Activity.class);					
+					context.startActivity(skuPresentacion);
+				}
+			});
+	      
 	      return convertView;
 	    }
 
