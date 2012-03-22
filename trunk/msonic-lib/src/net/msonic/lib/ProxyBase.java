@@ -67,11 +67,19 @@ public abstract class ProxyBase<T extends ResponseBase> {
 			httpPoster.setUrl(this.getUrl());
 			httpPoster.setRequest(this.requestText());
 			httpPoster.invoke();
-			rp = httpPoster.getResponse();
 			
-			T responseBase = responseText(rp);
-			response = responseBase;
-			exito=true;
+			
+			if(httpPoster.getStatus()==200){
+				rp = httpPoster.getResponse();
+				
+				T responseBase = responseText(rp);
+				response = responseBase;
+				exito=true;
+			}else{
+				Log.d("ProxyBase", "sin exito");
+				response = null;
+				exito=false;
+			}
 			
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
