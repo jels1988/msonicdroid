@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,10 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
 	private MyApplication application;
+	
+	private static int ESTADO_FOTO_FINAL;
+	private static final int FOTO_GUARDADA = 1;
+	
 	//@InjectExtra(RESPUESTA) String respuesta;
 	
 	public static String file_name="";
@@ -75,6 +80,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		cliente = application.getClienteTO();
         mActionBar.setSubTitle(cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
+        ESTADO_FOTO_FINAL = 0;
         processAsync(); 
     }
     
@@ -221,6 +227,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	  }
 	 
 	public void savePhoto(){
+		ESTADO_FOTO_FINAL = FOTO_GUARDADA;
 		//documentoTO.setNombreArchivo(file_name);
 		//documentoTO.setEsLocal(DocumentoTO.LOCAL);
 		//clienteBLL.guardarDocumento(clienteId, documentoTO);
@@ -357,13 +364,14 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		    	  holder.txEditFecha.setVisibility(View.GONE);	    	  
 		    	  holder.btnFecha.setVisibility(View.GONE);
 		    	  holder.txViewFecha.setVisibility(View.VISIBLE);
-		    	  //holder.btnFotoFinal.setEnabled(false);
+		    	  holder.btnFotoFinal.setEnabled(true);
 		      }
 		      else
 		      {
 		    	  holder.txEditFecha.setVisibility(View.VISIBLE);	    	  
 		    	  holder.btnFecha.setVisibility(View.VISIBLE);
-		    	  holder.txViewFecha.setVisibility(View.GONE);
+		    	  holder.txViewFecha.setVisibility(View.GONE);		
+		    	  holder.btnFotoFinal.setEnabled(false);
 		      }
 			
 			holder.btnFotoInicial.setOnClickListener(new OnClickListener() {
@@ -371,7 +379,23 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					((CompromisoPosicionOpen_Activity)context).takePhoto();					
+					if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
+					{
+						Log.v("CompromisoPosicionOpen_Activity", "visualizar foto");
+					}
+					else
+					{
+						if(ESTADO_FOTO_FINAL == FOTO_GUARDADA)
+						{
+							Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
+							intent.putExtra(VerFoto_Activity.FILE_NAME, file_name);
+							context.startActivity(intent);						
+						}
+						else
+						{
+							((CompromisoPosicionOpen_Activity)context).takePhoto();	
+						}
+					}
 				}
 			});
 			
@@ -380,9 +404,16 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
-					intent.putExtra(VerFoto_Activity.FILE_NAME, file_name);
-					context.startActivity(intent);				
+					if(ESTADO_FOTO_FINAL == FOTO_GUARDADA)
+					{
+						Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
+						intent.putExtra(VerFoto_Activity.FILE_NAME, file_name);
+						context.startActivity(intent);						
+					}
+					else
+					{
+						((CompromisoPosicionOpen_Activity)context).takePhoto();	
+					}
 				}
 			});
 			
