@@ -27,6 +27,11 @@ import lindley.desarrolloxcliente.ws.service.ConsultarCabeceraProxy;
 import roboguice.application.RoboApplication;
 import roboguice.config.AbstractAndroidModule;
 
+//Modificar:
+
+//SKUPrioritario_Activity
+//ConsultarPresentacion_Activity
+
 public class MyApplication extends RoboApplication {
 
 	private UsuarioTO usuarioTO;
