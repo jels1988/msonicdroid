@@ -1,7 +1,9 @@
 package lindley.desarrolloxcliente;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import net.msonic.lib.DBHelper;
+import net.msonic.lib.DBHelperProvider;
 
 
 import com.google.inject.Inject;
@@ -92,6 +94,8 @@ public class MyApplication extends RoboApplication {
 			@Override
 			protected void configure() {
 				// TODO Auto-generated method stub
+				bind(DBHelper.class).toProvider(DBHelperProvider.class).in(Singleton.class);
+				
 				bind(LoginProxy.class).in(Singleton.class);				
 				bind(ConsultarClienteProxy.class).in(Singleton.class);
 				bind(ConsultarCabeceraProxy.class).in(Singleton.class);
