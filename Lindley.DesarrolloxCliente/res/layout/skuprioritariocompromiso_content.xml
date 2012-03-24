@@ -20,7 +20,7 @@
                 android:id="@+id/txViewSKU"
                 android:layout_width="150dip"
                 android:layout_height="40dip"
-                android:gravity="center"
+                android:gravity="left"
                 android:text="" />
 
             <CheckBox
