@@ -194,4 +194,16 @@ public class ActivityBase extends RoboActivity {
 		   }
 		   return false;
 		}
+	
+	protected void ocultarEspera(){
+    	if (dialogWait.isShowing())
+			dialogWait.dismiss();
+    }
+	
+    protected void mostrarEspera(){
+    	dialogWait = new ProgressDialog(this);
+		dialogWait.setIndeterminate(true);
+		dialogWait.setMessage(wait_message);
+		dialogWait.show();
+    }
 }
