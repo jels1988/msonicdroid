@@ -137,12 +137,12 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
        	{      
 			if(application.posicionAdapter.posiciones == null)
 			{
-				showToast("Debe actualizar los datos de la pestaña Posiciones");
+				showToast("Debe actualizar los datos de la pesta–a Posiciones");
 				tieneError=true;
 			}
 			if(application.presentacionAdapter.detalles == null)
 			{
-				showToast("Debe actualizar los datos de la pestaña Presentacion");
+				showToast("Debe actualizar los datos de la pesta–a Presentacion");
 				tieneError=true;
 			}
 				
@@ -235,6 +235,10 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
        			int status = actualizarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
        				showToast("Los registros se actualizaron correctamente.");
+       				
+       				Intent intentService = new Intent("lindley.desarrolloxcliente.uploadFileService");
+       				startService(intentService);
+       				
        				Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.consultarcabecera");
 					startActivity(compromisoOpen);
        			}
