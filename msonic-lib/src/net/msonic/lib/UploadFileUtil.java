@@ -13,7 +13,7 @@ public class UploadFileUtil {
 		   Random randInt = new Random();
 		   int numero = randInt.nextInt(32000);
 		   
-		   String file_name = String.format("%d_%d_%d.%d",modulo,numero,  System.currentTimeMillis(),extension);
+		   String file_name = String.format("%d_%d_%d.txt",modulo,numero,  System.currentTimeMillis(),extension);
 
 		   return file_name;
 	}
