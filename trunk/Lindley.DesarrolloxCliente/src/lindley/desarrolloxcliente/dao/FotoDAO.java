@@ -39,8 +39,10 @@ public class FotoDAO {
 		Cursor cursor = dbHelper.getDataBase().rawQuery("select * from tbl_fotos",args);
 		
 		while(cursor.moveToNext()){
-			String fileName = cursor.getString(cursor.getColumnIndex("nombre"));
-			valores.add(fileName);
+			FileTO file = new FileTO();
+			file.id = cursor.getInt(cursor.getColumnIndex("id"));
+			file.file = cursor.getString(cursor.getColumnIndex("nombre"));
+			valores.add(file);
 		}
 		cursor.close();
 		
