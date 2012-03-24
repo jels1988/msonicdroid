@@ -3,6 +3,9 @@ package lindley.desarrolloxcliente.service;
 import java.io.File;
 import java.util.ArrayList;
 
+
+import lindley.desarrolloxcliente.negocio.FotoBLL;
+import lindley.desarrolloxcliente.to.FileTO;
 import lindley.desarrolloxcliente.ws.service.FileUploadProxy;
 
 
@@ -13,12 +16,11 @@ import android.os.Environment;
 public class UploadFileTask extends RoboAsyncTask<String> {
 
 	  private FileUploadProxy fileUploadProxy;
-	  //private RespuestaBLL respuestaBLL;
-	
-	  //RespuestaBLL respuestaBLL
-	  public UploadFileTask(FileUploadProxy fileUploadProxy){
+	  private FotoBLL fotoBLL;
+	  
+	  public UploadFileTask(FileUploadProxy fileUploadProxy,FotoBLL fotoBLL){
 		this.fileUploadProxy = fileUploadProxy;
-		//this.respuestaBLL = respuestaBLL;
+		this.fotoBLL=fotoBLL;
 	  }
   
 	
@@ -29,7 +31,7 @@ public class UploadFileTask extends RoboAsyncTask<String> {
 		// TODO Auto-generated method stub
 		super.onSuccess(t);
 		
-		Intent intentService = new Intent("pae.service.uploadFileService");
+		Intent intentService = new Intent("lindley.desarrolloxcliente.uploadFileService");
 		contextProvider.get().stopService(intentService);
       
 	}
@@ -41,7 +43,7 @@ public class UploadFileTask extends RoboAsyncTask<String> {
 		// TODO Auto-generated method stub
 		
 		File path = new File( Environment.getExternalStorageDirectory(), contextProvider.get().getPackageName());
-		ArrayList<FileTO> archivos = respuestaBLL.listarDocumentos();
+		ArrayList<FileTO> archivos = fotoBLL.Listar();
 		
 		if(archivos!=null && archivos.size()>=0){
 			
@@ -53,7 +55,17 @@ public class UploadFileTask extends RoboAsyncTask<String> {
 					fileUploadProxy.filePath = f.getAbsolutePath();
 					fileUploadProxy.execute();
 					f.delete();
+					
+
+					if(fileUploadProxy.isExito()){
+						if(fileUploadProxy.getResponse().getStatus()==0){
+							fotoBLL.delete(fileTO.id);
+						}
+					}
+					
 				}
+				
+				
 			}
 			
 		}
