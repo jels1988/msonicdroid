@@ -58,8 +58,8 @@
         android:id="@+id/txtObs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:maxLength="200" >		
+        android:inputType="text"        
+        android:maxLength="150" >		
         <requestFocus />
     </EditText>
     

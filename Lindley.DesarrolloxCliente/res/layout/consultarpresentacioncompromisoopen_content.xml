@@ -20,7 +20,7 @@
                 android:id="@+id/txViewVariable"
                 android:layout_width="100dip"
                 android:layout_height="40dip"
-                android:gravity="center"
+                android:gravity="left"
                 android:text="" />
             
             <TextView
