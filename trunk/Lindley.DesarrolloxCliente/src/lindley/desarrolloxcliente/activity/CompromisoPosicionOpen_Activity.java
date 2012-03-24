@@ -19,18 +19,19 @@ import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarPosicionCompromisoProxy;
 import net.msonic.lib.ListActivityBase;
+import net.msonic.lib.MessageBox;
 import net.msonic.lib.UploadFileUtil;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -502,7 +503,21 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 					// TODO Auto-generated method stub
 					if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
 					{
-						Log.v("CompromisoPosicionOpen_Activity", "visualizar foto");
+						if(!posicionTO.getFotoInicial().equals(""))
+						{
+							Intent intent = new Intent("lindley.desarrolloxcliente.webviewverfoto");
+							intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.getFotoInicial());
+							context.startActivity(intent);
+						}
+						else
+						{
+							MessageBox.showSimpleDialog(context, "Error", "No existe foto registrada.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+								
+								public void onClick(DialogInterface dialog, int which) {
+									// TODO Auto-generated method stub
+								}
+							});	
+						}
 					}
 					else
 					{
