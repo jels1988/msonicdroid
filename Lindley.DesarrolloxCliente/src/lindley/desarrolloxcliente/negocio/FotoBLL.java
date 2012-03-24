@@ -1,5 +1,7 @@
 package lindley.desarrolloxcliente.negocio;
 
+import java.util.ArrayList;
+
 import lindley.desarrolloxcliente.dao.FotoDAO;
 import android.util.Log;
 
@@ -53,5 +55,32 @@ public class FotoBLL {
 			dbHelper.endTransaction();
 			dbHelper.close();
 		}
+	}
+	
+	public void save(ArrayList<String> nombres){	
+		try {
+			dbHelper.openDataBase();
+			dbHelper.beginTransaction();
+			
+			for (String nombreFoto : nombres) {
+				fotoDAO.save(nombreFoto);
+			}
+			
+			dbHelper.setTransactionSuccessful();
+			
+		} catch (Exception e) {
+			Log.e(TAG_LOG, "save", e);
+		} finally {
+			dbHelper.endTransaction();
+			dbHelper.close();
+		}
+	}
+	
+	public ArrayList<String> Listar(){
+		ArrayList<String> detalles;
+		dbHelper.openDataBase();
+		detalles = fotoDAO.listar();
+		dbHelper.close();
+		return detalles;
 	}
 }
