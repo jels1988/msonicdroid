@@ -429,7 +429,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 					}
 				});
 			 
-			return convertView;
+			return view;
 		}
 
 		static class ViewHolder {
