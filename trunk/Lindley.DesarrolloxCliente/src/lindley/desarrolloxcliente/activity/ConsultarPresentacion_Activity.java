@@ -79,10 +79,10 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
     				SKUPresentacionCompromisoTO compromisoSKU = new SKUPresentacionCompromisoTO();
     				compromisoSKU.setCodigoSKU(sku.getCodigoSKU());
     				compromisoSKU.setDescripcionSKU(" ");
-    				//compromisoSKU.setActual(sku.valorActual);
-    				compromisoSKU.setActual("S");
-    				compromisoSKU.setCompromiso("S");
-    				compromisoSKU.setConfirmacion("S");
+    				compromisoSKU.setActual(sku.valorActual);
+//    				compromisoSKU.setActual("S");
+//    				compromisoSKU.setCompromiso("S");
+//    				compromisoSKU.setConfirmacion("S");
     				listSku.add(compromisoSKU);
     			}
     			compromiso.setListaSKU(listSku);
