@@ -294,17 +294,13 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	      //holder.txViewPCoca.setText(oportunidad.getPuntosCocaCola());
 	      
 	      ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter
-					.createFromResource(context,
+					.createFromResource(context.getApplicationContext(),
 							R.array.puntos_desarrollador,
 							android.R.layout.simple_spinner_item);
 			adapterTipo.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 			
 		  holder.cboPCoca.setAdapter(adapterTipo);
-	      
-		 
-	    
-		
-	
+	     	
 	      holder.txViewPBonus.setText(oportunidad.getPuntosBonus());
 	      
 	      
