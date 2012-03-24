@@ -151,6 +151,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
        			update.fechaCompromiso = posicion.getFechaCompromiso();
        			update.listCompromisos = posicion.getListCompromisos();
        			update.tipoAgrupacion = TIPO_POSICION;
+       			update.fotoInicial = posicion.getFotoInicial();
+       			update.fotoFinal = posicion.getFotoFinal();
        			listUpdatePosicionTO.add(update);
     		}
        		
