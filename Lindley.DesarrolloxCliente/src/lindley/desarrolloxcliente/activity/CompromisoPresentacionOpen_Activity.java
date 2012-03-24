@@ -51,7 +51,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 	@Inject	ConsultarPresentacionCompromisoProxy consultarPresentacionProxy;
 	@Inject CerrarCompromisoProxy cerrarCompromisoProxy;
 	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
-	private EfficientAdapter adap;
+	//private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha)	TextView txtViewFecha;
 	ClienteTO cliente;
 	private MyApplication application;
@@ -86,13 +86,15 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 			if (status == 0) {
 				List<PresentacionCompromisoTO> presentaciones = consultarPresentacionProxy
 						.getResponse().getListaCompromisos();
-				adap = new EfficientAdapter(this, presentaciones);
+				
+				application.presentacionAdapter = new EfficientAdapter(this, presentaciones);
+				//adap = new EfficientAdapter(this, presentaciones);
 				final Calendar c = Calendar.getInstance();
 				if (presentaciones.size() > 0)
 					txtViewFecha.setText(c.get(Calendar.DAY_OF_MONTH) + "/"
 							+ (c.get(Calendar.MONTH)) + "/"
 							+ c.get(Calendar.YEAR));
-				setListAdapter(adap);
+				setListAdapter(application.presentacionAdapter);
 			} else {
 				showToast(consultarPresentacionProxy.getResponse()
 						.getDescripcion());

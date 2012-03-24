@@ -2,9 +2,15 @@ package lindley.desarrolloxcliente;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
 import com.google.inject.Module;
 import com.google.inject.Singleton;
 
+import lindley.desarrolloxcliente.activity.CompromisoOpen_Activity;
+import lindley.desarrolloxcliente.activity.CompromisoPosicionOpen_Activity;
+import lindley.desarrolloxcliente.activity.CompromisoPresentacionOpen_Activity;
+import lindley.desarrolloxcliente.activity.CompromisoPrincipalOpen_Resumen;
 import lindley.desarrolloxcliente.adapter.AccionTradeTOAdapter;
 import lindley.desarrolloxcliente.to.AccionTradeTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
@@ -48,6 +54,11 @@ public class MyApplication extends RoboApplication {
 	
 	public ArrayList<SKUPresentacionTO> listSKUPresentacion;
 	public ArrayList<SKUPresentacionCompromisoTO> listSKUPresentacionCompromiso;
+	
+	public CompromisoPosicionOpen_Activity.EfficientAdapter 	posicionAdapter;
+	public CompromisoPresentacionOpen_Activity.EfficientAdapter presentacionAdapter;
+	public CompromisoOpen_Activity.EfficientAdapter 			openAdapter;
+	
 	
 	public UsuarioTO getUsuarioTO() {
 		return usuarioTO;
