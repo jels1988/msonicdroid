@@ -8,6 +8,12 @@ import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.CompromisoTO;
+import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
+import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
+import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
+import lindley.desarrolloxcliente.to.UpdatePosicionTO;
+import lindley.desarrolloxcliente.to.UpdatePresentacionTO;
+import lindley.desarrolloxcliente.to.UpdateSKUPresentacionTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCompromisoProxy;
@@ -39,7 +45,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
 
 public class CompromisoOpen_Activity extends ListActivityBase {
 
@@ -52,10 +57,12 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	
 	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
 	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
+	public static final String TIPO_PRESENTACION = "3";
+	public static final String TIPO_POSICION = "2";
 
 	@InjectExtra(CODIGO_REGISTRO) String codigoRegistro;
 	@InjectExtra(FLAG_FECHA) static String flagFecha;
-	@InjectView(R.id.actionBar)   ActionBar 	mActionBar;
+//	@InjectView(R.id.actionBar)   ActionBar 	mActionBar;
 	@Inject ConsultarCompromisoProxy consultarCompromisoProxy;
 	@Inject CerrarCompromisoProxy cerrarCompromisoProxy;
 	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
@@ -73,11 +80,11 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     	compromisos = new ArrayList<CompromisoTO>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.compromisoopen_activity);        
-        mActionBar.setTitle(R.string.compromiso_activity_title);
+//        mActionBar.setTitle(R.string.compromiso_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
-        mActionBar.setSubTitle(cliente.getNombre());
-        mActionBar.setHomeLogo(R.drawable.header_logo);        
+//        mActionBar.setSubTitle(cliente.getNombre());
+//        mActionBar.setHomeLogo(R.drawable.header_logo);        
         
         processAsync();
     }
@@ -101,6 +108,27 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     }
     
     @Override
+	protected boolean executeAsyncPre(int accion) {
+		// TODO Auto-generated method stub
+		boolean tieneError=false;
+		if(accion == ACCION_ACTUALIZAR)
+       	{      
+			if(application.posicionAdapter.posiciones == null)
+			{
+				showToast("Debe actualizar los datos de la pestaña Posiciones");
+				tieneError=true;
+			}
+			if(application.presentacionAdapter.detalles == null)
+			{
+				showToast("Debe actualizar los datos de la pestaña Presentacion");
+				tieneError=true;
+			}
+				
+       	}
+		return !tieneError;
+	}
+    
+    @Override
 	protected void process(int accion) {
     	if(accion == ACCION_CERRAR)
     	{
@@ -109,7 +137,45 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     	}
     	else if(accion == ACCION_ACTUALIZAR)
     	{
-    		actualizarCompromisoProxy.setCompromisos(compromisos);
+    		List<UpdatePosicionTO> listUpdatePosicionTO = new ArrayList<UpdatePosicionTO>();
+       		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
+    		{
+       			UpdatePosicionTO update = new UpdatePosicionTO();
+       			update.accionCompromiso = posicion.getAccionCompromiso();
+       			update.codigoRegistro = codigoRegistro;
+       			update.codigoVariable = posicion.getCodigoVariable();
+       			update.confirmacion = posicion.getConfirmacion();
+       			update.fechaCompromiso = posicion.getFechaCompromiso();
+       			update.listCompromisos = posicion.getListCompromisos();
+       			update.tipoAgrupacion = TIPO_POSICION;
+       			listUpdatePosicionTO.add(update);
+    		}
+       		
+    		List<UpdatePresentacionTO> listUpdatePresentacionTO = new ArrayList<UpdatePresentacionTO>();
+    		for(PresentacionCompromisoTO posicion : application.presentacionAdapter.detalles)
+    		{
+    			UpdatePresentacionTO update = new UpdatePresentacionTO();
+    			update.codigoRegistro = codigoRegistro;
+    			update.tipoAgrupacion = TIPO_PRESENTACION;
+    			update.codigoVariable = posicion.getCodigoVariable();
+    			update.confirmacion = posicion.getConfirmacion();
+    			update.fechaCompromiso = posicion.getFechaCompromiso();
+    			List<UpdateSKUPresentacionTO> skucompromisos = new ArrayList<UpdateSKUPresentacionTO>();
+    			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  posicion.getListaSKU())
+    			{
+    				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
+    				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.getCodigoSKU();
+    				updateSKUPresentacionTO.compromiso = skupresentacionCompromisoTO.getCompromiso();
+    				updateSKUPresentacionTO.confirmacion = skupresentacionCompromisoTO.getConfirmacion();
+    				skucompromisos.add(updateSKUPresentacionTO);
+    			}
+    			update.listaSKU = skucompromisos;    			
+    			listUpdatePresentacionTO.add(update);
+    		}
+    		
+    		actualizarCompromisoProxy.listaPosicionCompromiso = listUpdatePosicionTO;
+    		actualizarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
+    		actualizarCompromisoProxy.setCompromisos(application.openAdapter.detalles);
     		actualizarCompromisoProxy.execute();
     	}
     		
@@ -224,7 +290,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     		
 	    private LayoutInflater mInflater;
 	    private Context context;
-	    private List<CompromisoTO> detalles;
+	    public List<CompromisoTO> detalles;
 	    
 	    public EfficientAdapter(Context context, List<CompromisoTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
