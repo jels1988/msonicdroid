@@ -41,7 +41,7 @@ public class FotoDAO {
 		while(cursor.moveToNext()){
 			FileTO file = new FileTO();
 			file.id = cursor.getInt(cursor.getColumnIndex("id"));
-			file.file = cursor.getString(cursor.getColumnIndex("nombre"));
+			file.nombre = cursor.getString(cursor.getColumnIndex("nombre"));
 			valores.add(file);
 		}
 		cursor.close();
