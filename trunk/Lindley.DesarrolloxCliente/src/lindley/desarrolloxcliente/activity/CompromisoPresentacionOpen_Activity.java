@@ -123,7 +123,10 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
     	processAsync(ACCION_CERRAR);
     }
 
-	
+    public void btnGuardar_click(View view)
+    {
+    	processAsync(ACCION_ACTUALIZAR);
+    }
 	
 	@Override
 	protected boolean executeAsyncPre(int accion) {
