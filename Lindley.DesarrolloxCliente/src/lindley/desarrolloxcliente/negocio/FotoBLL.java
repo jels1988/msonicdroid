@@ -3,6 +3,7 @@ package lindley.desarrolloxcliente.negocio;
 import java.util.ArrayList;
 
 import lindley.desarrolloxcliente.dao.FotoDAO;
+import lindley.desarrolloxcliente.to.FileTO;
 import android.util.Log;
 
 import com.google.inject.Inject;
@@ -76,8 +77,8 @@ public class FotoBLL {
 		}
 	}
 	
-	public ArrayList<String> Listar(){
-		ArrayList<String> detalles;
+	public ArrayList<FileTO> Listar(){
+		ArrayList<FileTO> detalles;
 		dbHelper.openDataBase();
 		detalles = fotoDAO.listar();
 		dbHelper.close();
