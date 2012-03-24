@@ -1,12 +1,18 @@
 package lindley.desarrolloxcliente.activity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
+import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
+import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
+import lindley.desarrolloxcliente.to.UpdatePosicionTO;
+import lindley.desarrolloxcliente.to.UpdatePresentacionTO;
+import lindley.desarrolloxcliente.to.UpdateSKUPresentacionTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarPresentacionCompromisoProxy;
@@ -32,7 +38,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
 
 public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 
@@ -46,15 +51,17 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
 	private static final int ACCION_CERRAR = 1;
 	private static final int ACCION_ACTUALIZAR = 2;
+	public static final String TIPO_PRESENTACION = "3";
+	public static final String TIPO_POSICION = "2";
 
-	@InjectView(R.id.actionBar)	ActionBar mActionBar;
+//	@InjectView(R.id.actionBar)	ActionBar mActionBar;
 	@Inject	ConsultarPresentacionCompromisoProxy consultarPresentacionProxy;
 	@Inject CerrarCompromisoProxy cerrarCompromisoProxy;
 	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
 	//private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha)	TextView txtViewFecha;
 	ClienteTO cliente;
-	private MyApplication application;
+	public static MyApplication application;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -62,11 +69,11 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 		inicializarRecursos();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.consultarpresentacioncompromisoopen_activity);
-		mActionBar.setTitle(R.string.consultarpresentacion_activity_title);
+//		mActionBar.setTitle(R.string.consultarpresentacion_activity_title);
 		application = (MyApplication) getApplicationContext();
 		cliente = application.getClienteTO();
-		mActionBar.setSubTitle(cliente.getNombre());
-		mActionBar.setHomeLogo(R.drawable.header_logo);
+//		mActionBar.setSubTitle(cliente.getNombre());
+//		mActionBar.setHomeLogo(R.drawable.header_logo);
 		processAsync();
 	}
 
@@ -88,7 +95,6 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 						.getResponse().getListaCompromisos();
 				
 				application.presentacionAdapter = new EfficientAdapter(this, presentaciones);
-				//adap = new EfficientAdapter(this, presentaciones);
 				final Calendar c = Calendar.getInstance();
 				if (presentaciones.size() > 0)
 					txtViewFecha.setText(c.get(Calendar.DAY_OF_MONTH) + "/"
@@ -117,6 +123,29 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
     	processAsync(ACCION_CERRAR);
     }
 
+	
+	
+	@Override
+	protected boolean executeAsyncPre(int accion) {
+		// TODO Auto-generated method stub
+		boolean tieneError=false;
+		if(accion == ACCION_ACTUALIZAR)
+       	{      
+			if(application.posicionAdapter.posiciones == null)
+			{
+				showToast("Debe actualizar los datos de la pestaña Posiciones");
+				tieneError=true;
+			}
+			if(application.presentacionAdapter.detalles == null)
+			{
+				showToast("Debe actualizar los datos de la pestaña Presentacion");
+				tieneError=true;
+			}
+				
+       	}
+		return !tieneError;
+	}
+
 	@Override
    	protected void process(int accion) {
        	if(accion == ACCION_CERRAR)
@@ -125,9 +154,46 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
        		cerrarCompromisoProxy.execute();
        	}
        	else if(accion == ACCION_ACTUALIZAR)
-       	{
-       		//actualizarCompromisoProxy.setCompromisos(compromisos);
-       		actualizarCompromisoProxy.setCompromisos(null);
+       	{       		
+       		List<UpdatePosicionTO> listUpdatePosicionTO = new ArrayList<UpdatePosicionTO>();
+       		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
+    		{
+       			UpdatePosicionTO update = new UpdatePosicionTO();
+       			update.accionCompromiso = posicion.getAccionCompromiso();
+       			update.codigoRegistro = codigoGestion;
+       			update.codigoVariable = posicion.getCodigoVariable();
+       			update.confirmacion = posicion.getConfirmacion();
+       			update.fechaCompromiso = posicion.getFechaCompromiso();
+       			update.listCompromisos = posicion.getListCompromisos();
+       			update.tipoAgrupacion = TIPO_POSICION;
+       			listUpdatePosicionTO.add(update);
+    		}
+       		
+       		List<UpdatePresentacionTO> listUpdatePresentacionTO = new ArrayList<UpdatePresentacionTO>();
+    		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
+    		{
+    			UpdatePresentacionTO update = new UpdatePresentacionTO();
+    			update.codigoRegistro = codigoGestion;
+    			update.tipoAgrupacion = TIPO_PRESENTACION;
+    			update.codigoVariable = presentacion.getCodigoVariable();
+    			update.confirmacion = presentacion.getConfirmacion();
+    			update.fechaCompromiso = presentacion.getFechaCompromiso();
+    			List<UpdateSKUPresentacionTO> skucompromisos = new ArrayList<UpdateSKUPresentacionTO>();
+    			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  presentacion.getListaSKU())
+    			{
+    				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
+    				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.getCodigoSKU();
+    				updateSKUPresentacionTO.compromiso = skupresentacionCompromisoTO.getCompromiso();
+    				updateSKUPresentacionTO.confirmacion = skupresentacionCompromisoTO.getConfirmacion();
+    				skucompromisos.add(updateSKUPresentacionTO);
+    			}
+    			update.listaSKU = skucompromisos;    			
+    			listUpdatePresentacionTO.add(update);
+    		}
+    		
+    		actualizarCompromisoProxy.listaPosicionCompromiso = listUpdatePosicionTO;
+    		actualizarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
+       		actualizarCompromisoProxy.setCompromisos(application.openAdapter.detalles);
        		actualizarCompromisoProxy.execute();
        	}
        		
@@ -202,7 +268,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 		
 		private LayoutInflater mInflater;
 		private Context context;
-		private List<PresentacionCompromisoTO> detalles;
+		public List<PresentacionCompromisoTO> detalles;
 
 		public EfficientAdapter(Context context,
 				List<PresentacionCompromisoTO> valores) {
