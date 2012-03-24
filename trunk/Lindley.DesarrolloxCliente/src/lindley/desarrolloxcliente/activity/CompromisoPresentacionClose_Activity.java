@@ -25,12 +25,11 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
 
 public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 
 	public static final String COD_GESTION = "codGestion";
-	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
+//	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarPresentacionCompromisoProxy consultarPresentacionCompromisoProxy;
 	private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
@@ -51,11 +50,11 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
     	inicializarRecursos();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.consultarpresentacioncompromisoclose_activity);        
-        mActionBar.setTitle(R.string.consultarpresentacioncompromisoclose_activity_title);
+//        mActionBar.setTitle(R.string.consultarpresentacioncompromisoclose_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
-        mActionBar.setSubTitle(cliente.getNombre());
-        mActionBar.setHomeLogo(R.drawable.header_logo);
+//        mActionBar.setSubTitle(cliente.getNombre());
+//        mActionBar.setHomeLogo(R.drawable.header_logo);
         processAsync(); 
     }
 	
