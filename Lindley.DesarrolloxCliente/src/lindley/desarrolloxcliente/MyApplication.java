@@ -14,6 +14,7 @@ import lindley.desarrolloxcliente.activity.CompromisoOpen_Activity;
 import lindley.desarrolloxcliente.activity.CompromisoPosicionOpen_Activity;
 import lindley.desarrolloxcliente.activity.CompromisoPresentacionOpen_Activity;
 import lindley.desarrolloxcliente.adapter.AccionTradeTOAdapter;
+import lindley.desarrolloxcliente.dao.FotoDAO;
 import lindley.desarrolloxcliente.negocio.FotoBLL;
 import lindley.desarrolloxcliente.to.AccionTradeTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
@@ -39,6 +40,7 @@ import roboguice.config.AbstractAndroidModule;
 public class MyApplication extends RoboApplication {
 
 	@Inject FotoBLL fotoBLL;
+	@Inject FotoDAO fotoDAO;
 	
 	private UsuarioTO usuarioTO;
 	private ClienteTO clienteTO;
@@ -105,6 +107,7 @@ public class MyApplication extends RoboApplication {
 				bind(GuardarDesarrolloProxy.class).in(Singleton.class);
 				bind(CerrarCompromisoProxy.class).in(Singleton.class);
 				bind(FotoBLL.class).in(Singleton.class);
+				bind(FotoDAO.class).in(Singleton.class);
 			}});
 	}
 
