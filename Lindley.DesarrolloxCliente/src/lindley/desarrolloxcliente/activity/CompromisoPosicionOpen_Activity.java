@@ -52,7 +52,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	private static final int ACCION_CERRAR = 1;
 	private static final int ACCION_ACTUALIZAR = 2;
 	
-	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
+//	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarPosicionCompromisoProxy consultarPosicionProxy;
 	@Inject CerrarCompromisoProxy cerrarCompromisoProxy;
 	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
@@ -75,11 +75,11 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
     	inicializarRecursos();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.consultarposicioncompromisoopen_activity);        
-        mActionBar.setTitle(R.string.consultarposicion_activity_title);
+//        mActionBar.setTitle(R.string.consultarposicion_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
-        mActionBar.setSubTitle(cliente.getNombre());
-        mActionBar.setHomeLogo(R.drawable.header_logo);
+//        mActionBar.setSubTitle(cliente.getNombre());
+//        mActionBar.setHomeLogo(R.drawable.header_logo);
         ESTADO_FOTO_FINAL = 0;
         processAsync(); 
     }
@@ -272,7 +272,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		};
 		
     	private Activity context;
-		private List<PosicionCompromisoTO> posiciones;
+		public List<PosicionCompromisoTO> posiciones;
 		
 		public EfficientAdapter(Activity context,List<PosicionCompromisoTO> posiciones ){
 			super(context, R.layout.consultarposicioncompromisoopen_content, posiciones);
