@@ -12,12 +12,16 @@ import android.webkit.WebViewClient;
 
 import com.thira.examples.actionbar.widget.ActionBar;
 
+import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
 public class WebViewVerFoto_Activity extends ActivityBase {
 
+	private static final String DESARROLLO_X_CLIENTE = "/DesarrolloxCliente/";
+	public static final String NOMBRE_FOTO = "nomFoto";
 	@InjectView(R.id.wvwFoto) 	WebView   wvwFoto;
 	@InjectView(R.id.actionBar) ActionBar mActionBar;
+	@InjectExtra(NOMBRE_FOTO) String fotoNombre;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +75,10 @@ public class WebViewVerFoto_Activity extends ActivityBase {
 			
 	    })  ;  
 		
-			    
-		wvwFoto.loadUrl("http://java.cdaandino.com/rtm/MMILAndroid/Android/PoligonaRegionAndroid.aspx");
+
+		fotoNombre = fotoNombre.substring(0, (fotoNombre.length()-4));
+		System.out.println(fotoNombre);
+		wvwFoto.loadUrl("http://java.cdaandino.com/rtm/LanzadorApp/ImageViewService.svc"+ DESARROLLO_X_CLIENTE + fotoNombre);
+		//wvwFoto.loadUrl("http://java.cdaandino.com/rtm/LanzadorApp/ImageViewService.svc"+ DESARROLLO_X_CLIENTE + "12_20599_1332711988984");
 	}
 }

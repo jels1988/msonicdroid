@@ -1,5 +1,4 @@
 package lindley.desarrolloxcliente.activity;
-
 import java.util.Calendar;
 import java.util.List;
 
@@ -9,18 +8,22 @@ import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarPosicionCompromisoProxy;
 import net.msonic.lib.ListActivityBase;
+import net.msonic.lib.MessageBox;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+import android.content.DialogInterface;
 
 import com.google.inject.Inject;
 
@@ -98,13 +101,13 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
     
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
-	    //private Context context;
+	    private Context context;
 	    private List<PosicionCompromisoTO> detalles;
 	    
 	    public EfficientAdapter(Context context, List<PosicionCompromisoTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
-		      //this.context = context;
+		      this.context = context;
 		      this.detalles = valores;
 		    }
 	    
@@ -174,7 +177,54 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 	    	  
 	    	  holder.txViewFecComp.setText("");
 	      }
-	      	      	      
+	      
+	      holder.btnFotoFinal.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					if(!posicionTO.getFotoInicial().equals(""))
+					{
+						Intent intent = new Intent("lindley.desarrolloxcliente.webviewverfoto");
+						intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.getFotoInicial());
+						context.startActivity(intent);
+					}
+					else
+					{
+						MessageBox.showSimpleDialog(context, "Error", "No existe foto registrada.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+							
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+							}
+						});	
+					}
+				}
+			});
+	      
+	      
+	      holder.btnFotoFinal.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					if(!posicionTO.getFotoFinal().equals(""))
+					{
+						Intent intent = new Intent("lindley.desarrolloxcliente.webviewverfoto");
+						intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.getFotoFinal());
+						context.startActivity(intent);
+					}
+					else
+					{
+						MessageBox.showSimpleDialog(context, "Error", "No existe foto registrada.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+							
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+							}
+						});	
+					}
+				}
+			});
+	      
 	      return convertView;
 	    }
 

@@ -529,8 +529,8 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 						
 						((CompromisoPosicionOpen_Activity)context).takePhoto(TAKE_PHOTO_FINAL_CODE, posicionTO);
 					}else{
-						Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
-						intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.getFotoInicial());
+						Intent intent = new Intent("lindley.desarrolloxcliente.webviewverfoto");
+						intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.getFotoFinal());
 						context.startActivity(intent);	
 					}
 				}
