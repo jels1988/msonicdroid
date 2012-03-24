@@ -60,6 +60,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	public static final String TIPO_PRESENTACION = "3";
 	public static final String TIPO_POSICION = "2";
 
+	public static final String NO = "N";
+	
 	@InjectExtra(CODIGO_REGISTRO) String codigoRegistro;
 	@InjectExtra(FLAG_FECHA) static String flagFecha;
 //	@InjectView(R.id.actionBar)   ActionBar 	mActionBar;
@@ -142,7 +144,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     		{
        			UpdatePosicionTO update = new UpdatePosicionTO();
        			update.accionCompromiso = posicion.getAccionCompromiso();
-       			update.codigoRegistro = codigoRegistro;
+       			if(update.accionCompromiso.equalsIgnoreCase("")) update.accionCompromiso = " ";
+       			update.codigoRegistro = codigoRegistro; 
        			update.codigoVariable = posicion.getCodigoVariable();
        			update.confirmacion = posicion.getConfirmacion();
        			update.fechaCompromiso = posicion.getFechaCompromiso();
@@ -151,22 +154,24 @@ public class CompromisoOpen_Activity extends ListActivityBase {
        			listUpdatePosicionTO.add(update);
     		}
        		
-    		List<UpdatePresentacionTO> listUpdatePresentacionTO = new ArrayList<UpdatePresentacionTO>();
-    		for(PresentacionCompromisoTO posicion : application.presentacionAdapter.detalles)
+       		List<UpdatePresentacionTO> listUpdatePresentacionTO = new ArrayList<UpdatePresentacionTO>();
+    		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
     		{
     			UpdatePresentacionTO update = new UpdatePresentacionTO();
     			update.codigoRegistro = codigoRegistro;
     			update.tipoAgrupacion = TIPO_PRESENTACION;
-    			update.codigoVariable = posicion.getCodigoVariable();
-    			update.confirmacion = posicion.getConfirmacion();
-    			update.fechaCompromiso = posicion.getFechaCompromiso();
+    			update.codigoVariable = presentacion.getCodigoVariable();
+    			update.confirmacion = presentacion.getConfirmacion();
+    			update.fechaCompromiso = presentacion.getFechaCompromiso();
     			List<UpdateSKUPresentacionTO> skucompromisos = new ArrayList<UpdateSKUPresentacionTO>();
-    			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  posicion.getListaSKU())
+    			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  presentacion.getListaSKU())
     			{
     				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
     				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.getCodigoSKU();
     				updateSKUPresentacionTO.compromiso = skupresentacionCompromisoTO.getCompromiso();
+    				if(updateSKUPresentacionTO.compromiso.equalsIgnoreCase(" ")) updateSKUPresentacionTO.compromiso = NO;
     				updateSKUPresentacionTO.confirmacion = skupresentacionCompromisoTO.getConfirmacion();
+    				if(updateSKUPresentacionTO.confirmacion.equalsIgnoreCase(" ")) updateSKUPresentacionTO.confirmacion = NO;
     				skucompromisos.add(updateSKUPresentacionTO);
     			}
     			update.listaSKU = skucompromisos;    			
@@ -175,8 +180,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     		
     		actualizarCompromisoProxy.listaPosicionCompromiso = listUpdatePosicionTO;
     		actualizarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
-    		actualizarCompromisoProxy.setCompromisos(application.openAdapter.detalles);
-    		actualizarCompromisoProxy.execute();
+       		actualizarCompromisoProxy.setCompromisos(application.openAdapter.detalles);
+       		actualizarCompromisoProxy.execute();
     	}
     		
 	}
