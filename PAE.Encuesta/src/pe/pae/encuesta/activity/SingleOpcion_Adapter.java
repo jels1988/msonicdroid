@@ -21,7 +21,6 @@ public class SingleOpcion_Adapter extends ArrayAdapter<OpcionTO> {
 	
 	private final ArrayList<OpcionTO> opciones;
 	private final Activity context;
-	private int posicionSeleccionada = -1;
 	private static RadioButton radioButton=null;
 	
 	public SingleOpcion_Adapter(Activity context,ArrayList<OpcionTO> opciones){
@@ -60,7 +59,6 @@ public class SingleOpcion_Adapter extends ArrayAdapter<OpcionTO> {
 			view = inflator.inflate(R.layout.pregunta_single_content, null);
 			
 			final ViewHolder holder = new ViewHolder();
-			final int pos = position;
 			holder.rdbSeleccion = (RadioButton) view.findViewById(R.id.rdOption);
 			
 			holder.rdbSeleccion.setOnClickListener(new OnClickListener() {
@@ -76,7 +74,6 @@ public class SingleOpcion_Adapter extends ArrayAdapter<OpcionTO> {
 					//}
 					
 					radioButton = (RadioButton)v;
-					posicionSeleccionada=pos;
 					OpcionTO opcion = (OpcionTO) holder.rdbSeleccion.getTag();
 					opcion.seleccionado=radioButton.isChecked();
 				}

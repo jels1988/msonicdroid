@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.msonic.lib.DBHelper;
 import pe.pae.encuesta.dao.RespuestaDAO;
+import pe.pae.encuesta.to.FileTO;
 import pe.pae.encuesta.to.RespuestaDataTO;
 
 import android.util.Log;
@@ -18,6 +19,33 @@ public class RespuestaBLL {
 	@Inject protected DBHelper dbHelper;
 	@Inject protected RespuestaDAO respuestaDAO;
 	
+	
+	public void eliminarDocumento(int id){
+		try {
+			dbHelper.openDataBase();
+			respuestaDAO.eliminarDocumento(id);
+		} catch (Exception e) {
+			Log.e(TAG_LOG, "eliminarDocumento", e);
+		} finally {
+			dbHelper.close();
+		}
+	}
+	
+	public ArrayList<FileTO> listarDocumentos(){
+		
+		ArrayList<FileTO> documentos=null;
+		
+		try {
+			dbHelper.openDataBase();
+			documentos = respuestaDAO.listarDocumentos();
+		} catch (Exception e) {
+			Log.e(TAG_LOG, "listarDocumentos", e);
+		} finally {
+			dbHelper.close();
+		}
+		
+		return documentos;
+	}
 	
 	public void terminarEncuesta(){
 		try {

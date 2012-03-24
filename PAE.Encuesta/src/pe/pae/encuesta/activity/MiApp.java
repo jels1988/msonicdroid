@@ -10,8 +10,10 @@ import pe.pae.encuesta.dao.RespuestaDAO;
 import pe.pae.encuesta.negocio.ClienteBLL;
 import pe.pae.encuesta.negocio.EncuestaBLL;
 import pe.pae.encuesta.negocio.RespuestaBLL;
+import pe.pae.encuesta.service.UploadFileService;
 import pe.pae.encuesta.to.UsuarioTO;
 import pe.pae.encuesta.ws.service.EncuestaProxy;
+import pe.pae.encuesta.ws.service.FileUploadProxy;
 import pe.pae.encuesta.ws.service.GuardarRespuestaProxy;
 import pe.pae.encuesta.ws.service.LoginProxy;
 
@@ -54,6 +56,9 @@ public class MiApp extends RoboApplication {
 				bind(LoginProxy.class).in(Singleton.class);
 				bind(EncuestaProxy.class).in(Singleton.class);
 				bind(GuardarRespuestaProxy.class).in(Singleton.class);
+				bind(FileUploadProxy.class).in(Singleton.class);
+				
+				
 				
 				bind(DBHelper.class).toProvider(DBHelperProvider.class).in(Singleton.class);
 				
@@ -65,6 +70,9 @@ public class MiApp extends RoboApplication {
 				
 				bind(RespuestaDAO.class).in(Singleton.class);
 				bind(RespuestaBLL.class).in(Singleton.class);
+				
+				
+				requestStaticInjection(UploadFileService.class);
 				
 			}
 		});

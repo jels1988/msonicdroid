@@ -2,6 +2,7 @@ package pe.pae.encuesta.dao;
 
 import java.util.ArrayList;
 
+import pe.pae.encuesta.to.FileTO;
 import pe.pae.encuesta.to.RespuestaDataTO;
 import pe.pae.encuesta.to.RespuestaPreguntaDataTO;
 import pe.pae.encuesta.to.RespuestaPreguntaOpcionDataTO;
@@ -15,8 +16,39 @@ public class RespuestaDAO {
 
 	@Inject protected DBHelper dbHelper;
 	
+	
+	public void eliminarDocumento(int id){
+		
+		String[] parametros = new String[]{String.valueOf(id)};
+		dbHelper.getDataBase().delete("documento", "documentoId=?", parametros);
+		
+	}
+	public ArrayList<FileTO> listarDocumentos(){
+		
+		ArrayList<FileTO> documentos = new ArrayList<FileTO>();
+		String SQL = "SELECT documentoId,documento FROM documento where documento <> ''";
+		Cursor cursor = dbHelper.getDataBase().rawQuery(SQL,null);
+		
+		
+		FileTO fileTO;
+		
+		while(cursor.moveToNext()){
+			fileTO = new FileTO();
+			
+			fileTO.id = cursor.getInt(cursor.getColumnIndex("documentoId"));
+			fileTO.nombre = cursor.getString(cursor.getColumnIndex("documento"));
+			
+			documentos.add(fileTO);
+		}
+		
+		cursor.close();
+		
+		return documentos;
+	}
+	
 	public void terminarEncuesta(){
 		
+		dbHelper.getDataBase().execSQL("INSERT INTO documento (documento) SELECT foto FROM respuesta_pregunta where foto <> '' and foto not in (select documento from documento)");
 		dbHelper.getDataBase().delete("respuesta", null, null);
 		dbHelper.getDataBase().delete("respuesta_pregunta", null, null);
 		dbHelper.getDataBase().delete("respuesta_opcion", null, null);	

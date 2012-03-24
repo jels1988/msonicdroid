@@ -44,6 +44,9 @@ public class Login_Activity extends ActivityBase {
         
         inicializarRecursos();
         
+        
+        
+        
         setContentView(R.layout.login_activity);
         mActionBar.setTitle(R.string.login_activity_title);
         
@@ -85,6 +88,10 @@ public class Login_Activity extends ActivityBase {
     
     public void btnIngresar_onclick(View v){
     	
+    	/*
+    	Intent intentService = new Intent("pae.service.uploadFileService");
+        startService(intentService);*/
+        
     	processAsync();
     }
 

@@ -127,6 +127,10 @@ public class Producto_Buscar_Activity extends ListActivityBase {
 							editor.putString("TIENDA", "");
 							editor.commit();
 							
+							
+					    	Intent intentService = new Intent("pae.service.uploadFileService");
+					        startService(intentService);
+							
 							Intent intent = new Intent("pae.activity.seleccionarTienda");
 							startActivity(intent);
 						}
