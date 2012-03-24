@@ -161,6 +161,13 @@
             </intent-filter>
         </activity>
         
+        <activity android:name=".activity.WebViewVerFoto_Activity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.webviewverfoto" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
     </application>
         
 </manifest>
