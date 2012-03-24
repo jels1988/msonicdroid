@@ -37,7 +37,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
 
 public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 
@@ -61,26 +60,24 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	ClienteTO cliente;
 	private MyApplication application;
 	
-	private static int ESTADO_FOTO_FINAL;
-	private static final int FOTO_GUARDADA = 1;
 	
 	//@InjectExtra(RESPUESTA) String respuesta;
 	
 	public static String file_name="";
-	private static final int TAKE_PHOTO_CODE = 1;
-		
+	private static final int TAKE_PHOTO_INICIAL_CODE = 1;
+	private static final int TAKE_PHOTO_FINAL_CODE = 2;
+	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	
+    	 super.onCreate(savedInstanceState);
+    	 
     	inicializarRecursos();
-        super.onCreate(savedInstanceState);
+       
         setContentView(R.layout.consultarposicioncompromisoopen_activity);        
-//        mActionBar.setTitle(R.string.consultarposicion_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
-//        mActionBar.setSubTitle(cliente.getNombre());
-//        mActionBar.setHomeLogo(R.drawable.header_logo);
-        ESTADO_FOTO_FINAL = 0;
         processAsync(); 
     }
     
@@ -99,8 +96,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 			int status = consultarPosicionProxy.getResponse().getStatus();
 			if (status == 0) {
 				List<PosicionCompromisoTO> posiciones = consultarPosicionProxy
-						.getResponse().getListaCompromisos();
-				//adap = new EfficientAdapter(this, posiciones);		
+						.getResponse().getListaCompromisos();	
 				application.posicionAdapter =new EfficientAdapter(this, posiciones); 
 				final Calendar c = Calendar.getInstance();      
 				if(posiciones.size()>0)
@@ -147,12 +143,6 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
        	}
        	else if(accion == ACCION_ACTUALIZAR)
        	{
-       		
-       		//application.presentacionAdapter;
-       		//application.openAdapter;
-       		//application.posicionAdapter;
-       		
-       		//actualizarCompromisoProxy.setCompromisos(compromisos);
        		actualizarCompromisoProxy.setCompromisos(null);
        		actualizarCompromisoProxy.execute();
        	}
@@ -207,16 +197,16 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		showToast(error_generico_process);
 	}
     
-    static PosicionCompromisoTO posicionTO;
+     PosicionCompromisoTO posicionTO;
     
-    public void takePhoto(PosicionCompromisoTO posicionTO ){
+    public void takePhoto(int accion,PosicionCompromisoTO posicionTO ){
     	
-    	CompromisoPosicionOpen_Activity.posicionTO = posicionTO;
+    	this.posicionTO = posicionTO;
     	file_name = UploadFileUtil.GenerarFileName(12,"jpg");
     	 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
     	intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(this)) ); 
     	intent.putExtra(MediaStore.EXTRA_MEDIA_TITLE, "TITULO");
-    	startActivityForResult(intent, TAKE_PHOTO_CODE);
+    	startActivityForResult(intent, accion);
     	
     	
     }
@@ -235,9 +225,12 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	    if (resultCode == RESULT_OK) {
 	    		switch(requestCode){
-	    			case TAKE_PHOTO_CODE:{
-	    				savePhoto();
-	    				//processAsync();
+	    			case TAKE_PHOTO_INICIAL_CODE:{
+	    				savePhoto(TAKE_PHOTO_INICIAL_CODE);
+	    				break;
+	    			}
+	    			case TAKE_PHOTO_FINAL_CODE:{
+	    				savePhoto(TAKE_PHOTO_FINAL_CODE);
 	    				break;
 	    			}
 	    		}
@@ -245,12 +238,11 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	    }
 	  }
 	 
-	public void savePhoto(){
-		CompromisoPosicionOpen_Activity.posicionTO.setFotoInicial(file_name);
-		//ESTADO_FOTO_FINAL = FOTO_GUARDADA;
-		//documentoTO.setNombreArchivo(file_name);
-		//documentoTO.setEsLocal(DocumentoTO.LOCAL);
-		//clienteBLL.guardarDocumento(clienteId, documentoTO);
+	public void savePhoto(int accion){
+		if(TAKE_PHOTO_INICIAL_CODE==accion)
+			this.posicionTO.setFotoInicial(file_name);
+		else
+			this.posicionTO.setFotoFinal(file_name);
 	}
 	
     public static class EfficientAdapter extends ArrayAdapter<PosicionCompromisoTO> {
@@ -408,7 +400,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 						
 						if((posicionTO.getFotoInicial()==null)||(posicionTO.getFotoInicial().compareTo("")==0)){
 							
-							((CompromisoPosicionOpen_Activity)context).takePhoto(posicionTO);
+							((CompromisoPosicionOpen_Activity)context).takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionTO);
 						}else{
 							Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
 							intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.getFotoInicial());
@@ -424,15 +416,13 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					if(ESTADO_FOTO_FINAL == FOTO_GUARDADA)
-					{
+					if((posicionTO.getFotoFinal()==null)||(posicionTO.getFotoFinal().compareTo("")==0)){
+						
+						((CompromisoPosicionOpen_Activity)context).takePhoto(TAKE_PHOTO_FINAL_CODE, posicionTO);
+					}else{
 						Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
-						intent.putExtra(VerFoto_Activity.FILE_NAME, file_name);
-						context.startActivity(intent);						
-					}
-					else
-					{
-						//((CompromisoPosicionOpen_Activity)context).takePhoto();	
+						intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.getFotoInicial());
+						context.startActivity(intent);	
 					}
 				}
 			});
