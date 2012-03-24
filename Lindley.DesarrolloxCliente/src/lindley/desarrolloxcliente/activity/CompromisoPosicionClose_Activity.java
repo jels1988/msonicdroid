@@ -23,19 +23,16 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
 
 public class CompromisoPosicionClose_Activity extends ListActivityBase {
 
-	//public static final String RESPUESTA = "rspta";
 	public static final String COD_GESTION = "codGestion";
-	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
+//	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarPosicionCompromisoProxy consultarPosicionCompromisoProxy;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
 	private EfficientAdapter adap;	
 	private MyApplication application;
-	//@InjectExtra(RESPUESTA) String respuesta;
 	@InjectExtra(COD_GESTION) String codigoGestion;
 	
 	private static String pad(int c) {
@@ -51,11 +48,11 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
     	inicializarRecursos();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.consultarposicioncompromisoclose_activity);        
-        mActionBar.setTitle(R.string.consultarposicioncompromisoclose_activity_title);
+//        mActionBar.setTitle(R.string.consultarposicioncompromisoclose_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
-        mActionBar.setSubTitle(cliente.getNombre());
-        mActionBar.setHomeLogo(R.drawable.header_logo);
+//        mActionBar.setSubTitle(cliente.getNombre());
+//        mActionBar.setHomeLogo(R.drawable.header_logo);
         processAsync(); 
     }
     
