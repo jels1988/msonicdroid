@@ -113,12 +113,12 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 		boolean tieneError=false;
 		if(accion == ACCION_ACTUALIZAR)
        	{      
-			if(application.posicionAdapter.posiciones == null)
+			if(application.posicionAdapter.posiciones.isEmpty() || application.posicionAdapter.posiciones == null)
 			{
 				showToast("Debe actualizar los datos de la pestaña Posiciones");
 				tieneError=true;
 			}
-			if(application.presentacionAdapter.detalles == null)
+			if(application.presentacionAdapter.detalles.isEmpty() || application.presentacionAdapter.detalles == null)
 			{
 				showToast("Debe actualizar los datos de la pestaña Presentacion");
 				tieneError=true;
