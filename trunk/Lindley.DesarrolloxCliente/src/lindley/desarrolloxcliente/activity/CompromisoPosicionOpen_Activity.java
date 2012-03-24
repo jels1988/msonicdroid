@@ -34,6 +34,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -366,11 +367,21 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				
 				viewHolder.chkCumplio = (CheckBox) view.findViewById(R.id.chkCumplio);
 						    	
-				view.setTag(viewHolder);
+				viewHolder.txViewAccComp.setOnFocusChangeListener(new OnFocusChangeListener() {
+					
+					@Override
+					public void onFocusChange(View v, boolean hasFocus) {
+						// TODO Auto-generated method stub
+						PosicionCompromisoTO compromiso = (PosicionCompromisoTO) viewHolder.txViewAccComp.getTag();
+						compromiso.setAccionCompromiso(viewHolder.txViewAccComp.getText().toString());
+					}
+				});
 				
+				view.setTag(viewHolder);
+				viewHolder.txViewAccComp.setTag(this.posiciones.get(position));
 			}else{
 				view = convertView;
-				
+				((ViewHolder) view.getTag()).txViewAccComp.setTag(this.posiciones.get(position));
 			}
 			
 			final ViewHolder holder = (ViewHolder) view.getTag();
