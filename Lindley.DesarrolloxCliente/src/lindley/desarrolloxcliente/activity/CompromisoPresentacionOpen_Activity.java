@@ -53,7 +53,6 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 	private static final int ACCION_ACTUALIZAR = 2;
 	public static final String TIPO_PRESENTACION = "3";
 	public static final String TIPO_POSICION = "2";
-	
 	public static final String NO = "N";
 
 //	@InjectView(R.id.actionBar)	ActionBar mActionBar;
