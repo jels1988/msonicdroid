@@ -10,7 +10,6 @@ import com.google.inject.Singleton;
 import lindley.desarrolloxcliente.activity.CompromisoOpen_Activity;
 import lindley.desarrolloxcliente.activity.CompromisoPosicionOpen_Activity;
 import lindley.desarrolloxcliente.activity.CompromisoPresentacionOpen_Activity;
-import lindley.desarrolloxcliente.activity.CompromisoPrincipalOpen_Resumen;
 import lindley.desarrolloxcliente.adapter.AccionTradeTOAdapter;
 import lindley.desarrolloxcliente.to.AccionTradeTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
