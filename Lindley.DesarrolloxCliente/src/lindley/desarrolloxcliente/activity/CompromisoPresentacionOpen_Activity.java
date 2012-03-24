@@ -53,6 +53,8 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 	private static final int ACCION_ACTUALIZAR = 2;
 	public static final String TIPO_PRESENTACION = "3";
 	public static final String TIPO_POSICION = "2";
+	
+	public static final String NO = "N";
 
 //	@InjectView(R.id.actionBar)	ActionBar mActionBar;
 	@Inject	ConsultarPresentacionCompromisoProxy consultarPresentacionProxy;
@@ -163,7 +165,8 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
     		{
        			UpdatePosicionTO update = new UpdatePosicionTO();
        			update.accionCompromiso = posicion.getAccionCompromiso();
-       			update.codigoRegistro = codigoGestion;
+       			if(update.accionCompromiso.equalsIgnoreCase("")) update.accionCompromiso = " ";
+       			update.codigoRegistro = codigoGestion; 
        			update.codigoVariable = posicion.getCodigoVariable();
        			update.confirmacion = posicion.getConfirmacion();
        			update.fechaCompromiso = posicion.getFechaCompromiso();
@@ -187,7 +190,9 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
     				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
     				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.getCodigoSKU();
     				updateSKUPresentacionTO.compromiso = skupresentacionCompromisoTO.getCompromiso();
+    				if(updateSKUPresentacionTO.compromiso.equalsIgnoreCase(" ")) updateSKUPresentacionTO.compromiso = NO;
     				updateSKUPresentacionTO.confirmacion = skupresentacionCompromisoTO.getConfirmacion();
+    				if(updateSKUPresentacionTO.confirmacion.equalsIgnoreCase(" ")) updateSKUPresentacionTO.confirmacion = NO;
     				skucompromisos.add(updateSKUPresentacionTO);
     			}
     			update.listaSKU = skucompromisos;    			
