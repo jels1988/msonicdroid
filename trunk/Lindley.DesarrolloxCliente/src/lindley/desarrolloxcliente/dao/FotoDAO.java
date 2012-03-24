@@ -1,6 +1,9 @@
 package lindley.desarrolloxcliente.dao;
 
+import java.util.ArrayList;
+
 import android.content.ContentValues;
+import android.database.Cursor;
 
 import com.google.inject.Inject;
 
@@ -25,5 +28,20 @@ public class FotoDAO {
 		parametros.put("nombre", fileName);
 		
 		dbHelper.getDataBase().insertOrThrow("tbl_fotos", null, parametros);
+	}
+	
+	public ArrayList<String> listar(){
+		ArrayList<String> valores = new ArrayList<String>();
+		
+		String[] args = new String[] {};
+		Cursor cursor = dbHelper.getDataBase().rawQuery("select * from tbl_fotos",args);
+		
+		while(cursor.moveToNext()){
+			String fileName = cursor.getString(cursor.getColumnIndex("nombre"));
+			valores.add(fileName);
+		}
+		cursor.close();
+		
+		return valores;
 	}
 }
