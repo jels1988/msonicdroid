@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import com.google.inject.Inject;
 import com.google.inject.Module;
 import com.google.inject.Singleton;
 
@@ -11,6 +12,7 @@ import lindley.desarrolloxcliente.activity.CompromisoOpen_Activity;
 import lindley.desarrolloxcliente.activity.CompromisoPosicionOpen_Activity;
 import lindley.desarrolloxcliente.activity.CompromisoPresentacionOpen_Activity;
 import lindley.desarrolloxcliente.adapter.AccionTradeTOAdapter;
+import lindley.desarrolloxcliente.negocio.FotoBLL;
 import lindley.desarrolloxcliente.to.AccionTradeTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.CompromisoTO;
@@ -34,6 +36,8 @@ import roboguice.config.AbstractAndroidModule;
 
 public class MyApplication extends RoboApplication {
 
+	@Inject FotoBLL fotoBLL;
+	
 	private UsuarioTO usuarioTO;
 	private ClienteTO clienteTO;
 	
@@ -96,6 +100,7 @@ public class MyApplication extends RoboApplication {
 				bind(ActualizarCompromisoProxy.class).in(Singleton.class);
 				bind(GuardarDesarrolloProxy.class).in(Singleton.class);
 				bind(CerrarCompromisoProxy.class).in(Singleton.class);
+				bind(FotoBLL.class).in(Singleton.class);
 			}});
 	}
 

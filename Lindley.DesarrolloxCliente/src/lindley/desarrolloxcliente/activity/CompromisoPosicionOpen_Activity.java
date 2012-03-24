@@ -7,6 +7,7 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.negocio.FotoBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
@@ -67,6 +68,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	@Inject ConsultarPosicionCompromisoProxy consultarPosicionProxy;
 	@Inject CerrarCompromisoProxy cerrarCompromisoProxy;
 	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
+	@Inject FotoBLL fotoBLL;
 	//private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
@@ -185,7 +187,9 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
        			update.listCompromisos = posicion.getListCompromisos();
        			update.tipoAgrupacion = TIPO_POSICION;
        			update.fotoInicial = posicion.getFotoInicial();
+       			if(update.fotoInicial.equals("")) update.fotoInicial = " ";
        			update.fotoFinal = posicion.getFotoFinal();
+       			if(update.fotoFinal.equals("")) update.fotoFinal = " ";
        			listUpdatePosicionTO.add(update);
     		}
        		
@@ -312,9 +316,15 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	 
 	public void savePhoto(int accion){
 		if(TAKE_PHOTO_INICIAL_CODE==accion)
+		{
 			this.posicionTO.setFotoInicial(file_name);
+			fotoBLL.save(file_name);
+		}
 		else
+		{
 			this.posicionTO.setFotoFinal(file_name);
+			fotoBLL.save(file_name);
+		}
 	}
 	
     public static class EfficientAdapter extends ArrayAdapter<PosicionCompromisoTO> {
