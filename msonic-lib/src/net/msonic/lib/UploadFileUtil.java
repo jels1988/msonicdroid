@@ -4,9 +4,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Random;
 
 public class UploadFileUtil {
 
+	public static String GenerarFileName(int modulo,String extension){
+		
+		   Random randInt = new Random();
+		   int numero = randInt.nextInt(32000);
+		   
+		   String file_name = String.format("%d_%d_%d.txt",modulo,numero,  System.currentTimeMillis());
+
+		   return file_name;
+	}
 	
 	
     public static String FileToByteArray(String fileName){
