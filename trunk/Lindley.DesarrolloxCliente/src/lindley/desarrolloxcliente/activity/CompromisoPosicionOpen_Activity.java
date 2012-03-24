@@ -55,7 +55,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	@Inject ConsultarPosicionCompromisoProxy consultarPosicionProxy;
 	@Inject CerrarCompromisoProxy cerrarCompromisoProxy;
 	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
-	private EfficientAdapter adap;
+	//private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
 	private MyApplication application;
@@ -99,11 +99,12 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 			if (status == 0) {
 				List<PosicionCompromisoTO> posiciones = consultarPosicionProxy
 						.getResponse().getListaCompromisos();
-				adap = new EfficientAdapter(this, posiciones);				
+				//adap = new EfficientAdapter(this, posiciones);		
+				application.posicionAdapter =new EfficientAdapter(this, posiciones); 
 				final Calendar c = Calendar.getInstance();      
 				if(posiciones.size()>0)
 					txtViewFecha.setText(c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH)) + "/" + c.get(Calendar.YEAR));
-				setListAdapter(adap);
+				setListAdapter(application.posicionAdapter);
 			}
 			else  {
 				showToast(consultarPosicionProxy.getResponse().getDescripcion());
@@ -127,7 +128,16 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
     	processAsync(ACCION_CERRAR);
     }
     
+    
+    
+    
     @Override
+	protected boolean executeAsyncPre(int accion) {
+		// TODO Auto-generated method stub
+		return super.executeAsyncPre(accion);
+	}
+
+	@Override
    	protected void process(int accion) {
        	if(accion == ACCION_CERRAR)
        	{
@@ -136,6 +146,11 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
        	}
        	else if(accion == ACCION_ACTUALIZAR)
        	{
+       		
+       		//application.presentacionAdapter;
+       		//application.openAdapter;
+       		//application.posicionAdapter;
+       		
        		//actualizarCompromisoProxy.setCompromisos(compromisos);
        		actualizarCompromisoProxy.setCompromisos(null);
        		actualizarCompromisoProxy.execute();

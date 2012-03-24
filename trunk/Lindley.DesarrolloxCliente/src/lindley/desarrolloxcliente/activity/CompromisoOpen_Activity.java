@@ -33,8 +33,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Filter;
-import android.widget.Filterable;
+
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -61,29 +60,12 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	@Inject CerrarCompromisoProxy cerrarCompromisoProxy;
 	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
-	private EfficientAdapter adap;
+	//private EfficientAdapter adap;
 	ClienteTO cliente;
 	public static MyApplication application;
 	List<CompromisoTO> compromisos;
 	
-	/*
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		System.out.println("onPause");
-		ArrayList<CompromisoTO> compromisos = application.listInventarioCompromiso;
-    	
-    	if(compromisos==null){
-    		compromisos = new ArrayList<CompromisoTO>();
-    	}else{
-    		compromisos.clear();
-    	}
-    	
-    	application.listInventarioCompromiso = compromisos;
-		super.onPause();
-	}
-	*/
-	
+
 	/** Called when the activity is first created. */
     @Override 
     public void onCreate(Bundle savedInstanceState) {
@@ -99,6 +81,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
         
         processAsync();
     }
+    
     
 	private static String pad(int c) {
 		if (c >= 10)
@@ -150,8 +133,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 						.getResponse().getListaCompromiso();
 				if(compromisos.size()>0)
 					txtViewFecha.setText(compromisos.get(0).getFecha());
-				adap = new EfficientAdapter(this, compromisos);
-				setListAdapter(adap);
+				application.openAdapter = new EfficientAdapter(this, compromisos);
+				setListAdapter(application.openAdapter);
 			}
 			else  {
 				showToast(consultarCompromisoProxy.getResponse().getDescripcion());
@@ -172,7 +155,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
        		if (isExito) {
        			int status = cerrarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
-       				showToast("Los registros se cerrarón satisfactoriamente.");
+       				showToast("Los registros se cerrar—n satisfactoriamente.");
        				Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
 					startActivity(cabecera);
        			}
@@ -219,7 +202,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 		showToast(error_generico_process);
 	}
     
-    public static class EfficientAdapter extends BaseAdapter implements Filterable {
+    public static class EfficientAdapter extends BaseAdapter{
     	
     	   public static EditText txtFecha;
     	   public static CompromisoTO compromisoTO;
@@ -598,12 +581,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	    	Button btnProfit;
 	    }
 	    
-	    @Override
-	    public Filter getFilter() {
-	      // TODO Auto-generated method stub
-	      return null;
-	    }
-
+	   
 	    @Override
 	    public long getItemId(int position) {
 	      // TODO Auto-generated method stub
