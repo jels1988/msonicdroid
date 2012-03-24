@@ -81,8 +81,8 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 			holder.txViewSKU.setText(skuPresentacion.getDescripcionSKU());
 			
 			holder.txViewSKU.setText(skuPresentacion.getDescripcionSKU());
-			//if(skuPresentacion.valorActual.compareToIgnoreCase("S") == 0)
-			if("S".compareToIgnoreCase("S") == 0)
+			if(skuPresentacion.valorActual.compareToIgnoreCase("S") == 0)
+			//if("S".compareToIgnoreCase("S") == 0)
 			{
 				holder.chkValActual.setChecked(true);
 			}
