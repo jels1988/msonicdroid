@@ -19,21 +19,21 @@ import lindley.desarrolloxcliente.ws.service.ConsultarPresentacionCompromisoProx
 import net.msonic.lib.ListActivityBase;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
+import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -256,12 +256,18 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 		showToast(error_generico_process);
 	}
 	
-	public static class EfficientAdapter extends BaseAdapter implements
-			Filterable {
+	public static class EfficientAdapter extends ArrayAdapter<PresentacionCompromisoTO>{
 				
 		public static EditText txEditFecha;
 		public static PresentacionCompromisoTO compromisoTO;
 
+		public EfficientAdapter(Activity context, List<PresentacionCompromisoTO> valores) {
+			// Cache the LayoutInflate to avoid asking for a new one each time.
+			super(context, R.layout.consultarpresentacioncompromisoopen_content, valores);
+			this.context = context;
+			this.detalles = valores;
+		}
+		
 		DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
 			
 			@Override
@@ -275,17 +281,8 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 			}
 		};
 		
-		private LayoutInflater mInflater;
-		private Context context;
+		private Activity context;
 		public List<PresentacionCompromisoTO> detalles;
-
-		public EfficientAdapter(Context context,
-				List<PresentacionCompromisoTO> valores) {
-			// Cache the LayoutInflate to avoid asking for a new one each time.
-			mInflater = LayoutInflater.from(context);
-			this.context = context;
-			this.detalles = valores;
-		}
 
 		/**
 		 * Make a view to hold each row.
@@ -293,47 +290,69 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 		 * @see android.widget.ListAdapter#getView(int, android.view.View,
 		 *      android.view.ViewGroup)
 		 */
-		public View getView(final int position, View convertView,
+		public View getView( int position, View convertView,
 				ViewGroup parent) {
-			final PresentacionCompromisoTO presentacionTO = (PresentacionCompromisoTO) getItem(position);
-			final ViewHolder holder;
+			//final PresentacionCompromisoTO presentacionTO = (PresentacionCompromisoTO) getItem(position);
+			//final ViewHolder holder;
 
+			View view = null;
 			if (convertView == null) {
-				convertView = mInflater.inflate(
-						R.layout.consultarpresentacioncompromisoopen_content, null);
+				
+				LayoutInflater inflator = context.getLayoutInflater();
+				view = inflator.inflate(R.layout.consultarpresentacioncompromisoopen_content, null);
+				final ViewHolder viewHolder = new ViewHolder();
 
 				// Creates a ViewHolder and store references to the two children
 				// views
 				// we want to bind data to.
-				holder = new ViewHolder();
 
-				holder.txViewVariable = (TextView) convertView
+				viewHolder.txViewVariable = (TextView) view
 						.findViewById(R.id.txViewVariable);
-				holder.txViewPuntos = (TextView) convertView
+				viewHolder.txViewPuntos = (TextView) view
 						.findViewById(R.id.txViewPuntos);
-				holder.btnSKU = (Button) convertView.findViewById(R.id.btnSKU);
+				viewHolder.btnSKU = (Button) view.findViewById(R.id.btnSKU);
 
-				holder.txEditFecha = (EditText) convertView
+				viewHolder.txEditFecha = (EditText) view
 						.findViewById(R.id.txEditFecha);
-				holder.btnFecha = (ImageButton) convertView
+				viewHolder.btnFecha = (ImageButton) view
 						.findViewById(R.id.btnFecha);
-				holder.txViewFecha = (TextView) convertView
+				viewHolder.txViewFecha = (TextView) view
 						.findViewById(R.id.txViewFecha);
 
-				holder.chkCnfComp = (CheckBox) convertView
+				viewHolder.chkCnfComp = (CheckBox) view
 						.findViewById(R.id.chkCnfComp);
 
-				convertView.setTag(holder);
+				viewHolder.chkCnfComp.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+					
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						// TODO Auto-generated method stub
+						PresentacionCompromisoTO compromiso = (PresentacionCompromisoTO) viewHolder.chkCnfComp.getTag();
+						if(isChecked){
+							compromiso.setConfirmacion("S");
+						}else{
+							compromiso.setConfirmacion("N");
+						}
+					}
+				});
+				
+				view.setTag(viewHolder);
+				viewHolder.chkCnfComp.setTag(this.detalles.get(position));
 			} else {
 				// Get the ViewHolder back to get fast access to the TextView
 				// and the ImageView.
-				holder = (ViewHolder) convertView.getTag();
+				view = convertView;				
+				((ViewHolder) view.getTag()).chkCnfComp.setTag(this.detalles.get(position));
 			}
-
+			
+			final ViewHolder holder = (ViewHolder) view.getTag();
+			final PresentacionCompromisoTO presentacionTO = detalles.get(position);
+			
 			holder.txViewVariable.setText(presentacionTO
 					.getDescripcionVariable());
 			holder.txViewPuntos.setText(presentacionTO.getPuntosSugeridos());
 
+			
 			holder.btnFecha.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -381,9 +400,9 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 			}
 
 			if (presentacionTO.getConfirmacion().equals("S"))
-				holder.chkCnfComp.setSelected(true);
+				holder.chkCnfComp.setChecked(true);
 			else
-				holder.chkCnfComp.setSelected(false);
+				holder.chkCnfComp.setChecked(false);
 
 			if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
 		      {
@@ -422,35 +441,6 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 			TextView txViewFecha;
 			ImageButton btnFecha;
 			CheckBox chkCnfComp;
-		}
-
-		@Override
-		public Filter getFilter() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public long getItemId(int position) {
-			// TODO Auto-generated method stub
-			return position;
-		}
-
-		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			// return data.length;
-			if (detalles == null) {
-				return 0;
-			} else {
-				return detalles.size();
-			}
-		}
-
-		@Override
-		public Object getItem(int position) {
-			// TODO Auto-generated method stub
-			return detalles.get(position);
 		}
 
 	}

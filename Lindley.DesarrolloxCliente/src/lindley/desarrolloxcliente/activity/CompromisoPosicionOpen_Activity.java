@@ -38,10 +38,12 @@ import android.view.View.OnFocusChangeListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.google.inject.Inject;
 
@@ -379,11 +381,27 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 					}
 				});
 				
+				viewHolder.chkCumplio.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+					
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						// TODO Auto-generated method stub
+						PosicionCompromisoTO compromiso = (PosicionCompromisoTO) viewHolder.chkCumplio.getTag();
+						if(isChecked){							
+							compromiso.setConfirmacion("S");
+						}else{
+							compromiso.setConfirmacion("N");
+						}
+					}
+				});
+				
 				view.setTag(viewHolder);
 				viewHolder.txViewAccComp.setTag(this.posiciones.get(position));
+				viewHolder.chkCumplio.setTag(this.posiciones.get(position));
 			}else{
 				view = convertView;
 				((ViewHolder) view.getTag()).txViewAccComp.setTag(this.posiciones.get(position));
+				((ViewHolder) view.getTag()).chkCumplio.setTag(this.posiciones.get(position));
 			}
 			
 			final ViewHolder holder = (ViewHolder) view.getTag();
@@ -448,9 +466,9 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 			}
 
 			if(posicionTO.getConfirmacion().equals("S"))
-				holder.chkCumplio.setSelected(true);
+				holder.chkCumplio.setChecked(true);
 			else
-				holder.chkCumplio.setSelected(false);				
+				holder.chkCumplio.setChecked(false);				
 				
 			if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
 		      {
