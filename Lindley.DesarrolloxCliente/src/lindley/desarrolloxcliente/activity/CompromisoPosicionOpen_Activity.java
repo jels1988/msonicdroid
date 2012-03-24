@@ -12,6 +12,7 @@ import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarPosicionCompromisoProxy;
 import net.msonic.lib.ListActivityBase;
+import net.msonic.lib.UploadFileUtil;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.app.Activity;
@@ -166,7 +167,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
        		if (isExito) {
        			int status = cerrarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
-       				showToast("Los registros se cerrarón satisfactoriamente.");
+       				showToast("Los registros se cerrar—n satisfactoriamente.");
        				Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
 					startActivity(cabecera);
        			}
@@ -206,12 +207,18 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		showToast(error_generico_process);
 	}
     
-    public void takePhoto(){
-    	file_name = String.format("%d.jpg", System.currentTimeMillis());
+    PosicionCompromisoTO posicionTO;
+    
+    public void takePhoto(PosicionCompromisoTO posicionTO ){
+    	
+    	this.posicionTO = posicionTO;
+    	file_name = UploadFileUtil.GenerarFileName(12,"jpg");
     	 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
     	intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(this)) ); 
     	intent.putExtra(MediaStore.EXTRA_MEDIA_TITLE, "TITULO");
     	startActivityForResult(intent, TAKE_PHOTO_CODE);
+    	
+    	
     }
 
 	 private File getTempFile(Context context){
@@ -221,8 +228,6 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		    if(!path.exists()){
 		    	path.mkdir();
 		    }
-		    
-		    
 		    return new File(path, file_name); 
 		    }
 	 
@@ -241,7 +246,8 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	  }
 	 
 	public void savePhoto(){
-		ESTADO_FOTO_FINAL = FOTO_GUARDADA;
+		this.posicionTO.setFotoInicial(file_name);
+		//ESTADO_FOTO_FINAL = FOTO_GUARDADA;
 		//documentoTO.setNombreArchivo(file_name);
 		//documentoTO.setEsLocal(DocumentoTO.LOCAL);
 		//clienteBLL.guardarDocumento(clienteId, documentoTO);
@@ -399,16 +405,15 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 					}
 					else
 					{
-						if(ESTADO_FOTO_FINAL == FOTO_GUARDADA)
-						{
+						
+						if((posicionTO.getFotoInicial()==null)||(posicionTO.getFotoInicial().compareTo("")==0)){
 							Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
-							intent.putExtra(VerFoto_Activity.FILE_NAME, file_name);
-							context.startActivity(intent);						
+							intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.getFotoInicial());
+							context.startActivity(intent);	
+						}else{
+							((CompromisoPosicionOpen_Activity)context).takePhoto(posicionTO);	
 						}
-						else
-						{
-							((CompromisoPosicionOpen_Activity)context).takePhoto();	
-						}
+						
 					}
 				}
 			});
@@ -426,7 +431,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 					}
 					else
 					{
-						((CompromisoPosicionOpen_Activity)context).takePhoto();	
+						//((CompromisoPosicionOpen_Activity)context).takePhoto();	
 					}
 				}
 			});
