@@ -207,11 +207,11 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		showToast(error_generico_process);
 	}
     
-    PosicionCompromisoTO posicionTO;
+    static PosicionCompromisoTO posicionTO;
     
     public void takePhoto(PosicionCompromisoTO posicionTO ){
     	
-    	this.posicionTO = posicionTO;
+    	CompromisoPosicionOpen_Activity.posicionTO = posicionTO;
     	file_name = UploadFileUtil.GenerarFileName(12,"jpg");
     	 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
     	intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(this)) ); 
@@ -246,7 +246,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	  }
 	 
 	public void savePhoto(){
-		this.posicionTO.setFotoInicial(file_name);
+		CompromisoPosicionOpen_Activity.posicionTO.setFotoInicial(file_name);
 		//ESTADO_FOTO_FINAL = FOTO_GUARDADA;
 		//documentoTO.setNombreArchivo(file_name);
 		//documentoTO.setEsLocal(DocumentoTO.LOCAL);
@@ -407,11 +407,12 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 					{
 						
 						if((posicionTO.getFotoInicial()==null)||(posicionTO.getFotoInicial().compareTo("")==0)){
+							
+							((CompromisoPosicionOpen_Activity)context).takePhoto(posicionTO);
+						}else{
 							Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
 							intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.getFotoInicial());
 							context.startActivity(intent);	
-						}else{
-							((CompromisoPosicionOpen_Activity)context).takePhoto(posicionTO);	
 						}
 						
 					}
