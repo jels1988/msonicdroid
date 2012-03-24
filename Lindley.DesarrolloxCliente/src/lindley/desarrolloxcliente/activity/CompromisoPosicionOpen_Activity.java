@@ -392,6 +392,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		      else
 		    	  holder.TextViewRpsta.setText("NO");
 			holder.txViewVariable.setText(posicionTO.getDescripcionVariable());
+			holder.txViewAccComp.setText(posicionTO.getAccionCompromiso());
 			holder.txViewRed.setText(posicionTO.getRed());
 			holder.txViewMaximo.setText(posicionTO.getPtoMaximo());
 			holder.txViewDiferencia.setText(posicionTO.getDiferencia());
