@@ -32,4 +32,10 @@ public class UpdatePosicionTO {
 
 	@SerializedName("CNF")
 	public String confirmacion;
+	
+	@SerializedName("FINI")
+	public String fotoInicial;
+	
+	@SerializedName("FFIN")
+	public String fotoFinal;
 }
