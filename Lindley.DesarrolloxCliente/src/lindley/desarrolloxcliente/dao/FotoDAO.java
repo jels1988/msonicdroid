@@ -2,6 +2,8 @@ package lindley.desarrolloxcliente.dao;
 
 import java.util.ArrayList;
 
+import lindley.desarrolloxcliente.to.FileTO;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 
@@ -30,8 +32,8 @@ public class FotoDAO {
 		dbHelper.getDataBase().insertOrThrow("tbl_fotos", null, parametros);
 	}
 	
-	public ArrayList<String> listar(){
-		ArrayList<String> valores = new ArrayList<String>();
+	public ArrayList<FileTO> listar(){
+		ArrayList<FileTO> valores = new ArrayList<FileTO>();
 		
 		String[] args = new String[] {};
 		Cursor cursor = dbHelper.getDataBase().rawQuery("select * from tbl_fotos",args);
