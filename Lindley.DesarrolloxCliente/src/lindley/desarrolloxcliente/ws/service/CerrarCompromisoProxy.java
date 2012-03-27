@@ -1,7 +1,12 @@
 package lindley.desarrolloxcliente.ws.service;
 
+import java.util.List;
+
 import roboguice.inject.InjectResource;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.to.CompromisoTO;
+import lindley.desarrolloxcliente.to.UpdatePosicionTO;
+import lindley.desarrolloxcliente.to.UpdatePresentacionTO;
 import lindley.desarrolloxcliente.ws.bean.CerrarCompromisoRequest;
 import lindley.desarrolloxcliente.ws.bean.CerrarCompromisoResponse;
 import net.msonic.lib.JSONHelper;
@@ -11,6 +16,20 @@ public class CerrarCompromisoProxy extends ProxyBase<CerrarCompromisoResponse> {
 
 	@InjectResource(R.string.urlwsDesarrolloxCliente)protected String urlWS;
 	private String codigoCabecera;
+	
+	private List<CompromisoTO> compromisos;
+	
+	public List<UpdatePosicionTO> listaPosicionCompromiso;
+	
+	public List<UpdatePresentacionTO> listaPresentacionCompromiso;
+
+	public List<CompromisoTO> getCompromisos() {
+		return compromisos;
+	}
+
+	public void setCompromisos(List<CompromisoTO> compromisos) {
+		this.compromisos = compromisos;
+	}
 
 	public String getCodigoCabecera() {
 		return codigoCabecera;
@@ -31,6 +50,9 @@ public class CerrarCompromisoProxy extends ProxyBase<CerrarCompromisoResponse> {
 		// TODO Auto-generated method stub
 		CerrarCompromisoRequest cerrarCompromisoRequest = new CerrarCompromisoRequest();
 		cerrarCompromisoRequest.setCodigoCabecera(this.codigoCabecera);
+		cerrarCompromisoRequest.setCompromisos(this.compromisos);
+		cerrarCompromisoRequest.listaPosicionCompromiso = this.listaPosicionCompromiso;
+		cerrarCompromisoRequest.listaPresentacionCompromiso = this.listaPresentacionCompromiso;
 		String request = JSONHelper.serializar(cerrarCompromisoRequest);
 		return request;
 	}

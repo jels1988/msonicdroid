@@ -32,8 +32,12 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 	public static final String FLAG_OPEN_ESTADO_ABIERTO = "1";
 	public static final String FLAG_OPEN_ESTADO_CERRADO = "2";
 	
-	
 	@InjectExtra(FLAG_ESTADO) static String flagEstado;
+	
+	public final static String FLAG_FECHA = "fecha_flag";
+	@InjectExtra(FLAG_FECHA) static String flagFecha;
+	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
+	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +48,7 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 		 mActionBar.setTitle(R.string.skuprioritario_activity_title);
 		 application = (MyApplication)getApplicationContext();
 		 cliente = application.getClienteTO();
-		 mActionBar.setSubTitle(cliente.getNombre());
+		 mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
 		 mActionBar.setHomeLogo(R.drawable.header_logo);
 		 
 		 adap = new EfficientAdapter(this, application.listSKUPresentacionCompromiso);
@@ -152,6 +156,11 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 			{				
 				holder.chkValComp.setEnabled(false);
 				holder.chkValConf.setEnabled(false);
+			}
+			if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
+			{
+				holder.chkValComp.setEnabled(false);
+				holder.chkValConf.setEnabled(true);
 			}
 			else
 			{

@@ -164,6 +164,7 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 					application.listSKUPresentacionCompromiso = presentacionTO.getListaSKU();
 					Intent skuPresentacion = new Intent(context, SKUPrioritarioCompromiso_Activity.class);
 					skuPresentacion.putExtra(SKUPrioritarioCompromiso_Activity.FLAG_ESTADO, SKUPrioritarioCompromiso_Activity.FLAG_OPEN_ESTADO_CERRADO);
+					skuPresentacion.putExtra(SKUPrioritarioCompromiso_Activity.FLAG_FECHA, SKUPrioritarioCompromiso_Activity.FLAG_OPEN_FECHA_CERRADA);
 					context.startActivity(skuPresentacion);
 				}
 			});

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TableLayout
+     <TableLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/tableLayout"
         android:layout_width="2000dip"
@@ -67,7 +67,6 @@
                 android:layout_height="wrap_content"
                 android:focusable="false"
                 android:gravity="center"
-                android:layout_gravity="center"
                 android:text="@string/ver_fotoInicial" />
 
             <Button
@@ -75,7 +74,7 @@
                 android:layout_width="60dip"
                 android:layout_height="wrap_content"
                 android:focusable="false"
-                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="@string/ver_fotoExito" />
 
             <TextView
@@ -97,7 +96,7 @@
                 android:layout_width="60dip"
                 android:layout_height="wrap_content"
                 android:focusable="false"
-                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="@string/ver_fotoFinal" />
 
             <TextView

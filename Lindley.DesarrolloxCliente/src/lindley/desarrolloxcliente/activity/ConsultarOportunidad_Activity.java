@@ -56,7 +56,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
         mActionBar.setTitle(R.string.oportunidad_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
-        mActionBar.setSubTitle(cliente.getNombre());
+        mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
         processAsync(); 
     }
