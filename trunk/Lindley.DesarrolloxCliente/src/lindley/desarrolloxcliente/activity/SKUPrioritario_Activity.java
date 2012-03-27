@@ -14,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import net.msonic.lib.ListActivityBase;
 
 public class SKUPrioritario_Activity extends ListActivityBase {
@@ -33,7 +35,7 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 		 mActionBar.setTitle(R.string.skuprioritario_activity_title);
 		 application = (MyApplication)getApplicationContext();
 		 cliente = application.getClienteTO();
-		 mActionBar.setSubTitle(cliente.getNombre());
+		 mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
 		 mActionBar.setHomeLogo(R.drawable.header_logo);
 		 
 		 adap = new EfficientAdapter(this, application.listSKUPresentacion);
@@ -66,23 +68,30 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 				
 				viewHolder.txViewSKU = (TextView) view.findViewById(R.id.txViewSKU);
 				viewHolder.chkValActual = (CheckBox) view.findViewById(R.id.chkValActual);
-				//viewHolder.chkValComp = (CheckBox) view.findViewById(R.id.chkValComp);
-				//viewHolder.chkValConf = (CheckBox) view.findViewById(R.id.chkValConf);
 						    	
+				viewHolder.chkValActual.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+					
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						// TODO Auto-generated method stub
+						SKUPresentacionTO skuPresentacion = (SKUPresentacionTO) viewHolder.chkValActual.getTag();
+						skuPresentacion.seleccionado = isChecked;
+					}
+				});
+
 				view.setTag(viewHolder);
+				viewHolder.chkValActual.setTag(this.skuPresentaciones.get(position));
 				
 			}else{
 				view = convertView;				
+				((ViewHolder) view.getTag()).chkValActual.setTag(this.skuPresentaciones.get(position));
 			}
 			
 			ViewHolder holder = (ViewHolder) view.getTag();
-			final SKUPresentacionTO skuPresentacion = skuPresentaciones.get(position);
+			SKUPresentacionTO skuPresentacion = skuPresentaciones.get(position);
 			
 			holder.txViewSKU.setText(skuPresentacion.getDescripcionSKU());
-			
-			holder.txViewSKU.setText(skuPresentacion.getDescripcionSKU());
-			if(skuPresentacion.valorActual.compareToIgnoreCase("S") == 0)
-			//if("S".compareToIgnoreCase("S") == 0)
+			if(this.skuPresentaciones.get(position).seleccionado)
 			{
 				holder.chkValActual.setChecked(true);
 			}
@@ -90,7 +99,6 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 			{
 				holder.chkValActual.setChecked(false);
 			}
-			holder.chkValActual.setEnabled(false);
 			
 			return view;
 		}
@@ -98,8 +106,6 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 	    static class ViewHolder {   
 	    	TextView txViewSKU;
 	    	CheckBox chkValActual;
-	    	//CheckBox chkValComp;
-	    	//CheckBox chkValConf;
 	    }
 	    
 	  }    

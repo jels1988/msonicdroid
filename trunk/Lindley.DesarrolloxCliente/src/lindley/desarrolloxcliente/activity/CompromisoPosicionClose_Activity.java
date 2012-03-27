@@ -178,7 +178,7 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 	    	  holder.txViewFecComp.setText("");
 	      }
 	      
-	      holder.btnFotoFinal.setOnClickListener(new OnClickListener() {
+	      holder.btnFotoInicial.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {

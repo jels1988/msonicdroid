@@ -134,6 +134,50 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	protected void process(int accion) {
     	if(accion == ACCION_CERRAR)
     	{
+    		List<UpdatePosicionTO> listUpdatePosicionTO = new ArrayList<UpdatePosicionTO>();
+       		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
+    		{
+       			UpdatePosicionTO update = new UpdatePosicionTO();
+       			update.accionCompromiso = posicion.getAccionCompromiso();
+       			if(update.accionCompromiso.equalsIgnoreCase("")) update.accionCompromiso = " ";
+       			update.codigoRegistro = codigoRegistro; 
+       			update.codigoVariable = posicion.getCodigoVariable();
+       			update.confirmacion = posicion.getConfirmacion();
+       			update.fechaCompromiso = posicion.getFechaCompromiso();
+       			update.listCompromisos = posicion.getListCompromisos();
+       			update.tipoAgrupacion = TIPO_POSICION;
+       			update.fotoInicial = posicion.getFotoInicial();
+       			update.fotoFinal = posicion.getFotoFinal();
+       			listUpdatePosicionTO.add(update);
+    		}
+       		
+       		List<UpdatePresentacionTO> listUpdatePresentacionTO = new ArrayList<UpdatePresentacionTO>();
+    		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
+    		{
+    			UpdatePresentacionTO update = new UpdatePresentacionTO();
+    			update.codigoRegistro = codigoRegistro;
+    			update.tipoAgrupacion = TIPO_PRESENTACION;
+    			update.codigoVariable = presentacion.getCodigoVariable();
+    			update.confirmacion = presentacion.getConfirmacion();
+    			update.fechaCompromiso = presentacion.getFechaCompromiso();
+    			List<UpdateSKUPresentacionTO> skucompromisos = new ArrayList<UpdateSKUPresentacionTO>();
+    			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  presentacion.getListaSKU())
+    			{
+    				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
+    				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.getCodigoSKU();
+    				updateSKUPresentacionTO.compromiso = skupresentacionCompromisoTO.getCompromiso();
+    				if(updateSKUPresentacionTO.compromiso.equalsIgnoreCase(" ")) updateSKUPresentacionTO.compromiso = NO;
+    				updateSKUPresentacionTO.confirmacion = skupresentacionCompromisoTO.getConfirmacion();
+    				if(updateSKUPresentacionTO.confirmacion.equalsIgnoreCase(" ")) updateSKUPresentacionTO.confirmacion = NO;
+    				skucompromisos.add(updateSKUPresentacionTO);
+    			}
+    			update.listaSKU = skucompromisos;    			
+    			listUpdatePresentacionTO.add(update);
+    		}
+    		
+    		cerrarCompromisoProxy.listaPosicionCompromiso = listUpdatePosicionTO;
+    		cerrarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
+    		cerrarCompromisoProxy.setCompromisos(application.openAdapter.detalles);
     		cerrarCompromisoProxy.setCodigoCabecera(codigoRegistro);
     		cerrarCompromisoProxy.execute();
     	}

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-<!--desa: 0GnqeXeroFjywL9df0WrJpTEwFsWxFYCGqDe6xw-->
+    <!--desa: 0GnqeXeroFjywL9df0WrJpTEwFsWxFYCGqDe6xw-->
     <!--prod: 0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A-->
-    
     <string name="app_name">Desarrollo por Cliente</string>
     <string name="apikey">0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A</string>
     <string name="login_activity_title">Login</string>
@@ -73,5 +72,8 @@
     <string name="skuprioritario_activity_boton_ok">OK</string>
     <string name="oportunidad_activity_boton_siguiente">Siguiente</string>
     <string name="skuprioritario_activity_title">SKU Prioritarios</string>
-    
+    <string name="btnExitoText">Compromisos</string>
+    <string name="compromiso_guardar">Guardar</string>
+    <string name="compromiso_agregar">Agregar</string>
+    <string name="compromiso_title">Compromisos</string>
 </resources>

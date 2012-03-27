@@ -41,7 +41,7 @@ public class InformacionAdicional_Activity extends ActivityBase {
 		application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
 		usuario = application.getUsuarioTO();
-        mActionBar.setSubTitle(cliente.getNombre());
+		mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
 	}
 	

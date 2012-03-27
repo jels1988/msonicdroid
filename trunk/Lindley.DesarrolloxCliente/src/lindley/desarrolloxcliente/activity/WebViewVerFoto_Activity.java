@@ -1,6 +1,8 @@
 package lindley.desarrolloxcliente.activity;
 
+import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.to.ClienteTO;
 import net.msonic.lib.ActivityBase;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,6 +15,7 @@ import android.webkit.WebViewClient;
 import com.thira.examples.actionbar.widget.ActionBar;
 
 import roboguice.inject.InjectExtra;
+import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
 
 public class WebViewVerFoto_Activity extends ActivityBase {
@@ -22,16 +25,23 @@ public class WebViewVerFoto_Activity extends ActivityBase {
 	@InjectView(R.id.wvwFoto) 	WebView   wvwFoto;
 	@InjectView(R.id.actionBar) ActionBar mActionBar;
 	@InjectExtra(NOMBRE_FOTO) String fotoNombre;
+	@InjectResource(R.string.urlWebView) String urlwb;
+	ClienteTO cliente;
+	private MyApplication application;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		inicializarRecursos();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.webviewfoto_activity);
 		
 		 mActionBar.setTitle(R.string.ver_foto_activity_title);
 		 mActionBar.setHomeLogo(R.drawable.header_logo);
-		
+		 application = (MyApplication)getApplicationContext();
+		 cliente = application.getClienteTO();
+		 mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
+		 
 		WebSettings webSettings = wvwFoto.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 			    
@@ -77,8 +87,8 @@ public class WebViewVerFoto_Activity extends ActivityBase {
 		
 
 		fotoNombre = fotoNombre.substring(0, (fotoNombre.length()-4));
-		System.out.println(fotoNombre);
-		wvwFoto.loadUrl("http://java.cdaandino.com/rtm/LanzadorApp/ImageViewService.svc"+ DESARROLLO_X_CLIENTE + fotoNombre);
+		String url = this.urlwb;
+		wvwFoto.loadUrl( url + DESARROLLO_X_CLIENTE + fotoNombre );
 		//wvwFoto.loadUrl("http://java.cdaandino.com/rtm/LanzadorApp/ImageViewService.svc"+ DESARROLLO_X_CLIENTE + "12_20599_1332711988984");
 	}
 }

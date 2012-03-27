@@ -46,6 +46,8 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
 	public final String OPORTUNIDAD_DESARROLLADOR = "0";
+	public final String RESPUESTA_SI = "S";
+	public final String RESPUESTA_NO = "N";
 	public  MyApplication application;
 	//public static ArrayList<OportunidadTO> oportunidadesDesarrollador = new ArrayList<OportunidadTO>();
 	
@@ -58,7 +60,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
         mActionBar.setTitle(R.string.oportunidaddesarrollador_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
-        mActionBar.setSubTitle(cliente.getNombre());
+		mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
         processAsync(); 
     }
@@ -93,11 +95,28 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 				
 			});	
     	}else{
-    		application.setOportunidadesDesarrollador(oportunidadesDesarrollador); 		
-    		Intent intent = new Intent("lindley.desarrolloxcliente.consultarposicion");
-    		intent.putExtra(ConsultarPosicion_Activity.RESPUESTA, "S");
-    		startActivity(intent);
-    		//processAsync(ACCION_GUARDAR);
+    		final ArrayList<OportunidadTO> oportunidadesDesarrolladorAdd = oportunidadesDesarrollador;
+    		MessageBox.showConfirmDialog(this, "Activos", "ÀTiene ativos de la empresa ?", "SI", new android.content.DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					application.setOportunidadesDesarrollador(oportunidadesDesarrolladorAdd); 		
+		    		Intent intent = new Intent("lindley.desarrolloxcliente.consultarposicion");
+		    		intent.putExtra(ConsultarPosicion_Activity.RESPUESTA, RESPUESTA_SI);
+		    		startActivity(intent);
+				}
+				
+			}, "NO", new android.content.DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					application.setOportunidadesDesarrollador(oportunidadesDesarrolladorAdd); 		
+		    		Intent intent = new Intent("lindley.desarrolloxcliente.consultarposicion");
+		    		intent.putExtra(ConsultarPosicion_Activity.RESPUESTA, RESPUESTA_NO);
+		    		startActivity(intent);
+				}
+				
+			});
     	}
     	
     }

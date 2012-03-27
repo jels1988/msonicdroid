@@ -32,6 +32,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,19 +65,17 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	public static final String TIPO_PRESENTACION = "3";
 	public static final String TIPO_POSICION = "2";
 	public static final String NO = "N";
+	public static final String ESTANDAR_ANAQUEL = "03";
 	
 //	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarPosicionCompromisoProxy consultarPosicionProxy;
 	@Inject CerrarCompromisoProxy cerrarCompromisoProxy;
 	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
 	@Inject FotoBLL fotoBLL;
-	//private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
 	private MyApplication application;
 	
-	
-	//@InjectExtra(RESPUESTA) String respuesta;
 	
 	public static String file_name="";
 	private static final int TAKE_PHOTO_INICIAL_CODE = 1;
@@ -170,6 +169,50 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
    	protected void process(int accion) {
        	if(accion == ACCION_CERRAR)
        	{
+       		List<UpdatePosicionTO> listUpdatePosicionTO = new ArrayList<UpdatePosicionTO>();
+       		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
+    		{
+       			UpdatePosicionTO update = new UpdatePosicionTO();
+       			update.accionCompromiso = posicion.getAccionCompromiso();
+       			if(update.accionCompromiso.equalsIgnoreCase("")) update.accionCompromiso = " ";
+       			update.codigoRegistro = codigoGestion; 
+       			update.codigoVariable = posicion.getCodigoVariable();
+       			update.confirmacion = posicion.getConfirmacion();
+       			update.fechaCompromiso = posicion.getFechaCompromiso();
+       			update.listCompromisos = posicion.getListCompromisos();
+       			update.tipoAgrupacion = TIPO_POSICION;
+       			update.fotoInicial = posicion.getFotoInicial();
+       			update.fotoFinal = posicion.getFotoFinal();
+       			listUpdatePosicionTO.add(update);
+    		}
+       		
+       		List<UpdatePresentacionTO> listUpdatePresentacionTO = new ArrayList<UpdatePresentacionTO>();
+    		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
+    		{
+    			UpdatePresentacionTO update = new UpdatePresentacionTO();
+    			update.codigoRegistro = codigoGestion;
+    			update.tipoAgrupacion = TIPO_PRESENTACION;
+    			update.codigoVariable = presentacion.getCodigoVariable();
+    			update.confirmacion = presentacion.getConfirmacion();
+    			update.fechaCompromiso = presentacion.getFechaCompromiso();
+    			List<UpdateSKUPresentacionTO> skucompromisos = new ArrayList<UpdateSKUPresentacionTO>();
+    			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  presentacion.getListaSKU())
+    			{
+    				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
+    				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.getCodigoSKU();
+    				updateSKUPresentacionTO.compromiso = skupresentacionCompromisoTO.getCompromiso();
+    				if(updateSKUPresentacionTO.compromiso.equalsIgnoreCase(" ")) updateSKUPresentacionTO.compromiso = NO;
+    				updateSKUPresentacionTO.confirmacion = skupresentacionCompromisoTO.getConfirmacion();
+    				if(updateSKUPresentacionTO.confirmacion.equalsIgnoreCase(" ")) updateSKUPresentacionTO.confirmacion = NO;
+    				skucompromisos.add(updateSKUPresentacionTO);
+    			}
+    			update.listaSKU = skucompromisos;    			
+    			listUpdatePresentacionTO.add(update);
+    		}
+    		
+    		cerrarCompromisoProxy.listaPosicionCompromiso = listUpdatePosicionTO;
+    		cerrarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
+    		cerrarCompromisoProxy.setCompromisos(application.openAdapter.detalles);
        		cerrarCompromisoProxy.setCodigoCabecera(codigoGestion);
        		cerrarCompromisoProxy.execute();
        	}
@@ -378,6 +421,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				
 				viewHolder.btnFotoInicial = (Button) view.findViewById(R.id.btnFotoInicial);
 				viewHolder.btnFotoExito = (Button) view.findViewById(R.id.btnFotoExito);
+				
 				viewHolder.btnFotoFinal = (Button) view.findViewById(R.id.btnFotoFinal);
 				viewHolder.btnFecha = (ImageButton) view.findViewById(R.id.btnFecha);
 				viewHolder.txViewFecha = (TextView) view.findViewById(R.id.txViewFecha);
@@ -433,6 +477,10 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 			holder.txViewMaximo.setText(posicionTO.getPtoMaximo());
 			holder.txViewDiferencia.setText(posicionTO.getDiferencia());
 			holder.txViewPuntos.setText(posicionTO.getPuntosSugeridos());
+			if(posicionTO.getCodigoVariable().compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
+			{
+				holder.btnFotoExito.setText(R.string.btnExitoText);
+			}
 				    	
 	    	holder.btnFecha.setOnClickListener(new OnClickListener() {
 
@@ -552,6 +600,24 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 						Intent intent = new Intent("lindley.desarrolloxcliente.webviewverfoto");
 						intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.getFotoFinal());
 						context.startActivity(intent);	
+					}
+				}
+			});
+			
+			holder.btnFotoExito.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					if(posicionTO.getCodigoVariable().compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
+					{
+						Intent intent = new Intent("lindley.desarrolloxcliente.vercompromisos");
+						//intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.getFotoFinal());
+						context.startActivity(intent);	
+					}
+					else
+					{
+						Log.v("CompromisoPosicionOpen_Activity", "visualizar foto del exito");
 					}
 				}
 			});

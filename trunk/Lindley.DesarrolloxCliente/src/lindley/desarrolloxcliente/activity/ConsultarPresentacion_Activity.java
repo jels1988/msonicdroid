@@ -76,14 +76,17 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
     			ArrayList<SKUPresentacionCompromisoTO> listSku = new ArrayList<SKUPresentacionCompromisoTO>();
     			for(SKUPresentacionTO sku : presentacion.getListaSKU())
     			{
-    				SKUPresentacionCompromisoTO compromisoSKU = new SKUPresentacionCompromisoTO();
-    				compromisoSKU.setCodigoSKU(sku.getCodigoSKU());
-    				compromisoSKU.setDescripcionSKU(" ");
-    				compromisoSKU.setActual(sku.valorActual);
-//    				compromisoSKU.setActual("S");
-//    				compromisoSKU.setCompromiso("S");
-//    				compromisoSKU.setConfirmacion("S");
-    				listSku.add(compromisoSKU);
+    				if(!sku.seleccionado)
+    				{
+	    				SKUPresentacionCompromisoTO compromisoSKU = new SKUPresentacionCompromisoTO();
+	    				compromisoSKU.setCodigoSKU(sku.getCodigoSKU());
+	    				compromisoSKU.setDescripcionSKU(" ");
+	    				compromisoSKU.setActual("N");
+	//    				compromisoSKU.setActual("S");
+	//    				compromisoSKU.setCompromiso("S");
+	//    				compromisoSKU.setConfirmacion("S");
+	    				listSku.add(compromisoSKU);
+    				}
     			}
     			compromiso.setListaSKU(listSku);
     			
@@ -169,7 +172,7 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
         mActionBar.setTitle(R.string.consultarpresentacion_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
-        mActionBar.setSubTitle(cliente.getNombre());
+		mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
         processAsync(); 
     }

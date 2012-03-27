@@ -9,7 +9,9 @@ import com.thira.examples.actionbar.widget.ActionBar;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
+import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.to.ClienteTO;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -31,13 +33,19 @@ public class VerFoto_Activity extends ActivityBase {
 	private Bitmap bitmap;
 	private Bitmap bitmapTemp1;
 	private Bitmap bitmapTemp2;
+	
+	ClienteTO cliente;
+	private MyApplication application;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		inicializarRecursos();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.verfoto_activity);
 		mActionBar.setTitle(R.string.ver_foto_activity_title);
+		cliente = application.getClienteTO();
+		mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
 		processAsync();
 	}
 
