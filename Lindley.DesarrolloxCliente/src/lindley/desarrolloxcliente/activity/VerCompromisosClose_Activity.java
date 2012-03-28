@@ -13,10 +13,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.thira.examples.actionbar.widget.ActionBar;
@@ -50,15 +48,7 @@ public class VerCompromisosClose_Activity extends ListActivityBase {
 	{
 		finish();
 	}
-	
-	public void btnAgregar_click(View view)
-	{
-		CompromisoPosicionTO compromiso = new CompromisoPosicionTO();
-		compromiso.setDescripcion("");
-		application.listCompromiso.add(compromiso);
-		adap.notifyDataSetChanged();
-	}
-	
+		
 	public static class EfficientAdapter extends ArrayAdapter<CompromisoPosicionTO> {
     	
 		private Activity context;
