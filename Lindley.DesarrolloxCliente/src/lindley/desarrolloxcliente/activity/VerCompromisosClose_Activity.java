@@ -17,30 +17,32 @@ import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.thira.examples.actionbar.widget.ActionBar;
 
-public class VerCompromisos_Activity extends ListActivityBase {
+public class VerCompromisosClose_Activity extends ListActivityBase {
 
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	private EfficientAdapter adap;
 	private MyApplication application;
 	ClienteTO cliente;
-	List<CompromisoPosicionTO> listCompromisoPosicionTO = new ArrayList<CompromisoPosicionTO>();
-	 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		inicializarRecursos();
 		super.onCreate(savedInstanceState);
-		 setContentView(R.layout.vercompromisos_activity);    
+		 setContentView(R.layout.vercompromisosclose_activity);    
 		 mActionBar.setTitle(R.string.compromiso_title);
 		 application = (MyApplication)getApplicationContext();
 		 cliente = application.getClienteTO();
 		 mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
 		 mActionBar.setHomeLogo(R.drawable.header_logo);
-		 adap = new EfficientAdapter(this, listCompromisoPosicionTO);
+
+		 if(application.listCompromiso == null)
+			 application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
+		 adap = new EfficientAdapter(this, application.listCompromiso);
 		 setListAdapter(adap);
 	}
 	
@@ -53,7 +55,7 @@ public class VerCompromisos_Activity extends ListActivityBase {
 	{
 		CompromisoPosicionTO compromiso = new CompromisoPosicionTO();
 		compromiso.setDescripcion("");
-		listCompromisoPosicionTO.add(compromiso);
+		application.listCompromiso.add(compromiso);
 		adap.notifyDataSetChanged();
 	}
 	
@@ -63,7 +65,7 @@ public class VerCompromisos_Activity extends ListActivityBase {
 		public List<CompromisoPosicionTO> compromisos;
 		
 		public EfficientAdapter(Activity context,List<CompromisoPosicionTO> compromisos ){
-			super(context, R.layout.vercompromisos_content, compromisos);
+			super(context, R.layout.vercompromisosclose_content, compromisos);
 			this.context=context;
 			this.compromisos = compromisos;
 		}
@@ -75,21 +77,10 @@ public class VerCompromisos_Activity extends ListActivityBase {
 			View view = null;
 			if (convertView == null) {
 				LayoutInflater inflator = context.getLayoutInflater();
-				view = inflator.inflate(R.layout.vercompromisos_content, null);
+				view = inflator.inflate(R.layout.vercompromisosclose_content, null);
 				final ViewHolder viewHolder = new ViewHolder();
 				
-				viewHolder.txViewComp = (EditText) view.findViewById(R.id.txViewComp);
-						    	
-				viewHolder.txViewComp.setOnFocusChangeListener(new OnFocusChangeListener() {
-					
-					@Override
-					public void onFocusChange(View v, boolean hasFocus) {
-						// TODO Auto-generated method stub
-						CompromisoPosicionTO compromiso = (CompromisoPosicionTO) viewHolder.txViewComp.getTag();
-						compromiso.setDescripcion(viewHolder.txViewComp.getText().toString());
-					}
-				});
-				
+				viewHolder.txViewComp = (TextView) view.findViewById(R.id.txViewComp);				
 				view.setTag(viewHolder);
 				viewHolder.txViewComp.setTag(this.compromisos.get(position));
 			}else{
@@ -105,7 +96,7 @@ public class VerCompromisos_Activity extends ListActivityBase {
 		}
 
 	    static class ViewHolder {   
-	    	EditText txViewComp;
+	    	TextView txViewComp;
 	    }
 	    
 	  }

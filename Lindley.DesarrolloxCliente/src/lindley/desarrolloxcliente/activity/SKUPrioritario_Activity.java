@@ -37,7 +37,6 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 		 cliente = application.getClienteTO();
 		 mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
 		 mActionBar.setHomeLogo(R.drawable.header_logo);
-		 
 		 adap = new EfficientAdapter(this, application.listSKUPresentacion);
 		 setListAdapter(adap);
 	}

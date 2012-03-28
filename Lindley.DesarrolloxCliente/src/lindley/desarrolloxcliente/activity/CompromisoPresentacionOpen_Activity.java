@@ -7,6 +7,7 @@ import java.util.List;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
+import lindley.desarrolloxcliente.to.CompromisoPosicionTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
@@ -152,49 +153,51 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 
 	@Override
    	protected void process(int accion) {
+		List<UpdatePosicionTO> listUpdatePosicionTO = new ArrayList<UpdatePosicionTO>();
+   		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
+		{
+   			UpdatePosicionTO update = new UpdatePosicionTO();
+   			update.accionCompromiso = posicion.getAccionCompromiso();
+   			if(update.accionCompromiso.equalsIgnoreCase("")) update.accionCompromiso = " ";
+   			update.codigoRegistro = codigoGestion; 
+   			update.codigoVariable = posicion.getCodigoVariable();
+   			update.confirmacion = posicion.getConfirmacion();
+   			update.fechaCompromiso = posicion.getFechaCompromiso();
+   			if(application.listCompromiso == null)
+      			 application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
+      			update.listCompromisos = application.listCompromiso;
+   			update.tipoAgrupacion = TIPO_POSICION;
+   			update.fotoInicial = posicion.getFotoInicial();
+   			update.fotoFinal = posicion.getFotoFinal();
+   			listUpdatePosicionTO.add(update);
+		}
+   		
+   		List<UpdatePresentacionTO> listUpdatePresentacionTO = new ArrayList<UpdatePresentacionTO>();
+		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
+		{
+			UpdatePresentacionTO update = new UpdatePresentacionTO();
+			update.codigoRegistro = codigoGestion;
+			update.tipoAgrupacion = TIPO_PRESENTACION;
+			update.codigoVariable = presentacion.getCodigoVariable();
+			update.confirmacion = presentacion.getConfirmacion();
+			update.fechaCompromiso = presentacion.getFechaCompromiso();
+			List<UpdateSKUPresentacionTO> skucompromisos = new ArrayList<UpdateSKUPresentacionTO>();
+			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  presentacion.getListaSKU())
+			{
+				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
+				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.getCodigoSKU();
+				updateSKUPresentacionTO.compromiso = skupresentacionCompromisoTO.getCompromiso();
+				if(updateSKUPresentacionTO.compromiso.equalsIgnoreCase(" ")) updateSKUPresentacionTO.compromiso = NO;
+				updateSKUPresentacionTO.confirmacion = skupresentacionCompromisoTO.getConfirmacion();
+				if(updateSKUPresentacionTO.confirmacion.equalsIgnoreCase(" ")) updateSKUPresentacionTO.confirmacion = NO;
+				skucompromisos.add(updateSKUPresentacionTO);
+			}
+			update.listaSKU = skucompromisos;    			
+			listUpdatePresentacionTO.add(update);
+		}
+		
        	if(accion == ACCION_CERRAR)
-       	{
-       		List<UpdatePosicionTO> listUpdatePosicionTO = new ArrayList<UpdatePosicionTO>();
-       		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
-    		{
-       			UpdatePosicionTO update = new UpdatePosicionTO();
-       			update.accionCompromiso = posicion.getAccionCompromiso();
-       			if(update.accionCompromiso.equalsIgnoreCase("")) update.accionCompromiso = " ";
-       			update.codigoRegistro = codigoGestion; 
-       			update.codigoVariable = posicion.getCodigoVariable();
-       			update.confirmacion = posicion.getConfirmacion();
-       			update.fechaCompromiso = posicion.getFechaCompromiso();
-       			update.listCompromisos = posicion.getListCompromisos();
-       			update.tipoAgrupacion = TIPO_POSICION;
-       			update.fotoInicial = posicion.getFotoInicial();
-       			update.fotoFinal = posicion.getFotoFinal();
-       			listUpdatePosicionTO.add(update);
-    		}
-       		
-       		List<UpdatePresentacionTO> listUpdatePresentacionTO = new ArrayList<UpdatePresentacionTO>();
-    		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
-    		{
-    			UpdatePresentacionTO update = new UpdatePresentacionTO();
-    			update.codigoRegistro = codigoGestion;
-    			update.tipoAgrupacion = TIPO_PRESENTACION;
-    			update.codigoVariable = presentacion.getCodigoVariable();
-    			update.confirmacion = presentacion.getConfirmacion();
-    			update.fechaCompromiso = presentacion.getFechaCompromiso();
-    			List<UpdateSKUPresentacionTO> skucompromisos = new ArrayList<UpdateSKUPresentacionTO>();
-    			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  presentacion.getListaSKU())
-    			{
-    				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
-    				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.getCodigoSKU();
-    				updateSKUPresentacionTO.compromiso = skupresentacionCompromisoTO.getCompromiso();
-    				if(updateSKUPresentacionTO.compromiso.equalsIgnoreCase(" ")) updateSKUPresentacionTO.compromiso = NO;
-    				updateSKUPresentacionTO.confirmacion = skupresentacionCompromisoTO.getConfirmacion();
-    				if(updateSKUPresentacionTO.confirmacion.equalsIgnoreCase(" ")) updateSKUPresentacionTO.confirmacion = NO;
-    				skucompromisos.add(updateSKUPresentacionTO);
-    			}
-    			update.listaSKU = skucompromisos;    			
-    			listUpdatePresentacionTO.add(update);
-    		}
-    		
+       	{       		
     		cerrarCompromisoProxy.listaPosicionCompromiso = listUpdatePosicionTO;
     		cerrarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
     		cerrarCompromisoProxy.setCompromisos(application.openAdapter.detalles);
@@ -202,48 +205,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
        		cerrarCompromisoProxy.execute();
        	}
        	else if(accion == ACCION_ACTUALIZAR)
-       	{       		
-       		List<UpdatePosicionTO> listUpdatePosicionTO = new ArrayList<UpdatePosicionTO>();
-       		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
-    		{
-       			UpdatePosicionTO update = new UpdatePosicionTO();
-       			update.accionCompromiso = posicion.getAccionCompromiso();
-       			if(update.accionCompromiso.equalsIgnoreCase("")) update.accionCompromiso = " ";
-       			update.codigoRegistro = codigoGestion; 
-       			update.codigoVariable = posicion.getCodigoVariable();
-       			update.confirmacion = posicion.getConfirmacion();
-       			update.fechaCompromiso = posicion.getFechaCompromiso();
-       			update.listCompromisos = posicion.getListCompromisos();
-       			update.tipoAgrupacion = TIPO_POSICION;
-       			update.fotoInicial = posicion.getFotoInicial();
-       			update.fotoFinal = posicion.getFotoFinal();
-       			listUpdatePosicionTO.add(update);
-    		}
-       		
-       		List<UpdatePresentacionTO> listUpdatePresentacionTO = new ArrayList<UpdatePresentacionTO>();
-    		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
-    		{
-    			UpdatePresentacionTO update = new UpdatePresentacionTO();
-    			update.codigoRegistro = codigoGestion;
-    			update.tipoAgrupacion = TIPO_PRESENTACION;
-    			update.codigoVariable = presentacion.getCodigoVariable();
-    			update.confirmacion = presentacion.getConfirmacion();
-    			update.fechaCompromiso = presentacion.getFechaCompromiso();
-    			List<UpdateSKUPresentacionTO> skucompromisos = new ArrayList<UpdateSKUPresentacionTO>();
-    			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  presentacion.getListaSKU())
-    			{
-    				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
-    				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.getCodigoSKU();
-    				updateSKUPresentacionTO.compromiso = skupresentacionCompromisoTO.getCompromiso();
-    				if(updateSKUPresentacionTO.compromiso.equalsIgnoreCase(" ")) updateSKUPresentacionTO.compromiso = NO;
-    				updateSKUPresentacionTO.confirmacion = skupresentacionCompromisoTO.getConfirmacion();
-    				if(updateSKUPresentacionTO.confirmacion.equalsIgnoreCase(" ")) updateSKUPresentacionTO.confirmacion = NO;
-    				skucompromisos.add(updateSKUPresentacionTO);
-    			}
-    			update.listaSKU = skucompromisos;    			
-    			listUpdatePresentacionTO.add(update);
-    		}
-    		
+       	{       	
     		actualizarCompromisoProxy.listaPosicionCompromiso = listUpdatePosicionTO;
     		actualizarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
        		actualizarCompromisoProxy.setCompromisos(application.openAdapter.detalles);

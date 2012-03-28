@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -42,7 +43,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	@Inject ConsultarOportunidadProxy consultarOportunidadProxy;
 	private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
-	ClienteTO cliente;
+	public static ClienteTO cliente;
 	public final String OPORTUNIDAD_SISTEMA = "1";
 	private MyApplication application;
 	
@@ -141,14 +142,14 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
-	    //private Context context;
+	    private Context context;
 	    private List<OportunidadTO> detalles;
 	    private MyApplication application;
 	    
 	    public EfficientAdapter(Context context, List<OportunidadTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
-		      //this.context = context;
+		      this.context = context;
 		      this.detalles = valores;
 		      this.application = (MyApplication)context.getApplicationContext();
 		    }
@@ -238,19 +239,19 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 				}
 			});
 	      
-	      /*
-	      holder.txViewProfit.setOnClickListener(new OnClickListener() {
+	      
+	      holder.btnProfit.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					Intent profit = new Intent(context,MostrarVendedorActivity.class);
-					profit.putExtra(MostrarVendedorActivity.TIPO_SUPERVISOR, 0);
-					profit.putExtra(MostrarVendedorActivity.CODIGO_CDA, codigo_cda);
-					profit.putExtra(MostrarVendedorActivity.CODIGO_SUPERVISOR, supervisorTemporal.getCodigo());
-					profit.putExtra(MostrarVendedorActivity.NOMBRE_SUPERVISOR, supervisorTemporal.getNombre());
+					Intent profit = new Intent(context, VerProfit_Activity.class);
+					profit.putExtra(VerProfit_Activity.ANIO, "");
+					profit.putExtra(VerProfit_Activity.MES, "");
+					profit.putExtra(VerProfit_Activity.CLIENTE, cliente.getCodigo());
+					profit.putExtra(VerProfit_Activity.ARTICULO, oportunidad.getCodigoProducto());
 					context.startActivity(profit);
 				}
-			});*/
+			});
 	      
 	      return convertView;
 	    }
