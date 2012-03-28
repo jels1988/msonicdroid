@@ -76,6 +76,7 @@
     <string name="compromiso_guardar">Guardar</string>
     <string name="compromiso_agregar">Agregar</string>
     <string name="compromiso_title">Compromisos</string>
+    <string name="compromiso_ok">OK</string>
     
     <string name="cajas_fisicas">CF</string>
     <string name="margen_actual">Mg. Actual</string>
