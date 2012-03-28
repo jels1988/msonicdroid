@@ -7,6 +7,7 @@ import java.util.List;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
+import lindley.desarrolloxcliente.to.CompromisoPosicionTO;
 import lindley.desarrolloxcliente.to.CompromisoTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
@@ -70,7 +71,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	//private EfficientAdapter adap;
-	ClienteTO cliente;
+	public static ClienteTO cliente;
 	public static MyApplication application;
 	List<CompromisoTO> compromisos;
 	
@@ -130,51 +131,54 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 		return !tieneError;
 	}
     
-    @Override
+    @Override    
 	protected void process(int accion) {
+    	
+    	List<UpdatePosicionTO> listUpdatePosicionTO = new ArrayList<UpdatePosicionTO>();
+   		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
+		{
+   			UpdatePosicionTO update = new UpdatePosicionTO();
+   			update.accionCompromiso = posicion.getAccionCompromiso();
+   			if(update.accionCompromiso.equalsIgnoreCase("")) update.accionCompromiso = " ";
+   			update.codigoRegistro = codigoRegistro; 
+   			update.codigoVariable = posicion.getCodigoVariable();
+   			update.confirmacion = posicion.getConfirmacion();
+   			update.fechaCompromiso = posicion.getFechaCompromiso();
+   			if(application.listCompromiso == null)
+   			 application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
+   			update.listCompromisos = application.listCompromiso;
+   			update.tipoAgrupacion = TIPO_POSICION;
+   			update.fotoInicial = posicion.getFotoInicial();
+   			update.fotoFinal = posicion.getFotoFinal();
+   			listUpdatePosicionTO.add(update);
+		}
+   		
+   		List<UpdatePresentacionTO> listUpdatePresentacionTO = new ArrayList<UpdatePresentacionTO>();
+		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
+		{
+			UpdatePresentacionTO update = new UpdatePresentacionTO();
+			update.codigoRegistro = codigoRegistro;
+			update.tipoAgrupacion = TIPO_PRESENTACION;
+			update.codigoVariable = presentacion.getCodigoVariable();
+			update.confirmacion = presentacion.getConfirmacion();
+			update.fechaCompromiso = presentacion.getFechaCompromiso();
+			List<UpdateSKUPresentacionTO> skucompromisos = new ArrayList<UpdateSKUPresentacionTO>();
+			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  presentacion.getListaSKU())
+			{
+				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
+				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.getCodigoSKU();
+				updateSKUPresentacionTO.compromiso = skupresentacionCompromisoTO.getCompromiso();
+				if(updateSKUPresentacionTO.compromiso.equalsIgnoreCase(" ")) updateSKUPresentacionTO.compromiso = NO;
+				updateSKUPresentacionTO.confirmacion = skupresentacionCompromisoTO.getConfirmacion();
+				if(updateSKUPresentacionTO.confirmacion.equalsIgnoreCase(" ")) updateSKUPresentacionTO.confirmacion = NO;
+				skucompromisos.add(updateSKUPresentacionTO);
+			}
+			update.listaSKU = skucompromisos;    			
+			listUpdatePresentacionTO.add(update);
+		}
+		
     	if(accion == ACCION_CERRAR)
-    	{
-    		List<UpdatePosicionTO> listUpdatePosicionTO = new ArrayList<UpdatePosicionTO>();
-       		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
-    		{
-       			UpdatePosicionTO update = new UpdatePosicionTO();
-       			update.accionCompromiso = posicion.getAccionCompromiso();
-       			if(update.accionCompromiso.equalsIgnoreCase("")) update.accionCompromiso = " ";
-       			update.codigoRegistro = codigoRegistro; 
-       			update.codigoVariable = posicion.getCodigoVariable();
-       			update.confirmacion = posicion.getConfirmacion();
-       			update.fechaCompromiso = posicion.getFechaCompromiso();
-       			update.listCompromisos = posicion.getListCompromisos();
-       			update.tipoAgrupacion = TIPO_POSICION;
-       			update.fotoInicial = posicion.getFotoInicial();
-       			update.fotoFinal = posicion.getFotoFinal();
-       			listUpdatePosicionTO.add(update);
-    		}
-       		
-       		List<UpdatePresentacionTO> listUpdatePresentacionTO = new ArrayList<UpdatePresentacionTO>();
-    		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
-    		{
-    			UpdatePresentacionTO update = new UpdatePresentacionTO();
-    			update.codigoRegistro = codigoRegistro;
-    			update.tipoAgrupacion = TIPO_PRESENTACION;
-    			update.codigoVariable = presentacion.getCodigoVariable();
-    			update.confirmacion = presentacion.getConfirmacion();
-    			update.fechaCompromiso = presentacion.getFechaCompromiso();
-    			List<UpdateSKUPresentacionTO> skucompromisos = new ArrayList<UpdateSKUPresentacionTO>();
-    			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  presentacion.getListaSKU())
-    			{
-    				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
-    				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.getCodigoSKU();
-    				updateSKUPresentacionTO.compromiso = skupresentacionCompromisoTO.getCompromiso();
-    				if(updateSKUPresentacionTO.compromiso.equalsIgnoreCase(" ")) updateSKUPresentacionTO.compromiso = NO;
-    				updateSKUPresentacionTO.confirmacion = skupresentacionCompromisoTO.getConfirmacion();
-    				if(updateSKUPresentacionTO.confirmacion.equalsIgnoreCase(" ")) updateSKUPresentacionTO.confirmacion = NO;
-    				skucompromisos.add(updateSKUPresentacionTO);
-    			}
-    			update.listaSKU = skucompromisos;    			
-    			listUpdatePresentacionTO.add(update);
-    		}
-    		
+    	{    		
     		cerrarCompromisoProxy.listaPosicionCompromiso = listUpdatePosicionTO;
     		cerrarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
     		cerrarCompromisoProxy.setCompromisos(application.openAdapter.detalles);
@@ -182,47 +186,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     		cerrarCompromisoProxy.execute();
     	}
     	else if(accion == ACCION_ACTUALIZAR)
-    	{
-    		List<UpdatePosicionTO> listUpdatePosicionTO = new ArrayList<UpdatePosicionTO>();
-       		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
-    		{
-       			UpdatePosicionTO update = new UpdatePosicionTO();
-       			update.accionCompromiso = posicion.getAccionCompromiso();
-       			if(update.accionCompromiso.equalsIgnoreCase("")) update.accionCompromiso = " ";
-       			update.codigoRegistro = codigoRegistro; 
-       			update.codigoVariable = posicion.getCodigoVariable();
-       			update.confirmacion = posicion.getConfirmacion();
-       			update.fechaCompromiso = posicion.getFechaCompromiso();
-       			update.listCompromisos = posicion.getListCompromisos();
-       			update.tipoAgrupacion = TIPO_POSICION;
-       			update.fotoInicial = posicion.getFotoInicial();
-       			update.fotoFinal = posicion.getFotoFinal();
-       			listUpdatePosicionTO.add(update);
-    		}
-       		
-       		List<UpdatePresentacionTO> listUpdatePresentacionTO = new ArrayList<UpdatePresentacionTO>();
-    		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
-    		{
-    			UpdatePresentacionTO update = new UpdatePresentacionTO();
-    			update.codigoRegistro = codigoRegistro;
-    			update.tipoAgrupacion = TIPO_PRESENTACION;
-    			update.codigoVariable = presentacion.getCodigoVariable();
-    			update.confirmacion = presentacion.getConfirmacion();
-    			update.fechaCompromiso = presentacion.getFechaCompromiso();
-    			List<UpdateSKUPresentacionTO> skucompromisos = new ArrayList<UpdateSKUPresentacionTO>();
-    			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  presentacion.getListaSKU())
-    			{
-    				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
-    				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.getCodigoSKU();
-    				updateSKUPresentacionTO.compromiso = skupresentacionCompromisoTO.getCompromiso();
-    				if(updateSKUPresentacionTO.compromiso.equalsIgnoreCase(" ")) updateSKUPresentacionTO.compromiso = NO;
-    				updateSKUPresentacionTO.confirmacion = skupresentacionCompromisoTO.getConfirmacion();
-    				if(updateSKUPresentacionTO.confirmacion.equalsIgnoreCase(" ")) updateSKUPresentacionTO.confirmacion = NO;
-    				skucompromisos.add(updateSKUPresentacionTO);
-    			}
-    			update.listaSKU = skucompromisos;    			
-    			listUpdatePresentacionTO.add(update);
-    		}
+    	{    		
     		
     		actualizarCompromisoProxy.listaPosicionCompromiso = listUpdatePosicionTO;
     		actualizarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
@@ -668,19 +632,18 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 				
 			});*/
 	      
-	      /*
-	      holder.txViewProfit.setOnClickListener(new OnClickListener() {
+	      holder.btnProfit.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					Intent profit = new Intent(context,MostrarVendedorActivity.class);
-					profit.putExtra(MostrarVendedorActivity.TIPO_SUPERVISOR, 0);
-					profit.putExtra(MostrarVendedorActivity.CODIGO_CDA, codigo_cda);
-					profit.putExtra(MostrarVendedorActivity.CODIGO_SUPERVISOR, supervisorTemporal.getCodigo());
-					profit.putExtra(MostrarVendedorActivity.NOMBRE_SUPERVISOR, supervisorTemporal.getNombre());
+					Intent profit = new Intent(context, VerProfit_Activity.class);
+					profit.putExtra(VerProfit_Activity.ANIO, "");
+					profit.putExtra(VerProfit_Activity.MES, "");
+					profit.putExtra(VerProfit_Activity.CLIENTE, cliente.getCodigo());
+					profit.putExtra(VerProfit_Activity.ARTICULO, compromiso.getCodigoProducto());
 					context.startActivity(profit);
 				}
-			});*/
+			});
 	      
 	      return convertView;
 	    }

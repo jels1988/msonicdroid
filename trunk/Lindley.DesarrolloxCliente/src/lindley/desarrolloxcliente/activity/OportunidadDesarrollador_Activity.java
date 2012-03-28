@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -44,7 +45,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 	@Inject GuardarDesarrolloProxy guardarDesarrolloProxy;
 	private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
-	ClienteTO cliente;
+	public static ClienteTO cliente;
 	public final String OPORTUNIDAD_DESARROLLADOR = "0";
 	public final String RESPUESTA_SI = "S";
 	public final String RESPUESTA_NO = "N";
@@ -361,19 +362,18 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 			  holder.cboPCoca.setSelection(Integer.parseInt(oportunidad.getPuntosCocaCola()));
 		  }
 	      
-	      /*
-	      holder.txViewProfit.setOnClickListener(new OnClickListener() {
+	      holder.btnProfit.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					Intent profit = new Intent(context,MostrarVendedorActivity.class);
-					profit.putExtra(MostrarVendedorActivity.TIPO_SUPERVISOR, 0);
-					profit.putExtra(MostrarVendedorActivity.CODIGO_CDA, codigo_cda);
-					profit.putExtra(MostrarVendedorActivity.CODIGO_SUPERVISOR, supervisorTemporal.getCodigo());
-					profit.putExtra(MostrarVendedorActivity.NOMBRE_SUPERVISOR, supervisorTemporal.getNombre());
+					Intent profit = new Intent(context, VerProfit_Activity.class);
+					profit.putExtra(VerProfit_Activity.ANIO, "");
+					profit.putExtra(VerProfit_Activity.MES, "");
+					profit.putExtra(VerProfit_Activity.CLIENTE, cliente.getCodigo());
+					profit.putExtra(VerProfit_Activity.ARTICULO, oportunidad.getCodigoProducto());
 					context.startActivity(profit);
 				}
-			});*/
+			});
 	      
 	      return convertView;
 	    }

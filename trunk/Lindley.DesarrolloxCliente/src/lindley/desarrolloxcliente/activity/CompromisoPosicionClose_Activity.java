@@ -1,10 +1,12 @@
 package lindley.desarrolloxcliente.activity;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
+import lindley.desarrolloxcliente.to.CompromisoPosicionTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarPosicionCompromisoProxy;
 import net.msonic.lib.ListActivityBase;
@@ -14,6 +16,7 @@ import roboguice.inject.InjectView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +38,9 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
 	private EfficientAdapter adap;	
-	private MyApplication application;
+	public static MyApplication application;
 	@InjectExtra(COD_GESTION) String codigoGestion;
+	public static final String ESTANDAR_ANAQUEL = "03";
 	
 	private static String pad(int c) {
 		if (c >= 10)
@@ -162,6 +166,10 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 	      holder.txViewPuntos.setText(posicionTO.getPuntosSugeridos());
 	      holder.txViewAccComp.setText(posicionTO.getAccionCompromiso());	      
 	      holder.txViewCnfComp.setText(posicionTO.getConfirmacion());
+	      if(posicionTO.getCodigoVariable().compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
+	      {
+	    	  holder.btnFotoExito.setText(R.string.btnExitoText);
+	      }
 	      
 	      int mYear,mMonth,mDay;
 	      String fecha = posicionTO.getFechaCompromiso();
@@ -221,6 +229,26 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 								// TODO Auto-generated method stub
 							}
 						});	
+					}
+				}
+			});
+	      
+	      holder.btnFotoExito.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					if(posicionTO.getCodigoVariable().compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
+					{
+						application.listCompromiso = posicionTO.getListCompromisos();
+						if(application.listCompromiso == null)
+							application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
+						Intent intent = new Intent("lindley.desarrolloxcliente.vercompromisosclose");
+						context.startActivity(intent);	
+					}
+					else
+					{
+						Log.v("CompromisoPosicionOpen_Activity", "visualizar foto del exito");
 					}
 				}
 			});

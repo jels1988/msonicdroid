@@ -11,10 +11,12 @@ import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Filter;
@@ -34,7 +36,7 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	@Inject ConsultarCompromisoProxy consultarCompromisoProxy;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	private EfficientAdapter adap;
-	ClienteTO cliente;
+	public static ClienteTO cliente;
 	
 	/** Called when the activity is first created. */
     @Override 
@@ -91,13 +93,13 @@ public class CompromisoClose_Activity extends ListActivityBase {
     
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
-	    //private Context context;
+	    private Context context;
 	    private List<CompromisoTO> detalles;
 	    
 	    public EfficientAdapter(Context context, List<CompromisoTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
-		      //this.context = context;
+		      this.context = context;
 		      this.detalles = valores;
 		    }
 	    
@@ -109,7 +111,7 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	     *      android.view.ViewGroup)
 	     */
 	    public View getView(final int position, View convertView, ViewGroup parent) {
-	    	CompromisoTO compromiso = (CompromisoTO) getItem(position);
+	    	final CompromisoTO compromiso = (CompromisoTO) getItem(position);
 	    	ViewHolder holder;
 
 	      if (convertView == null) {
@@ -149,19 +151,18 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	      else holder.txViewSN.setText("1");
 	      holder.txViewPBonus.setText(compromiso.getPuntosBonus());
 	      
-	      /*
-	      holder.txViewProfit.setOnClickListener(new OnClickListener() {
+	      holder.btnProfit.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					Intent profit = new Intent(context,MostrarVendedorActivity.class);
-					profit.putExtra(MostrarVendedorActivity.TIPO_SUPERVISOR, 0);
-					profit.putExtra(MostrarVendedorActivity.CODIGO_CDA, codigo_cda);
-					profit.putExtra(MostrarVendedorActivity.CODIGO_SUPERVISOR, supervisorTemporal.getCodigo());
-					profit.putExtra(MostrarVendedorActivity.NOMBRE_SUPERVISOR, supervisorTemporal.getNombre());
+					Intent profit = new Intent(context, VerProfit_Activity.class);
+					profit.putExtra(VerProfit_Activity.ANIO, "");
+					profit.putExtra(VerProfit_Activity.MES, "");
+					profit.putExtra(VerProfit_Activity.CLIENTE, cliente.getCodigo());
+					profit.putExtra(VerProfit_Activity.ARTICULO, compromiso.getCodigoProducto());
 					context.startActivity(profit);
 				}
-			});*/
+			});
 	      
 	      return convertView;
 	    }
