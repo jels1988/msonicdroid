@@ -168,13 +168,27 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".activity.VerCompromisos_Activity" android:configChanges="keyboardHidden|orientation">
+        <activity android:name=".activity.VerCompromisosOpen_Activity" android:configChanges="keyboardHidden|orientation">
             <intent-filter>
-                <action android:name="lindley.desarrolloxcliente.vercompromisos" />                					  
+                <action android:name="lindley.desarrolloxcliente.vercompromisosopen" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>        
+        
+        <activity android:name=".activity.VerCompromisosClose_Activity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.vercompromisosclose" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         
+        <activity android:name=".activity.VerProfit_Activity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.verprofit" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+                    
         <service android:name=".service.UploadFileService">
             
             <intent-filter>
