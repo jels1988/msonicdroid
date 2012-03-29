@@ -113,7 +113,7 @@
     <string name="profit_descargarparametros_activity_confirm_dialog_message">¿Desea sincronizar los datos?</string>
     <string name="profit_descargarparametros_activity_confirm_dialog_no">No</string>
     <string name="profit_descargarparametros_activity_confirm_dialog_si">Si</string>
-    <string name="profit_descargarparametros_activity_message">¿Desea descargar los parametros?</string>
+    <string name="profit_descargarparametros_activity_message">¿Desea descargar los parámetros?</string>
     <!-- OM ACTIVITY -->
     <string name="consultar_cliente_om_activity_title">Buscar Cliente</string>
     <string name="consultar_cliente_om_activity_empty">Debes ingresar el código o razón</string>

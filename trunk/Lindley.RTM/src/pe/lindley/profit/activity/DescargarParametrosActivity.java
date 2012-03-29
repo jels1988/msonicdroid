@@ -87,7 +87,7 @@ public class DescargarParametrosActivity extends ActivityBase {
 				}
 				final Context context = this;
 				
-				MessageBox.showSimpleDialog(context, profit_descargar_parametros_title, "Se descago la información.", "Aceptar", new OnClickListener() {
+				MessageBox.showSimpleDialog(context, profit_descargar_parametros_title, "Se descago la informaci—n.", "Aceptar", new OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
