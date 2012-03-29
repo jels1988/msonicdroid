@@ -4,7 +4,11 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import roboguice.inject.InjectExtra;
+import roboguice.inject.InjectResource;
+import roboguice.inject.InjectView;
+import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.ProfitTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarProfitProxy;
 import android.os.Bundle;
@@ -17,6 +21,7 @@ import com.steema.teechart.styles.Bar;
 import com.steema.teechart.styles.Series;
 import com.steema.teechart.styles.StringList;
 import com.steema.teechart.themes.ThemesList;
+import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.ActivityBase;
 
@@ -25,6 +30,7 @@ public class VerProfit_Activity extends ActivityBase {
 	@Inject ConsultarProfitProxy consultarProfitProxy;
 	private TChart chart;
 	List<ProfitTO> detalle;
+	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 		
 	public static final String ANIO = "pfanio";
 	@InjectExtra(ANIO) String pf_anio;
@@ -34,12 +40,26 @@ public class VerProfit_Activity extends ActivityBase {
 	@InjectExtra(CLIENTE) String pf_cliente;
 	public static final String ARTICULO = "pcarticulo";
 	@InjectExtra(ARTICULO) String pf_articulo;
+	public static final String NOMBRE_ARTICULO = "nomarticulo";
+	@InjectExtra(NOMBRE_ARTICULO) String nombre_articulo;
+	private ClienteTO cliente;
+	private MyApplication application;
+	
+	@InjectResource(R.string.cajas_fisicas) String cajasFisicas;
+	@InjectResource(R.string.margen_actual) String margenActual;
+	@InjectResource(R.string.cajas_faltantes) String cajasFaltantes;
+	@InjectResource(R.string.margen_faltante) String margenFaltante;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		inicializarRecursos();
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.profitchartview_activity);
+        application = (MyApplication)getApplicationContext();
+		cliente = application.getClienteTO();
+        mActionBar.setTitle(cliente.getCodigo() + " - " + cliente.getNombre());
+        mActionBar.setHomeLogo(R.drawable.header_logo);
 		LinearLayout group = (LinearLayout) findViewById(R.id.linearLayoutTchart);
 		chart = new TChart(this);
 		group.addView(chart);
@@ -137,10 +157,10 @@ public class VerProfit_Activity extends ActivityBase {
 				indicadores.add(nombreIndicadores.toUpperCase());
 			}
 
-			variables.add(R.string.cajas_fisicas+"");
-			variables.add(R.string.margen_actual+"");
-			variables.add(R.string.cajas_faltantes+"");
-			variables.add(R.string.margen_faltante+"");
+			variables.add(cajasFisicas);
+			variables.add(margenActual);
+			variables.add(cajasFaltantes);
+			variables.add(margenFaltante);
 		}
 		
 		int sizeIndicadores = indicadores.size();
@@ -207,7 +227,7 @@ public class VerProfit_Activity extends ActivityBase {
 		chart.getLegend().setVisible(true);
 		chart.getLegend().setAlignment(LegendAlignment.BOTTOM);
 		
-		chart.getHeader().setText("Profit Story xSKU");
+		chart.getHeader().setText("Profit Story xSKU - " + nombre_articulo);
 		chart.getHeader().getFont().setSize(20);		    
 	}
 		

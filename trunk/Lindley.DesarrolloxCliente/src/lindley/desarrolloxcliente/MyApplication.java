@@ -30,6 +30,7 @@ import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCompromisoProxy;
+import lindley.desarrolloxcliente.ws.service.ConsultarFotoExitoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarOportunidadProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarProfitProxy;
 import lindley.desarrolloxcliente.ws.service.GuardarDesarrolloProxy;
@@ -110,6 +111,7 @@ public class MyApplication extends RoboApplication {
 				bind(GuardarDesarrolloProxy.class).in(Singleton.class);
 				bind(CerrarCompromisoProxy.class).in(Singleton.class);
 				bind(ConsultarProfitProxy.class).in(Singleton.class);
+				bind(ConsultarFotoExitoProxy.class).in(Singleton.class);
 				bind(FotoBLL.class).in(Singleton.class);
 				bind(FotoDAO.class).in(Singleton.class);
 			}});

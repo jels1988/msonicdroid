@@ -16,7 +16,6 @@ import roboguice.inject.InjectView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +35,7 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 //	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarPosicionCompromisoProxy consultarPosicionCompromisoProxy;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
-	ClienteTO cliente;
+	public static ClienteTO cliente;
 	private EfficientAdapter adap;	
 	public static MyApplication application;
 	@InjectExtra(COD_GESTION) String codigoGestion;
@@ -248,7 +247,9 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 					}
 					else
 					{
-						Log.v("CompromisoPosicionOpen_Activity", "visualizar foto del exito");
+						Intent intent = new Intent("lindley.desarrolloxcliente.listarfotoexito");
+						intent.putExtra(ListarFotoExito_Activity.ID_CLUSTER, cliente.getCluster() );
+						context.startActivity(intent);
 					}
 				}
 			});

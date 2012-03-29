@@ -249,6 +249,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 					profit.putExtra(VerProfit_Activity.MES, "");
 					profit.putExtra(VerProfit_Activity.CLIENTE, cliente.getCodigo());
 					profit.putExtra(VerProfit_Activity.ARTICULO, oportunidad.getCodigoProducto());
+					profit.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, oportunidad.getDescripcionProducto());
 					context.startActivity(profit);
 				}
 			});
