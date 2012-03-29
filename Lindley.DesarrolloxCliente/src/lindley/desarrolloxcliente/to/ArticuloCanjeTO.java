@@ -2,7 +2,7 @@ package lindley.desarrolloxcliente.to;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ArticuloCanje {
+public class ArticuloCanjeTO {
 
 	@SerializedName("COD")
 	public String codigoArticulo;

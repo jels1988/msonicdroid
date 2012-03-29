@@ -44,6 +44,7 @@ public class VerFoto_Activity extends ActivityBase {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.verfoto_activity);
 		mActionBar.setTitle(R.string.ver_foto_activity_title);
+		application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
 		mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
 		processAsync();
