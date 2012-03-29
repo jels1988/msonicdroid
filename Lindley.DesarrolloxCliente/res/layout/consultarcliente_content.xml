@@ -61,6 +61,7 @@
         		<ImageButton android:id="@+id/btn_direccion" android:visibility="gone" android:src="@drawable/btn_direccion" android:layout_height="wrap_content" android:layout_width="wrap_content"/>        		        	
         		<ImageButton android:id="@+id/btn_cabecera" android:visibility="visible" android:src="@drawable/btn_ficha" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
         		<ImageButton android:id="@+id/btn_nuevo" android:visibility="visible" android:src="@drawable/btn_add" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+        		<ImageButton android:id="@+id/btn_articulo" android:visibility="visible" android:src="@drawable/btn_articulo" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
         	</LinearLayout>
         </TableRow>
         
