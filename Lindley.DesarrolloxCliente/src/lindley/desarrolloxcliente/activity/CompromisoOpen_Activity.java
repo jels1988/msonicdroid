@@ -641,6 +641,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 					profit.putExtra(VerProfit_Activity.MES, "");
 					profit.putExtra(VerProfit_Activity.CLIENTE, cliente.getCodigo());
 					profit.putExtra(VerProfit_Activity.ARTICULO, compromiso.getCodigoProducto());
+					profit.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, compromiso.getDescripcionProducto());
 					context.startActivity(profit);
 				}
 			});

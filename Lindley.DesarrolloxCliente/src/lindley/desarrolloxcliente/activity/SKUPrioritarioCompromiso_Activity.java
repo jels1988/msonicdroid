@@ -152,11 +152,7 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 			}
 			
 			holder.chkValActual.setEnabled(false);
-			if(flagEstado.compareToIgnoreCase(FLAG_OPEN_ESTADO_CERRADO) == 0)
-			{				
-				holder.chkValComp.setEnabled(false);
-				holder.chkValConf.setEnabled(false);
-			}
+			
 			if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
 			{
 				holder.chkValComp.setEnabled(false);
@@ -166,6 +162,12 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 			{
 				holder.chkValComp.setEnabled(true);
 				holder.chkValConf.setEnabled(true);
+			}
+			
+			if(flagEstado.compareToIgnoreCase(FLAG_OPEN_ESTADO_CERRADO) == 0)
+			{				
+				holder.chkValComp.setEnabled(false);
+				holder.chkValConf.setEnabled(false);
 			}
 			
 			return view;

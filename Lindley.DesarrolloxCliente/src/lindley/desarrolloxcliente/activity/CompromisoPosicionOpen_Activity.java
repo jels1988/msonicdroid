@@ -33,7 +33,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +73,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
 	@Inject FotoBLL fotoBLL;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
-	ClienteTO cliente;
+	public static ClienteTO cliente;
 	public static MyApplication application;
 	
 	
@@ -579,7 +578,9 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 					}
 					else
 					{
-						Log.v("CompromisoPosicionOpen_Activity", "visualizar foto del exito");
+						Intent intent = new Intent("lindley.desarrolloxcliente.listarfotoexito");
+						intent.putExtra(ListarFotoExito_Activity.ID_CLUSTER, cliente.getCluster() );
+						context.startActivity(intent);
 					}
 				}
 			});
