@@ -82,4 +82,8 @@
     <string name="cajas_faltantes">Faltan CF</string>
     <string name="margen_faltante">Mg. Falt.</string>
     <string name="ver_foto">Ver Foto</string>
+    <string name="verproductoscanje_activity_title">Productos Canje</string>
+    <string name="articulo_descripcion">Articulo Canje</string>
+    <string name="puntos_ariculo">Puntos</string>
+    
 </resources>
