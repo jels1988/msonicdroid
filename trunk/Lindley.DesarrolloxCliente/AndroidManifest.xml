@@ -196,6 +196,13 @@
             </intent-filter>
         </activity>           
         
+        <activity android:name=".activity.VerArticulosCanje_Activity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.verarticuloscanje" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>           
+            
         <service android:name=".service.UploadFileService">
             
             <intent-filter>
