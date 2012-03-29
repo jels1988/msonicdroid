@@ -73,6 +73,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
 	@Inject FotoBLL fotoBLL;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
+	@InjectView(R.id.txtViewCliente) TextView txtViewCliente;
 	public static ClienteTO cliente;
 	public static MyApplication application;
 	
@@ -92,6 +93,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
         setContentView(R.layout.consultarposicioncompromisoopen_activity);        
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
+		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
         processAsync(); 
     }
     
@@ -150,12 +152,12 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		boolean tieneError=false;
 		if(accion == ACCION_ACTUALIZAR)
        	{      
-			if(application.posicionAdapter.posiciones == null)
+			if(application.posicionAdapter == null)
 			{
 				showToast("Debe actualizar los datos de la pesta–a Posiciones");
 				tieneError=true;
 			}
-			if(application.presentacionAdapter.detalles == null)
+			if(application.presentacionAdapter == null)
 			{
 				showToast("Debe actualizar los datos de la pesta–a Presentacion");
 				tieneError=true;
@@ -499,6 +501,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		    	  holder.btnFecha.setVisibility(View.GONE);
 		    	  holder.txViewFecha.setVisibility(View.VISIBLE);
 		    	  holder.btnFotoFinal.setEnabled(true);
+		    	  holder.txViewAccComp.setEnabled(false);
 		      }
 		      else
 		      {
@@ -570,11 +573,22 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 					// TODO Auto-generated method stub
 					if(posicionTO.getCodigoVariable().compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
 					{
-						application.listCompromiso = posicionTO.getListCompromisos();
-						if(application.listCompromiso == null)
-							application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
-						Intent intent = new Intent("lindley.desarrolloxcliente.vercompromisosopen");
-						context.startActivity(intent);	
+						if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
+						{
+							application.listCompromiso = posicionTO.getListCompromisos();
+							if(application.listCompromiso == null)
+								application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
+							Intent intent = new Intent("lindley.desarrolloxcliente.vercompromisosclose");
+							context.startActivity(intent);
+						}
+						else
+						{
+							application.listCompromiso = posicionTO.getListCompromisos();
+							if(application.listCompromiso == null)
+								application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
+							Intent intent = new Intent("lindley.desarrolloxcliente.vercompromisosopen");
+							context.startActivity(intent);
+						}
 					}
 					else
 					{

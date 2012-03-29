@@ -70,6 +70,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	@Inject CerrarCompromisoProxy cerrarCompromisoProxy;
 	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
+	@InjectView(R.id.txtViewCliente) TextView txtViewCliente;
 	//private EfficientAdapter adap;
 	public static ClienteTO cliente;
 	public static MyApplication application;
@@ -86,6 +87,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 //        mActionBar.setTitle(R.string.compromiso_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
+		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
 //        mActionBar.setSubTitle(cliente.getNombre());
 //        mActionBar.setHomeLogo(R.drawable.header_logo);        
         
@@ -530,6 +532,12 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	    	  holder.txEditFecha.setVisibility(View.GONE);	    	  
 	    	  holder.btnFecha.setVisibility(View.GONE);
 	    	  holder.txViewFecha.setVisibility(View.VISIBLE);
+	    	  holder.chkConcrecion.setEnabled(false);
+	    	  holder.chkSabores.setEnabled(false);
+	    	  holder.chkPrecio.setEnabled(false);
+	    	  holder.chkSOVI.setEnabled(false);
+	    	  holder.txViewSOVI.setEnabled(false);
+	    	  holder.cboCumPrecio.setEnabled(false);
 	      }
 	      else
 	      {

@@ -344,7 +344,8 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 				holder.imgDireccion = (ImageButton) convertView.findViewById(R.id.btn_direccion);
 				holder.imgCabecera = (ImageButton) convertView.findViewById(R.id.btn_cabecera);
 				holder.imgNuevo = (ImageButton) convertView.findViewById(R.id.btn_nuevo);
-								
+				holder.imgArticulo = (ImageButton) convertView.findViewById(R.id.btn_articulo);
+					
 				convertView.setTag(holder);
 			} else {
 				// Get the ViewHolder back to get fast access to the TextView
@@ -409,6 +410,16 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 				}
 			});
 			
+			holder.imgArticulo.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Intent intent = new Intent("lindley.desarrolloxcliente.verarticuloscanje");
+					context.startActivity(intent);					
+				}
+			});
+			
 			return convertView;
 		}
 
@@ -426,6 +437,7 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 			ImageButton imgDireccion;
 			ImageButton imgCabecera;
 			ImageButton imgNuevo;
+			ImageButton imgArticulo;
 		}
 
 		@Override

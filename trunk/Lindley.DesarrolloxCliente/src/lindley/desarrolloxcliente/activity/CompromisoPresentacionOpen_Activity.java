@@ -50,6 +50,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 	
 	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
 	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
+	
 	private static final int ACCION_CERRAR = 1;
 	private static final int ACCION_ACTUALIZAR = 2;
 	public static final String TIPO_PRESENTACION = "3";
@@ -62,9 +63,10 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
 	//private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha)	TextView txtViewFecha;
+	@InjectView(R.id.txtViewCliente) TextView txtViewCliente;
 	ClienteTO cliente;
 	public static MyApplication application;
-
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 //		mActionBar.setTitle(R.string.consultarpresentacion_activity_title);
 		application = (MyApplication) getApplicationContext();
 		cliente = application.getClienteTO();
+		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
 //		mActionBar.setSubTitle(cliente.getNombre());
 //		mActionBar.setHomeLogo(R.drawable.header_logo);
 		processAsync();

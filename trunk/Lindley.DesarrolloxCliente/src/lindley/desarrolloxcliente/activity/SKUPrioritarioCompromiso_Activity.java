@@ -27,10 +27,10 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 	private MyApplication application;
 	ClienteTO cliente;
 	
-	public final static String FLAG_ESTADO = "fecha_flag";
+	public final static String FLAG_ESTADO = "estado_flag";
 	
-	public static final String FLAG_OPEN_ESTADO_ABIERTO = "1";
-	public static final String FLAG_OPEN_ESTADO_CERRADO = "2";
+	public static final String FLAG_OPEN_ESTADO_ABIERTO = "3";
+	public static final String FLAG_OPEN_ESTADO_CERRADO = "4";
 	
 	@InjectExtra(FLAG_ESTADO) static String flagEstado;
 	
@@ -163,7 +163,7 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 				holder.chkValComp.setEnabled(true);
 				holder.chkValConf.setEnabled(true);
 			}
-			
+		
 			if(flagEstado.compareToIgnoreCase(FLAG_OPEN_ESTADO_CERRADO) == 0)
 			{				
 				holder.chkValComp.setEnabled(false);

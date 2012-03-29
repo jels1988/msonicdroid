@@ -33,6 +33,7 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 	@Inject ConsultarPresentacionCompromisoProxy consultarPresentacionCompromisoProxy;
 	private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
+	@InjectView(R.id.txtViewCliente) TextView txtViewCliente;
 	ClienteTO cliente;
 	private MyApplication application;
 	@InjectExtra(COD_GESTION) String codigoGestion;
@@ -53,6 +54,7 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 //        mActionBar.setTitle(R.string.consultarpresentacioncompromisoclose_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
+		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
 //        mActionBar.setSubTitle(cliente.getNombre());
 //        mActionBar.setHomeLogo(R.drawable.header_logo);
         processAsync(); 

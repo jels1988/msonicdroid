@@ -35,6 +35,7 @@ public class CompromisoClose_Activity extends ListActivityBase {
 //	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarCompromisoProxy consultarCompromisoProxy;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
+	@InjectView(R.id.txtViewCliente) TextView txtViewCliente;
 	private EfficientAdapter adap;
 	public static ClienteTO cliente;
 	
@@ -47,6 +48,7 @@ public class CompromisoClose_Activity extends ListActivityBase {
 //        mActionBar.setTitle(R.string.compromiso_activity_title);
         MyApplication application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
+		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
 //        mActionBar.setSubTitle(cliente.getNombre());
 //        mActionBar.setHomeLogo(R.drawable.header_logo);
         processAsync();

@@ -3,14 +3,16 @@ package lindley.desarrolloxcliente.activity;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import roboguice.inject.InjectExtra;
-import roboguice.inject.InjectResource;
-import roboguice.inject.InjectView;
+
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.ProfitTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarProfitProxy;
+import net.msonic.lib.ActivityBase;
+import roboguice.inject.InjectExtra;
+import roboguice.inject.InjectResource;
+import roboguice.inject.InjectView;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
@@ -23,53 +25,62 @@ import com.steema.teechart.styles.StringList;
 import com.steema.teechart.themes.ThemesList;
 import com.thira.examples.actionbar.widget.ActionBar;
 
-import net.msonic.lib.ActivityBase;
-
 public class VerProfit_Activity extends ActivityBase {
 
-	@Inject ConsultarProfitProxy consultarProfitProxy;
+	@Inject
+	ConsultarProfitProxy consultarProfitProxy;
 	private TChart chart;
 	List<ProfitTO> detalle;
-	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
-		
+	@InjectView(R.id.actionBar)
+	ActionBar mActionBar;
+
 	public static final String ANIO = "pfanio";
-	@InjectExtra(ANIO) String pf_anio;
+	@InjectExtra(ANIO)
+	String pf_anio;
 	public static final String MES = "pfmes";
-	@InjectExtra(MES) String pf_mes;
+	@InjectExtra(MES)
+	String pf_mes;
 	public static final String CLIENTE = "pfcliente";
-	@InjectExtra(CLIENTE) String pf_cliente;
+	@InjectExtra(CLIENTE)
+	String pf_cliente;
 	public static final String ARTICULO = "pcarticulo";
-	@InjectExtra(ARTICULO) String pf_articulo;
+	@InjectExtra(ARTICULO)
+	String pf_articulo;
 	public static final String NOMBRE_ARTICULO = "nomarticulo";
-	@InjectExtra(NOMBRE_ARTICULO) String nombre_articulo;
+	@InjectExtra(NOMBRE_ARTICULO)
+	String nombre_articulo;
 	private ClienteTO cliente;
 	private MyApplication application;
-	
-	@InjectResource(R.string.cajas_fisicas) String cajasFisicas;
-	@InjectResource(R.string.margen_actual) String margenActual;
-	@InjectResource(R.string.cajas_faltantes) String cajasFaltantes;
-	@InjectResource(R.string.margen_faltante) String margenFaltante;
-	
+
+	@InjectResource(R.string.cajas_fisicas)
+	String cajasFisicas;
+	@InjectResource(R.string.margen_actual)
+	String margenActual;
+	@InjectResource(R.string.cajas_faltantes)
+	String cajasFaltantes;
+	@InjectResource(R.string.margen_faltante)
+	String margenFaltante;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		inicializarRecursos();
-		super.onCreate(savedInstanceState);		
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.profitchartview_activity);
-        application = (MyApplication)getApplicationContext();
+		application = (MyApplication) getApplicationContext();
 		cliente = application.getClienteTO();
-        mActionBar.setTitle(cliente.getCodigo() + " - " + cliente.getNombre());
-        mActionBar.setHomeLogo(R.drawable.header_logo);
+		mActionBar.setTitle(cliente.getCodigo() + " - " + cliente.getNombre());
+		mActionBar.setHomeLogo(R.drawable.header_logo);
 		LinearLayout group = (LinearLayout) findViewById(R.id.linearLayoutTchart);
 		chart = new TChart(this);
 		group.addView(chart);
 		chart.getPanel().setBorderRound(7);
 		chart.getAspect().setView3D(true);
-		
-		selectTheme(1);		
+
+		selectTheme(1);
 		processAsync();
 	}
-	
+
 	public void selectTheme(int themeSelection) {
 
 		switch (themeSelection) {
@@ -116,20 +127,18 @@ public class VerProfit_Activity extends ActivityBase {
 		consultarProfitProxy.codigoCliente = this.pf_cliente;
 		consultarProfitProxy.execute();
 	}
-	
+
 	@Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
 		boolean isExito = consultarProfitProxy.isExito();
-		
+
 		if (isExito) {
 			int status = consultarProfitProxy.getResponse().getStatus();
-			if (status == 0) {		
-				detalle = consultarProfitProxy.getResponse().ListaProfit;							
-				selectSerie(detalle);				
-			}
-			else
-			{
+			if (status == 0) {
+				detalle = consultarProfitProxy.getResponse().ListaProfit;
+				selectSerie(detalle);
+			} else {
 				showToast(consultarProfitProxy.getResponse().getDescripcion());
 				finish();
 			}
@@ -143,17 +152,17 @@ public class VerProfit_Activity extends ActivityBase {
 		super.processError();
 		showToast(error_generico_process);
 	}
-	
+
 	public void selectSerie(List<ProfitTO> detalle) {
-		
+
 		chart.removeAllSeries();
-					
+
 		ArrayList<String> indicadores = new ArrayList<String>();
 		ArrayList<String> variables = new ArrayList<String>();
 		for (ProfitTO profitTO : detalle) {
-			
+
 			String nombreIndicadores = profitTO.nombreIndicador.toUpperCase();
-			if(!indicadores.contains(nombreIndicadores)){
+			if (!indicadores.contains(nombreIndicadores)) {
 				indicadores.add(nombreIndicadores.toUpperCase());
 			}
 
@@ -162,73 +171,88 @@ public class VerProfit_Activity extends ActivityBase {
 			variables.add(cajasFaltantes);
 			variables.add(margenFaltante);
 		}
-		
+
 		int sizeIndicadores = indicadores.size();
 		StringList sLabel = new StringList(sizeIndicadores);
 		int pos = 0;
-		
-		//for(String variable : variables){
-						
-			double[] varCajaFisica = new double[sizeIndicadores];
-			double[] varMargenActual = new double[sizeIndicadores];
-			double[] varCajaFaltante = new double[sizeIndicadores];
-			double[] varMargenFaltante = new double[sizeIndicadores];
-			
-			for (String nombre : indicadores) {
-				for (ProfitTO profitTO : detalle) {
-					
-					if(nombre.compareTo(profitTO.nombreIndicador.toUpperCase())==0){
-											
-						BigDecimal bd = new BigDecimal(profitTO.cajasFisica*100);
-					    BigDecimal rounded = bd.setScale(0, BigDecimal.ROUND_HALF_UP);
-					    varCajaFisica[indicadores.indexOf(nombre)]=rounded.doubleValue();
-					    
-					    bd = new BigDecimal(profitTO.margenActual*100);
-					    rounded = bd.setScale(0, BigDecimal.ROUND_HALF_UP);
-					    varMargenActual[indicadores.indexOf(nombre)]=rounded.doubleValue();
-					    
-					    bd = new BigDecimal(profitTO.cajasFisicasFaltante*100);
-					    rounded = bd.setScale(0, BigDecimal.ROUND_HALF_UP);
-					    varCajaFaltante[indicadores.indexOf(nombre)]=rounded.doubleValue();
-					    
-					    bd = new BigDecimal(profitTO.margenFaltante*100);
-					    rounded = bd.setScale(0, BigDecimal.ROUND_HALF_UP);
-					    varMargenFaltante[indicadores.indexOf(nombre)]=rounded.doubleValue();
-					}					
+
+		double[] varCajaFisica = new double[sizeIndicadores];
+		double[] varMargenActual = new double[sizeIndicadores];
+		double[] varCajaFaltante = new double[sizeIndicadores];
+		double[] varMargenFaltante = new double[sizeIndicadores];
+		double[] var = new double[sizeIndicadores];
+
+		for (String nombre : indicadores) {
+			for (ProfitTO profitTO : detalle) {
+
+				if (nombre.compareTo(profitTO.nombreIndicador.toUpperCase()) == 0) {
+
+					BigDecimal bd = new BigDecimal(profitTO.cajasFisica * 100);
+					BigDecimal rounded = bd.setScale(0,
+							BigDecimal.ROUND_HALF_UP);
+					varCajaFisica[indicadores.indexOf(nombre)] = rounded
+							.doubleValue();
+
+					bd = new BigDecimal(profitTO.margenActual * 100);
+					rounded = bd.setScale(0, BigDecimal.ROUND_HALF_UP);
+					varMargenActual[indicadores.indexOf(nombre)] = rounded
+							.doubleValue();
+
+					bd = new BigDecimal(profitTO.cajasFisicasFaltante * 100);
+					rounded = bd.setScale(0, BigDecimal.ROUND_HALF_UP);
+					varCajaFaltante[indicadores.indexOf(nombre)] = rounded
+							.doubleValue();
+
+					bd = new BigDecimal(profitTO.margenFaltante * 100);
+					rounded = bd.setScale(0, BigDecimal.ROUND_HALF_UP);
+					varMargenFaltante[indicadores.indexOf(nombre)] = rounded
+							.doubleValue();
 				}
-				sLabel.add(pos, nombre);
-				pos++;
 			}
-			
-			Series bar = new Bar(chart.getChart());
-			bar.setTitle(variables.get(0).toString());
-			bar.setShowInLegend(true);				
-			bar.add(varCajaFisica);		
-			
-			bar = new Bar(chart.getChart());
-			bar.setTitle(variables.get(1).toString());
-			bar.setShowInLegend(true);				
-			bar.add(varMargenActual);	
-			
-			bar = new Bar(chart.getChart());
-			bar.setTitle(variables.get(2).toString());
-			bar.setShowInLegend(true);				
-			bar.add(varCajaFaltante);	
-			
-			bar = new Bar(chart.getChart());
-			bar.setTitle(variables.get(3).toString());
-			bar.setShowInLegend(true);				
-			bar.add(varMargenFaltante);	
-			//bar.setLabels(sLabel);
-		//}
-		 
-		
+			sLabel.add(pos, nombre);
+			pos++;
+		}
+
+		Series bar = new Bar(chart.getChart());
+		bar.setTitle(variables.get(0).toString());
+		bar.setShowInLegend(true);
+		bar.add(varCajaFisica);
+		chart.addSeries(bar);
+
+		bar = new Bar(chart.getChart());
+		bar.setTitle(variables.get(1).toString());
+		bar.setShowInLegend(true);
+		bar.add(varMargenActual);
+		chart.addSeries(bar);
+
+		bar = new Bar(chart.getChart());
+		bar.setTitle(variables.get(2).toString());
+		bar.setShowInLegend(true);
+		bar.add(varCajaFaltante);
+		chart.addSeries(bar);
+
+		bar = new Bar(chart.getChart());
+		bar.setTitle(variables.get(3).toString());
+		bar.setShowInLegend(true);
+		bar.add(varMargenFaltante);
+		chart.addSeries(bar);
+
+		bar = new Bar(chart.getChart());
+		bar.setTitle("");
+		bar.setShowInLegend(false);
+		bar.setLabels(sLabel);
+		bar.add();
+		bar.add();
+		bar.add();
+		bar.add();
+
+		chart.addSeries(bar);
 
 		chart.getLegend().setVisible(true);
 		chart.getLegend().setAlignment(LegendAlignment.BOTTOM);
-		
-		chart.getHeader().setText("Profit Story xSKU - " + nombre_articulo);
-		chart.getHeader().getFont().setSize(20);		    
+
+		chart.getHeader().setText("Profit Story x SKU - " + nombre_articulo);
+		chart.getHeader().getFont().setSize(20);
 	}
-		
+
 }
