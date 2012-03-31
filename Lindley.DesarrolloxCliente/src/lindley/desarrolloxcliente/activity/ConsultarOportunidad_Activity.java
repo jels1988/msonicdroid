@@ -76,9 +76,6 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
     	
     	for (OportunidadTO oportunidad : adap.detalles) {
-    		/*if(oportunidad.getAccioneTrade().compareTo("")!=0){
-    			oportunidades.add(oportunidad);
-    		}*/
     		if(oportunidad.isSeleccionado()){    			    			
     			oportunidades.add(oportunidad);
     		}
