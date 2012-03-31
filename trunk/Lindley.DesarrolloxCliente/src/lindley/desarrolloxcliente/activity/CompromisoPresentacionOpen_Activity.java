@@ -57,11 +57,9 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 	public static final String TIPO_POSICION = "2";
 	public static final String NO = "N";
 
-//	@InjectView(R.id.actionBar)	ActionBar mActionBar;
 	@Inject	ConsultarPresentacionCompromisoProxy consultarPresentacionProxy;
 	@Inject CerrarCompromisoProxy cerrarCompromisoProxy;
 	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
-	//private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha)	TextView txtViewFecha;
 	@InjectView(R.id.txtViewCliente) TextView txtViewCliente;
 	ClienteTO cliente;
@@ -73,12 +71,9 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 		inicializarRecursos();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.consultarpresentacioncompromisoopen_activity);
-//		mActionBar.setTitle(R.string.consultarpresentacion_activity_title);
 		application = (MyApplication) getApplicationContext();
 		cliente = application.getClienteTO();
 		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
-//		mActionBar.setSubTitle(cliente.getNombre());
-//		mActionBar.setHomeLogo(R.drawable.header_logo);
 		processAsync();
 	}
 
@@ -377,16 +372,20 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 			    	    int dia;
 			    	   
 					   String fecha = presentacionTO.getFechaCompromiso();
+					   final Calendar c = Calendar.getInstance();
 					      if(fecha.length() >= 7)
 					      {
 					    	  anio =  Integer.parseInt(fecha.substring(0, 4));
-					    	  mes  =  Integer.parseInt(fecha.substring(4, 6))-1;
-					    	 dia  =  Integer.parseInt(fecha.substring(6));
+					    	  mes  =  Integer.parseInt(fecha.substring(4, 6));					    	  
+					    	  dia  =  Integer.parseInt(fecha.substring(6));
+					    	  if (dia>=30 && mes == 2)
+					    		  dia = c.get(Calendar.DAY_OF_MONTH);
+					    	  else if (dia>=30)
+					    		  dia = c.get(Calendar.DAY_OF_MONTH);
 					    	  
-					      }else{
-					    	  final Calendar c = Calendar.getInstance();        
+					      }else{					    	          
 					    	  anio = c.get(Calendar.YEAR);        
-					    	  mes = c.get(Calendar.MONTH)-1;        
+					    	  mes = c.get(Calendar.MONTH);        
 					    	  dia = c.get(Calendar.DAY_OF_MONTH); 
 					      }
 					      
@@ -394,7 +393,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 					      EfficientAdapter.txEditFecha = holder.txEditFecha;
 					      EfficientAdapter.compromisoTO = presentacionTO;
 					
-					      DatePickerDialog p = new DatePickerDialog(context, dateSetListener, anio,mes, dia);
+					      DatePickerDialog p = new DatePickerDialog(context, dateSetListener, anio,mes--, dia);
 					      p.show();
 				}
 			});

@@ -53,25 +53,22 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	public final static String FLAG_FECHA = "fecha_flag";
 
 	private static final int ACCION_CERRAR = 1;
-
 	private static final int ACCION_ACTUALIZAR = 2;
 	
 	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
 	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
 	public static final String TIPO_PRESENTACION = "3";
 	public static final String TIPO_POSICION = "2";
-
 	public static final String NO = "N";
 	
 	@InjectExtra(CODIGO_REGISTRO) String codigoRegistro;
 	@InjectExtra(FLAG_FECHA) static String flagFecha;
-//	@InjectView(R.id.actionBar)   ActionBar 	mActionBar;
 	@Inject ConsultarCompromisoProxy consultarCompromisoProxy;
 	@Inject CerrarCompromisoProxy cerrarCompromisoProxy;
 	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	@InjectView(R.id.txtViewCliente) TextView txtViewCliente;
-	//private EfficientAdapter adap;
+	
 	public static ClienteTO cliente;
 	public static MyApplication application;
 	List<CompromisoTO> compromisos;
@@ -84,13 +81,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     	compromisos = new ArrayList<CompromisoTO>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.compromisoopen_activity);        
-//        mActionBar.setTitle(R.string.compromiso_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
 		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
-//        mActionBar.setSubTitle(cliente.getNombre());
-//        mActionBar.setHomeLogo(R.drawable.header_logo);        
-        
         processAsync();
     }
     
@@ -559,16 +552,20 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 			    	    int dia;
 			    	   
 					   String fecha = compromiso.getFechaCompromiso();
+					   final Calendar c = Calendar.getInstance();
 					      if(fecha.length() >= 7)
 					      {
 					    	  anio =  Integer.parseInt(fecha.substring(0, 4));
-					    	  mes  =  Integer.parseInt(fecha.substring(4, 6))-1;
-					    	 dia  =  Integer.parseInt(fecha.substring(6));
+					    	  mes  =  Integer.parseInt(fecha.substring(4, 6));					    	  
+					    	  dia  =  Integer.parseInt(fecha.substring(6));
+					    	  if (dia>=30 && mes == 2)
+					    		  dia = c.get(Calendar.DAY_OF_MONTH);
+					    	  else if (dia>=30)
+					    		  dia = c.get(Calendar.DAY_OF_MONTH);
 					    	  
-					      }else{
-					    	  final Calendar c = Calendar.getInstance();        
+					      }else{					    	          
 					    	  anio = c.get(Calendar.YEAR);        
-					    	  mes = c.get(Calendar.MONTH)-1;        
+					    	  mes = c.get(Calendar.MONTH);        
 					    	  dia = c.get(Calendar.DAY_OF_MONTH); 
 					      }
 					      
@@ -576,7 +573,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 					      EfficientAdapter.txtFecha = holder.txEditFecha;
 					      EfficientAdapter.compromisoTO = compromiso;
 					
-					      DatePickerDialog p = new DatePickerDialog(context, dateSetListener, anio,mes, dia);
+					      DatePickerDialog p = new DatePickerDialog(context, dateSetListener, anio,mes--, dia);
 					      p.show();
 				}
 			});
