@@ -96,6 +96,8 @@ public class ClienteDAO {
 		parametros.put("documentoId", documentoTO.getDocumentoId());
 		parametros.put("nombreArchivo", documentoTO.getNombreArchivo());
 		parametros.put("islocal", documentoTO.getEsLocal());
+		
+		
 		long id =dbHelper.getDataBase().insertOrThrow("cliente_documento", null, parametros);
 		return id;
 	}
@@ -531,7 +533,16 @@ public class ClienteDAO {
 		clienteTO.setClienteId((int)id);
 
 	}
+	
+	public void indicarCambios(int clienteId){
+		ContentValues parametros = new ContentValues();
+		parametros.put("TieneCambios", ClienteTO.FICHA_TIENE_CAMBIOS);
+		
+		String[] valores = new String[] { String.valueOf(clienteId) };
 
+		dbHelper.getDataBase().update("Cliente", parametros, "ClienteId = ?",valores);
+		
+	}
 	public void update(final ClienteTO clienteTO, final UsuarioTO usuarioTO) {
 
 		ContentValues parametros = new ContentValues();
