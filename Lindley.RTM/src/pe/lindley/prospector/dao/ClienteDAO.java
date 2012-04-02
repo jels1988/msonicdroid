@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import pe.lindley.lanzador.to.UsuarioTO;
 import pe.lindley.prospector.to.ClienteTO;
+import pe.lindley.prospector.to.DocumentoEnviarTO;
 import pe.lindley.prospector.to.DocumentoTO;
 import pe.lindley.prospector.to.FileTO;
 import pe.lindley.util.DBHelper;
@@ -48,8 +49,32 @@ public class ClienteDAO {
 	}
 	
 	public void copiarTodosDocumentos(){
-		dbHelper.getDataBase().execSQL("insert into cliente_documento_enviar (nombre) SELECT nombrearchivo  FROM cliente_documento where islocal = 1");
+		dbHelper.getDataBase().execSQL("insert into cliente_documento_enviar (nombre) SELECT nombrearchivo  FROM cliente_documento where islocal = 0");
 	}
+	
+	public ArrayList<DocumentoEnviarTO> listarDocumentosEnviarxFicha(long fichaId){
+		
+		ArrayList<DocumentoEnviarTO> documentos = new ArrayList<DocumentoEnviarTO>();
+		
+		String SQL = "select * from cliente_documento where clienteId = ?";
+		String[] valores = new String[] { String.valueOf(fichaId) };
+		Cursor cursor = dbHelper.getDataBase().rawQuery(SQL,valores);
+		
+		DocumentoEnviarTO documentoEnviarTO;
+		
+		while (cursor.moveToNext()) {
+			documentoEnviarTO = new DocumentoEnviarTO();
+			documentoEnviarTO.codigoCliente = cursor.getInt(cursor.getColumnIndex("clienteId"));
+			documentoEnviarTO.nombre = cursor.getString(cursor.getColumnIndex("nombrearchivo"));
+			documentoEnviarTO.tipoDocumento = cursor.getInt(cursor.getColumnIndex("documentoId"));
+			documentos.add(documentoEnviarTO);
+		}
+		
+		cursor.close();
+		
+		return documentos;
+		
+	} 
 	
 	public long updateDocumento(int clienteId,DocumentoTO documentoTO){
 		
@@ -71,11 +96,6 @@ public class ClienteDAO {
 		parametros.put("documentoId", documentoTO.getDocumentoId());
 		parametros.put("nombreArchivo", documentoTO.getNombreArchivo());
 		parametros.put("islocal", documentoTO.getEsLocal());
-		
-		if(documentoTO.getServidorId()!=0){
-			parametros.put("servidorId", documentoTO.getServidorId());
-		}
-		
 		long id =dbHelper.getDataBase().insertOrThrow("cliente_documento", null, parametros);
 		return id;
 	}
@@ -100,7 +120,6 @@ public class ClienteDAO {
 		documentoTO.setDescripcion(cursor.getString(cursor.getColumnIndex("descripcion")));
 		documentoTO.setObligatorio(cursor.getInt(cursor.getColumnIndex("obligatorio")));
 		documentoTO.setNombreArchivo(cursor.getString(cursor.getColumnIndex("nombrearchivo")));
-		documentoTO.setServidorId(cursor.getInt(cursor.getColumnIndex("servidorId")));
 		
 		documentos.add(documentoTO);
 	}
@@ -364,7 +383,7 @@ public class ClienteDAO {
 		}
 
 		cursor.close();
-
+		
 		return listado;
 	}
 

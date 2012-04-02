@@ -69,9 +69,6 @@ public class LoginActivity extends ActivityBase {
 	@Override
 	protected void process() {
 
-		//consultarFotoProxy.setPeriodo("201011");
-		//consultarFotoProxy.execute();
-		
 		String usuario = txtUsuario.getText().toString();
 		String password = txtPassword.getText().toString();
 		
