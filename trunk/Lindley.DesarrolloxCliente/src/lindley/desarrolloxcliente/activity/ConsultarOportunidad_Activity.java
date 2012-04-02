@@ -75,13 +75,17 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     	
     	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
     	
+    	if(adap == null)
+    	{
+	    	adap = new EfficientAdapter(getApplicationContext(), new ArrayList<OportunidadTO>());
+    	}
+    	
     	for (OportunidadTO oportunidad : adap.detalles) {
     		if(oportunidad.isSeleccionado()){    			    			
     			oportunidades.add(oportunidad);
     		}
 		}
     	
-
     	int filasSeleccionadas=oportunidades.size();
     	if(filasSeleccionadas>3){
     		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede seleccionar como m‡ximo 3 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {

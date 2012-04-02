@@ -84,7 +84,7 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 				adap = new EfficientAdapter(this, posiciones);				
 				final Calendar c = Calendar.getInstance();      
 				if(posiciones.size()>0)
-					txtViewFecha.setText(c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH)) + "/" + c.get(Calendar.YEAR));
+					txtViewFecha.setText(c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH)+1) + "/" + c.get(Calendar.YEAR));
 				setListAdapter(adap);
 			}
 			else  {

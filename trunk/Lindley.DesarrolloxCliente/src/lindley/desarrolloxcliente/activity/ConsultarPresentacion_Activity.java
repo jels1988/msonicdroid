@@ -60,6 +60,11 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
     	
     	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
     	
+    	if(adap == null)
+    	{
+	    	adap = new EfficientAdapter(getApplicationContext(), new ArrayList<PresentacionTO>());
+    	}
+    	
     	for (PresentacionTO presentacion : adap.detalles) {
     		/*if(oportunidad.getAccioneTrade().compareTo("")!=0){
     			oportunidades.add(oportunidad);
@@ -195,7 +200,7 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
 				adap = new EfficientAdapter(this, presentaciones);				
 				final Calendar c = Calendar.getInstance();      
 				if(presentaciones.size()>0)
-					txtViewFecha.setText(c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH)) + "/" + c.get(Calendar.YEAR));
+					txtViewFecha.setText(c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.YEAR));
 				setListAdapter(adap);
 			}
 			else  {

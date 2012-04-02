@@ -150,7 +150,7 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	      holder.txViewPCoca.setText(compromiso.getPuntosCocaCola());
 	      holder.txViewAccTrade.setText(compromiso.getDescripcionAccion());
 	      if(compromiso.getCumplio().equals("0")) holder.txViewSN.setText("N");
-	      else holder.txViewSN.setText("1");
+	      else holder.txViewSN.setText("S");
 	      holder.txViewPBonus.setText(compromiso.getPuntosBonus());
 	      
 	      holder.btnProfit.setOnClickListener(new OnClickListener() {
