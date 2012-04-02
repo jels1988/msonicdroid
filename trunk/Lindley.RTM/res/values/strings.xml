@@ -3,7 +3,7 @@
     <!--desa: 0GnqeXeroFjywL9df0WrJpTEwFsWxFYCGqDe6xw-->
     <!--prod: 0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A-->
     <string name="app_name">Route to Market</string>
-    <string name="apikey">0GnqeXeroFjywL9df0WrJpTEwFsWxFYCGqDe6xw</string>
+    <string name="apikey">0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A</string>
     <!-- GENERAL -->
     <string name="error_not_network_message">Por favor, verifica tu conexión de datos o intenta en unos minutos.</string>
     <string name="wait_message">Por favor, espera un momento.</string>
@@ -16,7 +16,6 @@
     <string name="menu_inicio_ficha">Desarrollo Cliente</string>
     <string name="menu_inicio_mmil">MMil</string>
     <string name="menu_inicio_ventacero">Venta Cero</string>
-    
     <!-- VER FOTO WEB -->
     <string name="ver_foto_web_title">Documento</string>
     <!-- LOGIN ACTIVITY -->
@@ -79,6 +78,13 @@
     <string name="registrar_documentos_activity_title">Adjuntar Documentos</string>
     <string name="registrar_adjuntar_documentos_activity_tomar">Tomar Foto</string>
     <string name="registrar_adjuntar_documentos_activity_ver">Ver Foto</string>
+    <string name="registrar_adjuntar_documentos_activity_ver">Ver Foto</string>
+    <string name="descargartipodocumentos_activity_title">Descargar Tipo Documento</string>
+    <string name="descargartipodocumentos_activity_message_title">Descargar Tipo Documento</string>
+    <string name="descargartipodocumentos_activity_message_ok">Tipo Documento Descargados</string>
+    <string name="descargartipodocumentos_activity_message_error">Error descargando tipos de documentos, por favor vuelva a intentar</string>
+    <string name="descargartipodocumentos_activity_message">Click en el botòn aceptar para descargar los tipos de documentos.</string>
+    <string name="descargartipodocumentos_activity_confirm_dialog_message">¿Desea descargar los tipos de documentos?</string>
     <!-- SELECCIONAR UBICACION CLIENTE -->
     <string name="seleccionar_direccion_activity_aceptar">Aceptar</string>
     <string name="seleccionar_direccion_activity_cancelar">Cancelar</string>

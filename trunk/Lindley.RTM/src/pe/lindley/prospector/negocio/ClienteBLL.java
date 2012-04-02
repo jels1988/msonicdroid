@@ -8,6 +8,7 @@ import pe.lindley.prospector.to.ClienteTO;
 import pe.lindley.prospector.to.DocumentoEnviarTO;
 import pe.lindley.prospector.to.DocumentoTO;
 import pe.lindley.prospector.to.FileTO;
+import pe.lindley.prospector.to.TipoDocumentoTO;
 import pe.lindley.util.DBHelper;
 import android.util.Log;
 
@@ -19,6 +20,26 @@ public class ClienteBLL {
 	@Inject protected DBHelper dbHelper;
 	@Inject protected ClienteDAO clienteDAO;
 
+	
+	
+	public void insertTipoDocumento(ArrayList<TipoDocumentoTO> tipoDocumentoTO){
+		try {
+			dbHelper.openDataBase();
+			dbHelper.beginTransaction();
+			clienteDAO.deleteTipoDocumento();
+			
+			for (TipoDocumentoTO tipoDocumentoTO2 : tipoDocumentoTO) {
+				clienteDAO.insertTipoDocumento(tipoDocumentoTO2);
+			}
+			dbHelper.setTransactionSuccessful();
+			
+		} catch (Exception e) {
+			Log.e(TAG_LOG, "insertTipoDocumento", e);
+		} finally {
+			dbHelper.endTransaction();
+			dbHelper.close();
+		}
+	}
 	public ArrayList<FileTO> listarDocumentosEnviar(){
 		ArrayList<FileTO> archivos = null;
 		

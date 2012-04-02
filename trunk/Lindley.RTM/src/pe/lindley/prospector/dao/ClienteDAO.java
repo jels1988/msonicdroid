@@ -7,6 +7,7 @@ import pe.lindley.prospector.to.ClienteTO;
 import pe.lindley.prospector.to.DocumentoEnviarTO;
 import pe.lindley.prospector.to.DocumentoTO;
 import pe.lindley.prospector.to.FileTO;
+import pe.lindley.prospector.to.TipoDocumentoTO;
 import pe.lindley.util.DBHelper;
 
 import android.content.ContentValues;
@@ -18,6 +19,20 @@ public class ClienteDAO {
 
 	@Inject
 	protected DBHelper dbHelper;
+	
+	public void deleteTipoDocumento(){
+		dbHelper.getDataBase().delete("cliente_tipo_documento", null, null);
+	}
+	
+	public void insertTipoDocumento(TipoDocumentoTO tipoDocumentoTO){
+		ContentValues parametros = new ContentValues();
+		parametros.put("documentoId", tipoDocumentoTO.tipoDocumento);
+		parametros.put("descripcion", tipoDocumentoTO.documento);
+		parametros.put("obligatorio", tipoDocumentoTO.obligatorio);
+		
+
+		dbHelper.getDataBase().insertOrThrow("cliente_tipo_documento", null, parametros);
+	}
 	
 	public ArrayList<FileTO> listarDocumentosEnviar(){
 		

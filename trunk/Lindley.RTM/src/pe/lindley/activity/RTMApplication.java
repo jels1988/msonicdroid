@@ -43,6 +43,7 @@ import pe.lindley.prospector.negocio.ClienteBLL;
 import pe.lindley.prospector.ws.service.DatosClienteProxy;
 import pe.lindley.prospector.ws.service.FichasRechazadasProxy;
 import pe.lindley.prospector.ws.service.GuardarClienteProxy;
+import pe.lindley.prospector.ws.service.TipoDocumentoProxy;
 import pe.lindley.provider.DBHelperProvider;
 import pe.lindley.red.ws.service.ConsultarComunicacionProxy;
 import pe.lindley.red.ws.service.ConsultarEncuestaProxy;
@@ -466,6 +467,9 @@ public class RTMApplication extends RoboApplication {
 			@Override
 			protected void configure() {
 				// TODO Auto-generated method stub
+				
+				
+				bind(TipoDocumentoProxy.class).in(Singleton.class);
 				bind(LoginProxy.class).in(Singleton.class);
 				bind(ConsultarClienteProxy.class).in(Singleton.class);
 				bind(DatosClienteProxy.class).in(Singleton.class);
