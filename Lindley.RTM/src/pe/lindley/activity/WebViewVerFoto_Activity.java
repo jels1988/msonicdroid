@@ -21,9 +21,11 @@ public class WebViewVerFoto_Activity extends ActivityBase {
 	
 	private static final String DESARROLLO_X_CLIENTE = "/Prospector/";
 	public static final String NOMBRE_FOTO = "nomFoto";
+	public static final String SUB_TITULO_FOTO = "sub_titulo";
 	
 	@InjectView(R.id.wvwFoto) 	WebView   wvwFoto;
 	@InjectView(R.id.actionBar) ActionBar mActionBar;
+	@InjectExtra(SUB_TITULO_FOTO) String subTitulo;
 	@InjectExtra(NOMBRE_FOTO) String fotoNombre;
 	@InjectResource(R.string.urlWebView) String urlwb;
 	
@@ -35,12 +37,12 @@ public class WebViewVerFoto_Activity extends ActivityBase {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.webviewfoto_activity);
 		
-		// mActionBar.setTitle(R.string.ver_foto_activity_title);
-		 mActionBar.setHomeLogo(R.drawable.header_logo);
+		mActionBar.setTitle(R.string.ver_foto_web_title);
+		mActionBar.setHomeLogo(R.drawable.header_logo);
 		 
 		 //application = (MyApplication)getApplicationContext();
 		 //cliente = application.getClienteTO();
-		 //mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
+		 mActionBar.setSubTitle(subTitulo);
 		 
 		WebSettings webSettings = wvwFoto.getSettings();
 		webSettings.setJavaScriptEnabled(true);

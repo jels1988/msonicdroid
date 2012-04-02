@@ -193,6 +193,8 @@ public class RegistrarDocumentosActivity extends ListActivityBase {
 						}else{
 							Intent intent = new Intent(context,WebViewVerFoto_Activity.class);
 							intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, documento.getNombreArchivo());
+							intent.putExtra(WebViewVerFoto_Activity.SUB_TITULO_FOTO, nombreCliente);
+							
 							context.startActivity(intent);
 						}
 						

@@ -39,7 +39,7 @@ public class RegistrarClienteVerDocumentosActivity extends ActivityBase {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.registro_cliente_ver_documentos_activity);
-		
+		mActionBar.setHomeLogo(R.drawable.header_logo);
 		mActionBar.setTitle(R.string.registrar_documentos_activity_title);
 		mActionBar.setSubTitle(clienteNombre);
 		
