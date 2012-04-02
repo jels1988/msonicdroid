@@ -1,11 +1,9 @@
 package pe.lindley.prospector.negocio;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import pe.lindley.lanzador.to.UsuarioTO;
 import pe.lindley.prospector.dao.ClienteDAO;
-import pe.lindley.prospector.to.ClienteIdTO;
 import pe.lindley.prospector.to.ClienteTO;
 import pe.lindley.prospector.to.DocumentoTO;
 import pe.lindley.prospector.to.FileTO;
@@ -20,27 +18,14 @@ public class ClienteBLL {
 	@Inject protected DBHelper dbHelper;
 	@Inject protected ClienteDAO clienteDAO;
 
-	
-	public void updateIdGenerados(List<ClienteIdTO> idGenerados){
-		try {
-			dbHelper.openDataBase();
-			dbHelper.beginTransaction();
-			
-			
-			for (ClienteIdTO clienteIdTO : idGenerados) {
-				clienteDAO.updateIdGenerados(clienteIdTO);
-			}
-			
-			dbHelper.setTransactionSuccessful();
-			
-		} catch (Exception e) {
-			Log.e(TAG_LOG, "updateIdGenerados", e);
-		} finally {
-			dbHelper.endTransaction();
-			dbHelper.close();
-		}
+	public ArrayList<FileTO> listarDocumentosEnviar(){
+		return null;
 	}
 	
+	public void deleteDocumento(long id){
+		
+	}
+	/*
 	public void deleteAllDocumentos(long id){
 		try {
 			dbHelper.openDataBase();
@@ -50,7 +35,7 @@ public class ClienteBLL {
 		} finally {
 			dbHelper.close();
 		}
-	}
+	}*/
 	
 	public long guardarDocumento(int clienteId,DocumentoTO documentoTO){
 		long id = documentoTO.getId();
@@ -189,6 +174,7 @@ public class ClienteBLL {
 	}
 	
 	public void saveFichasRechazadas(ArrayList<ClienteTO> fichasRechazadas,UsuarioTO usuarioTO){
+		/*
 		try {
 			dbHelper.openDataBase();
 			dbHelper.beginTransaction();
@@ -222,5 +208,6 @@ public class ClienteBLL {
 			dbHelper.endTransaction();
 			dbHelper.close();
 		}
+		*/
 	}
 }
