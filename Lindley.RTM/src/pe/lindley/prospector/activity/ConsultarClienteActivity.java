@@ -90,7 +90,11 @@ public class ConsultarClienteActivity extends ListActivityBase {
 			startActivity(fichasLocales);
 			return true;
 		}
-		
+		case R.id.mnuTDocumentos:{
+			Intent tipoDocumentos = new Intent(this,DescargarTipoDocumentosActivity.class);
+			startActivity(tipoDocumentos);
+			return true;
+		}
 		}
 		return true;
 
