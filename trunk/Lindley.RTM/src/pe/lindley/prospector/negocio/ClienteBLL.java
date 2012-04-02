@@ -50,12 +50,14 @@ public class ClienteBLL {
 		
 		try {
 			dbHelper.openDataBase();
+			clienteDAO.indicarCambios(clienteId);
 			if(id==0){
 				id = clienteDAO.insertDocumento(clienteId, documentoTO);
 				documentoTO.setId(id);
 			}else{
 				clienteDAO.updateDocumento(clienteId, documentoTO);
 			}
+			
 		} catch (Exception e) {
 			Log.e(TAG_LOG, "guardarDocumento", e);
 		} finally {
