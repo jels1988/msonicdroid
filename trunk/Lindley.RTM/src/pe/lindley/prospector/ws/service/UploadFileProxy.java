@@ -1,5 +1,6 @@
 package pe.lindley.prospector.ws.service;
 
+
 import pe.lindley.prospector.to.FileTO;
 import pe.lindley.prospector.ws.bean.UploadFileRequest;
 import pe.lindley.prospector.ws.bean.UploadFileResponse;
@@ -13,26 +14,11 @@ public class UploadFileProxy extends ProxyBase<UploadFileResponse> {
 	@InjectResource(pe.lindley.activity.R.string.urlwsCliente)protected String urlWS;
 	
 	
-	private int servidorId;
-	private int tipoDocumentoId;
-	public int getServidorId() {
-		return servidorId;
-	}
 
-	public void setServidorId(int servidorId) {
-		this.servidorId = servidorId;
-	}
-
-	public int getTipoDocumentoId() {
-		return tipoDocumentoId;
-	}
-
-	public void setTipoDocumentoId(int tipoDocumentoId) {
-		this.tipoDocumentoId = tipoDocumentoId;
-	}
-
-	private String fileName;
-	private String filePath;
+	public String fileName;
+	public String filePath;
+	
+	
 	
 	@Override
 	protected String getUrl() {
@@ -43,20 +29,18 @@ public class UploadFileProxy extends ProxyBase<UploadFileResponse> {
 	@Override
 	protected String requestText() {
 		// TODO Auto-generated method stub
+		FileTO file = new FileTO();
+		file.file = UploadFileUtil.FileToByteArray(filePath);
+		file.nombre = fileName;
+		
+		
 		
 		UploadFileRequest uploadFileRequest = new UploadFileRequest();
-		
-		
-		FileTO file = new FileTO();
-		file.setServidorId(servidorId);
-		file.setTipoDocumento(tipoDocumentoId);
-		file.setFile(UploadFileUtil.FileToByteArray(getFilePath()));
-		file.setNombre(fileName);
-		
-		uploadFileRequest.setFile(file);
+		uploadFileRequest.file = file;
 		
 		String request = JSONHelper.serializar(uploadFileRequest);
 		return request;
+		
 	}
 
 	@Override

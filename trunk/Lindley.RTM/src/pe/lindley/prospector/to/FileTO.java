@@ -5,6 +5,21 @@ import com.google.gson.annotations.SerializedName;
 public class FileTO {
 	
 	
+	
+
+	public int id;
+	
+	@SerializedName("nom")
+	public String nombre;
+
+
+	@SerializedName("fil")
+	public String file;
+		
+
+
+	
+	/*
 	@SerializedName("nom")
 	private String nombre;
 
@@ -64,7 +79,7 @@ public class FileTO {
 
 	public void setTipoDocumento(int tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
-	}
+	}*/
 
 
 	

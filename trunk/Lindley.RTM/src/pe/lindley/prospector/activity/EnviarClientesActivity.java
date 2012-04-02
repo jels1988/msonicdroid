@@ -1,6 +1,5 @@
 package pe.lindley.prospector.activity;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import com.google.inject.Inject;
@@ -10,15 +9,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import pe.lindley.activity.R;
 import pe.lindley.prospector.negocio.ClienteBLL;
 import pe.lindley.prospector.to.ClienteTO;
-import pe.lindley.prospector.to.DocumentoTO;
 import pe.lindley.prospector.ws.service.GuardarClienteProxy;
-import pe.lindley.prospector.ws.service.UploadFileProxy;
 import pe.lindley.util.ActivityBase;
 import pe.lindley.util.MessageBox;
 import roboguice.inject.InjectResource;
@@ -32,7 +28,7 @@ public class EnviarClientesActivity extends ActivityBase {
 	@InjectView(R.id.actionBar)  	ActionBar 			mActionBar;
 	@Inject 						ClienteBLL 			clienteBLL;
 	@Inject 						GuardarClienteProxy guardarClienteProxy;
-	@Inject 						UploadFileProxy uploadFileProxy;
+	//@Inject 						UploadFileProxy uploadFileProxy;
 	
 	@InjectResource(R.string.sincronizar_clientes_activity_title) 					String 	sincronizar_cliente_title;
 	@InjectResource(R.string.sincronizar_clientes_activity_confirm_dialog_no) 		String 	confirm_no;
@@ -97,6 +93,7 @@ public class EnviarClientesActivity extends ActivityBase {
 		
 		if(UPLOAD_DOCUMENTOS==accion){
 			
+			/*
 			boolean isExito = guardarClienteProxy.isExito();
 			if (isExito) {
 				int status = guardarClienteProxy.getResponse().getStatus();
@@ -133,39 +130,47 @@ public class EnviarClientesActivity extends ActivityBase {
 					MessageBox.showSimpleDialog(this, sincronizar_cliente_title, confirm_message_error, confirm_ok, null);
 				}
 			}
-			
+			*/
 			
 			
 		}
 	}
+	
 	@Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
 		super.processOk();
 		
-		processAsync(UPLOAD_DOCUMENTOS);
+		//processAsync(UPLOAD_DOCUMENTOS);
 		
+		
+		boolean isExito = guardarClienteProxy.isExito();
+		if (isExito) {
+			int status = guardarClienteProxy.getResponse().getStatus();
+			
+			if (status == 0) {
+				
+
+				clienteBLL.deleteAll();
+				
+				final Context context = this;
+				MessageBox.showSimpleDialog(context, sincronizar_cliente_title, confirm_message_ok, confirm_ok, new OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						finish();
+					}
+				});
+		        
+			}else{
+				super.processOk();
+				MessageBox.showSimpleDialog(this, sincronizar_cliente_title, confirm_message_error, confirm_ok, null);
+			}
+		}
 				
 	}
 	
-	
-
-	@Override
-	protected void processOk(int accion) {
-		// TODO Auto-generated method stub
-	
-		final Context context = this;
-		MessageBox.showSimpleDialog(context, sincronizar_cliente_title, confirm_message_ok, confirm_ok, new OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-				finish();
-			}
-		});
-		
-		super.processOk(accion);
-	}
 
 	@Override
 	protected void processError(int accion) {

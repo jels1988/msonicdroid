@@ -56,11 +56,14 @@
 		<activity android:name="pe.lindley.prospector.activity.EnviarClientesActivity" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="pe.lindley.prospector.activity.DescargarRechazadosActivity" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="pe.lindley.prospector.activity.ConsultarClienteLocalActivity" android:configChanges="keyboardHidden|orientation"/>
-		<activity android:name="pe.lindley.prospector.activity.RegistrarDocumentosActivity" android:configChanges="keyboardHidden|orientation">
-		  
-		</activity>
+		<activity android:name="pe.lindley.prospector.activity.RegistrarDocumentosActivity" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="pe.lindley.prospector.activity.RegistrarClienteVerDocumentosActivity" android:configChanges="keyboardHidden|orientation"/>
-		
+		<service android:name="lindley.desarrolloxcliente.service.UploadFileService">
+		       <intent-filter>
+                <action android:name="pe.lindley.prospector.service.uploadFileService" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+		</service>
 		
 		<!-- PROFIT -->
 		<activity android:name="pe.lindley.profit.activity.ProfitHistoryActivity" android:configChanges="keyboardHidden|orientation"/>

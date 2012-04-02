@@ -3,7 +3,6 @@ package pe.lindley.prospector.dao;
 import java.util.ArrayList;
 
 import pe.lindley.lanzador.to.UsuarioTO;
-import pe.lindley.prospector.to.ClienteIdTO;
 import pe.lindley.prospector.to.ClienteTO;
 import pe.lindley.prospector.to.DocumentoTO;
 import pe.lindley.util.DBHelper;
@@ -17,24 +16,12 @@ public class ClienteDAO {
 
 	@Inject
 	protected DBHelper dbHelper;
-
 	
-	public void updateIdGenerados(ClienteIdTO clienteIdTO){
-		
-		String[] valores = new String[] { String.valueOf(clienteIdTO.getClienteId()) };
-
-		ContentValues parametros = new ContentValues();
-		parametros.put("servidorId", clienteIdTO.getIdBd());
-		
-		dbHelper.getDataBase().update("cliente_documento", parametros, "clienteId = ?",
-				valores);
-		
-	}
-	
+	/*
 	public void deleteDocumentos(long id){
 		String[] valores = new String[] { String.valueOf(id) };
 		dbHelper.getDataBase().execSQL("delete from cliente_documento where clienteDocumentoId = ?",valores);
-	}
+	}*/
 	
 	public long updateDocumento(int clienteId,DocumentoTO documentoTO){
 		
