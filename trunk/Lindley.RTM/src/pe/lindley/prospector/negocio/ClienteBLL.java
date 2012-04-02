@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import pe.lindley.lanzador.to.UsuarioTO;
 import pe.lindley.prospector.dao.ClienteDAO;
 import pe.lindley.prospector.to.ClienteTO;
+import pe.lindley.prospector.to.DocumentoEnviarTO;
 import pe.lindley.prospector.to.DocumentoTO;
 import pe.lindley.prospector.to.FileTO;
 import pe.lindley.util.DBHelper;
@@ -158,6 +159,10 @@ public class ClienteBLL {
 		try {
 			dbHelper.openDataBase();
 			listado = clienteDAO.list();
+			
+			for (ClienteTO clienteTO : listado) {
+				clienteTO.setDocumentos(clienteDAO.listarDocumentosEnviarxFicha(clienteTO.getClienteId()));
+			}
 		} catch (Exception e) {
 			Log.e(TAG_LOG, "list", e);
 		} finally {
@@ -185,7 +190,7 @@ public class ClienteBLL {
 	}
 	
 	public void saveFichasRechazadas(ArrayList<ClienteTO> fichasRechazadas,UsuarioTO usuarioTO){
-		/*
+		
 		try {
 			dbHelper.openDataBase();
 			dbHelper.beginTransaction();
@@ -199,14 +204,12 @@ public class ClienteBLL {
 				
  
 				 
-				for (FileTO fileTO : clienteTO.getDocumentos()) {
+				for (DocumentoEnviarTO documentoTO : clienteTO.getDocumentos()) {
 					DocumentoTO doc = new DocumentoTO();
 					doc.setClienteId(clienteTO.getClienteId());
-					doc.setDocumentoId(fileTO.getTipoDocumento());
-					doc.setNombreArchivo(fileTO.getNombre());
+					doc.setDocumentoId(documentoTO.tipoDocumento);
+					doc.setNombreArchivo(documentoTO.nombre);
 					doc.setEsLocal(DocumentoTO.SERVER);
-					doc.setServidorId(fileTO.getServidorId());
-					
 					clienteDAO.insertDocumento(clienteTO.getClienteId(),doc);
 				}
 			}
@@ -219,6 +222,6 @@ public class ClienteBLL {
 			dbHelper.endTransaction();
 			dbHelper.close();
 		}
-		*/
+		
 	}
 }

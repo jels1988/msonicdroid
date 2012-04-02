@@ -102,16 +102,15 @@ public class EnviarClientesActivity extends ActivityBase {
 
 				clienteBLL.deleteAll();
 				
+				Intent intentService = new Intent("pe.lindley.prospector.service.uploadFileService");
+   				startService(intentService);
+   				
 				final Context context = this;
 				MessageBox.showSimpleDialog(context, sincronizar_cliente_title, confirm_message_ok, confirm_ok, new OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
-						
-						Intent intentService = new Intent("pe.lindley.prospector.service.uploadFileService");
-	       				startService(intentService);
-	       				
 						finish();
 					}
 				});

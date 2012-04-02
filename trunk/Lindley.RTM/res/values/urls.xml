@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="urlWebView">http://java.cdaandino.com/rtm/LanzadorApp/ImageViewService.svc</string>
 	<!-- java.cdaandino.com -->
 	<string name="urlwsLogin">http://java.cdaandino.com/rtm/LanzadorApp/SeguridadService.svc</string>
 	<!--string name="urlwsCliente">http://java.cdaandino.com/rtm/prospector2/SincronizarCliente.svc</string-->

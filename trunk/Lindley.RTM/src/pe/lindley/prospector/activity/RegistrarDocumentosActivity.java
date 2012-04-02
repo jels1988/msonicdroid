@@ -25,9 +25,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import pe.lindley.activity.R;
+import pe.lindley.activity.WebViewVerFoto_Activity;
 import pe.lindley.prospector.negocio.ClienteBLL;
 import pe.lindley.prospector.to.DocumentoTO;
 import pe.lindley.util.ListActivityBase;
+import pe.lindley.util.UploadFileUtil;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
@@ -63,7 +65,7 @@ public class RegistrarDocumentosActivity extends ListActivityBase {
 	
 	public void takePhoto(DocumentoTO documentoTO){
 		this.documentoTO=documentoTO;
-    	file_name = String.format("%d.jpg", System.currentTimeMillis());
+    	file_name = UploadFileUtil.GenerarFileName(3, "jpg");
     	 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
     	intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(this)) ); 
     	intent.putExtra(MediaStore.EXTRA_MEDIA_TITLE, "TITULO");
@@ -182,12 +184,17 @@ public class RegistrarDocumentosActivity extends ListActivityBase {
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						DocumentoTO documento = (DocumentoTO)viewHolder.imgObligatorio.getTag();
-						Intent intent = new Intent(context,RegistrarClienteVerDocumentosActivity.class);
 						
-						
-						intent.putExtra(RegistrarClienteVerDocumentosActivity.CLIENTE_NOMBRES, nombreCliente);
-						intent.putExtra(RegistrarClienteVerDocumentosActivity.FILE_NAME, documento.getNombreArchivo());
-						context.startActivity(intent);
+						if(documento.getEsLocal()==DocumentoTO.LOCAL){
+							Intent intent = new Intent(context,RegistrarClienteVerDocumentosActivity.class);
+							intent.putExtra(RegistrarClienteVerDocumentosActivity.CLIENTE_NOMBRES, nombreCliente);
+							intent.putExtra(RegistrarClienteVerDocumentosActivity.FILE_NAME, documento.getNombreArchivo());
+							context.startActivity(intent);
+						}else{
+							Intent intent = new Intent(context,WebViewVerFoto_Activity.class);
+							intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, documento.getNombreArchivo());
+							context.startActivity(intent);
+						}
 						
 					}
 				});

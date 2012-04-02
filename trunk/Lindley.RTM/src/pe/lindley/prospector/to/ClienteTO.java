@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 public class ClienteTO {
 	
 	public ClienteTO(){
-		setDocumentos(new ArrayList<FileTO>());
+		setDocumentos(new ArrayList<DocumentoEnviarTO>());
 	}
 	
 	public static final int ESTADO_PENDIENTE = 0;
@@ -177,7 +177,7 @@ public class ClienteTO {
      public int idRef;
 
      @SerializedName("docs")
-     private ArrayList<FileTO> documentos;
+     private ArrayList<DocumentoEnviarTO> documentos;
      
 	public String getCodigo() {
 		return codigo;
@@ -531,11 +531,11 @@ public class ClienteTO {
 		this.idRef = idRef;
 	}
 
-	public ArrayList<FileTO> getDocumentos() {
+	public ArrayList<DocumentoEnviarTO> getDocumentos() {
 		return documentos;
 	}
 
-	public void setDocumentos(ArrayList<FileTO> documentos) {
+	public void setDocumentos(ArrayList<DocumentoEnviarTO> documentos) {
 		this.documentos = documentos;
 	}
 

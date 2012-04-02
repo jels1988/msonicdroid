@@ -43,10 +43,16 @@
         </activity>
 		
 
-		<activity android:name="MenuInicioActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="MenuInicioActivity" android:configChanges="keyboardHidden|orientation">
+		     <intent-filter>
+                <action android:name="pe.lindley.rtm.service.uploadFileService" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+		</activity>
 		
 		<activity android:name="org.achartengine.GraphicalActivity" android:configChanges="keyboardHidden|orientation"/>
 		
+		<activity android:name="WebViewVerFoto_Activity" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="DireccionActivity" android:configChanges="keyboardHidden|orientation"/>
 		<!-- PROSPECTOR -->
 		<activity android:name="pe.lindley.prospector.activity.ConsultarClienteActivity" android:configChanges="keyboardHidden|orientation"/>
@@ -58,7 +64,7 @@
 		<activity android:name="pe.lindley.prospector.activity.ConsultarClienteLocalActivity" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="pe.lindley.prospector.activity.RegistrarDocumentosActivity" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="pe.lindley.prospector.activity.RegistrarClienteVerDocumentosActivity" android:configChanges="keyboardHidden|orientation"/>
-		<service android:name="lindley.desarrolloxcliente.service.UploadFileService">
+		<service android:name="pe.lindley.prospector.service.UploadFileService">
 		       <intent-filter>
                 <action android:name="pe.lindley.prospector.service.uploadFileService" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
