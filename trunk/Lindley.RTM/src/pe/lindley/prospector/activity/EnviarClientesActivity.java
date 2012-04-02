@@ -7,6 +7,7 @@ import com.thira.examples.actionbar.widget.ActionBar;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,12 +24,10 @@ import roboguice.inject.InjectView;
 public class EnviarClientesActivity extends ActivityBase {
 	
 	
-	private static int UPLOAD_DOCUMENTOS=0;
 	
 	@InjectView(R.id.actionBar)  	ActionBar 			mActionBar;
 	@Inject 						ClienteBLL 			clienteBLL;
 	@Inject 						GuardarClienteProxy guardarClienteProxy;
-	//@Inject 						UploadFileProxy uploadFileProxy;
 	
 	@InjectResource(R.string.sincronizar_clientes_activity_title) 					String 	sincronizar_cliente_title;
 	@InjectResource(R.string.sincronizar_clientes_activity_confirm_dialog_no) 		String 	confirm_no;
@@ -86,64 +85,14 @@ public class EnviarClientesActivity extends ActivityBase {
 	}
 
 	
-	@Override
-	protected void process(int accion) {
-		// TODO Auto-generated method stub
-		
-		
-		if(UPLOAD_DOCUMENTOS==accion){
-			
-			/*
-			boolean isExito = guardarClienteProxy.isExito();
-			if (isExito) {
-				int status = guardarClienteProxy.getResponse().getStatus();
-				
-				if (status == 0) {
-					
-				   if((guardarClienteProxy.getResponse()!=null) && (guardarClienteProxy.getResponse().getIdGenerados())!=null){
-			        	clienteBLL.updateIdGenerados(guardarClienteProxy.getResponse().getIdGenerados());
-			        }
-				   
-					clienteBLL.deleteAll();
-					
-					File path = new File( Environment.getExternalStorageDirectory(), this.getPackageName() );
-					ArrayList<DocumentoTO> documentos = clienteBLL.listarDocumentos();
-					String fileName;
-			        for (DocumentoTO documentoTO : documentos) {
-			        	
-			        	fileName = documentoTO.getNombreArchivo();
-			        	File f = new File(path, fileName);
-			        	uploadFileProxy.setFilePath(f.getAbsolutePath());
-			        	uploadFileProxy.setFileName(fileName);
-			        	uploadFileProxy.setServidorId(documentoTO.getServidorId());
-			        	uploadFileProxy.setTipoDocumentoId(documentoTO.getDocumentoId());
-			        	uploadFileProxy.execute();
-			        	
-			        	if((uploadFileProxy.getResponse()!=null) && (uploadFileProxy.getResponse().getStatus()==0)){
-			        		clienteBLL.deleteAllDocumentos(documentoTO.getId());
-			        		f.delete();
-			        	}
-					}
-			        
-				}else{
-					super.processOk();
-					MessageBox.showSimpleDialog(this, sincronizar_cliente_title, confirm_message_error, confirm_ok, null);
-				}
-			}
-			*/
-			
-			
-		}
-	}
+
 	
 	@Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
 		super.processOk();
 		
-		//processAsync(UPLOAD_DOCUMENTOS);
-		
-		
+	
 		boolean isExito = guardarClienteProxy.isExito();
 		if (isExito) {
 			int status = guardarClienteProxy.getResponse().getStatus();
@@ -159,6 +108,10 @@ public class EnviarClientesActivity extends ActivityBase {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
+						
+						Intent intentService = new Intent("pe.lindley.prospector.service.uploadFileService");
+	       				startService(intentService);
+	       				
 						finish();
 					}
 				});

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import pe.lindley.lanzador.to.UsuarioTO;
 import pe.lindley.prospector.to.ClienteTO;
 import pe.lindley.prospector.to.DocumentoTO;
+import pe.lindley.prospector.to.FileTO;
 import pe.lindley.util.DBHelper;
 
 import android.content.ContentValues;
@@ -17,11 +18,38 @@ public class ClienteDAO {
 	@Inject
 	protected DBHelper dbHelper;
 	
-	/*
-	public void deleteDocumentos(long id){
-		String[] valores = new String[] { String.valueOf(id) };
-		dbHelper.getDataBase().execSQL("delete from cliente_documento where clienteDocumentoId = ?",valores);
-	}*/
+	public ArrayList<FileTO> listarDocumentosEnviar(){
+		
+		ArrayList<FileTO> archivos = new ArrayList<FileTO>();
+		FileTO fileTO;
+		
+		String SQL = "select * from cliente_documento_enviar";
+		
+		Cursor cursor = dbHelper.getDataBase().rawQuery(SQL, null);
+		
+		while (cursor.moveToNext()) {
+			fileTO = new FileTO();
+			fileTO.id=cursor.getInt(cursor.getColumnIndex("id"));
+			fileTO.nombre = cursor.getString(cursor.getColumnIndex("nombre"));
+			archivos.add(fileTO);
+		}
+		
+		cursor.close();
+		
+		return archivos;
+		
+	}
+	public void deleteDocumento(long id){
+		
+		String[] args = new String[]{String.valueOf(id)};
+		
+		dbHelper.getDataBase().delete("cliente_documento_enviar", "id=?", args);
+		
+	}
+	
+	public void copiarTodosDocumentos(){
+		dbHelper.getDataBase().execSQL("insert into cliente_documento_enviar (nombre) SELECT nombrearchivo  FROM cliente_documento where islocal = 1");
+	}
 	
 	public long updateDocumento(int clienteId,DocumentoTO documentoTO){
 		
@@ -81,6 +109,7 @@ public class ClienteDAO {
 	
 	return documentos;
 	}
+	
 	public ArrayList<DocumentoTO> listarDocumentos(int id){
 		
 		String SQL = "SELECT ifnull(CD.clienteDocumentoId,0) as id,TD.documentoId,TD.descripcion,TD.obligatorio,ifnull(CD.nombrearchivo,'') as nombrearchivo " +

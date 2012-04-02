@@ -19,23 +19,30 @@ public class ClienteBLL {
 	@Inject protected ClienteDAO clienteDAO;
 
 	public ArrayList<FileTO> listarDocumentosEnviar(){
-		return null;
-	}
-	
-	public void deleteDocumento(long id){
+		ArrayList<FileTO> archivos = null;
 		
-	}
-	/*
-	public void deleteAllDocumentos(long id){
 		try {
 			dbHelper.openDataBase();
-			clienteDAO.deleteDocumentos(id);
+			archivos = clienteDAO.listarDocumentosEnviar();
 		} catch (Exception e) {
-			Log.e(TAG_LOG, "deleteAllDocumentos", e);
+			Log.e(TAG_LOG, "listarDocumentosEnviar", e);
 		} finally {
 			dbHelper.close();
 		}
-	}*/
+		
+		return archivos;
+	}
+	
+	public void deleteDocumento(long id){
+		try {
+			dbHelper.openDataBase();
+			clienteDAO.deleteDocumento(id);
+		} catch (Exception e) {
+			Log.e(TAG_LOG, "deleteDocumento", e);
+		} finally {
+			dbHelper.close();
+		}
+	}
 	
 	public long guardarDocumento(int clienteId,DocumentoTO documentoTO){
 		long id = documentoTO.getId();
@@ -104,10 +111,14 @@ public class ClienteBLL {
 	public void deleteAll() {
 		try {
 			dbHelper.openDataBase();
+			dbHelper.beginTransaction();
+			clienteDAO.copiarTodosDocumentos();
 			clienteDAO.deleteAll();
+			dbHelper.setTransactionSuccessful();
 		} catch (Exception e) {
 			Log.e(TAG_LOG, "deleteAll", e);
 		} finally {
+			dbHelper.endTransaction();
 			dbHelper.close();
 		}
 	}
