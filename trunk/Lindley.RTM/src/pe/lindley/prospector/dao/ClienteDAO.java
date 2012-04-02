@@ -131,7 +131,7 @@ public class ClienteDAO {
 	
 	public ArrayList<DocumentoTO> listarDocumentos(int id){
 		
-		String SQL = "SELECT ifnull(CD.clienteDocumentoId,0) as id,TD.documentoId,TD.descripcion,TD.obligatorio,ifnull(CD.nombrearchivo,'') as nombrearchivo " +
+		String SQL = "SELECT ifnull(CD.clienteDocumentoId,0) as id,TD.documentoId,TD.descripcion,TD.obligatorio,ifnull(CD.nombrearchivo,'') as nombrearchivo,cd.islocal " +
 					"FROM cliente_tipo_documento TD left join cliente_documento CD on TD.DocumentoId = CD.DocumentoId " +
 					"and CD.ClienteId = ?";
 		
@@ -151,6 +151,7 @@ public class ClienteDAO {
 			documentoTO.setDescripcion(cursor.getString(cursor.getColumnIndex("descripcion")));
 			documentoTO.setObligatorio(cursor.getInt(cursor.getColumnIndex("obligatorio")));
 			documentoTO.setNombreArchivo(cursor.getString(cursor.getColumnIndex("nombrearchivo")));
+			documentoTO.setEsLocal(cursor.getInt(cursor.getColumnIndex("islocal")));
 			documentos.add(documentoTO);
 		}
 		

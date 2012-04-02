@@ -87,6 +87,12 @@
 	<item name="android:textColor">@color/custom_theme_color_negro</item>
 </style>
 
+<style name="MyListView" parent="@android:style/Widget.ListView">
+ 	<!-- item name="android:listSelector">@drawable/list_selector</item-->
+ 	<item name="android:cacheColorHint">#00000000</item>
+ 	 
+</style>
+
 
 <style name="CustomTheme">
 
@@ -109,6 +115,7 @@
  	<item name="android:editTextStyle">@style/EditTextCustom</item>
  	<item name="android:textViewStyle">@style/TextViewCustom</item>
  	<item name="android:buttonStyle">@style/ButtonCustom</item>
+ 	<item name="android:listViewStyle">@style/MyListView</item>
 </style>
 
 <style name="CustomThemeWhite">
@@ -133,6 +140,7 @@
  	<item name="android:editTextStyle">@style/EditTextCustom</item>
  	<item name="android:textViewStyle">@style/TextViewCustom</item>
  	<item name="android:buttonStyle">@style/ButtonCustom</item>
+ 	<item name="android:listViewStyle">@style/MyListView</item>
 </style>
 
 </resources>

@@ -16,6 +16,9 @@
     <string name="menu_inicio_ficha">Desarrollo Cliente</string>
     <string name="menu_inicio_mmil">MMil</string>
     <string name="menu_inicio_ventacero">Venta Cero</string>
+    
+    <!-- VER FOTO WEB -->
+    <string name="ver_foto_web_title">Documento</string>
     <!-- LOGIN ACTIVITY -->
     <string name="login_activity_title">Corporación Lindley</string>
     <string name="login_activity_ok">Bienvenido: %s.</string>
