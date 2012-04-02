@@ -78,6 +78,11 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
     	
     	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
     	
+    	if(adap == null)
+    	{
+	    	adap = new EfficientAdapter(getApplicationContext(), new ArrayList<OportunidadTO>());
+    	}
+    	
     	for (OportunidadTO oportunidad : adap.detalles) {
     		if(Integer.parseInt(oportunidad.getPuntosCocaCola())>0){
     			oportunidadesDesarrollador.add(oportunidad);
@@ -237,7 +242,6 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 					txtViewFecha.setText(oportunidades.get(0).getFecha());
 				}
 				setListAdapter(adap);
-				//adap.oportunidades=0;
 			}
 			else  {
 				showToast(consultarOportunidadProxy.getResponse().getDescripcion());

@@ -10,6 +10,7 @@ import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.FotoBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.CompromisoPosicionTO;
+import lindley.desarrolloxcliente.to.CompromisoTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
@@ -111,8 +112,8 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 						.getResponse().getListaCompromisos();	
 				application.posicionAdapter =new EfficientAdapter(this, posiciones); 
 				final Calendar c = Calendar.getInstance();      
-				if(posiciones.size()>0)
-					txtViewFecha.setText(c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH)) + "/" + c.get(Calendar.YEAR));
+				if(posiciones.size()>0)					
+					txtViewFecha.setText(c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH)+1) + "/" + c.get(Calendar.YEAR));
 				setListAdapter(application.posicionAdapter);
 			}
 			else  {
@@ -145,22 +146,38 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
     @Override
 	protected boolean executeAsyncPre(int accion) {
 		// TODO Auto-generated method stub
-		boolean tieneError=false;
-		if(accion == ACCION_ACTUALIZAR)
-       	{      
-			if(application.posicionAdapter == null)
-			{
-				showToast("Debe actualizar los datos de la pesta–a Posiciones");
-				tieneError=true;
+		boolean openAdapterVacio = false;
+		boolean posicionAdapterVacio = false;
+		boolean presentacionAdapterVacio = false;
+		if(accion == ACCION_ACTUALIZAR || accion == ACCION_CERRAR)
+       	{    
+			if(application.openAdapter == null || application.openAdapter.detalles.isEmpty())
+			{				
+				application.openAdapter = new CompromisoOpen_Activity.EfficientAdapter(this, new ArrayList<CompromisoTO>());
+				openAdapterVacio = true;
 			}
-			if(application.presentacionAdapter == null)
+			if(application.posicionAdapter == null || application.posicionAdapter.posiciones.isEmpty())
+			{				
+				application.posicionAdapter = new EfficientAdapter(this, new ArrayList<PosicionCompromisoTO>());
+				posicionAdapterVacio = true;
+			}
+			if(application.presentacionAdapter == null || application.presentacionAdapter.detalles.isEmpty())
 			{
-				showToast("Debe actualizar los datos de la pesta–a Presentacion");
-				tieneError=true;
+				application.presentacionAdapter = new CompromisoPresentacionOpen_Activity.EfficientAdapter(this, new ArrayList<PresentacionCompromisoTO>());
+				presentacionAdapterVacio = true;
 			}
 				
        	}
-		return !tieneError;
+		
+		if(openAdapterVacio && posicionAdapterVacio && presentacionAdapterVacio)
+		{			
+			showToast("Debe editar los datos.");
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 
 	@Override
@@ -234,6 +251,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
        		if (isExito) {
        			int status = cerrarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
+       				setAdapterApplication();
        				showToast("Los registros se cerrar—n satisfactoriamente.");
        				Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
 					startActivity(cabecera);
@@ -252,7 +270,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
        		if (isExito) {
        			int status = actualizarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
-       				
+       				setAdapterApplication();
        				showToast("Los registros se actualizaron correctamente.");
        				
        				Intent intentService = new Intent("lindley.desarrolloxcliente.uploadFileService");
@@ -271,6 +289,13 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
     	}   		
    		super.processOk();
    	} 
+    
+    private void setAdapterApplication() {
+		// TODO Auto-generated method stub
+    	application.openAdapter = null;
+    	application.posicionAdapter = null;
+    	application.presentacionAdapter = null;
+	}
     
     @Override
 	protected void processError(int accion) {
@@ -451,12 +476,13 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 			    	   
 					   String fecha = posicionTO.getFechaCompromiso();
 					   final Calendar c = Calendar.getInstance();
-					      if(fecha.length() >= 7)
+					   if(fecha.length() >= 7)
 					      {
 					    	  anio =  Integer.parseInt(fecha.substring(0, 4));
-					    	  mes  =  Integer.parseInt(fecha.substring(4, 6));					    	  
+					    	  mes  =  Integer.parseInt(fecha.substring(4, 6))-1;
 					    	  dia  =  Integer.parseInt(fecha.substring(6));
-					    	  if (dia>=30 && mes == 2)
+					    	  c.set(anio, mes, dia);					    	  
+					    	  if (dia>=30 && mes == 1)
 					    		  dia = c.get(Calendar.DAY_OF_MONTH);
 					    	  else if (dia>=30)
 					    		  dia = c.get(Calendar.DAY_OF_MONTH);

@@ -54,6 +54,11 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
     	
     	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
     	
+    	if(adap == null)
+    	{
+	    	adap = new EfficientAdapter(getApplicationContext(), new ArrayList<PosicionTO>());
+    	}
+    	
     	for (PosicionTO posicion : adap.detalles) {
     		
     		if(posicion.isSeleccionado()){
@@ -130,7 +135,7 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
 				adap = new EfficientAdapter(this, posiciones);				
 				final Calendar c = Calendar.getInstance();      
 				if(posiciones.size()>0)
-					txtViewFecha.setText(c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH)) + "/" + c.get(Calendar.YEAR));
+					txtViewFecha.setText(c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.YEAR));
 				setListAdapter(adap);
 			}
 			else  {
