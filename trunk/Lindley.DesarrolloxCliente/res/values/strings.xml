@@ -85,5 +85,6 @@
     <string name="verproductoscanje_activity_title">Productos Canje</string>
     <string name="articulo_descripcion">Articulo Canje</string>
     <string name="puntos_ariculo">Puntos</string>
+    <string name="compromiso_quitar">Quitar</string>
     
 </resources>

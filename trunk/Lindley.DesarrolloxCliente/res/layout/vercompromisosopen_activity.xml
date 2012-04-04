@@ -70,6 +70,16 @@
             android:onClick="btnAgregar_click"
             android:text="@string/compromiso_agregar" >
         </Button>
+        
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:focusable="false"
+            android:onClick="btnQuitar_click"
+            android:text="@string/compromiso_quitar" >
+        </Button>
 
         <Button
             android:layout_width="wrap_content"

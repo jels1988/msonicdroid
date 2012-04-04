@@ -64,7 +64,7 @@
                 <TableLayout
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/tableLayout"
-                    android:layout_width="1500dip"
+                    android:layout_width="2000dip"
                     android:layout_height="wrap_content"
                     android:shrinkColumns="*"
                     android:stretchColumns="*" >
@@ -91,11 +91,23 @@
                             android:layout_height="wrap_content"
                             android:text="SOVI"
                             style="@style/TextViewLabel" />
+                        
+                        <TextView
+                            android:layout_width="50dip"
+                            android:layout_height="wrap_content"
+                            android:text="SOVI Comp."
+                            style="@style/TextViewLabel" />
 
                         <TextView
                             android:layout_width="70dip"
                             android:layout_height="wrap_content"
                             android:text="Cumple Precio"
+                            style="@style/TextViewLabel" />
+                        
+                        <TextView
+                            android:layout_width="70dip"
+                            android:layout_height="wrap_content"
+                            android:text="Cumple Precio Cmp."
                             style="@style/TextViewLabel" />
 
                         <TextView
