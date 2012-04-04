@@ -16,15 +16,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
             
-            <TextView                
+            <TextView
                 android:id="@+id/txViewComp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dip"
+                android:gravity="center_vertical"
                 android:clickable="true"
                 android:maxLength="100"
                 android:text="" />
                         
         </TableRow>
+        
+             <View
+            android:layout_height="2dip"
+            android:background="#FF909090" />
 
     </TableLayout>
     

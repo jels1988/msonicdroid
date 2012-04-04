@@ -31,6 +31,16 @@
              android:layout_height="wrap_content"             
              android:text="SI" />
      </RadioGroup>
+    <TextView android:text="Observación: " android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+
+    <EditText
+        android:id="@+id/txtObsSS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"        
+        android:maxLength="150" >		
+        <requestFocus />
+    </EditText>
     
     <TextView android:text="¿Tiene Combos MS ?" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
      <RadioGroup
@@ -59,8 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"        
-        android:maxLength="150" >		
-        <requestFocus />
+        android:maxLength="150" >	
     </EditText>
     
     <Button android:layout_width="wrap_content" 

@@ -45,7 +45,7 @@
             android:orientation="vertical" >
 
             <TableLayout
-                android:layout_width="800dip"
+                android:layout_width="500dip"
                 android:layout_height="wrap_content"
                 android:shrinkColumns="*"
                 android:stretchColumns="*" >
@@ -54,12 +54,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" >
 
-                    <TextView
-                        style="@style/TextViewLabel"
-                        android:layout_width="20dip"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Selección" />
+<!--                     <TextView -->
+<!--                         android:visibility="gone" -->
+<!--                         style="@style/TextViewLabel" -->
+<!--                         android:layout_width="20dip" -->
+<!--                         android:layout_height="wrap_content" -->
+<!--                         android:gravity="center" -->
+<!--                         android:text="Selección" /> -->
 
                     <TextView
                         style="@style/TextViewLabel"
