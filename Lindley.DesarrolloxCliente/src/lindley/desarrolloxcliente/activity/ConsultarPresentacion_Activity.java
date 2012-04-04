@@ -25,9 +25,6 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
@@ -59,11 +56,6 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
     	
     	
     	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
-    	
-    	if(adap == null)
-    	{
-	    	adap = new EfficientAdapter(getApplicationContext(), new ArrayList<PresentacionTO>());
-    	}
     	
     	for (PresentacionTO presentacion : adap.detalles) {
     		/*if(oportunidad.getAccioneTrade().compareTo("")!=0){
@@ -200,7 +192,7 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
 				adap = new EfficientAdapter(this, presentaciones);				
 				final Calendar c = Calendar.getInstance();      
 				if(presentaciones.size()>0)
-					txtViewFecha.setText(c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.YEAR));
+					txtViewFecha.setText(pad(c.get(Calendar.DAY_OF_MONTH)) + "/" + pad((c.get(Calendar.MONTH) + 1)) + "/" + c.get(Calendar.YEAR));
 				setListAdapter(adap);
 			}
 			else  {
@@ -231,6 +223,8 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
     			op.setListaAccionesTrade(null);
     		}
     		List<OportunidadTO> oportunidadDesarrollador = application.getOportunidadesDesarrollador();
+    		if(oportunidadDesarrollador == null)
+    			oportunidadDesarrollador = new ArrayList<OportunidadTO>();
     		for(OportunidadTO op : oportunidadDesarrollador)
     		{    		
     			op.setListaAccionesTrade(null);
@@ -310,7 +304,7 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
 	        // we want to bind data to.
 	        holder = new ViewHolder();
 	        	        	        	    	
-	        holder.chkSeleccion = (CheckBox) convertView.findViewById(R.id.chkSeleccion);
+//	        holder.chkSeleccion = (CheckBox) convertView.findViewById(R.id.chkSeleccion);
 	        holder.txViewVariable = (TextView) convertView.findViewById(R.id.txViewVariable);
 	        holder.txViewPuntos = (TextView) convertView.findViewById(R.id.txViewPuntos);
 	        holder.btnSKU = (Button) convertView.findViewById(R.id.btnSKU);        
@@ -325,18 +319,18 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
 	      holder.txViewVariable.setText(presentacionTO.getDescripcionVariable());
 	      holder.txViewPuntos.setText(presentacionTO.getPuntosSugeridos());
 	      
-	      holder.chkSeleccion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-				
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					// TODO Auto-generated method stub
-					if(isChecked){
-						presentacionTO.setSeleccionado(true);
-					}else{
-						presentacionTO.setSeleccionado(false);
-					}
-				}
-			});
+//	      holder.chkSeleccion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//				
+//				@Override
+//				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//					// TODO Auto-generated method stub
+//					if(isChecked){
+//						presentacionTO.setSeleccionado(true);
+//					}else{
+//						presentacionTO.setSeleccionado(false);
+//					}
+//				}
+//			});
 	      
 	      holder.btnSKU.setOnClickListener(new OnClickListener() {
 				@Override
@@ -353,7 +347,7 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
 	    }
 
 	    static class ViewHolder {   
-	    	CheckBox chkSeleccion;
+//	    	CheckBox chkSeleccion;
 	    	TextView txViewVariable;
 	    	TextView txViewPuntos;  	
 	    	Button   btnSKU;
@@ -389,4 +383,11 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
 	    }
 
 	  }
+    
+    private static String pad(int c) {
+		if (c >= 10)
+			return String.valueOf(c);
+		else
+			return "0" + String.valueOf(c);
+	}
 }

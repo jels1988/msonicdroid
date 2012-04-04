@@ -11,18 +11,16 @@ import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PosicionTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarPosicionProxy;
 import net.msonic.lib.ListActivityBase;
-import roboguice.inject.InjectExtra;
+import net.msonic.lib.MessageBox;
 import roboguice.inject.InjectView;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
@@ -32,14 +30,18 @@ import com.thira.examples.actionbar.widget.ActionBar;
 
 public class ConsultarPosicion_Activity extends ListActivityBase {
 
-	public static final String RESPUESTA = "rspta";
+	//public static final String RESPUESTA = "rspta";
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarPosicionProxy consultarPosicionProxy;
 	private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	ClienteTO cliente;
 	private MyApplication application;
-	@InjectExtra(RESPUESTA) String respuesta;
+	//@InjectExtra(RESPUESTA) String respuesta;
+	String respuesta;
+
+	public final String RESPUESTA_SI = "S";
+	public final String RESPUESTA_NO = "N";
 	
 	public void btnSiguiente_click(View view)
     {
@@ -53,7 +55,7 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
     	
     	
     	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
-    	
+
     	if(adap == null)
     	{
 	    	adap = new EfficientAdapter(getApplicationContext(), new ArrayList<PosicionTO>());
@@ -112,7 +114,23 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
 		cliente = application.getClienteTO();
 		mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
-        processAsync(); 
+    	MessageBox.showConfirmDialog(this, "Activos", "¿Tiene activos de la empresa ?", "SI", new android.content.DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub	
+				respuesta = RESPUESTA_SI;
+		        processAsync(); 
+			}
+			
+		}, "NO", new android.content.DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				respuesta = RESPUESTA_NO;
+		        processAsync(); 
+			}
+			
+		});    	
     }
     
     @Override
@@ -135,7 +153,7 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
 				adap = new EfficientAdapter(this, posiciones);				
 				final Calendar c = Calendar.getInstance();      
 				if(posiciones.size()>0)
-					txtViewFecha.setText(c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.YEAR));
+					txtViewFecha.setText(pad(c.get(Calendar.DAY_OF_MONTH)) + "/" + pad((c.get(Calendar.MONTH) + 1)) + "/" + c.get(Calendar.YEAR));
 				setListAdapter(adap);
 			}
 			else  {
@@ -186,7 +204,7 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
 	        // we want to bind data to.
 	        holder = new ViewHolder();
 	        	        	        	    	
-	        holder.chkSeleccion = (CheckBox) convertView.findViewById(R.id.chkSeleccion);
+//	        holder.chkSeleccion = (CheckBox) convertView.findViewById(R.id.chkSeleccion);
 	        holder.txViewVariable = (TextView) convertView.findViewById(R.id.txViewVariable);
 	        holder.txViewRed = (TextView) convertView.findViewById(R.id.txViewRed);
 	        holder.txViewMaximo = (TextView) convertView.findViewById(R.id.txViewMaximo);
@@ -206,24 +224,24 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
 	      holder.txViewDiferencia.setText(posicionTO.getDiferencia());
 	      holder.txViewPuntos.setText(posicionTO.getPuntosSugeridos());
 	      
-	      holder.chkSeleccion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-				
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					// TODO Auto-generated method stub
-					if(isChecked){
-						posicionTO.setSeleccionado(true);
-					}else{
-						posicionTO.setSeleccionado(false);
-					}
-				}
-			});
-	      	      
+//	      holder.chkSeleccion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//				
+//				@Override
+//				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//					// TODO Auto-generated method stub
+//					if(isChecked){
+//						posicionTO.setSeleccionado(true);
+//					}else{
+//						posicionTO.setSeleccionado(false);
+//					}
+//				}
+//			});
+//	      	      
 	      return convertView;
 	    }
 
 	    static class ViewHolder {   
-	    	CheckBox chkSeleccion;
+//	    	CheckBox chkSeleccion;
 	    	TextView txViewVariable;
 	    	TextView txViewRed;
 	    	TextView txViewMaximo;
@@ -261,5 +279,11 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
 	    }
 
 	  }
-
+    
+    private static String pad(int c) {
+		if (c >= 10)
+			return String.valueOf(c);
+		else
+			return "0" + String.valueOf(c);
+	}
 }

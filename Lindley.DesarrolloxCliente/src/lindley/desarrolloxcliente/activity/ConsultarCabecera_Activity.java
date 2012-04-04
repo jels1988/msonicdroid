@@ -43,14 +43,14 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 		mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
     }
-    
+
     @Override
     public void onBackPressed() {
     // check if page 2 is open
     	Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
 		startActivity(intent);
     }
-
+    
     @Override
 	protected void onStart() {
 		// TODO Auto-generated method stub

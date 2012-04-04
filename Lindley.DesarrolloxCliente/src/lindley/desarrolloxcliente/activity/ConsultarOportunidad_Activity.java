@@ -1,5 +1,6 @@
 package lindley.desarrolloxcliente.activity;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,7 +75,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     	
     	
     	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
-    	
+
     	if(adap == null)
     	{
 	    	adap = new EfficientAdapter(getApplicationContext(), new ArrayList<OportunidadTO>());
@@ -86,9 +87,11 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     		}
 		}
     	
+
+    	int maximoValor = 2;
     	int filasSeleccionadas=oportunidades.size();
-    	if(filasSeleccionadas>3){
-    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede seleccionar como m‡ximo 3 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+    	if(filasSeleccionadas>maximoValor){
+    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede seleccionar como máximo " + maximoValor +" acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -185,6 +188,14 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	    	holder.txViewPBonus = (TextView) convertView.findViewById(R.id.txViewPBonus);
 	    	holder.btnProfit = (Button) convertView.findViewById(R.id.btnProfit);
 	        holder.chkSeleccion = (CheckBox) convertView.findViewById(R.id.chkSeleccion);
+	        
+//		      AccionTRADETO ACCIONTO = NEW ACCIONTRADETO();
+//		      ACCIONTO.SETCODIGO("0");
+//		      ACCIONTO.setDescripcion("--Seleccionar--");
+//		      oportunidad.getListaAccionesTrade().add(0, new AccionTradeTO("0","--Seleccionar--"));
+		        
+		      
+		      
 	    	
 	        convertView.setTag(holder);
 	      } else {
@@ -200,8 +211,12 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	      holder.txViewSabores.setText(oportunidad.getNumeroSabores());
 	      holder.txViewPCoca.setText(oportunidad.getPuntosCocaCola());
 	      
-	      holder.txViewPBonus.setText(oportunidad.getPuntosBonus());
+	      holder.txViewPBonus.setText(oportunidad.getPuntosBonus());	      
+
 	      holder.cboAccTrade.setAdapter(application.getAdapterAccionTrade(oportunidad.getListaAccionesTrade()));
+
+	      if(holder.cboAccTrade.getCount() > 1)
+	    	  holder.cboAccTrade.setSelection(1);
 	      
 	      holder.cboAccTrade.setOnItemSelectedListener(new OnItemSelectedListener() {
 

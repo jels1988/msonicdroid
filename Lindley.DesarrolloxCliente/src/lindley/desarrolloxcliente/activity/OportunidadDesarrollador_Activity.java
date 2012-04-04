@@ -77,7 +77,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
     	}
     	
     	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
-    	
+
     	if(adap == null)
     	{
 	    	adap = new EfficientAdapter(getApplicationContext(), new ArrayList<OportunidadTO>());
@@ -90,10 +90,11 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
     		}
 		}
     	
+    	int maximoValor = 2;
     	int filasSeleccionadas=oportunidadesDesarrollador.size();
     	
-    	if(filasSeleccionadas>2){
-    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede ingresar como m‡ximo 2 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+    	if(filasSeleccionadas>maximoValor){
+    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede ingresar como m‡ximo " + maximoValor + " acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
@@ -102,27 +103,9 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 			});	
     	}else{
     		final ArrayList<OportunidadTO> oportunidadesDesarrolladorAdd = oportunidadesDesarrollador;
-    		MessageBox.showConfirmDialog(this, "Activos", "ÀTiene ativos de la empresa ?", "SI", new android.content.DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					application.setOportunidadesDesarrollador(oportunidadesDesarrolladorAdd); 		
-		    		Intent intent = new Intent("lindley.desarrolloxcliente.consultarposicion");
-		    		intent.putExtra(ConsultarPosicion_Activity.RESPUESTA, RESPUESTA_SI);
-		    		startActivity(intent);
-				}
-				
-			}, "NO", new android.content.DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					application.setOportunidadesDesarrollador(oportunidadesDesarrolladorAdd); 		
-		    		Intent intent = new Intent("lindley.desarrolloxcliente.consultarposicion");
-		    		intent.putExtra(ConsultarPosicion_Activity.RESPUESTA, RESPUESTA_NO);
-		    		startActivity(intent);
-				}
-				
-			});
+    		application.setOportunidadesDesarrollador(oportunidadesDesarrolladorAdd); 		
+    		Intent intent = new Intent("lindley.desarrolloxcliente.consultarposicion");
+    		startActivity(intent);	
     	}
     	
     }
@@ -150,7 +133,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
     	int filasSeleccionadas=oportunidadesDesarrollador.size();
     	
     	if(filasSeleccionadas>2){
-    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede ingresar como m‡ximo 2 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede ingresar como máximo 2 acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
@@ -242,6 +225,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 					txtViewFecha.setText(oportunidades.get(0).getFecha());
 				}
 				setListAdapter(adap);
+				//adap.oportunidades=0;
 			}
 			else  {
 				showToast(consultarOportunidadProxy.getResponse().getDescripcion());
