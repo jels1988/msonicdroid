@@ -15,6 +15,9 @@ import net.msonic.lib.ProxyBase;
 public class CerrarCompromisoProxy extends ProxyBase<CerrarCompromisoResponse> {
 
 	@InjectResource(R.string.urlwsDesarrolloxCliente)protected String urlWS;
+	
+	public String codigoUsuario;
+	
 	private String codigoCabecera;
 	
 	private List<CompromisoTO> compromisos;
@@ -53,6 +56,7 @@ public class CerrarCompromisoProxy extends ProxyBase<CerrarCompromisoResponse> {
 		cerrarCompromisoRequest.setCompromisos(this.compromisos);
 		cerrarCompromisoRequest.listaPosicionCompromiso = this.listaPosicionCompromiso;
 		cerrarCompromisoRequest.listaPresentacionCompromiso = this.listaPresentacionCompromiso;
+		cerrarCompromisoRequest.codigoUsuario = this.codigoUsuario;
 		String request = JSONHelper.serializar(cerrarCompromisoRequest);
 		return request;
 	}
