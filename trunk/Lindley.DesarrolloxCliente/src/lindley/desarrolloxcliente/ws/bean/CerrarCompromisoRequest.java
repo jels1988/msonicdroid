@@ -10,6 +10,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class CerrarCompromisoRequest {
 
+	@SerializedName("USCIE")
+	public String codigoUsuario;
+	
 	@SerializedName("COD")
 	private String codigoCabecera;
 
