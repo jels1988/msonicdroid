@@ -17,6 +17,7 @@ import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.UpdatePosicionTO;
 import lindley.desarrolloxcliente.to.UpdatePresentacionTO;
 import lindley.desarrolloxcliente.to.UpdateSKUPresentacionTO;
+import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarPosicionCompromisoProxy;
@@ -77,6 +78,8 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	public static ClienteTO cliente;
 	public static MyApplication application;
 	
+	@InjectView(R.id.btnGuardar) Button btnGuardar;
+	@InjectView(R.id.btnCerrar) Button btnCerrar;
 	
 	public static String file_name="";
 	private static final int TAKE_PHOTO_INICIAL_CODE = 1;
@@ -92,6 +95,15 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		cliente = application.getClienteTO();
 		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
         processAsync(); 
+        
+        if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
+	    {
+        	btnGuardar.setVisibility(View.GONE);
+	    }
+        else
+        {
+        	btnCerrar.setVisibility(View.GONE);
+        }
     }
     
     @Override
@@ -112,8 +124,8 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 						.getResponse().getListaCompromisos();	
 				application.posicionAdapter =new EfficientAdapter(this, posiciones); 
 				final Calendar c = Calendar.getInstance();      
-				if(posiciones.size()>0)					
-					txtViewFecha.setText(c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH)+1) + "/" + c.get(Calendar.YEAR));
+				if(posiciones.size()>0)
+					txtViewFecha.setText(pad(c.get(Calendar.DAY_OF_MONTH)) + "/" + pad((c.get(Calendar.MONTH) + 1)) + "/" + c.get(Calendar.YEAR));
 				setListAdapter(application.posicionAdapter);
 			}
 			else  {
@@ -231,6 +243,8 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
     		cerrarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
     		cerrarCompromisoProxy.setCompromisos(application.openAdapter.detalles);
        		cerrarCompromisoProxy.setCodigoCabecera(codigoGestion);
+       		UsuarioTO user = application.getUsuarioTO();
+    		cerrarCompromisoProxy.codigoUsuario = user.getCodigoSap();
        		cerrarCompromisoProxy.execute();
        	}
        	else if(accion == ACCION_ACTUALIZAR)
@@ -252,7 +266,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
        			int status = cerrarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
        				setAdapterApplication();
-       				showToast("Los registros se cerrar—n satisfactoriamente.");
+       				showToast("Los registros se cerrarón satisfactoriamente.");
        				Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
 					startActivity(cabecera);
        			}
@@ -271,7 +285,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
        			int status = actualizarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
        				setAdapterApplication();
-       				showToast("Los registros se actualizaron correctamente.");
+       				showToast("Los registros se actualizarón correctamente.");
        				
        				Intent intentService = new Intent("lindley.desarrolloxcliente.uploadFileService");
        				startService(intentService);

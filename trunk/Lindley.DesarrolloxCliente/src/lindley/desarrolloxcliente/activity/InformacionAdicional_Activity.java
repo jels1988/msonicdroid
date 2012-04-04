@@ -19,12 +19,14 @@ import net.msonic.lib.ActivityBase;
 public class InformacionAdicional_Activity extends ActivityBase {
 
 	private static final String AGRUPACION_INVENTARIO = "1";
+	private static final String OPORTUNIDAD_DESARROLLADOR_ABIERTO = "A";
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	ClienteTO cliente;
 	UsuarioTO usuario;
 	private  MyApplication application;
 	InformacionAdicionalTO informacion;
 	@InjectView(R.id.txtObs) EditText txtObs;
+	@InjectView(R.id.txtObsSS) EditText txtObsSS;
 	@InjectView(R.id.radSSSi) RadioButton radSSSi;
 	@InjectView(R.id.radSSNo) RadioButton radSSNo;
 	@InjectView(R.id.radMSSi) RadioButton radMSSi;
@@ -65,12 +67,23 @@ public class InformacionAdicional_Activity extends ActivityBase {
 			informacion.setObservacion(" ");
 		else
 			informacion.setObservacion(txtObs.getText().toString());
+		informacion.setObservacionSS(txtObsSS.getText().toString());
 		informacion.setCodigoUsuario(usuario.getCodigoSap());
 		informacion.setCodigoCliente(cliente.getCodigo());
 		informacion.setTipoAgrupacion(AGRUPACION_INVENTARIO);
 		application.setInformacionAdicional(informacion);
 		
-		Intent intent = new Intent("lindley.desarrolloxcliente.oportunidaddesarrollador");
-		startActivity(intent);
+		Intent intent;
+		String a = "C";
+		if(a.equals(OPORTUNIDAD_DESARROLLADOR_ABIERTO))
+		{
+			intent= new Intent("lindley.desarrolloxcliente.oportunidaddesarrollador");		
+			startActivity(intent);
+		}
+		else
+		{
+			intent = new Intent("lindley.desarrolloxcliente.consultarposicion");
+			startActivity(intent);
+		}
 	}
 }

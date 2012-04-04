@@ -49,6 +49,12 @@ public class VerCompromisosOpen_Activity extends ListActivityBase {
 	
 	public void btnGuardar_click(View view)
 	{
+		for(CompromisoPosicionTO comp : application.listCompromiso)
+		{
+			if(comp.getDescripcion().equals(""))
+				comp.setDescripcion("  ");
+			
+		}
 		finish();
 	}
 	
@@ -57,6 +63,13 @@ public class VerCompromisosOpen_Activity extends ListActivityBase {
 		CompromisoPosicionTO compromiso = new CompromisoPosicionTO();
 		compromiso.setDescripcion("");
 		application.listCompromiso.add(compromiso);
+		adap.notifyDataSetChanged();
+	}
+	
+	public void btnQuitar_click(View view)
+	{
+		if(!application.listCompromiso.isEmpty())
+			application.listCompromiso.remove(application.listCompromiso.size()-1);
 		adap.notifyDataSetChanged();
 	}
 	

@@ -15,6 +15,7 @@ import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.UpdatePosicionTO;
 import lindley.desarrolloxcliente.to.UpdatePresentacionTO;
 import lindley.desarrolloxcliente.to.UpdateSKUPresentacionTO;
+import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarPresentacionCompromisoProxy;
@@ -66,6 +67,9 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 	ClienteTO cliente;
 	public static MyApplication application;
 	
+	@InjectView(R.id.btnGuardar) Button btnGuardar;
+	@InjectView(R.id.btnCerrar) Button btnCerrar;
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -76,6 +80,15 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 		cliente = application.getClienteTO();
 		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
 		processAsync();
+		
+		if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
+	    {
+        	btnGuardar.setVisibility(View.GONE);
+	    }
+        else
+        {
+        	btnCerrar.setVisibility(View.GONE);
+        }
 	}
 
 	@Override
@@ -98,9 +111,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 				application.presentacionAdapter = new EfficientAdapter(this, presentaciones);
 				final Calendar c = Calendar.getInstance();
 				if (presentaciones.size() > 0)
-					txtViewFecha.setText(c.get(Calendar.DAY_OF_MONTH) + "/"
-							+ (c.get(Calendar.MONTH)+1) + "/"
-							+ c.get(Calendar.YEAR));
+					txtViewFecha.setText(pad(c.get(Calendar.DAY_OF_MONTH)) + "/" + pad((c.get(Calendar.MONTH) + 1)) + "/" + c.get(Calendar.YEAR));
 				setListAdapter(application.presentacionAdapter);
 			} else {
 				showToast(consultarPresentacionProxy.getResponse()
@@ -216,6 +227,8 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
     		cerrarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
     		cerrarCompromisoProxy.setCompromisos(application.openAdapter.detalles);
        		cerrarCompromisoProxy.setCodigoCabecera(codigoGestion);
+       		UsuarioTO user = application.getUsuarioTO();
+    		cerrarCompromisoProxy.codigoUsuario = user.getCodigoSap();
        		cerrarCompromisoProxy.execute();
        	}
        	else if(accion == ACCION_ACTUALIZAR)
@@ -256,7 +269,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
        			int status = actualizarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
        				setAdapterApplication();
-       				showToast("Los registros se actualizaron correctamente.");
+       				showToast("Los registros se actualizarón correctamente.");
        				
        				Intent intentService = new Intent("lindley.desarrolloxcliente.uploadFileService");
        				startService(intentService);

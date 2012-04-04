@@ -81,7 +81,7 @@ public class VerCompromisosClose_Activity extends ListActivityBase {
 			final ViewHolder holder = (ViewHolder) view.getTag();
 			final CompromisoPosicionTO compromisoTO = compromisos.get(position);
 			
-			holder.txViewComp.setText(compromisoTO.getDescripcion());
+			holder.txViewComp.setText(compromisoTO.getDescripcion().toUpperCase());
 			return view;
 		}
 

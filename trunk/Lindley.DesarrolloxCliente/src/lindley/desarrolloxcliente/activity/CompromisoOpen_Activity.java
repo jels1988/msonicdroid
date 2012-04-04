@@ -15,6 +15,7 @@ import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.UpdatePosicionTO;
 import lindley.desarrolloxcliente.to.UpdatePresentacionTO;
 import lindley.desarrolloxcliente.to.UpdateSKUPresentacionTO;
+import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCompromisoProxy;
@@ -69,6 +70,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	@InjectView(R.id.txtViewCliente) TextView txtViewCliente;
 	
+	@InjectView(R.id.btnGuardar) Button btnGuardar;
+	@InjectView(R.id.btnCerrar) Button btnCerrar;
+	
 	public static ClienteTO cliente;
 	public static MyApplication application;
 	List<CompromisoTO> compromisos;
@@ -85,6 +89,15 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 		cliente = application.getClienteTO();
 		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
         processAsync();
+        
+        if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
+	    {
+        	btnGuardar.setVisibility(View.GONE);
+	    }
+        else
+        {
+        	btnCerrar.setVisibility(View.GONE);
+        }
     }
     
     
@@ -194,6 +207,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     		cerrarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
     		cerrarCompromisoProxy.setCompromisos(application.openAdapter.detalles);
     		cerrarCompromisoProxy.setCodigoCabecera(codigoRegistro);
+    		UsuarioTO user = application.getUsuarioTO();
+    		cerrarCompromisoProxy.codigoUsuario = user.getCodigoSap();
     		cerrarCompromisoProxy.execute();
     	}
     	else if(accion == ACCION_ACTUALIZAR)
@@ -248,7 +263,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
        			int status = cerrarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
        				setAdapterApplication();
-       				showToast("Los registros se cerrar—n satisfactoriamente.");
+       				showToast("Los registros se cerrarón satisfactoriamente.");
        				Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
 					startActivity(cabecera);
        			}
@@ -267,7 +282,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
        			int status = actualizarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
        				setAdapterApplication();
-       				showToast("Los registros se actualizaron correctamente.");      				
+       				showToast("Los registros se actualizarón correctamente.");			
        				
        				Intent intentService = new Intent("lindley.desarrolloxcliente.uploadFileService");
        				startService(intentService);
@@ -362,8 +377,10 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	        holder.cboConcrecion = (TextView) convertView.findViewById(R.id.cboConcrecion);
 	        holder.chkConcrecion = (CheckBox) convertView.findViewById(R.id.chkConcrecion);
 	        holder.txViewSOVI =  (EditText) convertView.findViewById(R.id.txViewSOVI);
+	        holder.txViewSOVICmp =  (EditText) convertView.findViewById(R.id.txViewSOVICmp);
 	        holder.chkSOVI = (CheckBox) convertView.findViewById(R.id.chkSOVI);
 	        holder.cboCumPrecio =  (Spinner) convertView.findViewById(R.id.cboCumPrecio);
+	        holder.cboCumPrecioCmp =  (Spinner) convertView.findViewById(R.id.cboCumPrecioCmp);
 	        holder.chkPrecio = (CheckBox) convertView.findViewById(R.id.chkPrecio);
 	        holder.txViewSabores = (TextView) convertView.findViewById(R.id.txViewSabores);
 	        holder.chkSabores = (CheckBox) convertView.findViewById(R.id.chkSabores);
@@ -378,47 +395,11 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	    	holder.btnProfit = (Button) convertView.findViewById(R.id.btnProfit);
 	        
 	        convertView.setTag(holder);
-	     // } else {
-	        // Get the ViewHolder back to get fast access to the TextView
-	        // and the ImageView.
-	      //  holder = (ViewHolder) convertView.getTag();
-	     // }
 	      
 	      holder.txViewPro.setText(compromiso.getDescripcionProducto());
-	      //holder.txViewConcrecion.setText(compromiso.getConcrecion());
-	      ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter.createFromResource(application.getApplicationContext(),R.array.confirmacion,android.R.layout.simple_spinner_item);
-			adapterTipo.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-		  //holder.cboConcrecion.setAdapter(adapterTipo);
+	      
+	      
 			holder.cboConcrecion.setText(compromiso.getConcrecion());
-		  
-		  /*holder.cboConcrecion.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View arg1,
-					int arg2, long arg3) {
-				// TODO Auto-generated method stub
-				if(arg2==0){
-					compromiso.setConcrecion("S");
-				}else{
-					compromiso.setConcrecion("N");
-				}
-				
-				//notifyDataSetChanged();
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		  
-		  
-		  if(compromiso.getConcrecion().equals("S"))
-			  holder.cboConcrecion.setSelection(0);
-		  else 
-			  holder.cboConcrecion.setSelection(1);
-	      */
 		  
 		  holder.chkConcrecion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
@@ -448,7 +429,16 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 		});
 	      
 	      holder.txViewSOVI.setText(compromiso.getSovi());
+	      holder.txViewSOVICmp.setText(compromiso.getSoviCompromiso());
 	      
+	      holder.txViewSOVICmp.setOnFocusChangeListener(new OnFocusChangeListener() {
+				
+				@Override
+				public void onFocusChange(View v, boolean hasFocus) {
+					// TODO Auto-generated method stub
+					compromiso.setSoviCompromiso(holder.txViewSOVICmp.getText().toString());
+				}
+			});
 	      
 	      holder.chkSOVI.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				
@@ -487,10 +477,37 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 			}
 		});
 		  
-			  
-	      holder.cboCumPrecio.setAdapter(adapterTipo);
+		  holder.cboCumPrecioCmp.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+				@Override
+				public void onItemSelected(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					// TODO Auto-generated method stub
+					if(arg2==0){
+						compromiso.setCumplePrecioCompromiso("S");
+					}else{
+						compromiso.setCumplePrecioCompromiso("N");
+					}
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+
+	      ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(application.getApplicationContext(),R.array.confirmacion,android.R.layout.simple_spinner_item);
+		  adap.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+	      holder.cboCumPrecio.setAdapter(adap);
+	      holder.cboCumPrecioCmp.setAdapter(adap);
+		  		  
+	      
 		  if(compromiso.getCumplePrecio().equals("S"))holder.cboCumPrecio.setSelection(0);
 		  else holder.cboCumPrecio.setSelection(1);
+		  
+		  if(compromiso.getCumplePrecioCompromiso().equals("S"))holder.cboCumPrecioCmp.setSelection(0);
+		  else holder.cboCumPrecioCmp.setSelection(1);
 	      
 		  holder.chkPrecio.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				
@@ -554,7 +571,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	    	  holder.chkPrecio.setEnabled(false);
 	    	  holder.chkSOVI.setEnabled(false);
 	    	  holder.txViewSOVI.setEnabled(false);
+	    	  holder.txViewSOVICmp.setEnabled(false);
 	    	  holder.cboCumPrecio.setEnabled(false);
+	    	  holder.cboCumPrecioCmp.setEnabled(false);
 	      }
 	      else
 	      {
@@ -684,8 +703,10 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	    	TextView cboConcrecion;
 	    	CheckBox chkConcrecion;
 	    	EditText txViewSOVI;
+	    	EditText txViewSOVICmp;
 	    	CheckBox chkSOVI;
 	    	Spinner cboCumPrecio;
+	    	Spinner cboCumPrecioCmp;
 	    	CheckBox chkPrecio;
 	    	TextView txViewSabores;
 	    	CheckBox chkSabores;

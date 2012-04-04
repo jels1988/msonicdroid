@@ -180,7 +180,7 @@ public class VerProfit_Activity extends ActivityBase {
 		double[] varMargenActual = new double[sizeIndicadores];
 		double[] varCajaFaltante = new double[sizeIndicadores];
 		double[] varMargenFaltante = new double[sizeIndicadores];
-
+		
 		for (String nombre : indicadores) {
 			for (ProfitTO profitTO : detalle) {
 
