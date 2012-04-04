@@ -7,6 +7,9 @@ public class InformacionAdicionalTO {
 	@SerializedName("CSS")
 	private String comboSS;
 	
+	@SerializedName("OBSSS")
+	private String observacionSS;
+	
 	@SerializedName("CMS")
 	private String comboMS;
 	
@@ -68,5 +71,13 @@ public class InformacionAdicionalTO {
 
 	public void setTipoAgrupacion(String tipoAgrupacion) {
 		this.tipoAgrupacion = tipoAgrupacion;
+	}
+
+	public String getObservacionSS() {
+		return observacionSS;
+	}
+
+	public void setObservacionSS(String observacionSS) {
+		this.observacionSS = observacionSS;
 	}
 }

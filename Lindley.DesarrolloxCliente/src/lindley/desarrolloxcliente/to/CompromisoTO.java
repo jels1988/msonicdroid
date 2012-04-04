@@ -25,11 +25,17 @@ public class CompromisoTO {
 	@SerializedName("SOVI")
 	private String Sovi;
 
+	@SerializedName("SOVICM")
+	private String SoviCompromiso;
+	
 	@SerializedName("CSOVI")
 	private String ConfirmacionSovi;
 
 	@SerializedName("RPRE")
 	private String CumplePrecio;
+	
+	@SerializedName("RPRECM")
+	private String CumplePrecioCompromiso;
 
 	@SerializedName("CRPRE")
 	private String ConfirmacionCumplePrecio;
@@ -233,5 +239,21 @@ public class CompromisoTO {
 
 	public void setOrigen(String origen) {
 		this.origen = origen;
+	}
+
+	public String getSoviCompromiso() {
+		return SoviCompromiso;
+	}
+
+	public void setSoviCompromiso(String soviCompromiso) {
+		SoviCompromiso = soviCompromiso;
+	}
+
+	public String getCumplePrecioCompromiso() {
+		return CumplePrecioCompromiso;
+	}
+
+	public void setCumplePrecioCompromiso(String cumplePrecioCompromiso) {
+		CumplePrecioCompromiso = cumplePrecioCompromiso;
 	}
 }
