@@ -37,7 +37,7 @@
         
         <activity android:name=".activity.ConsultarCliente_Activity" android:configChanges="keyboardHidden|orientation">
             <intent-filter>
-                <action android:name="lindley.desarrolloxcliente.consultarcliente" />
+                <action android:name="lindley.desarrolloxcliente.consultarcliente" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
