@@ -9,6 +9,7 @@ public class PresentacionTO {
 	public PresentacionTO()
     {
         listaSKU = new ArrayList<SKUPresentacionTO>();
+        seleccionado = true;
     }
     
     @SerializedName("CVAR")

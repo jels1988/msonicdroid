@@ -4,6 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class PosicionTO {
 
+	public PosicionTO()
+	{
+		seleccionado = true;
+	}
+	
 	@SerializedName("CVAR")
 	private String codigoVariable;
 	
