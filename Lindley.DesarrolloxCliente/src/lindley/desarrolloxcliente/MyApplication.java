@@ -6,6 +6,8 @@ import net.msonic.lib.DBHelper;
 import net.msonic.lib.DBHelperProvider;
 
 
+import android.widget.ArrayAdapter;
+
 import com.google.inject.Inject;
 import com.google.inject.Module;
 import com.google.inject.Singleton;
@@ -13,7 +15,6 @@ import com.google.inject.Singleton;
 import lindley.desarrolloxcliente.activity.CompromisoOpen_Activity;
 import lindley.desarrolloxcliente.activity.CompromisoPosicionOpen_Activity;
 import lindley.desarrolloxcliente.activity.CompromisoPresentacionOpen_Activity;
-import lindley.desarrolloxcliente.adapter.AccionTradeTOAdapter;
 import lindley.desarrolloxcliente.dao.FotoDAO;
 import lindley.desarrolloxcliente.negocio.FotoBLL;
 import lindley.desarrolloxcliente.to.AccionTradeTO;
@@ -83,16 +84,35 @@ public class MyApplication extends RoboApplication {
 		this.clienteTO = clienteTO;
 	}
 	
-	public synchronized lindley.desarrolloxcliente.adapter.AccionTradeTOAdapter getAdapterAccionTrade(List<AccionTradeTO> listaAcciones){
+//	public synchronized lindley.desarrolloxcliente.adapter.AccionTradeTOAdapter getAdapterAccionTrade(List<AccionTradeTO> listaAcciones){
+//		ArrayList<AccionTradeTO> listaAccionTrade = new ArrayList<AccionTradeTO>();
+//		AccionTradeTO accionTradeTO = new AccionTradeTO();
+//		accionTradeTO.setCodigo("0");
+//		accionTradeTO.setDescripcion("--Seleccionar--");
+//		listaAccionTrade.addAll(listaAcciones);
+//		listaAccionTrade.add(0,accionTradeTO);		
+//		AccionTradeTOAdapter accionTradeTOAdapter = new AccionTradeTOAdapter( getApplicationContext(), listaAccionTrade);
+//		return accionTradeTOAdapter;
+//	}
+	
+	public synchronized ArrayAdapter<AccionTradeTO> getAdapterAccionTrade(List<AccionTradeTO> listaAcciones){
 		ArrayList<AccionTradeTO> listaAccionTrade = new ArrayList<AccionTradeTO>();
 		AccionTradeTO accionTradeTO = new AccionTradeTO();
 		accionTradeTO.setCodigo("0");
 		accionTradeTO.setDescripcion("--Seleccionar--");
 		listaAccionTrade.addAll(listaAcciones);
-		listaAccionTrade.add(0,accionTradeTO);		
-		AccionTradeTOAdapter accionTradeTOAdapter = new AccionTradeTOAdapter( getApplicationContext(), listaAccionTrade);
-		return accionTradeTOAdapter;
+		listaAccionTrade.add(0,accionTradeTO);				
+		
+		ArrayAdapter<AccionTradeTO> adapAccionTradeTO = new ArrayAdapter<AccionTradeTO>( getApplicationContext(), android.R.layout.simple_spinner_item, listaAccionTrade);
+	    adapAccionTradeTO.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		
+		
+		return adapAccionTradeTO;
 	}
+	//ArrayAdapter<AccionTradeTO> adapAccionTradeTO = new ArrayAdapter<AccionTradeTO>( (ConsultarOportunidad_Activity)context, android.R.layout.simple_spinner_item, oportunidad.getListaAccionesTrade());
+    //adapAccionTradeTO.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    //holder.cboAccTrade.setAdapter(adapAccionTradeTO);
+    
 	
 	@Override
 	protected void addApplicationModules(List<Module> modules){	
