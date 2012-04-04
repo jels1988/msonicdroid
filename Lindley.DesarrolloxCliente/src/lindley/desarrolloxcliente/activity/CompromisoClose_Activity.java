@@ -127,7 +127,9 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	        holder.txViewPro = (TextView) convertView.findViewById(R.id.txViewPro); 
 	        holder.txViewConcrecion = (TextView) convertView.findViewById(R.id.txViewConcrecion);
 	        holder.txViewSOVI =  (TextView) convertView.findViewById(R.id.txViewSOVI);
-	        holder.txViewCumPrecio =  (TextView) convertView.findViewById(R.id.txViewCumPrecio);   
+	        holder.txViewSOVICmp =  (TextView) convertView.findViewById(R.id.txViewSOVICmp);
+	        holder.txViewCumPrecio =  (TextView) convertView.findViewById(R.id.txViewCumPrecio);
+	        holder.txViewCumPrecioCmp =  (TextView) convertView.findViewById(R.id.txViewCumPrecioCmp);
 	        holder.txViewSabores = (TextView) convertView.findViewById(R.id.txViewSabores);  	    	
 	    	holder.txViewPCoca = (TextView) convertView.findViewById(R.id.txViewPCoca);		    	
 	    	holder.txViewAccTrade = (TextView) convertView.findViewById(R.id.txViewAccTrade);	          	
@@ -145,12 +147,14 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	      holder.txViewPro.setText(compromiso.getDescripcionProducto());
 	      holder.txViewConcrecion.setText(compromiso.getConcrecion());
 	      holder.txViewSOVI.setText(compromiso.getSovi());
+	      holder.txViewSOVICmp.setText(compromiso.getSoviCompromiso());
 	      holder.txViewCumPrecio.setText(compromiso.getCumplePrecio());
+	      holder.txViewCumPrecioCmp.setText(compromiso.getCumplePrecioCompromiso());
 	      holder.txViewSabores.setText(compromiso.getNumeroSabores());
 	      holder.txViewPCoca.setText(compromiso.getPuntosCocaCola());
 	      holder.txViewAccTrade.setText(compromiso.getDescripcionAccion());
 	      if(compromiso.getCumplio().equals("0")) holder.txViewSN.setText("N");
-	      else holder.txViewSN.setText("S");
+	      else holder.txViewSN.setText("1");
 	      holder.txViewPBonus.setText(compromiso.getPuntosBonus());
 	      
 	      holder.btnProfit.setOnClickListener(new OnClickListener() {
@@ -174,7 +178,9 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	    	TextView txViewPro;
 	    	TextView txViewConcrecion;
 	    	TextView txViewSOVI;
+	    	TextView txViewSOVICmp;
 	    	TextView txViewCumPrecio;
+	    	TextView txViewCumPrecioCmp;
 	    	TextView txViewSabores;  	    	
 	    	TextView txViewPCoca;    	
 	    	TextView txViewAccTrade;    	
@@ -215,3 +221,4 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	  }
 
 }
+
