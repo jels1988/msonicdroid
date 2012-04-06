@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -24,7 +25,7 @@ public class TablaTOAdapter extends TOSpinnerAdapter<TablaTO> {
 		TextView v = new TextView(this.context);
 		v.setTextColor(Color.BLACK);
 		v.setText(data.get(position).getDescripcion());
-
+		v.setTextSize(TypedValue.COMPLEX_UNIT_DIP ,15);
 		return v;
 	}
 

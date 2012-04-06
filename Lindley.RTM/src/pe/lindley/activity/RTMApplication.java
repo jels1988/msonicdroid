@@ -271,6 +271,7 @@ public class RTMApplication extends RoboApplication {
 		if(adapterSubCanal==null){
 			
 			
+			
 			ArrayList<TablaTO> listSubCanal = tablaBLL.Listar("001");
 			TablaTO tablaTO = new TablaTO();
 			tablaTO.setCodigo("0");

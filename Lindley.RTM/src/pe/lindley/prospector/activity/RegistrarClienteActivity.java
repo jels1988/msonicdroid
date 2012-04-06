@@ -524,6 +524,9 @@ public class RegistrarClienteActivity extends ActivityBase {
 	
 	public void btnSeleccionarDireccion_click(View view){
 		
+		viewFlipper.showNext();
+		
+		/*
 		double latitudRef = Double.parseDouble(clienteTO.getLatitudRef());
     	double longitudRef = Double.parseDouble(clienteTO.getLongitudRef());
     	
@@ -542,7 +545,8 @@ public class RegistrarClienteActivity extends ActivityBase {
 	    	seleccionarDireccion.putExtra(SeleccionarDireccionActivity.LATITUD_SELECCIONADA_KEY,latitud );
 	    	seleccionarDireccion.putExtra(SeleccionarDireccionActivity.LONGITUD_SELECCIONADA_KEY, longitud);
     	}
-    	startActivityForResult(seleccionarDireccion, SeleccionarDireccionActivity.SELECCIONAR_CLIENTE);
+    	startActivityForResult(seleccionarDireccion, SeleccionarDireccionActivity.SELECCIONAR_CLIENTE);*/
+		
     	
 	}
 	

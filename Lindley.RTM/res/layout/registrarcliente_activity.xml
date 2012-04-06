@@ -21,8 +21,11 @@
   				android:layout_height="fill_parent">
     
 
+
+
+     
+     
  <TableLayout android:stretchColumns="1" 
- 				android:id="@+id/tableLayout1" 
  				android:layout_height="wrap_content" 
  				android:layout_width="fill_parent">
 	
@@ -189,7 +192,6 @@
     </TableLayout>
 
 <TableLayout android:stretchColumns="1" 
- 				android:id="@+id/tableLayout2" 
  				android:layout_height="wrap_content" 
  				android:layout_width="fill_parent">
 
@@ -291,74 +293,80 @@
 
 
 <TableLayout android:stretchColumns="1" 
- 				android:id="@+id/tableLayout2" 
  				android:layout_height="wrap_content" 
  				android:layout_width="fill_parent">
 
-	<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <TextView android:text="Distribuidor :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+	<TableRow android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0">
+            <TextView android:text="Distribuidor :" android:layout_height="wrap_content" android:layout_width="fill_parent"></TextView>
             <Spinner android:id="@+id/cboDistribuidor" 
             		android:layout_width="fill_parent" 
             		android:layout_height="wrap_content"
             		android:focusableInTouchMode="true"
+            		android:layout_weight="1"
             		android:drawSelectorOnTop="true"></Spinner>
         </TableRow>
             
-        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <TextView android:text="Distrito Comercial :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        <TableRow android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:text="Dist. Comercial :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
             <Spinner android:id="@+id/cboDistritoComercial" 
             		android:layout_width="fill_parent" 
             		android:layout_height="wrap_content"
             		android:focusableInTouchMode="true"
+            		android:layout_weight="1"
             		android:drawSelectorOnTop="true"></Spinner>
         </TableRow>
             
-		<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <TextView android:text="Distrito Geográfico :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+		<TableRow android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0">
+            <TextView android:text="Dist. Geográfico :" android:layout_height="wrap_content" android:layout_width="fill_parent"></TextView>
             <Spinner android:id="@+id/cboDistritoGeografico" 
             		android:layout_width="fill_parent" 
             		android:layout_height="wrap_content"
             		android:focusableInTouchMode="true"
-            		android:drawSelectorOnTop="true"></Spinner>
+            		android:drawSelectorOnTop="true"
+            		android:layout_weight="1"></Spinner>
         </TableRow>
         
-        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <TextView android:text="Zona :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        <TableRow android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0">
+            <TextView android:text="Zona :" android:layout_height="wrap_content" android:layout_width="fill_parent"></TextView>
             <Spinner android:id="@+id/cboZona" 
             		android:layout_width="fill_parent" 
             		android:layout_height="wrap_content"
             		android:focusableInTouchMode="true"
-            		android:drawSelectorOnTop="true"></Spinner>
+            		android:drawSelectorOnTop="true"
+            		android:layout_weight="1"></Spinner>
         </TableRow>
         
-        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <TextView android:text="RutaIK :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        <TableRow android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:text="RutaIK :" android:layout_height="wrap_content" android:layout_width="fill_parent"></TextView>
             <Spinner android:id="@+id/cboRutaIK" 
             		android:layout_width="fill_parent" 
             		android:layout_height="wrap_content"
             		android:focusableInTouchMode="true"
+            		android:layout_weight="1"
             		android:drawSelectorOnTop="true"></Spinner>
         </TableRow>
         
-        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TableRow android:layout_width="fill_parent" android:layout_height="wrap_content">
             <TextView android:text="Segmento :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
             <Spinner android:id="@+id/cboSegmento" 
             		android:layout_width="fill_parent" 
             		android:layout_height="wrap_content"
             		android:focusableInTouchMode="true"
+            		android:layout_weight="1"
             		android:drawSelectorOnTop="true"></Spinner>
         </TableRow>
         
-        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TableRow android:layout_width="fill_parent" android:layout_height="wrap_content">
             <TextView android:text="Ubicación :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
             <Spinner android:id="@+id/cboUbicacion" 
             		android:layout_width="fill_parent" 
             		android:layout_height="wrap_content"
             		android:focusableInTouchMode="true"
+            		android:layout_weight="1"
             		android:drawSelectorOnTop="true"></Spinner>
         </TableRow>
         
-        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" >
+        <TableRow android:layout_width="fill_parent" android:layout_height="wrap_content" >
         	
         	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" 	android:layout_span="2">
         		<Button android:id="@+id/btnDatosCarteraPrevius" 	
@@ -377,12 +385,7 @@
         			android:text="@string/registrar_cliente_activity_btnUbicacion" 
         			android:onClick="btnSeleccionarDireccion_click"/>
         	
-        	<Button android:id="@+id/btnGuardar"  
-        			android:text="@string/registrar_cliente_activity_btnGuardar" 
-        			android:focusable="false"
-        			android:layout_width="wrap_content" 
-        			android:layout_height="wrap_content"
-        			android:onClick="btnGuardar_onclick"/>
+        
         	</LinearLayout>
         	
         	
@@ -390,6 +393,92 @@
         
 </TableLayout>
 
+     <LinearLayout android:layout_height="fill_parent" 
+ 				android:layout_width="fill_parent" android:orientation="vertical">
+    
+    
+    <TableLayout android:stretchColumns="1"  android:layout_height="wrap_content" android:layout_width="fill_parent">
+    <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_vertical">
+         <TextView android:text="1.- Tráfico de Personas :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+         
+         <RadioGroup android:id="@+id/rdTraficoPersonas" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
+		    <RadioButton android:id="@+id/radio0" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="No" android:checked="true"/>
+		    <RadioButton android:id="@+id/radio1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Si"/>
+		</RadioGroup> 
+		
+     </TableRow>
+    </TableLayout>
+    
+    <TableLayout
+ 				android:layout_height="wrap_content" 
+ 				android:layout_width="fill_parent">
+
+     
+    <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TextView android:inputType="textMultiLine" android:layout_span="2"  android:text="2.- Existen algunos de los siguientes puntos de referencias a dos cuadras a la redonda del local :  " android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+    </TableRow>
+
+    <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <CheckBox android:id="@+id/chkColegio" android:text="Colegio/Nido" android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
+        
+    </TableRow>
+    <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+         <CheckBox android:id="@+id/chkColegio" android:text="Universidad, Instituto, Academia, Cenecape" android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
+           
+     </TableRow>
+    
+    
+    <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <CheckBox android:id="@+id/chkColegio" android:text="Gimnasio,Campo, Loza, Club Deportivo" android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
+        
+     </TableRow>
+     
+    <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+         <CheckBox android:id="@+id/chkColegio"  android:text="Parque, Plaza" android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
+         
+    </TableRow>
+    
+     <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+         <CheckBox android:id="@+id/chkColegio" android:layout_width="wrap_content" android:text="Bancos/Ministerios/Entidades Públicas/Comisarias/Cajeros" android:layout_height="wrap_content"></CheckBox>
+    </TableRow>
+    
+     
+    <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+         <CheckBox android:id="@+id/chkColegio" android:text="Hospitales/Clinicas/Centros de Salud"  android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
+    </TableRow>
+    
+    <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <CheckBox android:id="@+id/chkColegio" android:text="Centro Comercial/Mall:" android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
+    </TableRow>
+    
+    </TableLayout>
+    
+     <TableLayout android:stretchColumns="1"  android:layout_height="wrap_content" android:layout_width="fill_parent">
+    
+    <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_vertical">
+         <TextView android:text="3.-Local ubicado en una avenida :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>  
+        <RadioGroup android:id="@+id/rdTraficoPersonas" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
+		    <RadioButton android:id="@+id/radio0" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="No" android:checked="true"/>
+		    <RadioButton android:id="@+id/radio1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Si"/>
+		</RadioGroup>  
+    </TableRow>
+    
+     <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_vertical">
+         <TextView android:text="4.- Local ubicado en una esquina :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView> 
+         <RadioGroup android:id="@+id/rdTraficoPersonas" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
+		    <RadioButton android:id="@+id/radio0" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="No" android:checked="true"/>
+		    <RadioButton android:id="@+id/radio1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Si"/>
+		</RadioGroup>  
+    </TableRow>
+     
+</TableLayout>
+	<Button android:id="@+id/btnGuardar"  
+        			android:text="@string/registrar_cliente_activity_btnGuardar" 
+        			android:focusable="false"
+        			android:layout_width="wrap_content" 
+        			android:layout_height="wrap_content"
+        			android:onClick="btnGuardar_onclick"/>
+</LinearLayout>
 
 </ViewFlipper>
  
