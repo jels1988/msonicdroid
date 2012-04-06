@@ -23,7 +23,7 @@ public class UploadFileService extends RoboService {
 		// TODO Auto-generated method stub
 		super.onStart(intent, startId);
 		
-
+		
 		UploadFileTask uploadFileTask = new UploadFileTask(uploadFileProxy, clienteBLL);
 		final Executor executor = Executors.newSingleThreadExecutor();
 		executor.execute( uploadFileTask.future() );
