@@ -456,7 +456,7 @@
      <TableLayout android:stretchColumns="1"  android:layout_height="wrap_content" android:layout_width="fill_parent">
     
     <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_vertical">
-         <TextView android:text="3.-Local ubicado en una avenida :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>  
+         <TextView android:text="3.- Local ubicado en una avenida :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>  
         <RadioGroup android:id="@+id/rdTraficoPersonas" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
 		    <RadioButton android:id="@+id/radio0" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="No" android:checked="true"/>
 		    <RadioButton android:id="@+id/radio1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Si"/>
