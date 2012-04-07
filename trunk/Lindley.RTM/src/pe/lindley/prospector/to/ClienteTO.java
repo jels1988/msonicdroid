@@ -1,7 +1,6 @@
 package pe.lindley.prospector.to;
 
 import java.util.ArrayList;
-
 import com.google.gson.annotations.SerializedName;
 
 public class ClienteTO {
@@ -540,7 +539,117 @@ public class ClienteTO {
 	}
 
 	    
-     
-     
+	 @SerializedName("tfp")
+     private int traficoPersonas;
+	 
+	 @SerializedName("cni")
+	 private int colegioNido;
+	 
+	 @SerializedName("esu")
+	 private int educacionSuperior;
+	 
+	 @SerializedName("cde")
+	 private int centroDeportivo;
+	 
+	 @SerializedName("ppl")
+	 private int parquePlaza;
+	 
+	 @SerializedName("epu")
+	 private int entidadesPublicas;
+	 
+	 @SerializedName("csa")
+	 private int centroSalud;
+	 
+	 @SerializedName("cco")
+	 private int centroComercial;
+	
+	 
+	 @SerializedName("lav")
+     private int localAvenida;
+	 
+	 @SerializedName("les")
+     private int localEsquina;
+
+
+	public int getTraficoPersonas() {
+		return traficoPersonas;
+	}
+
+	public void setTraficoPersonas(int traficoPersonas) {
+		this.traficoPersonas = traficoPersonas;
+	}
+
+	public int getColegioNido() {
+		return colegioNido;
+	}
+
+	public void setColegioNido(int colegioNido) {
+		this.colegioNido = colegioNido;
+	}
+
+	public int getEducacionSuperior() {
+		return educacionSuperior;
+	}
+
+	public void setEducacionSuperior(int educacionSuperior) {
+		this.educacionSuperior = educacionSuperior;
+	}
+
+	public int getCentroDeportivo() {
+		return centroDeportivo;
+	}
+
+	public void setCentroDeportivo(int centroDeportivo) {
+		this.centroDeportivo = centroDeportivo;
+	}
+
+	public int getParquePlaza() {
+		return parquePlaza;
+	}
+
+	public void setParquePlaza(int parquePlaza) {
+		this.parquePlaza = parquePlaza;
+	}
+
+	public int getEntidadesPublicas() {
+		return entidadesPublicas;
+	}
+
+	public void setEntidadesPublicas(int entidadesPublicas) {
+		this.entidadesPublicas = entidadesPublicas;
+	}
+
+	public int getCentroSalud() {
+		return centroSalud;
+	}
+
+	public void setCentroSalud(int centroSalud) {
+		this.centroSalud = centroSalud;
+	}
+
+	public int getCentroComercial() {
+		return centroComercial;
+	}
+
+	public void setCentroComercial(int centroComercial) {
+		this.centroComercial = centroComercial;
+	}
+
+	public int getLocalAvenida() {
+		return localAvenida;
+	}
+
+	public void setLocalAvenida(int localAvenida) {
+		this.localAvenida = localAvenida;
+	}
+
+	public int getLocalEsquina() {
+		return localEsquina;
+	}
+
+	public void setLocalEsquina(int localEsquina) {
+		this.localEsquina = localEsquina;
+	}
+	
     
 }

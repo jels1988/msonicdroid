@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -115,6 +117,16 @@ public class RegistrarClienteActivity extends ActivityBase {
 	@InjectResource(R.string.registrar_cliente_activity_datos_basicos_ubicacion_error) 					String 	cboUbicacion_error;
 	@InjectResource(R.string.registrar_cliente_activity_datos_basicos_gps_error) 						String 	ubicacion_gps_error;
 	
+	@InjectView(R.id.rdTraficoPersonas) 	RadioGroup rdTraficoPersonas;
+	@InjectView(R.id.chkColegioNido) 		CheckBox chkColegioNido;
+	@InjectView(R.id.chkEducacionSuperior) 	CheckBox chkEducacionSuperior;
+	@InjectView(R.id.chkCentroDeportivo) 	CheckBox chkCentroDeportivo;
+	@InjectView(R.id.chkParquePlaza) 		CheckBox chkParquePlaza;
+	@InjectView(R.id.chkEntidadesPublicas) 	CheckBox chkEntidadesPublicas;
+	@InjectView(R.id.chkCentrosSalud) 		CheckBox chkCentrosSalud;
+	@InjectView(R.id.chkCentroComercial) 	CheckBox chkCentroComercial;
+	@InjectView(R.id.rdLocalAvenida) 	RadioGroup rdLocalAvenida;
+	@InjectView(R.id.rdLocalEsquina) 	RadioGroup rdLocalEsquina;
 	
 	//
 	@Inject 						TablaBLL 			tablaBLL;
@@ -133,7 +145,7 @@ public class RegistrarClienteActivity extends ActivityBase {
         setContentView(R.layout.registrarcliente_activity);
         
        clienteTO = new ClienteTO();
-       	
+       
        //
        Intent intent = getIntent();
        String codigoReferencia = intent.getStringExtra(CLIENTE_REFERENCIA_ID_KEY);

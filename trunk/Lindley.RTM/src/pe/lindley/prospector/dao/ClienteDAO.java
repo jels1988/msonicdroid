@@ -204,7 +204,8 @@ public class ClienteDAO {
 				+ "nullif(CodSucesor,'') as CodSucesor,nullif(CodPredecesor,'') as CodPredecesor,nullif(Usuario,'') as Usuario,nullif(Fecha,'') as Fecha,nullif(Hora,'') as Hora,nullif(Longitud,0) as Longitud,"
 				+ "nullif(Latitud,0) as Latitud,nullif(CodReferencia,'') as CodReferencia,nullif(Vendedor,'') as Vendedor,nullif(TamanioCliente,'') as TamanioCliente,nullif(IdReg,0) as IdReg,"
 				+ "nullif(TamanioCliente,'') as TamanioCliente,nullif(IdReg,0) as IdReg,nullif(C.codMotivo,'') as codMotivo,nullif(M.Descripcion,'') as motivo,nullif(observacion,'') as observacion,"
-				+ "nullif(LongitudRef,0) as LongitudRef,nullif(LatitudRef,0) as LatitudRef,nullif(RazonSocialRef,'') as RazonSocialRef,nullif(DireccionRef,'') as DireccionRef"
+				+ "nullif(LongitudRef,0) as LongitudRef,nullif(LatitudRef,0) as LatitudRef,nullif(RazonSocialRef,'') as RazonSocialRef,nullif(DireccionRef,'') as DireccionRef,"
+				+ "traficoPersonas,colegioNido,educacionSuperior,centroDeportivo,parquePlaza,entidadesPublicas,centroSalud,centroComercial,localAvenida,localEsquina "
 				+ " FROM Cliente C LEFT JOIN Tablas M ON M.CodigoTabla = '009' AND M.CodigoCampo = C.codMotivo"
 				+ " Where ClienteId=?";
 
@@ -256,6 +257,17 @@ public class ClienteDAO {
 			clienteTO.setCodigoMotivo(cursor.getString(cursor.getColumnIndex("codMotivo")));
 			clienteTO.setMotivo(cursor.getString(cursor.getColumnIndex("motivo")));
 			clienteTO.setObservacion(cursor.getString(cursor.getColumnIndex("observacion")));
+			
+			clienteTO.setTraficoPersonas(cursor.getInt(cursor.getColumnIndex("traficoPersonas")));
+			clienteTO.setColegioNido(cursor.getInt(cursor.getColumnIndex("colegioNido")));
+			clienteTO.setEducacionSuperior(cursor.getInt(cursor.getColumnIndex("educacionSuperior")));
+			clienteTO.setCentroDeportivo(cursor.getInt(cursor.getColumnIndex("centroDeportivo")));
+			clienteTO.setParquePlaza(cursor.getInt(cursor.getColumnIndex("parquePlaza")));
+			clienteTO.setEntidadesPublicas(cursor.getInt(cursor.getColumnIndex("entidadesPublicas")));
+			clienteTO.setCentroSalud(cursor.getInt(cursor.getColumnIndex("centroSalud")));
+			clienteTO.setCentroComercial(cursor.getInt(cursor.getColumnIndex("centroComercial")));
+			clienteTO.setLocalAvenida(cursor.getInt(cursor.getColumnIndex("localAvenida")));
+			clienteTO.setLocalEsquina(cursor.getInt(cursor.getColumnIndex("localEsquina")));
 
 		}
 
@@ -275,7 +287,8 @@ public class ClienteDAO {
 				+ "nullif(Segmento,'') as Segmento,nullif(Ubicacion,'') as Ubicacion,nullif(Email,'') as Email,nullif(Url,'') as Url,nullif(Telefono1,'') as Telefono1,nullif(Telefono2,'') as Telefono2,"
 				+ "nullif(CodSucesor,'') as CodSucesor,nullif(CodPredecesor,'') as CodPredecesor,nullif(Usuario,'') as Usuario,nullif(Fecha,'') as Fecha,nullif(Hora,'') as Hora,nullif(Longitud,0) as Longitud,nullif(Latitud,0) as Latitud,nullif(CodReferencia,'') as CodReferencia,nullif(Vendedor,'') as Vendedor,"
 				+ "nullif(TamanioCliente,'') as TamanioCliente,nullif(IdReg,0) as IdReg,nullif(C.codMotivo,'') as codMotivo,nullif(M.Descripcion,'') as motivo,nullif(observacion,'') as observacion,"
-				+ "nullif(LongitudRef,0) as LongitudRef,nullif(LatitudRef,0) as LatitudRef,nullif(RazonSocialRef,'') as RazonSocialRef,nullif(DireccionRef,'') as DireccionRef"
+				+ "nullif(LongitudRef,0) as LongitudRef,nullif(LatitudRef,0) as LatitudRef,nullif(RazonSocialRef,'') as RazonSocialRef,nullif(DireccionRef,'') as DireccionRef,"
+				+ "traficoPersonas,colegioNido,educacionSuperior,centroDeportivo,parquePlaza,entidadesPublicas,centroSalud,centroComercial,localAvenida,localEsquina "
 				+ " FROM Cliente C LEFT JOIN Tablas M ON M.CodigoTabla = '009' AND M.CodigoCampo = C.codMotivo"
 				+ " Where Ruc like ? or Dni like ? or Codigo like ?";
 		//M.Descripcion,
@@ -334,6 +347,18 @@ public class ClienteDAO {
 			clienteTO.setMotivo(cursor.getString(cursor.getColumnIndex("motivo")));
 			clienteTO.setObservacion(cursor.getString(cursor.getColumnIndex("observacion")));
 			
+			clienteTO.setTraficoPersonas(cursor.getInt(cursor.getColumnIndex("traficoPersonas")));
+			clienteTO.setColegioNido(cursor.getInt(cursor.getColumnIndex("colegioNido")));
+			clienteTO.setEducacionSuperior(cursor.getInt(cursor.getColumnIndex("educacionSuperior")));
+			clienteTO.setCentroDeportivo(cursor.getInt(cursor.getColumnIndex("centroDeportivo")));
+			clienteTO.setParquePlaza(cursor.getInt(cursor.getColumnIndex("parquePlaza")));
+			clienteTO.setEntidadesPublicas(cursor.getInt(cursor.getColumnIndex("entidadesPublicas")));
+			clienteTO.setCentroSalud(cursor.getInt(cursor.getColumnIndex("centroSalud")));
+			clienteTO.setCentroComercial(cursor.getInt(cursor.getColumnIndex("centroComercial")));
+			clienteTO.setLocalAvenida(cursor.getInt(cursor.getColumnIndex("localAvenida")));
+			clienteTO.setLocalEsquina(cursor.getInt(cursor.getColumnIndex("localEsquina")));
+			
+			
 			listado.add(clienteTO);
 		}
 
@@ -351,9 +376,11 @@ public class ClienteDAO {
 				+ "nullif(CodUbigeoEntrega,'') as CodUbigeoEntrega,nullif(SubCanal,'') as SubCanal,nullif(Fax,'') as Fax,nullif(Distribuidor,'') as Distribuidor,"
 				+ "nullif(DistritoComercial,'') as DistritoComercial,nullif(DistritoGeografico,'') as DistritoGeografico,nullif(Zona,'') as Zona,nullif(RutaIK,'') as RutaIK,"
 				+ "nullif(Segmento,'') as Segmento,nullif(Ubicacion,'') as Ubicacion,nullif(Email,'') as Email,nullif(Url,'') as Url,nullif(Telefono1,'') as Telefono1,nullif(Telefono2,'') as Telefono2,"
-				+ "nullif(CodSucesor,'') as CodSucesor,nullif(CodPredecesor,'') as CodPredecesor,nullif(Usuario,'') as Usuario,nullif(Fecha,'') as Fecha,nullif(Hora,'') as Hora,nullif(Longitud,0) as Longitud,nullif(Latitud,0) as Latitud,nullif(CodReferencia,'') as CodReferencia,nullif(Vendedor,'') as Vendedor,nullif(TamanioCliente,'') as TamanioCliente,nullif(IdReg,0) as IdReg"
+				+ "nullif(CodSucesor,'') as CodSucesor,nullif(CodPredecesor,'') as CodPredecesor,nullif(Usuario,'') as Usuario,nullif(Fecha,'') as Fecha,nullif(Hora,'') as Hora,nullif(Longitud,0) as Longitud," 
+				+ "nullif(Latitud,0) as Latitud,nullif(CodReferencia,'') as CodReferencia,nullif(Vendedor,'') as Vendedor,nullif(TamanioCliente,'') as TamanioCliente,nullif(IdReg,0) as IdReg,"
+				+ "traficoPersonas,colegioNido,educacionSuperior,centroDeportivo,parquePlaza,entidadesPublicas,centroSalud,centroComercial,localAvenida,localEsquina "
 				+ " FROM Cliente Where TieneCambios=?";
-
+		
 		String[] parametros = new String[] { String.valueOf(ClienteTO.FICHA_TIENE_CAMBIOS) };
 		Cursor cursor = dbHelper.getDataBase().rawQuery(SQL, parametros);
 
@@ -397,6 +424,17 @@ public class ClienteDAO {
 			clienteTO.setIdBd(cursor.getInt(cursor.getColumnIndex("IdReg")));
 			clienteTO.setClienteId(cursor.getInt(cursor.getColumnIndex("clienteId")));
 			
+			clienteTO.setTraficoPersonas(cursor.getInt(cursor.getColumnIndex("traficoPersonas")));
+			clienteTO.setColegioNido(cursor.getInt(cursor.getColumnIndex("colegioNido")));
+			clienteTO.setEducacionSuperior(cursor.getInt(cursor.getColumnIndex("educacionSuperior")));
+			clienteTO.setCentroDeportivo(cursor.getInt(cursor.getColumnIndex("centroDeportivo")));
+			clienteTO.setParquePlaza(cursor.getInt(cursor.getColumnIndex("parquePlaza")));
+			clienteTO.setEntidadesPublicas(cursor.getInt(cursor.getColumnIndex("entidadesPublicas")));
+			clienteTO.setCentroSalud(cursor.getInt(cursor.getColumnIndex("centroSalud")));
+			clienteTO.setCentroComercial(cursor.getInt(cursor.getColumnIndex("centroComercial")));
+			clienteTO.setLocalAvenida(cursor.getInt(cursor.getColumnIndex("localAvenida")));
+			clienteTO.setLocalEsquina(cursor.getInt(cursor.getColumnIndex("localEsquina")));
+
 			listado.add(clienteTO);
 		}
 
@@ -542,7 +580,19 @@ public class ClienteDAO {
 		parametros.put("TamanioCliente", clienteTO.getTamanio());
 
 		parametros.put("TieneCambios", clienteTO.getTieneCambios());
-
+		
+		parametros.put("traficoPersonas", clienteTO.getTraficoPersonas());
+		parametros.put("colegioNido", clienteTO.getColegioNido());
+		parametros.put("educacionSuperior", clienteTO.getEducacionSuperior());
+		parametros.put("centroDeportivo", clienteTO.getCentroDeportivo());
+		parametros.put("parquePlaza", clienteTO.getParquePlaza());
+		parametros.put("entidadesPublicas", clienteTO.getEntidadesPublicas());
+		parametros.put("centroSalud", clienteTO.getCentroSalud());
+		parametros.put("centroComercial", clienteTO.getCentroComercial());
+		parametros.put("localAvenida", clienteTO.getLocalAvenida());
+		parametros.put("localEsquina", clienteTO.getLocalEsquina());
+		
+	
 		long id = dbHelper.getDataBase().insertOrThrow("Cliente", null, parametros);
 		
 		clienteTO.setClienteId((int)id);
@@ -690,7 +740,18 @@ public class ClienteDAO {
 		parametros.put("TamanioCliente", clienteTO.getTamanio());
 
 		parametros.put("TieneCambios", clienteTO.tieneCambios);
-
+		
+		parametros.put("traficoPersonas", clienteTO.getTraficoPersonas());
+		parametros.put("colegioNido", clienteTO.getColegioNido());
+		parametros.put("educacionSuperior", clienteTO.getEducacionSuperior());
+		parametros.put("centroDeportivo", clienteTO.getCentroDeportivo());
+		parametros.put("parquePlaza", clienteTO.getParquePlaza());
+		parametros.put("entidadesPublicas", clienteTO.getEntidadesPublicas());
+		parametros.put("centroSalud", clienteTO.getCentroSalud());
+		parametros.put("centroComercial", clienteTO.getCentroComercial());
+		parametros.put("localAvenida", clienteTO.getLocalAvenida());
+		parametros.put("localEsquina", clienteTO.getLocalEsquina());
+		
 		String[] valores = new String[] { String.valueOf(clienteTO.getClienteId()) };
 
 		dbHelper.getDataBase().update("Cliente", parametros, "ClienteId = ?",
