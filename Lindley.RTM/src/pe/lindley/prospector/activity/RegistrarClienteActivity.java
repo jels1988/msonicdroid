@@ -983,6 +983,17 @@ public class RegistrarClienteActivity extends ActivityBase {
 		posicion =tablaTOSpinnerAdapter.findByValue(StringHelper.null2CharSequence(clienteTO.getUbicacion()));
 		cboUbicacion.setSelection(posicion);
 		
+		((CheckBox)rdTraficoPersonas.getChildAt(clienteTO.getTraficoPersonas())).setChecked(true);
+		chkColegioNido.setChecked((clienteTO.getColegioNido()==1?true:false));
+		chkEducacionSuperior.setChecked((clienteTO.getEducacionSuperior()==1?true:false));
+		chkCentroDeportivo.setChecked((clienteTO.getCentroDeportivo()==1?true:false));
+		chkParquePlaza.setChecked((clienteTO.getParquePlaza()==1?true:false));
+		chkEntidadesPublicas.setChecked((clienteTO.getEntidadesPublicas()==1?true:false));
+		chkCentrosSalud.setChecked((clienteTO.getCentroSalud()==1?true:false));
+		chkCentroComercial.setChecked((clienteTO.getCentroComercial()==1?true:false));
+		((CheckBox)rdLocalAvenida.getChildAt(clienteTO.getLocalAvenida())).setChecked(true);
+		((CheckBox)rdLocalEsquina.getChildAt(clienteTO.getLocalEsquina())).setChecked(true);
+		
 	}
 	
 	@Override
