@@ -540,35 +540,35 @@ public class ClienteTO {
 
 	    
 	 @SerializedName("tfp")
-     private int traficoPersonas;
+     private int traficoPersonas = 0;
 	 
 	 @SerializedName("cni")
-	 private int colegioNido;
+	 private int colegioNido  = 0;
 	 
 	 @SerializedName("esu")
-	 private int educacionSuperior;
+	 private int educacionSuperior  = 0;
 	 
 	 @SerializedName("cde")
-	 private int centroDeportivo;
+	 private int centroDeportivo  = 0;
 	 
 	 @SerializedName("ppl")
-	 private int parquePlaza;
+	 private int parquePlaza  = 0;
 	 
 	 @SerializedName("epu")
-	 private int entidadesPublicas;
+	 private int entidadesPublicas  = 0;
 	 
 	 @SerializedName("csa")
-	 private int centroSalud;
+	 private int centroSalud  = 0;
 	 
 	 @SerializedName("cco")
-	 private int centroComercial;
+	 private int centroComercial  = 0;
 	
 	 
 	 @SerializedName("lav")
-     private int localAvenida;
+     private int localAvenida  = 0;
 	 
 	 @SerializedName("les")
-     private int localEsquina;
+     private int localEsquina  = 0;
 
 
 	public int getTraficoPersonas() {
