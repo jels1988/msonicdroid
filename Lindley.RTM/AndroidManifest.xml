@@ -65,7 +65,7 @@
 		<activity android:name="pe.lindley.prospector.activity.ConsultarClienteLocalActivity" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="pe.lindley.prospector.activity.RegistrarDocumentosActivity" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="pe.lindley.prospector.activity.RegistrarClienteVerDocumentosActivity" android:configChanges="keyboardHidden|orientation"/>
-		<service android:name="pe.lindley.prospector.service.UploadFileService">
+		<service android:name="pe.lindley.prospector.service.UploadFileService" android:process=":remote">
 		       <intent-filter>
                 <action android:name="pe.lindley.prospector.service.uploadFileService" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
