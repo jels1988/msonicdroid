@@ -385,9 +385,11 @@ public class RegistrarClienteActivity extends ActivityBase {
     	
     }
 	  
-	public void btnDatosGenerales_click(View view){
-		viewFlipper.showPrevious();
-	}
+    
+    public void btnAnterior_click(View v){
+    	viewFlipper.showPrevious();
+    }
+	
 
 	
 	public void btnDatosCartera_click(View view){
@@ -531,42 +533,11 @@ public class RegistrarClienteActivity extends ActivityBase {
 		
 	}
 	
-	public void btnDatosCarteraPrevius_click(View view){
-		viewFlipper.showPrevious();
-	}
+	
 	
 	public void btnMicrosegmentacion_click(View view){
-		viewFlipper.showNext();
-	}
-	public void btnSeleccionarDireccion_click(View view){
 		
-
-		double latitudRef = Double.parseDouble(clienteTO.getLatitudRef());
-    	double longitudRef = Double.parseDouble(clienteTO.getLongitudRef());
-    	
-    	
-    	
-    	
-    	Intent seleccionarDireccion = new Intent(getApplicationContext(), SeleccionarDireccionActivity.class);
-    	seleccionarDireccion.putExtra(SeleccionarDireccionActivity.DIRECCION_KEY, clienteTO.getDireccionEntregaRef());
-    	seleccionarDireccion.putExtra(SeleccionarDireccionActivity.LATITUD_KEY,latitudRef );
-    	seleccionarDireccion.putExtra(SeleccionarDireccionActivity.LONGITUD_KEY, longitudRef);
-    	
-    	if(clienteTO.getLatitud()!=null){
-	    	double latitud = Double.parseDouble(clienteTO.getLatitud());
-	    	double longitud = Double.parseDouble(clienteTO.getLongitud());
-	    	
-	    	seleccionarDireccion.putExtra(SeleccionarDireccionActivity.LATITUD_SELECCIONADA_KEY,latitud );
-	    	seleccionarDireccion.putExtra(SeleccionarDireccionActivity.LONGITUD_SELECCIONADA_KEY, longitud);
-    	}
-    	startActivityForResult(seleccionarDireccion, SeleccionarDireccionActivity.SELECCIONAR_CLIENTE);
-		
-    	
-	}
-	
-	public void btnGuardar_onclick(View view){
-		
-		if(cboDistribuidor.getSelectedItemPosition()==0){
+if(cboDistribuidor.getSelectedItemPosition()==0){
 			
 			MessageBox.showSimpleDialog(this,
 					registrar_cliente_title,
@@ -692,6 +663,38 @@ public class RegistrarClienteActivity extends ActivityBase {
 					});
 			return ;
 		}
+		
+		viewFlipper.showNext();
+	}
+	public void btnSeleccionarDireccion_click(View view){
+		
+
+		double latitudRef = Double.parseDouble(clienteTO.getLatitudRef());
+    	double longitudRef = Double.parseDouble(clienteTO.getLongitudRef());
+    	
+    	
+    	
+    	
+    	Intent seleccionarDireccion = new Intent(getApplicationContext(), SeleccionarDireccionActivity.class);
+    	seleccionarDireccion.putExtra(SeleccionarDireccionActivity.DIRECCION_KEY, clienteTO.getDireccionEntregaRef());
+    	seleccionarDireccion.putExtra(SeleccionarDireccionActivity.LATITUD_KEY,latitudRef );
+    	seleccionarDireccion.putExtra(SeleccionarDireccionActivity.LONGITUD_KEY, longitudRef);
+    	
+    	if(clienteTO.getLatitud()!=null){
+	    	double latitud = Double.parseDouble(clienteTO.getLatitud());
+	    	double longitud = Double.parseDouble(clienteTO.getLongitud());
+	    	
+	    	seleccionarDireccion.putExtra(SeleccionarDireccionActivity.LATITUD_SELECCIONADA_KEY,latitud );
+	    	seleccionarDireccion.putExtra(SeleccionarDireccionActivity.LONGITUD_SELECCIONADA_KEY, longitud);
+    	}
+    	startActivityForResult(seleccionarDireccion, SeleccionarDireccionActivity.SELECCIONAR_CLIENTE);
+		
+    	
+	}
+	
+	public void btnGuardar_onclick(View view){
+		
+		
 		
 		String distribuidor = ((TablaTO)cboDistribuidor.getSelectedItem()).getCodigo();
     	clienteTO.setDistribuidor(distribuidor);
