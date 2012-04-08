@@ -186,6 +186,8 @@ public class ClienteDAO {
 
 	public void deleteAll() {
 		dbHelper.getDataBase().execSQL("delete from cliente");
+		dbHelper.getDataBase().execSQL("delete from cliente_documento");
+		
 	}
 
 	public void delete(int id) {
