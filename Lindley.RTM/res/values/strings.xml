@@ -43,6 +43,7 @@
     <string name="registrar_cliente_activity_btnDatosCartera">Datos Cartera</string>
     <string name="registrar_cliente_activity_btnUbicacion">Ubicación</string>
     <string name="registrar_cliente_activity_btnGuardar">Guardar</string>
+    <string name="registrar_cliente_activity_btnMicrosegmentacion">Microsegmentación</string>
     <string name="registrar_cliente_activity_datos_basicos_txtrazonsocial_error">Debes ingresar la razón social</string>
     <string name="registrar_cliente_activity_datos_basicos_txtruc_error">Debes ingresar el ruc</string>
     <string name="registrar_cliente_activity_datos_basicos_txtruc_no_valido">El ruc ingresado no es válido</string>

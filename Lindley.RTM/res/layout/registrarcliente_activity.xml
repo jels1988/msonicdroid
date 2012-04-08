@@ -374,16 +374,18 @@
         			android:layout_width="wrap_content" 
         			android:layout_height="wrap_content" 
         			android:focusable="false"
-        			android:text="@string/registrar_cliente_activity_btnDatosCartera" 
+        			android:text="@string/registrar_cliente_activity_btnDireccion" 
         			android:onClick="btnDatosCarteraPrevius_click"/>
         			
+        		
+        	
         	<Button android:id="@+id/btnSeleccionarDireccion" 	
         			android:layout_alignParentLeft="true" 	
         			android:layout_width="wrap_content" 
         			android:layout_height="wrap_content" 
         			android:focusable="false"
-        			android:text="@string/registrar_cliente_activity_btnUbicacion" 
-        			android:onClick="btnSeleccionarDireccion_click"/>
+        			android:text="@string/registrar_cliente_activity_btnMicrosegmentacion" 
+        			android:onClick="btnMicrosegmentacion_click"/>
         	
         
         	</LinearLayout>
@@ -402,8 +404,8 @@
          <TextView android:text="1.- Tráfico de Personas :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
          
          <RadioGroup android:id="@+id/rdTraficoPersonas" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
-		    <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="No" android:checked="true"/>
-		    <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Si"/>
+		    <RadioButton android:id="@+id/rdTraficoPersonasNo"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="No" android:checked="true"/>
+		    <RadioButton android:id="@+id/rdTraficoPersonasSi" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Si"/>
 		</RadioGroup> 
 		
      </TableRow>
@@ -458,26 +460,50 @@
     <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_vertical">
          <TextView android:text="3.- Local ubicado en una avenida :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>  
         <RadioGroup android:id="@+id/rdLocalAvenida" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
-		    <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="No" android:checked="true"/>
-		    <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Si"/>
+		    <RadioButton android:id="@+id/rdLocalAvenidaNo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="No" android:checked="true"/>
+		    <RadioButton android:id="@+id/rdLocalAvenidaSi" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Si"/>
 		</RadioGroup>  
     </TableRow>
     
      <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_vertical">
          <TextView android:text="4.- Local ubicado en una esquina :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView> 
          <RadioGroup android:id="@+id/rdLocalEsquina" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
-		    <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="No" android:checked="true"/>
-		    <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Si"/>
+		    <RadioButton android:id="@+id/rdLocalEsquinaNo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="No" android:checked="true"/>
+		    <RadioButton android:id="@+id/rdLocalEsquinaSi" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Si"/>
 		</RadioGroup>  
     </TableRow>
      
-</TableLayout>
-	<Button android:id="@+id/btnGuardar"  
+      <TableRow android:layout_width="fill_parent" android:layout_height="wrap_content" >
+
+        <LinearLayout android:id="@+id/LinearLayout03"
+			 android:layout_width="fill_parent" 
+			 android:layout_height="fill_parent" 
+			 android:gravity="bottom"
+			 android:layout_span="2">
+			
+			 <Button android:id="@+id/btnCartera" 		 android:focusable="false"	android:layout_alignParentRight="true" 	android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/registrar_cliente_activity_btnDatosCartera" android:onClick="btnDatosCarteraPrevius_click"/>
+			 
+			 <Button android:id="@+id/btnSeleccionarDireccion" 	
+        			android:layout_alignParentLeft="true" 	
+        			android:layout_width="wrap_content" 
+        			android:layout_height="wrap_content" 
+        			android:focusable="false"
+        			android:text="@string/registrar_cliente_activity_btnUbicacion" 
+        			android:onClick="btnSeleccionarDireccion_click"/>
+			 
+			 <Button android:id="@+id/btnGuardar"  
         			android:text="@string/registrar_cliente_activity_btnGuardar" 
         			android:focusable="false"
         			android:layout_width="wrap_content" 
         			android:layout_height="wrap_content"
         			android:onClick="btnGuardar_onclick"/>
+		 </LinearLayout>
+        </TableRow>
+        
+</TableLayout>
+
+     
+	
 </LinearLayout>
 
 </ViewFlipper>

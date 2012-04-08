@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -534,11 +535,12 @@ public class RegistrarClienteActivity extends ActivityBase {
 		viewFlipper.showPrevious();
 	}
 	
+	public void btnMicrosegmentacion_click(View view){
+		viewFlipper.showNext();
+	}
 	public void btnSeleccionarDireccion_click(View view){
 		
-		viewFlipper.showNext();
-		
-		/*
+
 		double latitudRef = Double.parseDouble(clienteTO.getLatitudRef());
     	double longitudRef = Double.parseDouble(clienteTO.getLongitudRef());
     	
@@ -557,7 +559,7 @@ public class RegistrarClienteActivity extends ActivityBase {
 	    	seleccionarDireccion.putExtra(SeleccionarDireccionActivity.LATITUD_SELECCIONADA_KEY,latitud );
 	    	seleccionarDireccion.putExtra(SeleccionarDireccionActivity.LONGITUD_SELECCIONADA_KEY, longitud);
     	}
-    	startActivityForResult(seleccionarDireccion, SeleccionarDireccionActivity.SELECCIONAR_CLIENTE);*/
+    	startActivityForResult(seleccionarDireccion, SeleccionarDireccionActivity.SELECCIONAR_CLIENTE);
 		
     	
 	}
@@ -712,6 +714,17 @@ public class RegistrarClienteActivity extends ActivityBase {
     	String ubicacion = ((TablaTO)cboUbicacion.getSelectedItem()).getCodigo();
     	clienteTO.setUbicacion(ubicacion);
 		
+    	clienteTO.setTraficoPersonas((rdTraficoPersonas.getCheckedRadioButtonId()==R.id.rdTraficoPersonasSi)?1:0);
+    	clienteTO.setColegioNido((chkColegioNido.isChecked()?1:0));
+    	clienteTO.setEducacionSuperior((chkEducacionSuperior.isChecked()?1:0));
+    	clienteTO.setCentroDeportivo((chkCentroDeportivo.isChecked()?1:0));
+    	clienteTO.setParquePlaza((chkParquePlaza.isChecked()?1:0));
+    	clienteTO.setEntidadesPublicas((chkEntidadesPublicas.isChecked()?1:0));
+    	clienteTO.setCentroSalud((chkCentrosSalud.isChecked()?1:0));
+    	clienteTO.setCentroComercial((chkCentroComercial.isChecked()?1:0));
+    	clienteTO.setLocalAvenida((rdLocalAvenida.getCheckedRadioButtonId()==R.id.rdLocalAvenidaSi)?1:0);
+    	clienteTO.setLocalEsquina((rdLocalEsquina.getCheckedRadioButtonId()==R.id.rdLocalEsquinaSi)?1:0);
+ 
     	
     	if( 
     			(clienteTO.getLatitud()==null || clienteTO.getLongitud()==null) ||
@@ -866,6 +879,20 @@ public class RegistrarClienteActivity extends ActivityBase {
 		clienteTO.setIdRef(clienteTOSource.getIdRef());
 		clienteTO.setAccion(clienteTOSource.accion);
 		
+		clienteTO.setTraficoPersonas(clienteTOSource.getTraficoPersonas());
+		clienteTO.setColegioNido(clienteTOSource.getColegioNido());
+		clienteTO.setEducacionSuperior(clienteTOSource.getEducacionSuperior());
+		clienteTO.setCentroDeportivo(clienteTOSource.getCentroDeportivo());
+		clienteTO.setParquePlaza(clienteTOSource.getParquePlaza());
+		clienteTO.setEntidadesPublicas(clienteTOSource.getEntidadesPublicas());
+		clienteTO.setCentroSalud(clienteTOSource.getCentroSalud());
+		clienteTO.setCentroComercial(clienteTOSource.getCentroComercial());
+		clienteTO.setLocalAvenida(clienteTOSource.getLocalAvenida());
+		clienteTO.setLocalEsquina(clienteTOSource.getLocalEsquina());
+		
+		
+		
+		
 		if(RegistrarClienteActivity.CLIENTE_CARGAR_FROM_BD==accion){
 			clienteTO.setCodigo(clienteTOSource.getCodigo());
 			clienteTO.setCodigoReferencia(clienteTOSource.codigoReferencia);
@@ -907,6 +934,17 @@ public class RegistrarClienteActivity extends ActivityBase {
 			TablaTOAdapter tamanioSpinnerAdapter =  (TablaTOAdapter)cboTamanio.getAdapter();
 			posicion = tamanioSpinnerAdapter.findByValue(StringHelper.null2String(clienteTOSource.getTamanio()));
 			cboTamanio.setSelection(posicion,true);
+			
+			((RadioButton)rdTraficoPersonas.getChildAt(clienteTO.getTraficoPersonas())).setChecked(true);
+			chkColegioNido.setChecked((clienteTO.getColegioNido()==1?true:false));
+			chkEducacionSuperior.setChecked((clienteTO.getEducacionSuperior()==1?true:false));
+			chkCentroDeportivo.setChecked((clienteTO.getCentroDeportivo()==1?true:false));
+			chkParquePlaza.setChecked((clienteTO.getParquePlaza()==1?true:false));
+			chkEntidadesPublicas.setChecked((clienteTO.getEntidadesPublicas()==1?true:false));
+			chkCentrosSalud.setChecked((clienteTO.getCentroSalud()==1?true:false));
+			chkCentroComercial.setChecked((clienteTO.getCentroComercial()==1?true:false));
+			((RadioButton)rdLocalAvenida.getChildAt(clienteTO.getLocalAvenida())).setChecked(true);
+			((RadioButton)rdLocalEsquina.getChildAt(clienteTO.getLocalEsquina())).setChecked(true);
 			
 		}
 		
@@ -953,6 +991,8 @@ public class RegistrarClienteActivity extends ActivityBase {
 			UbigeoTOAdapter distritoFiscalSpinnerAdapter = (UbigeoTOAdapter)cboDistritoFiscal.getAdapter();
 			posicion = distritoFiscalSpinnerAdapter.findByValue(distritoFiscal);
 			cboDistritoFiscal.setSelection(posicion,true);
+			
+			
 		}
 		
 		TablaTOAdapter tablaTOSpinnerAdapter = application.getAdapterDistribuidor();
@@ -983,16 +1023,7 @@ public class RegistrarClienteActivity extends ActivityBase {
 		posicion =tablaTOSpinnerAdapter.findByValue(StringHelper.null2CharSequence(clienteTO.getUbicacion()));
 		cboUbicacion.setSelection(posicion);
 		
-		((CheckBox)rdTraficoPersonas.getChildAt(clienteTO.getTraficoPersonas())).setChecked(true);
-		chkColegioNido.setChecked((clienteTO.getColegioNido()==1?true:false));
-		chkEducacionSuperior.setChecked((clienteTO.getEducacionSuperior()==1?true:false));
-		chkCentroDeportivo.setChecked((clienteTO.getCentroDeportivo()==1?true:false));
-		chkParquePlaza.setChecked((clienteTO.getParquePlaza()==1?true:false));
-		chkEntidadesPublicas.setChecked((clienteTO.getEntidadesPublicas()==1?true:false));
-		chkCentrosSalud.setChecked((clienteTO.getCentroSalud()==1?true:false));
-		chkCentroComercial.setChecked((clienteTO.getCentroComercial()==1?true:false));
-		((CheckBox)rdLocalAvenida.getChildAt(clienteTO.getLocalAvenida())).setChecked(true);
-		((CheckBox)rdLocalEsquina.getChildAt(clienteTO.getLocalEsquina())).setChecked(true);
+		
 		
 	}
 	
