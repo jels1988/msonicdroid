@@ -38,7 +38,7 @@
             <EditText android:id="@+id/txtRazonSocial"
              android:layout_width="fill_parent" 
              android:layout_height="wrap_content" 
-             android:hint="Ingresar Razon Social" 
+             android:hint="Ingresar Razón Social" 
              android:text="" 
              android:layout_weight="1" 
              android:inputType="textCapCharacters" 
@@ -285,7 +285,7 @@
 			 android:layout_height="fill_parent" 
 			 android:gravity="bottom"
 			 android:layout_span="2">
-			 <Button android:id="@+id/btnDatosGenerales" android:focusable="false"	android:layout_alignParentLeft="true" 	android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/registrar_cliente_activity_btnDatosGenerales" android:onClick="btnDatosGenerales_click"/>
+			 <Button android:id="@+id/btnDatosGenerales" android:focusable="false"	android:layout_alignParentLeft="true" 	android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/registrar_cliente_activity_btnDatosGenerales" android:onClick="btnAnterior_click"/>
 			 <Button android:id="@+id/btnCartera" 		 android:focusable="false"	android:layout_alignParentRight="true" 	android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/registrar_cliente_activity_btnDatosCartera" android:onClick="btnDatosCartera_click"/>
 		 </LinearLayout>
         </TableRow>
@@ -375,7 +375,7 @@
         			android:layout_height="wrap_content" 
         			android:focusable="false"
         			android:text="@string/registrar_cliente_activity_btnDireccion" 
-        			android:onClick="btnDatosCarteraPrevius_click"/>
+        			android:onClick="btnAnterior_click"/>
         			
         		
         	
@@ -450,7 +450,7 @@
     </TableRow>
     
     <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
-        <CheckBox android:id="@+id/chkCentroComercial" android:text="Centro Comercial/Mall:" android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
+        <CheckBox android:id="@+id/chkCentroComercial" android:text="Centro Comercial/Mall" android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
     </TableRow>
     
     </TableLayout>
