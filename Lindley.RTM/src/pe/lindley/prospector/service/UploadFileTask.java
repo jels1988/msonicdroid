@@ -70,8 +70,13 @@ public class UploadFileTask extends RoboAsyncTask<String> {
 						
 						if(uploadFileProxy.getResponse().getStatus()==0){
 							
-							Log.d("UploadFileTask", "Eliminando fs: " +  fileTO.nombre);
-							f.delete();
+							if(f.exists()){
+								Log.d("UploadFileTask", "Eliminando fs: " +  fileTO.nombre);
+								f.delete();
+							}else{
+								Log.d("UploadFileTask", "No existe fs: " +  fileTO.nombre);
+							}
+							
 							
 							Log.d("UploadFileTask", "Eliminando DB archivo:" +   String.valueOf(fileTO.id));
 							clienteBLL.deleteDocumento(fileTO.id);
