@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	
-    <item android:id="@+id/mnuTDocumentos" android:title="T. Documentos" />
+
   <item android:id="@+id/mnuEnviar" android:title="Enviar" />
-  <item android:id="@+id/mnuDescargar" android:title="Descargar" />
+  
   <item android:id="@+id/mnuFichas" android:title="Fichas" />
 	
+     <item android:id="@+id/mnuGlobalDescargar" android:title="Descargar" >
+        <menu>
+            
+                <item android:id="@+id/mnuTDocumentos" android:title="Tipos Documentos" />
+                <item android:id="@+id/mnuDescargar" android:title="Fichas Rechazadas" />
+        </menu>
+        
+    </item>
+  
 </menu>
