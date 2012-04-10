@@ -7,146 +7,174 @@
     <com.thira.examples.actionbar.widget.ActionBar
         android:id="@+id/actionBar"
         android:layout_width="fill_parent"
-        android:layout_height="44dip" />
+        android:layout_height="44dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:fillViewport="true" >
 
-        <TableLayout
-            android:id="@+id/tableLayout1"
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:stretchColumns="1" >
+            android:orientation="vertical" >
 
-            <TableRow
+            <TableLayout
+                android:id="@+id/tableLayout1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:stretchColumns="1" >
 
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="@string/consultarcliente_activity_codigo" >
-                </TextView>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
 
-                <EditText
-                    android:id="@+id/txtCodigo"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/consultarcliente_activity_codigo_hint"
-                    android:inputType="number"
-                    android:maxLength="11"
-                    android:singleLine="true"
-                    android:text="" />
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:text="@string/consultarcliente_activity_codigo" >
+                    </TextView>
 
-                <ImageButton
-                    android:contentDescription="@string/consultarcliente_activity_buscar"
-                    android:onClick="btnbuscar_onclick"
-                    android:src="@drawable/btn_search" >
-                </ImageButton>
-            </TableRow>
+                    <EditText
+                        android:id="@+id/txtCodigo"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/consultarcliente_activity_codigo_hint"
+                        android:inputType="number"
+                        android:maxLength="11"
+                        android:singleLine="true"
+                        android:text="" />
 
-            <TableRow
+                    <ImageButton
+                        android:contentDescription="@string/consultarcliente_activity_buscar"
+                        android:onClick="btnbuscar_onclick"
+                        android:src="@drawable/btn_search" >
+                    </ImageButton>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:text="@string/consultarcliente_activity_ruc" >
+                    </TextView>
+
+                    <EditText
+                        android:id="@+id/txtRuc"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/consultarcliente_activity_ruc_hint"
+                        android:inputType="number"
+                        android:maxLength="11"
+                        android:singleLine="true"
+                        android:text="" >
+                    </EditText>
+
+                    <ImageButton
+                        android:contentDescription="@string/consultarcliente_activity_buscar"
+                        android:onClick="btnbuscar_onclick"
+                        android:src="@drawable/btn_search" >
+                    </ImageButton>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_weight="0"
+                        android:text="@string/consultarcliente_activity_dni" >
+                    </TextView>
+
+                    <EditText
+                        android:id="@+id/txtDni"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/consultarcliente_activity_dni_hint"
+                        android:inputType="number"
+                        android:maxLength="11"
+                        android:singleLine="true"
+                        android:text="" >
+                    </EditText>
+
+                    <ImageButton
+                        android:contentDescription="@string/consultarcliente_activity_buscar"
+                        android:onClick="btnbuscar_onclick"
+                        android:src="@drawable/btn_search" >
+                    </ImageButton>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:text="@string/consultarcliente_activity_razon" >
+                    </TextView>
+
+                    <EditText
+                        android:id="@+id/txtRazonSocial"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/consultarcliente_activity_razonsocial_hint"
+                        android:inputType="text"
+                        android:maxLength="30"
+                        android:singleLine="true"
+                        android:text="" >
+                    </EditText>
+
+                    <ImageButton
+                        android:contentDescription="@string/consultarcliente_activity_buscar"
+                        android:onClick="btnbuscar_onclick"
+                        android:src="@drawable/btn_search" >
+                    </ImageButton>
+                </TableRow>
+            </TableLayout>
+
+            <ListView
+                android:id="@+id/android:list"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="match_parent"
+                android:layout_marginBottom="2dip"
+                android:layout_marginTop="2dip"
+                android:drawSelectorOnTop="false"
+                android:focusable="false" />
 
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="@string/consultarcliente_activity_ruc" >
-                </TextView>
+        </LinearLayout>
+    </HorizontalScrollView>
 
-                <EditText
-                    android:id="@+id/txtRuc"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/consultarcliente_activity_ruc_hint"
-                    android:inputType="number"
-                    android:maxLength="11"
-                    android:singleLine="true"
-                    android:text="" >
-                </EditText>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-                <ImageButton
-                    android:contentDescription="@string/consultarcliente_activity_buscar"
-                    android:onClick="btnbuscar_onclick"
-                    android:src="@drawable/btn_search" >
-                </ImageButton>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_weight="0"
-                    android:text="@string/consultarcliente_activity_dni" >
-                </TextView>
-
-                <EditText
-                    android:id="@+id/txtDni"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/consultarcliente_activity_dni_hint"
-                    android:inputType="number"
-                    android:maxLength="11"
-                    android:singleLine="true"
-                    android:text="" >
-                </EditText>
-
-                <ImageButton
-                    android:contentDescription="@string/consultarcliente_activity_buscar"
-                    android:onClick="btnbuscar_onclick"
-                    android:src="@drawable/btn_search" >
-                </ImageButton>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="@string/consultarcliente_activity_razon" >
-                </TextView>
-
-                <EditText
-                    android:id="@+id/txtRazonSocial"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/consultarcliente_activity_razonsocial_hint"
-                    android:inputType="text"
-                    android:maxLength="30"
-                    android:singleLine="true"
-                    android:text="" >
-                </EditText>
-
-                <ImageButton
-                    android:contentDescription="@string/consultarcliente_activity_buscar"
-                    android:onClick="btnbuscar_onclick"
-                    android:src="@drawable/btn_search" >
-                </ImageButton>
-            </TableRow>
-        </TableLayout>
-
-        <ListView
-            android:id="@+id/android:list"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_below="@+id/tableLayout1"
-            android:layout_marginTop="3dip"
-            android:drawSelectorOnTop="false" />
-    </RelativeLayout>
+        <Button
+            android:id="@+id/btnSalir" 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:focusable="false"
+            android:onClick="btnSalir_click"
+            android:text="@string/app_salir" >
+        </Button>
+    </LinearLayout>
 
 </LinearLayout>

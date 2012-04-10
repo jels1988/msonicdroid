@@ -45,7 +45,7 @@
             android:orientation="vertical" >
 
             <TableLayout
-                android:layout_width="1500dip"
+                android:layout_width="400dip"
                 android:layout_height="wrap_content"
                 android:shrinkColumns="*"
                 android:stretchColumns="*" >
@@ -74,55 +74,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Producto" />
-
-                    <TextView
-                        style="@style/TextViewLabel"
-                        android:layout_width="50dip"
-                        android:layout_height="wrap_content"
-                        android:text="Concreción" />
-
-                    <TextView
-                        style="@style/TextViewLabel"
-                        android:layout_width="50dip"
-                        android:layout_height="wrap_content"
-                        android:text="SOVI" />
-
-                    <TextView
-                        style="@style/TextViewLabel"
-                        android:layout_width="70dip"
-                        android:layout_height="wrap_content"
-                        android:text="Cumple Precio" />
-
-                    <TextView
-                        style="@style/TextViewLabel"
-                        android:layout_width="70dip"
-                        android:layout_height="wrap_content"
-                        android:text="Número Sabores" />
-
-                    <TextView
-                        style="@style/TextViewLabel"
-                        android:layout_width="50dip"
-                        android:layout_height="wrap_content"
-                        android:text="Puntos Coca Cola" />
-
-                    <TextView
-                        style="@style/TextViewLabel"
-                        android:layout_width="100dip"
-                        android:layout_height="wrap_content"
-                        android:text="Accion Trade" />
-
-                    <TextView
-                        style="@style/TextViewLabel"
-                        android:layout_width="1dip"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:text="" />
-
-                    <TextView
-                        style="@style/TextViewLabel"
-                        android:layout_width="50dip"
-                        android:layout_height="wrap_content"
-                        android:text="Puntos Bonus" />
+                  
                 </TableRow>
 
                 <View
