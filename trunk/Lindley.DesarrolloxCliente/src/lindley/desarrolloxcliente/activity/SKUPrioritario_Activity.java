@@ -1,11 +1,17 @@
 package lindley.desarrolloxcliente.activity;
 
+import java.util.Calendar;
 import java.util.List;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.activity.ConsultarPresentacion_Activity.EfficientAdapter;
 import lindley.desarrolloxcliente.to.ClienteTO;
+import lindley.desarrolloxcliente.to.PresentacionTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
+import lindley.desarrolloxcliente.ws.service.ConsultarSKUPrioritarioProxy;
 import roboguice.inject.InjectView;
+
+import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
@@ -25,6 +31,7 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 	private EfficientAdapter adap;
 	private MyApplication application;
 	ClienteTO cliente;
+	@Inject ConsultarSKUPrioritarioProxy consultarSKUPrioritarioProxy;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +44,47 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 		 cliente = application.getClienteTO();
 		 mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
 		 mActionBar.setHomeLogo(R.drawable.header_logo);
-		 adap = new EfficientAdapter(this, application.listSKUPresentacion);
-		 setListAdapter(adap);
+		 processAsync(); 
 	}
 	
+	@Override
+   	protected void process() {
+		consultarSKUPrioritarioProxy.codigoCluster = cliente.getCluster();
+		consultarSKUPrioritarioProxy.execute();
+   	}
+	
+	 @Override
+		protected void processOk() {
+			// TODO Auto-generated method stub
+			boolean isExito = consultarSKUPrioritarioProxy.isExito();
+			if (isExito) {
+				int status = consultarSKUPrioritarioProxy.getResponse().getStatus();
+				if (status == 0) {
+					List<SKUPresentacionTO> listaSKUPresentacion = consultarSKUPrioritarioProxy
+							.getResponse().listaSKUPresentacion;	
+					adap = new EfficientAdapter(this, listaSKUPresentacion);				
+					final Calendar c = Calendar.getInstance();      
+					if(listaSKUPresentacion.size()>0)
+						txtViewFecha.setText(pad(c.get(Calendar.DAY_OF_MONTH)) + "/" + pad((c.get(Calendar.MONTH) + 1)) + "/" + c.get(Calendar.YEAR));
+					setListAdapter(adap);
+				}
+				else  {
+					showToast(consultarSKUPrioritarioProxy.getResponse().getDescripcion());
+				}
+			}
+			else{
+				processError();
+			}
+			super.processOk();
+		}
+	    
+	    @Override
+		protected void processError() {
+			// TODO Auto-generated method stub
+			super.processError();
+			showToast(error_generico_process);
+		}
+	    
 	public void btnOK_click(View view)
 	{
 		finish();

@@ -20,10 +20,13 @@ import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarPresentacionCompromisoProxy;
 import net.msonic.lib.ListActivityBase;
+import net.msonic.lib.MessageBox;
 import roboguice.inject.InjectExtra;
+import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -70,6 +73,12 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 	@InjectView(R.id.btnGuardar) Button btnGuardar;
 	@InjectView(R.id.btnCerrar) Button btnCerrar;
 	
+	@InjectResource(R.string.btn_cancelar) 				String cancelar;	
+	@InjectResource(R.string.confirm_cancelar_title) 	String confirm_cancelar_title;
+	@InjectResource(R.string.confirm_cancelar_message)  String confirm_cancelar_message;
+	@InjectResource(R.string.confirm_cancelar_yes) 		String confirm_cancelar_yes;
+	@InjectResource(R.string.confirm_cancelar_no) 		String confirm_cancelar_no;
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -87,7 +96,8 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 	    }
         else
         {
-        	btnCerrar.setVisibility(View.GONE);
+//        	btnCerrar.setVisibility(View.GONE);
+        	btnCerrar.setText(cancelar);
         }
 	}
 
@@ -132,7 +142,23 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 	
 	public void btnCerrar_click(View view)
     {
-    	processAsync(ACCION_CERRAR);
+//    	processAsync(ACCION_CERRAR);
+		MessageBox.showConfirmDialog(this, confirm_cancelar_title, confirm_cancelar_message, confirm_cancelar_yes, new android.content.DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub	
+				Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
+				startActivity(intent);
+			}
+			
+		}, confirm_cancelar_no, new android.content.DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});  
     }
 
     public void btnGuardar_click(View view)

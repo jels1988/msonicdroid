@@ -73,17 +73,14 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
     			ArrayList<SKUPresentacionCompromisoTO> listSku = new ArrayList<SKUPresentacionCompromisoTO>();
     			for(SKUPresentacionTO sku : presentacion.getListaSKU())
     			{
-    				if(!sku.seleccionado)
-    				{
-	    				SKUPresentacionCompromisoTO compromisoSKU = new SKUPresentacionCompromisoTO();
-	    				compromisoSKU.setCodigoSKU(sku.getCodigoSKU());
-	    				compromisoSKU.setDescripcionSKU(" ");
-	    				compromisoSKU.setActual("N");
-	//    				compromisoSKU.setActual("S");
-	//    				compromisoSKU.setCompromiso("S");
-	//    				compromisoSKU.setConfirmacion("S");
-	    				listSku.add(compromisoSKU);
-    				}
+//    				if(!sku.seleccionado)
+//    				{
+//	    				SKUPresentacionCompromisoTO compromisoSKU = new SKUPresentacionCompromisoTO();
+//	    				compromisoSKU.setCodigoSKU(sku.getCodigoSKU());
+//	    				compromisoSKU.setDescripcionSKU(" ");
+//	    				compromisoSKU.setActual("N");
+//	    				listSku.add(compromisoSKU);
+//    				}
     			}
     			compromiso.setListaSKU(listSku);
     			
@@ -337,7 +334,7 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					MyApplication application = (MyApplication) context.getApplicationContext();
-					application.listSKUPresentacion = presentacionTO.getListaSKU();
+//					application.listSKUPresentacion = presentacionTO.getListaSKU();
 					Intent skuPresentacion = new Intent(context, SKUPrioritario_Activity.class);					
 					context.startActivity(skuPresentacion);
 				}
