@@ -96,5 +96,12 @@
 	<string name="confirm_cancelar_message">¿Desea salir de la evaluación?</string>
 	<string name="confirm_cancelar_yes">SI</string>
 	<string name="confirm_cancelar_no">NO</string>
+	<string name="skuprioritario_activity_boton_guardar">Guardar</string>
+	<string name="skuprioritario_activity_boton_cancelar">Cancelar</string>
+	<string name="confirm_atras_title">Cancelar</string>	
+	<string name="confirm_atras_message">¿Desea volver a la busqueda de clientes?</string>
+	<string name="confirm_atras_yes">SI</string>
+	<string name="confirm_atras_no">NO</string>
+	<string name="oportunidad_activity_boton_cancelar">Cancelar</string>
 	    
 </resources>
