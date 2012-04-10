@@ -30,7 +30,7 @@
     <string name="ver_profit">Ver Profit</string>
     <string name="cabeceracliente_activity_title">Evaluación</string>
     <string name="compromiso_activity_title">Compromisos</string>
-    <string name="oportunidad_activity_title">Oportunidades</string>
+    <string name="oportunidad_activity_title">Selección de Oportunidades</string>
     <string-array name="puntos_desarrollador">
         <item>0</item>
         <item>1</item>
@@ -49,7 +49,7 @@
         <item>NO</item>
         <item>SI</item>
     </string-array>
-    <string name="informacionadicional_activity_title">Información Adicional</string>
+    <string name="informacionadicional_activity_title">Combos</string>
     <string name="btnguardar">Guardar</string>
     <string name="compromiso_open_cerrar">Cerrar</string>
     <string name="compromiso_open_guardar">Guardar</string>
@@ -71,7 +71,7 @@
     <string name="sku_valor_confirmacion">Confirmación</string>
     <string name="skuprioritario_activity_boton_ok">OK</string>
     <string name="oportunidad_activity_boton_siguiente">Siguiente</string>
-    <string name="skuprioritario_activity_title">SKU Prioritarios</string>
+    <string name="skuprioritario_activity_title">PRESENTACION – Marcar Respeto de Precio</string>
     <string name="btnExitoText">Compromisos</string>
     <string name="compromiso_guardar">Guardar</string>
     <string name="compromiso_agregar">Agregar</string>
@@ -86,5 +86,15 @@
     <string name="articulo_descripcion">Articulo Canje</string>
     <string name="puntos_ariculo">Puntos</string>
     <string name="compromiso_quitar">Quitar</string>
-    
+    <string name="app_salir">Salir</string>
+	<string name="confirm_exit_title">Salir</string>	
+	<string name="confirm_exit_message">¿Desea salir de la aplicación?</string>
+	<string name="confirm_exit_yes">SI</string>
+	<string name="confirm_exit_no">NO</string>
+	<string name="btn_cancelar">Cancelar</string>   
+	<string name="confirm_cancelar_title">Cancelar</string>	
+	<string name="confirm_cancelar_message">¿Desea salir de la evaluación?</string>
+	<string name="confirm_cancelar_yes">SI</string>
+	<string name="confirm_cancelar_no">NO</string>
+	    
 </resources>
