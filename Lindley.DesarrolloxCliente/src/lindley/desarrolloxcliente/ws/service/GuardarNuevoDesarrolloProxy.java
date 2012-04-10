@@ -32,7 +32,7 @@ public class GuardarNuevoDesarrolloProxy extends ProxyBase<GuardarDesarrolloResp
 	}
 
 	@Override
-	protected String requestText() {
+	protected String requestText() { 
 		// TODO Auto-generated method stub
 		GuardarNuevoDesarrolloRequest guardarDesarrolloRequest = new GuardarNuevoDesarrolloRequest();
 		guardarDesarrolloRequest.oportunidadSistema = this.oportunidadSistema;

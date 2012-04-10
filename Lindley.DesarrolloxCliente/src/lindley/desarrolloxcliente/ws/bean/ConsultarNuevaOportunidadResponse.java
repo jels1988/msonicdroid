@@ -14,3 +14,4 @@ public class ConsultarNuevaOportunidadResponse extends ResponseBase {
 	public List<NuevaOportunidadTO> listaNuevaOportunidad;
 	
 }
+ 

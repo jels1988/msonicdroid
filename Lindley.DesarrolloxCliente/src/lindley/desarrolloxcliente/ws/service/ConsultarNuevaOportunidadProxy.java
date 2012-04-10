@@ -14,7 +14,7 @@ public class ConsultarNuevaOportunidadProxy extends ProxyBase<ConsultarNuevaOpor
 	private String codigoCliente;
 	private String tipoOportunidad;
 	
-	public String getCodigoCliente() {
+	public String getCodigoCliente() { 
 		return codigoCliente;
 	}
 

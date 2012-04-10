@@ -49,7 +49,7 @@ import roboguice.config.AbstractAndroidModule;
 public class MyApplication extends RoboApplication {
 
 	@Inject FotoBLL fotoBLL;
-	@Inject FotoDAO fotoDAO;
+	@Inject FotoDAO fotoDAO; 
 	
 	private UsuarioTO usuarioTO;
 	private ClienteTO clienteTO;
