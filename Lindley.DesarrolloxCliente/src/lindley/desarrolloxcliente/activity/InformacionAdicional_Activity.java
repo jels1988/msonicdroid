@@ -73,17 +73,17 @@ public class InformacionAdicional_Activity extends ActivityBase {
 		informacion.setTipoAgrupacion(AGRUPACION_INVENTARIO);
 		application.setInformacionAdicional(informacion);
 		
-		Intent intent;
-		String a = "C";
-		if(a.equals(OPORTUNIDAD_DESARROLLADOR_ABIERTO))
-		{
-			intent= new Intent("lindley.desarrolloxcliente.oportunidaddesarrollador");		
-			startActivity(intent);
-		}
-		else
-		{
-			intent = new Intent("lindley.desarrolloxcliente.consultarposicion");
-			startActivity(intent);
-		}
+//		Intent intent;
+//		String a = "C";
+//		if(a.equals(OPORTUNIDAD_DESARROLLADOR_ABIERTO))
+//		{
+//			intent= new Intent("lindley.desarrolloxcliente.oportunidaddesarrollador");		
+//			startActivity(intent);
+//		}
+//		else
+//		{
+//			intent = new Intent("lindley.desarrolloxcliente.consultarposicion");
+//			startActivity(intent);
+//		}
 	}
 }

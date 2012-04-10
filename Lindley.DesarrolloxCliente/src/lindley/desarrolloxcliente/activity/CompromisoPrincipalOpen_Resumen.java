@@ -70,6 +70,11 @@ public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 		presentacion.putExtra(CompromisoPresentacionOpen_Activity.FLAG_FECHA, flagFecha);
 		setContent = mTabHost.newTabSpec("PRESENTACION").setIndicator(tabview).setContent(presentacion);
 		mTabHost.addTab(setContent);		
+		
+		tabview = createTabView(mTabHost.getContext(), "COMBOS");
+		Intent combos = new Intent(this, InformacionAdicional_Activity.class);
+		setContent = mTabHost.newTabSpec("COMBOS").setIndicator(tabview).setContent(combos);
+		mTabHost.addTab(setContent);		
 	}
 	
 	private static View createTabView(final Context context, final String text) {

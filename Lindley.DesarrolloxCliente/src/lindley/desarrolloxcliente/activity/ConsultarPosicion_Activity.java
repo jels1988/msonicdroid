@@ -114,7 +114,7 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
 		cliente = application.getClienteTO();
 		mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
-    	MessageBox.showConfirmDialog(this, "Activos", "¿Tiene activos de la empresa ?", "SI", new android.content.DialogInterface.OnClickListener() {
+    	MessageBox.showConfirmDialog(this, "Posición-Activos", "¿Tiene activos de la empresa ?", "SI", new android.content.DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub	

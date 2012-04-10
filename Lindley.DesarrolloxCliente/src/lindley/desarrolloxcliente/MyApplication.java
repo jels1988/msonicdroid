@@ -35,6 +35,7 @@ import lindley.desarrolloxcliente.ws.service.ConsultarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarFotoExitoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarOportunidadProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarProfitProxy;
+import lindley.desarrolloxcliente.ws.service.ConsultarSKUPrioritarioProxy;
 import lindley.desarrolloxcliente.ws.service.GuardarDesarrolloProxy;
 import lindley.desarrolloxcliente.ws.service.LoginProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarClienteProxy;
@@ -59,14 +60,16 @@ public class MyApplication extends RoboApplication {
 	public ArrayList<PresentacionCompromisoTO> listPresentacionCompromiso;
 	public ArrayList<CompromisoTO> listInventarioCompromiso;
 	
-	public ArrayList<SKUPresentacionTO> listSKUPresentacion;
+//	public ArrayList<SKUPresentacionTO> listSKUPresentacion;
 	public ArrayList<SKUPresentacionCompromisoTO> listSKUPresentacionCompromiso;
 	
 	public CompromisoPosicionOpen_Activity.EfficientAdapter 	posicionAdapter;
 	public CompromisoPresentacionOpen_Activity.EfficientAdapter presentacionAdapter;
 	public CompromisoOpen_Activity.EfficientAdapter 			openAdapter;
-	
+		
 	public ArrayList<CompromisoPosicionTO> listCompromiso;
+	
+	public String activosLindley = "";
 	
 	public UsuarioTO getUsuarioTO() {
 		return usuarioTO;
@@ -133,7 +136,9 @@ public class MyApplication extends RoboApplication {
 				bind(CerrarCompromisoProxy.class).in(Singleton.class);
 				bind(ConsultarProfitProxy.class).in(Singleton.class);
 				bind(ConsultarFotoExitoProxy.class).in(Singleton.class);
-				bind(ConsultarArticulosCanjeProxy.class).in(Singleton.class);				
+				bind(ConsultarArticulosCanjeProxy.class).in(Singleton.class);
+				bind(ConsultarSKUPrioritarioProxy.class).in(Singleton.class);
+				
 				bind(FotoBLL.class).in(Singleton.class);
 				bind(FotoDAO.class).in(Singleton.class);
 			}});

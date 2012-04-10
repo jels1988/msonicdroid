@@ -6,12 +6,12 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
-import lindley.desarrolloxcliente.to.AccionTradeTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarOportunidadProxy;
+import net.msonic.lib.ListActivityBase;
+import net.msonic.lib.MessageBox;
 import roboguice.inject.InjectView;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,23 +20,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
-
-import net.msonic.lib.ListActivityBase;
-import net.msonic.lib.MessageBox;
 
 public class ConsultarOportunidad_Activity extends ListActivityBase {
 
@@ -46,6 +40,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	public static ClienteTO cliente;
 	public final String OPORTUNIDAD_SISTEMA = "1";
+	private final String OPORTUNIDAD_DESARROLLADOR_ABIERTO = "A";
 	private MyApplication application;
 	
 	
@@ -90,7 +85,18 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 
     	int maximoValor = 2;
     	int filasSeleccionadas=oportunidades.size();
-    	if(filasSeleccionadas>maximoValor){
+    	
+    	if(filasSeleccionadas == 0){
+    		MessageBox.showSimpleDialog(this, "Mensaje", "Debe seleccionar como mínimo una acción.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+				}
+				
+			});
+    	}
+    	else if(filasSeleccionadas>maximoValor){
     		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede seleccionar como máximo " + maximoValor +" acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
 				
 				@Override
@@ -100,9 +106,18 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 				
 			});
     	}else{
-    		application.setOportunidades(oportunidades);    		
-    		Intent intent = new Intent("lindley.desarrolloxcliente.informacionadicional");
-    		startActivity(intent);
+    		Intent intent;
+    		String a = "C";
+    		if(a.equals(OPORTUNIDAD_DESARROLLADOR_ABIERTO))
+    		{
+    			intent= new Intent("lindley.desarrolloxcliente.oportunidaddesarrollador");		
+    			startActivity(intent);
+    		}
+    		else
+    		{
+    			intent = new Intent("lindley.desarrolloxcliente.consultarposicion");
+    			startActivity(intent);
+    		}
     	}
     }
     
@@ -148,14 +163,14 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	    private LayoutInflater mInflater;
 	    private Context context;
 	    private List<OportunidadTO> detalles;
-	    private MyApplication application;
+//	    private MyApplication application;
 	    
 	    public EfficientAdapter(Context context, List<OportunidadTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
 		      this.context = context;
 		      this.detalles = valores;
-		      this.application = (MyApplication)context.getApplicationContext();
+//		      this.application = (MyApplication)context.getApplicationContext();
 		    }
 	    
 
@@ -178,25 +193,9 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	        holder = new ViewHolder();
 	        	        	        	    	
 	        holder.txViewPro = (TextView) convertView.findViewById(R.id.txViewPro); 
-	        holder.txViewConcrecion = (TextView) convertView.findViewById(R.id.txViewConcrecion);
-	        holder.txViewSOVI =  (TextView) convertView.findViewById(R.id.txViewSOVI);
-	        holder.txViewCumPrecio =  (TextView) convertView.findViewById(R.id.txViewCumPrecio);   
-	        holder.txViewSabores = (TextView) convertView.findViewById(R.id.txViewSabores);  	    	
-	    	holder.txViewPCoca = (TextView) convertView.findViewById(R.id.txViewPCoca);		    	
-	    	holder.cboAccTrade = (Spinner) convertView.findViewById(R.id.cboAccTrade);	          	
-	    	holder.txViewFecha = (TextView) convertView.findViewById(R.id.txViewFecha);	    	
-	    	holder.txViewPBonus = (TextView) convertView.findViewById(R.id.txViewPBonus);
 	    	holder.btnProfit = (Button) convertView.findViewById(R.id.btnProfit);
 	        holder.chkSeleccion = (CheckBox) convertView.findViewById(R.id.chkSeleccion);
-	        
-//		      AccionTRADETO ACCIONTO = NEW ACCIONTRADETO();
-//		      ACCIONTO.SETCODIGO("0");
-//		      ACCIONTO.setDescripcion("--Seleccionar--");
-//		      oportunidad.getListaAccionesTrade().add(0, new AccionTradeTO("0","--Seleccionar--"));
-		        
-		      
-		      
-	    	
+	        	    	
 	        convertView.setTag(holder);
 	      } else {
 	        // Get the ViewHolder back to get fast access to the TextView
@@ -205,42 +204,6 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	      }
 	      
 	      holder.txViewPro.setText(oportunidad.getDescripcionProducto());
-	      holder.txViewConcrecion.setText(oportunidad.getConcrecion());
-	      holder.txViewSOVI.setText(oportunidad.getSovi());
-	      holder.txViewCumPrecio.setText(oportunidad.getCumplePrecio());
-	      holder.txViewSabores.setText(oportunidad.getNumeroSabores());
-	      holder.txViewPCoca.setText(oportunidad.getPuntosCocaCola());
-	      
-	      holder.txViewPBonus.setText(oportunidad.getPuntosBonus());	      
-
-	      holder.cboAccTrade.setAdapter(application.getAdapterAccionTrade(oportunidad.getListaAccionesTrade()));
-
-	      if(holder.cboAccTrade.getCount() > 1)
-	    	  holder.cboAccTrade.setSelection(1);
-	      
-	      holder.cboAccTrade.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-				@Override
-				public void onItemSelected(AdapterView<?> arg0, View arg1,
-						int arg2, long arg3) {
-					// TODO Auto-generated method stub
-					if(arg2 > 0){
-						oportunidad.setDescripcionAccioneTrade(((AccionTradeTO)arg0.getSelectedItem()).getDescripcion());
-						oportunidad.setAccioneTrade(((AccionTradeTO)arg0.getSelectedItem()).getCodigo());
-					}else{
-						oportunidad.setDescripcionAccioneTrade(" ");
-						oportunidad.setAccioneTrade("0");
-					}
-				}
-
-				@Override
-				public void onNothingSelected(AdapterView<?> arg0) {
-					// TODO Auto-generated method stub
-					oportunidad.setDescripcionAccioneTrade(" ");
-					oportunidad.setAccioneTrade("0");
-				}
-				
-			});
 	      
 	      holder.chkSeleccion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				
@@ -276,14 +239,6 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	    static class ViewHolder {   
 	    	CheckBox chkSeleccion;
 	    	TextView txViewPro;
-	    	TextView txViewConcrecion;
-	    	TextView txViewSOVI;
-	    	TextView txViewCumPrecio;
-	    	TextView txViewSabores;  	    	
-	    	TextView txViewPCoca;    	
-	    	Spinner cboAccTrade;    	
-	    	TextView txViewFecha;
-	    	TextView txViewPBonus;
 	    	Button btnProfit;
 	    }
 	    

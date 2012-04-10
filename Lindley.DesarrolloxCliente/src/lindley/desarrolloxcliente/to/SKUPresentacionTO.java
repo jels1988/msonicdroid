@@ -10,7 +10,7 @@ public class SKUPresentacionTO {
 	@SerializedName("DSKU")
 	private String descripcionSKU;
 	
-	public boolean seleccionado;
+//	public boolean seleccionado;
 	
 //	@SerializedName("ACT")
 //	public String valorActual;

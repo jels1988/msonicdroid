@@ -11,6 +11,7 @@ import lindley.desarrolloxcliente.ws.service.ConsultarClienteProxy;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.ListActivityBase;
+import net.msonic.lib.MessageBox;
 
 public class ConsultarCliente_Activity extends ListActivityBase {
 
@@ -41,7 +43,13 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 	@InjectView(R.id.txtRuc)TextView txtRuc;
 	@InjectView(R.id.txtDni)TextView txtDni;
 	@InjectView(R.id.txtRazonSocial)TextView txtRazonSocial;
+	
 	@InjectResource(R.string.consultarcliente_activity_empty) String parametros_empty;
+	@InjectResource(R.string.confirm_exit_title) 	String confirm_exit_title;
+	@InjectResource(R.string.confirm_exit_message)  String confirm_exit_message;
+	@InjectResource(R.string.confirm_exit_yes) 		String confirm_exit_yes;
+	@InjectResource(R.string.confirm_exit_no) 		String confirm_exit_no;
+	
 	private EfficientAdapter adap;
 	
 	public static String file_name="";
@@ -278,6 +286,33 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 		showToast(error_generico_process);
 	}
     
+    
+    public void btnSalir_click(View view)
+    {
+    	MessageBox.showConfirmDialog(this, confirm_exit_title, confirm_exit_message, confirm_exit_yes, new android.content.DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub	
+				onDestroy();
+			}
+			
+		}, confirm_exit_no, new android.content.DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});    	
+
+    }
+    
+    @Override
+    protected void onDestroy() {
+    	// TODO Auto-generated method stub
+    	android.os.Process.killProcess(android.os.Process.myPid());
+    	super.onDestroy();
+    }
 
 	
 	public static class EfficientAdapter extends BaseAdapter implements
