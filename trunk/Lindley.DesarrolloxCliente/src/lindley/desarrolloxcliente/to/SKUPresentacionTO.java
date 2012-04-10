@@ -10,10 +10,9 @@ public class SKUPresentacionTO {
 	@SerializedName("DSKU")
 	private String descripcionSKU;
 	
-//	public boolean seleccionado;
+	@SerializedName("SLC")
+	public boolean seleccionado;
 	
-//	@SerializedName("ACT")
-//	public String valorActual;
 
 	public String getCodigoSKU() {
 		return codigoSKU;

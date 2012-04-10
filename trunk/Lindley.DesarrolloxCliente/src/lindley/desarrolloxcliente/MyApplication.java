@@ -21,6 +21,7 @@ import lindley.desarrolloxcliente.to.AccionTradeTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.CompromisoPosicionTO;
 import lindley.desarrolloxcliente.to.CompromisoTO;
+import lindley.desarrolloxcliente.to.GuardarOportunidadTO;
 import lindley.desarrolloxcliente.to.InformacionAdicionalTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
@@ -33,10 +34,12 @@ import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarArticulosCanjeProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarFotoExitoProxy;
+import lindley.desarrolloxcliente.ws.service.ConsultarNuevaOportunidadProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarOportunidadProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarProfitProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarSKUPrioritarioProxy;
 import lindley.desarrolloxcliente.ws.service.GuardarDesarrolloProxy;
+import lindley.desarrolloxcliente.ws.service.GuardarNuevoDesarrolloProxy;
 import lindley.desarrolloxcliente.ws.service.LoginProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarClienteProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCabeceraProxy;
@@ -54,13 +57,18 @@ public class MyApplication extends RoboApplication {
 	private ArrayList<OportunidadTO> oportunidadesDesarrollador; 
 	private ArrayList<OportunidadTO> oportunidades;
 	
+	///Agregado 10/04/2012
+	public ArrayList<GuardarOportunidadTO> guardarOportunidades;
+	public String activosLindley = "";
+	public List<SKUPresentacionTO> guardarSKUPresentacion;
+	///-------------------
+	
 	private InformacionAdicionalTO informacionAdicional;
 	
 	public ArrayList<PosicionCompromisoTO> listPosicionCompromiso;
 	public ArrayList<PresentacionCompromisoTO> listPresentacionCompromiso;
 	public ArrayList<CompromisoTO> listInventarioCompromiso;
 	
-//	public ArrayList<SKUPresentacionTO> listSKUPresentacion;
 	public ArrayList<SKUPresentacionCompromisoTO> listSKUPresentacionCompromiso;
 	
 	public CompromisoPosicionOpen_Activity.EfficientAdapter 	posicionAdapter;
@@ -68,8 +76,6 @@ public class MyApplication extends RoboApplication {
 	public CompromisoOpen_Activity.EfficientAdapter 			openAdapter;
 		
 	public ArrayList<CompromisoPosicionTO> listCompromiso;
-	
-	public String activosLindley = "";
 	
 	public UsuarioTO getUsuarioTO() {
 		return usuarioTO;
@@ -138,6 +144,8 @@ public class MyApplication extends RoboApplication {
 				bind(ConsultarFotoExitoProxy.class).in(Singleton.class);
 				bind(ConsultarArticulosCanjeProxy.class).in(Singleton.class);
 				bind(ConsultarSKUPrioritarioProxy.class).in(Singleton.class);
+				bind(GuardarNuevoDesarrolloProxy.class).in(Singleton.class);
+				bind(ConsultarNuevaOportunidadProxy.class).in(Singleton.class);
 				
 				bind(FotoBLL.class).in(Singleton.class);
 				bind(FotoDAO.class).in(Singleton.class);
@@ -167,5 +175,6 @@ public class MyApplication extends RoboApplication {
 
 	public void setInformacionAdicional(InformacionAdicionalTO informacionAdicional) {
 		this.informacionAdicional = informacionAdicional;
-	}	
+	}
+
 }

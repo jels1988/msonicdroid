@@ -2,15 +2,19 @@ package lindley.desarrolloxcliente.activity;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.OportunidadTO;
-import lindley.desarrolloxcliente.ws.service.ConsultarOportunidadProxy;
+import lindley.desarrolloxcliente.to.GuardarOportunidadTO;
+import lindley.desarrolloxcliente.to.NuevaOportunidadTO;
+import lindley.desarrolloxcliente.ws.service.ConsultarNuevaOportunidadProxy;
+import net.msonic.lib.ActivityUtil;
 import net.msonic.lib.ListActivityBase;
 import net.msonic.lib.MessageBox;
+import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -35,7 +39,7 @@ import com.thira.examples.actionbar.widget.ActionBar;
 public class ConsultarOportunidad_Activity extends ListActivityBase {
 
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
-	@Inject ConsultarOportunidadProxy consultarOportunidadProxy;
+	@Inject ConsultarNuevaOportunidadProxy consultarOportunidadProxy;
 	private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	public static ClienteTO cliente;
@@ -43,6 +47,10 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	private final String OPORTUNIDAD_DESARROLLADOR_ABIERTO = "A";
 	private MyApplication application;
 	
+	@InjectResource(R.string.confirm_atras_title) 	String confirm_atras_title;
+	@InjectResource(R.string.confirm_atras_message) String confirm_atras_message;
+	@InjectResource(R.string.confirm_atras_yes) 	String confirm_atras_yes;
+	@InjectResource(R.string.confirm_atras_no) 		String confirm_atras_no;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -58,12 +66,54 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
         processAsync(); 
     }
     
+	public void btnCancelar_click(View view)
+	{
+		MessageBox.showConfirmDialog(this, confirm_atras_title, confirm_atras_message, confirm_atras_yes, new android.content.DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub	
+				Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
+				startActivity(intent);
+			}
+			
+		}, confirm_atras_no, new android.content.DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});   
+	}
+	
     public void btnSiguiente_click(View view)
     {
-    	ArrayList<OportunidadTO> oportunidades = application.getOportunidades();
+//    	ArrayList<OportunidadTO> oportunidades = application.getOportunidades();
+//    	
+//    	if(oportunidades==null){
+//    		oportunidades = new ArrayList<OportunidadTO>();
+//    	}else{
+//    		oportunidades.clear();
+//    	}
+//    	
+//    	
+//    	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
+//
+//    	if(adap == null)
+//    	{
+//	    	adap = new EfficientAdapter(getApplicationContext(), new ArrayList<OportunidadTO>());
+//    	}
+//    	
+//    	for (OportunidadTO oportunidad : adap.detalles) {
+//    		if(oportunidad.isSeleccionado()){    			    			
+//    			oportunidades.add(oportunidad);
+//    		}
+//		}
+    	
+    	ArrayList<GuardarOportunidadTO> oportunidades = application.guardarOportunidades;
     	
     	if(oportunidades==null){
-    		oportunidades = new ArrayList<OportunidadTO>();
+    		oportunidades = new ArrayList<GuardarOportunidadTO>();
     	}else{
     		oportunidades.clear();
     	}
@@ -73,15 +123,17 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 
     	if(adap == null)
     	{
-	    	adap = new EfficientAdapter(getApplicationContext(), new ArrayList<OportunidadTO>());
+	    	adap = new EfficientAdapter(getApplicationContext(), new ArrayList<NuevaOportunidadTO>());
     	}
     	
-    	for (OportunidadTO oportunidad : adap.detalles) {
-    		if(oportunidad.isSeleccionado()){    			    			
-    			oportunidades.add(oportunidad);
+    	for (NuevaOportunidadTO oportunidad : adap.detalles) {
+    		if(oportunidad.seleccionado){    
+    			GuardarOportunidadTO guardar = new GuardarOportunidadTO();
+    			guardar.codigoProducto = oportunidad.codigoProducto;
+    			oportunidades.add(guardar);
     		}
 		}
-    	
+    	application.guardarOportunidades = oportunidades;
 
     	int maximoValor = 2;
     	int filasSeleccionadas=oportunidades.size();
@@ -115,7 +167,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     		}
     		else
     		{
-    			intent = new Intent("lindley.desarrolloxcliente.consultarposicion");
+    			intent = new Intent("lindley.desarrolloxcliente.skuprioritario");
     			startActivity(intent);
     		}
     	}
@@ -135,11 +187,12 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 		if (isExito) {
 			int status = consultarOportunidadProxy.getResponse().getStatus();
 			if (status == 0) {
-				List<OportunidadTO> oportunidades = consultarOportunidadProxy
-						.getResponse().getListaOportunidad();
+				List<NuevaOportunidadTO> oportunidades = consultarOportunidadProxy
+						.getResponse().listaNuevaOportunidad;
 				adap = new EfficientAdapter(this, oportunidades);
+				final Calendar c = Calendar.getInstance();
 				if(oportunidades.size()>0)
-				txtViewFecha.setText(oportunidades.get(0).getFecha());
+					txtViewFecha.setText(ActivityUtil.pad(c.get(Calendar.DAY_OF_MONTH)) + "/" + ActivityUtil.pad((c.get(Calendar.MONTH) + 1)) + "/" + c.get(Calendar.YEAR));
 				setListAdapter(adap);
 			}
 			else  {
@@ -162,10 +215,10 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
 	    private Context context;
-	    private List<OportunidadTO> detalles;
+	    private List<NuevaOportunidadTO> detalles;
 //	    private MyApplication application;
 	    
-	    public EfficientAdapter(Context context, List<OportunidadTO> valores) {
+	    public EfficientAdapter(Context context, List<NuevaOportunidadTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 		      mInflater = LayoutInflater.from(context);
 		      this.context = context;
@@ -181,7 +234,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	     *      android.view.ViewGroup)
 	     */
 	    public View getView(final int position, View convertView, ViewGroup parent) {
-	    	final OportunidadTO oportunidad = (OportunidadTO) getItem(position);
+	    	final NuevaOportunidadTO oportunidad = (NuevaOportunidadTO) getItem(position);
 	    	ViewHolder holder;
 
 	      if (convertView == null) {
@@ -203,7 +256,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	        holder = (ViewHolder) convertView.getTag();
 	      }
 	      
-	      holder.txViewPro.setText(oportunidad.getDescripcionProducto());
+	      holder.txViewPro.setText(oportunidad.descripcionProducto);
 	      
 	      holder.chkSeleccion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				
@@ -211,9 +264,9 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 					// TODO Auto-generated method stub
 					if(isChecked){
-						oportunidad.setSeleccionado(true);
+						oportunidad.seleccionado = true;
 					}else{
-						oportunidad.setSeleccionado(false);
+						oportunidad.seleccionado = false;
 					}
 				}
 			});
@@ -227,8 +280,8 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 					profit.putExtra(VerProfit_Activity.ANIO, "");
 					profit.putExtra(VerProfit_Activity.MES, "");
 					profit.putExtra(VerProfit_Activity.CLIENTE, cliente.getCodigo());
-					profit.putExtra(VerProfit_Activity.ARTICULO, oportunidad.getCodigoProducto());
-					profit.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, oportunidad.getDescripcionProducto());
+					profit.putExtra(VerProfit_Activity.ARTICULO, oportunidad.codigoProducto);
+					profit.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, oportunidad.descripcionProducto);
 					context.startActivity(profit);
 				}
 			});
