@@ -256,7 +256,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	        holder = (ViewHolder) convertView.getTag();
 	      }
 	      
-	      holder.txViewPro.setText(oportunidad.descripcionProducto);
+	      holder.txViewPro.setText("     "+oportunidad.descripcionProducto);
 	      
 	      holder.chkSeleccion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				

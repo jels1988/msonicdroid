@@ -191,27 +191,17 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 						}
 						else
 						{
-							estado = FLAG_OPEN_FECHA_CERRADA;
-						}
-						
-						
-						Intent compromisoOpen = new Intent(context, CompromisoPrincipalOpen_Resumen.class);
-						compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
-						compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.FLAG_FECHA, estado);
-						context.startActivity(compromisoOpen);
-						//Intent compromisoOpen = new Intent(context, CompromisoOpen_Activity.class);
-						//compromisoOpen.putExtra(CompromisoOpen_Activity.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
-						//compromisoOpen.putExtra(CompromisoOpen_Activity.FLAG_FECHA, CompromisoOpen_Activity.FLAG_OPEN_FECHA_CERRADA);
-						//context.startActivity(compromisoOpen);
+							Intent compromisoOpen = new Intent(context, CompromisoPrincipalOpen_Resumen.class);
+							compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
+							compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.FLAG_FECHA, FLAG_OPEN_FECHA_CERRADA);
+							context.startActivity(compromisoOpen);
+						}						
 					}
 					else
 					{
 						Intent compromisoClose = new Intent(context, CompromisoPrincipalClose_Resumen.class);
 						compromisoClose.putExtra(CompromisoPrincipalClose_Resumen.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
 						context.startActivity(compromisoClose);
-						//Intent compromisoClose = new Intent(context, CompromisoClose_Activity.class);
-						//compromisoClose.putExtra(CompromisoClose_Activity.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
-						//context.startActivity(compromisoClose);
 					}
 				}
 			});

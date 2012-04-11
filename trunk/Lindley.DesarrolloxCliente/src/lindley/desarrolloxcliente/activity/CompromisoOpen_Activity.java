@@ -38,7 +38,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
@@ -51,13 +50,11 @@ import com.google.inject.Inject;
 public class CompromisoOpen_Activity extends ListActivityBase {
 
 	public final static String CODIGO_REGISTRO = "codigo_reg";
-	public final static String FLAG_FECHA = "fecha_flag";
+//	public final static String FLAG_FECHA = "fecha_flag";
 
 	private static final int ACCION_CERRAR = 1;
 	private static final int ACCION_ACTUALIZAR = 2;
-	
-	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
-	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
+
 	public static final String TIPO_PRESENTACION = "3";
 	public static final String TIPO_POSICION = "2";
 	public static final String NO = "N";
@@ -67,7 +64,6 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	public static final String SI_DATO = "SI";
 	
 	@InjectExtra(CODIGO_REGISTRO) String codigoRegistro;
-	@InjectExtra(FLAG_FECHA) static String flagFecha;
 	@Inject ConsultarCompromisoProxy consultarCompromisoProxy;
 	@Inject CerrarCompromisoProxy cerrarCompromisoProxy;
 	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
@@ -411,8 +407,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	        holder.cboSaboresCmp =  (Spinner) convertView.findViewById(R.id.cboSaboresCmp);
 	        
 	    		    	
-	    	holder.txViewAccTrade = (Spinner) convertView.findViewById(R.id.txViewAccTrade);	          	
-	    	holder.txViewFecha = (TextView) convertView.findViewById(R.id.txViewFecha);
+	    	holder.txViewAccTrade = (Spinner) convertView.findViewById(R.id.txViewAccTrade);	
 	    	holder.txEditFecha = (EditText) convertView.findViewById(R.id.txEditFecha);	    	
 	    	holder.btnFecha = (ImageButton) convertView.findViewById(R.id.btnFecha);
 	    	
@@ -505,44 +500,11 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 		  if(compromiso.getCumplePrecioCompromiso().equals("S"))holder.cboCumPrecioCmp.setSelection(0);
 		  else holder.cboCumPrecioCmp.setSelection(1);
 	      
-	      
-	      //===============================
-	      
-	      /*holder.txViewSabores.setOnFocusChangeListener(new OnFocusChangeListener() {
-				
-				@Override
-				public void onFocusChange(View v, boolean hasFocus) {
-					// TODO Auto-generated method stub
-					compromiso.setNumeroSabores(holder.txViewSabores.getText().toString());
-				}
-			});*/
 	      holder.txViewSabores.setText(compromiso.getNumeroSabores());
-	      
-	      //=================================
-	      
-	      
-	    //=================================
 	      
 	      holder.txViewPuntos.setText(compromiso.getPuntosBonus());
 	      //holder.txViewAccTrade.setText(compromiso.getDescripcionAccion());
-	      
-	      if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
-	      {
-	    	  holder.txEditFecha.setVisibility(View.GONE);	    	  
-	    	  holder.btnFecha.setVisibility(View.GONE);
-	    	  holder.txViewFecha.setVisibility(View.VISIBLE);
-	    	  holder.txViewSOVI.setEnabled(false);
-	    	  holder.txViewSOVICmp.setEnabled(false);
-	    	  holder.cboCumPrecio.setEnabled(false);
-	    	  holder.cboCumPrecioCmp.setEnabled(false);
-	      }
-	      else
-	      {
-	    	  holder.txEditFecha.setVisibility(View.VISIBLE);	    	  
-	    	  holder.btnFecha.setVisibility(View.VISIBLE);
-	    	  holder.txViewFecha.setVisibility(View.GONE);
-	      }
-	      
+	     	      
 	      holder.btnFecha = (ImageButton)convertView.findViewById(R.id.btnFecha);
 	    	
 	    	holder.btnFecha.setOnClickListener(new OnClickListener() {
@@ -581,46 +543,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 					      DatePickerDialog p = new DatePickerDialog(context, dateSetListener, anio,mes--, dia);
 					      p.show();
 				}
-			});
-	    	
-	    	
-	      int mYear,mMonth,mDay;
-	      String fecha = compromiso.getFechaCompromiso();
-	      if(fecha.length() > 7)
-	      {
-	    	  mYear =  Integer.parseInt(fecha.substring(0, 4));
-	    	  mMonth  =  Integer.parseInt(fecha.substring(4, 6));
-	    	  mDay  =  Integer.parseInt(fecha.substring(6));
-	    	  
-	    	
-	          
-	    	  holder.txViewFecha.setText(pad(mDay)+"/"+ pad(mMonth)+"/"+pad(mYear));
-	     }
-	      else{
-	    	  
-	    	  holder.txViewFecha.setText("");
-	      }	      
-	      
-	      
-	      /*holder.cboConcrecion.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-				@Override
-				public void onItemSelected(AdapterView<?> arg0, View arg1,
-						int arg2, long arg3) {
-					// TODO Auto-generated method stub
-					if(arg2==0) 
-						compromiso.setConcrecion("S");
-					else
-						compromiso.setConcrecion("N");
-				}
-				
-				@Override
-				public void onNothingSelected(AdapterView<?> arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-			});*/
+			});	    	
+	    
 	      
 	      holder.btnProfit.setOnClickListener(new OnClickListener() {
 				@Override
@@ -652,7 +576,6 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	    	TextView txViewPuntos;   	    	
 	    	Spinner txViewAccTrade;    	
 	    	EditText txEditFecha;
-	    	TextView txViewFecha;
 	    	ImageButton btnFecha;
 	    	ImageButton btnProfit;
 	    }

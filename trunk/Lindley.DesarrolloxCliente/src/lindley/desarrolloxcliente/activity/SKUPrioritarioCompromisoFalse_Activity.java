@@ -20,13 +20,19 @@ import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import net.msonic.lib.ListActivityBase;
 
-public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
+public class SKUPrioritarioCompromisoFalse_Activity extends ListActivityBase {
 
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	private EfficientAdapter adap;
 	private MyApplication application;
 	ClienteTO cliente;
 	
+	public final static String FLAG_ESTADO = "estado_flag";
+	
+	public final static String FLAG_FECHA = "fecha_flag";
+	@InjectExtra(FLAG_FECHA) static String flagFecha;
+	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
+	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +77,7 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 				viewHolder.txViewSKU = (TextView) view.findViewById(R.id.txViewSKU);
 				viewHolder.chkValActual = (CheckBox) view.findViewById(R.id.chkValActual);
 				viewHolder.chkValComp = (CheckBox) view.findViewById(R.id.chkValComp);
+				viewHolder.chkValConf = (CheckBox) view.findViewById(R.id.chkValConf);
 						    	
 				viewHolder.chkValComp.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 					
@@ -86,10 +93,26 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 					}
 				});
 				
+				viewHolder.chkValConf.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+					
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						// TODO Auto-generated method stub
+						SKUPresentacionCompromisoTO skuPresentacion = (SKUPresentacionCompromisoTO) viewHolder.chkValConf.getTag();
+						if(isChecked){
+							skuPresentacion.setConfirmacion("S");
+						}else{
+							skuPresentacion.setConfirmacion("N");
+						}
+					}
+				});
+				
 				view.setTag(viewHolder);
+				viewHolder.chkValConf.setTag(this.skuPresentaciones.get(position));
 				viewHolder.chkValComp.setTag(this.skuPresentaciones.get(position));
 			}else{
 				view = convertView;				
+				((ViewHolder) view.getTag()).chkValConf.setTag(this.skuPresentaciones.get(position));
 				((ViewHolder) view.getTag()).chkValComp.setTag(this.skuPresentaciones.get(position));
 			}
 			
@@ -114,6 +137,29 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 				holder.chkValComp.setChecked(false);
 			}
 			
+			if(this.skuPresentaciones.get(position).getConfirmacion().compareToIgnoreCase("S") == 0)
+			{
+				holder.chkValConf.setChecked(true);
+			}
+			else
+			{
+				holder.chkValConf.setChecked(false);
+			}
+			
+			holder.chkValActual.setEnabled(false);
+			
+			if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
+			{
+				holder.chkValComp.setEnabled(false);
+				holder.chkValConf.setEnabled(true);
+			}
+			else
+			{
+				holder.chkValComp.setEnabled(true);
+				holder.chkValConf.setEnabled(true);
+			}
+		
+			
 			return view;
 		}
 
@@ -121,6 +167,7 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 	    	TextView txViewSKU;
 	    	CheckBox chkValActual;
 	    	CheckBox chkValComp;
+	    	CheckBox chkValConf;
 	    }
 	    
 	  }    

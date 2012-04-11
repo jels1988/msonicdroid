@@ -182,7 +182,7 @@ public class OportunidadDesarrollador_Activity extends ListActivityBase {
 					
 					Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.consultarcompromisoopen");
 					compromisoOpen.putExtra(CompromisoOpen_Activity.CODIGO_REGISTRO, idRegistro);
-					compromisoOpen.putExtra(CompromisoOpen_Activity.FLAG_FECHA, CompromisoOpen_Activity.FLAG_OPEN_FECHA_ABIERTO);
+					//compromisoOpen.putExtra(CompromisoOpen_Activity.FLAG_FECHA, CompromisoOpen_Activity.FLAG_OPEN_FECHA_ABIERTO);
 					startActivity(compromisoOpen);
 				}
 				else  {
