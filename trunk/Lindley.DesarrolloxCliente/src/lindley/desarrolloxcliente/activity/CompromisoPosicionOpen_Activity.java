@@ -433,14 +433,17 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				view = inflator.inflate(R.layout.consultarposicioncompromisoopen_content, null);
 				final ViewHolder viewHolder = new ViewHolder();
 				viewHolder.TextViewRpsta = (TextView) view.findViewById(R.id.TextViewRpsta);
-				viewHolder.txViewVariable = (TextView) view.findViewById(R.id.txViewVariable);
-				viewHolder.txViewRed = (TextView) view.findViewById(R.id.txViewRed);
-				viewHolder.txViewMaximo = (TextView) view.findViewById(R.id.txViewMaximo);
-				viewHolder.txViewDiferencia = (TextView) view.findViewById(R.id.txViewDiferencia);
 				viewHolder.txViewPuntos = (TextView) view.findViewById(R.id.txViewPuntos);
 				
 				viewHolder.btnFotoInicial = (Button) view.findViewById(R.id.btnFotoInicial);
 				viewHolder.btnFotoExito = (Button) view.findViewById(R.id.btnFotoExito);
+				
+//				viewHolder.txViewVariable = (TextView) view.findViewById(R.id.txViewVariable);
+				viewHolder.txViewRed = (TextView) view.findViewById(R.id.txViewRed);
+				viewHolder.txViewMaximo = (TextView) view.findViewById(R.id.txViewMaximo);
+//				viewHolder.txViewDiferencia = (TextView) view.findViewById(R.id.txViewDiferencia);
+								
+				
 				
 				viewHolder.btnFotoFinal = (Button) view.findViewById(R.id.btnFotoFinal);
 				viewHolder.btnFecha = (ImageButton) view.findViewById(R.id.btnFecha);
@@ -491,11 +494,11 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		    	  holder.TextViewRpsta.setText("SI");
 		      else
 		    	  holder.TextViewRpsta.setText("NO");
-			holder.txViewVariable.setText(posicionTO.getDescripcionVariable());
+//			holder.txViewVariable.setText(posicionTO.getDescripcionVariable());
 			holder.txViewAccComp.setText(posicionTO.getAccionCompromiso());
 			holder.txViewRed.setText(posicionTO.getRed());
 			holder.txViewMaximo.setText(posicionTO.getPtoMaximo());
-			holder.txViewDiferencia.setText(posicionTO.getDiferencia());
+//			holder.txViewDiferencia.setText(posicionTO.getDiferencia());
 			holder.txViewPuntos.setText(posicionTO.getPuntosSugeridos());
 			if(posicionTO.getCodigoVariable().compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
 			{
@@ -668,10 +671,10 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 
 	    static class ViewHolder {   
 	    	TextView TextViewRpsta;
-	    	TextView txViewVariable;
+//	    	TextView txViewVariable;
 	    	TextView txViewRed;
 	    	TextView txViewMaximo;
-	    	TextView txViewDiferencia;
+//	    	TextView txViewDiferencia;
 	    	TextView txViewPuntos;  	
 	    	Button   btnFotoInicial;
 	    	Button 	 btnFotoExito;

@@ -25,6 +25,8 @@ public class GuardarNuevoDesarrolloProxy extends ProxyBase<GuardarDesarrolloResp
 
 	public String codigoUsuario;
 	
+	public String codigoFDE;
+	
 	@Override
 	protected String getUrl() {
 		// TODO Auto-generated method stub
@@ -40,6 +42,7 @@ public class GuardarNuevoDesarrolloProxy extends ProxyBase<GuardarDesarrolloResp
 		guardarDesarrolloRequest.activosLindley = this.activosLindley;
 		guardarDesarrolloRequest.codigoCliente = this.codigoCliente;
 		guardarDesarrolloRequest.codigoUsuario = this.codigoUsuario;
+		guardarDesarrolloRequest.codigoFDE = this.codigoFDE;
 				
 		String request = JSONHelper.serializar(guardarDesarrolloRequest);
 		return request;

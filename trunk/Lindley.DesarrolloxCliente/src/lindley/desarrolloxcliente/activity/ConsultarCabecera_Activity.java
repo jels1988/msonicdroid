@@ -1,5 +1,6 @@
 package lindley.desarrolloxcliente.activity;
 
+import java.util.Calendar;
 import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
@@ -30,6 +31,9 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 	@Inject ConsultarCabeceraProxy ConsultarCabeceraProxy;
 	private EfficientAdapter adap;
 	ClienteTO cliente;
+	
+	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
+	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
 	
 	/** Called when the activity is first created. */
     @Override
@@ -128,10 +132,10 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 	        holder.txViewCodigo = (TextView) convertView.findViewById(R.id.txViewCodigo); 
 	        holder.txViewFecha = (TextView) convertView.findViewById(R.id.txViewFecha);
 	        holder.txViewHora =  (TextView) convertView.findViewById(R.id.txViewHora);
-	        holder.txViewCreado =  (TextView) convertView.findViewById(R.id.txViewCreado);   
+//	        holder.txViewCreado =  (TextView) convertView.findViewById(R.id.txViewCreado);   
 	        holder.txViewFechaCierre = (TextView) convertView.findViewById(R.id.txViewFechaCierre);  	    	
 	    	holder.txViewHoraCierre = (TextView) convertView.findViewById(R.id.txViewHoraCierre);		    	
-	    	holder.txViewCerrado = (TextView) convertView.findViewById(R.id.txViewCerrado);	          	
+//	    	holder.txViewCerrado = (TextView) convertView.findViewById(R.id.txViewCerrado);	          	
 	    	holder.txViewestado = (TextView) convertView.findViewById(R.id.txViewestado);	    	
 	    	holder.txViewVerDetalle = (Button) convertView.findViewById(R.id.txViewVerDetalle);	  
 	        
@@ -144,11 +148,11 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 	      
 	      holder.txViewCodigo.setText(desarrollo.getCodigo());
 	      holder.txViewFecha.setText(desarrollo.getFecha());
-	      holder.txViewHora.setText(desarrollo.getHora());
-	      holder.txViewCreado.setText(desarrollo.getUserCrea());
+	      holder.txViewHora.setText(desarrollo.getHora()); 
+//	      holder.txViewCreado.setText(desarrollo.getUserCrea());
 	      holder.txViewFechaCierre.setText(desarrollo.getFechaCierre());
 	      holder.txViewHoraCierre.setText(desarrollo.getHoraCierre());
-	      holder.txViewCerrado.setText(desarrollo.getUserCierra());
+//	      holder.txViewCerrado.setText(desarrollo.getUserCierra());
 	      
 	      //if(position == 0)
 	      if(desarrollo.getEstado().equals("A"))
@@ -164,9 +168,36 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 					//if(position == 0)
 					if(desarrolloTemp.getEstado().equals("A"))
 					{
+						String estado;
+						int anio = 0, anioActual;    
+			    	    int mes = 0, mesActual;  
+			    	    int dia = 0, diaActual;
+			    	    String fecha = desarrolloTemp.getFecha();
+			    	    Calendar c = Calendar.getInstance();
+			    	    anioActual = c.get(Calendar.YEAR);        
+				    	mesActual = c.get(Calendar.MONTH);        
+				    	diaActual = c.get(Calendar.DAY_OF_MONTH); 
+				    	
+						if(fecha.length() >= 10)
+						{
+							anio =  Integer.parseInt(fecha.substring(0, 2));
+					    	mes  =  Integer.parseInt(fecha.substring(3, 5))-1;
+					    	dia  =  Integer.parseInt(fecha.substring(7));
+					    }
+						
+						if(anio == anioActual && mes == mesActual && dia == diaActual)
+						{
+							estado = FLAG_OPEN_FECHA_ABIERTO;
+						}
+						else
+						{
+							estado = FLAG_OPEN_FECHA_CERRADA;
+						}
+						
+						
 						Intent compromisoOpen = new Intent(context, CompromisoPrincipalOpen_Resumen.class);
 						compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
-						compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.FLAG_FECHA, CompromisoPrincipalOpen_Resumen.FLAG_OPEN_FECHA_CERRADA);
+						compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.FLAG_FECHA, estado);
 						context.startActivity(compromisoOpen);
 						//Intent compromisoOpen = new Intent(context, CompromisoOpen_Activity.class);
 						//compromisoOpen.putExtra(CompromisoOpen_Activity.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
@@ -192,10 +223,10 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 	    	TextView txViewCodigo;
 	    	TextView txViewFecha;
 	    	TextView txViewHora;
-	    	TextView txViewCreado;
+//	    	TextView txViewCreado;
 	    	TextView txViewFechaCierre;  	    	
 	    	TextView txViewHoraCierre;    	
-	    	TextView txViewCerrado;    	
+//	    	TextView txViewCerrado;    	
 	    	TextView txViewestado;
 	    	Button txViewVerDetalle;	    	
 	    }

@@ -378,10 +378,11 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 				// views
 				// we want to bind data to.
 
-				viewHolder.txViewVariable = (TextView) view
-						.findViewById(R.id.txViewVariable);
 				viewHolder.txViewPuntos = (TextView) view
 						.findViewById(R.id.txViewPuntos);
+//				viewHolder.txViewVariable = (TextView) view
+//						.findViewById(R.id.txViewVariable);
+				
 				viewHolder.btnSKU = (Button) view.findViewById(R.id.btnSKU);
 
 				viewHolder.txEditFecha = (EditText) view
@@ -420,8 +421,8 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 			final ViewHolder holder = (ViewHolder) view.getTag();
 			final PresentacionCompromisoTO presentacionTO = detalles.get(position);
 			
-			holder.txViewVariable.setText(presentacionTO
-					.getDescripcionVariable());
+//			holder.txViewVariable.setText(presentacionTO
+//					.getDescripcionVariable());
 			holder.txViewPuntos.setText(presentacionTO.getPuntosSugeridos());
 
 			
@@ -511,7 +512,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 		}
 
 		static class ViewHolder {
-			TextView txViewVariable;
+//			TextView txViewVariable;
 			TextView txViewPuntos;
 			Button btnSKU;
 

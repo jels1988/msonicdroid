@@ -23,4 +23,7 @@ public class GuardarNuevoDesarrolloRequest {
 	
 	@SerializedName("USR")
 	public String codigoUsuario;
+	
+	@SerializedName("FDE")
+	public String codigoFDE;
 }
