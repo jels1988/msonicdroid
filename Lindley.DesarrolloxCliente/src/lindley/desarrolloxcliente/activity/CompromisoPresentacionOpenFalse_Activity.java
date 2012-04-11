@@ -35,6 +35,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -42,11 +45,17 @@ import android.widget.TextView;
 
 import com.google.inject.Inject;
 
-public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
+public class CompromisoPresentacionOpenFalse_Activity extends ListActivityBase {
 
 	public static final String COD_GESTION = "codGestion";
 	@InjectExtra(COD_GESTION) String codigoGestion;
-		
+	
+	public final static String FLAG_FECHA = "fecha_flag";
+	@InjectExtra(FLAG_FECHA) public static String flagFecha;
+	
+	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
+	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
+	
 	private static final int ACCION_CERRAR = 1;
 	private static final int ACCION_ACTUALIZAR = 2;
 	public static final String TIPO_PRESENTACION = "3";
@@ -60,6 +69,9 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 	@InjectView(R.id.txtViewCliente) TextView txtViewCliente;
 	ClienteTO cliente;
 	public static MyApplication application;
+	
+	@InjectView(R.id.btnGuardar) Button btnGuardar;
+	@InjectView(R.id.btnCerrar) Button btnCerrar;
 	
 	@InjectResource(R.string.btn_cancelar) 				String cancelar;	
 	@InjectResource(R.string.confirm_cancelar_title) 	String confirm_cancelar_title;
@@ -76,7 +88,17 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 		application = (MyApplication) getApplicationContext();
 		cliente = application.getClienteTO();
 		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
-		processAsync();		
+		processAsync();
+		
+		if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
+	    {
+        	btnGuardar.setVisibility(View.GONE);
+	    }
+        else
+        {
+//        	btnCerrar.setVisibility(View.GONE);
+        	btnCerrar.setText(cancelar);
+        }
 	}
 
 	@Override
@@ -96,7 +118,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 				List<PresentacionCompromisoTO> presentaciones = consultarPresentacionProxy
 						.getResponse().getListaCompromisos();
 				
-				application.presentacionAdapter = new EfficientAdapter(this, presentaciones);
+				application.presentacionAdapter = new CompromisoPresentacionOpen_Activity.EfficientAdapter(this, presentaciones);
 				final Calendar c = Calendar.getInstance();
 				if (presentaciones.size() > 0)
 					txtViewFecha.setText(pad(c.get(Calendar.DAY_OF_MONTH)) + "/" + pad((c.get(Calendar.MONTH) + 1)) + "/" + c.get(Calendar.YEAR));
@@ -118,7 +140,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 		showToast(error_generico_process);
 	}
 	
-	public void btnCancelar_click(View view)
+	public void btnCerrar_click(View view)
     {
 //    	processAsync(ACCION_CERRAR);
 		MessageBox.showConfirmDialog(this, confirm_cancelar_title, confirm_cancelar_message, confirm_cancelar_yes, new android.content.DialogInterface.OnClickListener() {
@@ -164,7 +186,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 			}
 			if(application.presentacionAdapter == null || application.presentacionAdapter.detalles.isEmpty())
 			{
-				application.presentacionAdapter = new EfficientAdapter(this, new ArrayList<PresentacionCompromisoTO>());
+				application.presentacionAdapter = new CompromisoPresentacionOpen_Activity.EfficientAdapter(this, new ArrayList<PresentacionCompromisoTO>());
 				presentacionAdapterVacio = true;
 			}
 				
@@ -366,15 +388,34 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 				viewHolder.txEditFecha = (EditText) view
 						.findViewById(R.id.txEditFecha);
 				viewHolder.btnFecha = (ImageButton) view
-						.findViewById(R.id.btnFecha);			
+						.findViewById(R.id.btnFecha);
+				viewHolder.txViewFecha = (TextView) view
+						.findViewById(R.id.txViewFecha);
+
+				viewHolder.chkCnfComp = (CheckBox) view
+						.findViewById(R.id.chkCnfComp);
+
+				viewHolder.chkCnfComp.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+					
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						// TODO Auto-generated method stub
+						PresentacionCompromisoTO compromiso = (PresentacionCompromisoTO) viewHolder.chkCnfComp.getTag();
+						if(isChecked){
+							compromiso.setConfirmacion("S");
+						}else{
+							compromiso.setConfirmacion("N");
+						}
+					}
+				});
 				
 				view.setTag(viewHolder);
-				viewHolder.btnFecha.setTag(this.detalles.get(position));
+				viewHolder.chkCnfComp.setTag(this.detalles.get(position));
 			} else {
 				// Get the ViewHolder back to get fast access to the TextView
 				// and the ImageView.
 				view = convertView;				
-				((ViewHolder) view.getTag()).btnFecha.setTag(this.detalles.get(position));
+				((ViewHolder) view.getTag()).chkCnfComp.setTag(this.detalles.get(position));
 			}
 			
 			final ViewHolder holder = (ViewHolder) view.getTag();
@@ -423,7 +464,37 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 				}
 			});
 			
-					 
+			int mYear, mMonth, mDay;
+			String fecha = presentacionTO.getFechaCompromiso();
+			if (fecha.length() > 7) {
+				mYear = Integer.parseInt(fecha.substring(0, 4));
+				mMonth = Integer.parseInt(fecha.substring(4, 6));
+				mDay = Integer.parseInt(fecha.substring(6));
+
+				holder.txViewFecha.setText(pad(mDay) + "/" + pad(mMonth) + "/"
+						+ pad(mYear));
+			} else {
+				holder.txViewFecha.setText("");
+			}
+
+			if (presentacionTO.getConfirmacion().equals("S"))
+				holder.chkCnfComp.setChecked(true);
+			else
+				holder.chkCnfComp.setChecked(false);
+
+			if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
+		      {
+		    	  holder.txEditFecha.setVisibility(View.GONE);	    	  
+		    	  holder.btnFecha.setVisibility(View.GONE);
+		    	  holder.txViewFecha.setVisibility(View.VISIBLE);
+		      }
+		      else
+		      {
+		    	  holder.txEditFecha.setVisibility(View.VISIBLE);	    	  
+		    	  holder.btnFecha.setVisibility(View.VISIBLE);
+		    	  holder.txViewFecha.setVisibility(View.GONE);
+		      }
+			 
 			 holder.btnSKU.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -439,10 +510,14 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 		}
 
 		static class ViewHolder {
+//			TextView txViewVariable;
 			TextView txViewPuntos;
 			Button btnSKU;
+
 			EditText txEditFecha;
+			TextView txViewFecha;
 			ImageButton btnFecha;
+			CheckBox chkCnfComp;
 		}
 
 	}

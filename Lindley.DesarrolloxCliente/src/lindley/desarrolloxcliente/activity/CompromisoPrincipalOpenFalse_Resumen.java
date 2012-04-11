@@ -12,7 +12,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.TabHost.TabSpec;
 
-public class CompromisoPrincipalOpen_Resumen extends TabActivity {
+public class CompromisoPrincipalOpenFalse_Resumen extends TabActivity {
 
 	public final static String CODIGO_REGISTRO = "codigo_reg";
 	public final static String FLAG_FECHA = "fecha_flag";
@@ -40,7 +40,7 @@ public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 		Intent intent = this.getIntent();
 		codigoRegistro = intent.getStringExtra(CODIGO_REGISTRO);
 		flagFecha = intent.getStringExtra(FLAG_FECHA);
-		setupTabHost();
+		setupTabHost();	
 		setupTab(new TextView(this));
 	}
 	
@@ -65,7 +65,6 @@ public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 		
 		tabview = createTabView(mTabHost.getContext(), "COMBOS");
 		Intent combos = new Intent(this, InformacionAdicional_Activity.class);
-		combos.putExtra(InformacionAdicional_Activity.COD_GESTION, codigoRegistro);
 		setContent = mTabHost.newTabSpec("COMBOS").setIndicator(tabview).setContent(combos);
 		mTabHost.addTab(setContent);		
 	}
@@ -75,7 +74,7 @@ public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 		TextView tv = (TextView) view.findViewById(R.id.tabsText);
 		tv.setText(text);
 		return view;
-	}	
+	}
 
 }
 

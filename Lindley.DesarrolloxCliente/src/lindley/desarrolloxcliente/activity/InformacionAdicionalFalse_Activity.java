@@ -29,12 +29,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import net.msonic.lib.ActivityBase;
 import net.msonic.lib.MessageBox;
 
-public class InformacionAdicional_Activity extends ActivityBase {
+public class InformacionAdicionalFalse_Activity extends ActivityBase {
 
 	private final String AGRUPACION_INVENTARIO = "1";
 	private final String OPORTUNIDAD_DESARROLLADOR_ABIERTO = "A";
@@ -66,10 +67,19 @@ public class InformacionAdicional_Activity extends ActivityBase {
 	public static final String COD_GESTION = "codGestion";
 	@InjectExtra(COD_GESTION) String codigoGestion;
 	
+	public final static String FLAG_FECHA = "fecha_flag";
+	@InjectExtra(FLAG_FECHA) static String flagFecha;
+	
 	public static final String TIPO_PRESENTACION = "3";
 	public static final String TIPO_POSICION = "2";
 	public static final String NO = "N";
-			
+	
+	@InjectView(R.id.btnGuardar) Button btnGuardar;
+	@InjectView(R.id.btnCerrar) Button btnCerrar;
+	
+	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
+	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -83,6 +93,15 @@ public class InformacionAdicional_Activity extends ActivityBase {
 		mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
         
+        if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
+	    {
+        	btnGuardar.setVisibility(View.GONE);
+	    }
+        else
+        {
+//        	btnCerrar.setVisibility(View.GONE);
+        	btnCerrar.setText(cancelar);
+        }
 	}
 	
 	public void btnSiguiente_click(View view)
@@ -128,7 +147,7 @@ public class InformacionAdicional_Activity extends ActivityBase {
 	
 	
 	
-	 public void btnCancelar_click(View view)
+	 public void btnCerrar_click(View view)
 	    {
 //	    	processAsync(ACCION_CERRAR);
 	    	MessageBox.showConfirmDialog(this, confirm_cancelar_title, confirm_cancelar_message, confirm_cancelar_yes, new android.content.DialogInterface.OnClickListener() {

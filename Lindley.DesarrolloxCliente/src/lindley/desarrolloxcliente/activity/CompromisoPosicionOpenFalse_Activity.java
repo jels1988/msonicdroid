@@ -43,18 +43,26 @@ import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.google.inject.Inject;
 
-public class CompromisoPosicionOpen_Activity extends ListActivityBase {
+public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 
 	public static final String COD_GESTION = "codGestion";
 	@InjectExtra(COD_GESTION) String codigoGestion;
-		
+	
+	public final static String FLAG_FECHA = "fecha_flag";
+	@InjectExtra(FLAG_FECHA) static String flagFecha;
+	
+	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
+	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
 	private static final int ACCION_CERRAR = 1;
 	private static final int ACCION_ACTUALIZAR = 2;
 	public static final String TIPO_PRESENTACION = "3";
@@ -70,7 +78,10 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	@InjectView(R.id.txtViewCliente) TextView txtViewCliente;
 	public static ClienteTO cliente;
 	public static MyApplication application;
-		
+	
+	@InjectView(R.id.btnGuardar) Button btnGuardar;
+	@InjectView(R.id.btnCerrar) Button btnCerrar;
+	
 	@InjectResource(R.string.btn_cancelar) 				String cancelar;	
 	@InjectResource(R.string.confirm_cancelar_title) 	String confirm_cancelar_title;
 	@InjectResource(R.string.confirm_cancelar_message)  String confirm_cancelar_message;
@@ -92,6 +103,15 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
         processAsync(); 
         
+        if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
+	    {
+        	btnGuardar.setVisibility(View.GONE);
+	    }
+        else
+        {
+//        	btnCerrar.setVisibility(View.GONE);
+        	btnCerrar.setText(cancelar);
+        }
     }
     
     @Override
@@ -110,7 +130,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 			if (status == 0) {
 				List<PosicionCompromisoTO> posiciones = consultarPosicionProxy
 						.getResponse().getListaCompromisos();	
-				application.posicionAdapter =new EfficientAdapter(this, posiciones); 
+				application.posicionAdapter =new CompromisoPosicionOpen_Activity.EfficientAdapter(this, posiciones); 
 				final Calendar c = Calendar.getInstance();      
 				if(posiciones.size()>0)
 					txtViewFecha.setText(pad(c.get(Calendar.DAY_OF_MONTH)) + "/" + pad((c.get(Calendar.MONTH) + 1)) + "/" + c.get(Calendar.YEAR));
@@ -133,8 +153,9 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		showToast(error_generico_process);
 	}
     
-    public void btnCancelar_click(View view)
+    public void btnCerrar_click(View view)
     {
+//    	processAsync(ACCION_CERRAR);
     	MessageBox.showConfirmDialog(this, confirm_cancelar_title, confirm_cancelar_message, confirm_cancelar_yes, new android.content.DialogInterface.OnClickListener() {
 			
 			public void onClick(DialogInterface dialog, int which) {
@@ -173,7 +194,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 			}
 			if(application.posicionAdapter == null || application.posicionAdapter.posiciones.isEmpty())
 			{				
-				application.posicionAdapter = new EfficientAdapter(this, new ArrayList<PosicionCompromisoTO>());
+				application.posicionAdapter = new CompromisoPosicionOpen_Activity.EfficientAdapter(this, new ArrayList<PosicionCompromisoTO>());
 				posicionAdapterVacio = true;
 			}
 			if(application.presentacionAdapter == null || application.presentacionAdapter.detalles.isEmpty())
@@ -417,14 +438,22 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				viewHolder.btnFotoInicial = (Button) view.findViewById(R.id.btnFotoInicial);
 				viewHolder.btnFotoExito = (Button) view.findViewById(R.id.btnFotoExito);
 				
+//				viewHolder.txViewVariable = (TextView) view.findViewById(R.id.txViewVariable);
 				viewHolder.txViewRed = (TextView) view.findViewById(R.id.txViewRed);
-				viewHolder.txViewMaximo = (TextView) view.findViewById(R.id.txViewMaximo);				
+				viewHolder.txViewMaximo = (TextView) view.findViewById(R.id.txViewMaximo);
+//				viewHolder.txViewDiferencia = (TextView) view.findViewById(R.id.txViewDiferencia);
+								
 				
+				
+				viewHolder.btnFotoFinal = (Button) view.findViewById(R.id.btnFotoFinal);
 				viewHolder.btnFecha = (ImageButton) view.findViewById(R.id.btnFecha);
+				viewHolder.txViewFecha = (TextView) view.findViewById(R.id.txViewFecha);
 				
 				viewHolder.txViewAccComp = (EditText) view.findViewById(R.id.txViewAccComp);
 				viewHolder.txEditFecha = (EditText) view.findViewById(R.id.txEditFecha);
 				
+				viewHolder.chkCumplio = (CheckBox) view.findViewById(R.id.chkCumplio);
+						    	
 				viewHolder.txViewAccComp.setOnFocusChangeListener(new OnFocusChangeListener() {
 					
 					@Override
@@ -435,12 +464,27 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 					}
 				});
 				
+				viewHolder.chkCumplio.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+					
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						// TODO Auto-generated method stub
+						PosicionCompromisoTO compromiso = (PosicionCompromisoTO) viewHolder.chkCumplio.getTag();
+						if(isChecked){							
+							compromiso.setConfirmacion("S");
+						}else{
+							compromiso.setConfirmacion("N");
+						}
+					}
+				});
 				
 				view.setTag(viewHolder);
 				viewHolder.txViewAccComp.setTag(this.posiciones.get(position));
+				viewHolder.chkCumplio.setTag(this.posiciones.get(position));
 			}else{
 				view = convertView;
 				((ViewHolder) view.getTag()).txViewAccComp.setTag(this.posiciones.get(position));
+				((ViewHolder) view.getTag()).chkCumplio.setTag(this.posiciones.get(position));
 			}
 			
 			final ViewHolder holder = (ViewHolder) view.getTag();
@@ -499,21 +543,95 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				}
 			});
 	    	
+			int mYear, mMonth, mDay;
+			String fecha = posicionTO.getFechaCompromiso();
+			if (fecha.length() > 7) {
+				mYear = Integer.parseInt(fecha.substring(0, 4));
+				mMonth = Integer.parseInt(fecha.substring(4, 6));
+				mDay = Integer.parseInt(fecha.substring(6));
+
+				holder.txViewFecha.setText(pad(mDay) + "/" + pad(mMonth) + "/"
+						+ pad(mYear));
+			} else {
+
+				holder.txViewFecha.setText("");
+			}
+
+			if(posicionTO.getConfirmacion().equals("S"))
+				holder.chkCumplio.setChecked(true);
+			else
+				holder.chkCumplio.setChecked(false);				
+				
+			if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
+		      {
+		    	  holder.txEditFecha.setVisibility(View.GONE);	    	  
+		    	  holder.btnFecha.setVisibility(View.GONE);
+		    	  holder.txViewFecha.setVisibility(View.VISIBLE);
+		    	  holder.btnFotoFinal.setEnabled(true);
+		    	  holder.txViewAccComp.setEnabled(false);
+		      }
+		      else
+		      {
+		    	  holder.txEditFecha.setVisibility(View.VISIBLE);	    	  
+		    	  holder.btnFecha.setVisibility(View.VISIBLE);
+		    	  holder.txViewFecha.setVisibility(View.GONE);		
+		    	  holder.btnFotoFinal.setEnabled(false);
+		      }
+			
 			holder.btnFotoInicial.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					if((posicionTO.getFotoInicial()==null)||(posicionTO.getFotoInicial().compareTo("")==0)){
-						((CompromisoPosicionOpen_Activity)context).takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionTO);
-					}else{
-						Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
-						intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.getFotoInicial());
-						context.startActivity(intent);
-				    }						
-			     }
+					if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
+					{
+						if(!posicionTO.getFotoInicial().equals(""))
+						{
+							Intent intent = new Intent("lindley.desarrolloxcliente.webviewverfoto");
+							intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.getFotoInicial());
+							context.startActivity(intent);
+						}
+						else
+						{
+							MessageBox.showSimpleDialog(context, "Error", "No existe foto registrada.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+								
+								public void onClick(DialogInterface dialog, int which) {
+									// TODO Auto-generated method stub
+								}
+							});	
+						}
+					}
+					else
+					{
+						
+						if((posicionTO.getFotoInicial()==null)||(posicionTO.getFotoInicial().compareTo("")==0)){
+							
+							((CompromisoPosicionOpenFalse_Activity)context).takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionTO);
+						}else{
+							Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
+							intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.getFotoInicial());
+							context.startActivity(intent);	
+						}
+						
+					}
+				}
 			});
 			
+			holder.btnFotoFinal.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					if((posicionTO.getFotoFinal()==null)||(posicionTO.getFotoFinal().compareTo("")==0)){
+						
+						((CompromisoPosicionOpenFalse_Activity)context).takePhoto(TAKE_PHOTO_FINAL_CODE, posicionTO);
+					}else{
+						Intent intent = new Intent("lindley.desarrolloxcliente.webviewverfoto");
+						intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.getFotoFinal());
+						context.startActivity(intent);	
+					}
+				}
+			});
 			
 			holder.btnFotoExito.setOnClickListener(new OnClickListener() {
 
@@ -522,11 +640,22 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 					// TODO Auto-generated method stub
 					if(posicionTO.getCodigoVariable().compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
 					{
-						application.listCompromiso = posicionTO.getListCompromisos();
-						if(application.listCompromiso == null)
-							application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
-						Intent intent = new Intent("lindley.desarrolloxcliente.vercompromisosopen");
-						context.startActivity(intent);
+						if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
+						{
+							application.listCompromiso = posicionTO.getListCompromisos();
+							if(application.listCompromiso == null)
+								application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
+							Intent intent = new Intent("lindley.desarrolloxcliente.vercompromisosclose");
+							context.startActivity(intent);
+						}
+						else
+						{
+							application.listCompromiso = posicionTO.getListCompromisos();
+							if(application.listCompromiso == null)
+								application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
+							Intent intent = new Intent("lindley.desarrolloxcliente.vercompromisosopen");
+							context.startActivity(intent);
+						}
 					}
 					else
 					{
@@ -542,14 +671,19 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 
 	    static class ViewHolder {   
 	    	TextView TextViewRpsta;
+//	    	TextView txViewVariable;
 	    	TextView txViewRed;
 	    	TextView txViewMaximo;
+//	    	TextView txViewDiferencia;
 	    	TextView txViewPuntos;  	
 	    	Button   btnFotoInicial;
 	    	Button 	 btnFotoExito;
 	    	EditText txViewAccComp;
 	    	EditText txEditFecha;
+	    	TextView txViewFecha;
 	    	ImageButton 	 btnFecha;
+	    	Button 	 btnFotoFinal;
+	    	CheckBox chkCumplio;
 	    }
 	    
 	  }
