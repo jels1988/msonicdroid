@@ -70,12 +70,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" >
 
-                    <TextView
-                        style="@style/TextViewLabel"
-                        android:layout_width="100dip"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Variable" />
 
                     <TextView
                         style="@style/TextViewLabel"
@@ -83,7 +77,14 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Puntos" />
-
+                    
+<!--                     <TextView -->
+<!--                         style="@style/TextViewLabel" -->
+<!--                         android:layout_width="100dip" -->
+<!--                         android:layout_height="wrap_content" -->
+<!--                         android:gravity="center" -->
+<!--                         android:text="Variable" /> -->
+                    
                     <TextView
                         style="@style/TextViewLabel"
                         android:layout_width="70dip"

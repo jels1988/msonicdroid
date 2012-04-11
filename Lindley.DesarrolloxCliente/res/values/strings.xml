@@ -28,7 +28,7 @@
     <string name="consultarcliente_activity_empty">Debes ingresar un dato de busqueda</string>
     <string name="ver_detalle">Ver Detalle</string>
     <string name="ver_profit">Ver Profit</string>
-    <string name="cabeceracliente_activity_title">Evaluación</string>
+    <string name="cabeceracliente_activity_title">Evaluación de Compromisos</string>
     <string name="compromiso_activity_title">Compromisos</string>
     <string name="oportunidad_activity_title">Selección de Oportunidades</string>
     <string-array name="puntos_desarrollador">
@@ -53,8 +53,9 @@
     <string name="btnguardar">Guardar</string>
     <string name="compromiso_open_cerrar">Cerrar</string>
     <string name="compromiso_open_guardar">Guardar</string>
+    <string name="compromiso_open_cancelar">Cancelar</string>    
     <string name="btnSiguiente">Siguiente</string>
-    <string name="ver_SKU">SKU Prioritarios</string>
+    <string name="ver_SKU">Precio Marcado Skus Prioritarios</string>
     <string name="consultarposicion_activity_title">Posición</string>
     <string name="consultarpresentacion_activity_title">Presentación</string>
     <string name="ver_fotoInicial">Foto Inicial</string>
@@ -103,5 +104,11 @@
 	<string name="confirm_atras_yes">SI</string>
 	<string name="confirm_atras_no">NO</string>
 	<string name="oportunidad_activity_boton_cancelar">Cancelar</string>
-	    
+	<string-array name="numero_sabores">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    
 </resources>
+

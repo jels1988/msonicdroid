@@ -26,7 +26,7 @@
 
                 <TableLayout
                     xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="1000dip"
+                    android:layout_width="550dip"
                     android:layout_height="wrap_content"
                     android:shrinkColumns="*"
                     android:stretchColumns="*">
@@ -36,56 +36,56 @@
                         android:layout_height="wrap_content" >
 
                         <TextView
-                            android:layout_width="50dip"
+                            android:layout_width="10dip"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Código" 
+                            android:text="Id" 
                             style="@style/TextViewHead"/>
 
                         <TextView
-                            android:layout_width="100dip"
+                            android:layout_width="60dip"
                             android:layout_height="wrap_content"
                             android:text="Fecha"
                             style="@style/TextViewHead" />
 
                         <TextView
-                            android:layout_width="100dip"
+                            android:layout_width="60dip"
                             android:layout_height="wrap_content"
                             android:text="Hora"
                             style="@style/TextViewHead"/>
 
-                        <TextView
-                            android:layout_width="100dip"
-                            android:layout_height="wrap_content"
-                            android:text="Creado Por"
-                            style="@style/TextViewHead" />
+<!--                         <TextView -->
+<!--                             android:layout_width="100dip" -->
+<!--                             android:layout_height="wrap_content" -->
+<!--                             android:text="Creado Por" -->
+<!--                             style="@style/TextViewHead" /> -->
 
                         <TextView
-                            android:layout_width="100dip"
+                            android:layout_width="60dip"
                             android:layout_height="wrap_content"
                             android:text="Fecha Cierre"
                             style="@style/TextViewHead" />
 
                         <TextView
-                            android:layout_width="100dip"
+                            android:layout_width="60dip"
                             android:layout_height="wrap_content"
                             android:text="Hora Cierre" 
                             style="@style/TextViewHead"/>
 
-                        <TextView 
-                            android:layout_width="100dip"
-                            android:layout_height="wrap_content"
-                            android:text="Cerrado Por"
-                            style="@style/TextViewHead" />
+<!--                         <TextView  -->
+<!--                             android:layout_width="100dip" -->
+<!--                             android:layout_height="wrap_content" -->
+<!--                             android:text="Cerrado Por" -->
+<!--                             style="@style/TextViewHead" /> -->
 
                         <TextView
-                            android:layout_width="70dip"
+                            android:layout_width="30dip"
                             android:layout_height="wrap_content"
                             android:text="Estado"
                             style="@style/TextViewHead" />
 
                         <TextView
-                            android:layout_width="40dip"
+                            android:layout_width="30dip"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             style="@style/TextViewHead"
