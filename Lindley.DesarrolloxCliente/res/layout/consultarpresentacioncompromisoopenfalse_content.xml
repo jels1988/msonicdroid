@@ -7,7 +7,7 @@
      <TableLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/tableLayout"
-        android:layout_width="fill_parent"
+        android:layout_width="1000dip"
         android:layout_height="wrap_content"
         android:shrinkColumns="*"
         android:stretchColumns="*" >
@@ -41,7 +41,17 @@
                 android:clickable="true"
                 android:editable="false"
                 android:maxLength="10"
-                android:text="" />                    
+                android:text="" />    
+                
+                <TextView
+                android:id="@+id/txViewFecha"
+                android:layout_width="100dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:editable="false"
+                android:text="" />    
+                
                  
                  <ImageButton android:id="@+id/btnFecha" 
                      android:layout_height="wrap_content"
@@ -50,7 +60,15 @@
                       android:focusable="false" 
                       android:src="@drawable/btn_calendario"/>
                 
-            </LinearLayout>                    
+            </LinearLayout>
+                    
+                        
+            <CheckBox
+		        android:id="@+id/chkCnfComp"
+		        android:layout_width="20dip"
+		        android:layout_gravity="center_vertical|center_horizontal"
+		        android:layout_height="wrap_content"		        
+		        android:text="" />  
             
         </TableRow>
 
