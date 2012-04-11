@@ -248,7 +248,7 @@ public class ConsultarPresentacion_Activity extends ListActivityBase {
 					
 					Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.compromisoprincipalopen");
 					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, idRegistro);
-					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.FLAG_FECHA, CompromisoPrincipalOpen_Resumen.FLAG_OPEN_FECHA_ABIERTO);
+					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.FLAG_FECHA, ConsultarCabecera_Activity.FLAG_OPEN_FECHA_ABIERTO);
 					startActivity(compromisoOpen);
 				}
 				else  {

@@ -13,8 +13,8 @@ public class DesarrolloClienteTO {
 	@SerializedName("HOR")
 	private String hora;
 
-	@SerializedName("CRB")
-	private String userCrea;
+//	@SerializedName("CRB")
+//	private String userCrea;
 
 	@SerializedName("FCC")
 	private String fechaCierre;
@@ -22,8 +22,8 @@ public class DesarrolloClienteTO {
 	@SerializedName("HCC")
 	private String horaCierre; 
 
-	@SerializedName("UCE")
-	private String userCierra;
+//	@SerializedName("UCE")
+//	private String userCierra;
 
 	@SerializedName("EST")
 	private String estado;
@@ -52,13 +52,13 @@ public class DesarrolloClienteTO {
 		this.hora = hora;
 	}
 
-	public String getUserCrea() {
-		return userCrea;
-	}
-
-	public void setUserCrea(String userCrea) {
-		this.userCrea = userCrea;
-	}
+//	public String getUserCrea() {
+//		return userCrea;
+//	}
+//
+//	public void setUserCrea(String userCrea) {
+//		this.userCrea = userCrea;
+//	}
 
 	public String getFechaCierre() {
 		return fechaCierre;
@@ -76,13 +76,13 @@ public class DesarrolloClienteTO {
 		this.horaCierre = horaCierre;
 	}
 
-	public String getUserCierra() {
-		return userCierra;
-	}
-
-	public void setUserCierra(String userCierra) {
-		this.userCierra = userCierra;
-	}
+//	public String getUserCierra() {
+//		return userCierra;
+//	}
+//
+//	public void setUserCierra(String userCierra) {
+//		this.userCierra = userCierra;
+//	}
 
 	public String getEstado() {
 		return estado;

@@ -17,9 +17,6 @@ public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 	public final static String CODIGO_REGISTRO = "codigo_reg";
 	public final static String FLAG_FECHA = "fecha_flag";
 	
-	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
-	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
-	
 	private TabHost mTabHost;
 	public String codigoRegistro;
 	public String flagFecha;
@@ -49,7 +46,6 @@ public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 	}
 	
 	private void setupTab(final View view) {
-		System.out.println("oepn .... "+codigoRegistro);
 		View tabview = createTabView(mTabHost.getContext(), "INVENTARIO");
 		Intent oportunidad = new Intent(this, CompromisoOpen_Activity.class);
 		oportunidad.putExtra(CompromisoOpen_Activity.CODIGO_REGISTRO, codigoRegistro);
