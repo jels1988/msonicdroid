@@ -94,7 +94,7 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 			}
 			
 			ViewHolder holder = (ViewHolder) view.getTag();
-						
+						 
 			holder.txViewSKU.setText(this.skuPresentaciones.get(position).getDescripcionSKU());
 			if(this.skuPresentaciones.get(position).getActual().compareToIgnoreCase("S") == 0)
 			{
