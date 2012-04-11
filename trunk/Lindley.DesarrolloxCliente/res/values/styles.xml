@@ -67,7 +67,7 @@
  	<item name="android:clickable">true</item>
 	<item name="android:textColor">@color/custom_theme_color_blanco</item>
 	<item name="android:background">@color/custom_theme_color_0</item>
-	<item name="android:textStyle">bold</item>
+	<item name="android:textStyle">bold</item>		
 </style>
 
 <style name="TextViewCustomHight" parent="@android:style/Widget.TextView">
