@@ -8,25 +8,24 @@ import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.DesarrolloClienteTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarCabeceraProxy;
+import net.msonic.lib.ActivityUtil;
+import net.msonic.lib.ListActivityBase;
 import roboguice.inject.InjectView;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
-
-import net.msonic.lib.ActivityUtil;
-import net.msonic.lib.ListActivityBase;
 
 public class ConsultarCabecera_Activity extends ListActivityBase {
 
@@ -171,7 +170,6 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 					// TODO Auto-generated method stub
 					//if(position == 0)
 					
-					String estado;
 					int anio = 0, anioActual;    
 		    	    int mes = 0, mesActual;  
 		    	    int dia = 0, diaActual;
@@ -184,9 +182,9 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 			    	
 			    	if(fecha.length() >= 10)
 					{
-						anio =  Integer.parseInt(fecha.substring(0, 2));
+			    		dia =  Integer.parseInt(fecha.substring(0, 2));
 				    	mes  =  Integer.parseInt(fecha.substring(3, 5))-1;
-				    	dia  =  Integer.parseInt(fecha.substring(7));
+				    	anio  =  Integer.parseInt(fecha.substring(6));
 				    }
 			    	
 			    	application.anio = ActivityUtil.pad(anio);
@@ -197,14 +195,15 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 					{											
 						if(anio == anioActual && mes == mesActual && dia == diaActual)
 						{
-							estado = FLAG_OPEN_FECHA_ABIERTO;
+							Intent compromisoOpen = new Intent(context, CompromisoPrincipalOpen_Resumen.class);
+							compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, desarrolloTemp.getCodigo());							
+							context.startActivity(compromisoOpen);							
 						}
 						else
-						{							
-							Intent compromisoOpen = new Intent(context, CompromisoPrincipalOpen_Resumen.class);
-							compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
-							compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.FLAG_FECHA, FLAG_OPEN_FECHA_CERRADA);
-							context.startActivity(compromisoOpen);
+						{				
+							Intent compromisoOpenFalse = new Intent(context, CompromisoPrincipalOpenFalse_Resumen.class);
+							compromisoOpenFalse.putExtra(CompromisoPrincipalOpenFalse_Resumen.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
+							context.startActivity(compromisoOpenFalse);
 						}						
 					}
 					else

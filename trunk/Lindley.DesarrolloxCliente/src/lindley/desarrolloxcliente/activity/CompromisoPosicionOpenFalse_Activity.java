@@ -8,19 +8,21 @@ import java.util.List;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.FotoBLL;
+import lindley.desarrolloxcliente.to.CerrarInventarioTO;
+import lindley.desarrolloxcliente.to.CerrarPosicionTO;
+import lindley.desarrolloxcliente.to.CerrarPresentacionTO;
+import lindley.desarrolloxcliente.to.CerrarSKUPresentacionTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.CompromisoPosicionTO;
 import lindley.desarrolloxcliente.to.CompromisoTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
-import lindley.desarrolloxcliente.to.UpdatePosicionTO;
-import lindley.desarrolloxcliente.to.UpdatePresentacionTO;
-import lindley.desarrolloxcliente.to.UpdateSKUPresentacionTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarPosicionCompromisoProxy;
+import net.msonic.lib.ActivityUtil;
 import net.msonic.lib.ListActivityBase;
 import net.msonic.lib.MessageBox;
 import net.msonic.lib.UploadFileUtil;
@@ -38,18 +40,17 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.google.inject.Inject;
 
@@ -58,13 +59,9 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 	public static final String COD_GESTION = "codGestion";
 	@InjectExtra(COD_GESTION) String codigoGestion;
 	
-	public final static String FLAG_FECHA = "fecha_flag";
-	@InjectExtra(FLAG_FECHA) static String flagFecha;
-	
 	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
 	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
 	private static final int ACCION_CERRAR = 1;
-	private static final int ACCION_ACTUALIZAR = 2;
 	public static final String TIPO_PRESENTACION = "3";
 	public static final String TIPO_POSICION = "2";
 	public static final String NO = "N";
@@ -78,9 +75,6 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 	@InjectView(R.id.txtViewCliente) TextView txtViewCliente;
 	public static ClienteTO cliente;
 	public static MyApplication application;
-	
-	@InjectView(R.id.btnGuardar) Button btnGuardar;
-	@InjectView(R.id.btnCerrar) Button btnCerrar;
 	
 	@InjectResource(R.string.btn_cancelar) 				String cancelar;	
 	@InjectResource(R.string.confirm_cancelar_title) 	String confirm_cancelar_title;
@@ -97,21 +91,11 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
     public void onCreate(Bundle savedInstanceState) {
     	inicializarRecursos();
     	super.onCreate(savedInstanceState);    	 
-        setContentView(R.layout.consultarposicioncompromisoopen_activity);        
+        setContentView(R.layout.consultarposicioncompromisoopenfalse_activity);        
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
 		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
-        processAsync(); 
-        
-        if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
-	    {
-        	btnGuardar.setVisibility(View.GONE);
-	    }
-        else
-        {
-//        	btnCerrar.setVisibility(View.GONE);
-        	btnCerrar.setText(cancelar);
-        }
+        processAsync();         
     }
     
     @Override
@@ -130,11 +114,11 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 			if (status == 0) {
 				List<PosicionCompromisoTO> posiciones = consultarPosicionProxy
 						.getResponse().getListaCompromisos();	
-				application.posicionAdapter =new CompromisoPosicionOpen_Activity.EfficientAdapter(this, posiciones); 
+				application.posicionFalseAdapter =new CompromisoPosicionOpenFalse_Activity.EfficientAdapter(this, posiciones); 
 				final Calendar c = Calendar.getInstance();      
 				if(posiciones.size()>0)
-					txtViewFecha.setText(pad(c.get(Calendar.DAY_OF_MONTH)) + "/" + pad((c.get(Calendar.MONTH) + 1)) + "/" + c.get(Calendar.YEAR));
-				setListAdapter(application.posicionAdapter);
+					txtViewFecha.setText(ActivityUtil.pad(c.get(Calendar.DAY_OF_MONTH)) + "/" + ActivityUtil.pad((c.get(Calendar.MONTH) + 1)) + "/" + c.get(Calendar.YEAR));
+				setListAdapter(application.posicionFalseAdapter);
 			}
 			else  {
 				showToast(consultarPosicionProxy.getResponse().getDescripcion());
@@ -153,7 +137,7 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 		showToast(error_generico_process);
 	}
     
-    public void btnCerrar_click(View view)
+    public void btnCancelar_click(View view)
     {
 //    	processAsync(ACCION_CERRAR);
     	MessageBox.showConfirmDialog(this, confirm_cancelar_title, confirm_cancelar_message, confirm_cancelar_yes, new android.content.DialogInterface.OnClickListener() {
@@ -174,9 +158,9 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 		});  
     }
 
-    public void btnGuardar_click(View view)
+    public void btnCerrar_click(View view)
     {
-    	processAsync(ACCION_ACTUALIZAR);
+    	processAsync(ACCION_CERRAR);
     }
 	
     @Override
@@ -185,16 +169,16 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 		boolean openAdapterVacio = false;
 		boolean posicionAdapterVacio = false;
 		boolean presentacionAdapterVacio = false;
-		if(accion == ACCION_ACTUALIZAR || accion == ACCION_CERRAR)
+		if(accion == ACCION_CERRAR)
        	{    
 			if(application.openAdapter == null || application.openAdapter.detalles.isEmpty())
 			{				
 				application.openAdapter = new CompromisoOpen_Activity.EfficientAdapter(this, new ArrayList<CompromisoTO>());
 				openAdapterVacio = true;
 			}
-			if(application.posicionAdapter == null || application.posicionAdapter.posiciones.isEmpty())
+			if(application.posicionFalseAdapter == null || application.posicionFalseAdapter.posiciones.isEmpty())
 			{				
-				application.posicionAdapter = new CompromisoPosicionOpen_Activity.EfficientAdapter(this, new ArrayList<PosicionCompromisoTO>());
+				application.posicionFalseAdapter = new CompromisoPosicionOpenFalse_Activity.EfficientAdapter(this, new ArrayList<PosicionCompromisoTO>());
 				posicionAdapterVacio = true;
 			}
 			if(application.presentacionAdapter == null || application.presentacionAdapter.detalles.isEmpty())
@@ -217,69 +201,62 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 	}
 
 	@Override
-   	protected void process(int accion) {
-		List<UpdatePosicionTO> listUpdatePosicionTO = new ArrayList<UpdatePosicionTO>();
-   		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
-		{
-   			UpdatePosicionTO update = new UpdatePosicionTO();
-   			update.accionCompromiso = posicion.getAccionCompromiso();
-   			if(update.accionCompromiso.equalsIgnoreCase("")) update.accionCompromiso = " ";
-   			update.codigoRegistro = codigoGestion; 
-   			update.codigoVariable = posicion.getCodigoVariable();
-   			update.confirmacion = posicion.getConfirmacion();
-   			update.fechaCompromiso = posicion.getFechaCompromiso();
-   			if(application.listCompromiso == null)
-   				application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
-      		update.listCompromisos = application.listCompromiso;
-   			update.tipoAgrupacion = TIPO_POSICION;
-   			update.fotoInicial = posicion.getFotoInicial();
-   			update.fotoFinal = posicion.getFotoFinal();
-   			listUpdatePosicionTO.add(update);
-		}
-   		
-   		List<UpdatePresentacionTO> listUpdatePresentacionTO = new ArrayList<UpdatePresentacionTO>();
-		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
-		{
-			UpdatePresentacionTO update = new UpdatePresentacionTO();
-			update.codigoRegistro = codigoGestion;
-			update.tipoAgrupacion = TIPO_PRESENTACION;
-			update.codigoVariable = presentacion.getCodigoVariable();
-			update.confirmacion = presentacion.getConfirmacion();
-			update.fechaCompromiso = presentacion.getFechaCompromiso();
-			List<UpdateSKUPresentacionTO> skucompromisos = new ArrayList<UpdateSKUPresentacionTO>();
-			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  presentacion.getListaSKU())
-			{
-				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
-				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.getCodigoSKU();
-				updateSKUPresentacionTO.compromiso = skupresentacionCompromisoTO.getCompromiso();
-				if(updateSKUPresentacionTO.compromiso.equalsIgnoreCase(" ")) updateSKUPresentacionTO.compromiso = NO;
-				updateSKUPresentacionTO.confirmacion = skupresentacionCompromisoTO.getConfirmacion();
-				if(updateSKUPresentacionTO.confirmacion.equalsIgnoreCase(" ")) updateSKUPresentacionTO.confirmacion = NO;
-				skucompromisos.add(updateSKUPresentacionTO);
-			}
-			update.listaSKU = skucompromisos;    			
-			listUpdatePresentacionTO.add(update);
-		}
-				
-       	if(accion == ACCION_CERRAR)
-       	{       		
-    		cerrarCompromisoProxy.listaPosicionCompromiso = listUpdatePosicionTO;
-    		cerrarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
-    		cerrarCompromisoProxy.setCompromisos(application.openAdapter.detalles);
-       		cerrarCompromisoProxy.setCodigoCabecera(codigoGestion);
-       		UsuarioTO user = application.getUsuarioTO();
-    		cerrarCompromisoProxy.codigoUsuario = user.getCodigoSap();
-       		cerrarCompromisoProxy.execute();
-       	}
-       	else if(accion == ACCION_ACTUALIZAR)
-       	{    		
-    		actualizarCompromisoProxy.listaPosicionCompromiso = listUpdatePosicionTO;
-    		actualizarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
-       		actualizarCompromisoProxy.setCompromisos(application.openAdapter.detalles);
-       		actualizarCompromisoProxy.execute();
-       	}
+  protected void process(int accion) {
+    	
+    	if(accion == ACCION_CERRAR)
+    	{    		
+    		List<CerrarInventarioTO> listCerrarCompromisoTO = new ArrayList<CerrarInventarioTO>();
+       		for(CompromisoTO compromiso : application.openFalseAdapter.detalles)
+    		{
+       			CerrarInventarioTO cerrar = new CerrarInventarioTO();
+       			cerrar.codigoProducto = compromiso.codigoProducto;
+       			cerrar.concrecionCumplio = compromiso.concrecionCumplio;
+       			cerrar.soviCumplio = compromiso.soviCumplio;
+       			cerrar.cumplePrecioCumplio = compromiso.cumplePrecioCumplio;
+       			cerrar.numeroSaboresCumplio = compromiso.numeroSaboresCumplio;
+       			
+       			listCerrarCompromisoTO.add(cerrar);
+    		}
        		
-   	}
+       		List<CerrarPosicionTO> listCerrarPosicionTO = new ArrayList<CerrarPosicionTO>();
+       		for(PosicionCompromisoTO posicion : application.posicionFalseAdapter.posiciones)
+    		{
+       			CerrarPosicionTO cerrar = new CerrarPosicionTO();
+       			cerrar.codigoVariable = posicion.codigoVariable;
+       			cerrar.cumplio = posicion.cumplio;
+       			listCerrarPosicionTO.add(cerrar);
+    		}
+       		
+       		List<CerrarPresentacionTO> listCerrarPresentacionTO = new ArrayList<CerrarPresentacionTO>();
+    		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
+    		{
+    			CerrarPresentacionTO cerrar = new CerrarPresentacionTO();
+    			cerrar.codigoVariable = presentacion.codigoVariable;
+    			cerrar.cumplio = presentacion.cumplio;
+    			
+    			List<CerrarSKUPresentacionTO> listCerrarSKUPresentacionTO = new ArrayList<CerrarSKUPresentacionTO>();
+    			for(SKUPresentacionCompromisoTO sku : presentacion.listaSKU)
+    			{
+    				CerrarSKUPresentacionTO cerrarSku = new CerrarSKUPresentacionTO();
+    				cerrarSku.codigoSKU = sku.codigoSKU;
+    				cerrarSku.cumplio = sku.cumplio;
+    				listCerrarSKUPresentacionTO.add(cerrarSku);
+    			}
+    			cerrar.listaSKU = listCerrarSKUPresentacionTO;
+    			
+    			listCerrarPresentacionTO.add(cerrar);
+    		}
+    		
+    		cerrarCompromisoProxy.listaPosicionCompromiso = listCerrarPosicionTO;
+    		cerrarCompromisoProxy.listaPresentacionCompromiso = listCerrarPresentacionTO;
+    		cerrarCompromisoProxy.listaInventarioCompromiso = listCerrarCompromisoTO;
+    		cerrarCompromisoProxy.codigoCabecera = codigoGestion;
+    		UsuarioTO user = application.getUsuarioTO();
+    		cerrarCompromisoProxy.codigoUsuario = user.getCodigoSap();
+    		cerrarCompromisoProxy.execute();
+    	}
+    		
+	}
     
     protected void processOk(int accion) {
    		// TODO Auto-generated method stub
@@ -302,36 +279,13 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
        			processError();
        		}
     	}
-    	else if(accion == ACCION_ACTUALIZAR)
-    	{
-    		boolean isExito = actualizarCompromisoProxy.isExito();
-       		if (isExito) {
-       			int status = actualizarCompromisoProxy.getResponse().getStatus();
-       			if (status == 0) {
-       				setAdapterApplication();
-       				showToast("Los registros se actualizarón correctamente.");
-       				
-       				Intent intentService = new Intent("lindley.desarrolloxcliente.uploadFileService");
-       				startService(intentService);
-       				
-       				Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.consultarcabecera");
-					startActivity(compromisoOpen);
-       			}
-       			else  {
-       				showToast(actualizarCompromisoProxy.getResponse().getDescripcion());
-       			}
-       		}
-       		else{
-       			processError();
-       		}	
-    	}   		
    		super.processOk();
    	} 
     
     private void setAdapterApplication() {
 		// TODO Auto-generated method stub
     	application.openAdapter = null;
-    	application.posicionAdapter = null;
+    	application.posicionFalseAdapter = null;
     	application.presentacionAdapter = null;
 	}
     
@@ -386,12 +340,12 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 	public void savePhoto(int accion){
 		if(TAKE_PHOTO_INICIAL_CODE==accion)
 		{
-			this.posicionTO.setFotoInicial(file_name);
+			this.posicionTO.fotoFinal = file_name;
 			fotoBLL.save(file_name);
 		}
 		else
 		{
-			this.posicionTO.setFotoFinal(file_name);
+			this.posicionTO.fotoFinal = file_name;
 			fotoBLL.save(file_name);
 		}
 	}
@@ -407,9 +361,9 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 			public void onDateSet(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
 				// TODO Auto-generated method stub
 
-					EfficientAdapter.txEditFecha.setText(String.valueOf(pad(dayOfMonth)) + "/"+ String.valueOf(pad(monthOfYear+1)) + "/" + String.valueOf(year));
+					EfficientAdapter.txEditFecha.setText(String.valueOf(ActivityUtil.pad(dayOfMonth)) + "/"+ String.valueOf(ActivityUtil.pad(monthOfYear+1)) + "/" + String.valueOf(year));
 		    	  if(EfficientAdapter.compromisoTO!=null){
-		    		  EfficientAdapter.compromisoTO.setFechaCompromiso(String.valueOf(year) + String.valueOf(pad(monthOfYear+1)) + String.valueOf(pad(dayOfMonth)) );
+		    		  EfficientAdapter.compromisoTO.fechaCompromiso = (String.valueOf(year) + String.valueOf(ActivityUtil.pad(monthOfYear+1)) + String.valueOf(ActivityUtil.pad(dayOfMonth)) );
 		    	  }
 			}
 		};
@@ -418,7 +372,7 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 		public List<PosicionCompromisoTO> posiciones;
 		
 		public EfficientAdapter(Activity context,List<PosicionCompromisoTO> posiciones ){
-			super(context, R.layout.consultarposicioncompromisoopen_content, posiciones);
+			super(context, R.layout.consultarposicioncompromisoopenfalse_content, posiciones);
 			this.context=context;
 			this.posiciones=posiciones;
 		}
@@ -430,37 +384,28 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 			View view = null;
 			if (convertView == null) {
 				LayoutInflater inflator = context.getLayoutInflater();
-				view = inflator.inflate(R.layout.consultarposicioncompromisoopen_content, null);
+				view = inflator.inflate(R.layout.consultarposicioncompromisoopenfalse_content, null);
 				final ViewHolder viewHolder = new ViewHolder();
 				viewHolder.TextViewRpsta = (TextView) view.findViewById(R.id.TextViewRpsta);
 				viewHolder.txViewPuntos = (TextView) view.findViewById(R.id.txViewPuntos);
 				
 				viewHolder.btnFotoInicial = (Button) view.findViewById(R.id.btnFotoInicial);
 				viewHolder.btnFotoExito = (Button) view.findViewById(R.id.btnFotoExito);
+				viewHolder.btnFotoFinal = (Button) view.findViewById(R.id.btnFotoFinal);
 				
-//				viewHolder.txViewVariable = (TextView) view.findViewById(R.id.txViewVariable);
 				viewHolder.txViewRed = (TextView) view.findViewById(R.id.txViewRed);
 				viewHolder.txViewMaximo = (TextView) view.findViewById(R.id.txViewMaximo);
-//				viewHolder.txViewDiferencia = (TextView) view.findViewById(R.id.txViewDiferencia);
-								
-				
-				
-				viewHolder.btnFotoFinal = (Button) view.findViewById(R.id.btnFotoFinal);
-				viewHolder.btnFecha = (ImageButton) view.findViewById(R.id.btnFecha);
-				viewHolder.txViewFecha = (TextView) view.findViewById(R.id.txViewFecha);
-				
-				viewHolder.txViewAccComp = (EditText) view.findViewById(R.id.txViewAccComp);
-				viewHolder.txEditFecha = (EditText) view.findViewById(R.id.txEditFecha);
-				
+				viewHolder.txViewAccComp = (TextView) view.findViewById(R.id.txViewAccComp);
+				viewHolder.txViewFecComp = (TextView) view.findViewById(R.id.txViewFecComp);				
 				viewHolder.chkCumplio = (CheckBox) view.findViewById(R.id.chkCumplio);
-						    	
+								
 				viewHolder.txViewAccComp.setOnFocusChangeListener(new OnFocusChangeListener() {
 					
 					@Override
 					public void onFocusChange(View v, boolean hasFocus) {
 						// TODO Auto-generated method stub
 						PosicionCompromisoTO compromiso = (PosicionCompromisoTO) viewHolder.txViewAccComp.getTag();
-						compromiso.setAccionCompromiso(viewHolder.txViewAccComp.getText().toString());
+						compromiso.observacion = viewHolder.txViewAccComp.getText().toString();
 					}
 				});
 				
@@ -471,9 +416,9 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 						// TODO Auto-generated method stub
 						PosicionCompromisoTO compromiso = (PosicionCompromisoTO) viewHolder.chkCumplio.getTag();
 						if(isChecked){							
-							compromiso.setConfirmacion("S");
+							compromiso.cumplio = "S";
 						}else{
-							compromiso.setConfirmacion("N");
+							compromiso.cumplio = "N";
 						}
 					}
 				});
@@ -494,101 +439,44 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 		    	  holder.TextViewRpsta.setText("SI");
 		      else
 		    	  holder.TextViewRpsta.setText("NO");
-//			holder.txViewVariable.setText(posicionTO.getDescripcionVariable());
-			holder.txViewAccComp.setText(posicionTO.getAccionCompromiso());
-			holder.txViewRed.setText(posicionTO.getRed());
-			holder.txViewMaximo.setText(posicionTO.getPtoMaximo());
-//			holder.txViewDiferencia.setText(posicionTO.getDiferencia());
-			holder.txViewPuntos.setText(posicionTO.getPuntosSugeridos());
-			if(posicionTO.getCodigoVariable().compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
+//			
+			holder.txViewAccComp.setText(posicionTO.observacion);
+			holder.txViewRed.setText(posicionTO.red);
+			holder.txViewMaximo.setText(posicionTO.ptoMaximo);
+			holder.txViewPuntos.setText(posicionTO.puntosSugeridos);
+			if(posicionTO.codigoVariable.compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
 			{
 				holder.btnFotoExito.setText(R.string.btnExitoText);
 			}
-				    	
-	    	holder.btnFecha.setOnClickListener(new OnClickListener() {
-
-	    		@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-				
-					   int anio;    
-			    	    int mes;  
-			    	    int dia;
-			    	   
-					   String fecha = posicionTO.getFechaCompromiso();
-					   final Calendar c = Calendar.getInstance();
-					   if(fecha.length() >= 7)
-					      {
-					    	  anio =  Integer.parseInt(fecha.substring(0, 4));
-					    	  mes  =  Integer.parseInt(fecha.substring(4, 6))-1;
-					    	  dia  =  Integer.parseInt(fecha.substring(6));
-					    	  c.set(anio, mes, dia);					    	  
-					    	  if (dia>=30 && mes == 1)
-					    		  dia = c.get(Calendar.DAY_OF_MONTH);
-					    	  else if (dia>=30)
-					    		  dia = c.get(Calendar.DAY_OF_MONTH);
-					    	  
-					      }else{					    	          
-					    	  anio = c.get(Calendar.YEAR);        
-					    	  mes = c.get(Calendar.MONTH);        
-					    	  dia = c.get(Calendar.DAY_OF_MONTH); 
-					      }
-					      
-					      
-					      EfficientAdapter.txEditFecha = holder.txEditFecha;
-					      EfficientAdapter.compromisoTO = posicionTO;
-					
-					      DatePickerDialog p = new DatePickerDialog(context, dateSetListener, anio,mes--, dia);
-					      p.show();
-				}
-			});
-	    	
+				   
 			int mYear, mMonth, mDay;
-			String fecha = posicionTO.getFechaCompromiso();
+			String fecha = posicionTO.fechaCompromiso;
 			if (fecha.length() > 7) {
 				mYear = Integer.parseInt(fecha.substring(0, 4));
 				mMonth = Integer.parseInt(fecha.substring(4, 6));
 				mDay = Integer.parseInt(fecha.substring(6));
 
-				holder.txViewFecha.setText(pad(mDay) + "/" + pad(mMonth) + "/"
-						+ pad(mYear));
+				holder.txViewFecComp.setText(ActivityUtil.pad(mDay) + "/" + ActivityUtil.pad(mMonth) + "/"
+						+ (mYear));
 			} else {
 
-				holder.txViewFecha.setText("");
+				holder.txViewFecComp.setText("");
 			}
 
-			if(posicionTO.getConfirmacion().equals("S"))
+			if(posicionTO.cumplio.equals("S"))
 				holder.chkCumplio.setChecked(true);
 			else
 				holder.chkCumplio.setChecked(false);				
-				
-			if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
-		      {
-		    	  holder.txEditFecha.setVisibility(View.GONE);	    	  
-		    	  holder.btnFecha.setVisibility(View.GONE);
-		    	  holder.txViewFecha.setVisibility(View.VISIBLE);
-		    	  holder.btnFotoFinal.setEnabled(true);
-		    	  holder.txViewAccComp.setEnabled(false);
-		      }
-		      else
-		      {
-		    	  holder.txEditFecha.setVisibility(View.VISIBLE);	    	  
-		    	  holder.btnFecha.setVisibility(View.VISIBLE);
-		    	  holder.txViewFecha.setVisibility(View.GONE);		
-		    	  holder.btnFotoFinal.setEnabled(false);
-		      }
-			
+							
 			holder.btnFotoInicial.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
-					{
-						if(!posicionTO.getFotoInicial().equals(""))
+					if(!posicionTO.fotoInicial.equals(""))
 						{
 							Intent intent = new Intent("lindley.desarrolloxcliente.webviewverfoto");
-							intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.getFotoInicial());
+							intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.fotoInicial);
 							context.startActivity(intent);
 						}
 						else
@@ -600,20 +488,7 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 								}
 							});	
 						}
-					}
-					else
-					{
-						
-						if((posicionTO.getFotoInicial()==null)||(posicionTO.getFotoInicial().compareTo("")==0)){
-							
-							((CompromisoPosicionOpenFalse_Activity)context).takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionTO);
-						}else{
-							Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
-							intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.getFotoInicial());
-							context.startActivity(intent);	
-						}
-						
-					}
+					
 				}
 			});
 			
@@ -622,12 +497,12 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					if((posicionTO.getFotoFinal()==null)||(posicionTO.getFotoFinal().compareTo("")==0)){
+					if((posicionTO.fotoFinal==null)||(posicionTO.fotoFinal.compareTo("")==0)){
 						
 						((CompromisoPosicionOpenFalse_Activity)context).takePhoto(TAKE_PHOTO_FINAL_CODE, posicionTO);
 					}else{
 						Intent intent = new Intent("lindley.desarrolloxcliente.webviewverfoto");
-						intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.getFotoFinal());
+						intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.fotoFinal);
 						context.startActivity(intent);	
 					}
 				}
@@ -638,24 +513,14 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					if(posicionTO.getCodigoVariable().compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
+					if(posicionTO.codigoVariable.compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
 					{
-						if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
-						{
-							application.listCompromiso = posicionTO.getListCompromisos();
+							application.listCompromiso = posicionTO.listCompromisos;
 							if(application.listCompromiso == null)
 								application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
 							Intent intent = new Intent("lindley.desarrolloxcliente.vercompromisosclose");
 							context.startActivity(intent);
-						}
-						else
-						{
-							application.listCompromiso = posicionTO.getListCompromisos();
-							if(application.listCompromiso == null)
-								application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
-							Intent intent = new Intent("lindley.desarrolloxcliente.vercompromisosopen");
-							context.startActivity(intent);
-						}
+						
 					}
 					else
 					{
@@ -671,29 +536,17 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 
 	    static class ViewHolder {   
 	    	TextView TextViewRpsta;
-//	    	TextView txViewVariable;
-	    	TextView txViewRed;
-	    	TextView txViewMaximo;
-//	    	TextView txViewDiferencia;
-	    	TextView txViewPuntos;  	
+	    	TextView txViewPuntos;
 	    	Button   btnFotoInicial;
 	    	Button 	 btnFotoExito;
-	    	EditText txViewAccComp;
-	    	EditText txEditFecha;
-	    	TextView txViewFecha;
-	    	ImageButton 	 btnFecha;
-	    	Button 	 btnFotoFinal;
+	    	Button 	 btnFotoFinal;	    	
+	    	TextView txViewRed;
+	    	TextView txViewMaximo;	 
+	    	TextView txViewAccComp;	    	
+	    	TextView txViewFecComp;  	
 	    	CheckBox chkCumplio;
 	    }
 	    
 	  }
-    
-	private static String pad(int c) {
-		if (c >= 10)
-			return String.valueOf(c);
-		else
-			return "0" + String.valueOf(c);
-	}
-
     
 }

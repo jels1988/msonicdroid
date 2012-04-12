@@ -20,13 +20,13 @@
                 android:id="@+id/TextViewRpsta"
                 android:layout_width="20dip"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:text="" />
              
               <TextView
                 android:id="@+id/txViewPuntos"
                 android:layout_width="40dip"
-                android:gravity="center"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:text="" />
@@ -51,7 +51,7 @@
             <TextView
                 android:id="@+id/txViewRed"
                 android:layout_width="30dip"
-                android:gravity="center"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:text="" />
@@ -59,7 +59,7 @@
             <TextView
                 android:id="@+id/txViewMaximo"
                 android:layout_width="30dip"
-                android:gravity="center"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:text="" />
@@ -70,6 +70,7 @@
                 android:layout_width="100dip"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                android:layout_gravity="center_vertical"
                 android:maxLength="50"
                 android:text="" />
 

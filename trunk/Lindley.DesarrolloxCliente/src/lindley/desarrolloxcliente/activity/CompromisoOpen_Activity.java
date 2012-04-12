@@ -27,6 +27,7 @@ import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCompromisoProxy;
+import net.msonic.lib.ActivityUtil;
 import net.msonic.lib.ListActivityBase;
 import net.msonic.lib.MessageBox;
 import roboguice.inject.InjectExtra;
@@ -37,6 +38,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -149,8 +151,12 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 				application.openAdapter = new EfficientAdapter(getApplicationContext(), new ArrayList<CompromisoTO>());
 				for(CompromisoTO comp : application.openAdapter.detalles)
 				{
-					if(Integer.parseInt(comp.sovi)<=0 && Integer.parseInt(comp.soviActual)<=0)
+					Log.v("CompromisoOpen_Activity", comp.sovi);
+					Log.v("CompromisoOpen_Activity", comp.soviActual);
+					if(Integer.parseInt(comp.sovi)<=0 || Integer.parseInt(comp.soviActual)<=0)
 					{
+						Log.v("CompromisoOpen_Activity", comp.sovi);
+						Log.v("CompromisoOpen_Activity", comp.soviActual);
 						showToast("Los valores de SOVI deben ser mayores a 0");
 						return false;
 					}
@@ -159,7 +165,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 				if(openAdapterVacio)
 				{
 					showToast("Debe editar valores de la pestaña inventario.");
-					return true;
+					return false;
 				}
 			}
 			if(application.posicionAdapter == null || application.posicionAdapter.posiciones.isEmpty())
@@ -169,7 +175,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 				if(posicionAdapterVacio)
 				{
 					showToast("Debe editar valores de la pestaña posición.");
-					return true;
+					return false;
 				}
 			}
 			if(application.presentacionAdapter == null || application.presentacionAdapter.detalles.isEmpty())
@@ -179,13 +185,13 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 				if(presentacionAdapterVacio)
 				{
 					showToast("Debe editar valores de la pestaña presentación.");
-					return true;
+					return false;
 				}
 			}
 			if(application.informacionAdicional == null)
 			{
 				showToast("Debe editar valores de la pestaña combos.");
-				return true;
+				return false;
 			}
 				
        	}
@@ -211,7 +217,11 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     		{
        			CerrarInventarioTO cerrar = new CerrarInventarioTO();
        			cerrar.codigoProducto = compromiso.codigoProducto;
-       			cerrar.cumplio = compromiso.cumplio;
+       			cerrar.concrecionCumplio = compromiso.concrecionCumplio;
+       			cerrar.soviCumplio = compromiso.soviCumplio;
+       			cerrar.cumplePrecioCumplio = compromiso.cumplePrecioCumplio;
+       			cerrar.numeroSaboresCumplio = compromiso.numeroSaboresCumplio;
+       			
        			listCerrarCompromisoTO.add(cerrar);
     		}
        		
@@ -341,8 +351,17 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 			if (status == 0) {
 				compromisos = consultarCompromisoProxy
 						.getResponse().getListaCompromiso();
+				
 				if(compromisos.size()>0)
-					txtViewFecha.setText(application.dia + "/" + application.mes + "/" + application.anio);
+				{
+					if(application.dia == null)
+					{
+						final Calendar c = Calendar.getInstance();
+						txtViewFecha.setText(ActivityUtil.pad(c.get(Calendar.DAY_OF_MONTH)) + "/" + ActivityUtil.pad((c.get(Calendar.MONTH) + 1)) + "/" + c.get(Calendar.YEAR));
+					}
+					else
+						txtViewFecha.setText(application.dia+ "/" + application.mes + "/" + application.anio);
+				}
 				application.openAdapter = new EfficientAdapter(this, compromisos);
 				setListAdapter(application.openAdapter);
 			}
@@ -505,8 +524,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					Intent profit = new Intent(context, VerProfit_Activity.class);
-					profit.putExtra(VerProfit_Activity.ANIO, application.anio);
-					profit.putExtra(VerProfit_Activity.MES, application.mes);
+					profit.putExtra(VerProfit_Activity.ANIO, "");
+					profit.putExtra(VerProfit_Activity.MES, "");
 					profit.putExtra(VerProfit_Activity.CLIENTE, cliente.getCodigo());
 					profit.putExtra(VerProfit_Activity.ARTICULO, compromiso.codigoProducto);
 					profit.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, compromiso.descripcionProducto);
@@ -520,7 +539,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	    	  holder.cboConcrecion.setText(SI_DATO);
 	      else
 	    	  holder.cboConcrecion.setText(NO_DATO);
-		  
+	      
 	      holder.cboConcrecionCmp.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 				@Override
@@ -606,6 +625,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 		  
 		  holder.txViewSabores.setText(compromiso.numeroSabores);
 		  
+		 
+		  
 		  holder.cboSaboresCmp.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 				@Override
@@ -641,13 +662,27 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	      ArrayAdapter<CharSequence> adapSabores = ArrayAdapter.createFromResource(application.getApplicationContext(),R.array.numero_sabores,android.R.layout.simple_spinner_item);
 	      adapSabores.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 		  holder.cboSaboresCmp.setAdapter(adapSabores);
+		  
+		  if(compromiso.concrecionActual.equalsIgnoreCase(NO))
+	    	  holder.cboConcrecionCmp.setSelection(0);
+	      else
+	    	  holder.cboConcrecionCmp.setSelection(1);
 	      	      
-		  if(compromiso.cumplePrecio.equals(SI_DATO))holder.cboCumPrecio.setSelection(0);
+		  if(compromiso.numeroSaboresActual == 2)
+			  holder.cboSaboresCmp.setSelection(0);
+		  else  if(compromiso.numeroSaboresActual == 3)
+			  holder.cboSaboresCmp.setSelection(1);
+		  else
+			  holder.cboSaboresCmp.setSelection(2);
+		  
+		  if(compromiso.cumplePrecio.equals(NO))holder.cboCumPrecio.setSelection(0);
 		  else holder.cboCumPrecio.setSelection(1);
 		  
-		  if(compromiso.cumplePrecioActual.equals(SI_DATO))holder.cboCumPrecioCmp.setSelection(0);
-		  else holder.cboCumPrecioCmp.setSelection(1);
-	      
+		  if(compromiso.cumplePrecioActual.equals(SI))
+			  holder.cboCumPrecioCmp.setSelection(1);
+		  else 
+			  holder.cboCumPrecioCmp.setSelection(0);
+		  
 		  
 		  holder.txViewAccTrade.setAdapter(application.getAdapterAccionTrade(compromiso.listaAccionesTrade));
 
@@ -678,7 +713,22 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 				
 			});
 	      
-	      
+			String fecha = compromiso.fechaCompromiso;
+			int anio;
+			int mes;
+			int dia;
+			final Calendar c = Calendar.getInstance();
+			if (fecha.length() >= 7) {
+				anio = Integer.parseInt(fecha.substring(0, 4));
+				mes = Integer.parseInt(fecha.substring(4, 6)) - 1;
+				dia = Integer.parseInt(fecha.substring(6));
+				c.set(anio, mes, dia);
+				if (dia >= 30 && mes == 1)
+					dia = c.get(Calendar.DAY_OF_MONTH);
+				else if (dia >= 30)
+					dia = c.get(Calendar.DAY_OF_MONTH);
+				holder.txEditFecha.setText(ActivityUtil.pad(dia)+"/"+ActivityUtil.pad(mes+1)+"/"+anio);
+			}
 	      
 	      //holder.txViewAccTrade.setText(compromiso.getDescripcionAccion());
 	     	      

@@ -20,6 +20,9 @@ public class PosicionCompromisoTO {
     @SerializedName("PTO")
     public String puntosSugeridos;
     
+    @SerializedName("PTG")
+    public String puntosGanados;
+    
     @SerializedName("FINI")
     public String fotoInicial;
     
@@ -40,5 +43,8 @@ public class PosicionCompromisoTO {
     public ArrayList<CompromisoPosicionTO> listCompromisos;
     
     public String cumplio;
+    
+    @SerializedName("FFIN")
+    public String fotoFinal;
     
 }

@@ -66,16 +66,15 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
     		if(posicion.isSeleccionado()){
     			PosicionCompromisoTO compromiso = new PosicionCompromisoTO();
     			
-    			compromiso.setCodigoVariable(posicion.getCodigoVariable());
-    			compromiso.setRed(posicion.getRed());
-    			compromiso.setPtoMaximo(posicion.getPtoMaximo());
-    			compromiso.setDiferencia(posicion.getDiferencia());
-    			compromiso.setPuntosSugeridos(posicion.getPuntosSugeridos());
-    			compromiso.respuesta = respuesta;
-    			compromiso.setDescripcionVariable(" ");
-    			compromiso.setFechaCompromiso("0");
-    			compromiso.setConfirmacion("N");
-    			compromiso.setAccionCompromiso(" ");
+//    			compromiso.codigoVariable = (posicion.getCodigoVariable());
+//    			compromiso.red = (posicion.getRed());
+//    			compromiso.ptoMaximo = (posicion.getPtoMaximo());    			
+//    			compromiso.puntosSugeridos = (posicion.getPuntosSugeridos());
+//    			compromiso.respuesta = respuesta;
+//    			
+//    			compromiso.fechaCompromiso = ("0");
+//    			compromiso.cumplio = ("N");
+//    			compromiso.observacion = (" ");
     			
     			posiciones.add(compromiso);
     		}

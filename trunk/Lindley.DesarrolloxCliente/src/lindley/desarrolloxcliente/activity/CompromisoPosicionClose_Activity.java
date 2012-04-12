@@ -136,19 +136,17 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 	        holder = new ViewHolder();
 	        
 	        holder.TextViewRpsta = (TextView) convertView.findViewById(R.id.TextViewRpsta);
-	        holder.txViewVariable = (TextView) convertView.findViewById(R.id.txViewVariable);
+	        holder.txViewPuntos = (TextView) convertView.findViewById(R.id.txViewPuntos);
+	        holder.btnFotoInicial = (Button) convertView.findViewById(R.id.btnFotoInicial);
+			holder.btnFotoExito = (Button) convertView.findViewById(R.id.btnFotoExito);
+			holder.btnFotoFinal = (Button) convertView.findViewById(R.id.btnFotoFinal);
 			holder.txViewRed = (TextView) convertView.findViewById(R.id.txViewRed);
 			holder.txViewMaximo = (TextView) convertView.findViewById(R.id.txViewMaximo);
-			holder.txViewDiferencia = (TextView) convertView.findViewById(R.id.txViewDiferencia);
-			holder.txViewPuntos = (TextView) convertView.findViewById(R.id.txViewPuntos);
+			
 			holder.txViewAccComp = (TextView) convertView.findViewById(R.id.txViewAccComp);
 			holder.txViewFecComp = (TextView) convertView.findViewById(R.id.txViewFecComp);
 			holder.txViewCnfComp = (TextView) convertView.findViewById(R.id.txViewCnfComp);
-			
-			holder.btnFotoInicial = (Button) convertView.findViewById(R.id.btnFotoInicial);
-			holder.btnFotoExito = (Button) convertView.findViewById(R.id.btnFotoExito);
-			holder.btnFotoFinal = (Button) convertView.findViewById(R.id.btnFotoFinal);
-						
+									
 	        convertView.setTag(holder);
 	      } else {
 	        // Get the ViewHolder back to get fast access to the TextView
@@ -160,20 +158,22 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 	    	  holder.TextViewRpsta.setText("SI");
 	      else
 	    	  holder.TextViewRpsta.setText("NO");
-	      holder.txViewVariable.setText(posicionTO.getDescripcionVariable());
-	      holder.txViewRed.setText(posicionTO.getRed());
-	      holder.txViewMaximo.setText(posicionTO.getPtoMaximo());
-	      holder.txViewDiferencia.setText(posicionTO.getDiferencia());
-	      holder.txViewPuntos.setText(posicionTO.getPuntosSugeridos());
-	      holder.txViewAccComp.setText(posicionTO.getAccionCompromiso());	      
-	      holder.txViewCnfComp.setText(posicionTO.getConfirmacion());
-	      if(posicionTO.getCodigoVariable().compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
+	      holder.txViewRed.setText(posicionTO.red);
+	      holder.txViewMaximo.setText(posicionTO.ptoMaximo);
+	      holder.txViewPuntos.setText(posicionTO.puntosGanados);
+	      holder.txViewAccComp.setText(posicionTO.observacion);	   
+	      if(posicionTO.cumplio.equals("S"))
+	    	  holder.txViewCnfComp.setText("SI");
+	      else
+	    	  holder.TextViewRpsta.setText("NO");
+	      
+	      if(posicionTO.codigoVariable.compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
 	      {
 	    	  holder.btnFotoExito.setText(R.string.btnExitoText);
 	      }
 	      
 	      int mYear,mMonth,mDay;
-	      String fecha = posicionTO.getFechaCompromiso();
+	      String fecha = posicionTO.fechaCompromiso;
 	      if(fecha.length() > 7)
 	      {
 	    	  mYear =  Integer.parseInt(fecha.substring(0, 4));
@@ -192,10 +192,10 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					if(!posicionTO.getFotoInicial().equals(""))
+					if(!posicionTO.fotoInicial.equals(""))
 					{
 						Intent intent = new Intent("lindley.desarrolloxcliente.webviewverfoto");
-						intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.getFotoInicial());
+						intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.fotoInicial);
 						context.startActivity(intent);
 					}
 					else
@@ -216,10 +216,10 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					if(!posicionTO.getFotoFinal().equals(""))
+					if(!posicionTO.fotoFinal.equals(""))
 					{
 						Intent intent = new Intent("lindley.desarrolloxcliente.webviewverfoto");
-						intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.getFotoFinal());
+						intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.fotoFinal);
 						context.startActivity(intent);
 					}
 					else
@@ -239,9 +239,9 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					if(posicionTO.getCodigoVariable().compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
+					if(posicionTO.codigoVariable.compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
 					{
-						application.listCompromiso = posicionTO.getListCompromisos();
+						application.listCompromiso = posicionTO.listCompromisos;
 						if(application.listCompromiso == null)
 							application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
 						Intent intent = new Intent("lindley.desarrolloxcliente.vercompromisosclose");
@@ -261,16 +261,14 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 
 	    static class ViewHolder {   
 	    	public TextView TextViewRpsta;
-	    	public TextView txViewVariable;
-	    	public TextView txViewRed;
-	    	public TextView txViewMaximo;
-	    	public TextView txViewDiferencia;
 	    	public TextView txViewPuntos;
 	    	public Button btnFotoInicial;
 	    	public Button btnFotoExito;
-	    	public TextView txViewAccComp;
-	    	public TextView txViewFecComp;
 	    	public Button btnFotoFinal;
+	    	public TextView txViewRed;
+	    	public TextView txViewMaximo;
+	    	public TextView txViewAccComp;
+	    	public TextView txViewFecComp;	    	
 	    	public TextView txViewCnfComp;	
 	    }
 	    

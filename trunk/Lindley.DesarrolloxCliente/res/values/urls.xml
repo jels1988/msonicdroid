@@ -2,12 +2,12 @@
 <resources>
     
 	<!-- java.cdaandino.com -->
-	<string name="urlwsLogin">http://java.cdaandino.com/rtm/LanzadorApp/SeguridadService.svc</string>
-<!-- 	<string name="urlwsLogin">http://197.1.1.87/rtm/LanzadorApp/SeguridadService.svc</string> -->
+<!-- 	<string name="urlwsLogin">http://java.cdaandino.com/rtm/LanzadorApp/SeguridadService.svc</string> -->
+	<string name="urlwsLogin">http://197.1.1.87/rtm/LanzadorApp/SeguridadService.svc</string>
 	
-	<string name="urlwsDesarrolloxCliente">http://java.cdaandino.com/rtm/DesarrolloxCliente/FotoExitoService.svc</string>
-<!--  	<string name="urlwsDesarrolloxCliente">http://197.1.1.87/rtm/DesarrolloxCliente/FotoExitoService.svc</string>  -->
+<!-- 	<string name="urlwsDesarrolloxCliente">http://java.cdaandino.com/rtm/DesarrolloxCliente/FotoExitoService.svc</string> -->
+ 	<string name="urlwsDesarrolloxCliente">http://197.1.1.87/rtm/DesarrolloxCliente/FotoExitoService.svc</string> 
 	
-	<string name="urlWebView">http://java.cdaandino.com/rtm/LanzadorApp/ImageViewService.svc</string>
-<!--  	<string name="urlWebView">http://197.1.1.87/rtm/LanzadorApp/ImageViewService.svc</string> -->
+<!-- 	<string name="urlWebView">http://java.cdaandino.com/rtm/LanzadorApp/ImageViewService.svc</string> -->
+ 	<string name="urlWebView">http://197.1.1.87/rtm/LanzadorApp/ImageViewService.svc</string>
 </resources>

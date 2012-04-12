@@ -26,6 +26,7 @@ import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarPresentacionCompromisoProxy;
+import net.msonic.lib.ActivityUtil;
 import net.msonic.lib.ListActivityBase;
 import net.msonic.lib.MessageBox;
 import roboguice.inject.InjectExtra;
@@ -164,7 +165,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 				application.openAdapter = new CompromisoOpen_Activity.EfficientAdapter(this, new ArrayList<CompromisoTO>());
 				for(CompromisoTO comp : application.openAdapter.detalles)
 				{
-					if(Integer.parseInt(comp.sovi)<=0 && Integer.parseInt(comp.soviActual)<=0)
+					if(Integer.parseInt(comp.sovi)<=0 || Integer.parseInt(comp.soviActual)<=0)
 					{
 						showToast("Los valores de SOVI deben ser mayores a 0");
 						return false;
@@ -174,7 +175,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 				if(openAdapterVacio)
 				{
 					showToast("Debe editar valores de la pestaña inventario.");
-					return true;
+					return false;
 				}
 			}
 			if(application.posicionAdapter == null || application.posicionAdapter.posiciones.isEmpty())
@@ -184,7 +185,7 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 				if(posicionAdapterVacio)
 				{
 					showToast("Debe editar valores de la pestaña posición.");
-					return true;
+					return false;
 				}
 			}
 			if(application.presentacionAdapter == null || application.presentacionAdapter.detalles.isEmpty())
@@ -194,13 +195,13 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 				if(presentacionAdapterVacio)
 				{
 					showToast("Debe editar valores de la pestaña presentación.");
-					return true;
+					return false;
 				}
 			}
 			if(application.informacionAdicional == null)
 			{
 				showToast("Debe editar valores de la pestaña combos.");
-				return true;
+				return false;
 			}
 				
        	}
@@ -225,7 +226,11 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
     		{
        			CerrarInventarioTO cerrar = new CerrarInventarioTO();
        			cerrar.codigoProducto = compromiso.codigoProducto;
-       			cerrar.cumplio = compromiso.cumplio;
+       			cerrar.concrecionCumplio = compromiso.concrecionCumplio;
+       			cerrar.soviCumplio = compromiso.soviCumplio;
+       			cerrar.cumplePrecioCumplio = compromiso.cumplePrecioCumplio;
+       			cerrar.numeroSaboresCumplio = compromiso.numeroSaboresCumplio;
+       			
        			listCerrarCompromisoTO.add(cerrar);
     		}
        		
@@ -398,7 +403,10 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 	protected void processError(int accion) {
 		// TODO Auto-generated method stub
 		super.processError();
-		showToast(error_generico_process);
+		if(accion == ACCION_ACTUALIZAR || accion == ACCION_CERRAR)
+    	{
+			showToast(error_generico_process);
+    	}
 	}
 	
 	public static class EfficientAdapter extends ArrayAdapter<PresentacionCompromisoTO>{
@@ -479,6 +487,22 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 //					.getDescripcionVariable());
 			holder.txViewPuntos.setText(presentacionTO.puntosSugeridos);
 
+			String fecha = presentacionTO.fechaCompromiso;
+			int anio;
+			int mes;
+			int dia;
+			final Calendar c = Calendar.getInstance();
+			if (fecha.length() >= 7) {
+				anio = Integer.parseInt(fecha.substring(0, 4));
+				mes = Integer.parseInt(fecha.substring(4, 6)) - 1;
+				dia = Integer.parseInt(fecha.substring(6));
+				c.set(anio, mes, dia);
+				if (dia >= 30 && mes == 1)
+					dia = c.get(Calendar.DAY_OF_MONTH);
+				else if (dia >= 30)
+					dia = c.get(Calendar.DAY_OF_MONTH);
+				holder.txEditFecha.setText(ActivityUtil.pad(dia)+"/"+ActivityUtil.pad(mes+1)+"/"+anio);
+			}
 			
 			holder.btnFecha.setOnClickListener(new OnClickListener() {
 

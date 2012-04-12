@@ -29,12 +29,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
+            android:enabled="false"
             android:text="NO" />
 
         <RadioButton
             android:id="@+id/radSSSi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:text="SI" />
     </RadioGroup>
 
@@ -51,6 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
+        android:enabled="false"
         android:maxLength="150" >
 
         <requestFocus />
@@ -74,12 +77,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
+            android:enabled="false"
             android:text="NO" />
 
         <RadioButton
             android:id="@+id/radMSSi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:text="SI" />
     </RadioGroup>
 
@@ -96,6 +101,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
+        android:enabled="false"
         android:maxLength="150" >
     </EditText>
 
@@ -106,14 +112,14 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/btnGuardar"
+            android:id="@+id/btnCancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_weight="1"
             android:focusable="false"
-            android:onClick="btnGuardar_click"
-            android:text="@string/compromiso_open_guardar" >
+            android:onClick="btnCancelar_click"
+            android:text="@string/compromiso_open_cancelar" >
         </Button>
 
         <Button

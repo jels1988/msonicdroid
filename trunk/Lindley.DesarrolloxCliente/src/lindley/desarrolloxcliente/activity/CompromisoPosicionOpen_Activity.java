@@ -28,6 +28,7 @@ import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarPosicionCompromisoProxy;
+import net.msonic.lib.ActivityUtil;
 import net.msonic.lib.ListActivityBase;
 import net.msonic.lib.MessageBox;
 import net.msonic.lib.UploadFileUtil;
@@ -117,9 +118,15 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 			if (status == 0) {
 				List<PosicionCompromisoTO> posiciones = consultarPosicionProxy
 						.getResponse().getListaCompromisos();	
-				application.posicionAdapter =new EfficientAdapter(this, posiciones); 
+				application.posicionAdapter =new EfficientAdapter(this, posiciones);
+				final Calendar c = Calendar.getInstance();
 				if(posiciones.size()>0)
-					txtViewFecha.setText(application.dia+ "/" + application.mes + "/" + application.anio);
+				{
+					if(application.dia == null)
+						txtViewFecha.setText(ActivityUtil.pad(c.get(Calendar.DAY_OF_MONTH)) + "/" + ActivityUtil.pad((c.get(Calendar.MONTH) + 1)) + "/" + c.get(Calendar.YEAR));
+					else
+						txtViewFecha.setText(application.dia+ "/" + application.mes + "/" + application.anio);
+				}
 				setListAdapter(application.posicionAdapter);
 			}
 			else  {
@@ -177,7 +184,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				application.openAdapter = new CompromisoOpen_Activity.EfficientAdapter(this, new ArrayList<CompromisoTO>());
 				for(CompromisoTO comp : application.openAdapter.detalles)
 				{
-					if(Integer.parseInt(comp.sovi)<=0 && Integer.parseInt(comp.soviActual)<=0)
+					if(Integer.parseInt(comp.sovi)<=0 || Integer.parseInt(comp.soviActual)<=0)
 					{
 						showToast("Los valores de SOVI deben ser mayores a 0");
 						return false;
@@ -187,7 +194,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				if(openAdapterVacio)
 				{
 					showToast("Debe editar valores de la pestaña inventario.");
-					return true;
+					return false;
 				}
 			}
 			if(application.posicionAdapter == null || application.posicionAdapter.posiciones.isEmpty())
@@ -197,7 +204,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				if(posicionAdapterVacio)
 				{
 					showToast("Debe editar valores de la pestaña posición.");
-					return true;
+					return false;
 				}
 			}
 			if(application.presentacionAdapter == null || application.presentacionAdapter.detalles.isEmpty())
@@ -207,13 +214,13 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				if(presentacionAdapterVacio)
 				{
 					showToast("Debe editar valores de la pestaña presentación.");
-					return true;
+					return false;
 				}
 			}
 			if(application.informacionAdicional == null)
 			{
 				showToast("Debe editar valores de la pestaña combos.");
-				return true;
+				return false;
 			}
 				
        	}
@@ -239,7 +246,11 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
     		{
        			CerrarInventarioTO cerrar = new CerrarInventarioTO();
        			cerrar.codigoProducto = compromiso.codigoProducto;
-       			cerrar.cumplio = compromiso.cumplio;
+       			cerrar.concrecionCumplio = compromiso.concrecionCumplio;
+       			cerrar.soviCumplio = compromiso.soviCumplio;
+       			cerrar.cumplePrecioCumplio = compromiso.cumplePrecioCumplio;
+       			cerrar.numeroSaboresCumplio = compromiso.numeroSaboresCumplio;
+       			
        			listCerrarCompromisoTO.add(cerrar);
     		}
        		
@@ -479,9 +490,9 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 			public void onDateSet(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
 				// TODO Auto-generated method stub
 
-					EfficientAdapter.txEditFecha.setText(String.valueOf(pad(dayOfMonth)) + "/"+ String.valueOf(pad(monthOfYear+1)) + "/" + String.valueOf(year));
+					EfficientAdapter.txEditFecha.setText(String.valueOf(ActivityUtil.pad(dayOfMonth)) + "/"+ String.valueOf(ActivityUtil.pad(monthOfYear+1)) + "/" + String.valueOf(year));
 		    	  if(EfficientAdapter.compromisoTO!=null){
-		    		  EfficientAdapter.compromisoTO.fechaCompromiso = (String.valueOf(year) + String.valueOf(pad(monthOfYear+1)) + String.valueOf(pad(dayOfMonth)) );
+		    		  EfficientAdapter.compromisoTO.fechaCompromiso = (String.valueOf(year) + String.valueOf(ActivityUtil.pad(monthOfYear+1)) + String.valueOf(ActivityUtil.pad(dayOfMonth)) );
 		    	  }
 			}
 		};
@@ -553,6 +564,23 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				holder.btnFotoExito.setText(R.string.btnExitoText);
 			}
 				    	
+			String fecha = posicionTO.fechaCompromiso;
+			int anio;
+			int mes;
+			int dia;
+			final Calendar c = Calendar.getInstance();
+			if (fecha.length() >= 7) {
+				anio = Integer.parseInt(fecha.substring(0, 4));
+				mes = Integer.parseInt(fecha.substring(4, 6)) - 1;
+				dia = Integer.parseInt(fecha.substring(6));
+				c.set(anio, mes, dia);
+				if (dia >= 30 && mes == 1)
+					dia = c.get(Calendar.DAY_OF_MONTH);
+				else if (dia >= 30)
+					dia = c.get(Calendar.DAY_OF_MONTH);
+				holder.txEditFecha.setText(ActivityUtil.pad(dia)+"/"+ActivityUtil.pad(mes+1)+"/"+anio);
+			}
+			
 	    	holder.btnFecha.setOnClickListener(new OnClickListener() {
 
 	    		@Override
@@ -645,13 +673,5 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	    }
 	    
 	  }
-    
-	private static String pad(int c) {
-		if (c >= 10)
-			return String.valueOf(c);
-		else
-			return "0" + String.valueOf(c);
-	}
-
     
 }

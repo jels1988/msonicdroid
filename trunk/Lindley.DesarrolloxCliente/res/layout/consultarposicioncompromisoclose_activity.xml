@@ -63,7 +63,7 @@
                 android:orientation="vertical" >
 
                 <TableLayout
-                    android:layout_width="2000dip"
+                    android:layout_width="800dip"
                     android:layout_height="wrap_content"
                     android:shrinkColumns="*"
                     android:stretchColumns="*" >
@@ -74,39 +74,11 @@
                         
                         <TextView
                             style="@style/TextViewLabel"
-                            android:layout_width="40dip"
+                            android:layout_width="30dip"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Activos Empresa" />
-                         
-                        <TextView
-                            style="@style/TextViewLabel"
-                            android:layout_width="120dip"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Variable" />
+                            android:text="Activos" />                        
                         
-                        <TextView
-                            style="@style/TextViewLabel"
-                            android:layout_width="40dip"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Red" />
-                        
-                        <TextView
-                            style="@style/TextViewLabel"
-                            android:layout_width="50dip"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Pto. Máximo" />
-
-                        <TextView
-                            style="@style/TextViewLabel"
-                            android:layout_width="50dip"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Diferencia" />
-
                         <TextView
                             style="@style/TextViewLabel"
                             android:layout_width="40dip"
@@ -114,13 +86,6 @@
                             android:layout_height="wrap_content"
                             android:text="Puntos" />
                         
-                         <TextView
-                            style="@style/TextViewLabel"
-                            android:layout_width="60dip"
-                            android:gravity="center"
-                            android:layout_height="wrap_content"
-                            android:text="" />
-                        
                         <TextView
                             style="@style/TextViewLabel"
                             android:layout_width="60dip"
@@ -130,19 +95,62 @@
                         
                         <TextView
                             style="@style/TextViewLabel"
-                            android:layout_width="120dip"
+                            android:layout_width="60dip"
                             android:gravity="center"
                             android:layout_height="wrap_content"
-                            android:text="Acc. Compromiso" />
+                            android:text="" />
+                                                
+                        <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="60dip"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_span="2"
+                            android:text="Medición RED" />
+                       
                         
                         <TextView
                             style="@style/TextViewLabel"
                             android:layout_width="120dip"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:text="Observación" />
+                        
+                        <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="90dip"
                             android:gravity="center"
                             android:layout_height="wrap_content"
                             android:text="Fecha Compromiso" />
                         
-                       <TextView
+                        <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="30dip"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:text="Cumplio" />
+                                                 
+                    </TableRow>
+                    
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+                        
+                        <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="20dip"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Lindley" />                        
+                        
+                        <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="40dip"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:text="" />
+                        
+                        <TextView
                             style="@style/TextViewLabel"
                             android:layout_width="60dip"
                             android:gravity="center"
@@ -151,11 +159,47 @@
                         
                         <TextView
                             style="@style/TextViewLabel"
-                            android:layout_width="20dip"
+                            android:layout_width="60dip"
                             android:gravity="center"
                             android:layout_height="wrap_content"
-                            android:text="Cumplio" />
-                         
+                            android:text="" />
+                                                
+                        <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="30dip"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Std.Exhib." />
+                        
+                        <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="30dip"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Pto. Max." />
+                       
+                        
+                        <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="100dip"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:text="" />
+                        
+                        <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="90dip"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:text="" />
+                        
+                         <TextView
+                            style="@style/TextViewLabel"
+                            android:layout_width="30dip"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:text="" />
+                                                 
                     </TableRow>
 
                     <View
