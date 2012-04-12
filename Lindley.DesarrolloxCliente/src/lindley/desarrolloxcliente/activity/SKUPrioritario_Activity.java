@@ -202,8 +202,7 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 					String idRegistro = guardarNuevoDesarrolloProxy.getResponse().getCodCabecera();
 					
 					Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.compromisoprincipalopen");
-					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, idRegistro);
-					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.FLAG_FECHA, ConsultarCabecera_Activity.FLAG_OPEN_FECHA_ABIERTO);
+					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, idRegistro);					
 					startActivity(compromisoOpen);
 				}
 				else  {

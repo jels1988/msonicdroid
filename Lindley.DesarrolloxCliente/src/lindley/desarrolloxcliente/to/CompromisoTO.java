@@ -9,6 +9,9 @@ public class CompromisoTO {
 	@SerializedName("PSS")
 	public String puntosSugeridos;
 	
+	@SerializedName("PSG")
+	public String puntosGanados;
+	
 	@SerializedName("CPRO")
 	public String codigoProducto;
 
@@ -23,6 +26,9 @@ public class CompromisoTO {
 	@SerializedName("CNRCM")
 	public String concrecionActual;
 	
+	@SerializedName("CNCUM")
+	public String concrecionCumplio;
+	
 	
 		
 	@SerializedName("SOVI")
@@ -30,6 +36,9 @@ public class CompromisoTO {
 
 	@SerializedName("SOVICM")
 	public String soviActual;
+	
+	@SerializedName("SVCUM")
+	public String soviCumplio;
 	
 	
 		
@@ -39,6 +48,10 @@ public class CompromisoTO {
 	@SerializedName("RPRECM")
 	public String cumplePrecioActual;
 	
+	@SerializedName("PRECUM")
+	public String cumplePrecioCumplio;
+	
+	
 
 
 	@SerializedName("NSB")
@@ -46,6 +59,11 @@ public class CompromisoTO {
 
 	@SerializedName("NSBCM")
 	public int numeroSaboresActual;
+	
+	@SerializedName("NSBCUM")
+	public String numeroSaboresCumplio;
+
+	
 	
 	
 	@SerializedName("ACTR")
@@ -57,7 +75,5 @@ public class CompromisoTO {
 	
 	public String codigoAccionTrade;
 	public String descAccionTrade;
-	
-	public String cumplio;
-		
+			
 }

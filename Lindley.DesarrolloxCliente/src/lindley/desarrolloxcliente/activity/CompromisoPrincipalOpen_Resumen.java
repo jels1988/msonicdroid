@@ -15,7 +15,6 @@ import android.widget.TabHost.TabSpec;
 public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 
 	public final static String CODIGO_REGISTRO = "codigo_reg";
-	public final static String FLAG_FECHA = "fecha_flag";
 	
 	private TabHost mTabHost;
 	public String codigoRegistro;
@@ -39,7 +38,6 @@ public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 		setContentView(R.layout.compromisoprincipal_activity);
 		Intent intent = this.getIntent();
 		codigoRegistro = intent.getStringExtra(CODIGO_REGISTRO);
-		flagFecha = intent.getStringExtra(FLAG_FECHA);
 		setupTabHost();
 		setupTab(new TextView(this));
 	}

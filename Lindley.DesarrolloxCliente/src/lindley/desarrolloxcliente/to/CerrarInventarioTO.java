@@ -7,7 +7,16 @@ public class CerrarInventarioTO {
 	@SerializedName("CPRO")
 	public String codigoProducto;	
 	
-	@SerializedName("CUM")
-	public String cumplio;	
+	@SerializedName("CNCUM")
+	public String concrecionCumplio;
+	
+	@SerializedName("SVCUM")
+	public String soviCumplio;
+	
+	@SerializedName("PRECUM")
+	public String cumplePrecioCumplio;
+	
+	@SerializedName("NSBCUM")
+	public String numeroSaboresCumplio;
 	
 }

@@ -130,7 +130,6 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 	        // we want to bind data to.
 	        holder = new ViewHolder();
 	        	        	        	    	
-	        holder.txViewVariable = (TextView) convertView.findViewById(R.id.txViewVariable);
 	        holder.txViewPuntos = (TextView) convertView.findViewById(R.id.txViewPuntos);
 	        holder.btnSKU = (Button) convertView.findViewById(R.id.btnSKU);       
 	        holder.txViewFecComp = (TextView) convertView.findViewById(R.id.txViewFecComp);
@@ -144,7 +143,7 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 	      }
 	      
 	      int mYear, mMonth, mDay;
-			String fecha = presentacionTO.getFechaCompromiso();
+			String fecha = presentacionTO.fechaCompromiso;
 			if (fecha.length() > 7) {
 				mYear = Integer.parseInt(fecha.substring(0, 4));
 				mMonth = Integer.parseInt(fecha.substring(4, 6));
@@ -154,16 +153,18 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 			} else {
 				holder.txViewFecComp.setText("");
 			}
-	      holder.txViewVariable.setText(presentacionTO.getDescripcionVariable());
-	      holder.txViewPuntos.setText(presentacionTO.getPuntosSugeridos());
-	      holder.txViewCnfComp.setText(presentacionTO.getConfirmacion());
-	      	      	     
+	      holder.txViewPuntos.setText(presentacionTO.puntosSugeridos);
+	      if(presentacionTO.cumplio.equals("S"))
+	    	  holder.txViewCnfComp.setText("SI");
+	      else
+	    	  holder.txViewCnfComp.setText("NO");
+	      
 	      holder.btnSKU.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					MyApplication application = (MyApplication) context.getApplicationContext();
-					application.listSKUPresentacionCompromiso = presentacionTO.getListaSKU();
+					application.listSKUPresentacionCompromiso = presentacionTO.listaSKU;
 					Intent skuPresentacion = new Intent(context, SKUPrioritarioCompromiso_Activity.class);
 					context.startActivity(skuPresentacion);
 				}
@@ -173,7 +174,6 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 	    }
 
 	    static class ViewHolder {   
-	    	TextView txViewVariable;
 	    	TextView txViewPuntos;  	
 	    	Button   btnSKU;
 	    	TextView txViewFecComp;

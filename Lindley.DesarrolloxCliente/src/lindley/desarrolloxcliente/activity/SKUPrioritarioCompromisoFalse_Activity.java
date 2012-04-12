@@ -27,6 +27,10 @@ public class SKUPrioritarioCompromisoFalse_Activity extends ListActivityBase {
 	private MyApplication application;
 	ClienteTO cliente;
 	
+	public static final String RESPUESTA_SI = "S";
+	public static final String RESPUESTA_NO = "N";
+	public static final String RESPUESTA_NO_TIENE = "T";
+	
 	public final static String FLAG_ESTADO = "estado_flag";
 	
 	public final static String FLAG_FECHA = "fecha_flag";
@@ -39,7 +43,7 @@ public class SKUPrioritarioCompromisoFalse_Activity extends ListActivityBase {
 		// TODO Auto-generated method stub
 		inicializarRecursos();
 		super.onCreate(savedInstanceState);
-		 setContentView(R.layout.skuprioritariocompromiso_activity);    
+		 setContentView(R.layout.skuprioritariocompromisofalse_activity);    
 		 mActionBar.setTitle(R.string.skuprioritario_activity_title);
 		 application = (MyApplication)getApplicationContext();
 		 cliente = application.getClienteTO();
@@ -71,28 +75,14 @@ public class SKUPrioritarioCompromisoFalse_Activity extends ListActivityBase {
 			View view = null;
 			if (convertView == null) {
 				LayoutInflater inflator = context.getLayoutInflater();
-				view = inflator.inflate(R.layout.skuprioritariocompromiso_content, null);
+				view = inflator.inflate(R.layout.skuprioritariocompromisofalse_content, null);
 				final ViewHolder viewHolder = new ViewHolder();
 				
 				viewHolder.txViewSKU = (TextView) view.findViewById(R.id.txViewSKU);
-				viewHolder.chkValActual = (CheckBox) view.findViewById(R.id.chkValActual);
-				viewHolder.chkValComp = (CheckBox) view.findViewById(R.id.chkValComp);
+				viewHolder.chkValActual = (TextView) view.findViewById(R.id.chkValActual);
+				viewHolder.chkValComp = (TextView) view.findViewById(R.id.chkValComp);
 				viewHolder.chkValConf = (CheckBox) view.findViewById(R.id.chkValConf);
-						    	
-				viewHolder.chkValComp.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-					
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						// TODO Auto-generated method stub
-						SKUPresentacionCompromisoTO skuPresentacion = (SKUPresentacionCompromisoTO) viewHolder.chkValComp.getTag();
-						if(isChecked){							
-							skuPresentacion.setCompromiso("S");
-						}else{
-							skuPresentacion.setCompromiso("N");
-						}
-					}
-				});
-				
+													
 				viewHolder.chkValConf.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 					
 					@Override
@@ -100,9 +90,9 @@ public class SKUPrioritarioCompromisoFalse_Activity extends ListActivityBase {
 						// TODO Auto-generated method stub
 						SKUPresentacionCompromisoTO skuPresentacion = (SKUPresentacionCompromisoTO) viewHolder.chkValConf.getTag();
 						if(isChecked){
-							skuPresentacion.setConfirmacion("S");
+							skuPresentacion.cumplio = "S";
 						}else{
-							skuPresentacion.setConfirmacion("N");
+							skuPresentacion.cumplio = "N";
 						}
 					}
 				});
@@ -118,55 +108,38 @@ public class SKUPrioritarioCompromisoFalse_Activity extends ListActivityBase {
 			
 			ViewHolder holder = (ViewHolder) view.getTag();
 						
-			holder.txViewSKU.setText(this.skuPresentaciones.get(position).getDescripcionSKU());
-			if(this.skuPresentaciones.get(position).getActual().compareToIgnoreCase("S") == 0)
-			{
-				holder.chkValActual.setChecked(true);
-			}
-			else
-			{
-				holder.chkValActual.setChecked(false);
+			holder.txViewSKU.setText(this.skuPresentaciones.get(position).descripcionSKU);
+			
+			if (this.skuPresentaciones.get(position).actual.equalsIgnoreCase(RESPUESTA_NO)) {
+				holder.chkValActual.setText("NO");
+			} else if (this.skuPresentaciones.get(position).actual.equalsIgnoreCase(RESPUESTA_SI)) {
+				holder.chkValActual.setText("SI");
+			}else {
+				holder.chkValActual.setText("NV");
 			}
 			
-			if(this.skuPresentaciones.get(position).getCompromiso().compareToIgnoreCase("S") == 0)
-			{
-				holder.chkValComp.setChecked(true);
-			}
-			else
-			{
-				holder.chkValComp.setChecked(false);
+			if (this.skuPresentaciones.get(position).compromiso.equalsIgnoreCase(RESPUESTA_NO)) {
+				holder.chkValComp.setText("NO");
+			} else if (this.skuPresentaciones.get(position).compromiso.equalsIgnoreCase(RESPUESTA_SI)) {
+				holder.chkValComp.setText("SI");
 			}
 			
-			if(this.skuPresentaciones.get(position).getConfirmacion().compareToIgnoreCase("S") == 0)
+			if(this.skuPresentaciones.get(position).cumplio.compareToIgnoreCase("S") == 0)
 			{
 				holder.chkValConf.setChecked(true);
 			}
 			else
 			{
 				holder.chkValConf.setChecked(false);
-			}
-			
-			holder.chkValActual.setEnabled(false);
-			
-			if(flagFecha.equals(FLAG_OPEN_FECHA_CERRADA))
-			{
-				holder.chkValComp.setEnabled(false);
-				holder.chkValConf.setEnabled(true);
-			}
-			else
-			{
-				holder.chkValComp.setEnabled(true);
-				holder.chkValConf.setEnabled(true);
-			}
-		
+			}		
 			
 			return view;
 		}
 
 	    static class ViewHolder {   
 	    	TextView txViewSKU;
-	    	CheckBox chkValActual;
-	    	CheckBox chkValComp;
+	    	TextView chkValActual;
+	    	TextView chkValComp;
 	    	CheckBox chkValConf;
 	    }
 	    

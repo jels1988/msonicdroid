@@ -18,9 +18,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
@@ -32,7 +32,6 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	public final static String CODIGO_REGISTRO = "codigo_reg";
 	
 	@InjectExtra(CODIGO_REGISTRO) String codigoRegistro;
-//	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarCompromisoProxy consultarCompromisoProxy;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	@InjectView(R.id.txtViewCliente) TextView txtViewCliente;
@@ -46,12 +45,9 @@ public class CompromisoClose_Activity extends ListActivityBase {
     	inicializarRecursos();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.compromisoclose_activity);        
-//        mActionBar.setTitle(R.string.compromiso_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
 		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
-//        mActionBar.setSubTitle(cliente.getNombre());
-//        mActionBar.setHomeLogo(R.drawable.header_logo);
         processAsync();
     }
     
@@ -125,19 +121,21 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	        // we want to bind data to.
 	        holder = new ViewHolder();
 	        	        	    	
+	        holder.txViewPuntos = (TextView) convertView.findViewById(R.id.txViewPuntos);
+	        holder.btnProfit = (ImageButton) convertView.findViewById(R.id.btnProfit);
 	        holder.txViewPro = (TextView) convertView.findViewById(R.id.txViewPro); 
-	        holder.txViewConcrecion = (TextView) convertView.findViewById(R.id.txViewConcrecion);
+	        holder.txViewConcrecion = (TextView) convertView.findViewById(R.id.txViewConcrecion); 
+	        holder.txViewConcrecionActual = (TextView) convertView.findViewById(R.id.txViewConcrecionActual); 
 	        holder.txViewSOVI =  (TextView) convertView.findViewById(R.id.txViewSOVI);
 	        holder.txViewSOVICmp =  (TextView) convertView.findViewById(R.id.txViewSOVICmp);
 	        holder.txViewCumPrecio =  (TextView) convertView.findViewById(R.id.txViewCumPrecio);
 	        holder.txViewCumPrecioCmp =  (TextView) convertView.findViewById(R.id.txViewCumPrecioCmp);
 	        holder.txViewSabores = (TextView) convertView.findViewById(R.id.txViewSabores);  	    	
-	    	holder.txViewPCoca = (TextView) convertView.findViewById(R.id.txViewPCoca);		    	
+	    	holder.txViewSaboresActual = (TextView) convertView.findViewById(R.id.txViewSaboresActual);		    	
 	    	holder.txViewAccTrade = (TextView) convertView.findViewById(R.id.txViewAccTrade);	          	
+	    	holder.txViewFecha = (TextView) convertView.findViewById(R.id.txViewFecha);
 	    	holder.txViewSN = (TextView) convertView.findViewById(R.id.txViewSN);	    	
-	    	holder.txViewPBonus = (TextView) convertView.findViewById(R.id.txViewPBonus);
-	    	holder.btnProfit = (Button) convertView.findViewById(R.id.btnProfit);
-	        
+	    	
 	        convertView.setTag(holder);
 	      } else {
 	        // Get the ViewHolder back to get fast access to the TextView
@@ -145,18 +143,20 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	        holder = (ViewHolder) convertView.getTag();
 	      }
 	      
-	      holder.txViewPro.setText(compromiso.getDescripcionProducto());
-	      holder.txViewConcrecion.setText(compromiso.getConcrecion());
-	      holder.txViewSOVI.setText(compromiso.getSovi());
-	      holder.txViewSOVICmp.setText(compromiso.getSoviCompromiso());
-	      holder.txViewCumPrecio.setText(compromiso.getCumplePrecio());
-	      holder.txViewCumPrecioCmp.setText(compromiso.getCumplePrecioCompromiso());
-	      holder.txViewSabores.setText(compromiso.getNumeroSabores());
-	      holder.txViewPCoca.setText(compromiso.getPuntosCocaCola());
-	      holder.txViewAccTrade.setText(compromiso.getDescripcionAccion());
-	      if(compromiso.getCumplio().equals("0")) holder.txViewSN.setText("N");
-	      else holder.txViewSN.setText("1");
-	      holder.txViewPBonus.setText(compromiso.getPuntosBonus());
+	      holder.txViewPuntos.setText(compromiso.puntosGanados);
+	      holder.txViewPro.setText(compromiso.descripcionProducto);
+	      holder.txViewConcrecion.setText(compromiso.concrecion);
+	      holder.txViewConcrecionActual.setText(compromiso.concrecionActual);
+	      holder.txViewSOVI.setText(compromiso.sovi);
+	      holder.txViewSOVICmp.setText(compromiso.soviActual);
+	      holder.txViewCumPrecio.setText(compromiso.cumplePrecio);
+	      holder.txViewCumPrecioCmp.setText(compromiso.cumplePrecioActual);
+	      holder.txViewSabores.setText(compromiso.numeroSabores);
+	      holder.txViewSaboresActual.setText(compromiso.numeroSaboresActual+"");
+	      holder.txViewAccTrade.setText(compromiso.descAccionTrade);
+	      holder.txViewFecha.setText(compromiso.fechaCompromiso);
+//	      if(compromiso.cumplio.equals("S")) holder.txViewSN.setText("SI");
+//	      else holder.txViewSN.setText("NO");
 	      
 	      holder.btnProfit.setOnClickListener(new OnClickListener() {
 				@Override
@@ -166,8 +166,8 @@ public class CompromisoClose_Activity extends ListActivityBase {
 					profit.putExtra(VerProfit_Activity.ANIO, "");
 					profit.putExtra(VerProfit_Activity.MES, "");
 					profit.putExtra(VerProfit_Activity.CLIENTE, cliente.getCodigo());
-					profit.putExtra(VerProfit_Activity.ARTICULO, compromiso.getCodigoProducto());
-					profit.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, compromiso.getDescripcionProducto());
+					profit.putExtra(VerProfit_Activity.ARTICULO, compromiso.codigoProducto);
+					profit.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, compromiso.descripcionProducto);
 					context.startActivity(profit);
 				}
 			});
@@ -176,18 +176,20 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	    }
 
 	    static class ViewHolder {   
+	    	TextView txViewPuntos;
+	    	ImageButton btnProfit;
 	    	TextView txViewPro;
 	    	TextView txViewConcrecion;
+	    	TextView txViewConcrecionActual;
 	    	TextView txViewSOVI;
 	    	TextView txViewSOVICmp;
 	    	TextView txViewCumPrecio;
 	    	TextView txViewCumPrecioCmp;
-	    	TextView txViewSabores;  	    	
-	    	TextView txViewPCoca;    	
-	    	TextView txViewAccTrade;    	
+	    	TextView txViewSabores; 
+	    	TextView txViewSaboresActual;
+	    	TextView txViewAccTrade;
+	    	TextView txViewFecha;
 	    	TextView txViewSN;
-	    	TextView txViewPBonus;
-	    	TextView btnProfit;
 	    }
 	    
 	    @Override

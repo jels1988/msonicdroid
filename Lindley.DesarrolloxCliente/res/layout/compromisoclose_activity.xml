@@ -70,83 +70,181 @@
                     android:stretchColumns="*" >
                     
                     <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" >
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                    
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="25dip"
+                        android:layout_height="wrap_content"
+                        android:text="Puntos"
+                        android:gravity="center" />
+                    
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="10dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="" />
+                                        
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="150dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Producto"
+                         />
 
-                        <TextView
-                            android:layout_width="200dip"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Producto"
-                            style="@style/TextViewLabel" />
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="60dip"
+                        android:layout_height="wrap_content"
+                        android:text="Concreciones"
+                        android:gravity="center"
+                        android:layout_span="2" />
+                                        
+                    
 
-                        <TextView
-                            android:layout_width="50dip"
-                            android:layout_height="wrap_content"
-                            android:text="Concreción"
-                            style="@style/TextViewLabel" />
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="40dip"
+                        android:layout_height="wrap_content"
+                        android:text="SOVI" 
+                        android:gravity="center"
+                        android:layout_span="2"/>                    
+                    
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="80dip"
+                        android:layout_height="wrap_content"
+                        android:text="Marca Precio"
+                        android:gravity="center"
+                        android:layout_span="2" />
+                    
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="50dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text=" Sabores"
+                        android:layout_span="2" />
 
-                        <TextView
-                            android:layout_width="50dip"
-                            android:layout_height="wrap_content"
-                            android:text="SOVI"
-                            style="@style/TextViewLabel" />
-                        
-                        <TextView
-                            android:layout_width="50dip"
-                            android:layout_height="wrap_content"
-                            android:text="SOVI Comp."
-                            style="@style/TextViewLabel" />
 
-                        <TextView
-                            android:layout_width="70dip"
-                            android:layout_height="wrap_content"
-                            android:text="Cumple Precio"
-                            style="@style/TextViewLabel" />
-                        
-                        <TextView
-                            android:layout_width="70dip"
-                            android:layout_height="wrap_content"
-                            android:text="Cumple Precio Cmp."
-                            style="@style/TextViewLabel" />
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="100dip"
+                        android:layout_height="wrap_content"
+                        android:text="Acciones Trade"
+                        android:gravity="center" />
 
-                        <TextView
-                            android:layout_width="70dip"
-                            android:layout_height="wrap_content"
-                            android:text="Número Sabores"
-                            style="@style/TextViewLabel" />
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="120dip"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha" 
+                        android:gravity="center" />
+                    
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="20dip"
+                        android:layout_height="wrap_content"
+                        android:text="Cumplio" 
+                        android:gravity="center" />
+                    
+                </TableRow>
 
-                        <TextView
-                            android:layout_width="50dip"
-                            android:layout_height="wrap_content"
-                            android:text="Puntos Coca Cola"
-                            style="@style/TextViewLabel" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                    
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="10dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" />
+                    
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="10dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="" />
+                                        
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="150dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="" />
 
-                        <TextView
-                            android:layout_width="100dip"
-                            android:layout_height="wrap_content"
-                            android:text="Acciones Trade"
-                            style="@style/TextViewLabel" />
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="20dip"
+                        android:layout_height="wrap_content"
+                        android:text="Actual" />
+                    
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="40dip"
+                        android:layout_height="wrap_content"
+                        android:text="Comprom" />
 
-                        <TextView
-                            android:layout_width="30dip"
-                            android:layout_height="wrap_content"
-                            android:text="S/N"
-                            style="@style/TextViewLabel" />
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="20dip"
+                        android:layout_height="wrap_content"
+                        android:text="Actual" />
+                    
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="20dip"
+                        android:layout_height="wrap_content"
+                        android:text="Comprom" />
 
-                        <TextView
-                            android:layout_width="50dip"
-                            android:layout_height="wrap_content"
-                            android:text="Puntos Bonus"
-                            style="@style/TextViewLabel" />
-                        
-                        <TextView
-                            android:layout_width="40dip"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text=""
-                            style="@style/TextViewLabel" />
-                    </TableRow>
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="40dip"
+                        android:layout_height="wrap_content"
+                        android:text="Actual" />
+
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="40dip"
+                        android:layout_height="wrap_content"
+                        android:text="Comprom" />
+                    
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="20dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Actual" />
+
+                     <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="30dip"
+                        android:layout_height="wrap_content"
+                        android:text="Comprom" />
+                     
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="100dip"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="120dip"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                    
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="20dip"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                    
+                </TableRow>
 
                     <View
                         android:layout_height="2dip"

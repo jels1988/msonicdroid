@@ -15,11 +15,9 @@ import android.widget.TabHost.TabSpec;
 public class CompromisoPrincipalOpenFalse_Resumen extends TabActivity {
 
 	public final static String CODIGO_REGISTRO = "codigo_reg";
-	public final static String FLAG_FECHA = "fecha_flag";
 	
 	private TabHost mTabHost;
 	public String codigoRegistro;
-	public String flagFecha;
 	
 	public static MyApplication application;
 	
@@ -39,34 +37,33 @@ public class CompromisoPrincipalOpenFalse_Resumen extends TabActivity {
 		setContentView(R.layout.compromisoprincipal_activity);
 		Intent intent = this.getIntent();
 		codigoRegistro = intent.getStringExtra(CODIGO_REGISTRO);
-		flagFecha = intent.getStringExtra(FLAG_FECHA);
 		setupTabHost();	
 		setupTab(new TextView(this));
 	}
 	
 	private void setupTab(final View view) {
 		View tabview = createTabView(mTabHost.getContext(), "INVENTARIO");
-		Intent oportunidad = new Intent(this, CompromisoOpen_Activity.class);
-		oportunidad.putExtra(CompromisoOpen_Activity.CODIGO_REGISTRO, codigoRegistro);
+		Intent oportunidad = new Intent(this, CompromisoOpenFalse_Activity.class);
+		oportunidad.putExtra(CompromisoOpenFalse_Activity.CODIGO_REGISTRO, codigoRegistro);
 		TabSpec setContent = mTabHost.newTabSpec("INVENTARIO").setIndicator(tabview).setContent(oportunidad);
 		mTabHost.addTab(setContent);
 		
-		tabview = createTabView(mTabHost.getContext(), "POSICION");
-		Intent posicion = new Intent(this, CompromisoPosicionOpen_Activity.class);
-		posicion.putExtra(CompromisoPosicionOpen_Activity.COD_GESTION, codigoRegistro);
-		setContent = mTabHost.newTabSpec("POSICION").setIndicator(tabview).setContent(posicion);
-		mTabHost.addTab(setContent);
-		
-		tabview = createTabView(mTabHost.getContext(), "PRESENTACION");
-		Intent presentacion = new Intent(this, CompromisoPresentacionOpen_Activity.class);
-		presentacion.putExtra(CompromisoPresentacionOpen_Activity.COD_GESTION, codigoRegistro);
-		setContent = mTabHost.newTabSpec("PRESENTACION").setIndicator(tabview).setContent(presentacion);
-		mTabHost.addTab(setContent);		
-		
-		tabview = createTabView(mTabHost.getContext(), "COMBOS");
-		Intent combos = new Intent(this, InformacionAdicional_Activity.class);
-		setContent = mTabHost.newTabSpec("COMBOS").setIndicator(tabview).setContent(combos);
-		mTabHost.addTab(setContent);		
+//		tabview = createTabView(mTabHost.getContext(), "POSICION");
+//		Intent posicion = new Intent(this, CompromisoPosicionOpenFalse_Activity.class);
+//		posicion.putExtra(CompromisoPosicionOpenFalse_Activity.COD_GESTION, codigoRegistro);
+//		setContent = mTabHost.newTabSpec("POSICION").setIndicator(tabview).setContent(posicion);
+//		mTabHost.addTab(setContent);
+//		
+//		tabview = createTabView(mTabHost.getContext(), "PRESENTACION");
+//		Intent presentacion = new Intent(this, CompromisoPresentacionOpenFalse_Activity.class);
+//		presentacion.putExtra(CompromisoPresentacionOpenFalse_Activity.COD_GESTION, codigoRegistro);
+//		setContent = mTabHost.newTabSpec("PRESENTACION").setIndicator(tabview).setContent(presentacion);
+//		mTabHost.addTab(setContent);		
+////		
+//		tabview = createTabView(mTabHost.getContext(), "COMBOS");
+//		Intent combos = new Intent(this, InformacionAdicional_Activity.class);
+//		setContent = mTabHost.newTabSpec("COMBOS").setIndicator(tabview).setContent(combos);
+//		mTabHost.addTab(setContent);		
 	}
 	
 	private static View createTabView(final Context context, final String text) {

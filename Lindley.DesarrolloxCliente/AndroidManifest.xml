@@ -63,6 +63,13 @@
             </intent-filter>
         </activity>
         
+        <activity android:name=".activity.CompromisoOpenFalse_Activity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.consultarcompromisoopenfalse" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
          <activity android:name=".activity.CompromisoClose_Activity">
             <intent-filter>
                 <action android:name="lindley.desarrolloxcliente.consultarcompromisoclose" />                					  
@@ -136,6 +143,13 @@
         <activity android:name=".activity.CompromisoPrincipalOpen_Resumen" android:configChanges="keyboardHidden|orientation" >
             <intent-filter>
                 <action android:name="lindley.desarrolloxcliente.compromisoprincipalopen" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".activity.CompromisoPrincipalOpenFalse_Resumen" android:configChanges="keyboardHidden|orientation" >
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.compromisoprincipalopenfalse" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

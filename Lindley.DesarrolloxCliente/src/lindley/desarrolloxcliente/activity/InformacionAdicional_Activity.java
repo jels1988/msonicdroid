@@ -292,7 +292,11 @@ public class InformacionAdicional_Activity extends ActivityBase {
 	    		{
 	       			CerrarInventarioTO cerrar = new CerrarInventarioTO();
 	       			cerrar.codigoProducto = compromiso.codigoProducto;
-	       			cerrar.cumplio = compromiso.cumplio;
+	       			cerrar.concrecionCumplio = compromiso.concrecionCumplio;
+	       			cerrar.soviCumplio = compromiso.soviCumplio;
+	       			cerrar.cumplePrecioCumplio = compromiso.cumplePrecioCumplio;
+	       			cerrar.numeroSaboresCumplio = compromiso.numeroSaboresCumplio;
+	       			
 	       			listCerrarCompromisoTO.add(cerrar);
 	    		}
 	       		
