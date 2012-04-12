@@ -6,12 +6,20 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.to.AccionTradeTO;
+import lindley.desarrolloxcliente.to.CerrarInventarioTO;
+import lindley.desarrolloxcliente.to.CerrarPosicionTO;
+import lindley.desarrolloxcliente.to.CerrarPresentacionTO;
+import lindley.desarrolloxcliente.to.CerrarSKUPresentacionTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.CompromisoPosicionTO;
 import lindley.desarrolloxcliente.to.CompromisoTO;
+import lindley.desarrolloxcliente.to.InformacionAdicionalTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
+import lindley.desarrolloxcliente.to.UpdateInformacionAdicionalTO;
+import lindley.desarrolloxcliente.to.UpdateInventarioTO;
 import lindley.desarrolloxcliente.to.UpdatePosicionTO;
 import lindley.desarrolloxcliente.to.UpdatePresentacionTO;
 import lindley.desarrolloxcliente.to.UpdateSKUPresentacionTO;
@@ -50,7 +58,6 @@ import com.google.inject.Inject;
 public class CompromisoOpen_Activity extends ListActivityBase {
 
 	public final static String CODIGO_REGISTRO = "codigo_reg";
-//	public final static String FLAG_FECHA = "fecha_flag";
 
 	private static final int ACCION_CERRAR = 1;
 	private static final int ACCION_ACTUALIZAR = 2;
@@ -142,23 +149,43 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 				application.openAdapter = new EfficientAdapter(getApplicationContext(), new ArrayList<CompromisoTO>());
 				for(CompromisoTO comp : application.openAdapter.detalles)
 				{
-					if(Integer.parseInt(comp.getSovi())<=0 && Integer.parseInt(comp.getSoviCompromiso())<=0)
+					if(Integer.parseInt(comp.sovi)<=0 && Integer.parseInt(comp.soviActual)<=0)
 					{
 						showToast("Los valores de SOVI deben ser mayores a 0");
 						return false;
 					}
 				}
 				openAdapterVacio = true;
+				if(openAdapterVacio)
+				{
+					showToast("Debe editar valores de la pestaña inventario.");
+					return true;
+				}
 			}
 			if(application.posicionAdapter == null || application.posicionAdapter.posiciones.isEmpty())
 			{				
 				application.posicionAdapter = new CompromisoPosicionOpen_Activity.EfficientAdapter(this, new ArrayList<PosicionCompromisoTO>());
 				posicionAdapterVacio = true;
+				if(posicionAdapterVacio)
+				{
+					showToast("Debe editar valores de la pestaña posición.");
+					return true;
+				}
 			}
 			if(application.presentacionAdapter == null || application.presentacionAdapter.detalles.isEmpty())
 			{
 				application.presentacionAdapter = new CompromisoPresentacionOpen_Activity.EfficientAdapter(this, new ArrayList<PresentacionCompromisoTO>());
 				presentacionAdapterVacio = true;
+				if(presentacionAdapterVacio)
+				{
+					showToast("Debe editar valores de la pestaña presentación.");
+					return true;
+				}
+			}
+			if(application.informacionAdicional == null)
+			{
+				showToast("Debe editar valores de la pestaña combos.");
+				return true;
 			}
 				
        	}
@@ -176,56 +203,51 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     
     @Override    
 	protected void process(int accion) {
-    	
-    	List<UpdatePosicionTO> listUpdatePosicionTO = new ArrayList<UpdatePosicionTO>();
-   		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
-		{
-   			UpdatePosicionTO update = new UpdatePosicionTO();
-   			update.accionCompromiso = posicion.getAccionCompromiso();
-   			if(update.accionCompromiso.equalsIgnoreCase("")) update.accionCompromiso = " ";
-   			update.codigoRegistro = codigoRegistro; 
-   			update.codigoVariable = posicion.getCodigoVariable();
-   			update.confirmacion = posicion.getConfirmacion();
-   			update.fechaCompromiso = posicion.getFechaCompromiso();
-   			if(application.listCompromiso == null)
-   			 application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
-   			update.listCompromisos = application.listCompromiso;
-   			update.tipoAgrupacion = TIPO_POSICION;
-   			update.fotoInicial = posicion.getFotoInicial();
-   			update.fotoFinal = posicion.getFotoFinal();
-   			listUpdatePosicionTO.add(update);
-		}
-   		
-   		List<UpdatePresentacionTO> listUpdatePresentacionTO = new ArrayList<UpdatePresentacionTO>();
-		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
-		{
-			UpdatePresentacionTO update = new UpdatePresentacionTO();
-			update.codigoRegistro = codigoRegistro;
-			update.tipoAgrupacion = TIPO_PRESENTACION;
-			update.codigoVariable = presentacion.getCodigoVariable();
-			update.confirmacion = presentacion.getConfirmacion();
-			update.fechaCompromiso = presentacion.getFechaCompromiso();
-			List<UpdateSKUPresentacionTO> skucompromisos = new ArrayList<UpdateSKUPresentacionTO>();
-			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  presentacion.getListaSKU())
-			{
-				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
-				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.getCodigoSKU();
-				updateSKUPresentacionTO.compromiso = skupresentacionCompromisoTO.getCompromiso();
-				if(updateSKUPresentacionTO.compromiso.equalsIgnoreCase(" ")) updateSKUPresentacionTO.compromiso = NO;
-				updateSKUPresentacionTO.confirmacion = skupresentacionCompromisoTO.getConfirmacion();
-				if(updateSKUPresentacionTO.confirmacion.equalsIgnoreCase(" ")) updateSKUPresentacionTO.confirmacion = NO;
-				skucompromisos.add(updateSKUPresentacionTO);
-			}
-			update.listaSKU = skucompromisos;    			
-			listUpdatePresentacionTO.add(update);
-		}
-		
+    			
     	if(accion == ACCION_CERRAR)
     	{    		
-    		cerrarCompromisoProxy.listaPosicionCompromiso = listUpdatePosicionTO;
-    		cerrarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
-    		cerrarCompromisoProxy.setCompromisos(application.openAdapter.detalles);
-    		cerrarCompromisoProxy.setCodigoCabecera(codigoRegistro);
+    		List<CerrarInventarioTO> listCerrarCompromisoTO = new ArrayList<CerrarInventarioTO>();
+       		for(CompromisoTO compromiso : application.openFalseAdapter.detalles)
+    		{
+       			CerrarInventarioTO cerrar = new CerrarInventarioTO();
+       			cerrar.codigoProducto = compromiso.codigoProducto;
+       			cerrar.cumplio = compromiso.cumplio;
+       			listCerrarCompromisoTO.add(cerrar);
+    		}
+       		
+       		List<CerrarPosicionTO> listCerrarPosicionTO = new ArrayList<CerrarPosicionTO>();
+       		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
+    		{
+       			CerrarPosicionTO cerrar = new CerrarPosicionTO();
+       			cerrar.codigoVariable = posicion.codigoVariable;
+       			cerrar.cumplio = posicion.cumplio;
+       			listCerrarPosicionTO.add(cerrar);
+    		}
+       		
+       		List<CerrarPresentacionTO> listCerrarPresentacionTO = new ArrayList<CerrarPresentacionTO>();
+    		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
+    		{
+    			CerrarPresentacionTO cerrar = new CerrarPresentacionTO();
+    			cerrar.codigoVariable = presentacion.codigoVariable;
+    			cerrar.cumplio = presentacion.cumplio;
+    			
+    			List<CerrarSKUPresentacionTO> listCerrarSKUPresentacionTO = new ArrayList<CerrarSKUPresentacionTO>();
+    			for(SKUPresentacionCompromisoTO sku : presentacion.listaSKU)
+    			{
+    				CerrarSKUPresentacionTO cerrarSku = new CerrarSKUPresentacionTO();
+    				cerrarSku.codigoSKU = sku.codigoSKU;
+    				cerrarSku.cumplio = sku.cumplio;
+    				listCerrarSKUPresentacionTO.add(cerrarSku);
+    			}
+    			cerrar.listaSKU = listCerrarSKUPresentacionTO;
+    			
+    			listCerrarPresentacionTO.add(cerrar);
+    		}
+    		
+    		cerrarCompromisoProxy.listaPosicionCompromiso = listCerrarPosicionTO;
+    		cerrarCompromisoProxy.listaPresentacionCompromiso = listCerrarPresentacionTO;
+    		cerrarCompromisoProxy.listaInventarioCompromiso = listCerrarCompromisoTO;
+    		cerrarCompromisoProxy.codigoCabecera = codigoRegistro;
     		UsuarioTO user = application.getUsuarioTO();
     		cerrarCompromisoProxy.codigoUsuario = user.getCodigoSap();
     		cerrarCompromisoProxy.execute();
@@ -233,9 +255,71 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     	else if(accion == ACCION_ACTUALIZAR)
     	{    		
     		
+    		List<UpdateInventarioTO> listUpdateCompromisoTO = new ArrayList<UpdateInventarioTO>();
+       		for(CompromisoTO compromiso : application.openAdapter.detalles)
+    		{
+       			UpdateInventarioTO update = new UpdateInventarioTO();
+       			update.codigoProducto = compromiso.codigoProducto;
+       			update.concrecionActual = compromiso.concrecionActual;
+       			update.sovi = compromiso.sovi;
+       			update.soviActual = compromiso.soviActual;
+       			update.cumplePrecio = compromiso.cumplePrecio;
+       			update.cumplePrecioActual = compromiso.cumplePrecioActual;
+       			update.numeroSaboresActual = compromiso.numeroSaboresActual;
+       			update.fechaCompromiso = compromiso.fechaCompromiso;
+       			update.codigoAccionTrade = compromiso.codigoAccionTrade;
+       			update.descAccionTrade = compromiso.descAccionTrade;
+       			listUpdateCompromisoTO.add(update);
+    		}
+       		
+       		List<UpdatePosicionTO> listUpdatePosicionTO = new ArrayList<UpdatePosicionTO>();
+       		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
+    		{
+       			UpdatePosicionTO update = new UpdatePosicionTO();
+       			update.accionCompromiso = posicion.observacion;
+       			update.codigoVariable = posicion.codigoVariable;
+       			update.fechaCompromiso = posicion.fechaCompromiso;
+       			if(application.listCompromiso == null)
+       			 application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
+       			update.listCompromisos = application.listCompromiso;
+       			update.fotoInicial = posicion.fotoInicial;
+       			listUpdatePosicionTO.add(update);
+    		}
+       		
+       		List<UpdatePresentacionTO> listUpdatePresentacionTO = new ArrayList<UpdatePresentacionTO>();
+    		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
+    		{
+    			UpdatePresentacionTO update = new UpdatePresentacionTO();
+    			update.codigoVariable = presentacion.codigoVariable;
+    			update.fechaCompromiso = presentacion.fechaCompromiso;
+    			
+    			List<UpdateSKUPresentacionTO> skucompromisos = new ArrayList<UpdateSKUPresentacionTO>();
+    			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  presentacion.listaSKU)
+    			{
+    				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
+    				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.codigoSKU;
+    				    				
+    				updateSKUPresentacionTO.compromiso = skupresentacionCompromisoTO.compromiso;
+    				if(updateSKUPresentacionTO.compromiso.equalsIgnoreCase(" ")) updateSKUPresentacionTO.compromiso = NO;
+    				
+    				skucompromisos.add(updateSKUPresentacionTO);
+    			}
+    			update.listaSKU = skucompromisos;    			
+    			listUpdatePresentacionTO.add(update);
+    		}
+    		
+    		InformacionAdicionalTO informacion = application.informacionAdicional;
+    		UpdateInformacionAdicionalTO update = new UpdateInformacionAdicionalTO();
+    		update.comboMS = informacion.getComboMS();
+    		update.comboSS = informacion.getComboSS();
+    		update.observacion = informacion.getObservacion();
+    		update.observacionSS = informacion.getObservacionSS();
+    		
     		actualizarCompromisoProxy.listaPosicionCompromiso = listUpdatePosicionTO;
     		actualizarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
-       		actualizarCompromisoProxy.setCompromisos(application.openAdapter.detalles);
+       		actualizarCompromisoProxy.listaInventarioCompromiso = listUpdateCompromisoTO;
+       		actualizarCompromisoProxy.updateInformacionAdicionalTO = update;
+       		actualizarCompromisoProxy.codigoCabecera = codigoRegistro;
        		actualizarCompromisoProxy.execute();
     	}
     		
@@ -258,7 +342,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 				compromisos = consultarCompromisoProxy
 						.getResponse().getListaCompromiso();
 				if(compromisos.size()>0)
-					txtViewFecha.setText(compromisos.get(0).getFecha());
+					txtViewFecha.setText(application.dia + "/" + application.mes + "/" + application.anio);
 				application.openAdapter = new EfficientAdapter(this, compromisos);
 				setListAdapter(application.openAdapter);
 			}
@@ -357,7 +441,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 
     					EfficientAdapter.txtFecha.setText(String.valueOf(pad(dayOfMonth)) + "/"+ String.valueOf(pad(monthOfYear+1)) + "/" + String.valueOf(year));
     		    	  if(EfficientAdapter.compromisoTO!=null){
-    		    		  EfficientAdapter.compromisoTO.setFechaCompromiso(String.valueOf(year) + String.valueOf(pad(monthOfYear+1)) + String.valueOf(pad(dayOfMonth)) );
+    		    		  EfficientAdapter.compromisoTO.fechaCompromiso = String.valueOf(year) + String.valueOf(pad(monthOfYear+1)) + String.valueOf(pad(dayOfMonth));
     		    	  }
     			}
     		};
@@ -393,53 +477,89 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	        holder = new ViewHolder();
 	        	        	    		    	
 	        holder.txViewPuntos = (TextView) convertView.findViewById(R.id.txViewPuntos);	
-	        holder.btnProfit = (ImageButton) convertView.findViewById(R.id.btnProfit);
-	        
+	        holder.btnProfit = (ImageButton) convertView.findViewById(R.id.btnProfit);	        
 	        holder.txViewPro = (TextView) convertView.findViewById(R.id.txViewPro); 
+	        
 	        holder.cboConcrecion = (TextView) convertView.findViewById(R.id.cboConcrecion);
 	        holder.cboConcrecionCmp = (Spinner) convertView.findViewById(R.id.cboConcrecionCmp);
 	        
 	        holder.txViewSOVI =  (EditText) convertView.findViewById(R.id.txViewSOVI);
 	        holder.txViewSOVICmp =  (EditText) convertView.findViewById(R.id.txViewSOVICmp);
+	        
 	        holder.cboCumPrecio =  (Spinner) convertView.findViewById(R.id.cboCumPrecio);
 	        holder.cboCumPrecioCmp =  (Spinner) convertView.findViewById(R.id.cboCumPrecioCmp);
-	        holder.txViewSabores = (TextView) convertView.findViewById(R.id.txViewSabores);
-	        holder.cboSaboresCmp =  (Spinner) convertView.findViewById(R.id.cboSaboresCmp);
 	        
+	        holder.txViewSabores = (TextView) convertView.findViewById(R.id.txViewSabores);
+	        holder.cboSaboresCmp =  (Spinner) convertView.findViewById(R.id.cboSaboresCmp);	        
 	    		    	
 	    	holder.txViewAccTrade = (Spinner) convertView.findViewById(R.id.txViewAccTrade);	
 	    	holder.txEditFecha = (EditText) convertView.findViewById(R.id.txEditFecha);	    	
 	    	holder.btnFecha = (ImageButton) convertView.findViewById(R.id.btnFecha);
 	    	
-	        
 	        convertView.setTag(holder);
 	      
-	      holder.txViewPro.setText(compromiso.getDescripcionProducto());
+	      holder.txViewPuntos.setText(compromiso.puntosSugeridos);
 	      
-	      if(compromiso.getConcrecion().equalsIgnoreCase(SI))
+	      holder.btnProfit.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Intent profit = new Intent(context, VerProfit_Activity.class);
+					profit.putExtra(VerProfit_Activity.ANIO, application.anio);
+					profit.putExtra(VerProfit_Activity.MES, application.mes);
+					profit.putExtra(VerProfit_Activity.CLIENTE, cliente.getCodigo());
+					profit.putExtra(VerProfit_Activity.ARTICULO, compromiso.codigoProducto);
+					profit.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, compromiso.descripcionProducto);
+					context.startActivity(profit);
+				}
+			});
+	      
+	      holder.txViewPro.setText("    " + compromiso.descripcionProducto);
+	      
+	      if(compromiso.concrecion.equalsIgnoreCase(SI))
 	    	  holder.cboConcrecion.setText(SI_DATO);
 	      else
 	    	  holder.cboConcrecion.setText(NO_DATO);
 		  
-		  	      
+	      holder.cboConcrecionCmp.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+				@Override
+				public void onItemSelected(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					// TODO Auto-generated method stub
+					if(arg2==0){
+						compromiso.concrecionActual = SI;
+					}else{
+						compromiso.concrecionActual = NO;
+					}
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+	      
+	      
 	      holder.txViewSOVI.setOnFocusChangeListener(new OnFocusChangeListener() {
 			
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
 				// TODO Auto-generated method stub
-				compromiso.setSovi(holder.txViewSOVI.getText().toString());
+				compromiso.sovi = holder.txViewSOVI.getText().toString();
 			}
 		});
 	      
-	      holder.txViewSOVI.setText(compromiso.getSovi());
-	      holder.txViewSOVICmp.setText(compromiso.getSoviCompromiso());
+	      holder.txViewSOVI.setText(compromiso.sovi);
+	      holder.txViewSOVICmp.setText(compromiso.soviActual);
 	      
 	      holder.txViewSOVICmp.setOnFocusChangeListener(new OnFocusChangeListener() {
 				
 				@Override
 				public void onFocusChange(View v, boolean hasFocus) {
 					// TODO Auto-generated method stub
-					compromiso.setSoviCompromiso(holder.txViewSOVICmp.getText().toString());
+					compromiso.soviActual = holder.txViewSOVICmp.getText().toString();
 				}
 			});
 	      	      
@@ -451,9 +571,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 					int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				if(arg2==0){
-					compromiso.setCumplePrecio("S");
+					compromiso.cumplePrecio = SI;
 				}else{
-					compromiso.setCumplePrecio("N");
+					compromiso.cumplePrecio = NO;
 				}
 			}
 
@@ -471,9 +591,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 						int arg2, long arg3) {
 					// TODO Auto-generated method stub
 					if(arg2==0){
-						compromiso.setCumplePrecioCompromiso("S");
+						compromiso.cumplePrecioActual = SI;
 					}else{
-						compromiso.setCumplePrecioCompromiso("N");
+						compromiso.cumplePrecioActual = NO;
 					}
 				}
 
@@ -483,7 +603,35 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 					
 				}
 			});
+		  
+		  holder.txViewSabores.setText(compromiso.numeroSabores);
+		  
+		  holder.cboSaboresCmp.setOnItemSelectedListener(new OnItemSelectedListener() {
 
+				@Override
+				public void onItemSelected(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					// TODO Auto-generated method stub
+					if(arg2==0){
+						compromiso.numeroSaboresActual = 2;
+					} else if(arg2 == 1){
+						compromiso.numeroSaboresActual = 3;
+					} else if(arg2 == 2){
+						compromiso.numeroSaboresActual = 4;
+					}
+					else{
+						compromiso.numeroSaboresActual = 0;
+					}
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+		  
+		  
 	      ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(application.getApplicationContext(),R.array.confirmacion,android.R.layout.simple_spinner_item);
 		  adap.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 	      holder.cboCumPrecio.setAdapter(adap);
@@ -494,15 +642,44 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	      adapSabores.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 		  holder.cboSaboresCmp.setAdapter(adapSabores);
 	      	      
-		  if(compromiso.getCumplePrecio().equals("S"))holder.cboCumPrecio.setSelection(0);
+		  if(compromiso.cumplePrecio.equals(SI_DATO))holder.cboCumPrecio.setSelection(0);
 		  else holder.cboCumPrecio.setSelection(1);
 		  
-		  if(compromiso.getCumplePrecioCompromiso().equals("S"))holder.cboCumPrecioCmp.setSelection(0);
+		  if(compromiso.cumplePrecioActual.equals(SI_DATO))holder.cboCumPrecioCmp.setSelection(0);
 		  else holder.cboCumPrecioCmp.setSelection(1);
 	      
-	      holder.txViewSabores.setText(compromiso.getNumeroSabores());
+		  
+		  holder.txViewAccTrade.setAdapter(application.getAdapterAccionTrade(compromiso.listaAccionesTrade));
+
+	      if(holder.txViewAccTrade.getCount() > 1)
+	    	  holder.txViewAccTrade.setSelection(1);
 	      
-	      holder.txViewPuntos.setText(compromiso.getPuntosBonus());
+	      holder.txViewAccTrade.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+				@Override
+				public void onItemSelected(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					// TODO Auto-generated method stub
+					if(arg2 > 0){
+						compromiso.descAccionTrade = (((AccionTradeTO)arg0.getSelectedItem()).getDescripcion());
+						compromiso.codigoAccionTrade = (((AccionTradeTO)arg0.getSelectedItem()).getCodigo());
+					}else{
+						compromiso.descAccionTrade  = " ";
+						compromiso.codigoAccionTrade = "0";
+					}
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> arg0) {
+					// TODO Auto-generated method stub
+					compromiso.descAccionTrade  = " ";
+					compromiso.codigoAccionTrade = "0";
+				}
+				
+			});
+	      
+	      
+	      
 	      //holder.txViewAccTrade.setText(compromiso.getDescripcionAccion());
 	     	      
 	      holder.btnFecha = (ImageButton)convertView.findViewById(R.id.btnFecha);
@@ -517,7 +694,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 			    	    int mes;  
 			    	    int dia;
 			    	   
-					   String fecha = compromiso.getFechaCompromiso();
+					   String fecha = compromiso.fechaCompromiso;
 					   final Calendar c = Calendar.getInstance();
 					      if(fecha.length() >= 7)
 					      {
@@ -546,38 +723,33 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 			});	    	
 	    
 	      
-	      holder.btnProfit.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					Intent profit = new Intent(context, VerProfit_Activity.class);
-					profit.putExtra(VerProfit_Activity.ANIO, "");
-					profit.putExtra(VerProfit_Activity.MES, "");
-					profit.putExtra(VerProfit_Activity.CLIENTE, cliente.getCodigo());
-					profit.putExtra(VerProfit_Activity.ARTICULO, compromiso.getCodigoProducto());
-					profit.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, compromiso.getDescripcionProducto());
-					context.startActivity(profit);
-				}
-			});
+	      
 	      
 	      return convertView;
 	    }
 
 	    static class ViewHolder {   
+	    	TextView txViewPuntos;
+	    	ImageButton btnProfit;	    	
 	    	TextView txViewPro;
+	    	
 	    	TextView cboConcrecion;
 	    	Spinner cboConcrecionCmp;
+	    	
 	    	EditText txViewSOVI;
 	    	EditText txViewSOVICmp;
+	    	
 	    	Spinner cboCumPrecio;
 	    	Spinner cboCumPrecioCmp;
+	    	
 	    	TextView txViewSabores;
 	    	Spinner cboSaboresCmp;
-	    	TextView txViewPuntos;   	    	
+	    	   	    	
 	    	Spinner txViewAccTrade;    	
+	    	
 	    	EditText txEditFecha;
 	    	ImageButton btnFecha;
-	    	ImageButton btnProfit;
+	    	
 	    }
 	    
 	   

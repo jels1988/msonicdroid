@@ -23,10 +23,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
@@ -37,14 +37,15 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 	@InjectView(R.id.actionBar)
 	ActionBar mActionBar;
 	private EfficientAdapter adap;
-	private MyApplication application;
+	public static MyApplication application;
 	ClienteTO cliente;
 	UsuarioTO usuario;
 	@Inject	ConsultarSKUPrioritarioProxy consultarSKUPrioritarioProxy;
     @Inject GuardarNuevoDesarrolloProxy guardarNuevoDesarrolloProxy;
 	@InjectView(R.id.txtViewFecha) 		TextView txtViewFecha;
-	public final String RESPUESTA_SI = "S";
-	public final String RESPUESTA_NO = "N";
+	public static final String RESPUESTA_SI = "S";
+	public static final String RESPUESTA_NO = "N";
+	public static final String RESPUESTA_NO_TIENE = "T";
 	public final int ACCION_GUARDAR = 1;
 
 	@InjectResource(R.string.confirm_atras_title)
@@ -246,21 +247,32 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 
 				viewHolder.txViewSKU = (TextView) view
 						.findViewById(R.id.txViewSKU);
-				viewHolder.chkValActual = (CheckBox) view
+				viewHolder.chkValActual = (Spinner) view
 						.findViewById(R.id.chkValActual);
+				
+				viewHolder.chkValActual.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-				viewHolder.chkValActual
-						.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+					@Override
+					public void onItemSelected(AdapterView<?> arg0, View arg1,
+							int arg2, long arg3) {
+						// TODO Auto-generated method stub
+						SKUPresentacionTO skuPresentacion = (SKUPresentacionTO) viewHolder.chkValActual
+								.getTag();
+						if(arg2==0){
+							skuPresentacion.valorActual = RESPUESTA_NO;
+						}else if(arg2==1){
+							skuPresentacion.valorActual = RESPUESTA_SI;
+						}else{
+							skuPresentacion.valorActual = RESPUESTA_NO_TIENE ;
+						}
+					}
 
-							@Override
-							public void onCheckedChanged(
-									CompoundButton buttonView, boolean isChecked) {
-								// TODO Auto-generated method stub
-								SKUPresentacionTO skuPresentacion = (SKUPresentacionTO) viewHolder.chkValActual
-										.getTag();
-								skuPresentacion.seleccionado = isChecked;
-							}
-						});
+					@Override
+					public void onNothingSelected(AdapterView<?> arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
 
 				view.setTag(viewHolder);
 				viewHolder.chkValActual.setTag(this.skuPresentaciones
@@ -276,10 +288,17 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 			SKUPresentacionTO skuPresentacion = skuPresentaciones.get(position);
 
 			holder.txViewSKU.setText(skuPresentacion.getDescripcionSKU());
-			if (this.skuPresentaciones.get(position).seleccionado) {
-				holder.chkValActual.setChecked(true);
-			} else {
-				holder.chkValActual.setChecked(false);
+			
+			ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(application.getApplicationContext(),R.array.sku_estados,android.R.layout.simple_spinner_item);
+			adap.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+			holder.chkValActual.setAdapter(adap);
+		      
+			if (this.skuPresentaciones.get(position).valorActual.equalsIgnoreCase(RESPUESTA_NO)) {
+				holder.chkValActual.setSelection(0);
+			} else if (this.skuPresentaciones.get(position).valorActual.equalsIgnoreCase(RESPUESTA_SI)) {
+				holder.chkValActual.setSelection(1);
+			}else {
+				holder.chkValActual.setSelection(2);
 			}
 
 			return view;
@@ -287,7 +306,7 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 
 		static class ViewHolder {
 			TextView txViewSKU;
-			CheckBox chkValActual;
+			Spinner chkValActual;
 		}
 
 	}

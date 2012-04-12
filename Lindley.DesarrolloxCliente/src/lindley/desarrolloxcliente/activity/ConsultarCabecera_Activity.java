@@ -9,6 +9,7 @@ import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.DesarrolloClienteTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarCabeceraProxy;
 import roboguice.inject.InjectView;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ import android.widget.Filterable;
 import android.widget.TextView;
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
+
+import net.msonic.lib.ActivityUtil;
 import net.msonic.lib.ListActivityBase;
 
 public class ConsultarCabecera_Activity extends ListActivityBase {
@@ -31,6 +34,7 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 	@Inject ConsultarCabeceraProxy ConsultarCabeceraProxy;
 	private EfficientAdapter adap;
 	ClienteTO cliente;
+	public static MyApplication application;
 	
 	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
 	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
@@ -42,7 +46,7 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cabeceracliente_activity);        
         mActionBar.setTitle(R.string.cabeceracliente_activity_title);
-        MyApplication application = (MyApplication)getApplicationContext();
+        application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
 		mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
@@ -166,31 +170,37 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					//if(position == 0)
-					if(desarrolloTemp.getEstado().equals("A"))
+					
+					String estado;
+					int anio = 0, anioActual;    
+		    	    int mes = 0, mesActual;  
+		    	    int dia = 0, diaActual;
+		    	    String fecha = desarrolloTemp.getFecha();
+
+					Calendar c = Calendar.getInstance();
+		    	    anioActual = c.get(Calendar.YEAR);        
+			    	mesActual = c.get(Calendar.MONTH);        
+			    	diaActual = c.get(Calendar.DAY_OF_MONTH); 
+			    	
+			    	if(fecha.length() >= 10)
 					{
-						String estado;
-						int anio = 0, anioActual;    
-			    	    int mes = 0, mesActual;  
-			    	    int dia = 0, diaActual;
-			    	    String fecha = desarrolloTemp.getFecha();
-			    	    Calendar c = Calendar.getInstance();
-			    	    anioActual = c.get(Calendar.YEAR);        
-				    	mesActual = c.get(Calendar.MONTH);        
-				    	diaActual = c.get(Calendar.DAY_OF_MONTH); 
-				    	
-						if(fecha.length() >= 10)
-						{
-							anio =  Integer.parseInt(fecha.substring(0, 2));
-					    	mes  =  Integer.parseInt(fecha.substring(3, 5))-1;
-					    	dia  =  Integer.parseInt(fecha.substring(7));
-					    }
-						
+						anio =  Integer.parseInt(fecha.substring(0, 2));
+				    	mes  =  Integer.parseInt(fecha.substring(3, 5))-1;
+				    	dia  =  Integer.parseInt(fecha.substring(7));
+				    }
+			    	
+			    	application.anio = ActivityUtil.pad(anio);
+					application.mes = ActivityUtil.pad(mes+1);
+					application.dia = ActivityUtil.pad(dia+1);
+					
+					if(desarrolloTemp.getEstado().equals("A"))
+					{											
 						if(anio == anioActual && mes == mesActual && dia == diaActual)
 						{
 							estado = FLAG_OPEN_FECHA_ABIERTO;
 						}
 						else
-						{
+						{							
 							Intent compromisoOpen = new Intent(context, CompromisoPrincipalOpen_Resumen.class);
 							compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
 							compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.FLAG_FECHA, FLAG_OPEN_FECHA_CERRADA);

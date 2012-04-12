@@ -38,6 +38,7 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	@InjectView(R.id.txtViewCliente) TextView txtViewCliente;
 	private EfficientAdapter adap;
 	public static ClienteTO cliente;
+	MyApplication application;
 	
 	/** Called when the activity is first created. */
     @Override 
@@ -46,7 +47,7 @@ public class CompromisoClose_Activity extends ListActivityBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.compromisoclose_activity);        
 //        mActionBar.setTitle(R.string.compromiso_activity_title);
-        MyApplication application = (MyApplication)getApplicationContext();
+        application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
 		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
 //        mActionBar.setSubTitle(cliente.getNombre());
@@ -70,7 +71,7 @@ public class CompromisoClose_Activity extends ListActivityBase {
 			if (status == 0) {
 				List<CompromisoTO> compromisos = consultarCompromisoProxy
 						.getResponse().getListaCompromiso();
-				txtViewFecha.setText(compromisos.get(0).getFecha());
+				txtViewFecha.setText(application.dia + "/" + application.mes + "/" + application.anio);
 				adap = new EfficientAdapter(this, compromisos);
 				setListAdapter(adap);
 			}

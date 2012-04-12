@@ -12,8 +12,11 @@ import com.google.inject.Inject;
 import com.google.inject.Module;
 import com.google.inject.Singleton;
 
+import lindley.desarrolloxcliente.activity.CompromisoOpenFalse_Activity;
 import lindley.desarrolloxcliente.activity.CompromisoOpen_Activity;
+import lindley.desarrolloxcliente.activity.CompromisoPosicionOpenFalse_Activity;
 import lindley.desarrolloxcliente.activity.CompromisoPosicionOpen_Activity;
+import lindley.desarrolloxcliente.activity.CompromisoPresentacionOpenFalse_Activity;
 import lindley.desarrolloxcliente.activity.CompromisoPresentacionOpen_Activity;
 import lindley.desarrolloxcliente.dao.FotoDAO;
 import lindley.desarrolloxcliente.negocio.FotoBLL;
@@ -61,9 +64,18 @@ public class MyApplication extends RoboApplication {
 	public ArrayList<GuardarOportunidadTO> guardarOportunidades;
 	public String activosLindley = "";
 	public List<SKUPresentacionTO> guardarSKUPresentacion;
+	public String anio;
+	public String mes;
+	public String dia;
+	public InformacionAdicionalTO informacionAdicional;
+	public CompromisoPosicionOpenFalse_Activity.EfficientAdapter 	 posicionFalseAdapter;
+	public CompromisoPresentacionOpenFalse_Activity.EfficientAdapter presentacionFalseAdapter;
+	public CompromisoOpenFalse_Activity.EfficientAdapter 			 openFalseAdapter;
+		
+	
 	///-------------------
 	
-	private InformacionAdicionalTO informacionAdicional;
+	
 	
 	public ArrayList<PosicionCompromisoTO> listPosicionCompromiso;
 	public ArrayList<PresentacionCompromisoTO> listPresentacionCompromiso;
@@ -169,12 +181,5 @@ public class MyApplication extends RoboApplication {
 		this.oportunidades = oportunidades;
 	}
 
-	public InformacionAdicionalTO getInformacionAdicional() {
-		return informacionAdicional;
-	}
-
-	public void setInformacionAdicional(InformacionAdicionalTO informacionAdicional) {
-		this.informacionAdicional = informacionAdicional;
-	}
 
 }

@@ -12,12 +12,6 @@ public class UpdatePresentacionTO {
 		listaSKU = new ArrayList<UpdateSKUPresentacionTO>();
     }
 	
-	@SerializedName("REG")
-	public String codigoRegistro;
-
-	@SerializedName("TAG")
-	public String tipoAgrupacion;
-
 	@SerializedName("CVAR")
 	public String codigoVariable;       
 
@@ -26,8 +20,4 @@ public class UpdatePresentacionTO {
 
 	@SerializedName("FCM")
 	public String fechaCompromiso;
-
-	@SerializedName("CNF")
-	public String confirmacion;
-
 }
