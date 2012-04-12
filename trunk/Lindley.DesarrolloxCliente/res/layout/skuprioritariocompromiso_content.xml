@@ -23,19 +23,18 @@
                 android:gravity="left"
                 android:text="" />
 
-            <CheckBox
+            <TextView
                 android:id="@+id/chkValActual"
                 android:layout_width="40dip"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_gravity="center"
                 android:text="" />
 
-            <CheckBox
+            <Spinner
                 android:id="@+id/chkValComp"
                 android:layout_width="40dip"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:text="" />
+                android:layout_gravity="center_vertical|center_horizontal" />
 
         </TableRow>
 
