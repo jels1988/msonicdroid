@@ -1,32 +1,40 @@
 package lindley.desarrolloxcliente.activity;
 
 import java.util.List;
+
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
-import roboguice.inject.InjectExtra;
+import net.msonic.lib.ListActivityBase;
 import roboguice.inject.InjectView;
-import com.thira.examples.actionbar.widget.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import net.msonic.lib.ListActivityBase;
+
+import com.thira.examples.actionbar.widget.ActionBar;
 
 public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	private EfficientAdapter adap;
-	private MyApplication application;
+	public static MyApplication application;
 	ClienteTO cliente;
+		
+	public static final String RESPUESTA_SI = "S";
+	public static final String RESPUESTA_NO = "N";
+	public static final String RESPUESTA_NO_TIENE = "T";
 	
+	public static final String DATO_SI = "SI";
+	public static final String DATO_NO = "NO";
+	public static final String DATO_NO_TIENE = "NV";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,23 +77,30 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 				final ViewHolder viewHolder = new ViewHolder();
 				
 				viewHolder.txViewSKU = (TextView) view.findViewById(R.id.txViewSKU);
-				viewHolder.chkValActual = (CheckBox) view.findViewById(R.id.chkValActual);
-				viewHolder.chkValComp = (CheckBox) view.findViewById(R.id.chkValComp);
+				viewHolder.chkValActual = (TextView) view.findViewById(R.id.chkValActual);
+				viewHolder.chkValComp = (Spinner) view.findViewById(R.id.chkValComp);
 						    	
-				viewHolder.chkValComp.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-					
+				viewHolder.chkValComp.setOnItemSelectedListener(new OnItemSelectedListener() {
+
 					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					public void onItemSelected(AdapterView<?> arg0, View arg1,
+							int arg2, long arg3) {
 						// TODO Auto-generated method stub
 						SKUPresentacionCompromisoTO skuPresentacion = (SKUPresentacionCompromisoTO) viewHolder.chkValComp.getTag();
-						if(isChecked){							
-							skuPresentacion.setCompromiso("S");
+						if(arg2==0){
+							skuPresentacion.compromiso = RESPUESTA_NO;
 						}else{
-							skuPresentacion.setCompromiso("N");
+							skuPresentacion.compromiso = RESPUESTA_SI;
 						}
 					}
+
+					@Override
+					public void onNothingSelected(AdapterView<?> arg0) {
+						// TODO Auto-generated method stub
+						
+					}
 				});
-				
+								
 				view.setTag(viewHolder);
 				viewHolder.chkValComp.setTag(this.skuPresentaciones.get(position));
 			}else{
@@ -94,24 +109,34 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 			}
 			
 			ViewHolder holder = (ViewHolder) view.getTag();
+			ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(application.getApplicationContext(),R.array.confirmacion,android.R.layout.simple_spinner_item);
+			adap.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+			holder.chkValComp.setAdapter(adap);
 						 
-			holder.txViewSKU.setText(this.skuPresentaciones.get(position).getDescripcionSKU());
-			if(this.skuPresentaciones.get(position).getActual().compareToIgnoreCase("S") == 0)
+			holder.txViewSKU.setText(this.skuPresentaciones.get(position).descripcionSKU);
+						
+			
+			if(this.skuPresentaciones.get(position).actual.compareToIgnoreCase(RESPUESTA_SI) == 0)
 			{
-				holder.chkValActual.setChecked(true);
+				holder.chkValActual.setText(DATO_SI);
+			}
+			else if(this.skuPresentaciones.get(position).actual.compareToIgnoreCase(RESPUESTA_NO) == 0)
+			{
+				holder.chkValActual.setText(DATO_NO);
 			}
 			else
 			{
-				holder.chkValActual.setChecked(false);
+				holder.chkValActual.setText(DATO_NO_TIENE);
 			}
 			
-			if(this.skuPresentaciones.get(position).getCompromiso().compareToIgnoreCase("S") == 0)
+			
+			if(this.skuPresentaciones.get(position).compromiso.compareToIgnoreCase(RESPUESTA_SI) == 0)
 			{
-				holder.chkValComp.setChecked(true);
+				holder.chkValComp.setSelection(1);
 			}
 			else
 			{
-				holder.chkValComp.setChecked(false);
+				holder.chkValComp.setSelection(0);
 			}
 			
 			return view;
@@ -119,8 +144,8 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 
 	    static class ViewHolder {   
 	    	TextView txViewSKU;
-	    	CheckBox chkValActual;
-	    	CheckBox chkValComp;
+	    	TextView chkValActual;
+	    	Spinner chkValComp;
 	    }
 	    
 	  }    

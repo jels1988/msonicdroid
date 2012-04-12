@@ -4,9 +4,9 @@ import java.util.List;
 
 import roboguice.inject.InjectResource;
 import lindley.desarrolloxcliente.R;
-import lindley.desarrolloxcliente.to.CompromisoTO;
-import lindley.desarrolloxcliente.to.UpdatePosicionTO;
-import lindley.desarrolloxcliente.to.UpdatePresentacionTO;
+import lindley.desarrolloxcliente.to.CerrarInventarioTO;
+import lindley.desarrolloxcliente.to.CerrarPosicionTO;
+import lindley.desarrolloxcliente.to.CerrarPresentacionTO;
 import lindley.desarrolloxcliente.ws.bean.CerrarCompromisoRequest;
 import lindley.desarrolloxcliente.ws.bean.CerrarCompromisoResponse;
 import net.msonic.lib.JSONHelper;
@@ -18,29 +18,13 @@ public class CerrarCompromisoProxy extends ProxyBase<CerrarCompromisoResponse> {
 	
 	public String codigoUsuario;
 	
-	private String codigoCabecera;
+	public String codigoCabecera;
 	
-	private List<CompromisoTO> compromisos;
+	public List<CerrarInventarioTO> listaInventarioCompromiso;
 	
-	public List<UpdatePosicionTO> listaPosicionCompromiso;
+	public List<CerrarPosicionTO> listaPosicionCompromiso;
 	
-	public List<UpdatePresentacionTO> listaPresentacionCompromiso;
-
-	public List<CompromisoTO> getCompromisos() {
-		return compromisos;
-	}
-
-	public void setCompromisos(List<CompromisoTO> compromisos) {
-		this.compromisos = compromisos;
-	}
-
-	public String getCodigoCabecera() {
-		return codigoCabecera;
-	}
-
-	public void setCodigoCabecera(String codigoCabecera) {
-		this.codigoCabecera = codigoCabecera;
-	}
+	public List<CerrarPresentacionTO> listaPresentacionCompromiso;
 	
 	@Override
 	protected String getUrl() {
@@ -52,8 +36,8 @@ public class CerrarCompromisoProxy extends ProxyBase<CerrarCompromisoResponse> {
 	protected String requestText() {
 		// TODO Auto-generated method stub
 		CerrarCompromisoRequest cerrarCompromisoRequest = new CerrarCompromisoRequest();
-		cerrarCompromisoRequest.setCodigoCabecera(this.codigoCabecera);
-		cerrarCompromisoRequest.setCompromisos(this.compromisos);
+		cerrarCompromisoRequest.codigoCabecera = this.codigoCabecera;
+		cerrarCompromisoRequest.listaInventarioCompromiso = this.listaInventarioCompromiso;
 		cerrarCompromisoRequest.listaPosicionCompromiso = this.listaPosicionCompromiso;
 		cerrarCompromisoRequest.listaPresentacionCompromiso = this.listaPresentacionCompromiso;
 		cerrarCompromisoRequest.codigoUsuario = this.codigoUsuario;

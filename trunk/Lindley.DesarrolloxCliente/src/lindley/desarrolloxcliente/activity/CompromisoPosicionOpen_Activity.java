@@ -8,12 +8,19 @@ import java.util.List;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.FotoBLL;
+import lindley.desarrolloxcliente.to.CerrarInventarioTO;
+import lindley.desarrolloxcliente.to.CerrarPosicionTO;
+import lindley.desarrolloxcliente.to.CerrarPresentacionTO;
+import lindley.desarrolloxcliente.to.CerrarSKUPresentacionTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.CompromisoPosicionTO;
 import lindley.desarrolloxcliente.to.CompromisoTO;
+import lindley.desarrolloxcliente.to.InformacionAdicionalTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
+import lindley.desarrolloxcliente.to.UpdateInformacionAdicionalTO;
+import lindley.desarrolloxcliente.to.UpdateInventarioTO;
 import lindley.desarrolloxcliente.to.UpdatePosicionTO;
 import lindley.desarrolloxcliente.to.UpdatePresentacionTO;
 import lindley.desarrolloxcliente.to.UpdateSKUPresentacionTO;
@@ -111,9 +118,8 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				List<PosicionCompromisoTO> posiciones = consultarPosicionProxy
 						.getResponse().getListaCompromisos();	
 				application.posicionAdapter =new EfficientAdapter(this, posiciones); 
-				final Calendar c = Calendar.getInstance();      
 				if(posiciones.size()>0)
-					txtViewFecha.setText(pad(c.get(Calendar.DAY_OF_MONTH)) + "/" + pad((c.get(Calendar.MONTH) + 1)) + "/" + c.get(Calendar.YEAR));
+					txtViewFecha.setText(application.dia+ "/" + application.mes + "/" + application.anio);
 				setListAdapter(application.posicionAdapter);
 			}
 			else  {
@@ -169,17 +175,45 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 			if(application.openAdapter == null || application.openAdapter.detalles.isEmpty())
 			{				
 				application.openAdapter = new CompromisoOpen_Activity.EfficientAdapter(this, new ArrayList<CompromisoTO>());
+				for(CompromisoTO comp : application.openAdapter.detalles)
+				{
+					if(Integer.parseInt(comp.sovi)<=0 && Integer.parseInt(comp.soviActual)<=0)
+					{
+						showToast("Los valores de SOVI deben ser mayores a 0");
+						return false;
+					}
+				}
 				openAdapterVacio = true;
+				if(openAdapterVacio)
+				{
+					showToast("Debe editar valores de la pestaña inventario.");
+					return true;
+				}
 			}
 			if(application.posicionAdapter == null || application.posicionAdapter.posiciones.isEmpty())
 			{				
 				application.posicionAdapter = new EfficientAdapter(this, new ArrayList<PosicionCompromisoTO>());
 				posicionAdapterVacio = true;
+				if(posicionAdapterVacio)
+				{
+					showToast("Debe editar valores de la pestaña posición.");
+					return true;
+				}
 			}
 			if(application.presentacionAdapter == null || application.presentacionAdapter.detalles.isEmpty())
 			{
 				application.presentacionAdapter = new CompromisoPresentacionOpen_Activity.EfficientAdapter(this, new ArrayList<PresentacionCompromisoTO>());
 				presentacionAdapterVacio = true;
+				if(presentacionAdapterVacio)
+				{
+					showToast("Debe editar valores de la pestaña presentación.");
+					return true;
+				}
+			}
+			if(application.informacionAdicional == null)
+			{
+				showToast("Debe editar valores de la pestaña combos.");
+				return true;
 			}
 				
        	}
@@ -197,68 +231,127 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 
 	@Override
    	protected void process(int accion) {
-		List<UpdatePosicionTO> listUpdatePosicionTO = new ArrayList<UpdatePosicionTO>();
-   		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
-		{
-   			UpdatePosicionTO update = new UpdatePosicionTO();
-   			update.accionCompromiso = posicion.getAccionCompromiso();
-   			if(update.accionCompromiso.equalsIgnoreCase("")) update.accionCompromiso = " ";
-   			update.codigoRegistro = codigoGestion; 
-   			update.codigoVariable = posicion.getCodigoVariable();
-   			update.confirmacion = posicion.getConfirmacion();
-   			update.fechaCompromiso = posicion.getFechaCompromiso();
-   			if(application.listCompromiso == null)
-   				application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
-      		update.listCompromisos = application.listCompromiso;
-   			update.tipoAgrupacion = TIPO_POSICION;
-   			update.fotoInicial = posicion.getFotoInicial();
-   			update.fotoFinal = posicion.getFotoFinal();
-   			listUpdatePosicionTO.add(update);
-		}
-   		
-   		List<UpdatePresentacionTO> listUpdatePresentacionTO = new ArrayList<UpdatePresentacionTO>();
-		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
-		{
-			UpdatePresentacionTO update = new UpdatePresentacionTO();
-			update.codigoRegistro = codigoGestion;
-			update.tipoAgrupacion = TIPO_PRESENTACION;
-			update.codigoVariable = presentacion.getCodigoVariable();
-			update.confirmacion = presentacion.getConfirmacion();
-			update.fechaCompromiso = presentacion.getFechaCompromiso();
-			List<UpdateSKUPresentacionTO> skucompromisos = new ArrayList<UpdateSKUPresentacionTO>();
-			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  presentacion.getListaSKU())
-			{
-				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
-				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.getCodigoSKU();
-				updateSKUPresentacionTO.compromiso = skupresentacionCompromisoTO.getCompromiso();
-				if(updateSKUPresentacionTO.compromiso.equalsIgnoreCase(" ")) updateSKUPresentacionTO.compromiso = NO;
-				updateSKUPresentacionTO.confirmacion = skupresentacionCompromisoTO.getConfirmacion();
-				if(updateSKUPresentacionTO.confirmacion.equalsIgnoreCase(" ")) updateSKUPresentacionTO.confirmacion = NO;
-				skucompromisos.add(updateSKUPresentacionTO);
-			}
-			update.listaSKU = skucompromisos;    			
-			listUpdatePresentacionTO.add(update);
-		}
-				
-       	if(accion == ACCION_CERRAR)
-       	{       		
-    		cerrarCompromisoProxy.listaPosicionCompromiso = listUpdatePosicionTO;
-    		cerrarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
-    		cerrarCompromisoProxy.setCompromisos(application.openAdapter.detalles);
-       		cerrarCompromisoProxy.setCodigoCabecera(codigoGestion);
-       		UsuarioTO user = application.getUsuarioTO();
+    			
+    	if(accion == ACCION_CERRAR)
+    	{    		
+    		List<CerrarInventarioTO> listCerrarCompromisoTO = new ArrayList<CerrarInventarioTO>();
+       		for(CompromisoTO compromiso : application.openFalseAdapter.detalles)
+    		{
+       			CerrarInventarioTO cerrar = new CerrarInventarioTO();
+       			cerrar.codigoProducto = compromiso.codigoProducto;
+       			cerrar.cumplio = compromiso.cumplio;
+       			listCerrarCompromisoTO.add(cerrar);
+    		}
+       		
+       		List<CerrarPosicionTO> listCerrarPosicionTO = new ArrayList<CerrarPosicionTO>();
+       		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
+    		{
+       			CerrarPosicionTO cerrar = new CerrarPosicionTO();
+       			cerrar.codigoVariable = posicion.codigoVariable;
+       			cerrar.cumplio = posicion.cumplio;
+       			listCerrarPosicionTO.add(cerrar);
+    		}
+       		
+       		List<CerrarPresentacionTO> listCerrarPresentacionTO = new ArrayList<CerrarPresentacionTO>();
+    		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
+    		{
+    			CerrarPresentacionTO cerrar = new CerrarPresentacionTO();
+    			cerrar.codigoVariable = presentacion.codigoVariable;
+    			cerrar.cumplio = presentacion.cumplio;
+    			
+    			List<CerrarSKUPresentacionTO> listCerrarSKUPresentacionTO = new ArrayList<CerrarSKUPresentacionTO>();
+    			for(SKUPresentacionCompromisoTO sku : presentacion.listaSKU)
+    			{
+    				CerrarSKUPresentacionTO cerrarSku = new CerrarSKUPresentacionTO();
+    				cerrarSku.codigoSKU = sku.codigoSKU;
+    				cerrarSku.cumplio = sku.cumplio;
+    				listCerrarSKUPresentacionTO.add(cerrarSku);
+    			}
+    			cerrar.listaSKU = listCerrarSKUPresentacionTO;
+    			
+    			listCerrarPresentacionTO.add(cerrar);
+    		}
+    		
+    		cerrarCompromisoProxy.listaPosicionCompromiso = listCerrarPosicionTO;
+    		cerrarCompromisoProxy.listaPresentacionCompromiso = listCerrarPresentacionTO;
+    		cerrarCompromisoProxy.listaInventarioCompromiso = listCerrarCompromisoTO;
+    		cerrarCompromisoProxy.codigoCabecera = codigoGestion;
+    		UsuarioTO user = application.getUsuarioTO();
     		cerrarCompromisoProxy.codigoUsuario = user.getCodigoSap();
-       		cerrarCompromisoProxy.execute();
-       	}
-       	else if(accion == ACCION_ACTUALIZAR)
-       	{    		
+    		cerrarCompromisoProxy.execute();
+    	}
+    	else if(accion == ACCION_ACTUALIZAR)
+    	{    		
+    		
+    		List<UpdateInventarioTO> listUpdateCompromisoTO = new ArrayList<UpdateInventarioTO>();
+       		for(CompromisoTO compromiso : application.openAdapter.detalles)
+    		{
+       			UpdateInventarioTO update = new UpdateInventarioTO();
+       			update.codigoProducto = compromiso.codigoProducto;
+       			update.concrecionActual = compromiso.concrecionActual;
+       			update.sovi = compromiso.sovi;
+       			update.soviActual = compromiso.soviActual;
+       			update.cumplePrecio = compromiso.cumplePrecio;
+       			update.cumplePrecioActual = compromiso.cumplePrecioActual;
+       			update.numeroSaboresActual = compromiso.numeroSaboresActual;
+       			update.fechaCompromiso = compromiso.fechaCompromiso;
+       			update.codigoAccionTrade = compromiso.codigoAccionTrade;
+       			update.descAccionTrade = compromiso.descAccionTrade;
+       			listUpdateCompromisoTO.add(update);
+    		}
+       		
+       		List<UpdatePosicionTO> listUpdatePosicionTO = new ArrayList<UpdatePosicionTO>();
+       		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
+    		{
+       			UpdatePosicionTO update = new UpdatePosicionTO();
+       			update.accionCompromiso = posicion.observacion;
+       			update.codigoVariable = posicion.codigoVariable;
+       			update.fechaCompromiso = posicion.fechaCompromiso;
+       			if(application.listCompromiso == null)
+       			 application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
+       			update.listCompromisos = application.listCompromiso;
+       			update.fotoInicial = posicion.fotoInicial;
+       			listUpdatePosicionTO.add(update);
+    		}
+       		
+       		List<UpdatePresentacionTO> listUpdatePresentacionTO = new ArrayList<UpdatePresentacionTO>();
+    		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
+    		{
+    			UpdatePresentacionTO update = new UpdatePresentacionTO();
+    			update.codigoVariable = presentacion.codigoVariable;
+    			update.fechaCompromiso = presentacion.fechaCompromiso;
+    			
+    			List<UpdateSKUPresentacionTO> skucompromisos = new ArrayList<UpdateSKUPresentacionTO>();
+    			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  presentacion.listaSKU)
+    			{
+    				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
+    				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.codigoSKU;
+    				    				
+    				updateSKUPresentacionTO.compromiso = skupresentacionCompromisoTO.compromiso;
+    				if(updateSKUPresentacionTO.compromiso.equalsIgnoreCase(" ")) updateSKUPresentacionTO.compromiso = NO;
+    				
+    				skucompromisos.add(updateSKUPresentacionTO);
+    			}
+    			update.listaSKU = skucompromisos;    			
+    			listUpdatePresentacionTO.add(update);
+    		}
+    		
+    		InformacionAdicionalTO informacion = application.informacionAdicional;
+    		UpdateInformacionAdicionalTO update = new UpdateInformacionAdicionalTO();
+    		update.comboMS = informacion.getComboMS();
+    		update.comboSS = informacion.getComboSS();
+    		update.observacion = informacion.getObservacion();
+    		update.observacionSS = informacion.getObservacionSS();
+    		
     		actualizarCompromisoProxy.listaPosicionCompromiso = listUpdatePosicionTO;
     		actualizarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
-       		actualizarCompromisoProxy.setCompromisos(application.openAdapter.detalles);
+       		actualizarCompromisoProxy.listaInventarioCompromiso = listUpdateCompromisoTO;
+       		actualizarCompromisoProxy.updateInformacionAdicionalTO = update;
+       		actualizarCompromisoProxy.codigoCabecera = codigoGestion;
        		actualizarCompromisoProxy.execute();
-       	}
-       		
-   	}
+    	}
+    		
+	}
     
     protected void processOk(int accion) {
    		// TODO Auto-generated method stub
@@ -365,12 +458,12 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 	public void savePhoto(int accion){
 		if(TAKE_PHOTO_INICIAL_CODE==accion)
 		{
-			this.posicionTO.setFotoInicial(file_name);
+			this.posicionTO.fotoInicial = file_name;
 			fotoBLL.save(file_name);
 		}
 		else
 		{
-			this.posicionTO.setFotoFinal(file_name);
+			this.posicionTO.fotoInicial = file_name;
 			fotoBLL.save(file_name);
 		}
 	}
@@ -388,7 +481,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 
 					EfficientAdapter.txEditFecha.setText(String.valueOf(pad(dayOfMonth)) + "/"+ String.valueOf(pad(monthOfYear+1)) + "/" + String.valueOf(year));
 		    	  if(EfficientAdapter.compromisoTO!=null){
-		    		  EfficientAdapter.compromisoTO.setFechaCompromiso(String.valueOf(year) + String.valueOf(pad(monthOfYear+1)) + String.valueOf(pad(dayOfMonth)) );
+		    		  EfficientAdapter.compromisoTO.fechaCompromiso = (String.valueOf(year) + String.valueOf(pad(monthOfYear+1)) + String.valueOf(pad(dayOfMonth)) );
 		    	  }
 			}
 		};
@@ -431,7 +524,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 					public void onFocusChange(View v, boolean hasFocus) {
 						// TODO Auto-generated method stub
 						PosicionCompromisoTO compromiso = (PosicionCompromisoTO) viewHolder.txViewAccComp.getTag();
-						compromiso.setAccionCompromiso(viewHolder.txViewAccComp.getText().toString());
+						compromiso.observacion = viewHolder.txViewAccComp.getText().toString();
 					}
 				});
 				
@@ -450,13 +543,12 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 		    	  holder.TextViewRpsta.setText("SI");
 		      else
 		    	  holder.TextViewRpsta.setText("NO");
-//			holder.txViewVariable.setText(posicionTO.getDescripcionVariable());
-			holder.txViewAccComp.setText(posicionTO.getAccionCompromiso());
-			holder.txViewRed.setText(posicionTO.getRed());
-			holder.txViewMaximo.setText(posicionTO.getPtoMaximo());
+			holder.txViewAccComp.setText(posicionTO.observacion);
+			holder.txViewRed.setText(posicionTO.red);
+			holder.txViewMaximo.setText(posicionTO.ptoMaximo);
 //			holder.txViewDiferencia.setText(posicionTO.getDiferencia());
-			holder.txViewPuntos.setText(posicionTO.getPuntosSugeridos());
-			if(posicionTO.getCodigoVariable().compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
+			holder.txViewPuntos.setText(posicionTO.puntosSugeridos);
+			if(posicionTO.codigoVariable.compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
 			{
 				holder.btnFotoExito.setText(R.string.btnExitoText);
 			}
@@ -471,7 +563,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 			    	    int mes;  
 			    	    int dia;
 			    	   
-					   String fecha = posicionTO.getFechaCompromiso();
+					   String fecha = posicionTO.fechaCompromiso;
 					   final Calendar c = Calendar.getInstance();
 					   if(fecha.length() >= 7)
 					      {
@@ -504,11 +596,11 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					if((posicionTO.getFotoInicial()==null)||(posicionTO.getFotoInicial().compareTo("")==0)){
+					if((posicionTO.fotoInicial==null)||(posicionTO.fotoInicial.compareTo("")==0)){
 						((CompromisoPosicionOpen_Activity)context).takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionTO);
 					}else{
 						Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
-						intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.getFotoInicial());
+						intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.fotoInicial);
 						context.startActivity(intent);
 				    }						
 			     }
@@ -520,9 +612,9 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					if(posicionTO.getCodigoVariable().compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
+					if(posicionTO.codigoVariable.compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)
 					{
-						application.listCompromiso = posicionTO.getListCompromisos();
+						application.listCompromiso = posicionTO.listCompromisos;
 						if(application.listCompromiso == null)
 							application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
 						Intent intent = new Intent("lindley.desarrolloxcliente.vercompromisosopen");

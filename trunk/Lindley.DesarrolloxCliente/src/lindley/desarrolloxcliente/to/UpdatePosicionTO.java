@@ -12,12 +12,6 @@ public class UpdatePosicionTO {
 		listCompromisos = new ArrayList<CompromisoPosicionTO>();
     }
 	
-	@SerializedName("REG")
-	public String codigoRegistro;
-
-	@SerializedName("TAG")
-	public String tipoAgrupacion;
-
 	@SerializedName("CVAR")
 	public String codigoVariable;
 
@@ -29,13 +23,8 @@ public class UpdatePosicionTO {
 
 	@SerializedName("FCM")
 	public String fechaCompromiso;
-
-	@SerializedName("CNF")
-	public String confirmacion;
 	
 	@SerializedName("FINI")
 	public String fotoInicial;
 	
-	@SerializedName("FFIN")
-	public String fotoFinal;
 }

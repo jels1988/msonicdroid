@@ -97,7 +97,7 @@ public class CompromisoOpenFalse_Activity extends ListActivityBase {
     	inicializarRecursos();
     	compromisos = new ArrayList<CompromisoTO>();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.compromisoopen_activity);        
+        setContentView(R.layout.compromisoopenfalse_activity);        
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
 		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());

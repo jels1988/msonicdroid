@@ -2,9 +2,9 @@ package lindley.desarrolloxcliente.ws.bean;
 
 import java.util.List;
 
-import lindley.desarrolloxcliente.to.CompromisoTO;
-import lindley.desarrolloxcliente.to.UpdatePosicionTO;
-import lindley.desarrolloxcliente.to.UpdatePresentacionTO;
+import lindley.desarrolloxcliente.to.CerrarInventarioTO;
+import lindley.desarrolloxcliente.to.CerrarPosicionTO;
+import lindley.desarrolloxcliente.to.CerrarPresentacionTO;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -14,30 +14,14 @@ public class CerrarCompromisoRequest {
 	public String codigoUsuario;
 	
 	@SerializedName("COD")
-	private String codigoCabecera;
-
-	public String getCodigoCabecera() {
-		return codigoCabecera;
-	}
-
-	public void setCodigoCabecera(String codigoCabecera) {
-		this.codigoCabecera = codigoCabecera;
-	}
+	public String codigoCabecera;
 	
 	@SerializedName("COM")
-	private List<CompromisoTO> compromisos;
+	public List<CerrarInventarioTO> listaInventarioCompromiso;
 
 	@SerializedName("POS")
-	public List<UpdatePosicionTO> listaPosicionCompromiso;
+	public List<CerrarPosicionTO> listaPosicionCompromiso;
 
 	@SerializedName("PRE")
-	public List<UpdatePresentacionTO> listaPresentacionCompromiso;
-	        
-	public List<CompromisoTO> getCompromisos() {
-		return compromisos;
-	}
-
-	public void setCompromisos(List<CompromisoTO> compromisos) {
-		this.compromisos = compromisos;
-	}
+	public List<CerrarPresentacionTO> listaPresentacionCompromiso;
 }

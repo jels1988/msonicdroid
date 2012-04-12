@@ -11,7 +11,7 @@ public class SKUPresentacionTO {
 	private String descripcionSKU;
 	
 	@SerializedName("SLC")
-	public boolean seleccionado;
+	public String valorActual;
 	
 
 	public String getCodigoSKU() {

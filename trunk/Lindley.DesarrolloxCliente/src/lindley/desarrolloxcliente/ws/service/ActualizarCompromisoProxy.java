@@ -3,7 +3,8 @@ package lindley.desarrolloxcliente.ws.service;
 import java.util.List;
 import roboguice.inject.InjectResource;
 import lindley.desarrolloxcliente.R;
-import lindley.desarrolloxcliente.to.CompromisoTO;
+import lindley.desarrolloxcliente.to.UpdateInformacionAdicionalTO;
+import lindley.desarrolloxcliente.to.UpdateInventarioTO;
 import lindley.desarrolloxcliente.to.UpdatePosicionTO;
 import lindley.desarrolloxcliente.to.UpdatePresentacionTO;
 import lindley.desarrolloxcliente.ws.bean.ActualizarCompromisoRequest;
@@ -15,20 +16,16 @@ public class ActualizarCompromisoProxy extends ProxyBase<ActualizarCompromisoRes
 
 	@InjectResource(R.string.urlwsDesarrolloxCliente)protected String urlWS;
 	
-	private List<CompromisoTO> compromisos;
+	public List<UpdateInventarioTO> listaInventarioCompromiso;
 	
 	public List<UpdatePosicionTO> listaPosicionCompromiso;
 	
 	public List<UpdatePresentacionTO> listaPresentacionCompromiso;
+	
+	public UpdateInformacionAdicionalTO updateInformacionAdicionalTO;
 
-	public List<CompromisoTO> getCompromisos() {
-		return compromisos;
-	}
-
-	public void setCompromisos(List<CompromisoTO> compromisos) {
-		this.compromisos = compromisos;
-	}
-
+	public String codigoCabecera;
+	
 	@Override
 	protected String getUrl() {
 		// TODO Auto-generated method stub
@@ -39,9 +36,11 @@ public class ActualizarCompromisoProxy extends ProxyBase<ActualizarCompromisoRes
 	protected String requestText() {
 		// TODO Auto-generated method stub
 		ActualizarCompromisoRequest actualizarCompromisoRequest = new ActualizarCompromisoRequest();
-		actualizarCompromisoRequest.setCompromisos(this.compromisos);
+		actualizarCompromisoRequest.listaInventarioCompromiso = this.listaInventarioCompromiso;
 		actualizarCompromisoRequest.listaPosicionCompromiso = this.listaPosicionCompromiso;
 		actualizarCompromisoRequest.listaPresentacionCompromiso = this.listaPresentacionCompromiso;
+		actualizarCompromisoRequest.updateInformacionAdicionalTO = this.updateInformacionAdicionalTO;
+		actualizarCompromisoRequest.codigoCabecera = this.codigoCabecera;
 		String request = JSONHelper.serializar(actualizarCompromisoRequest);
 		return request;
 	}
