@@ -5,13 +5,13 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
-import lindley.desarrolloxcliente.activity.CompromisoPosicionOpen_Activity.EfficientAdapter;
 import lindley.desarrolloxcliente.to.CerrarInventarioTO;
 import lindley.desarrolloxcliente.to.CerrarPosicionTO;
 import lindley.desarrolloxcliente.to.CerrarPresentacionTO;
 import lindley.desarrolloxcliente.to.CerrarSKUPresentacionTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.CompromisoTO;
+import lindley.desarrolloxcliente.to.InformacionAdicionalCompromisoTO;
 import lindley.desarrolloxcliente.to.InformacionAdicionalTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
@@ -19,6 +19,7 @@ import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
+import lindley.desarrolloxcliente.ws.service.ConsultarInformacionComboProxy;
 import lindley.desarrolloxcliente.ws.service.GuardarDesarrolloProxy;
 import net.msonic.lib.ActivityBase;
 import net.msonic.lib.MessageBox;
@@ -36,8 +37,7 @@ import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
 public class InformacionAdicionalFalse_Activity extends ActivityBase {
-	private final String AGRUPACION_INVENTARIO = "1";
-	private final String OPORTUNIDAD_DESARROLLADOR_ABIERTO = "A";
+	
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	ClienteTO cliente;
 	UsuarioTO usuario;
@@ -61,6 +61,7 @@ public class InformacionAdicionalFalse_Activity extends ActivityBase {
 	
 	@Inject CerrarCompromisoProxy 	  cerrarCompromisoProxy;
 	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
+	@Inject ConsultarInformacionComboProxy consultarInformacionComboProxy;
 	
 	public static final String COD_GESTION = "codGestion";
 	@InjectExtra(COD_GESTION) String codigoGestion;
@@ -87,20 +88,50 @@ public class InformacionAdicionalFalse_Activity extends ActivityBase {
 	@Override
 	protected void process() {
 		// TODO Auto-generated method stub
-		super.process();
+		consultarInformacionComboProxy.codigoRegistro = codigoGestion;
+		consultarInformacionComboProxy.execute();
 	}
 	
 	@Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
+		boolean isExito = consultarInformacionComboProxy.isExito();
+		if (isExito) {
+			int status = consultarInformacionComboProxy.getResponse().getStatus();
+			if (status == 0) {
+				InformacionAdicionalCompromisoTO informacion = consultarInformacionComboProxy.getResponse().informacion;
+				txtObs.setText(informacion.observacion);
+				txtObsSS.setText(informacion.observacionSS);
+				if(informacion.comboSS.equalsIgnoreCase("S"))
+				{
+					radSSSi.setChecked(true);
+				}
+				else
+				{
+					radSSNo.setChecked(true);
+				}
+				if(informacion.comboMS.equalsIgnoreCase("S"))
+				{
+					radMSSi.setChecked(true);
+				}
+				else
+				{
+					radMSNo.setChecked(true);
+				}
+			}
+			else
+			{
+				showToast(consultarInformacionComboProxy.getResponse().getDescripcion());
+			}
+		}
 		super.processOk();
 	}
 	
 	@Override
 	protected void processError() {
 		// TODO Auto-generated method stub
-		super.processError();
 		showToast(error_generico_process);
+		super.processError();
 	}
 	
 	 public void btnCancelar_click(View view)
@@ -130,55 +161,43 @@ public class InformacionAdicionalFalse_Activity extends ActivityBase {
 	    }
 		
 	    @Override
-		protected boolean executeAsyncPre(int accion) {
+	    protected boolean executeAsyncPre(int accion) {
 			// TODO Auto-generated method stub
 			boolean openAdapterVacio = false;
 			boolean posicionAdapterVacio = false;
 			boolean presentacionAdapterVacio = false;
+		
 			if(accion == ACCION_CERRAR)
 	       	{    
-				if(application.openAdapter == null || application.openAdapter.detalles.isEmpty())
+				if(application.openFalseAdapter == null || application.openFalseAdapter.detalles.isEmpty())
 				{				
-					application.openAdapter = new CompromisoOpen_Activity.EfficientAdapter(this, new ArrayList<CompromisoTO>());
-					for(CompromisoTO comp : application.openAdapter.detalles)
-					{
-						if(Integer.parseInt(comp.sovi)<=0 && Integer.parseInt(comp.soviActual)<=0)
-						{
-							showToast("Los valores de SOVI deben ser mayores a 0");
-							return false;
-						}
-					}
+					application.openFalseAdapter = new CompromisoOpenFalse_Activity.EfficientAdapter(this, new ArrayList<CompromisoTO>());
 					openAdapterVacio = true;
 					if(openAdapterVacio)
 					{
 						showToast("Debe editar valores de la pestaña inventario.");
-						return true;
+						return false;
 					}
 				}
-				if(application.posicionAdapter == null || application.posicionAdapter.posiciones.isEmpty())
+				if(application.posicionFalseAdapter == null || application.posicionFalseAdapter.posiciones.isEmpty())
 				{				
-					application.posicionAdapter = new EfficientAdapter(this, new ArrayList<PosicionCompromisoTO>());
+					application.posicionFalseAdapter = new CompromisoPosicionOpenFalse_Activity.EfficientAdapter(this, new ArrayList<PosicionCompromisoTO>());
 					posicionAdapterVacio = true;
 					if(posicionAdapterVacio)
 					{
 						showToast("Debe editar valores de la pestaña posición.");
-						return true;
+						return false;
 					}
 				}
-				if(application.presentacionAdapter == null || application.presentacionAdapter.detalles.isEmpty())
+				if(application.presentacionFalseAdapter == null || application.presentacionFalseAdapter.detalles.isEmpty())
 				{
-					application.presentacionAdapter = new CompromisoPresentacionOpen_Activity.EfficientAdapter(this, new ArrayList<PresentacionCompromisoTO>());
+					application.presentacionFalseAdapter = new CompromisoPresentacionOpenFalse_Activity.EfficientAdapter(this, new ArrayList<PresentacionCompromisoTO>());
 					presentacionAdapterVacio = true;
 					if(presentacionAdapterVacio)
 					{
 						showToast("Debe editar valores de la pestaña presentación.");
-						return true;
+						return false;
 					}
-				}
-				if(application.informacionAdicional == null)
-				{
-					showToast("Debe editar valores de la pestaña combos.");
-					return true;
 				}
 					
 	       	}
@@ -193,8 +212,10 @@ public class InformacionAdicionalFalse_Activity extends ActivityBase {
 				return true;
 			}
 		}
+	    
+	    @Override
 	    protected void process(int accion) {
-			
+	    	
 	    	if(accion == ACCION_CERRAR)
 	    	{    		
 	    		List<CerrarInventarioTO> listCerrarCompromisoTO = new ArrayList<CerrarInventarioTO>();
@@ -211,16 +232,17 @@ public class InformacionAdicionalFalse_Activity extends ActivityBase {
 	    		}
 	       		
 	       		List<CerrarPosicionTO> listCerrarPosicionTO = new ArrayList<CerrarPosicionTO>();
-	       		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
+	       		for(PosicionCompromisoTO posicion : application.posicionFalseAdapter.posiciones)
 	    		{
 	       			CerrarPosicionTO cerrar = new CerrarPosicionTO();
 	       			cerrar.codigoVariable = posicion.codigoVariable;
 	       			cerrar.cumplio = posicion.cumplio;
+	       			cerrar.fotoFinal = posicion.fotoFinal;
 	       			listCerrarPosicionTO.add(cerrar);
 	    		}
 	       		
 	       		List<CerrarPresentacionTO> listCerrarPresentacionTO = new ArrayList<CerrarPresentacionTO>();
-	    		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
+	    		for(PresentacionCompromisoTO presentacion : application.presentacionFalseAdapter.detalles)
 	    		{
 	    			CerrarPresentacionTO cerrar = new CerrarPresentacionTO();
 	    			cerrar.codigoVariable = presentacion.codigoVariable;
@@ -247,7 +269,7 @@ public class InformacionAdicionalFalse_Activity extends ActivityBase {
 	    		cerrarCompromisoProxy.codigoUsuario = user.getCodigoSap();
 	    		cerrarCompromisoProxy.execute();
 	    	}
-	    		    		
+	    		
 		}
 	    
 	    protected void processOk(int accion) {

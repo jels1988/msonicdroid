@@ -34,12 +34,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
+                android:enabled="false"
                 android:text="NO" />
 
             <RadioButton
                 android:id="@+id/radSSSi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:text="SI" />
         </RadioGroup>
 
@@ -47,7 +49,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:focusable="false"
+            android:focusable="false"            
             android:text="Observación: " >
         </TextView>
 
@@ -56,6 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
+            android:enabled="false"
             android:maxLength="150" >
 
             <requestFocus />
@@ -79,12 +82,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
+                android:enabled="false"
                 android:text="NO" />
 
             <RadioButton
                 android:id="@+id/radMSSi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:text="SI" />
         </RadioGroup>
 
@@ -101,6 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
+            android:enabled="false"
             android:maxLength="150" >
         </EditText>
     </LinearLayout>
@@ -127,32 +133,32 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+<!--     <LinearLayout -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:orientation="horizontal" > -->
 
-        <Button
-            android:id="@+id/btnCancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_weight="1"
-            android:focusable="false"
-            android:onClick="btnCancelar_click"
-            android:text="@string/compromiso_open_cancelar" >
-        </Button>
+<!--         <Button -->
+<!--             android:id="@+id/btnCancelar" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_gravity="left" -->
+<!--             android:layout_weight="1" -->
+<!--             android:focusable="false" -->
+<!--             android:onClick="btnCancelar_click" -->
+<!--             android:text="@string/compromiso_open_cancelar" > -->
+<!--         </Button> -->
 
-        <Button
-            android:id="@+id/btnGuardar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_weight="1"
-            android:focusable="false"
-            android:onClick="btnGuardar_click"
-            android:text="@string/compromiso_open_guardar" >
-        </Button>
-    </LinearLayout>
+<!--         <Button -->
+<!--             android:id="@+id/btnCerrar" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_gravity="right" -->
+<!--             android:layout_weight="1" -->
+<!--             android:focusable="false" -->
+<!--             android:onClick="btnCerrar_click" -->
+<!--             android:text="@string/compromiso_open_cerrar" > -->
+<!--         </Button> -->
+<!--     </LinearLayout> -->
 
 </LinearLayout>

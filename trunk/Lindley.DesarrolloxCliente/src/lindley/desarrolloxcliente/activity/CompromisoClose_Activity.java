@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.google.inject.Inject;
 
+import net.msonic.lib.ActivityUtil;
 import net.msonic.lib.ListActivityBase;
 
 public class CompromisoClose_Activity extends ListActivityBase {
@@ -134,8 +135,12 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	    	holder.txViewSaboresActual = (TextView) convertView.findViewById(R.id.txViewSaboresActual);		    	
 	    	holder.txViewAccTrade = (TextView) convertView.findViewById(R.id.txViewAccTrade);	          	
 	    	holder.txViewFecha = (TextView) convertView.findViewById(R.id.txViewFecha);
-	    	holder.txViewSN = (TextView) convertView.findViewById(R.id.txViewSN);	    	
 	    	
+	    	holder.txViewConcrecionConf = (TextView) convertView.findViewById(R.id.txViewConcrecionConf);    	
+	    	holder.txViewSOVIConf = (TextView) convertView.findViewById(R.id.txViewSOVIConf);    	
+	    	holder.txViewCumPrecioConf = (TextView) convertView.findViewById(R.id.txViewCumPrecioConf);    	
+	    	holder.txViewSaboresConf = (TextView) convertView.findViewById(R.id.txViewSaboresConf);    	
+	    		    	
 	        convertView.setTag(holder);
 	      } else {
 	        // Get the ViewHolder back to get fast access to the TextView
@@ -154,9 +159,62 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	      holder.txViewSabores.setText(compromiso.numeroSabores);
 	      holder.txViewSaboresActual.setText(compromiso.numeroSaboresActual+"");
 	      holder.txViewAccTrade.setText(compromiso.descAccionTrade);
-	      holder.txViewFecha.setText(compromiso.fechaCompromiso);
-//	      if(compromiso.cumplio.equals("S")) holder.txViewSN.setText("SI");
-//	      else holder.txViewSN.setText("NO");
+	      int mYear,mMonth,mDay;
+	      String fecha = compromiso.fechaCompromiso;
+	      if(fecha.length() > 7)
+	      {
+	    	  mYear =  Integer.parseInt(fecha.substring(0, 4));
+	    	  mMonth  =  Integer.parseInt(fecha.substring(4, 6));
+	    	  mDay  =  Integer.parseInt(fecha.substring(6));
+	    	  
+	    	  holder.txViewFecha.setText(ActivityUtil.pad(mDay)+"/"+ ActivityUtil.pad(mMonth)+"/"+(mYear));
+	     }
+	      else{
+	    	  
+	    	  holder.txViewFecha.setText("");
+	      }
+	      
+	      if(compromiso.cumplePrecio.equals("S")) 
+	    	  holder.txViewCumPrecio.setText("SI");
+	      else 
+	    	  holder.txViewCumPrecio.setText("NO");
+	      
+	      if(compromiso.cumplePrecioActual.equals("S")) 
+	    	  holder.txViewCumPrecioCmp.setText("SI");
+	      else 
+	    	  holder.txViewCumPrecioCmp.setText("NO");
+	      
+	      
+	      
+	      if(compromiso.concrecion.equals("S")) 
+	    	  holder.txViewConcrecion.setText("SI");
+	      else 
+	    	  holder.txViewConcrecion.setText("NO");
+	      
+	      if(compromiso.concrecionActual.equals("S")) 
+	    	  holder.txViewConcrecionActual.setText("SI");
+	      else 
+	    	  holder.txViewConcrecionActual.setText("NO");
+	      
+	      if(compromiso.concrecionCumplio.equals("S")) 
+	    	  holder.txViewConcrecionConf.setText("SI");
+	      else 
+	    	  holder.txViewConcrecionConf.setText("NO");
+	      
+	      if(compromiso.soviCumplio.equals("S")) 
+	    	  holder.txViewSOVIConf.setText("SI");
+	      else 
+	    	  holder.txViewSOVIConf.setText("NO");
+	      
+	      if(compromiso.cumplePrecioCumplio.equals("S")) 
+	    	  holder.txViewCumPrecioConf.setText("SI");
+	      else 
+	    	  holder.txViewCumPrecioConf.setText("NO");
+	      
+	      if(compromiso.numeroSaboresCumplio.equals("S")) 
+	    	  holder.txViewSaboresConf.setText("SI");
+	      else 
+	    	  holder.txViewSaboresConf.setText("NO");
 	      
 	      holder.btnProfit.setOnClickListener(new OnClickListener() {
 				@Override
@@ -189,7 +247,10 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	    	TextView txViewSaboresActual;
 	    	TextView txViewAccTrade;
 	    	TextView txViewFecha;
-	    	TextView txViewSN;
+	    	TextView txViewConcrecionConf;
+	    	TextView txViewSOVIConf;
+	    	TextView txViewCumPrecioConf;
+	    	TextView txViewSaboresConf;
 	    }
 	    
 	    @Override

@@ -47,23 +47,24 @@ public class CompromisoPrincipalOpenFalse_Resumen extends TabActivity {
 		oportunidad.putExtra(CompromisoOpenFalse_Activity.CODIGO_REGISTRO, codigoRegistro);
 		TabSpec setContent = mTabHost.newTabSpec("INVENTARIO").setIndicator(tabview).setContent(oportunidad);
 		mTabHost.addTab(setContent);
+
+		tabview = createTabView(mTabHost.getContext(), "POSICION");
+		Intent posicion = new Intent(this, CompromisoPosicionOpenFalse_Activity.class);
+		posicion.putExtra(CompromisoPosicionOpenFalse_Activity.COD_GESTION, codigoRegistro);
+		setContent = mTabHost.newTabSpec("POSICION").setIndicator(tabview).setContent(posicion);
+		mTabHost.addTab(setContent);
 		
-//		tabview = createTabView(mTabHost.getContext(), "POSICION");
-//		Intent posicion = new Intent(this, CompromisoPosicionOpenFalse_Activity.class);
-//		posicion.putExtra(CompromisoPosicionOpenFalse_Activity.COD_GESTION, codigoRegistro);
-//		setContent = mTabHost.newTabSpec("POSICION").setIndicator(tabview).setContent(posicion);
-//		mTabHost.addTab(setContent);
-//		
-//		tabview = createTabView(mTabHost.getContext(), "PRESENTACION");
-//		Intent presentacion = new Intent(this, CompromisoPresentacionOpenFalse_Activity.class);
-//		presentacion.putExtra(CompromisoPresentacionOpenFalse_Activity.COD_GESTION, codigoRegistro);
-//		setContent = mTabHost.newTabSpec("PRESENTACION").setIndicator(tabview).setContent(presentacion);
-//		mTabHost.addTab(setContent);		
-////		
-//		tabview = createTabView(mTabHost.getContext(), "COMBOS");
-//		Intent combos = new Intent(this, InformacionAdicional_Activity.class);
-//		setContent = mTabHost.newTabSpec("COMBOS").setIndicator(tabview).setContent(combos);
-//		mTabHost.addTab(setContent);		
+		tabview = createTabView(mTabHost.getContext(), "PRESENTACION");
+		Intent presentacion = new Intent(this, CompromisoPresentacionOpenFalse_Activity.class);
+		presentacion.putExtra(CompromisoPresentacionOpenFalse_Activity.COD_GESTION, codigoRegistro);
+		setContent = mTabHost.newTabSpec("PRESENTACION").setIndicator(tabview).setContent(presentacion);
+		mTabHost.addTab(setContent);		
+		
+		tabview = createTabView(mTabHost.getContext(), "COMBOS");
+		Intent combos = new Intent(this, InformacionAdicionalFalse_Activity.class);
+		combos.putExtra(InformacionAdicional_Activity.COD_GESTION, codigoRegistro);
+		setContent = mTabHost.newTabSpec("COMBOS").setIndicator(tabview).setContent(combos);
+		mTabHost.addTab(setContent);		
 	}
 	
 	private static View createTabView(final Context context, final String text) {

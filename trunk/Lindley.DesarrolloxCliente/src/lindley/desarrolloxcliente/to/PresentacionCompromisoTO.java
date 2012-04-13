@@ -9,6 +9,7 @@ public class PresentacionCompromisoTO {
 	public PresentacionCompromisoTO()
     {
         listaSKU = new ArrayList<SKUPresentacionCompromisoTO>();
+        cumplio = "N";
     }
     	
     @SerializedName("CVAR")
@@ -23,6 +24,10 @@ public class PresentacionCompromisoTO {
     @SerializedName("PTO")
     public String puntosSugeridos;
     
+    @SerializedName("PTOG")
+    public String puntosGanados;
+    
+    @SerializedName("CUM")
     public String cumplio;
 
 }

@@ -4,6 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class SKUPresentacionCompromisoTO {
 
+	public SKUPresentacionCompromisoTO()
+	{
+		cumplio = "N";
+	}
+	
 	@SerializedName("CSKU")
 	public String codigoSKU;
 	

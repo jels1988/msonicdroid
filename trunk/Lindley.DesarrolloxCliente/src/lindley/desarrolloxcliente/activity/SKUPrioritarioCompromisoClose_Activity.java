@@ -1,25 +1,24 @@
 package lindley.desarrolloxcliente.activity;
 
 import java.util.List;
+
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
+import net.msonic.lib.ListActivityBase;
 import roboguice.inject.InjectView;
-import com.thira.examples.actionbar.widget.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import net.msonic.lib.ListActivityBase;
 
-public class SKUPrioritarioCompromisoFalse_Activity extends ListActivityBase {
+import com.thira.examples.actionbar.widget.ActionBar;
+
+public class SKUPrioritarioCompromisoClose_Activity extends ListActivityBase {
 
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	private EfficientAdapter adap;
@@ -38,7 +37,7 @@ public class SKUPrioritarioCompromisoFalse_Activity extends ListActivityBase {
 		// TODO Auto-generated method stub
 		inicializarRecursos();
 		super.onCreate(savedInstanceState);
-		 setContentView(R.layout.skuprioritariocompromisofalse_activity);    
+		 setContentView(R.layout.skuprioritariocompromisoclose_activity);    
 		 mActionBar.setTitle(R.string.skuprioritario_activity_title);
 		 application = (MyApplication)getApplicationContext();
 		 cliente = application.getClienteTO();
@@ -70,28 +69,14 @@ public class SKUPrioritarioCompromisoFalse_Activity extends ListActivityBase {
 			View view = null;
 			if (convertView == null) {
 				LayoutInflater inflator = context.getLayoutInflater();
-				view = inflator.inflate(R.layout.skuprioritariocompromisofalse_content, null);
+				view = inflator.inflate(R.layout.skuprioritariocompromisoclose_content, null);
 				final ViewHolder viewHolder = new ViewHolder();
 				
 				viewHolder.txViewSKU = (TextView) view.findViewById(R.id.txViewSKU);
 				viewHolder.chkValActual = (TextView) view.findViewById(R.id.chkValActual);
 				viewHolder.chkValComp = (TextView) view.findViewById(R.id.chkValComp);
-				viewHolder.chkValConf = (CheckBox) view.findViewById(R.id.chkValConf);
-													
-				viewHolder.chkValConf.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-					
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						// TODO Auto-generated method stub
-						SKUPresentacionCompromisoTO skuPresentacion = (SKUPresentacionCompromisoTO) viewHolder.chkValConf.getTag();
-						if(isChecked){
-							skuPresentacion.cumplio = "S";
-						}else{
-							skuPresentacion.cumplio = "N";
-						}
-					}
-				});
-				
+				viewHolder.chkValConf = (TextView) view.findViewById(R.id.chkValConf);
+																
 				view.setTag(viewHolder);
 				viewHolder.chkValConf.setTag(this.skuPresentaciones.get(position));
 				viewHolder.chkValComp.setTag(this.skuPresentaciones.get(position));
@@ -119,16 +104,12 @@ public class SKUPrioritarioCompromisoFalse_Activity extends ListActivityBase {
 				holder.chkValComp.setText("SI");
 			}
 			
-			if(this.skuPresentaciones.get(position).cumplio.compareToIgnoreCase("S") == 0)
-			{
-				holder.chkValConf.setChecked(true);
-				this.skuPresentaciones.get(position).cumplio = "S";
+			if (this.skuPresentaciones.get(position).cumplio.equalsIgnoreCase(RESPUESTA_NO)) {
+				holder.chkValConf.setText("NO");
+			} else if (this.skuPresentaciones.get(position).cumplio.equalsIgnoreCase(RESPUESTA_SI)) {
+				holder.chkValConf.setText("SI");
 			}
-			else
-			{
-				holder.chkValConf.setChecked(false);
-				this.skuPresentaciones.get(position).cumplio = "N";
-			}		
+			
 			
 			return view;
 		}
@@ -137,7 +118,7 @@ public class SKUPrioritarioCompromisoFalse_Activity extends ListActivityBase {
 	    	TextView txViewSKU;
 	    	TextView chkValActual;
 	    	TextView chkValComp;
-	    	CheckBox chkValConf;
+	    	TextView chkValConf;
 	    }
 	    
 	  }    

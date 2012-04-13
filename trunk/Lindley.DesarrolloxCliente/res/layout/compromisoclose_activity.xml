@@ -64,12 +64,12 @@
                 <TableLayout
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/tableLayout"
-                    android:layout_width="2000dip"
+                    android:layout_width="1500dip"
                     android:layout_height="wrap_content"
                     android:shrinkColumns="*"
                     android:stretchColumns="*" >
                     
-                    <TableRow
+                   <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" >
                     
@@ -101,33 +101,33 @@
                         android:layout_height="wrap_content"
                         android:text="Concreciones"
                         android:gravity="center"
-                        android:layout_span="2" />
+                        android:layout_span="3" />
                                         
                     
 
                     <TextView
                         style="@style/TextViewHead"
-                        android:layout_width="40dip"
+                        android:layout_width="60dip"
                         android:layout_height="wrap_content"
                         android:text="SOVI" 
                         android:gravity="center"
-                        android:layout_span="2"/>                    
+                        android:layout_span="3"/>                    
                     
                     <TextView
                         style="@style/TextViewHead"
-                        android:layout_width="80dip"
+                        android:layout_width="60dip"
                         android:layout_height="wrap_content"
                         android:text="Marca Precio"
                         android:gravity="center"
-                        android:layout_span="2" />
+                        android:layout_span="3" />
                     
                     <TextView
                         style="@style/TextViewHead"
-                        android:layout_width="50dip"
+                        android:layout_width="60dip"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text=" Sabores"
-                        android:layout_span="2" />
+                        android:layout_span="3" />
 
 
                     <TextView
@@ -139,18 +139,11 @@
 
                     <TextView
                         style="@style/TextViewHead"
-                        android:layout_width="120dip"
+                        android:layout_width="90dip"
                         android:layout_height="wrap_content"
                         android:text="Fecha" 
                         android:gravity="center" />
-                    
-                    <TextView
-                        style="@style/TextViewHead"
-                        android:layout_width="20dip"
-                        android:layout_height="wrap_content"
-                        android:text="Cumplio" 
-                        android:gravity="center" />
-                    
+                                        
                 </TableRow>
 
                 <TableRow
@@ -185,32 +178,51 @@
                     
                     <TextView
                         style="@style/TextViewHead"
-                        android:layout_width="40dip"
+                        android:layout_width="20dip"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="Comprom" />
+                    
+                   <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="20dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="OK" />
 
                     <TextView
                         style="@style/TextViewHead"
                         android:layout_width="20dip"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="Actual" />
                     
                     <TextView
                         style="@style/TextViewHead"
                         android:layout_width="20dip"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="Comprom" />
 
                     <TextView
                         style="@style/TextViewHead"
-                        android:layout_width="40dip"
+                        android:layout_width="20dip"
                         android:layout_height="wrap_content"
-                        android:text="Actual" />
-
+                        android:gravity="center"
+                        android:text="OK" />
+                    
                     <TextView
                         style="@style/TextViewHead"
                         android:layout_width="40dip"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Actual" />
+                    
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="20dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="Comprom" />
                     
                     <TextView
@@ -218,14 +230,31 @@
                         android:layout_width="20dip"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:text="OK" />
+                    
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="20dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="Actual" />
+                    
 
                      <TextView
                         style="@style/TextViewHead"
-                        android:layout_width="30dip"
+                        android:layout_width="20dip"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="Comprom" />
                      
+                     
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="20dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="OK" />
+                    
                     <TextView
                         style="@style/TextViewHead"
                         android:layout_width="100dip"
@@ -234,18 +263,12 @@
 
                     <TextView
                         style="@style/TextViewHead"
-                        android:layout_width="120dip"
-                        android:layout_height="wrap_content"
-                        android:text="" />
-                    
-                    <TextView
-                        style="@style/TextViewHead"
-                        android:layout_width="20dip"
+                        android:layout_width="90dip"
                         android:layout_height="wrap_content"
                         android:text="" />
                     
                 </TableRow>
-
+                
                     <View
                         android:layout_height="2dip"
                         android:background="#FF909090" />

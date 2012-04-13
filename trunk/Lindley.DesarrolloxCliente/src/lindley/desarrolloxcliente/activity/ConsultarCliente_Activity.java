@@ -286,6 +286,25 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 		showToast(error_generico_process);
 	}
     
+    @Override
+    public void onBackPressed() {
+    	// TODO Auto-generated method stub
+    	MessageBox.showConfirmDialog(this, confirm_exit_title, confirm_exit_message, confirm_exit_yes, new android.content.DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub	
+				onDestroy();
+			}
+			
+		}, confirm_exit_no, new android.content.DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});  
+    }
     
     public void btnSalir_click(View view)
     {

@@ -14,6 +14,7 @@ import roboguice.inject.InjectView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -189,7 +190,14 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 			    	
 			    	application.anio = ActivityUtil.pad(anio);
 					application.mes = ActivityUtil.pad(mes+1);
-					application.dia = ActivityUtil.pad(dia+1);
+					application.dia = ActivityUtil.pad(dia);
+					
+					Log.v("ConsultarCabecera_Activity", anio+"");
+					Log.v("ConsultarCabecera_Activity", anioActual+"");
+					Log.v("ConsultarCabecera_Activity", mes+"");
+					Log.v("ConsultarCabecera_Activity", mesActual+"");
+					Log.v("ConsultarCabecera_Activity", dia+"");
+					Log.v("ConsultarCabecera_Activity", diaActual+"");
 					
 					if(desarrolloTemp.getEstado().equals("A"))
 					{											

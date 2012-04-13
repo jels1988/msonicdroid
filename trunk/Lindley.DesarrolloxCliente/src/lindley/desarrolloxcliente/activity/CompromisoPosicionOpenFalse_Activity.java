@@ -164,27 +164,43 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
     }
 	
     @Override
-	protected boolean executeAsyncPre(int accion) {
+    protected boolean executeAsyncPre(int accion) {
 		// TODO Auto-generated method stub
 		boolean openAdapterVacio = false;
 		boolean posicionAdapterVacio = false;
 		boolean presentacionAdapterVacio = false;
+	
 		if(accion == ACCION_CERRAR)
        	{    
-			if(application.openAdapter == null || application.openAdapter.detalles.isEmpty())
+			if(application.openFalseAdapter == null || application.openFalseAdapter.detalles.isEmpty())
 			{				
-				application.openAdapter = new CompromisoOpen_Activity.EfficientAdapter(this, new ArrayList<CompromisoTO>());
+				application.openFalseAdapter = new CompromisoOpenFalse_Activity.EfficientAdapter(this, new ArrayList<CompromisoTO>());
 				openAdapterVacio = true;
+				if(openAdapterVacio)
+				{
+					showToast("Debe editar valores de la pestaña inventario.");
+					return false;
+				}
 			}
 			if(application.posicionFalseAdapter == null || application.posicionFalseAdapter.posiciones.isEmpty())
 			{				
 				application.posicionFalseAdapter = new CompromisoPosicionOpenFalse_Activity.EfficientAdapter(this, new ArrayList<PosicionCompromisoTO>());
 				posicionAdapterVacio = true;
+				if(posicionAdapterVacio)
+				{
+					showToast("Debe editar valores de la pestaña posición.");
+					return false;
+				}
 			}
-			if(application.presentacionAdapter == null || application.presentacionAdapter.detalles.isEmpty())
+			if(application.presentacionFalseAdapter == null || application.presentacionFalseAdapter.detalles.isEmpty())
 			{
-				application.presentacionAdapter = new CompromisoPresentacionOpen_Activity.EfficientAdapter(this, new ArrayList<PresentacionCompromisoTO>());
+				application.presentacionFalseAdapter = new CompromisoPresentacionOpenFalse_Activity.EfficientAdapter(this, new ArrayList<PresentacionCompromisoTO>());
 				presentacionAdapterVacio = true;
+				if(presentacionAdapterVacio)
+				{
+					showToast("Debe editar valores de la pestaña presentación.");
+					return false;
+				}
 			}
 				
        	}
@@ -199,7 +215,8 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 			return true;
 		}
 	}
-
+    
+	
 	@Override
   protected void process(int accion) {
     	
@@ -224,11 +241,12 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
        			CerrarPosicionTO cerrar = new CerrarPosicionTO();
        			cerrar.codigoVariable = posicion.codigoVariable;
        			cerrar.cumplio = posicion.cumplio;
+       			cerrar.fotoFinal = posicion.fotoFinal;
        			listCerrarPosicionTO.add(cerrar);
     		}
        		
        		List<CerrarPresentacionTO> listCerrarPresentacionTO = new ArrayList<CerrarPresentacionTO>();
-    		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
+    		for(PresentacionCompromisoTO presentacion : application.presentacionFalseAdapter.detalles)
     		{
     			CerrarPresentacionTO cerrar = new CerrarPresentacionTO();
     			cerrar.codigoVariable = presentacion.codigoVariable;
@@ -464,9 +482,15 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 			}
 
 			if(posicionTO.cumplio.equals("S"))
+			{
 				holder.chkCumplio.setChecked(true);
+				posicionTO.cumplio = "S";
+			}
 			else
-				holder.chkCumplio.setChecked(false);				
+			{
+				holder.chkCumplio.setChecked(false);
+				posicionTO.cumplio = "N";
+			}
 							
 			holder.btnFotoInicial.setOnClickListener(new OnClickListener() {
 

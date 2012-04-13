@@ -10,4 +10,7 @@ public class CerrarPosicionTO {
 	@SerializedName("CUM")
 	public String cumplio;
 	
+	@SerializedName("FFIN")
+	public String fotoFinal;
+	
 }

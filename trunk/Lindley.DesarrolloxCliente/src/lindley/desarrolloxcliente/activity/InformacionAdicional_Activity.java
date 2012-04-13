@@ -18,6 +18,7 @@ import lindley.desarrolloxcliente.to.CerrarSKUPresentacionTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.CompromisoPosicionTO;
 import lindley.desarrolloxcliente.to.CompromisoTO;
+import lindley.desarrolloxcliente.to.InformacionAdicionalCompromisoTO;
 import lindley.desarrolloxcliente.to.InformacionAdicionalTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
@@ -30,6 +31,7 @@ import lindley.desarrolloxcliente.to.UpdateSKUPresentacionTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
+import lindley.desarrolloxcliente.ws.service.ConsultarInformacionComboProxy;
 import lindley.desarrolloxcliente.ws.service.GuardarDesarrolloProxy;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -45,8 +47,7 @@ import net.msonic.lib.MessageBox;
 
 public class InformacionAdicional_Activity extends ActivityBase {
 
-	private final String AGRUPACION_INVENTARIO = "1";
-	private final String OPORTUNIDAD_DESARROLLADOR_ABIERTO = "A";
+//	private final String OPORTUNIDAD_DESARROLLADOR_ABIERTO = "A";
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	ClienteTO cliente;
 	UsuarioTO usuario;
@@ -71,6 +72,7 @@ public class InformacionAdicional_Activity extends ActivityBase {
 	
 	@Inject CerrarCompromisoProxy 	  cerrarCompromisoProxy;
 	@Inject ActualizarCompromisoProxy actualizarCompromisoProxy;
+	@Inject ConsultarInformacionComboProxy consultarInformacionComboProxy;
 	
 	public static final String COD_GESTION = "codGestion";
 	@InjectExtra(COD_GESTION) String codigoGestion;
@@ -91,6 +93,7 @@ public class InformacionAdicional_Activity extends ActivityBase {
 		usuario = application.getUsuarioTO();
 		mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
         mActionBar.setHomeLogo(R.drawable.header_logo);
+        processAsync();
         
         application.informacionAdicional = new InformacionAdicionalTO();
         
@@ -117,7 +120,10 @@ public class InformacionAdicional_Activity extends ActivityBase {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				// TODO Auto-generated method stub
-				application.informacionAdicional.setComboSS("S");				
+				if(isChecked)
+					application.informacionAdicional.setComboSS("S");		
+				else
+					application.informacionAdicional.setComboSS("N");
 			}
 		});
         
@@ -126,7 +132,10 @@ public class InformacionAdicional_Activity extends ActivityBase {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				// TODO Auto-generated method stub
-				application.informacionAdicional.setComboSS("N");				
+				if(isChecked)
+					application.informacionAdicional.setComboSS("N");
+				else
+					application.informacionAdicional.setComboSS("S");
 			}
 		});
         
@@ -135,7 +144,10 @@ public class InformacionAdicional_Activity extends ActivityBase {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				// TODO Auto-generated method stub
-				application.informacionAdicional.setComboMS("S");				
+				if(isChecked)
+					application.informacionAdicional.setComboMS("S");
+				else
+					application.informacionAdicional.setComboMS("N");
 			}
 		});
         
@@ -144,10 +156,62 @@ public class InformacionAdicional_Activity extends ActivityBase {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				// TODO Auto-generated method stub
-				application.informacionAdicional.setComboMS("N");				
+				if(isChecked)
+					application.informacionAdicional.setComboMS("N");
+				else
+					application.informacionAdicional.setComboMS("S");
 			}
 		});
         
+	}
+	
+	@Override
+	protected void process() {
+		// TODO Auto-generated method stub
+		consultarInformacionComboProxy.codigoRegistro = codigoGestion;
+		consultarInformacionComboProxy.execute();
+	}
+	
+	@Override
+	protected void processOk() {
+		// TODO Auto-generated method stub
+		boolean isExito = consultarInformacionComboProxy.isExito();
+		if (isExito) {
+			int status = consultarInformacionComboProxy.getResponse().getStatus();
+			if (status == 0) {
+				InformacionAdicionalCompromisoTO informacion = consultarInformacionComboProxy.getResponse().informacion;
+				txtObs.setText(informacion.observacion);
+				txtObsSS.setText(informacion.observacionSS);
+				if(informacion.comboSS.equalsIgnoreCase("S"))
+				{
+					radSSSi.setChecked(true);
+				}
+				else
+				{
+					radSSNo.setChecked(true);
+				}
+				if(informacion.comboMS.equalsIgnoreCase("S"))
+				{
+					radMSSi.setChecked(true);
+				}
+				else
+				{
+					radMSNo.setChecked(true);
+				}
+			}
+			else
+			{
+				showToast(consultarInformacionComboProxy.getResponse().getDescripcion());
+			}
+		}
+		super.processOk();
+	}
+	
+	@Override
+	protected void processError() {
+		// TODO Auto-generated method stub
+		showToast(error_generico_process);
+		super.processError();
 	}
 	
 //	public void btnSiguiente_click(View view)
@@ -227,17 +291,17 @@ public class InformacionAdicional_Activity extends ActivityBase {
 			boolean presentacionAdapterVacio = false;
 			if(accion == ACCION_ACTUALIZAR || accion == ACCION_CERRAR)
 	       	{    
+				for(CompromisoTO comp : application.openAdapter.detalles)
+				{
+					if(Integer.parseInt(comp.sovi)<=0 || Integer.parseInt(comp.soviActual)<=0)
+					{
+						showToast("Los valores de SOVI deben ser mayores a 0");
+						return false;
+					}
+				}
 				if(application.openAdapter == null || application.openAdapter.detalles.isEmpty())
 				{				
 					application.openAdapter = new CompromisoOpen_Activity.EfficientAdapter(this, new ArrayList<CompromisoTO>());
-					for(CompromisoTO comp : application.openAdapter.detalles)
-					{
-						if(Integer.parseInt(comp.sovi)<=0 && Integer.parseInt(comp.soviActual)<=0)
-						{
-							showToast("Los valores de SOVI deben ser mayores a 0");
-							return false;
-						}
-					}
 					openAdapterVacio = true;
 					if(openAdapterVacio)
 					{

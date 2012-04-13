@@ -4,50 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-<!--     <com.thira.examples.actionbar.widget.ActionBar -->
-<!--         android:id="@+id/actionBar" -->
-<!--         android:layout_width="fill_parent" -->
-<!--         android:layout_height="44dip" -->
-<!--         android:layout_alignParentLeft="true" -->
-<!--         android:layout_alignParentTop="true" /> -->
-
-	<LinearLayout
+    <com.thira.examples.actionbar.widget.ActionBar
+        android:id="@+id/actionBar"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <TextView
-            style="@style/TextViewLabel"
-            android:id="@+id/txtViewCliente" 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="" />
-    
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <TextView
-            style="@style/TextViewLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Fecha: " />
-
-        <TextView
-            android:id="@+id/txtViewFecha"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="left"
-            android:text="" />
-    </LinearLayout>
+        android:layout_height="44dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
@@ -59,47 +21,45 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
-
+ 
             <TableLayout
                 android:layout_width="500dip"
                 android:layout_height="wrap_content"
                 android:shrinkColumns="*"
                 android:stretchColumns="*" >
 
-               <TableRow
+                <TableRow
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" >
 
                     <TextView
                         style="@style/TextViewLabel"
-                        android:layout_width="40dip"
+                        android:layout_width="150dip"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Puntos" />
-                   
-                    <TextView
-                        style="@style/TextViewLabel"
-                        android:layout_width="70dip"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="" />
+                        android:text="@string/sku_prioritario" />
 
                     <TextView
                         style="@style/TextViewLabel"
                         android:layout_width="100dip"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Fecha Compromiso" />
-                    
+                        android:text="@string/sku_valor_actual" />
+
                     <TextView
                         style="@style/TextViewLabel"
-                        android:layout_width="20dip"
-                        android:gravity="center"
+                        android:layout_width="100dip"
                         android:layout_height="wrap_content"
-                        android:text="Cumplio" />
-                    
-                </TableRow>
+                        android:gravity="center"
+                        android:text="@string/sku_valor_compromiso" />
 
+                    <TextView
+                        style="@style/TextViewLabel"
+                        android:layout_width="100dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/sku_valor_confirmacion" />
+                </TableRow>
 
                 <View
                     android:layout_height="2dip"
@@ -120,28 +80,16 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="vertical"
+        android:padding="1dip" >
 
         <Button
-            android:id="@+id/btnCancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_weight="1"
-            android:focusable="false"
-            android:onClick="btnCancelar_click"
-            android:text="@string/compromiso_open_cancelar" >
-        </Button>
-
-        <Button
-            android:id="@+id/btnCerrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:layout_weight="1"
             android:focusable="false"
-            android:onClick="btnCerrar_click"
-            android:text="@string/compromiso_open_cerrar" >
+            android:onClick="btnOK_click"
+            android:text="@string/skuprioritario_activity_boton_ok" >
         </Button>
     </LinearLayout>
 
