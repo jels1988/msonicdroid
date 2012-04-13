@@ -46,10 +46,10 @@ public class ProfitHistoryBasicoActivity extends Activity {
 		this.detalle = detalle;
 	}
 	
-	private int año;
+	private int anio;
 	
-	public int getAño() {
-		return año;
+	public int getAnio() {
+		return anio;
 	}
 
 	public int getCampo() {
@@ -60,15 +60,15 @@ public class ProfitHistoryBasicoActivity extends Activity {
 		this.campo = campo;
 	}
 
-	public void setAño(int año) {
-		this.año = año;
+	public void setAnio(int anio) {
+		this.anio = anio;
 	}
 	
 	private int campo;
 	
 	public Intent execute(Context context) {
 		
-		String[] titles = new String[] { String.valueOf(this.año) };
+		String[] titles = new String[] { String.valueOf(this.anio) };
 		
 		double[] anioActual = new double[12];
 		

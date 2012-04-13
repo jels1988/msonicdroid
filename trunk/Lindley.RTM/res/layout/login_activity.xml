@@ -17,11 +17,11 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
   android:layout_height="wrap_content" 
-  android:orientation="vertical" android:padding="5px">
+  android:orientation="vertical" android:padding="5dip">
   <TextView android:text="Usuario :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
 	<EditText android:id="@+id/txtUsuario" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Ingresar Usuario" android:text="" android:layout_weight="1" android:inputType="number" android:maxLength="8"></EditText>
       
-        <TextView android:text="Password :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+        <TextView android:text="Password :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
             <EditText android:id="@+id/txtPassword" android:layout_width="fill_parent" android:hint="Ingresar Contraseña" android:layout_height="wrap_content" android:text="" android:layout_weight="1" android:password="true" android:inputType="number|textPassword" android:maxLength="8"></EditText>
                
    <Button android:layout_width="wrap_content" 

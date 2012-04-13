@@ -52,7 +52,15 @@ public class ProfitHistoryFamiliaMarcaActivity extends ActivityBase{
 	
 	private ArrayList<HistoryNewTO> datos;
 	private String titulo;
-	private int año;
+	private int anio;
+	public int getAnio() {
+		return anio;
+	}
+
+	public void setAnio(int anio) {
+		this.anio = anio;
+	}
+
 	private int campo;
 	
 	@Inject ProfitFamiliaMarcaProxy profitFamiliaMarcaProxy;
@@ -75,9 +83,7 @@ public class ProfitHistoryFamiliaMarcaActivity extends ActivityBase{
 		this.datos = datos;
 	}
 		
-	public int getAño() {
-		return año;
-	}
+
 
 	public int getCampo() {
 		return campo;
@@ -87,9 +93,7 @@ public class ProfitHistoryFamiliaMarcaActivity extends ActivityBase{
 		this.campo = campo;
 	}
 
-	public void setAño(int año) {
-		this.año = año;
-	}
+
 	
 	
 	
@@ -157,7 +161,7 @@ public class ProfitHistoryFamiliaMarcaActivity extends ActivityBase{
 				setDatos(detalle);				 
 				titulo = "FAMILIA: "+nom_familia;
 				setTitulo(titulo);
-				setAño(num_anio);
+				setAnio(num_anio);
 				setCampo(campo_tipo);					
 				selectSerie();				
 			}
@@ -251,7 +255,7 @@ public class ProfitHistoryFamiliaMarcaActivity extends ActivityBase{
 		sLabel.add(10, "NV");
 		sLabel.add(11, "DC");
 		
-		String[] titles = new String[] { String.valueOf(this.año) };
+		String[] titles = new String[] { String.valueOf(this.anio) };
 		int i=0;
 		double[] anioActual = new double[12];
 		String[] legend = new String[datos.size()] ;

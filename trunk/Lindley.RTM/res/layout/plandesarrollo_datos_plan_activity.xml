@@ -19,7 +19,7 @@
         <TextView android:text="Avance (%) :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/txViewAvance" android:layout_width="fill_parent" ></TextView>  
     <EditText android:id="@+id/txtAvance"  android:enabled="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Avance" android:inputType="number" android:maxLength="6"></EditText>
     
-    <TextView android:text="Objetivo a alcanzar :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent" ></TextView>  
+    <TextView android:text="Objetivo a alcanzar :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent" ></TextView>  
     <EditText android:id="@+id/txtObjetivo"  android:enabled="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Objetivo" android:maxLength="150"></EditText>
     
 <!--     <TextView android:text="Fecha Creación  :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/txViewFchCreacion" android:layout_width="fill_parent" ></TextView> 	 -->
@@ -32,7 +32,7 @@
 <!-- 			<ImageButton android:id="@+id/btnFcCreacion" android:onClick="btnFecCreacion_onclick" android:src="@drawable/btn_calendario" android:layout_width="wrap_content" android:layout_height="wrap_content"></ImageButton> -->
 <!-- 	</LinearLayout> -->
 	
- 	<TextView android:text="Fecha Inicio  :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent" ></TextView> 	
+ 	<TextView android:text="Fecha Inicio  :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent" ></TextView> 	
  	 <LinearLayout
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"

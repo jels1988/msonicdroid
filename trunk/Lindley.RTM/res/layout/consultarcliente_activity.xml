@@ -33,13 +33,13 @@
            <ImageButton android:onClick="btnbuscar_onclick" android:src="@drawable/search"></ImageButton>
         </TableRow>
         <TableRow android:id="@+id/tableRow3" android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <TextView android:text="Ruc :" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+            <TextView android:text="Ruc :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
             <EditText android:id="@+id/txtRuc"
              android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Ingresar Ruc" android:text="" android:layout_weight="1" android:inputType="number" android:maxLength="11" android:singleLine="true"></EditText>
      		<ImageButton android:onClick="btnbuscar_onclick" android:src="@drawable/search"></ImageButton>
         </TableRow>
-       <TableRow android:id="@+id/tableRow3" android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <TextView android:text="Dni :" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+       <TableRow  android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <TextView android:text="Dni :" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
             <EditText android:id="@+id/txtDni"
              android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Ingresar Dni" android:text="" android:layout_weight="1" android:inputType="number" android:maxLength="11" android:singleLine="true"></EditText>
         	<ImageButton android:onClick="btnbuscar_onclick" android:src="@drawable/search"></ImageButton>

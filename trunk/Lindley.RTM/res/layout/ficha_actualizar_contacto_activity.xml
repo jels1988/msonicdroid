@@ -15,21 +15,21 @@
 
    
 
-    <EditText android:id="@+id/txtCl"  android:enabled="true" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+    <EditText android:id="@+id/txtCl"   android:enabled="true" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
        
     
-    <TextView android:text="Fecha Cumpleaños  :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+    <TextView android:text="Fecha Cumpleaños  :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
  	<EditText android:id="@+id/txtRazonSocial" android:enabled="true" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
        
-	<TextView android:text="Teléfono :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+	<TextView android:text="Teléfono :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
  	<EditText android:id="@+id/txtDireccion" android:enabled="true" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
     
- 	<TextView android:text="Tipo Contacto :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+ 	<TextView android:text="Tipo Contacto :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
  	<Spinner android:id="@+id/cboGiro" 
             		android:layout_width="fill_parent" 
             		android:layout_height="wrap_content"></Spinner>
     
- 	<TextView android:text="E-mail :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+ 	<TextView android:text="E-mail :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
  	<EditText android:id="@+id/txtRuc" android:enabled="true" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
     
  	 <Button android:layout_marginTop="20dip"

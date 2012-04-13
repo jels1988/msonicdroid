@@ -700,9 +700,9 @@ public class ProfitHistoryActivity extends ActivityBase {
 					titulo = String.format(profit_history_basic_title,
 							cliente_descripcion);
 					profitHistoryActivity.setTitulo(titulo);
-					int anio = Integer.parseInt(cboHistoryAnio
-							.getSelectedItem().toString());
-					profitHistoryActivity.setAño(anio);
+					int anio = Integer.parseInt(cboHistoryAnio.getSelectedItem().toString());
+					
+					profitHistoryActivity.setAnio(anio);
 
 					int campo = cboHistoryTipo.getSelectedItemPosition();
 					profitHistoryActivity.setCampo(campo);
@@ -720,10 +720,10 @@ public class ProfitHistoryActivity extends ActivityBase {
 
 					int anio = Integer.parseInt(cboHistoryComparativoAnio
 							.getSelectedItem().toString());
-					profitComparativoActivity.setAño(anio);
+					
+					profitComparativoActivity.setAnio(anio);
 
-					int campo = cboHistoryComparativoTipo
-							.getSelectedItemPosition();
+					int campo = cboHistoryComparativoTipo.getSelectedItemPosition();
 					profitComparativoActivity.setCampo(campo);
 
 					Intent intent = profitComparativoActivity
@@ -740,7 +740,7 @@ public class ProfitHistoryActivity extends ActivityBase {
 
 					int anio = Integer.parseInt(cboHistorySemanalAnio
 							.getSelectedItem().toString());
-					profitHistorySemanalActivity.setAño(anio);
+					profitHistorySemanalActivity.setAnio(anio);
 
 					int mes = cboHistorySemanalMes.getSelectedItemPosition() + 1;
 					profitHistorySemanalActivity.setMes(mes);

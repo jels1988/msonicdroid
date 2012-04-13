@@ -34,10 +34,10 @@ public class ProfitHistoryComparativoActivity extends Activity {
 		this.detalle = detalle;
 	}
 	
-	private int año;
+	private int anio;
 	
-	public int getAño() {
-		return año;
+	public int getAnio() {
+		return anio;
 	}
 
 	public int getCampo() {
@@ -48,8 +48,8 @@ public class ProfitHistoryComparativoActivity extends Activity {
 		this.campo = campo;
 	}
 
-	public void setAño(int año) {
-		this.año = año;
+	public void setAnio(int anio) {
+		this.anio = anio;
 	}
 	
 	private int campo;
@@ -66,16 +66,16 @@ public class ProfitHistoryComparativoActivity extends Activity {
 
 	public Intent execute(Context context) {
 		
-		String[] titles = new String[] { String.valueOf(this.año-1), String.valueOf(this.año) };
+		String[] titles = new String[] { String.valueOf(this.anio-1), String.valueOf(this.anio) };
 		
-		int añoAnterior=this.año-1;
-		int añoActual=this.año;
+		int aniooAnterior=this.anio-1;
+		int aniooActual=this.anio;
 		
 		double[] anioAnterior = new double[12]; 
 		double[] anioActual = new double[12];
 		
 		for (HistoryDetalleTO data : detalle) {
-			if(data.getAnio()==añoActual){
+			if(data.getAnio()==aniooActual){
 				
 				switch (campo){
 					case CAJAS_FISICAS_ACUMULADAS:
@@ -98,7 +98,7 @@ public class ProfitHistoryComparativoActivity extends Activity {
 				
 			}
 			
-			if(data.getAnio()==añoAnterior){
+			if(data.getAnio()==aniooAnterior){
 				switch (campo){
 				case CAJAS_FISICAS_ACUMULADAS:
 					anioAnterior[data.getMes()-1] = data.getCajasFacturadas();
