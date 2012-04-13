@@ -18,7 +18,7 @@
     <EditText android:id="@+id/txtNombre"  android:enabled="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Nombres" android:maxLength="30"></EditText>
        
     
-    <TextView android:text="Fecha Nacimiento  :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent" ></TextView> 	
+    <TextView android:text="Fecha Nacimiento  :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent" ></TextView> 	
  	 <LinearLayout
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
@@ -28,15 +28,15 @@
 			<ImageButton android:onClick="btncalendario_onclick" android:src="@drawable/btn_calendario" android:layout_width="wrap_content" android:layout_height="wrap_content"></ImageButton>
 	</LinearLayout>
        
-	<TextView android:text="Teléfono :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+	<TextView android:text="Teléfono :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
  	<EditText android:id="@+id/txtTelefono" android:enabled="true" android:layout_width="fill_parent" android:layout_height="wrap_content"  android:hint="Teléfono" android:inputType="number" android:maxLength="11"></EditText>
     
- 	<TextView android:text="Tipo Contacto :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+ 	<TextView android:text="Tipo Contacto :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
  	<Spinner android:id="@+id/cboContacto" 
             		android:layout_width="fill_parent" 
             		android:layout_height="wrap_content"></Spinner>
     
- 	<TextView android:text="E-mail :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+ 	<TextView android:text="E-mail :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
  	<EditText android:id="@+id/txtEmail" android:enabled="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="textEmailAddress"  android:hint="E-mail" android:maxLength="30" ></EditText>
 
  	 <Button android:layout_marginTop="20dip"

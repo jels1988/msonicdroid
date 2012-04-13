@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="pe.lindley.activity"
-      android:versionCode="29"
-      android:versionName="4.5">
-    <uses-sdk android:minSdkVersion="8" />
+      android:versionCode="30"
+      android:versionName="4.6">
 
-	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-	<uses-permission android:name="android.permission.CAMERA"/>
+	 
 	
-    <application android:icon="@drawable/header_logo" 
+    <application android:name="pe.lindley.activity.RTMApplication" 
+        		android:icon="@drawable/header_logo" 
     			 android:label="@string/app_name"
     			 android:theme="@style/CustomTheme"
-    			 android:name=".RTMApplication">
-    			 
-    	<uses-library android:name="com.google.android.maps" android:required="true"/>
+    			 >
+    	
+    	<uses-library
+            android:name="com.google.android.maps"
+            android:required="true" />
+    	
    		 <receiver android:name="ReInstallApp">
    		     <intent-filter>
                    <category android:name="android.intent.category.DEFAULT" />
@@ -34,7 +30,7 @@
     	
     	
 
-        <activity android:name="LoginActivity" android:label="@string/app_name" android:configChanges="keyboardHidden|orientation" android:noHistory="true">
+        <activity android:name="pe.lindley.activity.LoginActivity" android:label="@string/app_name" android:configChanges="keyboardHidden|orientation" android:noHistory="true">
                <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -43,17 +39,14 @@
         </activity>
 		
 
-		<activity android:name="MenuInicioActivity" android:configChanges="keyboardHidden|orientation">
-		     <intent-filter>
-                <action android:name="pe.lindley.rtm.service.uploadFileService" />                					  
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-		</activity>
+		<activity android:name="pe.lindley.activity.MenuInicioActivity" android:configChanges="keyboardHidden|orientation"/>
+		     
 		
 		<activity android:name="org.achartengine.GraphicalActivity" android:configChanges="keyboardHidden|orientation"/>
 		
 		<activity android:name="WebViewVerFoto_Activity" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="DireccionActivity" android:configChanges="keyboardHidden|orientation"/>
+		
 		<!-- PROSPECTOR -->
 		<activity android:name="pe.lindley.prospector.activity.ConsultarClienteActivity" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="pe.lindley.prospector.activity.RegistrarClienteActivity" android:configChanges="keyboardHidden|orientation"/>
@@ -65,7 +58,7 @@
 		<activity android:name="pe.lindley.prospector.activity.ConsultarClienteLocalActivity" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="pe.lindley.prospector.activity.RegistrarDocumentosActivity" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="pe.lindley.prospector.activity.RegistrarClienteVerDocumentosActivity" android:configChanges="keyboardHidden|orientation"/>
-		<service android:name="pe.lindley.prospector.service.UploadFileService" android:process=":remote">
+		<service android:name="pe.lindley.prospector.service.UploadFileService" android:process=":remote" android:enabled="true" android:exported="false">
 		       <intent-filter>
                 <action android:name="pe.lindley.prospector.service.uploadFileService" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
@@ -230,4 +223,15 @@
 		
 		
     </application>
+    
+    <uses-sdk android:minSdkVersion="8" android:maxSdkVersion="8" android:targetSdkVersion="8" />
+	
+	 <uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.CAMERA"/>
 </manifest>

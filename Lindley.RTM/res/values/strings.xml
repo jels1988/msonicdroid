@@ -79,7 +79,6 @@
     <string name="registrar_documentos_activity_title">Adjuntar Documentos</string>
     <string name="registrar_adjuntar_documentos_activity_tomar">Tomar Foto</string>
     <string name="registrar_adjuntar_documentos_activity_ver">Ver Foto</string>
-    <string name="registrar_adjuntar_documentos_activity_ver">Ver Foto</string>
     <string name="descargartipodocumentos_activity_title">Descargar Tipo Documento</string>
     <string name="descargartipodocumentos_activity_message_title">Descargar Tipo Documento</string>
     <string name="descargartipodocumentos_activity_message_ok">Tipo Documento Descargados</string>

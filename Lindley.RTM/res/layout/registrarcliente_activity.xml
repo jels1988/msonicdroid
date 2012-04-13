@@ -417,7 +417,7 @@
 
      
     <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
-        <TextView android:inputType="textMultiLine" android:layout_span="2"  android:text="2.- Existen algunos de los siguientes puntos de referencias a dos cuadras a la redonda del local :  " android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
+        <TextView android:layout_span="2"  android:text="2.- Existen algunos de los siguientes puntos de referencias a dos cuadras a la redonda del local :  " android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
     </TableRow>
 
     <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
@@ -475,15 +475,17 @@
      
       <TableRow android:layout_width="fill_parent" android:layout_height="wrap_content" >
 
-        <LinearLayout android:id="@+id/LinearLayout03"
+        <LinearLayout
 			 android:layout_width="fill_parent" 
 			 android:layout_height="fill_parent" 
 			 android:gravity="bottom"
 			 android:layout_span="2">
 			
-			 <Button android:id="@+id/btnCartera" 		 android:focusable="false"	android:layout_alignParentRight="true" 	android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/registrar_cliente_activity_btnDatosCartera" android:onClick="btnDatosCarteraPrevius_click"/>
+			 <Button 		 android:focusable="false"	android:layout_alignParentRight="true" 	android:layout_width="wrap_content" android:layout_height="wrap_content" 
+			     android:text="@string/registrar_cliente_activity_btnDatosCartera"  
+			     android:onClick="btnAnterior_click"/>
 			 
-			 <Button android:id="@+id/btnSeleccionarDireccion" 	
+			 <Button 	
         			android:layout_alignParentLeft="true" 	
         			android:layout_width="wrap_content" 
         			android:layout_height="wrap_content" 

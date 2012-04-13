@@ -56,7 +56,7 @@ public class ProfitHistorySegMarArtActivity extends ActivityBase{
 	
 	private ArrayList<HistoryNewTO> datos;
 	private String titulo;
-	private int año;
+	private int anio;
 	private int campo;
 	
 	@Inject ProfitSegmentoMarcaArticuloProxy profitSegmentoMarcaArticuloProxy;
@@ -109,7 +109,7 @@ public class ProfitHistorySegMarArtActivity extends ActivityBase{
 					titulo = "SEGMENTO: "+nom_segmento+", MARCA: "+nom_marca;
 					setTitulo(titulo);
 					
-					setAño(num_anio);					
+					setAnio(num_anio);					
 					setCampo(campo_tipo);					
 					selectSerie();
 					
@@ -122,6 +122,14 @@ public class ProfitHistorySegMarArtActivity extends ActivityBase{
 			}
 		}
 		super.processOk();
+	}
+
+	public int getAnio() {
+		return anio;
+	}
+
+	public void setAnio(int anio) {
+		this.anio = anio;
 	}
 
 	@Override
@@ -149,10 +157,7 @@ public class ProfitHistorySegMarArtActivity extends ActivityBase{
 		this.datos = datos;
 	}
 		
-	public int getAño() {
-		return año;
-	}
-
+	
 	public int getCampo() {
 		return campo;
 	}
@@ -161,9 +166,7 @@ public class ProfitHistorySegMarArtActivity extends ActivityBase{
 		this.campo = campo;
 	}
 
-	public void setAño(int año) {
-		this.año = año;
-	}
+	
 	
 	
 	
@@ -257,7 +260,7 @@ public class ProfitHistorySegMarArtActivity extends ActivityBase{
 		sLabel.add(10, "NV");
 		sLabel.add(11, "DC");
 		
-		String[] titles = new String[] { String.valueOf(this.año) };
+		String[] titles = new String[] { String.valueOf(this.anio) };
 		
 		double[] anioActual = new double[12];
 		

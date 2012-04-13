@@ -21,28 +21,28 @@
             <TextView android:text="Cliente :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
     <EditText android:id="@+id/txtCliente"  android:enabled="false" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
      
-             <TextView android:text="Razón Social :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+             <TextView android:text="Razón Social :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
  	<EditText android:id="@+id/txtRazonSocial" android:enabled="false" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
        
-            <TextView android:text="Dirección :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+            <TextView android:text="Dirección :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0"  android:layout_width="fill_parent"></TextView>
  	<EditText android:id="@+id/txtDireccion" android:enabled="false" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
     
- 	    <TextView android:text="Distrito :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+ 	    <TextView android:text="Distrito :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0"  android:layout_width="fill_parent"></TextView>
  	<EditText android:id="@+id/txtDistrito" android:enabled="false" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
     
- 	    <TextView android:text="Ruc :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+ 	    <TextView android:text="Ruc :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0"  android:layout_width="fill_parent"></TextView>
  	<EditText android:id="@+id/txtRuc" android:enabled="false" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
    
- 	    	<TextView android:text="Teléfono :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+ 	    	<TextView android:text="Teléfono :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0"  android:layout_width="fill_parent"></TextView>
  	<EditText android:id="@+id/txtTelefono" android:enabled="false" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
  	
- 	    <TextView android:text="Razón Comercial :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+ 	    <TextView android:text="Razón Comercial :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
  	<EditText android:id="@+id/txtRazonComercial" android:layout_width="fill_parent" android:layout_height="wrap_content"  android:hint="Ingresar Razón Comercial" android:maxLength="30"></EditText>
  	
- 	    <TextView android:text="Referencia :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+ 	    <TextView android:text="Referencia :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0"  android:layout_width="fill_parent"></TextView>
  	<EditText android:id="@+id/txtReferencia" android:layout_width="fill_parent" android:layout_height="wrap_content"  android:hint="Ingresar Referencia" android:maxLength="60"></EditText>
  	
- 	     <TextView android:text="Fecha Aniversario :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+ 	     <TextView android:text="Fecha Aniversario :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
 	    <LinearLayout
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
 			<ImageButton android:onClick="btncalendario_onclick" android:src="@drawable/btn_calendario" android:layout_width="wrap_content" android:layout_height="wrap_content"></ImageButton>
 	</LinearLayout>
         
-	        <TextView android:text="Observaciones :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:id="@+id/textView1" android:layout_width="fill_parent"></TextView>
+	        <TextView android:text="Observaciones :" android:focusable="false" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"></TextView>
  	<EditText android:id="@+id/txtObservacion" 
  	    android:layout_width="fill_parent" 
  	    android:layout_height="wrap_content"

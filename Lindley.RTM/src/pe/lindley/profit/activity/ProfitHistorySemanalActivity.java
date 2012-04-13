@@ -44,14 +44,14 @@ public class ProfitHistorySemanalActivity extends ActivityBase {
 		this.detalle = detalle;
 	}
 
-	private int año;
+	private int anio;
 
-	public int getAño() {
-		return año;
+	public int getAnio() {
+		return anio;
 	}
 
-	public void setAño(int año) {
-		this.año = año;
+	public void setAnio(int anio) {
+		this.anio = anio;
 	}
 
 	private int campo;
@@ -76,7 +76,7 @@ public class ProfitHistorySemanalActivity extends ActivityBase {
 
 	public Intent execute(Context context) {
 
-		String[] titles = new String[] { String.format("%s %s", this.año,
+		String[] titles = new String[] { String.format("%s %s", this.anio,
 				this.mes) };
 
 		double[] valorSemana = new double[5];

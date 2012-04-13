@@ -51,7 +51,7 @@ public class ProfitHistoryArticuloActivity extends ActivityBase{
 	
 	private ArrayList<HistoryNewTO> datos;
 	private String titulo;
-	private int año;
+	private int anio;
 	private int campo;		
 	
 	@Override
@@ -92,7 +92,7 @@ public class ProfitHistoryArticuloActivity extends ActivityBase{
 			if (status == 0) {		
 				ArrayList<HistoryNewTO> detalle = profitHistoryArticuloProxy.getResponse().getDatos();
 					setDatos(detalle);
-					setAño(num_anio);
+					setAnio(num_anio);
 					setCampo(campo);					
 					selectSerie();					
 			}
@@ -103,6 +103,10 @@ public class ProfitHistoryArticuloActivity extends ActivityBase{
 			}
 		}
 		super.processOk();
+	}
+
+	public void setAnio(int anio) {
+		this.anio = anio;
 	}
 
 	@Override
@@ -129,8 +133,8 @@ public class ProfitHistoryArticuloActivity extends ActivityBase{
 		this.datos = datos;
 	}
 		
-	public int getAño() {
-		return año;
+	public int getAnio() {
+		return anio;
 	}
 
 	public int getCampo() {
@@ -141,9 +145,6 @@ public class ProfitHistoryArticuloActivity extends ActivityBase{
 		this.campo = campo;
 	}
 
-	public void setAño(int año) {
-		this.año = año;
-	}
 	
 	
 	
@@ -239,7 +240,7 @@ public class ProfitHistoryArticuloActivity extends ActivityBase{
 		sLabel.add(10, "NV");
 		sLabel.add(11, "DC");
 
-		String[] titles = new String[] { String.valueOf(this.año) };
+		String[] titles = new String[] { String.valueOf(this.anio) };
 
 		double[] anioActual = new double[12];
 
