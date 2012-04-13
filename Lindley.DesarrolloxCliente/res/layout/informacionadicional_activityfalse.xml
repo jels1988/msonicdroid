@@ -11,104 +11,131 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true" />
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:focusable="false"
-        android:text="¿Tiene Combos SS ?" >
-    </TextView>
-
-    <RadioGroup
-        android:id="@+id/radGrSS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
-        <RadioButton
-            android:id="@+id/radSSNo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:enabled="false"
-            android:text="NO" />
-
-        <RadioButton
-            android:id="@+id/radSSSi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:text="SI" />
-    </RadioGroup>
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:focusable="false"
-        android:text="Observación: " >
-    </TextView>
-
-    <EditText
-        android:id="@+id/txtObsSS"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:enabled="false"
-        android:maxLength="150" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:focusable="false"
-        android:text="¿Tiene Combos MS ?" >
-    </TextView>
-
-    <RadioGroup
-        android:id="@+id/radGrMS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
-        <RadioButton
-            android:id="@+id/radMSNo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:enabled="false"
-            android:text="NO" />
-
-        <RadioButton
-            android:id="@+id/radMSSi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:text="SI" />
-    </RadioGroup>
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:focusable="false"
-        android:text="Observación: " >
-    </TextView>
-
-    <EditText
-        android:id="@+id/txtObs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:enabled="false"
-        android:maxLength="150" >
-    </EditText>
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dip"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:focusable="false"
+            android:text="¿Tiene Combos SS ?" >
+        </TextView>
+
+        <RadioGroup
+            android:id="@+id/radGrSS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <RadioButton
+                android:id="@+id/radSSNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:enabled="false"
+                android:text="NO" />
+
+            <RadioButton
+                android:id="@+id/radSSSi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:text="SI" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:focusable="false"            
+            android:text="Observación: " >
+        </TextView>
+
+        <EditText
+            android:id="@+id/txtObsSS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:enabled="false"
+            android:maxLength="150" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:focusable="false"
+            android:text="¿Tiene Combos MS ?" >
+        </TextView>
+
+        <RadioGroup
+            android:id="@+id/radGrMS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <RadioButton
+                android:id="@+id/radMSNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:enabled="false"
+                android:text="NO" />
+
+            <RadioButton
+                android:id="@+id/radMSSi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:text="SI" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:focusable="false"
+            android:text="Observación: " >
+        </TextView>
+
+        <EditText
+            android:id="@+id/txtObs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:enabled="false"
+            android:maxLength="150" >
+        </EditText>
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:fillViewport="true" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ListView
+                android:id="@+id/android:list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="2dip"
+                android:layout_marginTop="2dip"
+                android:drawSelectorOnTop="false"
+                android:focusable="false" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
         <Button

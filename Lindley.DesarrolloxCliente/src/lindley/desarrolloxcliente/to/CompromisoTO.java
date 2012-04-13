@@ -5,6 +5,11 @@ import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 public class CompromisoTO {
+	
+	public CompromisoTO()
+	{
+		concrecionCumplio = soviCumplio = cumplePrecioCumplio = numeroSaboresCumplio = "N"; 
+	}
 
 	@SerializedName("PSS")
 	public String puntosSugeridos;

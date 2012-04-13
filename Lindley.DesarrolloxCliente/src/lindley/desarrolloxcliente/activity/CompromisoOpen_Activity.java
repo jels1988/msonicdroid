@@ -38,7 +38,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -146,21 +145,17 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	
 		if(accion == ACCION_ACTUALIZAR || accion == ACCION_CERRAR)
        	{    
+			for(CompromisoTO comp : application.openAdapter.detalles)
+			{
+				if(Integer.parseInt(comp.sovi)<=0 || Integer.parseInt(comp.soviActual)<=0)
+				{
+					showToast("Los valores de SOVI deben ser mayores a 0");
+					return false;
+				}
+			}
 			if(application.openAdapter == null || application.openAdapter.detalles.isEmpty())
 			{				
-				application.openAdapter = new EfficientAdapter(getApplicationContext(), new ArrayList<CompromisoTO>());
-				for(CompromisoTO comp : application.openAdapter.detalles)
-				{
-					Log.v("CompromisoOpen_Activity", comp.sovi);
-					Log.v("CompromisoOpen_Activity", comp.soviActual);
-					if(Integer.parseInt(comp.sovi)<=0 || Integer.parseInt(comp.soviActual)<=0)
-					{
-						Log.v("CompromisoOpen_Activity", comp.sovi);
-						Log.v("CompromisoOpen_Activity", comp.soviActual);
-						showToast("Los valores de SOVI deben ser mayores a 0");
-						return false;
-					}
-				}
+				application.openAdapter = new EfficientAdapter(getApplicationContext(), new ArrayList<CompromisoTO>());				
 				openAdapterVacio = true;
 				if(openAdapterVacio)
 				{
@@ -324,6 +319,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     		update.comboSS = informacion.getComboSS();
     		update.observacion = informacion.getObservacion();
     		update.observacionSS = informacion.getObservacionSS();
+    		
+    		
     		
     		actualizarCompromisoProxy.listaPosicionCompromiso = listUpdatePosicionTO;
     		actualizarCompromisoProxy.listaPresentacionCompromiso = listUpdatePresentacionTO;
@@ -547,9 +544,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 						int arg2, long arg3) {
 					// TODO Auto-generated method stub
 					if(arg2==0){
-						compromiso.concrecionActual = SI;
-					}else{
 						compromiso.concrecionActual = NO;
+					}else{
+						compromiso.concrecionActual = SI;
 					}
 				}
 
@@ -590,9 +587,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 					int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				if(arg2==0){
-					compromiso.cumplePrecio = SI;
-				}else{
 					compromiso.cumplePrecio = NO;
+				}else{
+					compromiso.cumplePrecio = SI;
 				}
 			}
 
@@ -610,9 +607,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 						int arg2, long arg3) {
 					// TODO Auto-generated method stub
 					if(arg2==0){
-						compromiso.cumplePrecioActual = SI;
-					}else{
 						compromiso.cumplePrecioActual = NO;
+					}else{
+						compromiso.cumplePrecioActual = SI;
 					}
 				}
 

@@ -160,17 +160,17 @@ public class CompromisoPresentacionOpen_Activity extends ListActivityBase {
 		boolean presentacionAdapterVacio = false;
 		if(accion == ACCION_ACTUALIZAR || accion == ACCION_CERRAR)
        	{    
+			for(CompromisoTO comp : application.openAdapter.detalles)
+			{
+				if(Integer.parseInt(comp.sovi)<=0 || Integer.parseInt(comp.soviActual)<=0)
+				{
+					showToast("Los valores de SOVI deben ser mayores a 0");
+					return false;
+				}
+			}
 			if(application.openAdapter == null || application.openAdapter.detalles.isEmpty())
 			{				
-				application.openAdapter = new CompromisoOpen_Activity.EfficientAdapter(this, new ArrayList<CompromisoTO>());
-				for(CompromisoTO comp : application.openAdapter.detalles)
-				{
-					if(Integer.parseInt(comp.sovi)<=0 || Integer.parseInt(comp.soviActual)<=0)
-					{
-						showToast("Los valores de SOVI deben ser mayores a 0");
-						return false;
-					}
-				}
+				application.openAdapter = new CompromisoOpen_Activity.EfficientAdapter(this, new ArrayList<CompromisoTO>());				
 				openAdapterVacio = true;
 				if(openAdapterVacio)
 				{

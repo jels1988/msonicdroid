@@ -129,25 +129,32 @@ public class CompromisoOpenFalse_Activity extends ListActivityBase {
 			if(application.openFalseAdapter == null || application.openFalseAdapter.detalles.isEmpty())
 			{				
 				application.openFalseAdapter = new CompromisoOpenFalse_Activity.EfficientAdapter(this, new ArrayList<CompromisoTO>());
-				for(CompromisoTO comp : application.openFalseAdapter.detalles)
-				{
-					if(Integer.parseInt(comp.sovi)<=0 && Integer.parseInt(comp.soviActual)<=0)
-					{
-						showToast("Los valores de SOVI deben ser mayores a 0");
-						return false;
-					}
-				}
 				openAdapterVacio = true;
+				if(openAdapterVacio)
+				{
+					showToast("Debe editar valores de la pestaña inventario.");
+					return false;
+				}
 			}
-			if(application.posicionAdapter == null || application.posicionAdapter.posiciones.isEmpty())
+			if(application.posicionFalseAdapter == null || application.posicionFalseAdapter.posiciones.isEmpty())
 			{				
-				application.posicionAdapter = new CompromisoPosicionOpen_Activity.EfficientAdapter(this, new ArrayList<PosicionCompromisoTO>());
+				application.posicionFalseAdapter = new CompromisoPosicionOpenFalse_Activity.EfficientAdapter(this, new ArrayList<PosicionCompromisoTO>());
 				posicionAdapterVacio = true;
+				if(posicionAdapterVacio)
+				{
+					showToast("Debe editar valores de la pestaña posición.");
+					return false;
+				}
 			}
-			if(application.presentacionAdapter == null || application.presentacionAdapter.detalles.isEmpty())
+			if(application.presentacionFalseAdapter == null || application.presentacionFalseAdapter.detalles.isEmpty())
 			{
-				application.presentacionAdapter = new CompromisoPresentacionOpen_Activity.EfficientAdapter(this, new ArrayList<PresentacionCompromisoTO>());
+				application.presentacionFalseAdapter = new CompromisoPresentacionOpenFalse_Activity.EfficientAdapter(this, new ArrayList<PresentacionCompromisoTO>());
 				presentacionAdapterVacio = true;
+				if(presentacionAdapterVacio)
+				{
+					showToast("Debe editar valores de la pestaña presentación.");
+					return false;
+				}
 			}
 				
        	}
@@ -182,16 +189,17 @@ public class CompromisoOpenFalse_Activity extends ListActivityBase {
     		}
        		
        		List<CerrarPosicionTO> listCerrarPosicionTO = new ArrayList<CerrarPosicionTO>();
-       		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
+       		for(PosicionCompromisoTO posicion : application.posicionFalseAdapter.posiciones)
     		{
        			CerrarPosicionTO cerrar = new CerrarPosicionTO();
        			cerrar.codigoVariable = posicion.codigoVariable;
        			cerrar.cumplio = posicion.cumplio;
+       			cerrar.fotoFinal = posicion.fotoFinal;
        			listCerrarPosicionTO.add(cerrar);
     		}
        		
        		List<CerrarPresentacionTO> listCerrarPresentacionTO = new ArrayList<CerrarPresentacionTO>();
-    		for(PresentacionCompromisoTO presentacion : application.presentacionAdapter.detalles)
+    		for(PresentacionCompromisoTO presentacion : application.presentacionFalseAdapter.detalles)
     		{
     			CerrarPresentacionTO cerrar = new CerrarPresentacionTO();
     			cerrar.codigoVariable = presentacion.codigoVariable;
@@ -369,7 +377,7 @@ public class CompromisoOpenFalse_Activity extends ListActivityBase {
 	    	
 	        convertView.setTag(holder);
 
-	        holder.txViewPuntos.setText(compromiso.puntosGanados);
+	        holder.txViewPuntos.setText(compromiso.puntosSugeridos);
 		    holder.txViewPro.setText("    "+compromiso.descripcionProducto);
 		    holder.txViewConcrecion.setText(compromiso.concrecion);
 		    holder.txViewConcrecionActual.setText(compromiso.concrecionActual);
@@ -380,6 +388,50 @@ public class CompromisoOpenFalse_Activity extends ListActivityBase {
 		    holder.txViewSabores.setText(compromiso.numeroSabores);
 		    holder.txViewSaboresActual.setText(compromiso.numeroSaboresActual+"");
 		    holder.txViewAccTrade.setText(compromiso.descAccionTrade);
+		    
+		    if(compromiso.numeroSaboresCumplio.equals("S"))
+			{
+				holder.chkViewSabor.setChecked(true);
+				compromiso.numeroSaboresCumplio = "S";
+			}
+			else
+			{
+				holder.chkViewSabor.setChecked(false);
+				compromiso.numeroSaboresCumplio = "N";
+			}
+		    
+		    if(compromiso.cumplePrecioCumplio.equals("S"))
+			{
+				holder.chkViewPrecio.setChecked(true);
+				compromiso.cumplePrecioCumplio = "S";
+			}
+			else
+			{
+				holder.chkViewPrecio.setChecked(false);
+				compromiso.cumplePrecioCumplio = "N";
+			}
+		    
+		    if(compromiso.soviCumplio.equals("S"))
+			{
+				holder.chkViewSOVI.setChecked(true);
+				compromiso.soviCumplio = "S";
+			}
+			else
+			{
+				holder.chkViewSOVI.setChecked(false);
+				compromiso.soviCumplio = "N";
+			}
+		    
+		    if(compromiso.concrecionCumplio.equals("S"))
+			{
+				holder.chkViewConcrecion.setChecked(true);
+				compromiso.concrecionCumplio = "S";
+			}
+			else
+			{
+				holder.chkViewConcrecion.setChecked(false);
+				compromiso.concrecionCumplio = "N";
+			}
 		    
 		    String fecha = compromiso.fechaCompromiso;
 			int anio;

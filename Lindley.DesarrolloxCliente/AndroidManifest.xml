@@ -91,6 +91,20 @@
             </intent-filter>
         </activity>
         
+        <activity android:name=".activity.InformacionAdicionalClose_Activity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.informacionadicionalclose" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".activity.InformacionAdicionalFalse_Activity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.informacionadicionalfalse" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
         <activity android:name=".activity.ConsultarPosicion_Activity" android:configChanges="keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="lindley.desarrolloxcliente.consultarposicion" />                					  
@@ -119,6 +133,14 @@
             </intent-filter>
         </activity>
         
+        <activity android:name=".activity.CompromisoPosicionOpenFalse_Activity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.compromisoposicionopenfalse"  />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>            
+        
+                    
         <activity android:name=".activity.CompromisoPresentacionClose_Activity" android:configChanges="keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="lindley.desarrolloxcliente.compromisopresentacionclose" />                					  
@@ -129,6 +151,13 @@
         <activity android:name=".activity.CompromisoPresentacionOpen_Activity" android:configChanges="keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="lindley.desarrolloxcliente.compromisopresentacionopen" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+         <activity android:name=".activity.CompromisoPresentacionOpenFalse_Activity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.compromisopresentacionopenfalse" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -171,6 +200,20 @@
         <activity android:name=".activity.SKUPrioritarioCompromiso_Activity" android:configChanges="keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="lindley.desarrolloxcliente.skuprioritariocompromiso" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".activity.SKUPrioritarioCompromisoClose_Activity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.skuprioritariocompromisoclose" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+                
+        <activity android:name=".activity.SKUPrioritarioCompromisoFalse_Activity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.skuprioritariocompromisofalse" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

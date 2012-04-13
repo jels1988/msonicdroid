@@ -1,41 +1,41 @@
 package lindley.desarrolloxcliente.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import lindley.desarrolloxcliente.MyApplication;
-import lindley.desarrolloxcliente.R;
-import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.OportunidadTO;
-import lindley.desarrolloxcliente.ws.service.ConsultarOportunidadProxy;
-import lindley.desarrolloxcliente.ws.service.GuardarDesarrolloProxy;
-import roboguice.inject.InjectView;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.AdapterView.OnItemSelectedListener;
-
-import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
-
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//import lindley.desarrolloxcliente.MyApplication;
+//import lindley.desarrolloxcliente.R;
+//import lindley.desarrolloxcliente.to.ClienteTO;
+//import lindley.desarrolloxcliente.to.OportunidadTO;
+//import lindley.desarrolloxcliente.ws.service.ConsultarOportunidadProxy;
+//import lindley.desarrolloxcliente.ws.service.GuardarDesarrolloProxy;
+//import roboguice.inject.InjectView;
+//import android.content.Context;
+//import android.content.DialogInterface;
+//import android.content.Intent;
+//import android.os.Bundle;
+//
+//import android.view.LayoutInflater;
+//import android.view.View;
+//import android.view.ViewGroup;
+//import android.view.View.OnClickListener;
+//import android.view.View.OnFocusChangeListener;
+//import android.widget.AdapterView;
+//import android.widget.ArrayAdapter;
+//import android.widget.BaseAdapter;
+//import android.widget.Button;
+//import android.widget.EditText;
+//import android.widget.Filter;
+//import android.widget.Filterable;
+//import android.widget.Spinner;
+//import android.widget.TextView;
+//import android.widget.AdapterView.OnItemSelectedListener;
+//
+//import com.google.inject.Inject;
+//import com.thira.examples.actionbar.widget.ActionBar;
+//
 import net.msonic.lib.ListActivityBase;
-import net.msonic.lib.MessageBox;
+//import net.msonic.lib.MessageBox;
 
 public class OportunidadDesarrollador_Activity extends ListActivityBase {
 

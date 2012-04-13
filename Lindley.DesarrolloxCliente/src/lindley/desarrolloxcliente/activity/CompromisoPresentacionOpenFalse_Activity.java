@@ -49,10 +49,7 @@ public class CompromisoPresentacionOpenFalse_Activity extends ListActivityBase {
 
 	public static final String COD_GESTION = "codGestion";
 	@InjectExtra(COD_GESTION) String codigoGestion;
-	
-	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
-	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
-	
+		
 	private static final int ACCION_CERRAR = 1;
 	public static final String TIPO_PRESENTACION = "3";
 	public static final String TIPO_POSICION = "2";
@@ -65,9 +62,6 @@ public class CompromisoPresentacionOpenFalse_Activity extends ListActivityBase {
 	@InjectView(R.id.txtViewCliente) TextView txtViewCliente;
 	ClienteTO cliente;
 	public static MyApplication application;
-	
-	@InjectView(R.id.btnGuardar) Button btnGuardar;
-	@InjectView(R.id.btnCerrar) Button btnCerrar;
 	
 	@InjectResource(R.string.btn_cancelar) 				String cancelar;	
 	@InjectResource(R.string.confirm_cancelar_title) 	String confirm_cancelar_title;
@@ -152,29 +146,45 @@ public class CompromisoPresentacionOpenFalse_Activity extends ListActivityBase {
     {
     	processAsync(ACCION_CERRAR);
     }
-	
+
     @Override
-	protected boolean executeAsyncPre(int accion) {
+    protected boolean executeAsyncPre(int accion) {
 		// TODO Auto-generated method stub
 		boolean openAdapterVacio = false;
 		boolean posicionAdapterVacio = false;
 		boolean presentacionAdapterVacio = false;
+	
 		if(accion == ACCION_CERRAR)
        	{    
-			if(application.openAdapter == null || application.openAdapter.detalles.isEmpty())
+			if(application.openFalseAdapter == null || application.openFalseAdapter.detalles.isEmpty())
 			{				
-				application.openAdapter = new CompromisoOpen_Activity.EfficientAdapter(this, new ArrayList<CompromisoTO>());
+				application.openFalseAdapter = new CompromisoOpenFalse_Activity.EfficientAdapter(this, new ArrayList<CompromisoTO>());
 				openAdapterVacio = true;
+				if(openAdapterVacio)
+				{
+					showToast("Debe editar valores de la pestaña inventario.");
+					return false;
+				}
 			}
-			if(application.posicionAdapter == null || application.posicionAdapter.posiciones.isEmpty())
+			if(application.posicionFalseAdapter == null || application.posicionFalseAdapter.posiciones.isEmpty())
 			{				
-				application.posicionAdapter = new CompromisoPosicionOpen_Activity.EfficientAdapter(this, new ArrayList<PosicionCompromisoTO>());
+				application.posicionFalseAdapter = new CompromisoPosicionOpenFalse_Activity.EfficientAdapter(this, new ArrayList<PosicionCompromisoTO>());
 				posicionAdapterVacio = true;
+				if(posicionAdapterVacio)
+				{
+					showToast("Debe editar valores de la pestaña posición.");
+					return false;
+				}
 			}
 			if(application.presentacionFalseAdapter == null || application.presentacionFalseAdapter.detalles.isEmpty())
 			{
 				application.presentacionFalseAdapter = new CompromisoPresentacionOpenFalse_Activity.EfficientAdapter(this, new ArrayList<PresentacionCompromisoTO>());
 				presentacionAdapterVacio = true;
+				if(presentacionAdapterVacio)
+				{
+					showToast("Debe editar valores de la pestaña presentación.");
+					return false;
+				}
 			}
 				
        	}
@@ -209,11 +219,12 @@ public class CompromisoPresentacionOpenFalse_Activity extends ListActivityBase {
     		}
        		
        		List<CerrarPosicionTO> listCerrarPosicionTO = new ArrayList<CerrarPosicionTO>();
-       		for(PosicionCompromisoTO posicion : application.posicionAdapter.posiciones)
+       		for(PosicionCompromisoTO posicion : application.posicionFalseAdapter.posiciones)
     		{
        			CerrarPosicionTO cerrar = new CerrarPosicionTO();
        			cerrar.codigoVariable = posicion.codigoVariable;
        			cerrar.cumplio = posicion.cumplio;
+       			cerrar.fotoFinal = posicion.fotoFinal;
        			listCerrarPosicionTO.add(cerrar);
     		}
        		
@@ -392,9 +403,15 @@ public class CompromisoPresentacionOpenFalse_Activity extends ListActivityBase {
 			}
 
 			if (presentacionTO.cumplio.equals("S"))
+			{
 				holder.chkCnfComp.setChecked(true);
+				presentacionTO.cumplio = "S";
+			}
 			else
+			{
 				holder.chkCnfComp.setChecked(false);
+				presentacionTO.cumplio = "N";
+			}
 
 		
 			 holder.btnSKU.setOnClickListener(new OnClickListener() {
@@ -403,7 +420,7 @@ public class CompromisoPresentacionOpenFalse_Activity extends ListActivityBase {
 						// TODO Auto-generated method stub
 						MyApplication application = (MyApplication) context.getApplicationContext();
 						application.listSKUPresentacionCompromiso = presentacionTO.listaSKU;
-						Intent skuPresentacion = new Intent(context, SKUPrioritarioCompromiso_Activity.class);
+						Intent skuPresentacion = new Intent(context, SKUPrioritarioCompromisoFalse_Activity.class);
 						context.startActivity(skuPresentacion);
 					}
 				});

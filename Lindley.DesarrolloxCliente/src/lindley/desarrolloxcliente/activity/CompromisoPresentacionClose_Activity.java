@@ -153,7 +153,7 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 			} else {
 				holder.txViewFecComp.setText("");
 			}
-	      holder.txViewPuntos.setText(presentacionTO.puntosSugeridos);
+	      holder.txViewPuntos.setText(presentacionTO.puntosGanados);
 	      if(presentacionTO.cumplio.equals("S"))
 	    	  holder.txViewCnfComp.setText("SI");
 	      else
@@ -165,7 +165,7 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 					// TODO Auto-generated method stub
 					MyApplication application = (MyApplication) context.getApplicationContext();
 					application.listSKUPresentacionCompromiso = presentacionTO.listaSKU;
-					Intent skuPresentacion = new Intent(context, SKUPrioritarioCompromiso_Activity.class);
+					Intent skuPresentacion = new Intent(context, SKUPrioritarioCompromisoClose_Activity.class);
 					context.startActivity(skuPresentacion);
 				}
 			});

@@ -7,7 +7,7 @@
      <TableLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/tableLayout"
-        android:layout_width="fill_parent"
+        android:layout_width="500dip"
         android:layout_height="wrap_content"
         android:shrinkColumns="*"
         android:stretchColumns="*" >

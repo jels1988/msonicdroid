@@ -9,6 +9,8 @@ public class PosicionCompromisoTO {
 	public PosicionCompromisoTO()
     {
 		listCompromisos = new ArrayList<CompromisoPosicionTO>();
+		cumplio = "N";
+		fotoFinal = " ";
     }
 
 	@SerializedName("RSPT")
@@ -42,6 +44,7 @@ public class PosicionCompromisoTO {
     @SerializedName("CMP")
     public ArrayList<CompromisoPosicionTO> listCompromisos;
     
+    @SerializedName("CUM")
     public String cumplio;
     
     @SerializedName("FFIN")
