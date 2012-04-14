@@ -1,5 +1,6 @@
 package lindley.desarrolloxcliente.activity;
 
+//import java.io.File;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -457,9 +458,6 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 					// TODO Auto-generated method stub
 					Intent oportunidad = new Intent(context, ConsultarOportunidad_Activity.class);
 					context.startActivity(oportunidad);
-					//Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
-					//intent.putExtra(VerFoto_Activity.FILE_NAME, file_name);
-					//context.startActivity(intent);
 					
 				}
 			});
@@ -524,6 +522,8 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 		}
 
 	}
+	
+	
 	
 	public void takePhoto(){
     	file_name = String.format("%d.jpg", System.currentTimeMillis());
