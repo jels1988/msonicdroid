@@ -4,25 +4,20 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="8" />
-    
-	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-	<uses-permission android:name="android.permission.CAMERA"/>
+   
 		    
     <application
         android:icon="@drawable/header_logo"
         android:label="@string/app_name" 
         android:theme="@style/CustomTheme"
-        android:name="MyApplication">
+        android:name="lindley.desarrolloxcliente.MyApplication">
          
-        <uses-library android:name="com.google.android.maps" android:required="true"/>
+        <uses-library
+            android:name="com.google.android.maps"
+            android:required="true" />
         
+        
+         
         <activity android:name="DireccionActivity" android:configChanges="keyboardHidden|orientation"/>
         
         <activity
@@ -260,7 +255,7 @@
             </intent-filter>
         </activity>           
             
-        <service android:name=".service.UploadFileService">
+        <service android:name=".service.UploadFileService" android:exported="false">
             
             <intent-filter>
                 <action android:name="lindley.desarrolloxcliente.uploadFileService" />                					  
@@ -270,5 +265,16 @@
         </service>
         
     </application>
+    
+     <uses-sdk android:minSdkVersion="7" android:maxSdkVersion="10"/>
+	
+	 <uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.CAMERA"/>
         
 </manifest>
