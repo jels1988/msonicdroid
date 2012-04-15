@@ -125,7 +125,7 @@ public class HttpPoster {
 
 	private String stream2String(InputStream input) throws IOException {
 		
-		BufferedReader buffer = new BufferedReader(new InputStreamReader(input));
+		BufferedReader buffer = new BufferedReader(new InputStreamReader(input),8 * 1024);
 		StringBuilder sb = new StringBuilder();
 		String line;
 
