@@ -70,8 +70,8 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 		mActionBar.setSubTitle(cliente.getCodigo() + " - "
 				+ cliente.getNombre());
 		mActionBar.setHomeLogo(R.drawable.header_logo);
-		MessageBox.showConfirmDialog(this, "Posición-Activos",
-				"¿Tiene activos de la empresa ?", "SI",
+		MessageBox.showConfirmDialog(this, "Posici—n-Activos",
+				"ÀTiene activos de la empresa ?", "SI",
 				new android.content.DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {

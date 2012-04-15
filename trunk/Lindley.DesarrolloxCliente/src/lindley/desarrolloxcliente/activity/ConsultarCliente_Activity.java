@@ -1,7 +1,6 @@
 package lindley.desarrolloxcliente.activity;
 
 //import java.io.File;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +13,12 @@ import roboguice.inject.InjectView;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+/*
+import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+*/
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -53,8 +54,8 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 	
 	private EfficientAdapter adap;
 	
-	public static String file_name="";
-	private static final int TAKE_PHOTO_CODE = 1;
+	//public static String file_name="";
+	//private static final int TAKE_PHOTO_CODE = 1;
 	
     /** Called when the activity is first created. */
     @Override
@@ -330,6 +331,7 @@ public class ConsultarCliente_Activity extends ListActivityBase {
     @Override
     protected void onDestroy() {
     	// TODO Auto-generated method stub
+    	finish();
     	android.os.Process.killProcess(android.os.Process.myPid());
     	super.onDestroy();
     }
@@ -524,7 +526,7 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 	}
 	
 	
-	
+	/*
 	public void takePhoto(){
     	file_name = String.format("%d.jpg", System.currentTimeMillis());
     	 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -563,6 +565,6 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 		//documentoTO.setNombreArchivo(file_name);
 		//documentoTO.setEsLocal(DocumentoTO.LOCAL);
 		//clienteBLL.guardarDocumento(clienteId, documentoTO);
-	}
+	}*/
 
 }

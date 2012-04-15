@@ -159,7 +159,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 				openAdapterVacio = true;
 				if(openAdapterVacio)
 				{
-					showToast("Debe editar valores de la pestaña inventario.");
+					showToast("Debe editar valores de la pesta–a inventario.");
 					return false;
 				}
 			}
@@ -179,13 +179,13 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 				presentacionAdapterVacio = true;
 				if(presentacionAdapterVacio)
 				{
-					showToast("Debe editar valores de la pestaña presentación.");
+					showToast("Debe editar valores de la pesta–a presentaci—n.");
 					return false;
 				}
 			}
 			if(application.informacionAdicional == null)
 			{
-				showToast("Debe editar valores de la pestaña combos.");
+				showToast("Debe editar valores de la pesta–a combos.");
 				return false;
 			}
 				
@@ -382,7 +382,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
        			int status = cerrarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
        				setAdapterApplication();
-       				showToast("Los registros se cerrarón satisfactoriamente.");
+       				showToast("Los registros se cerraron satisfactoriamente.");
        				Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
 					startActivity(cabecera);
        			}
@@ -401,7 +401,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
        			int status = actualizarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
        				setAdapterApplication();
-       				showToast("Los registros se actualizarón correctamente.");			
+       				showToast("Los registros se actualizaron correctamente.");			
        				
        				Intent intentService = new Intent("lindley.desarrolloxcliente.uploadFileService");
        				startService(intentService);

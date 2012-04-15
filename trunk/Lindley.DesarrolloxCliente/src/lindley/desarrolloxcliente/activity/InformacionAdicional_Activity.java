@@ -97,6 +97,7 @@ public class InformacionAdicional_Activity extends ActivityBase {
         
         application.informacionAdicional = new InformacionAdicionalTO();
         
+        /*
         txtObs.setOnFocusChangeListener(new OnFocusChangeListener() {
 			
 			@Override
@@ -162,12 +163,15 @@ public class InformacionAdicional_Activity extends ActivityBase {
 					application.informacionAdicional.setComboMS("S");
 			}
 		});
-        
+        */
 	}
 	
 	@Override
 	protected void process() {
 		// TODO Auto-generated method stub
+		
+		
+		
 		consultarInformacionComboProxy.codigoRegistro = codigoGestion;
 		consultarInformacionComboProxy.execute();
 	}
@@ -295,7 +299,7 @@ public class InformacionAdicional_Activity extends ActivityBase {
 				{
 					if(Integer.parseInt(comp.sovi)<=0 || Integer.parseInt(comp.soviActual)<=0)
 					{
-						showToast("Los valores de SOVI deben ser mayores a 0");
+						showToast("Los valores de SOVI deben ser mayores a 0.");
 						return false;
 					}
 				}
@@ -305,7 +309,7 @@ public class InformacionAdicional_Activity extends ActivityBase {
 					openAdapterVacio = true;
 					if(openAdapterVacio)
 					{
-						showToast("Debe editar valores de la pestaña inventario.");
+						showToast("Debe editar valores de la pesta–a inventario.");
 						return true;
 					}
 				}
@@ -315,7 +319,7 @@ public class InformacionAdicional_Activity extends ActivityBase {
 					posicionAdapterVacio = true;
 					if(posicionAdapterVacio)
 					{
-						showToast("Debe editar valores de la pestaña posición.");
+						showToast("Debe editar valores de la pesta–a posicion.");
 						return true;
 					}
 				}
@@ -325,13 +329,13 @@ public class InformacionAdicional_Activity extends ActivityBase {
 					presentacionAdapterVacio = true;
 					if(presentacionAdapterVacio)
 					{
-						showToast("Debe editar valores de la pestaña presentación.");
+						showToast("Debe editar valores de la pesta–a presentacion.");
 						return true;
 					}
 				}
 				if(application.informacionAdicional == null)
 				{
-					showToast("Debe editar valores de la pestaña combos.");
+					showToast("Debe editar valores de la pestana combos.");
 					return true;
 				}
 					
@@ -349,6 +353,21 @@ public class InformacionAdicional_Activity extends ActivityBase {
 		}
 	    protected void process(int accion) {
 			
+	    	if(radMSNo.isChecked())
+    			application.informacionAdicional.setComboMS("N");
+    		else
+    			application.informacionAdicional.setComboMS("S");
+    		
+    		
+    		if(radSSNo.isChecked())
+    			application.informacionAdicional.setComboSS("N");
+    		else
+    			application.informacionAdicional.setComboSS("S");
+    		
+    		
+    		application.informacionAdicional.setObservacion(txtObs.getText().toString());
+    		application.informacionAdicional.setObservacionSS(txtObsSS.getText().toString());
+    		
 	    	if(accion == ACCION_CERRAR)
 	    	{    		
 	    		List<CerrarInventarioTO> listCerrarCompromisoTO = new ArrayList<CerrarInventarioTO>();
@@ -403,6 +422,7 @@ public class InformacionAdicional_Activity extends ActivityBase {
 	    	}
 	    	else if(accion == ACCION_ACTUALIZAR)
 	    	{    		
+	    		
 	    		
 	    		List<UpdateInventarioTO> listUpdateCompromisoTO = new ArrayList<UpdateInventarioTO>();
 	       		for(CompromisoTO compromiso : application.openAdapter.detalles)

@@ -3,7 +3,7 @@
     <!--desa: 0GnqeXeroFjywL9df0WrJpTEwFsWxFYCGqDe6xw-->
     <!--prod: 0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A-->
     <string name="app_name">Desarrollo por Cliente</string>
-    <string name="apikey">0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A</string>
+    <string name="apikey">0GnqeXeroFjywL9df0WrJpTEwFsWxFYCGqDe6xw</string>
     <string name="login_activity_title">Login</string>
     <string name="login_activity_ingresar">Ingresar</string>
     <string name="login_activity_usuario">Usuario :</string>
@@ -53,7 +53,7 @@
     <string name="btnguardar">Guardar</string>
     <string name="compromiso_open_cerrar">Cerrar</string>
     <string name="compromiso_open_guardar">Guardar</string>
-    <string name="compromiso_open_cancelar">Cancelar</string>    
+    <string name="compromiso_open_cancelar">Cancelar</string>
     <string name="btnSiguiente">Siguiente</string>
     <string name="ver_SKU">Precio Marcado Skus Prioritarios</string>
     <string name="consultarposicion_activity_title">Posición</string>
@@ -88,23 +88,23 @@
     <string name="puntos_ariculo">Puntos</string>
     <string name="compromiso_quitar">Quitar</string>
     <string name="app_salir">Salir</string>
-	<string name="confirm_exit_title">Salir</string>	
-	<string name="confirm_exit_message">¿Desea salir de la aplicación?</string>
-	<string name="confirm_exit_yes">SI</string>
-	<string name="confirm_exit_no">NO</string>
-	<string name="btn_cancelar">Cancelar</string>   
-	<string name="confirm_cancelar_title">Cancelar</string>	
-	<string name="confirm_cancelar_message">¿Desea salir de la evaluación?</string>
-	<string name="confirm_cancelar_yes">SI</string>
-	<string name="confirm_cancelar_no">NO</string>
-	<string name="skuprioritario_activity_boton_guardar">Guardar</string>
-	<string name="skuprioritario_activity_boton_cancelar">Cancelar</string>
-	<string name="confirm_atras_title">Cancelar</string>	
-	<string name="confirm_atras_message">¿Desea volver a la busqueda de clientes?</string>
-	<string name="confirm_atras_yes">SI</string>
-	<string name="confirm_atras_no">NO</string>
-	<string name="oportunidad_activity_boton_cancelar">Cancelar</string>
-	<string-array name="numero_sabores">
+    <string name="confirm_exit_title">Salir</string>
+    <string name="confirm_exit_message">¿Desea salir de la aplicación?</string>
+    <string name="confirm_exit_yes">SI</string>
+    <string name="confirm_exit_no">NO</string>
+    <string name="btn_cancelar">Cancelar</string>
+    <string name="confirm_cancelar_title">Cancelar</string>
+    <string name="confirm_cancelar_message">¿Desea salir de la evaluación?</string>
+    <string name="confirm_cancelar_yes">SI</string>
+    <string name="confirm_cancelar_no">NO</string>
+    <string name="skuprioritario_activity_boton_guardar">Guardar</string>
+    <string name="skuprioritario_activity_boton_cancelar">Cancelar</string>
+    <string name="confirm_atras_title">Cancelar</string>
+    <string name="confirm_atras_message">¿Desea volver a la busqueda de clientes?</string>
+    <string name="confirm_atras_yes">SI</string>
+    <string name="confirm_atras_no">NO</string>
+    <string name="oportunidad_activity_boton_cancelar">Cancelar</string>
+    <string-array name="numero_sabores">
         <item>2</item>
         <item>3</item>
         <item>4</item>
@@ -114,6 +114,4 @@
         <item>SI</item>
         <item>NV</item>
     </string-array>
-    
 </resources>
-

@@ -157,14 +157,14 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".activity.VerFoto_Activity" android:configChanges="keyboardHidden|orientation" >
+        <activity android:name=".activity.VerFoto_Activity" android:configChanges="keyboardHidden|orientation"  android:noHistory="true">
             <intent-filter>
                 <action android:name="lindley.desarrolloxcliente.verfoto" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
               
-        <activity android:name=".activity.CompromisoPrincipalOpen_Resumen" android:configChanges="keyboardHidden|orientation" >
+        <activity android:name=".activity.CompromisoPrincipalOpen_Resumen" android:configChanges="keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="lindley.desarrolloxcliente.compromisoprincipalopen" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
@@ -255,7 +255,7 @@
             </intent-filter>
         </activity>           
             
-        <service android:name=".service.UploadFileService" android:exported="false">
+        <service android:name=".service.UploadFileService" android:exported="false" android:process=":remote">
             
             <intent-filter>
                 <action android:name="lindley.desarrolloxcliente.uploadFileService" />                					  

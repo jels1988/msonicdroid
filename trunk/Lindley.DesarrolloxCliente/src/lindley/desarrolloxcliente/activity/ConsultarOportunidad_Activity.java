@@ -139,7 +139,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     	int filasSeleccionadas=oportunidades.size();
     	
     	if(filasSeleccionadas == 0){
-    		MessageBox.showSimpleDialog(this, "Mensaje", "Debe seleccionar como mínimo una acción.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+    		MessageBox.showSimpleDialog(this, "Mensaje", "Debe seleccionar como m’nimo una acci—n.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -149,7 +149,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 			});
     	}
     	else if(filasSeleccionadas>maximoValor){
-    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede seleccionar como máximo " + maximoValor +" acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede seleccionar como m‡ximo " + maximoValor +" acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
