@@ -193,7 +193,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				openAdapterVacio = true;
 				if(openAdapterVacio)
 				{
-					showToast("Debe editar valores de la pestaña inventario.");
+					showToast("Debe editar valores de la pesta–a inventario.");
 					return false;
 				}
 			}
@@ -203,7 +203,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				posicionAdapterVacio = true;
 				if(posicionAdapterVacio)
 				{
-					showToast("Debe editar valores de la pestaña posición.");
+					showToast("Debe editar valores de la pesta–a posici—n.");
 					return false;
 				}
 			}
@@ -213,13 +213,13 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				presentacionAdapterVacio = true;
 				if(presentacionAdapterVacio)
 				{
-					showToast("Debe editar valores de la pestaña presentación.");
+					showToast("Debe editar valores de la pesta–a presentaci—n.");
 					return false;
 				}
 			}
 			if(application.informacionAdicional == null)
 			{
-				showToast("Debe editar valores de la pestaña combos.");
+				showToast("Debe editar valores de la pesta–a combos.");
 				return false;
 			}
 				
@@ -373,7 +373,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
        			int status = cerrarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
        				setAdapterApplication();
-       				showToast("Los registros se cerrarón satisfactoriamente.");
+       				showToast("Los registros se cerraron satisfactoriamente.");
        				Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
 					startActivity(cabecera);
        			}
@@ -392,7 +392,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
        			int status = actualizarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
        				setAdapterApplication();
-       				showToast("Los registros se actualizarón correctamente.");
+       				showToast("Los registros se actualizaron correctamente.");
        				
        				Intent intentService = new Intent("lindley.desarrolloxcliente.uploadFileService");
        				startService(intentService);
@@ -625,11 +625,43 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					if((posicionTO.fotoInicial==null)||(posicionTO.fotoInicial.compareTo("")==0)){
+						
 						((CompromisoPosicionOpen_Activity)context).takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionTO);
+						
+						
+												
+						
+						
+						
+						
 					}else{
-						Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
-						intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.fotoInicial);
-						context.startActivity(intent);
+
+						MessageBox.showConfirmDialog(context, "Confirmacion", "ÀDesea reemplazar la foto?", "Si",
+								new android.content.DialogInterface.OnClickListener() {
+							
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub	
+								/*Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
+								intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.fotoInicial);
+								context.startActivity(intent);*/
+								
+								((CompromisoPosicionOpen_Activity)context).takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionTO);
+								
+							}
+							
+						}, "No", new android.content.DialogInterface.OnClickListener() {
+
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+								
+								
+								Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
+								intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.fotoInicial);
+								context.startActivity(intent);
+							}
+							
+						});  
+
 				    }						
 			     }
 			});

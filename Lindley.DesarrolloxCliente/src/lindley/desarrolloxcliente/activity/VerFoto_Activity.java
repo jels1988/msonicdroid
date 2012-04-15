@@ -13,6 +13,7 @@ import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -49,13 +50,32 @@ public class VerFoto_Activity extends ActivityBase {
 		mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
 		processAsync();
 	}
-
+	
+	
+	
+	private boolean existeArchivo(String fileNameLocal){
+		File path = new File(Environment.getExternalStorageDirectory(),this.getPackageName());
+		File file = new File(path, fileNameLocal);
+		return(file.exists());
+		
+		
+		
+	}
 	@Override
 	protected void process() {
-
+		
+		if(!existeArchivo(fileName)){
+			
+			Intent intent = new Intent("lindley.desarrolloxcliente.webviewverfoto");
+			intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, fileName);
+			startActivity(intent);	
+			
+			super.process();
+			return;
+		}
+		
 		// TODO Auto-generated method stub
-		File path = new File(Environment.getExternalStorageDirectory(),
-				this.getPackageName());
+		File path = new File(Environment.getExternalStorageDirectory(),this.getPackageName());
 
 		FileInputStream is = null;
 		BufferedInputStream bis = null;

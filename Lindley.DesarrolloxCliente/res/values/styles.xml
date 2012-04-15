@@ -97,7 +97,7 @@
 <style name="MyListView" parent="@android:style/Widget.ListView">
  	<!-- item name="android:listSelector">@drawable/list_selector</item-->
  	<item name="android:cacheColorHint">#00000000</item>
- 	 
+ 	<item name="android:clickable">false</item>
 </style>
 
 
