@@ -6,7 +6,7 @@
 
 
 
-<color name="custom_theme_color_amarillo">#fecc00</color> 
+<color name="custom_theme_color_amarillo">#F2F2F2</color> 
 <color name="custom_theme_color_amarillo_alterno">#ffdd00</color> 
 
 <color name="custom_theme_color_lila">#6d1e7e</color>
@@ -41,7 +41,7 @@
  	<item name="android:focusable">false</item>
  	<item name="android:focusableInTouchMode">false</item>
  	<item name="android:clickable">true</item>
-	<item name="android:textColor">@color/custom_theme_color_lila</item>
+	<item name="android:textColor">@color/custom_theme_color_negro</item>
 	<!--item name="android:textStyle">bold</item-->
 </style>
 
@@ -104,7 +104,8 @@
 
 <style name="CustomTheme">
 
-    <item name="android:windowBackground">@color/custom_theme_color_amarillo</item>
+<!--     <item name="android:windowBackground">@color/custom_theme_color_amarillo</item> -->
+<item name="android:windowBackground">@drawable/background_lindley</item>
 	<item name="android:colorForegroundInverse">@color/custom_theme_color_amarillo</item>
 	<item name="android:colorBackground">@color/custom_theme_color_lila</item>
 	<item name="android:disabledAlpha">0.5</item>
@@ -132,9 +133,11 @@
 
 <style name="CustomThemeWhite">
 
-    <item name="android:windowBackground">@color/custom_theme_color_blanco</item>
+<!--     <item name="android:windowBackground">@color/custom_theme_color_blanco</item> -->
+    <item name="android:windowBackground">@drawable/background_lindley</item>
 	<item name="android:colorForegroundInverse">@color/custom_theme_color_blanco</item>
-	<item name="android:colorBackground">@color/custom_theme_color_lila</item>
+<!-- 	<item name="android:colorBackground">@color/custom_theme_color_lila</item> -->
+	<item name="android:colorBackground">@drawable/background_lindley</item>
 	<item name="android:disabledAlpha">0.5</item>
 	<item name="android:backgroundDimAmount">0.6</item>
 
