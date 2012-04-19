@@ -88,7 +88,7 @@
              android:text="" 
              android:layout_weight="1" 
              android:inputType="number" 
-             android:maxLength="8"></EditText>
+             android:maxLength="11"></EditText>
         </TableRow>
         
         
@@ -101,7 +101,7 @@
              android:text="" 
              android:layout_weight="1" 
              android:inputType="number" 
-             android:maxLength="9"></EditText>
+             android:maxLength="11"></EditText>
         </TableRow>
         
         <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
