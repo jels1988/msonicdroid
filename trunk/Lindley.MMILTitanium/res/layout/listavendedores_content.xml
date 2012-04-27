@@ -1,0 +1,116 @@
+<TableLayout
+ xmlns:android="http://schemas.android.com/apk/res/android"
+ android:layout_height="wrap_content"
+ 	android:layout_width="wrap_content"
+ 	android:background="@color/custom_theme_color_blanco"
+ 	android:addStatesFromChildren="true"
+      android:stretchColumns="*"
+        android:shrinkColumns="*">
+ 
+    
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent">
+            
+              <TextView
+                android:id="@+id/txtCodigo"
+                android:layout_height="wrap_content"
+                android:layout_width="50dip"
+                android:gravity="left"/>
+            
+              <TextView
+                android:id="@+id/txtNombre"
+                android:layout_height="wrap_content"
+                android:layout_width="250dip"
+                android:gravity="left"/>
+              
+              
+                  
+              <ImageView android:id="@+id/imgEstado" 
+                  		 android:layout_gravity="center_vertical" 
+                  		android:focusable="false"
+        				android:clickable="false"
+                  		 android:layout_width="20dip" 
+                  		 android:layout_height="wrap_content" 
+                  		 android:contentDescription="@string/app_name"/>
+              
+                <TextView
+                android:id="@+id/txViewEstado"
+                android:layout_height="wrap_content"
+                android:layout_width="80dip"
+                android:gravity="left"/>
+            
+                 
+                      
+              <ImageView android:id="@+id/imgCuota" 
+                  		 android:layout_gravity="center_vertical" 
+                  		android:focusable="false"
+        				android:clickable="false"
+                  		 android:layout_width="20dip" 
+                  		 android:layout_height="wrap_content" 
+                  		 android:contentDescription="@string/app_name"/>
+              
+                <TextView
+                android:id="@+id/txCuota"
+                android:layout_height="wrap_content"
+                android:layout_width="80dip"
+                android:gravity="left"/>
+                
+               
+
+                          
+              <ImageView android:id="@+id/imgEficienciaGlobal" 
+                  		 android:layout_gravity="center_vertical" 
+                  		android:focusable="false"
+        				android:clickable="false"
+                  		 android:layout_width="20dip" 
+                  		 android:layout_height="wrap_content" 
+                  		 android:contentDescription="@string/app_name"/>
+              
+                <TextView
+                android:id="@+id/txtEficienciaGlobal"
+                android:layout_height="wrap_content"
+                android:layout_width="80dip"
+                android:gravity="left"/>
+                
+                
+                
+     	 <ImageView android:id="@+id/imgPlanVisita" 
+                  		 android:layout_gravity="center_vertical" 
+                  		android:focusable="false"
+        				android:clickable="false"
+                  		 android:layout_width="20dip" 
+                  		 android:layout_height="wrap_content" 
+                  		 android:contentDescription="@string/app_name"/>
+              
+
+
+          <TextView
+                android:id="@+id/txtPlanVisita"
+                android:layout_height="wrap_content"
+                android:layout_width="80dip"
+                android:gravity="left"/>
+                
+         
+                    
+     	 <ImageView android:id="@+id/imgEficienciaPreventa" 
+                  		 android:layout_gravity="center_vertical" 
+                  		android:focusable="false"
+        				android:clickable="false"
+                  		 android:layout_width="20dip" 
+                  		 android:layout_height="wrap_content" 
+                  		 android:contentDescription="@string/app_name"/>
+     	 
+
+         <TextView
+                android:id="@+id/txtEficienciaPreventa"
+                android:layout_height="wrap_content"
+                android:layout_width="80dip"
+                android:gravity="left"/>
+
+                
+                
+        </TableRow>
+    
+ 
+ </TableLayout>

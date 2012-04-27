@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:state_selected="true" android:drawable="@color/custom_theme_color_rojo" />
+<item android:state_checked="true"  android:drawable="@color/custom_theme_color_verde" />
+<item android:state_focused="true" android:drawable="@color/custom_theme_color_blanco" />
+<item android:state_pressed="true" android:drawable="@color/custom_theme_color_amarillo_alterno" />
+<item android:drawable="@color/custom_theme_color_lila" />
+</selector>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+<!--     <string name="urlwsMMILPizarra">http://java.cdaandino.com/rtm/MMILTitanium/PizarraService.svc</string> -->
+<!--     <string name="urlwsMMILVendedor">http://java.cdaandino.com/rtm/MMILTitanium/VendedorService.svc</string> -->
+<!--     <string name="urlwsMMILSupervisor">http://java.cdaandino.com/rtm/MMILTitanium/SupervisorService.svc</string> -->
+    
+    <string name="urlwsMMILPizarra">http://192.168.0.13/MMIL/PizarraService.svc</string>
+  	<string name="urlwsMMILVendedor">http://192.168.0.13/MMIL/VendedorService.svc</string>
+    <string name="urlwsMMILSupervisor">http://192.168.0.13/MMIL/SupervisorService.svc</string>
+    
+    
+</resources>
