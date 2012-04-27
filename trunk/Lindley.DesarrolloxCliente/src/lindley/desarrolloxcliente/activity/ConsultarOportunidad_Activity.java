@@ -52,6 +52,27 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	@InjectResource(R.string.confirm_atras_yes) 	String confirm_atras_yes;
 	@InjectResource(R.string.confirm_atras_no) 		String confirm_atras_no;
 	
+	 @Override
+	 public void onBackPressed() {
+		 // TODO Auto-generated method stub
+		 MessageBox.showConfirmDialog(this, confirm_atras_title, confirm_atras_message, confirm_atras_yes, new android.content.DialogInterface.OnClickListener() {
+				
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub	
+					Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
+					startActivity(intent);
+				}
+				
+			}, confirm_atras_no, new android.content.DialogInterface.OnClickListener() {
+
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+			});   
+    }
+	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,22 +89,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     
 	public void btnCancelar_click(View view)
 	{
-		MessageBox.showConfirmDialog(this, confirm_atras_title, confirm_atras_message, confirm_atras_yes, new android.content.DialogInterface.OnClickListener() {
-			
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub	
-				Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
-				startActivity(intent);
-			}
-			
-		}, confirm_atras_no, new android.content.DialogInterface.OnClickListener() {
-
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});   
+		onBackPressed();
 	}
 	
     public void btnSiguiente_click(View view)
@@ -160,6 +166,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     	}else{
     		Intent intent;
     		String a = "C";
+    		finish();
     		if(a.equals(OPORTUNIDAD_DESARROLLADOR_ABIERTO))
     		{
     			intent= new Intent("lindley.desarrolloxcliente.oportunidaddesarrollador");		
@@ -247,6 +254,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	        	        	        	    	
 	        holder.txViewPro = (TextView) convertView.findViewById(R.id.txViewPro); 
 	    	holder.btnProfit = (Button) convertView.findViewById(R.id.btnProfit);
+	    	holder.txViewLegacy = (TextView) convertView.findViewById(R.id.txViewLegacy);
 	        holder.chkSeleccion = (CheckBox) convertView.findViewById(R.id.chkSeleccion);
 	        	    	
 	        convertView.setTag(holder);
@@ -256,8 +264,8 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	        holder = (ViewHolder) convertView.getTag();
 	      }
 	      
-	      holder.txViewPro.setText("     "+oportunidad.descripcionProducto);
-	      
+	      holder.txViewPro.setText(" "+oportunidad.descripcionProducto);
+	      holder.txViewLegacy.setText(oportunidad.codigoLegacy);
 	      holder.chkSeleccion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				
 				@Override
@@ -292,6 +300,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	    static class ViewHolder {   
 	    	CheckBox chkSeleccion;
 	    	TextView txViewPro;
+	    	TextView txViewLegacy;
 	    	Button btnProfit;
 	    }
 	    

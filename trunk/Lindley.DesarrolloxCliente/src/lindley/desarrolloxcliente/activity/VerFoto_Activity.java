@@ -27,7 +27,7 @@ import net.msonic.lib.ActivityBase;
 public class VerFoto_Activity extends ActivityBase {
 
 	public static final String FILE_NAME = "FILE_NAME";
-
+	
 	@InjectView(R.id.actionBar)	ActionBar mActionBar;
 	@InjectExtra(FILE_NAME)		String fileName;
 	@InjectView(R.id.imgFoto)	ImageView imgVer;

@@ -124,6 +124,7 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	        	        	    	
 	        holder.txViewPuntos = (TextView) convertView.findViewById(R.id.txViewPuntos);
 	        holder.btnProfit = (ImageButton) convertView.findViewById(R.id.btnProfit);
+	        holder.txViewLegacy = (TextView) convertView.findViewById(R.id.txViewLegacy);
 	        holder.txViewPro = (TextView) convertView.findViewById(R.id.txViewPro); 
 	        holder.txViewConcrecion = (TextView) convertView.findViewById(R.id.txViewConcrecion); 
 	        holder.txViewConcrecionActual = (TextView) convertView.findViewById(R.id.txViewConcrecionActual); 
@@ -149,7 +150,8 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	      }
 	      
 	      holder.txViewPuntos.setText(compromiso.puntosGanados);
-	      holder.txViewPro.setText(compromiso.descripcionProducto);
+	      holder.txViewPro.setText(compromiso.descripcionProducto);	      
+		  holder.txViewLegacy.setText(compromiso.codigoLegacy);
 	      holder.txViewConcrecion.setText(compromiso.concrecion);
 	      holder.txViewConcrecionActual.setText(compromiso.concrecionActual);
 	      holder.txViewSOVI.setText(compromiso.sovi);
@@ -236,6 +238,7 @@ public class CompromisoClose_Activity extends ListActivityBase {
 	    static class ViewHolder {   
 	    	TextView txViewPuntos;
 	    	ImageButton btnProfit;
+	    	TextView txViewLegacy;
 	    	TextView txViewPro;
 	    	TextView txViewConcrecion;
 	    	TextView txViewConcrecionActual;

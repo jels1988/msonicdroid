@@ -22,9 +22,12 @@ public class WebViewVerFoto_Activity extends ActivityBase {
 
 	private static final String DESARROLLO_X_CLIENTE = "/DesarrolloxCliente/";
 	public static final String NOMBRE_FOTO = "nomFoto";
+	public static final String TITULO_FOTO = "titFoto";
 	@InjectView(R.id.wvwFoto) 	WebView   wvwFoto;
 	@InjectView(R.id.actionBar) ActionBar mActionBar;
 	@InjectExtra(NOMBRE_FOTO) String fotoNombre;
+	@InjectExtra(TITULO_FOTO) String tituloNombre;
+	
 	@InjectResource(R.string.urlWebView) String urlwb;
 	ClienteTO cliente;
 	private MyApplication application;
@@ -36,7 +39,9 @@ public class WebViewVerFoto_Activity extends ActivityBase {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.webviewfoto_activity);
 		
-		 mActionBar.setTitle(R.string.ver_foto_activity_title);
+		 mActionBar.setTitle(tituloNombre);
+//		 mActionBar.setTitle(R.string.ver_foto_activity_title);
+		 
 		 mActionBar.setHomeLogo(R.drawable.header_logo);
 		 application = (MyApplication)getApplicationContext();
 		 cliente = application.getClienteTO();

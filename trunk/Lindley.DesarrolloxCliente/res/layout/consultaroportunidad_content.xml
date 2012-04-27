@@ -32,6 +32,13 @@
                 android:text="@string/ver_profit" />
             
             <TextView
+                android:id="@+id/txViewLegacy"
+                android:layout_width="30dip"
+                android:layout_height="40dip"
+                android:gravity="left|center_vertical"
+                android:text="" />
+            
+            <TextView
                 android:id="@+id/txViewPro"
                 android:layout_width="200dip"
                 android:layout_height="40dip"

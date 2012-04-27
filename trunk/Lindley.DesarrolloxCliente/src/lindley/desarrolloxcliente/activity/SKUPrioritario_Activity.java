@@ -70,8 +70,8 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 		mActionBar.setSubTitle(cliente.getCodigo() + " - "
 				+ cliente.getNombre());
 		mActionBar.setHomeLogo(R.drawable.header_logo);
-		MessageBox.showConfirmDialog(this, "Posici—n-Activos",
-				"ÀTiene activos de la empresa ?", "SI",
+		MessageBox.showConfirmDialog(this, "Posición: ",
+				"", "Activos de Lindley",
 				new android.content.DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -80,7 +80,7 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 						processAsync();
 					}
 
-				}, "NO", new android.content.DialogInterface.OnClickListener() {
+				}, "Anaquel", new android.content.DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
@@ -132,7 +132,8 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 		showToast(error_generico_process);
 	}
 
-	public void btnCancelar_click(View view) {
+	@Override
+	public void onBackPressed() {
 		MessageBox.showConfirmDialog(this, confirm_atras_title,
 				confirm_atras_message, confirm_atras_yes,
 				new android.content.DialogInterface.OnClickListener() {
@@ -153,6 +154,11 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 					}
 
 				});
+	}
+	
+	public void btnCancelar_click(View view) {
+		finish();
+		onBackPressed();
 	}
 
 	public void btnGuardar_click(View view) {
@@ -200,7 +206,7 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 				int status = guardarNuevoDesarrolloProxy.getResponse().getStatus();
 				if (status == 0) {
 					String idRegistro = guardarNuevoDesarrolloProxy.getResponse().getCodCabecera();
-					
+					finish();
 					Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.compromisoprincipalopen");
 					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, idRegistro);					
 					startActivity(compromisoOpen);

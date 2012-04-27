@@ -134,26 +134,30 @@ public class InformacionAdicionalFalse_Activity extends ActivityBase {
 		super.processError();
 	}
 	
-	 public void btnCancelar_click(View view)
-	    {
-//	    	processAsync(ACCION_CERRAR);
-	    	MessageBox.showConfirmDialog(this, confirm_cancelar_title, confirm_cancelar_message, confirm_cancelar_yes, new android.content.DialogInterface.OnClickListener() {
-				
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub	
-					Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
-					startActivity(intent);
-				}
-				
-			}, confirm_cancelar_no, new android.content.DialogInterface.OnClickListener() {
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		MessageBox.showConfirmDialog(this, confirm_cancelar_title, confirm_cancelar_message, confirm_cancelar_yes, new android.content.DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub	
+				Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
+				startActivity(intent);
+			}
+			
+		}, confirm_cancelar_no, new android.content.DialogInterface.OnClickListener() {
 
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-			});  
-	    }
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub				
+			}
+			
+		});
+	}
+	
+	 public void btnCancelar_click(View view)
+	 {
+		 onBackPressed();
+	 }
 
 	    public void btnCerrar_click(View view)
 	    {

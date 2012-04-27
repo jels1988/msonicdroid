@@ -10,6 +10,9 @@ public class NuevaOportunidadTO {
 	@SerializedName("DPRO")
 	public String descripcionProducto;
 	
+	@SerializedName("LEG")
+	public String codigoLegacy;
+	
 	public boolean seleccionado;
 
 }

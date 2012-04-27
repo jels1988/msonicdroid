@@ -110,13 +110,15 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 			return "0" + String.valueOf(c);
 	}
     
-    public void btnCancelar_click(View view)
-    {
-    	//processAsync(ACCION_CERRAR);
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		//processAsync(ACCION_CERRAR);
     	MessageBox.showConfirmDialog(this, confirm_cancelar_title, confirm_cancelar_message, confirm_cancelar_yes, new android.content.DialogInterface.OnClickListener() {
 			
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub	
+				finish();
 				Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
 				startActivity(intent);
 			}
@@ -128,7 +130,12 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 				
 			}
 			
-		});    	
+		}); 
+	}
+	
+    public void btnCancelar_click(View view)
+    {
+    	onBackPressed();
     }
 
     public void btnGuardar_click(View view)
@@ -274,6 +281,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
        			update.fechaCompromiso = compromiso.fechaCompromiso;
        			update.codigoAccionTrade = compromiso.codigoAccionTrade;
        			update.descAccionTrade = compromiso.descAccionTrade;
+       			
        			listUpdateCompromisoTO.add(update);
     		}
        		
@@ -493,7 +501,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 	        holder = new ViewHolder();
 	        	        	    		    	
 	        holder.txViewPuntos = (TextView) convertView.findViewById(R.id.txViewPuntos);	
-	        holder.btnProfit = (ImageButton) convertView.findViewById(R.id.btnProfit);	        
+	        holder.btnProfit = (ImageButton) convertView.findViewById(R.id.btnProfit);	   
+	        holder.txViewLegacy = (TextView) convertView.findViewById(R.id.txViewLegacy);
 	        holder.txViewPro = (TextView) convertView.findViewById(R.id.txViewPro); 
 	        
 	        holder.cboConcrecion = (TextView) convertView.findViewById(R.id.cboConcrecion);
@@ -530,7 +539,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 				}
 			});
 	      
-	      holder.txViewPro.setText("    " + compromiso.descripcionProducto);
+	      holder.txViewPro.setText("  " + compromiso.descripcionProducto);
+	      holder.txViewLegacy.setText(compromiso.codigoLegacy);
 	      
 	      if(compromiso.concrecion.equalsIgnoreCase(SI))
 	    	  holder.cboConcrecion.setText(SI_DATO);
@@ -777,7 +787,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 
 	    static class ViewHolder {   
 	    	TextView txViewPuntos;
-	    	ImageButton btnProfit;	    	
+	    	ImageButton btnProfit;
+	    	TextView txViewLegacy;
 	    	TextView txViewPro;
 	    	
 	    	TextView cboConcrecion;
