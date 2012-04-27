@@ -121,9 +121,9 @@ public class CompromisoPresentacionOpenFalse_Activity extends ListActivityBase {
 		showToast(error_generico_process);
 	}
 	
-	public void btnCancelar_click(View view)
-    {
-//    	processAsync(ACCION_CERRAR);
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
 		MessageBox.showConfirmDialog(this, confirm_cancelar_title, confirm_cancelar_message, confirm_cancelar_yes, new android.content.DialogInterface.OnClickListener() {
 			
 			public void onClick(DialogInterface dialog, int which) {
@@ -139,7 +139,12 @@ public class CompromisoPresentacionOpenFalse_Activity extends ListActivityBase {
 				
 			}
 			
-		});  
+		}); 
+	}
+	
+	public void btnCancelar_click(View view)
+    {
+		onBackPressed();
     }
 
     public void btnCerrar_click(View view)

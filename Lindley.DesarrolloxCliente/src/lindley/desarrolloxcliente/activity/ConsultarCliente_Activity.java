@@ -289,12 +289,21 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 	}
     
     @Override
+    protected void onDestroy() {
+    	// TODO Auto-generated method stub    	
+    	super.onDestroy();
+    	System.exit(1);
+    }
+    
+    @Override
     public void onBackPressed() {
     	// TODO Auto-generated method stub
     	MessageBox.showConfirmDialog(this, confirm_exit_title, confirm_exit_message, confirm_exit_yes, new android.content.DialogInterface.OnClickListener() {
 			
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub	
+//				int pid = android.os.Process.myPid(); 
+//				android.os.Process.killProcess(pid);
 				onDestroy();
 			}
 			
@@ -314,7 +323,9 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 			
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub	
-				onDestroy();
+//				int pid = android.os.Process.myPid(); 
+//				android.os.Process.killProcess(pid);
+				onDestroy();				
 			}
 			
 		}, confirm_exit_no, new android.content.DialogInterface.OnClickListener() {
@@ -328,15 +339,6 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 
     }
     
-    @Override
-    protected void onDestroy() {
-    	// TODO Auto-generated method stub
-    	finish();
-    	android.os.Process.killProcess(android.os.Process.myPid());
-    	super.onDestroy();
-    }
-
-	
 	public static class EfficientAdapter extends BaseAdapter implements
 			Filterable {
 		private LayoutInflater mInflater;

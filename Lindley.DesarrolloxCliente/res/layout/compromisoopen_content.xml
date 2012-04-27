@@ -32,6 +32,13 @@
                 android:src="@drawable/bar_chart" />
 						
 			<TextView
+                android:id="@+id/txViewLegacy" 
+                android:layout_width="30dip"
+                android:layout_height="40dip"
+                android:gravity="left"
+                android:text="" />
+			
+			<TextView
                 android:id="@+id/txViewPro" 
                 android:layout_width="150dip"
                 android:layout_height="40dip"

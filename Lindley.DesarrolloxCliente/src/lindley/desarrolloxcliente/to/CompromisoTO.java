@@ -79,6 +79,11 @@ public class CompromisoTO {
 	public String fechaCompromiso;
 	
 	public String codigoAccionTrade;
+		
+	@SerializedName("DSACTR")
 	public String descAccionTrade;
+	
+	@SerializedName("CDLEG")
+	public String codigoLegacy;
 			
 }

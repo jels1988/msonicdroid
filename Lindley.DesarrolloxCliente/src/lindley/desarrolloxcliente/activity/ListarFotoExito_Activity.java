@@ -130,6 +130,7 @@ public class ListarFotoExito_Activity extends ListActivityBase {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					Intent intent = new Intent("lindley.desarrolloxcliente.webviewverfoto");
+					intent.putExtra(WebViewVerFoto_Activity.TITULO_FOTO, fotoExito.titulo);
 					intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, fotoExito.nombre);
 					context.startActivity(intent);	
 				}

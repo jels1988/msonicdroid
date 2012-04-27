@@ -3,11 +3,6 @@ package lindley.desarrolloxcliente.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import roboguice.inject.InjectExtra;
-import roboguice.inject.InjectResource;
-import roboguice.inject.InjectView;
-import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.activity.CompromisoPosicionOpen_Activity.EfficientAdapter;
@@ -33,17 +28,20 @@ import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarInformacionComboProxy;
 import lindley.desarrolloxcliente.ws.service.GuardarDesarrolloProxy;
+import net.msonic.lib.ActivityBase;
+import net.msonic.lib.MessageBox;
+import roboguice.inject.InjectExtra;
+import roboguice.inject.InjectResource;
+import roboguice.inject.InjectView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import net.msonic.lib.ActivityBase;
-import net.msonic.lib.MessageBox;
+
+import com.google.inject.Inject;
+import com.thira.examples.actionbar.widget.ActionBar;
 
 public class InformacionAdicional_Activity extends ActivityBase {
 
@@ -258,29 +256,32 @@ public class InformacionAdicional_Activity extends ActivityBase {
 ////		}
 //	}
 	
-	
+	@Override
+		public void onBackPressed() {
+			// TODO Auto-generated method stub
+		MessageBox.showConfirmDialog(this, confirm_cancelar_title, confirm_cancelar_message, confirm_cancelar_yes, new android.content.DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub	
+				Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
+				startActivity(intent);
+			}
+			
+		}, confirm_cancelar_no, new android.content.DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});  
+		}
 	
 	
 	 public void btnCancelar_click(View view)
-	    {
-//	    	processAsync(ACCION_CERRAR);
-	    	MessageBox.showConfirmDialog(this, confirm_cancelar_title, confirm_cancelar_message, confirm_cancelar_yes, new android.content.DialogInterface.OnClickListener() {
-				
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub	
-					Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
-					startActivity(intent);
-				}
-				
-			}, confirm_cancelar_no, new android.content.DialogInterface.OnClickListener() {
-
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-			});  
-	    }
+	 {
+		 onBackPressed();
+	 }
 
 	    public void btnGuardar_click(View view)
 	    {

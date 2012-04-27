@@ -84,6 +84,13 @@
                                         
                     <TextView
                         style="@style/TextViewHead"
+                        android:layout_width="30dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Legacy" />
+                    
+                    <TextView
+                        style="@style/TextViewHead"
                         android:layout_width="150dip"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -154,6 +161,13 @@
                     <TextView
                         style="@style/TextViewHead"
                         android:layout_width="10dip"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="" />
+                    
+                    <TextView
+                        style="@style/TextViewHead"
+                        android:layout_width="30dip"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="" />
