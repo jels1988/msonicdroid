@@ -178,7 +178,7 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 				openAdapterVacio = true;
 				if(openAdapterVacio)
 				{
-					showToast("Debe editar valores de la pestaña inventario.");
+					showToast("Debe editar valores de la pestana inventario.");
 					return false;
 				}
 			}
@@ -188,7 +188,7 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 				posicionAdapterVacio = true;
 				if(posicionAdapterVacio)
 				{
-					showToast("Debe editar valores de la pestaña posición.");
+					showToast("Debe editar valores de la pestana posicion.");
 					return false;
 				}
 			}
@@ -198,7 +198,7 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 				presentacionAdapterVacio = true;
 				if(presentacionAdapterVacio)
 				{
-					showToast("Debe editar valores de la pestaña presentación.");
+					showToast("Debe editar valores de la pestana presentacion.");
 					return false;
 				}
 			}
@@ -285,7 +285,7 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
        			int status = cerrarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
        				setAdapterApplication();
-       				showToast("Los registros se cerrarón satisfactoriamente.");
+       				showToast("Los registros se cerraron satisfactoriamente.");
        				Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
 					startActivity(cabecera);
        			}
@@ -522,12 +522,42 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					if((posicionTO.fotoFinal==null)||(posicionTO.fotoFinal.compareTo("")==0)){
-						
 						((CompromisoPosicionOpenFalse_Activity)context).takePhoto(TAKE_PHOTO_FINAL_CODE, posicionTO);
 					}else{
+						
+						/*
 						Intent intent = new Intent("lindley.desarrolloxcliente.webviewverfoto");
 						intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.fotoFinal);
 						context.startActivity(intent);	
+						*/
+						
+						
+						MessageBox.showConfirmDialog(context, "Confirmacion", "ÀDesea reemplazar la foto?", "Si",
+								new android.content.DialogInterface.OnClickListener() {
+							
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub	
+								/*Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
+								intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.fotoInicial);
+								context.startActivity(intent);*/
+								
+								//((CompromisoPosicionOpen_Activity)context).takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionTO);
+								((CompromisoPosicionOpenFalse_Activity)context).takePhoto(TAKE_PHOTO_FINAL_CODE, posicionTO);
+							}
+							
+						}, "No", new android.content.DialogInterface.OnClickListener() {
+
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+								
+								
+								Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
+								intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.fotoFinal);
+								context.startActivity(intent);
+								
+							}
+							
+						});  
 					}
 				}
 			});

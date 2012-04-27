@@ -264,6 +264,22 @@
             
         </service>
         
+        
+        
+        <activity android:name=".activity.VerArticulosCanje_Activity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.verarticuloscanje" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>     
+   
+    
+       <activity android:name=".activity.ConsultarResumen_Activity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="lindley.desarrolloxcliente.consultarresumen" />                					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>     
     </application>
     
      <uses-sdk android:minSdkVersion="7" android:maxSdkVersion="10"/>

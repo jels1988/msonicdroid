@@ -449,7 +449,7 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 					// TODO Auto-generated method stub
 					Intent cabecera = new Intent(context, ConsultarCabecera_Activity.class);
 					context.startActivity(cabecera);
-					//((ConsultarCliente_Activity)context).takePhoto();					
+									
 				}
 			});
 			
