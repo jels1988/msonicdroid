@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <string name="hello">Hello World, LoginActivity!</string>
+    <string name="app_name">Lindley.MMILTitanium</string>
+    <string name="login_activity_title">Login</string>
+    <string name="login_activity_usuario">Usuario:</string>
+    <string name="login_activity_usuario_hint">Ingresar Usuario</string>
+    <string name="login_activity_password">Password:</string>
+    <string name="login_activity_password_hint">Ingresar Password</string>
+    <string name="login_activity_btn_ingresar">Ingresar</string>
+    <string name="tablero_activity_title">Tablero</string>
+    <string name="tablero_grafico_activity_title">Tablero</string>
+    <string name="lista_vendedores_activity_title">Vendedores</string>
+    <string name="lista_pedidos_activity_title">Pedidos</string>
+    <string name="tablero_menu_supervisor">Supervidores</string>
+    <string name="tablero_menu_televenta">Televenta</string>
+    <string name="listasupervisores_activity_title">Supervisores</string>
+    <string name="listasupervisores_activity_codigo_column">Código</string>
+    <string name="listasupervisores_activity_supervisor_column">Supervisor</string>
+    <string name="listasupervisores_activity_cuota_column">Cuota</string>
+    <string name="listasupervisores_activity_eficienciaglobal_column">Eficiencia Global</string>
+    <string name="listasupervisores_activity_planvisitas_column">Plan de Visitas</string>
+    <string name="listasupervisores_activity_eficienciapreventa_column">Ef. Preventa</string>
+    <string name="listasupervisores_activity_clientes_column">Clientes</string>
+    <string name="listasupervisores_activity_visitas_column">Visitas</string>
+    <string name="listasupervisores_activity_conpedido_column">Con Pedido</string>
+    <string name="listasupervisores_activity_sinpedido_column">Sin Pedido</string>
+    <string name="listasupervisores_activity_importe_column">Importe</string>
+    <string name="listasupervisores_activity_efectivo_column">Efectivo</string>
+    <string name="listasupervisores_activity_title_dialog">Seleccionar Supervisor</string>
+    <string name="listasupervisores_activity_title_dialog_Aceptar">Aceptar</string>
+    <string name="listasupervisores_activity_title_dialog_Cancelar">Cancelar</string>
+    <string name="listasupervisores_menu_vendedores">Vendedores</string>
+    <string name="listasupervisores_menu_graficos">Gráficos</string>
+    <string name="listasupervisores_menu_cuota">Cuota</string>
+    <string name="listasupervisores_menu_eficienciaglobal">Eficiencia Global</string>
+    <string name="listasupervisores_menu_planvisita">Plan de Visita</string>
+    <string name="listasupervisores_menu_eficienciapreventa">Eficiencia Preventa</string>
+</resources>

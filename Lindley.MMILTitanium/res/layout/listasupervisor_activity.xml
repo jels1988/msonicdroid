@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+    <com.thira.examples.actionbar.widget.ActionBar
+		android:id="@+id/actionBar" 
+		android:layout_width="fill_parent"
+		android:layout_height="44dip" />
+     
+    
+       
+      <HorizontalScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_margin="1dip"
+            android:layout_weight="1"
+            android:focusable="false"
+ 	android:clickable="false"
+            android:fillViewport="true">
+            
+         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+ 			android:clickable="false"
+            android:orientation="vertical" >
+
+            <TableLayout
+                android:layout_width="1350dip"
+                android:layout_height="wrap_content">
+        		
+                
+                 <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+              <TextView
+                android:id="@+id/txtCodigo"
+                android:layout_height="wrap_content"
+                android:layout_width="50dip"
+                android:gravity="left"
+                android:text="@string/listasupervisores_activity_codigo_column"
+                style="@style/TextViewHead"/>
+            
+              <TextView
+                android:id="@+id/txtNombre"
+                android:layout_height="wrap_content"
+                android:layout_width="200dip"
+                android:gravity="left"
+                style="@style/TextViewHead"
+                 android:text="@string/listasupervisores_activity_supervisor_column"/>
+              
+            
+                  
+              <TextView
+                android:id="@+id/txtCuota"
+                android:layout_height="wrap_content"
+                android:layout_width="220dip"
+                android:gravity="left"
+                style="@style/TextViewHead"
+                android:text="@string/listasupervisores_activity_cuota_column"/>
+              
+                  
+               
+				
+                <TextView
+                android:id="@+id/txtEficienciaGlobal"
+                android:layout_height="wrap_content"
+                 android:layout_width="140dip"
+                 style="@style/TextViewHead"
+                android:text="@string/listasupervisores_activity_eficienciaglobal_column"
+                 android:gravity="left"/>
+                
+             
+				
+                <TextView
+                android:id="@+id/txtPlanVisitas"
+                android:layout_height="wrap_content"
+                 android:layout_width="100dip"
+                 style="@style/TextViewHead"
+                android:text="@string/listasupervisores_activity_planvisitas_column"  android:gravity="left"/>
+                
+                
+                
+                <TextView
+                android:id="@+id/txtEficienciaPreVenta"
+                android:layout_height="wrap_content"
+                 android:layout_width="100dip"
+                 style="@style/TextViewHead"
+                android:text="@string/listasupervisores_activity_eficienciapreventa_column" android:gravity="left"/>
+
+                <TextView
+                android:id="@+id/txtClientes"
+                android:layout_height="wrap_content"
+                 android:layout_width="100dip"
+                 style="@style/TextViewHead"
+                android:text="@string/listasupervisores_activity_clientes_column"  android:gravity="right"/>
+        
+                <TextView
+                android:id="@+id/txtVisitas"
+                android:layout_height="wrap_content"
+                android:layout_width="80dip"
+                style="@style/TextViewHead"
+                android:text="@string/listasupervisores_activity_visitas_column"   android:gravity="right"/>
+                
+                 <TextView
+                android:id="@+id/txtConPedido"
+                android:layout_height="wrap_content"
+                 android:layout_width="80dip"
+                 style="@style/TextViewHead"
+                android:text="@string/listasupervisores_activity_conpedido_column"  android:gravity="right"/>
+                
+                  <TextView
+                android:id="@+id/txtSinPedido"
+                android:layout_height="wrap_content"
+                 android:layout_width="80dip"
+                 style="@style/TextViewHead"
+                android:text="@string/listasupervisores_activity_sinpedido_column"   android:gravity="right"/>
+                  
+                   <TextView
+                android:id="@+id/txtImporte"
+                android:layout_height="wrap_content"
+                 android:layout_width="120dip"
+                 style="@style/TextViewHead"
+                android:text="@string/listasupervisores_activity_importe_column"  android:gravity="right"/>
+                   
+                     <TextView
+                android:id="@+id/txtTiempoEfectivo"
+                android:layout_height="wrap_content"
+                 android:layout_width="80dip"
+                 style="@style/TextViewHead"
+                android:text="@string/listasupervisores_activity_efectivo_column"  android:gravity="right"/>
+                
+                     </TableRow>
+             </TableLayout>
+            
+            <ListView android:id="@+id/android:list"
+         		 android:clickable="true"
+         		android:addStatesFromChildren="true"
+                 android:choiceMode="singleChoice"
+                android:layout_width="fill_parent"
+    		   android:layout_height="wrap_content"/>
+            
+           </LinearLayout>
+     </HorizontalScrollView>
+     
+     
+     
+     
+     
+</LinearLayout>

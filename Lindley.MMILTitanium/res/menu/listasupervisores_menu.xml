@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/mnuVendedores" android:title="@string/listasupervisores_menu_vendedores"></item>
+    <item android:id="@+id/mnuGraficos" android:title="@string/listasupervisores_menu_graficos">
+        <menu>
+            <item android:id="@+id/mnuCuota" android:title="@string/listasupervisores_menu_cuota"/>
+            <item android:id="@+id/mnuEficienciaGlobal" android:title="@string/listasupervisores_menu_eficienciaglobal"/>
+            <item android:id="@+id/mnuPlanVista" android:title="@string/listasupervisores_menu_planvisita"/>
+            <item android:id="@+id/mnuEficienciaPreventa" android:title="@string/listasupervisores_menu_eficienciapreventa"/>
+        </menu>
+    </item>
+
+</menu>

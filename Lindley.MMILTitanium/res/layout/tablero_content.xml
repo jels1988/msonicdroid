@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+    
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="1" 
+    android:layout_margin="10dip"
+    android:background="@color/custom_theme_color_blanco">
+        
+        <TableRow>
+        
+              
+            <ImageView android:id="@+id/imgIndicador" android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:contentDescription="@string/app_name"/>
+          
+           
+            <TextView
+                android:id="@+id/txtTitulo"
+            android:layout_width="wrap_content" 
+    		android:layout_height="wrap_content"
+            android:padding="3dip" />
+            
+             <TextView
+                android:id="@+id/txtRatio"
+            android:layout_width="wrap_content" 
+    		android:layout_height="wrap_content"
+            android:padding="3dip" />
+
+        </TableRow>
+   </TableLayout>
