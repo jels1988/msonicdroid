@@ -143,6 +143,7 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 //	    	holder.txViewCerrado = (TextView) convertView.findViewById(R.id.txViewCerrado);	          	
 	    	holder.txViewestado = (TextView) convertView.findViewById(R.id.txViewestado);	    	
 	    	holder.txViewVerDetalle = (Button) convertView.findViewById(R.id.txViewVerDetalle);	  
+	    	holder.txViewVerResumen = (Button) convertView.findViewById(R.id.txViewVerResumen);
 	        
 	        convertView.setTag(holder);
 	      } else {
@@ -164,6 +165,18 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 	    	  holder.txViewestado.setText("Abierto");
 	      else
 	    	  holder.txViewestado.setText("Cerrado");
+	      
+	      holder.txViewVerResumen.setOnClickListener(new OnClickListener() {
+	    	  DesarrolloClienteTO desarrolloTemp = (DesarrolloClienteTO) getItem(position);
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent compromisoOpen = new Intent(context, ConsultarResumen_Activity.class);
+				compromisoOpen.putExtra(ConsultarResumen_Activity.CODIGO_REGISTRO_KEY, desarrolloTemp.getCodigo());							
+				context.startActivity(compromisoOpen);		
+			}
+	    	  
+	      });
 	      
 	      holder.txViewVerDetalle.setOnClickListener(new OnClickListener() {
 	    	  DesarrolloClienteTO desarrolloTemp = (DesarrolloClienteTO) getItem(position);
@@ -237,6 +250,9 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 //	    	TextView txViewCerrado;    	
 	    	TextView txViewestado;
 	    	Button txViewVerDetalle;	    	
+	    	
+	    	Button txViewVerResumen;
+	    	
 	    }
 	    
 	    @Override
