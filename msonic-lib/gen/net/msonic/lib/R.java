@@ -10,17 +10,12 @@ package net.msonic.lib;
 public final class R {
     public static final class attr {
     }
-    public static final class drawable {
-        public static int ic_launcher=0x7f020000;
-    }
     public static final class string {
+        public static int error_generico_process=0x7f020002;
         /**  GENERAL 
+ GENERAL 
          */
-        public static int app_name=0x7f030000;
-        public static int error_generico_process=0x7f030003;
-        /**  GENERAL 
-         */
-        public static int error_not_network_message=0x7f030001;
-        public static int wait_message=0x7f030002;
+        public static int error_not_network_message=0x7f020000;
+        public static int wait_message=0x7f020001;
     }
 }
