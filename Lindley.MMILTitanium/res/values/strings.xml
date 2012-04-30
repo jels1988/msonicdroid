@@ -19,7 +19,7 @@
     <string name="listasupervisores_activity_supervisor_column">Supervisor</string>
     <string name="listasupervisores_activity_cuota_column">Cuota</string>
     <string name="listasupervisores_activity_eficienciaglobal_column">Eficiencia Global</string>
-    <string name="listasupervisores_activity_planvisitas_column">Plan de Visitas</string>
+    <string name="listasupervisores_activity_planvisitas_column">Plan de Visita</string>
     <string name="listasupervisores_activity_eficienciapreventa_column">Ef. Preventa</string>
     <string name="listasupervisores_activity_clientes_column">Clientes</string>
     <string name="listasupervisores_activity_visitas_column">Visitas</string>
@@ -36,4 +36,21 @@
     <string name="listasupervisores_menu_eficienciaglobal">Eficiencia Global</string>
     <string name="listasupervisores_menu_planvisita">Plan de Visita</string>
     <string name="listasupervisores_menu_eficienciapreventa">Eficiencia Preventa</string>
+    
+    
+       <string name="listavendedores_activity_cuota_column">Cuota</string>
+       <string name="listavendedores_activity_eficienciaglobal_column">Eficiencia Global</string>
+       <string name="listavendedores_activity_planvisitas_column">Plan de Visita</string>
+       <string name="listavendedores_activity_eficienciapreventa_column">Ef. Preventa</string>
+       <string name="listavendedores_activity_clientes_column">Clientes</string>
+       <string name="listavendedores_activity_visitas_column">Visitas</string>
+       <string name="listavendedores_activity_conpedido_column">Con Pedido</string>
+       <string name="listavendedores_activity_sinpedido_column">Sin Pedido</string>
+       
+       <string name="listavendedores_activity_importe_column">Importe</string>
+       <string name="listavendedores_activity_tiempoefectivo_column">T. Efectivo</string>
+       
+       <string name="listavendedores_menu_pedidos">Pedidos</string>
+       
+       <string name="listavendedores_activity_title_dialog">Seleccionar Vendedor</string>
 </resources>
