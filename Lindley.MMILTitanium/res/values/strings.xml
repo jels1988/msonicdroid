@@ -52,4 +52,17 @@
     <string name="listavendedores_activity_tiempoefectivo_column">T. Efectivo</string>
     <string name="listavendedores_menu_pedidos">Pedidos</string>
     <string name="listavendedores_activity_title_dialog">Seleccionar Vendedor</string>
+    <string name="lista_televendedores_activity_title">Televendedores</string>
+    
+    <string name="listatelevendedores_nombre_column">Televendedor</string>
+    <string name="listatelevendedores_primerreg_column">Primer Registro</string>
+    <string name="listatelevendedores_ultimoreg_column">Último Registro</string>
+    <string name="listatelevendedores_planvisita_column">Plan Visita</string>
+    <string name="listatelevendedores_clientes_column">Clientes</string>
+    <string name="listatelevendedores_atendidos_column">Atendidos</string>
+    <string name="listatelevendedores_sinpedido_column">Sin Pedidos</string>
+    <string name="listatelevendedores_importe_column">Importe S/.</string>
+    <string name="listatelevendedores_cajasfisicas_column">Cj. Físicas</string>
+    <string name="listatelevendedores_cajasunitarias_column">Cj. Unitarias</string>
+    <string name="listatelevendedores_tiempoefectivo_column">Tiempor Efectivo</string>
 </resources>

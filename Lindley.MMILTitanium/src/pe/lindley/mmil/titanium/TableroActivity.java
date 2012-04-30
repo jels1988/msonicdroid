@@ -135,6 +135,11 @@ public class TableroActivity extends ActivityBase {
 				intent.putExtra(ListaSupervisorActivity.CODIGO_CDA_KEY, codigo_cda);
 				startActivity(intent);
 			}
+		}else if(item.getItemId()==R.id.mnuTeleventa){
+			Intent intent = new Intent(this,ListaTeleventaActivity.class);
+			intent.putExtra(ListaSupervisorActivity.NOMBRE_CDA_KEY, nombre_cda);
+			intent.putExtra(ListaSupervisorActivity.CODIGO_CDA_KEY, codigo_cda);
+			startActivity(intent);
 		}
 		return super.onMenuItemSelected(featureId, item);
 	}
