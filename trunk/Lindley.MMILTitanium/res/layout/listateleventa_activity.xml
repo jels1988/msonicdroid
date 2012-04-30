@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+        <com.thira.examples.actionbar.widget.ActionBar
+		android:id="@+id/actionBar" 
+		android:layout_width="fill_parent"
+		android:layout_height="44dip" />
+     
+         <HorizontalScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_margin="1dip"
+            android:layout_weight="1"
+            android:focusable="false"
+ 			android:clickable="false"
+            android:fillViewport="true">
+            
+                 <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+ 	android:clickable="false"
+            android:orientation="vertical" >
+
+            <TableLayout
+                android:layout_width="1390dip"
+                android:layout_height="wrap_content">
+        		
+                
+                 <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+              <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="50dip"
+                android:gravity="left"
+                style="@style/TextViewHead"
+                android:text="@string/listasupervisores_activity_codigo_column"/>
+            
+              <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="250dip"
+                android:gravity="left"
+                style="@style/TextViewHead"
+                 android:text="@string/listatelevendedores_nombre_column"/>
+              
+                 <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="150dip"
+                android:gravity="left"
+                style="@style/TextViewHead"
+                android:text="@string/listatelevendedores_primerreg_column"/>
+                 
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="150dip"
+                android:gravity="left"
+                style="@style/TextViewHead"
+                android:text="@string/listatelevendedores_ultimoreg_column"/>
+            
+                    
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="140dip"
+                android:gravity="left"
+                style="@style/TextViewHead"
+                android:text="@string/listatelevendedores_planvisita_column"/>
+            
+                    
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="100dip"
+                android:gravity="left"
+                style="@style/TextViewHead"
+                android:text="@string/listatelevendedores_clientes_column"/>
+            
+                    
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="100dip"
+                android:gravity="left"
+                style="@style/TextViewHead"
+                android:text="@string/listatelevendedores_atendidos_column"/>
+            
+         
+                 <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="100dip"
+                android:gravity="left"
+                style="@style/TextViewHead"
+                android:text="@string/listatelevendedores_importe_column"/>
+            
+                 
+                      <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="100dip"
+                android:gravity="left"
+                style="@style/TextViewHead"
+                android:text="@string/listatelevendedores_cajasfisicas_column"/>
+            
+            
+                         <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="100dip"
+                android:gravity="left"
+                style="@style/TextViewHead"
+                android:text="@string/listatelevendedores_cajasunitarias_column"/>
+                         
+                            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="150dip"
+                android:gravity="left"
+                style="@style/TextViewHead"
+                android:text="@string/listatelevendedores_tiempoefectivo_column"/>
+                            
+              </TableRow>
+             </TableLayout>
+              <ListView android:id="@+id/android:list"
+		android:clickable="true"
+		android:addStatesFromChildren="true"
+        android:choiceMode="singleChoice"
+       	android:layout_width="fill_parent"
+		android:layout_height="wrap_content"/>
+          
+                   
+             </LinearLayout>
+       </HorizontalScrollView>
+
+</LinearLayout>

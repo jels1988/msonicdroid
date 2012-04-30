@@ -1,0 +1,103 @@
+<TableLayout
+ xmlns:android="http://schemas.android.com/apk/res/android"
+ android:layout_height="wrap_content"
+ 	android:layout_width="wrap_content"
+ 	android:background="@color/custom_theme_color_blanco"
+ 	android:addStatesFromChildren="true"
+      android:stretchColumns="*"
+        android:shrinkColumns="*">
+ 
+    
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent">
+            
+              <TextView
+                android:id="@+id/txtCodigo"
+                android:layout_height="wrap_content"
+                android:layout_width="50dip"
+                android:gravity="left"/>
+            
+              <TextView
+                android:id="@+id/txtNombre"
+                android:layout_height="wrap_content"
+                android:layout_width="250dip"
+                android:gravity="left"/>
+              
+                
+              
+               <TextView
+                android:id="@+id/txtPrimerRegistro"
+                android:layout_height="wrap_content"
+                android:layout_width="150dip"
+                android:gravity="left"/>
+              
+                   <TextView
+                android:id="@+id/txtUltimoRegistro"
+                android:layout_height="wrap_content"
+                android:layout_width="150dip"
+                android:gravity="left"/>
+              
+             
+                
+     	 <ImageView android:id="@+id/imgPlanVisita" 
+                  		 android:layout_gravity="center_vertical" 
+                  		android:focusable="false"
+        				android:clickable="false"
+                  		 android:layout_width="20dip" 
+                  		 android:layout_height="wrap_content" 
+                  		 android:contentDescription="@string/app_name"/>
+              
+
+
+          <TextView
+                android:id="@+id/txtPlanVisita"
+                android:layout_height="wrap_content"
+                android:layout_width="120dip"
+                android:gravity="left"/>
+                
+         
+        
+
+             <TextView
+                android:id="@+id/txtClientes"
+                android:layout_height="wrap_content"
+                android:layout_width="100dip"
+                android:gravity="left"/>
+         
+             
+              <TextView
+                android:id="@+id/txtAtendidos"
+                android:layout_height="wrap_content"
+                android:layout_width="100dip"
+                android:gravity="left"/>
+              
+                <TextView
+                android:id="@+id/txtImporte"
+                android:layout_height="wrap_content"
+                android:layout_width="100dip"
+                android:gravity="left"/>
+                
+                   
+                <TextView
+                android:id="@+id/txtCajasFisicas"
+                android:layout_height="wrap_content"
+                android:layout_width="100dip"
+                android:gravity="left"/>
+                
+                 <TextView
+                android:id="@+id/txtCajasUnitarias"
+                android:layout_height="wrap_content"
+                android:layout_width="100dip"
+                android:gravity="left"/>
+                 
+                  <TextView
+                android:id="@+id/txtTiempoEfectivo"
+                android:layout_height="wrap_content"
+                android:layout_width="150dip"
+                android:gravity="left"/>
+                
+        </TableRow>
+    
+ 
+ </TableLayout>

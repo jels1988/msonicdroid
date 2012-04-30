@@ -33,6 +33,7 @@ public class ListaVendedoresActivity extends ListActivityBase {
 	
 	public static final String CODIGO_SUPERVISOR_KEY="CODIGO_SUPERVISOR";
 	public static final String CODIGO_CDA_KEY="CODIGO_CDA_KEY";
+	public static final String NOMBRE_CDA_KEY="NOMBRE_CDA";
 	
 	
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
@@ -46,6 +47,7 @@ public class ListaVendedoresActivity extends ListActivityBase {
 	
 	@InjectExtra(CODIGO_SUPERVISOR_KEY) String codigoSupervisor;
 	@InjectExtra(CODIGO_CDA_KEY) String codigoCda;
+	@InjectExtra(NOMBRE_CDA_KEY) String nombre_cda;
 	
 	 @Override
 	    public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,7 @@ public class ListaVendedoresActivity extends ListActivityBase {
 	        
 	        mActionBar.setHomeLogo(R.drawable.header_logo);
 	        mActionBar.setTitle(R.string.lista_vendedores_activity_title);
-
+	        mActionBar.setSubTitle(nombre_cda);
 	        
 	        lstSupervisor = getListView();
 	        processAsync();
@@ -334,7 +336,7 @@ public class ListaVendedoresActivity extends ListActivityBase {
 				
 				holder.txtPlanVisita.setText(vendedorTO.planVisita);
 				if(vendedorTO.planVisitaColor!=null){
-					 switch(Integer.parseInt(vendedorTO.eficGlobalColor))
+					 switch(Integer.parseInt(vendedorTO.planVisitaColor))
 				      {
 				      	case IND_VERDE:
 				      		holder.imgPlanVisita.setImageResource(R.drawable.icon_verde);
@@ -349,7 +351,7 @@ public class ListaVendedoresActivity extends ListActivityBase {
 					}
 				
 				holder.txtEficienciaPreventa.setText(vendedorTO.eficPreventa);
-				if(vendedorTO.planVisitaColor!=null){
+				if(vendedorTO.eficPreventaColor!=null){
 					 switch(Integer.parseInt(vendedorTO.eficPreventaColor))
 				      {
 				      	case IND_VERDE:
