@@ -3,10 +3,11 @@
 <!--     <string name="urlwsMMILPizarra">http://java.cdaandino.com/rtm/MMILTitanium/PizarraService.svc</string> -->
 <!--     <string name="urlwsMMILVendedor">http://java.cdaandino.com/rtm/MMILTitanium/VendedorService.svc</string> -->
 <!--     <string name="urlwsMMILSupervisor">http://java.cdaandino.com/rtm/MMILTitanium/SupervisorService.svc</string> -->
+<!-- 	<string name="urlwsMMILMapVendedor">http://java.cdaandino.com/rtm/MMILTitanium/MapVendedorService.svc</string> -->
     
     <string name="urlwsMMILPizarra">http://192.168.0.11/MMIL/PizarraService.svc</string>
   	<string name="urlwsMMILVendedor">http://192.168.0.11/MMIL/VendedorService.svc</string>
     <string name="urlwsMMILSupervisor">http://192.168.0.11/MMIL/SupervisorService.svc</string>
-    
+    <string name="urlwsMMILMapVendedor">http://192.168.0.11/MMIL/MapVendedorService.svc</string>
     
 </resources>

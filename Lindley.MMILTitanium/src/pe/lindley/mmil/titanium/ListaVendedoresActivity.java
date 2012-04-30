@@ -34,12 +34,15 @@ public class ListaVendedoresActivity extends ListActivityBase {
 	public static final String CODIGO_SUPERVISOR_KEY="CODIGO_SUPERVISOR";
 	public static final String CODIGO_CDA_KEY="CODIGO_CDA_KEY";
 	
+	
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
-	@Inject ListarVendedorProxy listarVendedorProxy;
+	@Inject ListarVendedorProxy 	listarVendedorProxy;
+	
 	ListView 	lstSupervisor;
 	Tablero_Adapter adapter = null;
-	int item_selected = 0; // select at 0
+	int item_selected = -1; // select at 0
 	String codigoVendedor=null;
+	String nombreVendedor=null;
 	
 	@InjectExtra(CODIGO_SUPERVISOR_KEY) String codigoSupervisor;
 	@InjectExtra(CODIGO_CDA_KEY) String codigoCda;
@@ -64,7 +67,7 @@ public class ListaVendedoresActivity extends ListActivityBase {
 		protected void process() {
 			// TODO Auto-generated method stub
 		 
-		 item_selected=0;
+		 item_selected=-1;
 		 listarVendedorProxy.codigoDeposito=codigoCda;
 		 listarVendedorProxy.codigoSupervisor=codigoSupervisor;
 		 listarVendedorProxy.tipo="0";
@@ -156,18 +159,21 @@ public class ListaVendedoresActivity extends ListActivityBase {
 			    public void onClick(DialogInterface dialog, int item) {
 			    	item_selected = item;
 			    	codigoVendedor=String.valueOf(adapter.detalle.get(item_selected).codigo);
-			    	
+			    	nombreVendedor=String.valueOf(adapter.detalle.get(item_selected).nombre);
 			    }
 			});
 			
 			builder.setPositiveButton(R.string.listasupervisores_activity_title_dialog_Aceptar, new DialogInterface.OnClickListener() {
 				
 		        public void onClick(DialogInterface dialog, int id) {
-		        	Intent i = new Intent(getApplicationContext(),ListaPedidosActivity.class);
-		        	//i.putExtra(ListaVendedoresActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
-		        	//i.putExtra(ListaVendedoresActivity.CODIGO_CDA_KEY, listarSupervisorProxy.codigoDeposito);
-		        	startActivity(i);
-		        	dialog.dismiss();
+		        	if(item_selected>-1){
+			        	Intent i = new Intent(getApplicationContext(),ListaPedidosActivity.class);
+			        	i.putExtra(ListaPedidosActivity.CODIGO_CDA_KEY, codigoCda);
+			        	i.putExtra(ListaPedidosActivity.CODIGO_VENDEDOR_KEY, codigoVendedor);
+			        	i.putExtra(ListaPedidosActivity.NOMBRE_VENDEDOR_KEY, nombreVendedor);
+			        	startActivity(i);
+			        	dialog.dismiss();
+		        	}
 		        }
 		    });
 

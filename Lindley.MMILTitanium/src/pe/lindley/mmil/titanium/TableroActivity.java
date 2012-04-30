@@ -34,7 +34,9 @@ public class TableroActivity extends ActivityBase {
 	@InjectView(R.id.lstTeleventa) 		ListView 	lstTeleventa;
 	
 	@Inject MostrarPizarraProxy mostrarPizarraProxy;
-		
+	private String nombre_cda;
+	private String codigo_cda;
+	
 	  /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,13 +48,15 @@ public class TableroActivity extends ActivityBase {
         mActionBar.setHomeLogo(R.drawable.header_logo);
         mActionBar.setTitle(R.string.tablero_activity_title);
         
+        codigo_cda="C4";
+        
         processAsync();
     }
 
 	@Override
 	protected void process() {
 		// TODO Auto-generated method stub
-		mostrarPizarraProxy.codigoDeposito="C4";
+		mostrarPizarraProxy.codigoDeposito=codigo_cda;
 		mostrarPizarraProxy.execute();
 		
 	}
@@ -67,7 +71,9 @@ public class TableroActivity extends ActivityBase {
 			if (status == 0) {
 				
 				PizarraDataTO pizarra = mostrarPizarraProxy.getResponse().pizarra;
-				mActionBar.setSubTitle(pizarra.cda);
+				nombre_cda=pizarra.cda;
+				mActionBar.setSubTitle(nombre_cda);
+				
 				txtSupervisores.setText(pizarra.nombreSupervisor + " Cantidad:" + String.valueOf(pizarra.cantidadSupervisor));
 				txtTeleventa.setText(pizarra.nombreTeleventa + " Cantidad:" + String.valueOf(pizarra.cantidadTeleventa));
 				
@@ -123,8 +129,12 @@ public class TableroActivity extends ActivityBase {
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		// TODO Auto-generated method stub
 		if(item.getItemId()==R.id.mnuSupervisor){
-			Intent intent = new Intent(this,ListaSupervisorActivity.class);
-			startActivity(intent);
+			if(nombre_cda!=null){
+				Intent intent = new Intent(this,ListaSupervisorActivity.class);
+				intent.putExtra(ListaSupervisorActivity.NOMBRE_CDA_KEY, nombre_cda);
+				intent.putExtra(ListaSupervisorActivity.CODIGO_CDA_KEY, codigo_cda);
+				startActivity(intent);
+			}
 		}
 		return super.onMenuItemSelected(featureId, item);
 	}

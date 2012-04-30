@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <!--desa: 0GnqeXeroFjywL9df0WrJpTEwFsWxFYCGqDe6xw-->
+    <!--prod: 0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A-->
+    <string name="app_name">Lindley.MMILTitanium</string>
+    <string name="apikey">0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A</string>
     <string name="hello">Hello World, LoginActivity!</string>
     <string name="app_name">Lindley.MMILTitanium</string>
     <string name="login_activity_title">Login</string>
@@ -36,21 +40,16 @@
     <string name="listasupervisores_menu_eficienciaglobal">Eficiencia Global</string>
     <string name="listasupervisores_menu_planvisita">Plan de Visita</string>
     <string name="listasupervisores_menu_eficienciapreventa">Eficiencia Preventa</string>
-    
-    
-       <string name="listavendedores_activity_cuota_column">Cuota</string>
-       <string name="listavendedores_activity_eficienciaglobal_column">Eficiencia Global</string>
-       <string name="listavendedores_activity_planvisitas_column">Plan de Visita</string>
-       <string name="listavendedores_activity_eficienciapreventa_column">Ef. Preventa</string>
-       <string name="listavendedores_activity_clientes_column">Clientes</string>
-       <string name="listavendedores_activity_visitas_column">Visitas</string>
-       <string name="listavendedores_activity_conpedido_column">Con Pedido</string>
-       <string name="listavendedores_activity_sinpedido_column">Sin Pedido</string>
-       
-       <string name="listavendedores_activity_importe_column">Importe</string>
-       <string name="listavendedores_activity_tiempoefectivo_column">T. Efectivo</string>
-       
-       <string name="listavendedores_menu_pedidos">Pedidos</string>
-       
-       <string name="listavendedores_activity_title_dialog">Seleccionar Vendedor</string>
+    <string name="listavendedores_activity_cuota_column">Cuota</string>
+    <string name="listavendedores_activity_eficienciaglobal_column">Eficiencia Global</string>
+    <string name="listavendedores_activity_planvisitas_column">Plan de Visita</string>
+    <string name="listavendedores_activity_eficienciapreventa_column">Ef. Preventa</string>
+    <string name="listavendedores_activity_clientes_column">Clientes</string>
+    <string name="listavendedores_activity_visitas_column">Visitas</string>
+    <string name="listavendedores_activity_conpedido_column">Con Pedido</string>
+    <string name="listavendedores_activity_sinpedido_column">Sin Pedido</string>
+    <string name="listavendedores_activity_importe_column">Importe</string>
+    <string name="listavendedores_activity_tiempoefectivo_column">T. Efectivo</string>
+    <string name="listavendedores_menu_pedidos">Pedidos</string>
+    <string name="listavendedores_activity_title_dialog">Seleccionar Vendedor</string>
 </resources>
