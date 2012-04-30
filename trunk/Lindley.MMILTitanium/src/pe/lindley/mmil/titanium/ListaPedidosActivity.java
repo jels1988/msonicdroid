@@ -6,8 +6,9 @@ import com.thira.examples.actionbar.widget.ActionBar;
 
 import android.os.Bundle;
 import net.msonic.lib.ListActivityBase;
+import net.msonic.lib.MapActivityBase;
 
-public class ListaPedidosActivity extends ListActivityBase {
+public class ListaPedidosActivity extends MapActivityBase {
 	
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	 @Override

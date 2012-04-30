@@ -11,12 +11,17 @@ import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -33,7 +38,8 @@ public class ListaVendedoresActivity extends ListActivityBase {
 	@Inject ListarVendedorProxy listarVendedorProxy;
 	ListView 	lstSupervisor;
 	Tablero_Adapter adapter = null;
-	
+	int item_selected = 0; // select at 0
+	String codigoVendedor=null;
 	
 	@InjectExtra(CODIGO_SUPERVISOR_KEY) String codigoSupervisor;
 	@InjectExtra(CODIGO_CDA_KEY) String codigoCda;
@@ -57,6 +63,8 @@ public class ListaVendedoresActivity extends ListActivityBase {
 	 @Override
 		protected void process() {
 			// TODO Auto-generated method stub
+		 
+		 item_selected=0;
 		 listarVendedorProxy.codigoDeposito=codigoCda;
 		 listarVendedorProxy.codigoSupervisor=codigoSupervisor;
 		 listarVendedorProxy.tipo="0";
@@ -108,7 +116,77 @@ public class ListaVendedoresActivity extends ListActivityBase {
 		
 		
 	 
-	 public static class Tablero_Adapter extends ArrayAdapter<VendedorTO>{
+	 @Override
+		public boolean onCreateOptionsMenu(Menu menu) {
+			// TODO Auto-generated method stub
+		 	MenuInflater menuInflater = new MenuInflater(this);
+		 	menuInflater.inflate(R.menu.listavendedores_menu, menu);
+			return super.onCreateOptionsMenu(menu);
+		}
+
+	 @Override
+		public boolean onMenuItemSelected(int featureId, MenuItem item) {
+			// TODO Auto-generated method stub
+			if(item.getItemId()==R.id.mnuPedidos){
+				showDialog(0);
+			}
+			return super.onMenuItemSelected(featureId, item);
+		}
+
+	 @Override
+	protected Dialog onCreateDialog(int id) {
+		 
+		 ArrayList<String> vendedores = new ArrayList<String>();
+			
+			if(adapter!=null){
+				for (VendedorTO vendedorTO : adapter.detalle) {
+					vendedores.add(vendedorTO.nombre);
+				}
+			}
+			
+			final String[] values = vendedores.toArray(new String[vendedores.size()]);
+			ArrayAdapter<String> arrAdap = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, android.R.id.text1, values);
+			
+
+			// TODO Auto-generated method stub
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle(R.string.listavendedores_activity_title_dialog);
+			
+			builder.setSingleChoiceItems(arrAdap,-1, new DialogInterface.OnClickListener() {
+			    public void onClick(DialogInterface dialog, int item) {
+			    	item_selected = item;
+			    	codigoVendedor=String.valueOf(adapter.detalle.get(item_selected).codigo);
+			    	
+			    }
+			});
+			
+			builder.setPositiveButton(R.string.listasupervisores_activity_title_dialog_Aceptar, new DialogInterface.OnClickListener() {
+				
+		        public void onClick(DialogInterface dialog, int id) {
+		        	Intent i = new Intent(getApplicationContext(),ListaPedidosActivity.class);
+		        	//i.putExtra(ListaVendedoresActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+		        	//i.putExtra(ListaVendedoresActivity.CODIGO_CDA_KEY, listarSupervisorProxy.codigoDeposito);
+		        	startActivity(i);
+		        	dialog.dismiss();
+		        }
+		    });
+
+			builder.setNegativeButton(R.string.listasupervisores_activity_title_dialog_Cancelar, new DialogInterface.OnClickListener() {
+
+		        public void onClick(DialogInterface dialog, int id) {
+		        	 dialog.dismiss();
+		        }
+		    });
+			AlertDialog alert = builder.create();
+			
+		    
+			alert.setCanceledOnTouchOutside(true);
+			
+			return builder.create();
+			
+	 }
+
+	public static class Tablero_Adapter extends ArrayAdapter<VendedorTO>{
 		   private final ArrayList<VendedorTO> detalle;
 		   private final Activity context;
 		
@@ -175,8 +253,6 @@ public class ListaVendedoresActivity extends ListActivityBase {
 					view.setClickable(true);
 					holder.txtCodigo = (TextView) view.findViewById(R.id.txtCodigo);
 					holder.txtNombre = (TextView) view.findViewById(R.id.txtNombre);
-					holder.txtEstado = (TextView) view.findViewById(R.id.txViewEstado);
-					holder.imgEstado = (ImageView) view.findViewById(R.id.imgEstado);
 					
 					holder.txCuota = (TextView) view.findViewById(R.id.txCuota);
 					holder.imgCuota = (ImageView) view.findViewById(R.id.imgCuota);
@@ -190,6 +266,14 @@ public class ListaVendedoresActivity extends ListActivityBase {
 					holder.txtEficienciaPreventa = (TextView) view.findViewById(R.id.txtEficienciaPreventa);
 					holder.imgEficienciaPreventa = (ImageView) view.findViewById(R.id.imgEficienciaPreventa);
 					
+					holder.txtClientes = (TextView) view.findViewById(R.id.txtClientes);
+					holder.txtVisitas = (TextView) view.findViewById(R.id.txtVisitas);
+					
+					holder.txtConPedido = (TextView) view.findViewById(R.id.txtConPedido);
+					holder.txtSinPedido = (TextView) view.findViewById(R.id.txtSinPedido);
+					
+					holder.txtImporte = (TextView) view.findViewById(R.id.txtImporte);
+					holder.txtTiempoEficiencia = (TextView) view.findViewById(R.id.txtTiempoEficiencia);
 					
 					view.setTag(holder);
 					holder.txtCodigo.setTag(this.detalle.get(position));
@@ -205,25 +289,8 @@ public class ListaVendedoresActivity extends ListActivityBase {
 				ViewHolder holder = (ViewHolder) view.getTag();
 				holder.txtCodigo.setText(String.valueOf(vendedorTO.codigo));
 				holder.txtNombre.setText(vendedorTO.nombre);
-				holder.txtEstado.setText(vendedorTO.estado);
-				
-				if(vendedorTO.estado!=null){
-				 switch(Integer.parseInt(vendedorTO.estado))
-			      {
-			      	case IND_VERDE:
-			      		holder.imgEstado.setImageResource(R.drawable.icon_verde);
-			    	  break;
-			      	case IND_AMARRILLO:
-			      		holder.imgEstado.setImageResource(R.drawable.icon_amarrillo);
-			      		break;
-			      	case IND_ROJO:
-			      		holder.imgEstado.setImageResource(R.drawable.icon_rojo);
-			      		break;	 
-			       }	
-				}
 				
 				holder.txCuota.setText(vendedorTO.cuota);
-				
 				if(vendedorTO.cuotaColor!=null){
 					 switch(Integer.parseInt(vendedorTO.cuotaColor))
 				      {
@@ -292,6 +359,15 @@ public class ListaVendedoresActivity extends ListActivityBase {
 					}
 				
 				
+				holder.txtClientes.setText(vendedorTO.cantidadClientes);
+				holder.txtVisitas.setText(vendedorTO.visitas);
+				
+				holder.txtConPedido.setText(vendedorTO.conPedido);
+				holder.txtSinPedido.setText(vendedorTO.sinPedido);
+				
+				holder.txtImporte.setText(vendedorTO.importe);
+				holder.txtTiempoEficiencia.setText(vendedorTO.tiempoEfec);
+				
 				return view;
 				
 			}
@@ -299,10 +375,6 @@ public class ListaVendedoresActivity extends ListActivityBase {
 			private class ViewHolder {
 				public TextView txtCodigo;
 				public TextView txtNombre;
-				
-				public ImageView imgEstado;
-				public TextView txtEstado;
-				
 				
 				public ImageView imgCuota;
 				public TextView txCuota;
@@ -317,8 +389,15 @@ public class ListaVendedoresActivity extends ListActivityBase {
 				public ImageView imgEficienciaPreventa;
 				public TextView txtEficienciaPreventa;
 				
+				public TextView txtClientes;
+				public TextView txtVisitas;
 				
-		
+				public TextView txtConPedido;
+				public TextView txtSinPedido;
+				
+				public TextView txtImporte;
+				public TextView txtTiempoEficiencia;
+				
 			}
 		   
 	 }
