@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import pe.lindley.mmil.titanium.to.SupervisorTO;
 import pe.lindley.mmil.titanium.ws.service.ListarSupervisorProxy;
+import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
 import android.app.Activity;
@@ -33,11 +34,17 @@ import net.msonic.lib.ListActivityBase;
 
 public class ListaSupervisorActivity extends ListActivityBase {
 
+	public static final String NOMBRE_CDA_KEY="NOMBRE_CDA";
+	public static final String CODIGO_CDA_KEY="CODIGO_CDA";
+	
+	@InjectExtra(NOMBRE_CDA_KEY) String nombre_cda;
+	@InjectExtra(CODIGO_CDA_KEY) String codigo_cda;
+	
 	@Inject ListarSupervisorProxy listarSupervisorProxy;
 	ListView 	lstSupervisor;
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	Tablero_Adapter adapter = null;
-	int item_selected = 0; // select at 0
+	int item_selected = -1; // select at 0
 	String codigoSupervisor=null;
 	
 	 @Override
@@ -49,7 +56,7 @@ public class ListaSupervisorActivity extends ListActivityBase {
 	        
 	        mActionBar.setHomeLogo(R.drawable.header_logo);
 	        mActionBar.setTitle(R.string.listasupervisores_activity_title);
-	        
+	        mActionBar.setSubTitle(nombre_cda);
 	        
 	        lstSupervisor = getListView();
 	        processAsync();
@@ -60,8 +67,8 @@ public class ListaSupervisorActivity extends ListActivityBase {
 	 @Override
 	protected void process() {
 		// TODO Auto-generated method stub
-		 item_selected=0;
-		 listarSupervisorProxy.codigoDeposito="C4";
+		 item_selected=-1;
+		 listarSupervisorProxy.codigoDeposito=codigo_cda;
 		 listarSupervisorProxy.tipo=0;
 		 listarSupervisorProxy.execute();
 		 
@@ -149,13 +156,14 @@ public class ListaSupervisorActivity extends ListActivityBase {
 		});
 		
 		builder.setPositiveButton(R.string.listasupervisores_activity_title_dialog_Aceptar, new DialogInterface.OnClickListener() {
-			
 	        public void onClick(DialogInterface dialog, int id) {
-	        	Intent i = new Intent(getApplicationContext(),ListaVendedoresActivity.class);
-	        	i.putExtra(ListaVendedoresActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
-	        	i.putExtra(ListaVendedoresActivity.CODIGO_CDA_KEY, listarSupervisorProxy.codigoDeposito);
-	        	startActivity(i);
-	        	dialog.dismiss();
+	        	if(item_selected>-1){
+		        	Intent i = new Intent(getApplicationContext(),ListaVendedoresActivity.class);
+		        	i.putExtra(ListaVendedoresActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+		        	i.putExtra(ListaVendedoresActivity.CODIGO_CDA_KEY, listarSupervisorProxy.codigoDeposito);
+		        	startActivity(i);
+		        	dialog.dismiss();
+	        	}
 	        }
 	    });
 
@@ -178,15 +186,8 @@ public class ListaSupervisorActivity extends ListActivityBase {
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		// TODO Auto-generated method stub
-		if(item.getItemId()==R.id.mnuVendedores){
-			
-			
-		
-		    
+		if(item.getItemId()==R.id.mnuVendedores){		    
 			showDialog(0);
-			
-		
-			
 		}
 		return super.onMenuItemSelected(featureId, item);
 	}
@@ -261,8 +262,6 @@ public class ListaSupervisorActivity extends ListActivityBase {
 						public void onClick(View v) {
 							// TODO Auto-generated method stub
 							Log.d("TAG","DATA");
-							
-							
 						}
 					});
 				    
