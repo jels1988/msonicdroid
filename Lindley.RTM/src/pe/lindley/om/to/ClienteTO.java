@@ -19,6 +19,8 @@ public class ClienteTO {
 
      @SerializedName("cdrum")
      private String rutaMecaderista;
+     
+     
 
      public String getCodigo() {
 		return codigo;
@@ -158,5 +160,18 @@ public class ClienteTO {
 
      @SerializedName("modo")
      private String modoservicio;
+     
+     @SerializedName("cex")
+     private String clubExito;
+
+
+
+	public String getClubExito() {
+		return clubExito;
+	}
+
+	public void setClubExito(String clubExito) {
+		this.clubExito = clubExito;
+	}
      
 }

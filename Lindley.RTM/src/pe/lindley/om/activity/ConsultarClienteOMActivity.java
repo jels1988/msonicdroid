@@ -6,8 +6,10 @@ import java.util.List;
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,13 +22,16 @@ import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import pe.lindley.activity.R;
+import pe.lindley.activity.RTMApplication;
 import pe.lindley.equipofrio.activity.ConsultarEquipoFrioActivity;
 import pe.lindley.om.negocio.ClienteBLL;
 import pe.lindley.om.to.ClienteTO;
 import pe.lindley.profit.activity.ProfitHistoryActivity;
 import pe.lindley.profit.activity.ProfitHistoryDatosComercialesActivity;
+import pe.lindley.util.JSONHelper;
 import pe.lindley.util.ListActivityBase;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
@@ -192,13 +197,25 @@ public View getView(final int position, View convertView,
 		holder.imgProfit = (ImageButton) convertView.findViewById(R.id.btn_profit);
 		holder.imgDatosComerciales = (ImageButton) convertView.findViewById(R.id.btn_profitDatosComerciales);
 		holder.imgAvanceResumen = (ImageButton) convertView.findViewById(R.id.btn_profitAvanceResumen);
-
+		holder.imgClubExito = (ImageView) convertView.findViewById(R.id.imgClubExito);
+		holder.btn_clubexito = (ImageButton) convertView.findViewById(R.id.btn_clubexito);
+		
 		convertView.setTag(holder);
 	} else {
 
 		holder = (ViewHolder) convertView.getTag();
 	}
 	
+	ClienteTO clienteTO = (ClienteTO)getItem(position);
+	
+	if(clienteTO.getClubExito()!=null && clienteTO.getClubExito().compareTo("S")==0){
+		//convertView.setBackgroundResource(R.drawable.club_exito);
+		holder.btn_clubexito.setVisibility(View.VISIBLE);
+		holder.imgClubExito.setVisibility(View.VISIBLE);
+	}else{
+		holder.btn_clubexito.setVisibility(View.GONE);
+		holder.imgClubExito.setVisibility(View.GONE);
+	}
 	
 	holder.txtRazonSocial.setText(cliente.getRazonSocial());
 	holder.txtCodigo.setText(cliente.getCodigo());
@@ -281,10 +298,39 @@ public View getView(final int position, View convertView,
 		
 	});
 	
+	
+	holder.btn_clubexito.setOnClickListener(new OnClickListener() {
+		ClienteTO clienteTO = (ClienteTO)getItem(position);
+		
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+			RTMApplication app=(RTMApplication)context.getApplicationContext();
+			String usuario = JSONHelper.serializar(app.getUsuarioTO());
+			Intent consultarEquipoFrioActivity = new Intent("lindley.desarrolloxcliente.consultarcliente");
+			consultarEquipoFrioActivity.putExtra("CODIGO_CLIENTE", clienteTO.getCodigo());
+			consultarEquipoFrioActivity.putExtra("USUARIO", usuario);
+			try
+			{
+				context.startActivity(consultarEquipoFrioActivity);
+			}catch (ActivityNotFoundException e) {
+				// TODO: handle exception
+				
+				Uri uri = Uri.parse("market://search?q=lindley.desarrolloxcliente");
+				Intent i = new Intent(Intent.ACTION_VIEW, uri);
+				context.startActivity(i); 
+				
+			}
+			
+		}
+	});
+	
+	
 	return convertView;
 }
 
 static class ViewHolder {
+	
 	TextView txtRazonSocial;
 	TextView txtCodigo;
 	TextView txtDireccion;
@@ -303,6 +349,9 @@ static class ViewHolder {
 	ImageButton imgProfit;
 	ImageButton imgDatosComerciales;
 	ImageButton imgAvanceResumen;
+	ImageButton btn_clubexito;
+	ImageView imgClubExito;
+	
 
 }
 
