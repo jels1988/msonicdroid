@@ -11,6 +11,7 @@
     <string name="login_activity_password">Password:</string>
     <string name="login_activity_password_hint">Ingresar Password</string>
     <string name="login_activity_btn_ingresar">Ingresar</string>
+    <string name="login_activity_no_tiene_acceso">El usuario no tiene acceso.</string>
     <string name="tablero_activity_title">Tablero</string>
     <string name="tablero_grafico_activity_title">Tablero</string>
     <string name="lista_vendedores_activity_title">Vendedores</string>
@@ -64,7 +65,6 @@
     <string name="listatelevendedores_cajasfisicas_column">Cj. Físicas</string>
     <string name="listatelevendedores_cajasunitarias_column">Cj. Unitarias</string>
     <string name="listatelevendedores_tiempoefectivo_column">Tiempor Efectivo</string>
-    
     <string name="login_activity_ok">Bienvenido: %s.</string>
     <string name="login_activity_error">%s</string>
     <string name="login_activity_txtlogin_empty">Debes ingresar tu usuario</string>

@@ -13,9 +13,7 @@ import com.thira.examples.actionbar.widget.ActionBar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -32,6 +30,7 @@ public class LoginActivity extends ActivityBase {
 	@InjectResource(R.string.login_activity_error) String login_error;
 	@InjectResource(R.string.login_activity_txtlogin_empty) String txtlogin_empty;
 	@InjectResource(R.string.login_activity_txtpassword_empty) String txtpassword_empty;
+	@InjectResource(R.string.login_activity_no_tiene_acceso) String usuario_no_tiene_acceso;
 	
 	
 	@Inject 						LoginProxy 	loginProxy;
@@ -108,9 +107,29 @@ public class LoginActivity extends ActivityBase {
 				
 				message = String.format(login_ok,usuarioTO.nombres);
 				
-				Intent intent = new Intent(this, TableroActivity.class);
-				intent.putExtra(TableroActivity.CODIGO_CDA_KEY, usuarioTO.codigoDeposito.trim());
-		    	startActivity(intent);
+				
+				if(usuarioTO.rolId.compareToIgnoreCase("7")==0){ //GERENTE
+					Intent intent = new Intent(this, TableroActivity.class);
+					intent.putExtra(TableroActivity.CODIGO_CDA_KEY, usuarioTO.codigoDeposito.trim());
+			    	startActivity(intent);
+				}else if(usuarioTO.rolId.compareToIgnoreCase("8")==0){//SUPERVISOR
+					Intent intent = new Intent(this, ListaVendedoresActivity.class);
+					intent.putExtra(ListaVendedoresActivity.CODIGO_SUPERVISOR_KEY, usuarioTO.codigoSap.trim());
+					intent.putExtra(ListaVendedoresActivity.CODIGO_CDA_KEY, usuarioTO.codigoDeposito.trim());
+					intent.putExtra(ListaVendedoresActivity.NOMBRE_CDA_KEY, usuarioTO.descripcionDeposito.trim());
+			    	startActivity(intent);
+					
+				}else if(usuarioTO.rolId.compareToIgnoreCase("9")==0){//VENDEDOR
+					
+					Intent intent = new Intent(this, ListaPedidosActivity.class);
+					intent.putExtra(ListaPedidosActivity.CODIGO_VENDEDOR_KEY, usuarioTO.codigoSap.trim());
+					intent.putExtra(ListaPedidosActivity.CODIGO_CDA_KEY, usuarioTO.codigoDeposito.trim());
+					intent.putExtra(ListaPedidosActivity.NOMBRE_VENDEDOR_KEY, usuarioTO.nombres.trim());
+			    	startActivity(intent);
+			    	
+				}else{
+					message = usuario_no_tiene_acceso;
+				}
 				
 			}else{
 				message = String.format(
