@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" 
 	android:layout_height="@dimen/actionbar_height"
-	android:layout_marginBottom="0dip">
+	android:layout_marginBottom="0dip"
+	android:background="@drawable/actionbar_btn_normal">
 	
     <!-- android:background="@drawable/logo_btn" -->
 	<ImageView android:id="@+id/actionbar_home_logo"
@@ -53,7 +54,7 @@
 		android:layout_height="fill_parent"
 		android:background="@drawable/actionbar_btn_normal"
 		android:paddingLeft="10dip"
-		android:paddingRight="10dip" android:textSize="16dip"
+		android:paddingRight="10dip" android:textSize="18dip"
 		android:textStyle="bold" 
 		android:gravity="center_vertical"
 		android:textColor="@color/actionbar_title"
