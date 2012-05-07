@@ -29,4 +29,8 @@ public class UsuarioTO {
 	
 	@SerializedName("CSB")
 	public String codigoBasis;
+	
+	@SerializedName("DDP")
+	public String descripcionDeposito;
+	
 }
