@@ -4,8 +4,15 @@
 	android:layout_width="wrap_content" 
 	android:layout_height="wrap_content"
 	android:gravity="center_vertical">
+	
 	 <TableLayout android:stretchColumns="1" android:id="@+id/tableLayout1" android:layout_height="wrap_content" android:layout_width="fill_parent">
-        <TableRow android:id="@+id/tableRow2" android:layout_width="wrap_content" android:layout_height="wrap_content">
+	    
+	     <TableRow  android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <ImageView android:id="@+id/imgClubExito"  android:scaleType="center" android:layout_width="fill_parent" android:layout_span="2" android:layout_height="fill_parent" android:src="@drawable/clubexito2"/>
+        </TableRow>
+        
+	     
+        <TableRow  android:layout_width="wrap_content" android:layout_height="wrap_content">
             <TextView android:id="@+id/txtRazonSocial" android:text="Razon Social" android:layout_span="2" android:layout_height="wrap_content" android:layout_weight="0" android:layout_width="fill_parent"/>
         </TableRow>
         
@@ -72,7 +79,8 @@
         		<ImageButton android:id="@+id/btn_equipofrio" android:src="@drawable/btn_equipofrio" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
 				<ImageButton android:id="@+id/btn_profit" android:src="@drawable/btn_profit" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
 				<ImageButton android:id="@+id/btn_profitDatosComerciales" android:src="@drawable/btn_datoscomerciales" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
-				<ImageButton android:id="@+id/btn_profitAvanceResumen" android:src="@drawable/btn_avanceresumen" android:layout_height="wrap_content" android:layout_width="wrap_content"/>        	
+				<ImageButton android:id="@+id/btn_profitAvanceResumen" android:src="@drawable/btn_avanceresumen" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+				<ImageButton android:id="@+id/btn_clubexito" android:src="@drawable/coca_cola" android:layout_height="wrap_content" android:layout_width="wrap_content"/>        	
         	</LinearLayout>
         </TableRow>
      </TableLayout>

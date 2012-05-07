@@ -35,7 +35,8 @@ public class ClienteDAO {
 		parametros.put("TAMANO", clienteTO.getTamanio());
 		parametros.put("POTENCIAL", clienteTO.getPotencial());
 		parametros.put("MODOSERVICIO", clienteTO.getModoservicio());
-
+		parametros.put("CLUBEXITO", clienteTO.getClubExito());
+		
 		dbHelper.getDataBase().insertOrThrow("om_cliente", null, parametros);
 		
 	}
@@ -95,6 +96,7 @@ public class ClienteDAO {
 		clienteTO.setRutaDesarrollador(cursor.getString(cursor.getColumnIndex("rtadesa")));
 		clienteTO.setRutaMecaderista(cursor.getString(cursor.getColumnIndex("rtamerca")));
 		clienteTO.setRutaTecnicoMan(cursor.getString(cursor.getColumnIndex("rtamaest")));
+		clienteTO.setClubExito(cursor.getString(cursor.getColumnIndex("clubexito")));
 		return clienteTO;
 	}
 	
