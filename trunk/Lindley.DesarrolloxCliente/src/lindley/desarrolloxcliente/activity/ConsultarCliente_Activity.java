@@ -7,7 +7,9 @@ import java.util.List;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
+import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarClienteProxy;
+import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
 import android.content.Context;
@@ -34,11 +36,15 @@ import android.widget.TextView;
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
+import net.msonic.lib.JSONHelper;
 import net.msonic.lib.ListActivityBase;
 import net.msonic.lib.MessageBox;
 
 public class ConsultarCliente_Activity extends ListActivityBase {
 
+	@InjectExtra(value="CODIGO_CLIENTE",optional=true) String codigoCliente;
+	@InjectExtra(value="USUARIO",optional=true) String usuario;
+	
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarClienteProxy consultarClienteProxy;
 	@InjectView(R.id.txtCodigo)TextView txtCodigo;
@@ -71,6 +77,18 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 		txtRuc.addTextChangedListener(txtRucTextWatcher);
 		txtDni.addTextChangedListener(txtDniTextWatcher);
 		txtRazonSocial.addTextChangedListener(txtRazonSocialTextWatcher);
+		
+		if(codigoCliente!=null){
+			
+			
+			MyApplication application = (MyApplication)contextProvider.get().getApplicationContext();
+			UsuarioTO usuarioTO = JSONHelper.desSerializar(usuario, UsuarioTO.class);
+			application.setUsuarioTO(usuarioTO);
+		
+			txtCodigo.setText(codigoCliente);
+			processAsync();
+		}
+		
     }
     
 	private TextWatcher txtRucTextWatcher = new TextWatcher() {
@@ -215,7 +233,7 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 	};
     
     public void btnbuscar_onclick(View view){
-    	processAsync();
+    	//processAsync();
     }
     
     @Override
@@ -302,9 +320,10 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 			
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub	
-//				int pid = android.os.Process.myPid(); 
-//				android.os.Process.killProcess(pid);
-				onDestroy();
+				finish();
+				int pid = android.os.Process.myPid(); 
+				android.os.Process.killProcess(pid);
+				//onDestroy();
 			}
 			
 		}, confirm_exit_no, new android.content.DialogInterface.OnClickListener() {

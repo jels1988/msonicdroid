@@ -119,8 +119,8 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub	
 				finish();
-				Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
-				startActivity(intent);
+				//Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
+				//startActivity(intent);
 			}
 			
 		}, confirm_cancelar_no, new android.content.DialogInterface.OnClickListener() {

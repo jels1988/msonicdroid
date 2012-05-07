@@ -74,9 +74,13 @@ public class VerProfit_Activity extends ActivityBase {
 		LinearLayout group = (LinearLayout) findViewById(R.id.linearLayoutTchart);
 		chart = new TChart(this);
 		group.addView(chart);
+		
 		chart.getPanel().setBorderRound(7);
 		chart.getAspect().setView3D(true);
-
+		
+		//chart.getAxes().getLeft().getLabels().setValueFormat("#,##0.00;(#,##0.00)");
+		
+		
 		selectTheme(1);
 		processAsync();
 	}
@@ -186,26 +190,29 @@ public class VerProfit_Activity extends ActivityBase {
 
 				if (nombre.compareTo(profitTO.nombreIndicador.toUpperCase()) == 0) {
 
+					/*
 					BigDecimal bd = new BigDecimal(profitTO.cajasFisica * 100);
-					BigDecimal rounded = bd.setScale(0,
-							BigDecimal.ROUND_HALF_UP);
-					varCajaFisica[indicadores.indexOf(nombre)] = rounded
-							.doubleValue();
+					BigDecimal rounded = bd.setScale(0,BigDecimal.ROUND_HALF_UP);
+					varCajaFisica[indicadores.indexOf(nombre)] = rounded.doubleValue();
 
 					bd = new BigDecimal(profitTO.margenActual * 100);
 					rounded = bd.setScale(0, BigDecimal.ROUND_HALF_UP);
-					varMargenActual[indicadores.indexOf(nombre)] = rounded
-							.doubleValue();
+					varMargenActual[indicadores.indexOf(nombre)] = rounded.doubleValue();
 
 					bd = new BigDecimal(profitTO.cajasFisicasFaltante * 100);
 					rounded = bd.setScale(0, BigDecimal.ROUND_HALF_UP);
-					varCajaFaltante[indicadores.indexOf(nombre)] = rounded
-							.doubleValue();
+					varCajaFaltante[indicadores.indexOf(nombre)] = rounded.doubleValue();
 
 					bd = new BigDecimal(profitTO.margenFaltante * 100);
 					rounded = bd.setScale(0, BigDecimal.ROUND_HALF_UP);
-					varMargenFaltante[indicadores.indexOf(nombre)] = rounded
-							.doubleValue();
+					varMargenFaltante[indicadores.indexOf(nombre)] = rounded.doubleValue();
+					*/
+					
+					varCajaFisica[indicadores.indexOf(nombre)] = profitTO.cajasFisica;
+					varMargenActual[indicadores.indexOf(nombre)] = profitTO.margenActual;
+					varCajaFaltante[indicadores.indexOf(nombre)] = profitTO.cajasFisicasFaltante;
+					varMargenFaltante[indicadores.indexOf(nombre)] = profitTO.margenFaltante;
+					
 				}
 			}
 			sLabel.add(pos, nombre);
@@ -216,42 +223,57 @@ public class VerProfit_Activity extends ActivityBase {
 		bar.setTitle(variables.get(0).toString());
 		bar.setShowInLegend(true);
 		bar.add(varCajaFisica);
+		bar.getMarks().getFont().setSize(20);
+		bar.setValueFormat("###,###");
 		chart.addSeries(bar);
 
 		bar = new Bar(chart.getChart());
 		bar.setTitle(variables.get(1).toString());
+		bar.getMarks().getFont().setSize(20);
+		bar.setValueFormat("###,###");
 		bar.setShowInLegend(true);
 		bar.add(varMargenActual);
+		
 		chart.addSeries(bar);
-
+		
 		bar = new Bar(chart.getChart());
 		bar.setTitle(variables.get(2).toString());
+		bar.getMarks().getFont().setSize(20);
+		bar.setValueFormat("###,###");
 		bar.setShowInLegend(true);
 		bar.add(varCajaFaltante);
 		chart.addSeries(bar);
 
 		bar = new Bar(chart.getChart());
 		bar.setTitle(variables.get(3).toString());
+		bar.getMarks().getFont().setSize(20);
+		bar.setValueFormat("###,###");
 		bar.setShowInLegend(true);
 		bar.add(varMargenFaltante);
 		chart.addSeries(bar);
 
+		
 		bar = new Bar(chart.getChart());
 		bar.setTitle("");
 		bar.setShowInLegend(false);
 		bar.setLabels(sLabel);
+		
 		bar.add();
 		bar.add();
 		bar.add();
 		bar.add();
 
 		chart.addSeries(bar);
-
+		
 		chart.getLegend().setVisible(true);
 		chart.getLegend().setAlignment(LegendAlignment.BOTTOM);
-
+		chart.getLegend().getFont().setSize(15);
+		chart.getAxes().getLeft().setIncrement(10);
+		
 		chart.getHeader().setText("Profit Story x SKU - " + nombre_articulo);
 		chart.getHeader().getFont().setSize(20);
+		
+		//chart.getFooter().getFont().setSize(20);
 	}
 
 }

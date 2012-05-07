@@ -141,8 +141,11 @@ public class InformacionAdicionalFalse_Activity extends ActivityBase {
 			
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub	
+				/*
 				Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
 				startActivity(intent);
+				*/
+				finish();
 			}
 			
 		}, confirm_cancelar_no, new android.content.DialogInterface.OnClickListener() {
