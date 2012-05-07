@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <PreferenceCategory
+                android:title="Parámetros de Configuración">
+    
+         <EditTextPreference
+            android:key="url_servicio"
+            android:title="url de servicio" 
+            android:summary="Url web service"
+            android:dialogTitle="Url web service"
+            android:dialogMessage="Url web service"    
+            android:defaultValue="http://ip:port/app/webservices.svc/message" />
+        
+          <EditTextPreference
+            android:key="time_out_servicio"
+            android:title="TimeOut service" 
+            android:summary="TimeOut service"
+            android:dialogTitle="TimeOut service en segundos"
+            android:dialogMessage="TimeOut service"   
+           
+            android:defaultValue="60" />
+        
+		<EditTextPreference
+            android:key="msg_not_servicio"
+            android:title="SMS enviado al cliente en caso de error" 
+            android:summary="Este sms será enviado cuando el web service no responda."
+            android:dialogTitle="SMS error"
+            android:dialogMessage="SMS enviado al cliente en caso de error"    
+            android:defaultValue="" />
+    
+		<CheckBoxPreference
+     		android:key="sms_servicio_onoff"
+     		android:summary="On/Off"
+     		android:summaryOn="El servicio se encuentra habilitado."
+			android:summaryOff="El servicio se encuentra deshabilitado."
+     		android:title="Habilitar o deshabilitar el servicio de SMS" />
+     
+    </PreferenceCategory>
+</PreferenceScreen>
