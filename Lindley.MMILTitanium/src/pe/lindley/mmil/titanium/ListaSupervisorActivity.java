@@ -46,6 +46,7 @@ public class ListaSupervisorActivity extends ListActivityBase {
 	Tablero_Adapter adapter = null;
 	int item_selected = -1; // select at 0
 	String codigoSupervisor=null;
+	String nombreSupervisor=null;
 	
 	 @Override
 	    public void onCreate(Bundle savedInstanceState) {
@@ -151,7 +152,7 @@ public class ListaSupervisorActivity extends ListActivityBase {
 		    public void onClick(DialogInterface dialog, int item) {
 		    	item_selected = item;
 		    	codigoSupervisor=String.valueOf(adapter.detalle.get(item_selected).codigo);
-		    	
+		    	nombreSupervisor=adapter.detalle.get(item_selected).nombre;
 		    }
 		});
 		
@@ -161,6 +162,7 @@ public class ListaSupervisorActivity extends ListActivityBase {
 		        	Intent i = new Intent(getApplicationContext(),ListaVendedoresActivity.class);
 		        	i.putExtra(ListaVendedoresActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
 		        	i.putExtra(ListaVendedoresActivity.CODIGO_CDA_KEY, listarSupervisorProxy.codigoDeposito);
+		        	i.putExtra(ListaVendedoresActivity.NOMBRE_CDA_KEY, nombreSupervisor);
 		        	startActivity(i);
 		        	dialog.dismiss();
 	        	}

@@ -6,7 +6,7 @@
 
  
     <application
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/header_logo"
         android:label="@string/app_name" android:name="App"
         android:theme="@style/CustomTheme">
         
@@ -33,6 +33,10 @@
         
         <activity android:name=".ListaVendedoresActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".ListaPedidosActivity" android:configChanges="keyboardHidden|orientation"></activity>
+        <activity android:name=".ListaTeleventaActivity" android:configChanges="keyboardHidden|orientation"></activity>
+        <activity android:name=".TableroGraficoActivity" android:configChanges="keyboardHidden|orientation"></activity>
+            
+        
         
         
         

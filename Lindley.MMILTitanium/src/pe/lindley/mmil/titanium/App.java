@@ -5,6 +5,7 @@ import java.util.List;
 import pe.lindley.mmil.titanium.ws.service.ListarMapVendedorProxy;
 import pe.lindley.mmil.titanium.ws.service.ListarSupervisorProxy;
 import pe.lindley.mmil.titanium.ws.service.ListarVendedorProxy;
+import pe.lindley.mmil.titanium.ws.service.LoginProxy;
 import pe.lindley.mmil.titanium.ws.service.MostrarPizarraProxy;
 
 import com.google.inject.Module;
@@ -27,6 +28,8 @@ public class App extends RoboApplication {
 				bind(ListarSupervisorProxy.class).in(Singleton.class);
 				bind(ListarVendedorProxy.class).in(Singleton.class);
 				bind(ListarMapVendedorProxy.class).in(Singleton.class);
+				bind(LoginProxy.class).in(Singleton.class);
+				
 				
 			}
 		});

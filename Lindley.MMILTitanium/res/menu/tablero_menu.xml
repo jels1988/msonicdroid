@@ -2,5 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:id="@+id/mnuSupervisor" android:title="@string/tablero_menu_supervisor"/>
     <item android:id="@+id/mnuTeleventa" android:title="@string/tablero_menu_televenta"/>
+    <item android:id="@+id/mnuGrafico" android:title="@string/tablero_menu_grafico"/>
 	
 </menu>

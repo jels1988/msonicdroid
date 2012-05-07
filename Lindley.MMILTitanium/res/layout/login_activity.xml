@@ -16,7 +16,7 @@
 	<EditText android:id="@+id/txtUsuario" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/login_activity_usuario_hint" android:inputType="number" android:maxLength="8"></EditText>
       
 	<TextView android:text="@string/login_activity_password" android:focusable="false" android:layout_height="wrap_content"  android:layout_width="fill_parent"></TextView>
-  	<EditText android:id="@+id/txtPassword" android:layout_width="fill_parent" android:hint="@string/login_activity_password_hint" android:layout_height="wrap_content"  android:inputType="number|textPassword" android:maxLength="8"></EditText>
+  	<EditText android:id="@+id/txtPassword" android:layout_width="fill_parent" android:hint="@string/login_activity_password_hint" android:layout_height="wrap_content"  android:inputType="number" android:password="true" android:maxLength="8"></EditText>
                
    <Button android:layout_width="wrap_content" 
     android:layout_gravity="right" 
