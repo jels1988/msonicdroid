@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import pe.lindley.mmil.titanium.to.PizarraDataTO;
 import pe.lindley.mmil.titanium.to.PizarraDetalleTO;
 import pe.lindley.mmil.titanium.ws.service.MostrarPizarraProxy;
+import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
 import com.google.inject.Inject;
@@ -27,6 +28,9 @@ import net.msonic.lib.ActivityBase;
 
 public class TableroActivity extends ActivityBase {
 	
+	public static final String CODIGO_CDA_KEY = "CODIGO_CDA";
+	@InjectExtra(CODIGO_CDA_KEY) String codigo_cda;
+	
 	@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
 	@InjectView(R.id.txtSupervisores)	TextView	txtSupervisores;
 	@InjectView(R.id.txtTeleventa)		TextView	txtTeleventa;
@@ -35,7 +39,7 @@ public class TableroActivity extends ActivityBase {
 	
 	@Inject MostrarPizarraProxy mostrarPizarraProxy;
 	private String nombre_cda;
-	private String codigo_cda;
+	
 	
 	  /** Called when the activity is first created. */
     @Override
@@ -48,7 +52,7 @@ public class TableroActivity extends ActivityBase {
         mActionBar.setHomeLogo(R.drawable.header_logo);
         mActionBar.setTitle(R.string.tablero_activity_title);
         
-        codigo_cda="C4";
+        
         
         processAsync();
     }
@@ -140,6 +144,33 @@ public class TableroActivity extends ActivityBase {
 			intent.putExtra(ListaSupervisorActivity.NOMBRE_CDA_KEY, nombre_cda);
 			intent.putExtra(ListaSupervisorActivity.CODIGO_CDA_KEY, codigo_cda);
 			startActivity(intent);
+		}else if(item.getItemId()==R.id.mnuGrafico){
+			
+			Tablero_Adapter adapterSupervisor = (Tablero_Adapter)lstSupervisores.getAdapter();
+			
+			if(adapterSupervisor!=null){
+				
+				String[] titulo = new String[adapterSupervisor.getCount()];
+				String[] actual = new String[adapterSupervisor.getCount()];
+				String[] esperado = new String[adapterSupervisor.getCount()];
+				
+				int i=0;
+				for (PizarraDetalleTO detalle : adapterSupervisor.detalle) {
+					titulo[i] = detalle.indicador;
+					actual[i] = String.valueOf(detalle.valorReal) ;
+					esperado[i] = String.valueOf(detalle.valorEsperado) ;
+					i++;
+				}
+				
+				
+				Intent intent = new Intent(this,TableroGraficoActivity.class);
+				intent.putExtra(TableroGraficoActivity.NOMBRE_CDA_KEY, nombre_cda);
+				intent.putExtra(TableroGraficoActivity.CODIGO_CDA_KEY, codigo_cda);
+				intent.putExtra(TableroGraficoActivity.TITULOS_KEY, titulo);
+				intent.putExtra(TableroGraficoActivity.ACTUAL_KEY, actual);
+				intent.putExtra(TableroGraficoActivity.ESPERADO_KEY, esperado);
+				startActivity(intent);
+			}
 		}
 		return super.onMenuItemSelected(featureId, item);
 	}

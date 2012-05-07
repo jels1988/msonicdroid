@@ -2,10 +2,9 @@
 <resources>
     <!--desa: 0GnqeXeroFjywL9df0WrJpTEwFsWxFYCGqDe6xw-->
     <!--prod: 0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A-->
-    <string name="app_name">Lindley.MMILTitanium</string>
     <string name="apikey">0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A</string>
     <string name="hello">Hello World, LoginActivity!</string>
-    <string name="app_name">Lindley.MMILTitanium</string>
+    <string name="app_name">Lindley RTM MMIL_L</string>
     <string name="login_activity_title">Login</string>
     <string name="login_activity_usuario">Usuario:</string>
     <string name="login_activity_usuario_hint">Ingresar Usuario</string>
@@ -18,6 +17,7 @@
     <string name="lista_pedidos_activity_title">Pedidos</string>
     <string name="tablero_menu_supervisor">Supervidores</string>
     <string name="tablero_menu_televenta">Televenta</string>
+    <string name="tablero_menu_grafico">Gráfico</string>
     <string name="listasupervisores_activity_title">Supervisores</string>
     <string name="listasupervisores_activity_codigo_column">Código</string>
     <string name="listasupervisores_activity_supervisor_column">Supervisor</string>
@@ -53,7 +53,6 @@
     <string name="listavendedores_menu_pedidos">Pedidos</string>
     <string name="listavendedores_activity_title_dialog">Seleccionar Vendedor</string>
     <string name="lista_televendedores_activity_title">Televendedores</string>
-    
     <string name="listatelevendedores_nombre_column">Televendedor</string>
     <string name="listatelevendedores_primerreg_column">Primer Registro</string>
     <string name="listatelevendedores_ultimoreg_column">Último Registro</string>
@@ -65,4 +64,9 @@
     <string name="listatelevendedores_cajasfisicas_column">Cj. Físicas</string>
     <string name="listatelevendedores_cajasunitarias_column">Cj. Unitarias</string>
     <string name="listatelevendedores_tiempoefectivo_column">Tiempor Efectivo</string>
+    
+    <string name="login_activity_ok">Bienvenido: %s.</string>
+    <string name="login_activity_error">%s</string>
+    <string name="login_activity_txtlogin_empty">Debes ingresar tu usuario</string>
+    <string name="login_activity_txtpassword_empty">Debes ingresar tu password</string>
 </resources>
