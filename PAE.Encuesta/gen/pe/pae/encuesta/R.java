@@ -47,38 +47,56 @@ public final class R {
         public static final int actionbar_btn_normal=0x7f020002;
         public static final int actionbar_btn_pressed=0x7f020003;
         public static final int btn_buscar=0x7f020004;
-        public static final int button_selector=0x7f020005;
-        public static final int fondo_selector=0x7f020006;
-        public static final int header_logo=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
-        public static final int logo_btn=0x7f020009;
-        public static final int logo_btn_normal=0x7f02000a;
-        public static final int logo_btn_pressed=0x7f02000b;
+        public static final int btn_first=0x7f020005;
+        public static final int btn_last=0x7f020006;
+        public static final int btn_next=0x7f020007;
+        public static final int btn_previous=0x7f020008;
+        public static final int btn_save=0x7f020009;
+        public static final int btn_tomarfoto=0x7f02000a;
+        public static final int btn_verfoto=0x7f02000b;
+        public static final int button_selector=0x7f02000c;
+        public static final int fondo_selector=0x7f02000d;
+        public static final int header_logo=0x7f02000e;
+        public static final int ic_launcher=0x7f02000f;
+        public static final int icon_rojo=0x7f020010;
+        public static final int icon_verde=0x7f020011;
+        public static final int logo_btn=0x7f020012;
+        public static final int logo_btn_normal=0x7f020013;
+        public static final int logo_btn_pressed=0x7f020014;
     }
     public static final class id {
-        public static final int actionBar=0x7f080006;
-        public static final int actionbar_actionIcons=0x7f080001;
-        public static final int actionbar_home_logo=0x7f080000;
-        public static final int actionbar_item=0x7f080005;
-        public static final int actionbar_progress=0x7f080002;
-        public static final int actionbar_subtitle=0x7f080004;
-        public static final int actionbar_title=0x7f080003;
-        public static final int btnIngresar=0x7f080016;
-        public static final int btnLogin=0x7f08000a;
-        public static final int cboCliente=0x7f080014;
-        public static final int cboTienda=0x7f080015;
-        public static final int chkOpcion=0x7f080010;
-        public static final int gridview=0x7f08000f;
-        public static final int lblPregunta=0x7f08000b;
-        public static final int lnCuestionario=0x7f080007;
-        public static final int radioButton1=0x7f08000c;
-        public static final int radioButton2=0x7f08000d;
-        public static final int rdOption=0x7f080011;
-        public static final int tableLayout1=0x7f080012;
-        public static final int textView1=0x7f08000e;
-        public static final int txtCodigo=0x7f080013;
-        public static final int txtPassword=0x7f080009;
-        public static final int txtUsuario=0x7f080008;
+        public static final int actionBar=0x7f090006;
+        public static final int actionbar_actionIcons=0x7f090001;
+        public static final int actionbar_home_logo=0x7f090000;
+        public static final int actionbar_item=0x7f090005;
+        public static final int actionbar_progress=0x7f090002;
+        public static final int actionbar_subtitle=0x7f090004;
+        public static final int actionbar_title=0x7f090003;
+        public static final int btnCuestionario=0x7f09001a;
+        public static final int btnIngresar=0x7f09001d;
+        public static final int btnLogin=0x7f09000a;
+        public static final int cboCliente=0x7f09001b;
+        public static final int cboTienda=0x7f09001c;
+        public static final int chkOpcion=0x7f090015;
+        public static final int cmdTomarFoto=0x7f09000d;
+        public static final int cmdVerFoto=0x7f09000c;
+        public static final int gridview=0x7f090014;
+        public static final int imgFoto=0x7f09001e;
+        public static final int imgIndicador=0x7f090019;
+        public static final int lblPregunta=0x7f09000e;
+        public static final int lnCuestionario=0x7f090007;
+        public static final int lnlFoto=0x7f09000b;
+        public static final int lnlObservacion=0x7f090011;
+        public static final int mnuEnviar=0x7f09001f;
+        public static final int rdOption=0x7f090016;
+        public static final int tableLayout1=0x7f090017;
+        public static final int txtComentario=0x7f090010;
+        public static final int txtNumero=0x7f09000f;
+        public static final int txtObservacion=0x7f090012;
+        public static final int txtPassword=0x7f090009;
+        public static final int txtProducto=0x7f090018;
+        public static final int txtTexto=0x7f090013;
+        public static final int txtUsuario=0x7f090008;
     }
     public static final class layout {
         public static final int actionbar=0x7f030000;
@@ -91,21 +109,32 @@ public final class R {
         public static final int pregunta_multi_content=0x7f030007;
         public static final int pregunta_single_content=0x7f030008;
         public static final int producto_buscar_activity=0x7f030009;
-        public static final int tienda_seleccionar_activity=0x7f03000a;
+        public static final int producto_buscar_content=0x7f03000a;
+        public static final int tienda_seleccionar_activity=0x7f03000b;
+        public static final int ver_foto_activity=0x7f03000c;
+    }
+    public static final class menu {
+        public static final int producto_buscar_menu=0x7f080000;
     }
     public static final class string {
         public static final int apikey=0x7f040005;
-        /**  GENERAL 
-desa: 0GnqeXeroFjywL9df0WrJpTEwFsWxFYCGqDe6xw
+        /** desa: 0GnqeXeroFjywL9df0WrJpTEwFsWxFYCGqDe6xw
 prod: 0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A
          */
-        public static final int app_name=0x7f040000;
-        public static final int cuestionario_activity_title=0x7f040017;
-        public static final int error_generico_process=0x7f040003;
+        public static final int app_name=0x7f040004;
+        public static final int buscar_producto_menu_cerrar=0x7f04001e;
+        public static final int cuestionario_activity_comentario=0x7f040019;
+        public static final int cuestionario_activity_observacion=0x7f04001a;
+        public static final int cuestionario_activity_observacion_hint=0x7f04001b;
+        public static final int cuestionario_activity_title=0x7f040018;
+        public static final int cuestionario_activity_tomar_foto=0x7f04001c;
+        public static final int cuestionario_activity_ver_foto=0x7f04001d;
+        public static final int error_generico_process=0x7f040002;
         /**  GENERAL 
+ GENERAL 
          */
-        public static final int error_not_network_message=0x7f040001;
-        public static final int hello=0x7f040004;
+        public static final int error_not_network_message=0x7f040000;
+        public static final int hello=0x7f040003;
         public static final int login_activity_error=0x7f04000f;
         public static final int login_activity_ingresar=0x7f040007;
         public static final int login_activity_ok=0x7f04000e;
@@ -116,15 +145,17 @@ prod: 0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A
         public static final int login_activity_txtpassword_empty=0x7f04000d;
         public static final int login_activity_usuario=0x7f040008;
         public static final int login_activity_usuario_hint=0x7f04000a;
-        public static final int producto_buscar_activity_descripcion=0x7f040015;
-        public static final int producto_buscar_activity_descripcion_hint=0x7f040016;
+        public static final int producto_buscar_activity_descripcion=0x7f040016;
+        public static final int producto_buscar_activity_descripcion_hint=0x7f040017;
+        public static final int producto_buscar_activity_responder=0x7f040015;
         public static final int producto_buscar_activity_title=0x7f040014;
         public static final int tienda_seleccionar_activity_cliente=0x7f040011;
         public static final int tienda_seleccionar_activity_ingresar=0x7f040013;
         public static final int tienda_seleccionar_activity_tienda=0x7f040012;
         public static final int tienda_seleccionar_activity_title=0x7f040010;
-        public static final int urlLoginWS=0x7f040018;
-        public static final int wait_message=0x7f040002;
+        public static final int urlLoginWS=0x7f040020;
+        public static final int ver_foto_title=0x7f04001f;
+        public static final int wait_message=0x7f040001;
     }
     public static final class style {
         public static final int ButtonCustom=0x7f070008;
