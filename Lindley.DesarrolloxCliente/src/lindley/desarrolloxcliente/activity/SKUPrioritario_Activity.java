@@ -70,7 +70,7 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 		mActionBar.setSubTitle(cliente.getCodigo() + " - "
 				+ cliente.getNombre());
 		mActionBar.setHomeLogo(R.drawable.header_logo);
-		MessageBox.showConfirmDialog(this, "Posición: ",
+		MessageBox.showConfirmDialog(this, "Posici—n: ",
 				"", "Activos de Lindley",
 				new android.content.DialogInterface.OnClickListener() {
 					@Override
@@ -140,9 +140,9 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
-						Intent intent = new Intent(
-								"lindley.desarrolloxcliente.consultarcliente");
-						startActivity(intent);
+						//Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
+						//startActivity(intent);
+						finish();
 					}
 
 				}, confirm_atras_no,

@@ -4,11 +4,11 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" path="C:/Users/jgonzales/Joseph/M-SONIC2SDK/ANDROID_IDE/Proyectos/libreria/TeeChart.Android.jar"/>
-	<classpathentry kind="lib" path="C:/Users/jgonzales/Joseph/M-SONIC2SDK/ANDROID_IDE/Proyectos/libreria/guice-2.0-no_aop.jar"/>
-	<classpathentry kind="lib" path="C:/Users/jgonzales/Joseph/M-SONIC2SDK/ANDROID_IDE/Proyectos/libreria/roboguice-1.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/jgonzales/Joseph/M-SONIC2SDK/ANDROID_IDE/Proyectos/libreria/gson-1.7.1.jar"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/android-actionbar-lib-v2"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/msonic-lib"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/android-actionbar-lib-v2"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/msonic-lib"/>
+	<classpathentry exported="true" kind="lib" path="/Users/Manuel/Proyectos/Lindley/RTM/Android/Librerias/TeeChart/TeeChart.Android.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/Manuel/Proyectos/Lindley/RTM/Android/Librerias/robotguice/guice-2.0-no_aop.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/Manuel/Proyectos/Lindley/RTM/Android/Librerias/robotguice/roboguice-1.1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/Manuel/Proyectos/Lindley/RTM/Android/Librerias/google-gson-1.7.1/gson-1.7.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

@@ -143,9 +143,11 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
     	MessageBox.showConfirmDialog(this, confirm_cancelar_title, confirm_cancelar_message, confirm_cancelar_yes, new android.content.DialogInterface.OnClickListener() {
 			
 			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub	
+				// TODO Auto-generated method stub
+				finish();
+				/*
 				Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
-				startActivity(intent);
+				startActivity(intent);*/
 			}
 			
 		}, confirm_cancelar_no, new android.content.DialogInterface.OnClickListener() {

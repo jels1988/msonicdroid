@@ -59,8 +59,9 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 				
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub	
-					Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
-					startActivity(intent);
+					/*Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
+					startActivity(intent);*/
+					finish();
 				}
 				
 			}, confirm_atras_no, new android.content.DialogInterface.OnClickListener() {

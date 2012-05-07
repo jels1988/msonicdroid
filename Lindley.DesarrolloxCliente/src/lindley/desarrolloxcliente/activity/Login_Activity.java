@@ -31,21 +31,24 @@ public class Login_Activity extends ActivityBase {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	
     	inicializarRecursos();
         super.onCreate(savedInstanceState);
+        finish();
         
+        /*
         setContentView(R.layout.login_activity);
         
         mActionBar.setTitle(R.string.login_activity_title);
 		mActionBar.setHomeLogo(R.drawable.header_logo);
 	
 		txtUsuario.requestFocus();
-	
+		*/
 		
     }
     
     public void btnLogin_click(View v){
-		processAsync();
+		//processAsync();
 	}
     
 	@Override

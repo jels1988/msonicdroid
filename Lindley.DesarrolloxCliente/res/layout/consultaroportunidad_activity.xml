@@ -45,7 +45,7 @@
             android:orientation="vertical" >
 
             <TableLayout
-                android:layout_width="400dip"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:shrinkColumns="*"
                 android:stretchColumns="*" >
@@ -56,30 +56,29 @@
 
                     <TextView
                         style="@style/TextViewLabel"
-                        android:layout_width="20dip"
+                        android:layout_width="60dip"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Selección" />
+                        android:text=" " />
 
                     <TextView
                         style="@style/TextViewLabel"
-                        android:layout_width="40dip"
+                        android:layout_width="80dip"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="" />
+                        
+                        android:text=" " />
 
                     <TextView
                         style="@style/TextViewLabel"
-                        android:layout_width="30dip"
+                        android:layout_width="80dip"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
+                        
                         android:text="Legacy" />
                     
                     <TextView
                         style="@style/TextViewLabel"
-                        android:layout_width="100dip"
+                        android:layout_width="150dip"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:text="Producto" />
                   
                 </TableRow>

@@ -28,7 +28,7 @@
     <string name="consultarcliente_activity_empty">Debes ingresar un dato de busqueda</string>
     <string name="ver_detalle">Detalle</string>
     <string name="ver_resumen">Resumen</string>
-    <string name="ver_profit">Ver Profit</string>
+    <string name="ver_profit">Profit</string>
     <string name="cabeceracliente_activity_title">Evaluación de Compromisos</string>
     <string name="resumen_activity_title">Resumen Evaluación</string>
     <string name="compromiso_activity_title">Compromisos</string>
