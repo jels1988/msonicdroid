@@ -32,20 +32,21 @@ public final class R {
         public static final int padding_small=0x7f050001;
     }
     public static final class drawable {
-        public static final int actionbar_btn=0x7f020000;
-        public static final int actionbar_btn_normal=0x7f020001;
-        public static final int actionbar_btn_pressed=0x7f020002;
-        public static final int background_lindley=0x7f020003;
-        public static final int button_selector=0x7f020004;
-        public static final int header_logo=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int icon_amarrillo=0x7f020007;
-        public static final int icon_rojo=0x7f020008;
-        public static final int icon_verde=0x7f020009;
-        public static final int list_selector=0x7f02000a;
-        public static final int logo_btn=0x7f02000b;
-        public static final int logo_btn_normal=0x7f02000c;
-        public static final int logo_btn_pressed=0x7f02000d;
+        public static final int action_bar_background=0x7f020000;
+        public static final int actionbar_btn=0x7f020001;
+        public static final int actionbar_btn_normal=0x7f020002;
+        public static final int actionbar_btn_pressed=0x7f020003;
+        public static final int background_lindley=0x7f020004;
+        public static final int button_selector=0x7f020005;
+        public static final int header_logo=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int icon_amarrillo=0x7f020008;
+        public static final int icon_rojo=0x7f020009;
+        public static final int icon_verde=0x7f02000a;
+        public static final int list_selector=0x7f02000b;
+        public static final int logo_btn=0x7f02000c;
+        public static final int logo_btn_normal=0x7f02000d;
+        public static final int logo_btn_pressed=0x7f02000e;
     }
     public static final class id {
         public static final int actionBar=0x7f090006;
@@ -197,10 +198,11 @@ prod: 0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A
         public static final int tablero_menu_grafico=0x7f060013;
         public static final int tablero_menu_supervisor=0x7f060011;
         public static final int tablero_menu_televenta=0x7f060012;
-        public static final int urlwsLogin=0x7f06004a;
-        public static final int urlwsMMILMapVendedor=0x7f060049;
+        public static final int urlwsLogin=0x7f06004b;
+        public static final int urlwsMMILMapVendedor=0x7f06004a;
         public static final int urlwsMMILPizarra=0x7f060046;
         public static final int urlwsMMILSupervisor=0x7f060048;
+        public static final int urlwsMMILSupervisorLocal=0x7f060049;
         public static final int urlwsMMILVendedor=0x7f060047;
         public static final int wait_message=0x7f060001;
     }
