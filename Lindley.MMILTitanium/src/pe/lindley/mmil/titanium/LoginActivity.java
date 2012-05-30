@@ -114,12 +114,22 @@ public class LoginActivity extends ActivityBase {
 					intent.putExtra(TableroActivity.CODIGO_CDA_KEY, usuarioTO.codigoDeposito.trim());
 			    	startActivity(intent);
 				}else if(usuarioTO.rolId.compareToIgnoreCase("8")==0){//SUPERVISOR
-					Intent intent = new Intent(this, ListaVendedoresActivity.class);
+					
+					
+					Intent intent = new Intent(this, ResumenVentaActivity.class);
+					intent.putExtra(ResumenVentaActivity.CODIGO_SUPERVISOR_KEY, usuarioTO.codigoSap.trim());
+					intent.putExtra(ResumenVentaActivity.CODIGO_DEPOSITO_KEY, usuarioTO.codigoDeposito.trim());
+					intent.putExtra(ResumenVentaActivity.NOMBRE_CDA_KEY, usuarioTO.descripcionDeposito.trim());
+			    	startActivity(intent);
+					
+			    	/*
+			    	Intent intent = new Intent(this, ListaVendedoresActivity.class);
 					intent.putExtra(ListaVendedoresActivity.CODIGO_SUPERVISOR_KEY, usuarioTO.codigoSap.trim());
 					intent.putExtra(ListaVendedoresActivity.CODIGO_CDA_KEY, usuarioTO.codigoDeposito.trim());
 					intent.putExtra(ListaVendedoresActivity.NOMBRE_CDA_KEY, usuarioTO.descripcionDeposito.trim());
 			    	startActivity(intent);
-					
+					*/
+			    	
 				}else if(usuarioTO.rolId.compareToIgnoreCase("9")==0){//VENDEDOR
 					
 					Intent intent = new Intent(this, ListaPedidosActivity.class);

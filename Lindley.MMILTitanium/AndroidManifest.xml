@@ -19,12 +19,19 @@
             android:name=".LoginActivity"
             android:label="@string/app_name" 
             android:configChanges="keyboardHidden|orientation" android:noHistory="true">
-            <intent-filter>
+           
+              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            
         </activity>
+
+
+		<activity android:name=".ResumenVentaActivity" android:configChanges="keyboardHidden|orientation">
+		   
+		    
+		</activity>
         <activity android:name=".ListaSupervisorActivity" android:configChanges="keyboardHidden|orientation"></activity>
         
         <activity android:name=".TableroActivity" android:configChanges="keyboardHidden|orientation"></activity>

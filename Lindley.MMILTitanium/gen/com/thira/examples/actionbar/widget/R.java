@@ -62,17 +62,20 @@ public final class R {
         public static final int imgEficienciaGlobal=0x7f090015;
         public static final int imgEficienciaPreVenta=0x7f090017;
         public static final int imgEficienciaPreventa=0x7f090021;
-        public static final int imgIndicador=0x7f09002b;
+        public static final int imgIndicador=0x7f090028;
         public static final int imgPlanVisita=0x7f09001a;
         public static final int imgPlanVisitas=0x7f090016;
-        public static final int linearLayoutTchart=0x7f09002e;
-        public static final int lstSupervisores=0x7f090028;
-        public static final int lstTeleventa=0x7f09002a;
-        public static final int mnuGrafico=0x7f090033;
-        public static final int mnuPedidos=0x7f090030;
-        public static final int mnuSupervisor=0x7f090031;
-        public static final int mnuTeleventa=0x7f090032;
-        public static final int mnuVendedores=0x7f09002f;
+        public static final int linearLayoutTchart=0x7f090030;
+        public static final int lstSupervisores=0x7f09002b;
+        public static final int lstTeleventa=0x7f09002d;
+        public static final int mnuConsultas=0x7f090035;
+        public static final int mnuGrafico=0x7f090038;
+        public static final int mnuMercaderista=0x7f090033;
+        public static final int mnuMix=0x7f090034;
+        public static final int mnuPedidos=0x7f090032;
+        public static final int mnuSupervisor=0x7f090036;
+        public static final int mnuTeleventa=0x7f090037;
+        public static final int mnuVendedores=0x7f090031;
         public static final int mv1=0x7f090007;
         public static final int txCuota=0x7f090020;
         public static final int txtAtendidos=0x7f09001c;
@@ -82,6 +85,7 @@ public final class R {
         public static final int txtCodigo=0x7f090008;
         public static final int txtConPedido=0x7f090010;
         public static final int txtCuota=0x7f09000a;
+        public static final int txtDescripcion=0x7f090027;
         public static final int txtEficienciaGlobal=0x7f09000b;
         public static final int txtEficienciaPreVenta=0x7f09000d;
         public static final int txtEficienciaPreventa=0x7f090022;
@@ -91,15 +95,16 @@ public final class R {
         public static final int txtPlanVisita=0x7f09001b;
         public static final int txtPlanVisitas=0x7f09000c;
         public static final int txtPrimerRegistro=0x7f090018;
-        public static final int txtRatio=0x7f09002d;
+        public static final int txtRatio=0x7f09002f;
         public static final int txtSinPedido=0x7f090011;
-        public static final int txtSupervisores=0x7f090027;
-        public static final int txtTeleventa=0x7f090029;
+        public static final int txtSupervisores=0x7f09002a;
+        public static final int txtTeleventa=0x7f09002c;
         public static final int txtTiempoEfectivo=0x7f090013;
         public static final int txtTiempoEficiencia=0x7f090023;
-        public static final int txtTitulo=0x7f09002c;
+        public static final int txtTitulo=0x7f09002e;
         public static final int txtUltimoRegistro=0x7f090019;
         public static final int txtUsuario=0x7f090024;
+        public static final int txtValor=0x7f090029;
         public static final int txtVisitas=0x7f09000f;
     }
     public static final class layout {
@@ -113,14 +118,17 @@ public final class R {
         public static final int listavendedores_activity=0x7f030007;
         public static final int listavendedores_content=0x7f030008;
         public static final int login_activity=0x7f030009;
-        public static final int tablero_activity=0x7f03000a;
-        public static final int tablero_content=0x7f03000b;
-        public static final int tablerro_grafico=0x7f03000c;
+        public static final int resumenventa_activity=0x7f03000a;
+        public static final int resumenventa_content=0x7f03000b;
+        public static final int tablero_activity=0x7f03000c;
+        public static final int tablero_content=0x7f03000d;
+        public static final int tablerro_grafico=0x7f03000e;
     }
     public static final class menu {
         public static final int listasupervisores_menu=0x7f080000;
         public static final int listavendedores_menu=0x7f080001;
-        public static final int tablero_menu=0x7f080002;
+        public static final int resumen_venta_menu=0x7f080002;
+        public static final int tablero_menu=0x7f080003;
     }
     public static final class string {
         /** desa: 0GnqeXeroFjywL9df0WrJpTEwFsWxFYCGqDe6xw
@@ -193,16 +201,24 @@ prod: 0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A
         public static final int login_activity_txtpassword_empty=0x7f060045;
         public static final int login_activity_usuario=0x7f060007;
         public static final int login_activity_usuario_hint=0x7f060008;
+        public static final int resumen_venta_activity_title=0x7f060046;
+        public static final int resumen_venta_descripcion_column=0x7f06004b;
+        public static final int resumen_venta_indicador_column=0x7f06004c;
+        public static final int resumen_venta_menu_consulta=0x7f06004a;
+        public static final int resumen_venta_menu_mercaderista=0x7f060047;
+        public static final int resumen_venta_menu_mix=0x7f060048;
+        public static final int resumen_venta_menu_vendedores=0x7f060049;
+        public static final int resumen_venta_valor_column=0x7f06004d;
         public static final int tablero_activity_title=0x7f06000d;
         public static final int tablero_grafico_activity_title=0x7f06000e;
         public static final int tablero_menu_grafico=0x7f060013;
         public static final int tablero_menu_supervisor=0x7f060011;
         public static final int tablero_menu_televenta=0x7f060012;
-        public static final int urlwsLogin=0x7f06004a;
-        public static final int urlwsMMILMapVendedor=0x7f060049;
-        public static final int urlwsMMILPizarra=0x7f060046;
-        public static final int urlwsMMILSupervisor=0x7f060048;
-        public static final int urlwsMMILVendedor=0x7f060047;
+        public static final int urlwsLogin=0x7f060052;
+        public static final int urlwsMMILMapVendedor=0x7f060051;
+        public static final int urlwsMMILPizarra=0x7f06004e;
+        public static final int urlwsMMILSupervisor=0x7f060050;
+        public static final int urlwsMMILVendedor=0x7f06004f;
         public static final int wait_message=0x7f060001;
     }
     public static final class style {
