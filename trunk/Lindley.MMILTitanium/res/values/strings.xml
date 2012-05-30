@@ -77,8 +77,7 @@
     <string name="resumen_venta_descripcion_column">Descripción</string>
     <string name="resumen_venta_indicador_column"> </string>
     <string name="resumen_venta_valor_column">Valor</string>
-    
-    <string name="mix_producto_activity_title">Resumen de Venta</string>
+    <string name="mix_producto_activity_title">Mix de Productos</string>
     <string name="mix_producto_producto_column">Producto</string>
     <string name="mix_producto_cunitaria_column">C.Unitarias</string>
     <string name="mix_producto_cfisica_column">C.Físicas</string>

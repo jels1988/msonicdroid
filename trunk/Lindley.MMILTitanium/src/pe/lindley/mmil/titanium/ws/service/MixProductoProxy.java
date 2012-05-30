@@ -37,7 +37,7 @@ public class MixProductoProxy extends ProxyBase<MixProductoResponse> {
 	@Override
 	protected MixProductoResponse responseText(String json) {
 		// TODO Auto-generated method stub
-		json = "{\"MPR\":[{\"PRO\":\"SAN LUIS S/G 2.5L PFM*6\",\"CUN\":\"374.90\",\"CFI\":\"142.00\"},{\"PRO\":\"SAN LUIS S/G 625 ML PET*15\",\"CUN\":\"321.84\",\"CFI\":\"195.01\"}],\"STS\":0,\"DES\":null}";
+		//json = "{\"MPR\":[{\"PRO\":\"SAN LUIS S/G 2.5L PFM*6\",\"CUN\":\"374.90\",\"CFI\":\"142.00\"},{\"PRO\":\"SAN LUIS S/G 625 ML PET*15\",\"CUN\":\"321.84\",\"CFI\":\"195.01\"}],\"STS\":0,\"DES\":null}";
 		MixProductoResponse response =  JSONHelper.desSerializar(json,MixProductoResponse.class);
 		return response;
 	}
