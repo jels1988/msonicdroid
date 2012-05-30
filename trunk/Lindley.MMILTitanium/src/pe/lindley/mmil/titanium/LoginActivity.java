@@ -101,6 +101,7 @@ public class LoginActivity extends ActivityBase {
 			String message;
 			if (status == 0) {
 				UsuarioTO usuarioTO = loginProxy.getResponse().usuario;
+				usuarioTO.codigoSap=txtPassword.getText().toString();
 				
 				txtUsuario.setText("");
 				txtPassword.setText("");
