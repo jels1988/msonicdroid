@@ -198,11 +198,10 @@ prod: 0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A
         public static final int tablero_menu_grafico=0x7f060013;
         public static final int tablero_menu_supervisor=0x7f060011;
         public static final int tablero_menu_televenta=0x7f060012;
-        public static final int urlwsLogin=0x7f06004b;
-        public static final int urlwsMMILMapVendedor=0x7f06004a;
+        public static final int urlwsLogin=0x7f06004a;
+        public static final int urlwsMMILMapVendedor=0x7f060049;
         public static final int urlwsMMILPizarra=0x7f060046;
         public static final int urlwsMMILSupervisor=0x7f060048;
-        public static final int urlwsMMILSupervisorLocal=0x7f060049;
         public static final int urlwsMMILVendedor=0x7f060047;
         public static final int wait_message=0x7f060001;
     }

@@ -3,7 +3,6 @@
     <string name="urlwsMMILPizarra">http://java.cdaandino.com/rtm/MMILTitanium/PizarraService.svc</string>
     <string name="urlwsMMILVendedor">http://java.cdaandino.com/rtm/MMILTitanium/VendedorService.svc</string>
     <string name="urlwsMMILSupervisor">http://java.cdaandino.com/rtm/MMILTitanium/SupervisorService.svc</string>
-    <string name="urlwsMMILSupervisorLocal">http://192.168.0.13/site/SupervisorService.svc</string>
     
 	<string name="urlwsMMILMapVendedor">http://java.cdaandino.com/rtm/MMILTitanium/MapVendedorService.svc</string>
 	<string name="urlwsLogin">http://java.cdaandino.com/rtm/LanzadorApp/SeguridadService.svc</string>
