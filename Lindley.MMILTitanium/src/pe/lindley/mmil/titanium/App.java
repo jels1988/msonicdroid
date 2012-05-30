@@ -7,7 +7,8 @@ import pe.lindley.mmil.titanium.ws.service.ListarSupervisorProxy;
 import pe.lindley.mmil.titanium.ws.service.ListarVendedorProxy;
 import pe.lindley.mmil.titanium.ws.service.LoginProxy;
 import pe.lindley.mmil.titanium.ws.service.MostrarPizarraProxy;
-import pe.lindley.mmil.titanium.ws.service.ResumenVentaProxy;
+import pe.lindley.mmil.titanium.ws.service.ResumenMercaderistasProxy;
+import pe.lindley.mmil.titanium.ws.service.ResumenVendedoresProxy;
 
 import com.google.inject.Module;
 import com.google.inject.Singleton;
@@ -30,7 +31,8 @@ public class App extends RoboApplication {
 				bind(ListarVendedorProxy.class).in(Singleton.class);
 				bind(ListarMapVendedorProxy.class).in(Singleton.class);
 				bind(LoginProxy.class).in(Singleton.class);
-				bind(ResumenVentaProxy.class).in(Singleton.class);
+				bind(ResumenVendedoresProxy.class).in(Singleton.class);
+				bind(ResumenMercaderistasProxy.class).in(Singleton.class);
 				
 				
 			}

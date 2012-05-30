@@ -7,7 +7,7 @@ import roboguice.inject.InjectResource;
 import net.msonic.lib.JSONHelper;
 import net.msonic.lib.ProxyBase;
 
-public class ResumenVentaProxy extends ProxyBase<ResumenVentaResponse> {
+public class ResumenVendedoresProxy extends ProxyBase<ResumenVentaResponse> {
 
 	public String codigoDeposito;
 	public String codigoSupervisor;
@@ -17,7 +17,7 @@ public class ResumenVentaProxy extends ProxyBase<ResumenVentaResponse> {
 	@Override
 	protected String getUrl() {
 		// TODO Auto-generated method stub
-		return urlWS + "/ResumenVentas";
+		return urlWS + "/ResumenVendedores";
 	}
 
 	@Override

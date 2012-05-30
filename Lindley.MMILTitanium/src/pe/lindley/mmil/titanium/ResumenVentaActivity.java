@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 import pe.lindley.mmil.titanium.to.ResumenVentaTO;
-import pe.lindley.mmil.titanium.ws.service.ResumenVentaProxy;
+import pe.lindley.mmil.titanium.ws.service.ResumenVendedoresProxy;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
@@ -34,7 +34,7 @@ public class ResumenVentaActivity extends ListActivityBase {
 	@InjectExtra(NOMBRE_CDA_KEY) String nombre_cda;
 	
 	
-	@Inject ResumenVentaProxy resumenVentaProxy;
+	@Inject ResumenVendedoresProxy resumenVentaProxy;
 	
 	@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
 	  /** Called when the activity is first created. */
