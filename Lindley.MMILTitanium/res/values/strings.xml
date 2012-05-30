@@ -69,16 +69,17 @@
     <string name="login_activity_error">%s</string>
     <string name="login_activity_txtlogin_empty">Debes ingresar tu usuario</string>
     <string name="login_activity_txtpassword_empty">Debes ingresar tu password</string>
-    
-    
-    
     <string name="resumen_venta_activity_title">Resumen de Venta</string>
     <string name="resumen_venta_menu_mercaderista">Mercaderista</string>
     <string name="resumen_venta_menu_mix">Mix</string>
     <string name="resumen_venta_menu_vendedores">Vendedores</string>
     <string name="resumen_venta_menu_consulta">Consultas</string>
-    
     <string name="resumen_venta_descripcion_column">Descripción</string>
     <string name="resumen_venta_indicador_column"> </string>
     <string name="resumen_venta_valor_column">Valor</string>
+    
+    <string name="mix_producto_activity_title">Resumen de Venta</string>
+    <string name="mix_producto_producto_column">Producto</string>
+    <string name="mix_producto_cunitaria_column">C.Unitarias</string>
+    <string name="mix_producto_cfisica_column">C.Físicas</string>
 </resources>
