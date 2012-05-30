@@ -34,6 +34,10 @@
 		<activity android:name=".ResumenMercaderistaActivity" android:configChanges="keyboardHidden|orientation">
 		</activity>
 		
+		<activity android:name=".MixProductoActivity" android:configChanges="keyboardHidden|orientation">
+		</activity>
+		
+		
 		
         <activity android:name=".ListaSupervisorActivity" android:configChanges="keyboardHidden|orientation"></activity>
         

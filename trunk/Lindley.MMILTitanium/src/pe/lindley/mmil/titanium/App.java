@@ -6,6 +6,7 @@ import pe.lindley.mmil.titanium.ws.service.ListarMapVendedorProxy;
 import pe.lindley.mmil.titanium.ws.service.ListarSupervisorProxy;
 import pe.lindley.mmil.titanium.ws.service.ListarVendedorProxy;
 import pe.lindley.mmil.titanium.ws.service.LoginProxy;
+import pe.lindley.mmil.titanium.ws.service.MixProductoProxy;
 import pe.lindley.mmil.titanium.ws.service.MostrarPizarraProxy;
 import pe.lindley.mmil.titanium.ws.service.ResumenMercaderistasProxy;
 import pe.lindley.mmil.titanium.ws.service.ResumenVendedoresProxy;
@@ -33,7 +34,7 @@ public class App extends RoboApplication {
 				bind(LoginProxy.class).in(Singleton.class);
 				bind(ResumenVendedoresProxy.class).in(Singleton.class);
 				bind(ResumenMercaderistasProxy.class).in(Singleton.class);
-				
+				bind(MixProductoProxy.class).in(Singleton.class);
 				
 			}
 		});
