@@ -5,12 +5,12 @@ import com.google.gson.annotations.SerializedName;
 public class ResumenVentaTO {
 
 	@SerializedName("DES")
-	public int descripcion;
+	public String descripcion;
 
 	@SerializedName("VAL")
-	public int valor;
+	public String valor;
 	
 	@SerializedName("IND")
-	public int indicador;
+	public String indicador;
 	
 }
