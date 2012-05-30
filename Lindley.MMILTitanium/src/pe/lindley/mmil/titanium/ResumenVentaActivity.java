@@ -136,6 +136,13 @@ public class ResumenVentaActivity extends ListActivityBase {
 		    	
 	            return true;
 	        case R.id.mnuMix:
+	        	
+	        	Intent intent2 = new Intent(this, MixProductoActivity.class);
+	        	intent2.putExtra(ResumenMercaderistaActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+	        	intent2.putExtra(ResumenMercaderistaActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+	        	intent2.putExtra(ResumenMercaderistaActivity.NOMBRE_CDA_KEY, nombre_cda);
+		    	startActivity(intent2);
+		    	
 	            return true;
 	        case R.id.mnuVendedores:
 	        	Intent intent = new Intent(this, ListaVendedoresActivity.class);
