@@ -12,7 +12,8 @@ public class ResumenVentaProxy extends ProxyBase<ResumenVentaResponse> {
 	public String codigoDeposito;
 	public String codigoSupervisor;
 	
-	@InjectResource(R.string.urlwsMMILSupervisorLocal)protected String urlWS;
+	@InjectResource(R.string.urlwsMMILSupervisor)protected String urlWS;
+	
 	@Override
 	protected String getUrl() {
 		// TODO Auto-generated method stub
