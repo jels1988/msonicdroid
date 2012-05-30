@@ -1,14 +1,10 @@
 package pe.lindley.mmil.titanium;
 
 import java.util.ArrayList;
-import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
 import pe.lindley.mmil.titanium.to.ResumenVentaTO;
-import pe.lindley.mmil.titanium.ws.service.ResumenVendedoresProxy;
+import pe.lindley.mmil.titanium.ws.service.ResumenMercaderistasProxy;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
-
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,10 +17,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.inject.Inject;
+import com.thira.examples.actionbar.widget.ActionBar;
+
 import net.msonic.lib.ListActivityBase;
 
-public class ResumenVentaActivity extends ListActivityBase {
-	
+public class ResumenMercaderistaActivity extends ListActivityBase {
 	public static final String NOMBRE_CDA_KEY="NOMBRE_CDA";
 	public static final String CODIGO_DEPOSITO_KEY = "CODIGO_DEPOSITO";
 	public static final String CODIGO_SUPERVISOR_KEY = "CODIGO_SUPERVISOR";
@@ -34,7 +33,8 @@ public class ResumenVentaActivity extends ListActivityBase {
 	@InjectExtra(NOMBRE_CDA_KEY) String nombre_cda;
 	
 	
-	@Inject ResumenVendedoresProxy resumenVentaProxy;
+	
+	@Inject ResumenMercaderistasProxy resumenMercaderistasProxy;
 	
 	@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
 	  /** Called when the activity is first created. */
@@ -57,9 +57,9 @@ public class ResumenVentaActivity extends ListActivityBase {
   @Override
 	protected void process() {
 		// TODO Auto-generated method stub
-	  resumenVentaProxy.codigoDeposito=codigoCda;
-	  resumenVentaProxy.codigoSupervisor=codigoSupervisor;
-	  resumenVentaProxy.execute();
+	  resumenMercaderistasProxy.codigoDeposito=codigoCda;
+	  resumenMercaderistasProxy.codigoSupervisor=codigoSupervisor;
+	  resumenMercaderistasProxy.execute();
 		
 	}
 
@@ -68,18 +68,18 @@ public class ResumenVentaActivity extends ListActivityBase {
 	protected void processOk() {
 		String message;
 		
-		boolean isExito = resumenVentaProxy.isExito();
+		boolean isExito = resumenMercaderistasProxy.isExito();
 		if (isExito) {
-			int status = resumenVentaProxy.getResponse().getStatus();
+			int status = resumenMercaderistasProxy.getResponse().getStatus();
 			if (status == 0) {
 				
-				ArrayList<ResumenVentaTO> resumenVenta = resumenVentaProxy.getResponse().resumenVenta;
+				ArrayList<ResumenVentaTO> resumenVenta = resumenMercaderistasProxy.getResponse().resumenVenta;
 				ResumenVenta_Adapter adapterSupervisor = new ResumenVenta_Adapter(this, resumenVenta);
 				getListView().setAdapter(adapterSupervisor);
 				
 				super.processOk();
 			}else{
-				message = resumenVentaProxy.getResponse().getDescripcion();
+				message = resumenMercaderistasProxy.getResponse().getDescripcion();
 				super.processOk();
 				showToast(message);
 			}
@@ -92,8 +92,8 @@ public class ResumenVentaActivity extends ListActivityBase {
 	@Override
 	protected void processError() {
 		String message;
-		if(resumenVentaProxy.getResponse()!=null){
-			String error = resumenVentaProxy.getResponse().getDescripcion();
+		if(resumenMercaderistasProxy.getResponse()!=null){
+			String error = resumenMercaderistasProxy.getResponse().getDescripcion();
 			message = error;
 		}else{
 			message = error_generico_process;
@@ -127,13 +127,6 @@ public class ResumenVentaActivity extends ListActivityBase {
 	    // Handle item selection
 	    switch (item.getItemId()) {
 	        case R.id.mnuMercaderista:
-	        	
-	        	Intent intent1 = new Intent(this, ResumenMercaderistaActivity.class);
-	        	intent1.putExtra(ResumenMercaderistaActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
-	        	intent1.putExtra(ResumenMercaderistaActivity.CODIGO_DEPOSITO_KEY, codigoCda);
-	        	intent1.putExtra(ResumenMercaderistaActivity.NOMBRE_CDA_KEY, nombre_cda);
-		    	startActivity(intent1);
-		    	
 	            return true;
 	        case R.id.mnuMix:
 	            return true;
@@ -253,5 +246,4 @@ public class ResumenVentaActivity extends ListActivityBase {
 			 }
 			
 	}
-
 }
