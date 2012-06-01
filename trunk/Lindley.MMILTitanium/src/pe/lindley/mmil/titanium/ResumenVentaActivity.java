@@ -234,6 +234,7 @@ public class ResumenVentaActivity extends ListActivityBase {
 				holder.txtValor.setText(this.detalle.get(position).valor);
 				
 				
+				holder.imgIndicador.setImageResource(R.drawable.icon_white);
 				
 				 switch(Integer.parseInt(this.detalle.get(position).indicador))
 			      {

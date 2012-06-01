@@ -46,7 +46,7 @@ public class ResumenMercaderistaActivity extends ListActivityBase {
       setContentView(R.layout.resumenventa_activity);
       
       mActionBar.setHomeLogo(R.drawable.header_logo);
-      mActionBar.setTitle(R.string.resumen_venta_activity_title);
+      mActionBar.setTitle(R.string.resumen_mercaderista_activity_title);
       mActionBar.setSubTitle(nombre_cda);
       
       processAsync();
@@ -219,7 +219,7 @@ public class ResumenMercaderistaActivity extends ListActivityBase {
 				holder.txtDescripcion.setText(this.detalle.get(position).descripcion);
 				holder.txtValor.setText(this.detalle.get(position).valor);
 				
-				
+				holder.imgIndicador.setImageResource(R.drawable.icon_white);
 				
 				 switch(Integer.parseInt(this.detalle.get(position).indicador))
 			      {
