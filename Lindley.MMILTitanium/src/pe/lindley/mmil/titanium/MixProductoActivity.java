@@ -8,8 +8,12 @@ import pe.lindley.mmil.titanium.ws.service.MixProductoProxy;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -98,6 +102,63 @@ public class MixProductoActivity extends ListActivityBase {
 		super.processError();
 		showToast(message);
 	}
+	
+	
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.mix_producto_menu, menu);
+		return true;
+	}
+
+
+
+
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	    case R.id.mnuVentas:
+        	
+        	Intent intent2 = new Intent(this, ResumenVentaActivity.class);
+        	intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        	intent2.putExtra(ResumenMercaderistaActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+        	intent2.putExtra(ResumenMercaderistaActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+        	intent2.putExtra(ResumenMercaderistaActivity.NOMBRE_CDA_KEY, nombre_cda);
+	    	startActivity(intent2);
+	    	
+            return true;
+	        case R.id.mnuMercaderista:
+	        	
+	        	Intent intent1 = new Intent(this, ResumenMercaderistaActivity.class);
+	        	intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        	intent1.putExtra(ResumenMercaderistaActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+	        	intent1.putExtra(ResumenMercaderistaActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+	        	intent1.putExtra(ResumenMercaderistaActivity.NOMBRE_CDA_KEY, nombre_cda);
+		    	startActivity(intent1);
+		    	
+	            return true;
+
+	        case R.id.mnuVendedores:
+	        	Intent intent = new Intent(this, ListaVendedoresActivity.class);
+	        	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra(ListaVendedoresActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+				intent.putExtra(ListaVendedoresActivity.CODIGO_CDA_KEY, codigoCda);
+				intent.putExtra(ListaVendedoresActivity.NOMBRE_CDA_KEY, nombre_cda);
+		    	startActivity(intent);
+	            return true;
+	        case R.id.mnuConsultas:
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+
 	
 	public static class MixProducto_Adapter extends ArrayAdapter<MixProductoTO>{
 		
