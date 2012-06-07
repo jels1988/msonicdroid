@@ -36,7 +36,7 @@
 	              <TextView
 	                android:layout_height="wrap_content"
 	                android:layout_width="0dip"
-	                android:layout_weight="3"
+	                android:layout_weight="4"
 	              	style="@style/TextViewHead"
 	              	android:gravity="right"
 	                android:text="@string/confrontacion_column_supervisor"/>
