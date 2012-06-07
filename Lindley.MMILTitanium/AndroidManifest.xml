@@ -49,7 +49,7 @@
         <activity android:name=".ListaPedidosActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".ListaTeleventaActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".TableroGraficoActivity" android:configChanges="keyboardHidden|orientation"></activity>
-            
+        <activity android:name=".DetallePedidosActivity" android:configChanges="keyboardHidden|orientation"></activity>
         
         
         

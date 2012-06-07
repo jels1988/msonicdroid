@@ -83,4 +83,9 @@
     <string name="mix_producto_producto_column">Producto</string>
     <string name="mix_producto_cunitaria_column">C.Unitarias</string>
     <string name="mix_producto_cfisica_column">C.Físicas</string>
+    
+    
+    
+    <string name="detalle_pedido_activity_title">Detalle de Pedidos</string>
+    
 </resources>
