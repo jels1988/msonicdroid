@@ -2,6 +2,7 @@ package pe.lindley.mmil.titanium;
 
 import java.util.List;
 
+import pe.lindley.mmil.titanium.ws.service.ConfrontacionProxy;
 import pe.lindley.mmil.titanium.ws.service.ListarMapVendedorProxy;
 import pe.lindley.mmil.titanium.ws.service.ListarSupervisorProxy;
 import pe.lindley.mmil.titanium.ws.service.ListarVendedorProxy;
@@ -37,6 +38,7 @@ public class App extends RoboApplication {
 				bind(ResumenMercaderistasProxy.class).in(Singleton.class);
 				bind(MixProductoProxy.class).in(Singleton.class);
 				bind(PedidoServiceProxy.class).in(Singleton.class);
+				bind(ConfrontacionProxy.class).in(Singleton.class);
 				
 				
 				

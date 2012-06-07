@@ -1,16 +1,12 @@
 package pe.lindley.mmil.titanium;
 
 import java.util.ArrayList;
-import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
-import pe.lindley.mmil.titanium.to.ResumenVentaTO;
-import pe.lindley.mmil.titanium.ws.service.ResumenVendedoresProxy;
+
+import pe.lindley.mmil.titanium.to.ConfrontacionTO;
+import pe.lindley.mmil.titanium.ws.service.ConfrontacionProxy;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
-
-
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,11 +15,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.inject.Inject;
+import com.thira.examples.actionbar.widget.ActionBar;
+
 import net.msonic.lib.ListActivityBase;
 
-public class ResumenVentaActivity extends ListActivityBase {
+public class ConfrontacionActivity extends ListActivityBase {
 	
 	public static final String NOMBRE_CDA_KEY="NOMBRE_CDA";
 	public static final String CODIGO_DEPOSITO_KEY = "CODIGO_DEPOSITO";
@@ -34,7 +33,7 @@ public class ResumenVentaActivity extends ListActivityBase {
 	@InjectExtra(NOMBRE_CDA_KEY) String nombre_cda;
 	
 	
-	@Inject ResumenVendedoresProxy resumenVentaProxy;
+	@Inject ConfrontacionProxy confrontacionProxy;
 	
 	@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
 	  /** Called when the activity is first created. */
@@ -43,10 +42,10 @@ public class ResumenVentaActivity extends ListActivityBase {
       super.onCreate(savedInstanceState);
       inicializarRecursos();
       
-      setContentView(R.layout.resumenventa_activity);
+      setContentView(R.layout.confrontacion_activity);
       
       mActionBar.setHomeLogo(R.drawable.header_logo);
-      mActionBar.setTitle(R.string.resumen_venta_activity_title);
+      mActionBar.setTitle(R.string.confrontacion_activity_title);
       mActionBar.setSubTitle(nombre_cda);
       
       processAsync();
@@ -57,9 +56,9 @@ public class ResumenVentaActivity extends ListActivityBase {
   @Override
 	protected void process() {
 		// TODO Auto-generated method stub
-	  resumenVentaProxy.codigoDeposito=codigoCda;
-	  resumenVentaProxy.codigoSupervisor=codigoSupervisor;
-	  resumenVentaProxy.execute();
+	  confrontacionProxy.codigoDeposito=codigoCda;
+	  confrontacionProxy.codigoSupervisor=codigoSupervisor;
+	  confrontacionProxy.execute();
 		
 	}
 
@@ -68,18 +67,18 @@ public class ResumenVentaActivity extends ListActivityBase {
 	protected void processOk() {
 		String message;
 		
-		boolean isExito = resumenVentaProxy.isExito();
+		boolean isExito = confrontacionProxy.isExito();
 		if (isExito) {
-			int status = resumenVentaProxy.getResponse().getStatus();
+			int status = confrontacionProxy.getResponse().getStatus();
 			if (status == 0) {
 				
-				ArrayList<ResumenVentaTO> resumenVenta = resumenVentaProxy.getResponse().resumenVenta;
-				ResumenVenta_Adapter adapterSupervisor = new ResumenVenta_Adapter(this, resumenVenta);
+				ArrayList<ConfrontacionTO> confrontacion = confrontacionProxy.getResponse().confrontacion;
+				Confrontaciono_Adapter adapterSupervisor = new Confrontaciono_Adapter(this, confrontacion);
 				getListView().setAdapter(adapterSupervisor);
 				
 				super.processOk();
 			}else{
-				message = resumenVentaProxy.getResponse().getDescripcion();
+				message = confrontacionProxy.getResponse().getDescripcion();
 				super.processOk();
 				showToast(message);
 			}
@@ -92,8 +91,8 @@ public class ResumenVentaActivity extends ListActivityBase {
 	@Override
 	protected void processError() {
 		String message;
-		if(resumenVentaProxy.getResponse()!=null){
-			String error = resumenVentaProxy.getResponse().getDescripcion();
+		if(confrontacionProxy.getResponse()!=null){
+			String error = confrontacionProxy.getResponse().getDescripcion();
 			message = error;
 		}else{
 			message = error_generico_process;
@@ -101,19 +100,15 @@ public class ResumenVentaActivity extends ListActivityBase {
 		super.processError();
 		showToast(message);
 	}
-  
-  
-  
-  
-  
-  
-  
+	
+	
+	/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.resumen_venta_menu, menu);
+		inflater.inflate(R.menu.mix_producto_menu, menu);
 		return true;
 	}
 
@@ -126,6 +121,16 @@ public class ResumenVentaActivity extends ListActivityBase {
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle item selection
 	    switch (item.getItemId()) {
+	    case R.id.mnuVentas:
+        	
+        	Intent intent2 = new Intent(this, ResumenVentaActivity.class);
+        	intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        	intent2.putExtra(ResumenMercaderistaActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+        	intent2.putExtra(ResumenMercaderistaActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+        	intent2.putExtra(ResumenMercaderistaActivity.NOMBRE_CDA_KEY, nombre_cda);
+	    	startActivity(intent2);
+	    	
+            return true;
 	        case R.id.mnuMercaderista:
 	        	
 	        	Intent intent1 = new Intent(this, ResumenMercaderistaActivity.class);
@@ -136,16 +141,7 @@ public class ResumenVentaActivity extends ListActivityBase {
 		    	startActivity(intent1);
 		    	
 	            return true;
-	        case R.id.mnuMix:
-	        	
-	        	Intent intent2 = new Intent(this, MixProductoActivity.class);
-	        	intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	        	intent2.putExtra(ResumenMercaderistaActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
-	        	intent2.putExtra(ResumenMercaderistaActivity.CODIGO_DEPOSITO_KEY, codigoCda);
-	        	intent2.putExtra(ResumenMercaderistaActivity.NOMBRE_CDA_KEY, nombre_cda);
-		    	startActivity(intent2);
-		    	
-	            return true;
+
 	        case R.id.mnuVendedores:
 	        	Intent intent = new Intent(this, ListaVendedoresActivity.class);
 	        	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -154,39 +150,22 @@ public class ResumenVentaActivity extends ListActivityBase {
 				intent.putExtra(ListaVendedoresActivity.NOMBRE_CDA_KEY, nombre_cda);
 		    	startActivity(intent);
 	            return true;
-	        case R.id.mnuConfrontacion:
-	        	Intent intent3 = new Intent(this, ConfrontacionActivity.class);
-	        	intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	        	intent3.putExtra(ConfrontacionActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
-	        	intent3.putExtra(ConfrontacionActivity.CODIGO_DEPOSITO_KEY, codigoCda);
-	        	intent3.putExtra(ConfrontacionActivity.NOMBRE_CDA_KEY, nombre_cda);
-		    	startActivity(intent3);
-	        	return true;
 	        case R.id.mnuConsultas:
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
-	}
+	}*/
 
-
-
-
-
-
-	public static class ResumenVenta_Adapter extends ArrayAdapter<ResumenVentaTO>{
+	
+	public static class Confrontaciono_Adapter extends ArrayAdapter<ConfrontacionTO>{
 		
-		   private final ArrayList<ResumenVentaTO> detalle;
+		   private final ArrayList<ConfrontacionTO> detalle;
 		   private final Activity context;
 		
-					
-		   private static final int IND_VERDE = 3;
-		   private static final int IND_AMARRILLO = 2;
-		   private static final int IND_ROJO = 1;
-		   
-		   
-		   public ResumenVenta_Adapter(Activity context,ArrayList<ResumenVentaTO> detalle){
-				super(context, R.layout.resumenventa_content, detalle);
+	
+		   public Confrontaciono_Adapter(Activity context,ArrayList<ConfrontacionTO> detalle){
+				super(context, R.layout.confrontacion_content, detalle);
 				this.detalle = detalle;
 				this.context = context;
 			}
@@ -202,7 +181,7 @@ public class ResumenVentaActivity extends ListActivityBase {
 				}
 			}
 			
-			public ResumenVentaTO getItem(int position) {
+			public ConfrontacionTO getItem(int position) {
 				// TODO Auto-generated method stub
 				return this.detalle.get(position);
 			}
@@ -223,51 +202,37 @@ public class ResumenVentaActivity extends ListActivityBase {
 				if (convertView == null) {
 					
 					LayoutInflater inflator = context.getLayoutInflater();
-					view = inflator.inflate(R.layout.resumenventa_content, null);
+					view = inflator.inflate(R.layout.confrontacion_content, null);
 					
 					final ViewHolder holder = new ViewHolder();
-					
-					holder.imgIndicador = (ImageView)view.findViewById(R.id.imgIndicador);
 					holder.txtDescripcion = (TextView) view.findViewById(R.id.txtDescripcion);
-					holder.txtValor = (TextView)view.findViewById(R.id.txtValor);
+					holder.txtMonto = (TextView) view.findViewById(R.id.txtMonto);
+					holder.txtSupervisor = (TextView)view.findViewById(R.id.txtSupervisor);
 					
 					view.setTag(holder);
-					holder.txtValor.setTag(this.detalle.get(position));
+					holder.txtDescripcion.setTag(this.detalle.get(position));
 					
 				}else{
 					view = convertView;
-					((ViewHolder) view.getTag()).txtValor.setTag(this.detalle.get(position));
+					((ViewHolder) view.getTag()).txtDescripcion.setTag(this.detalle.get(position));
 				}
 				
 				ViewHolder holder = (ViewHolder) view.getTag();
 				
 				holder.txtDescripcion.setText(this.detalle.get(position).descripcion);
-				holder.txtValor.setText(this.detalle.get(position).valor);
+				holder.txtMonto.setText(this.detalle.get(position).monto);
+				holder.txtSupervisor.setText(this.detalle.get(position).supervisor);
 				
 				
-				holder.imgIndicador.setImageResource(R.drawable.icon_white);
-				
-				 switch(Integer.parseInt(this.detalle.get(position).indicador))
-			      {
-			      	case IND_VERDE:
-			      		holder.imgIndicador.setImageResource(R.drawable.icon_verde);
-			    	  break;
-			      	case IND_AMARRILLO:
-			      		holder.imgIndicador.setImageResource(R.drawable.icon_amarrillo);
-			      		break;
-			      	case IND_ROJO:
-			      		holder.imgIndicador.setImageResource(R.drawable.icon_rojo);
-			      		break;	 
-			       }
 				return view;
 				
 			}
 			
 			
 			private class ViewHolder {
-				 public ImageView imgIndicador;
 				 public TextView txtDescripcion;
-				 public TextView txtValor;
+				 public TextView txtMonto;
+				 public TextView txtSupervisor;
 					 
 			 }
 			

@@ -111,9 +111,9 @@ public class LoginActivity extends ActivityBase {
 				
 				//*******************
 				//TEMPORAL
-				usuarioTO.rolId="9";
-				usuarioTO.codigoSap="00351";
-				usuarioTO.codigoDeposito="C4";
+				//usuarioTO.rolId="9";
+				//usuarioTO.codigoSap="00351";
+				//usuarioTO.codigoDeposito="C4";
 				//*******************
 				
 				
