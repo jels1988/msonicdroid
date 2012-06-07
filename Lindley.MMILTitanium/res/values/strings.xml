@@ -90,5 +90,9 @@
     <string name="detalle_pedido_column_hora">Hora</string>
     <string name="detalle_pedido_column_estado">Estado</string>
     <string name="detalle_pedido_menu_mapa">Mapa</string>
+    
     <string name="confrontacion_activity_title">Confrontación</string>
+    <string name="confrontacion_column_descripcion">Descripción</string>
+    <string name="confrontacion_column_monto">%</string>
+    <string name="confrontacion_column_supervisor">Supervisor</string>
 </resources>
