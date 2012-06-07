@@ -90,9 +90,13 @@
     <string name="detalle_pedido_column_hora">Hora</string>
     <string name="detalle_pedido_column_estado">Estado</string>
     <string name="detalle_pedido_menu_mapa">Mapa</string>
-    
     <string name="confrontacion_activity_title">Confrontación</string>
     <string name="confrontacion_column_descripcion">Descripción</string>
     <string name="confrontacion_column_monto">%</string>
     <string name="confrontacion_column_supervisor">Supervisor</string>
+    <string name="clientecreditos_activity_title">Clientes con Créditos</string>
+    <string name="clientecreditos_column_codigo">Código</string>
+    <string name="clientecreditos_column_cliente">Cliente</string>
+    <string name="clientecreditos_column_disponible">Imp.Disp.</string>
+    <string name="clientecreditos_column_vencido">Imp.Venc.</string>
 </resources>

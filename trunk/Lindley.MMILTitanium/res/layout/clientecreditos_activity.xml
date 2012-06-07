@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:layout_margin="1dip">
+    
+    <com.thira.examples.actionbar.widget.ActionBar
+		android:id="@+id/actionBar" 
+		android:layout_width="fill_parent"
+		android:layout_height="44dip" />
+
+     <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+        		
+                
+                 <TableRow>
+            
+	              <TextView
+	                android:layout_height="wrap_content"
+	                android:layout_width="0dip"
+	                android:layout_weight="2"
+	                android:text="@string/clientecreditos_column_codigo"
+	                style="@style/TextViewHead"/>
+	            
+	         
+	              <TextView
+	                android:layout_height="wrap_content"
+	                android:layout_width="0dip"
+	                android:layout_weight="4"
+	                android:text="@string/clientecreditos_column_cliente"
+	                style="@style/TextViewHead"/>
+	              
+	                  
+	              <TextView
+	                android:layout_height="wrap_content"
+	                android:layout_width="0dip"
+	                android:layout_weight="2"
+	              	style="@style/TextViewHead"
+	                android:text="@string/clientecreditos_column_disponible"/>
+	              
+	              <TextView
+	                android:layout_height="wrap_content"
+	                android:layout_width="0dip"
+	                android:layout_weight="2"
+	              	style="@style/TextViewHead"
+	                android:text="@string/clientecreditos_column_vencido"/>
+	              
+              
+      		</TableRow>      
+      
+      </TableLayout>
+              
+     <ListView android:id="@+id/android:list"
+  		 android:clickable="true"
+  		android:addStatesFromChildren="true"
+          android:choiceMode="singleChoice"
+         android:layout_width="fill_parent"
+  android:layout_height="wrap_content"/>
+     
+
+</LinearLayout>
