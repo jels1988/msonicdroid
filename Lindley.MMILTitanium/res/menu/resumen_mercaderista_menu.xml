@@ -3,5 +3,6 @@
     <item android:id="@+id/mnuVentas" android:title="@string/resumen_venta_menu_ventas"/>
 	<item android:id="@+id/mnuMix" android:title="@string/resumen_venta_menu_mix"/>
     <item android:id="@+id/mnuVendedores" android:title="@string/resumen_venta_menu_vendedores"/>
+    <item android:id="@+id/mnuConfrontacion" android:title="@string/resumen_venta_menu_confrontacion"/>
     <item android:id="@+id/mnuConsultas" android:title="@string/resumen_venta_menu_consulta"/>
 </menu>

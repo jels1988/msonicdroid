@@ -69,11 +69,11 @@ public final class R {
         public static final int linearLayoutTchart=0x7f090037;
         public static final int lstSupervisores=0x7f090032;
         public static final int lstTeleventa=0x7f090034;
-        public static final int mnuConfrontacion=0x7f09003f;
-        public static final int mnuConsultas=0x7f09003d;
+        public static final int mnuConfrontacion=0x7f09003d;
+        public static final int mnuConsultas=0x7f09003e;
         public static final int mnuGrafico=0x7f090042;
         public static final int mnuMercaderista=0x7f09003c;
-        public static final int mnuMix=0x7f09003e;
+        public static final int mnuMix=0x7f09003f;
         public static final int mnuPedidoMapa=0x7f090038;
         public static final int mnuPedidos=0x7f09003a;
         public static final int mnuSupervisor=0x7f090040;
