@@ -69,18 +69,18 @@ public final class R {
         public static final int linearLayoutTchart=0x7f090039;
         public static final int lstSupervisores=0x7f090034;
         public static final int lstTeleventa=0x7f090036;
-        public static final int mnuClienteCreditos=0x7f09003f;
-        public static final int mnuConfrontacion=0x7f090040;
-        public static final int mnuConsultas=0x7f090041;
+        public static final int mnuClienteCreditos=0x7f090040;
+        public static final int mnuConfrontacion=0x7f09003e;
+        public static final int mnuConsultas=0x7f09003f;
         public static final int mnuGrafico=0x7f090045;
-        public static final int mnuMercaderista=0x7f09003e;
-        public static final int mnuMix=0x7f090042;
-        public static final int mnuPedidoMapa=0x7f09003a;
-        public static final int mnuPedidos=0x7f09003c;
+        public static final int mnuMercaderista=0x7f09003b;
+        public static final int mnuMix=0x7f09003d;
+        public static final int mnuPedidoMapa=0x7f090041;
+        public static final int mnuPedidos=0x7f090042;
         public static final int mnuSupervisor=0x7f090043;
         public static final int mnuTeleventa=0x7f090044;
-        public static final int mnuVendedores=0x7f09003b;
-        public static final int mnuVentas=0x7f09003d;
+        public static final int mnuVendedores=0x7f09003c;
+        public static final int mnuVentas=0x7f09003a;
         public static final int mv1=0x7f090011;
         public static final int txCuota=0x7f090029;
         public static final int txtAtendidos=0x7f090025;
@@ -147,13 +147,15 @@ public final class R {
         public static final int tablerro_grafico=0x7f030016;
     }
     public static final class menu {
-        public static final int detallepedidos_menu=0x7f080000;
-        public static final int listasupervisores_menu=0x7f080001;
-        public static final int listavendedores_menu=0x7f080002;
-        public static final int mix_producto_menu=0x7f080003;
-        public static final int resumen_mercaderista_menu=0x7f080004;
-        public static final int resumen_venta_menu=0x7f080005;
-        public static final int tablero_menu=0x7f080006;
+        public static final int clientecreditos_menu=0x7f080000;
+        public static final int confrontacion_menu=0x7f080001;
+        public static final int detallepedidos_menu=0x7f080002;
+        public static final int listasupervisores_menu=0x7f080003;
+        public static final int listavendedores_menu=0x7f080004;
+        public static final int mix_producto_menu=0x7f080005;
+        public static final int resumen_mercaderista_menu=0x7f080006;
+        public static final int resumen_venta_menu=0x7f080007;
+        public static final int tablero_menu=0x7f080008;
     }
     public static final class string {
         /** desa: 0GnqeXeroFjywL9df0WrJpTEwFsWxFYCGqDe6xw
