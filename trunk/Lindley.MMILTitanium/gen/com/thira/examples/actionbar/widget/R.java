@@ -157,6 +157,9 @@ prod: 0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A
         public static final int apikey=0x7f060003;
         public static final int app_name=0x7f060005;
         public static final int confrontacion_activity_title=0x7f06005b;
+        public static final int confrontacion_column_descripcion=0x7f06005c;
+        public static final int confrontacion_column_monto=0x7f06005d;
+        public static final int confrontacion_column_supervisor=0x7f06005e;
         public static final int detalle_pedido_activity_title=0x7f060055;
         public static final int detalle_pedido_column_cliente=0x7f060057;
         public static final int detalle_pedido_column_estado=0x7f060059;
@@ -248,11 +251,11 @@ prod: 0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A
         public static final int tablero_menu_grafico=0x7f060013;
         public static final int tablero_menu_supervisor=0x7f060011;
         public static final int tablero_menu_televenta=0x7f060012;
-        public static final int urlwsLogin=0x7f060060;
-        public static final int urlwsMMILMapVendedor=0x7f06005f;
-        public static final int urlwsMMILPizarra=0x7f06005c;
-        public static final int urlwsMMILSupervisor=0x7f06005e;
-        public static final int urlwsMMILVendedor=0x7f06005d;
+        public static final int urlwsLogin=0x7f060063;
+        public static final int urlwsMMILMapVendedor=0x7f060062;
+        public static final int urlwsMMILPizarra=0x7f06005f;
+        public static final int urlwsMMILSupervisor=0x7f060061;
+        public static final int urlwsMMILVendedor=0x7f060060;
         public static final int wait_message=0x7f060001;
     }
     public static final class style {

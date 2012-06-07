@@ -20,8 +20,8 @@
 	              <TextView
 	                android:layout_height="wrap_content"
 	                android:layout_width="0dip"
-	                android:layout_weight="4"
-	                android:text="@string/mix_producto_producto_column"
+	                android:layout_weight="3"
+	                android:text="@string/confrontacion_column_descripcion"
 	                style="@style/TextViewHead"/>
 	            
 	         
@@ -29,17 +29,17 @@
 	                android:layout_height="wrap_content"
 	                android:layout_width="0dip"
 	                android:layout_weight="2"
-	                android:text="@string/mix_producto_cunitaria_column"
+	                android:text="@string/confrontacion_column_monto"
 	                style="@style/TextViewHead"/>
 	              
 	                  
 	              <TextView
 	                android:layout_height="wrap_content"
 	                android:layout_width="0dip"
-	                android:layout_weight="2"
+	                android:layout_weight="3"
 	              	style="@style/TextViewHead"
 	              	android:gravity="right"
-	                android:text="@string/mix_producto_cfisica_column"/>
+	                android:text="@string/confrontacion_column_supervisor"/>
               
       		</TableRow>      
       
