@@ -84,8 +84,11 @@
     <string name="mix_producto_cunitaria_column">C.Unitarias</string>
     <string name="mix_producto_cfisica_column">C.Físicas</string>
     
-    
-    
     <string name="detalle_pedido_activity_title">Detalle de Pedidos</string>
+    <string name="detalle_pedido_column_numero">Número</string>
+    <string name="detalle_pedido_column_cliente">Cliente</string>
+    <string name="detalle_pedido_column_hora">Hora</string>
+    <string name="detalle_pedido_column_estado">Estado</string>
     
+    <string name="detalle_pedido_menu_mapa">Mapa</string>
 </resources>

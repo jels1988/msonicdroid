@@ -109,6 +109,14 @@ public class LoginActivity extends ActivityBase {
 				message = String.format(login_ok,usuarioTO.nombres);
 				
 				
+				//*******************
+				//TEMPORAL
+				usuarioTO.rolId="9";
+				usuarioTO.codigoSap="00351";
+				usuarioTO.codigoDeposito="C4";
+				//*******************
+				
+				
 				if(usuarioTO.rolId.compareToIgnoreCase("7")==0){ //GERENTE
 					Intent intent = new Intent(this, TableroActivity.class);
 					intent.putExtra(TableroActivity.CODIGO_CDA_KEY, usuarioTO.codigoDeposito.trim());
@@ -132,10 +140,17 @@ public class LoginActivity extends ActivityBase {
 			    	
 				}else if(usuarioTO.rolId.compareToIgnoreCase("9")==0){//VENDEDOR
 					
+					/*
 					Intent intent = new Intent(this, ListaPedidosActivity.class);
 					intent.putExtra(ListaPedidosActivity.CODIGO_VENDEDOR_KEY, usuarioTO.codigoSap.trim());
 					intent.putExtra(ListaPedidosActivity.CODIGO_CDA_KEY, usuarioTO.codigoDeposito.trim());
 					intent.putExtra(ListaPedidosActivity.NOMBRE_VENDEDOR_KEY, usuarioTO.nombres.trim());
+			    	startActivity(intent);*/
+					
+					Intent intent = new Intent(this, DetallePedidosActivity.class);
+					intent.putExtra(DetallePedidosActivity.CODIGO_VENDEDOR_KEY, usuarioTO.codigoSap.trim());
+					intent.putExtra(DetallePedidosActivity.CODIGO_CDA_KEY, usuarioTO.codigoDeposito.trim());
+					intent.putExtra(DetallePedidosActivity.NOMBRE_VENDEDOR_KEY, usuarioTO.nombres.trim());
 			    	startActivity(intent);
 			    	
 				}else{

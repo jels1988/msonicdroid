@@ -20,16 +20,16 @@
 	              <TextView
 	                android:layout_height="wrap_content"
 	                android:layout_width="0dip"
-	                android:layout_weight="4"
-	                android:text="@string/mix_producto_producto_column"
+	                android:layout_weight="2"
+	                android:text="@string/detalle_pedido_column_numero"
 	                style="@style/TextViewHead"/>
 	            
 	         
 	              <TextView
 	                android:layout_height="wrap_content"
 	                android:layout_width="0dip"
-	                android:layout_weight="2"
-	                android:text="@string/mix_producto_cunitaria_column"
+	                android:layout_weight="3"
+	                android:text="@string/detalle_pedido_column_cliente"
 	                style="@style/TextViewHead"/>
 	              
 	                  
@@ -38,8 +38,14 @@
 	                android:layout_width="0dip"
 	                android:layout_weight="2"
 	              	style="@style/TextViewHead"
-	              	android:gravity="right"
-	                android:text="@string/mix_producto_cfisica_column"/>
+	                android:text="@string/detalle_pedido_column_hora"/>
+	              
+	              <TextView
+	                android:layout_height="wrap_content"
+	                android:layout_width="0dip"
+	                android:layout_weight="2"
+	              	style="@style/TextViewHead"
+	                android:text="@string/detalle_pedido_column_estado"/>
               
       		</TableRow>      
       
