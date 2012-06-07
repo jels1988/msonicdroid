@@ -107,7 +107,7 @@ public class ClienteCreditosActivity extends ListActivityBase {
 		// TODO Auto-generated method stub
 		
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.confrontacion_menu, menu);
+		inflater.inflate(R.menu.clientecreditos_menu, menu);
 		return true;
 	}
 
