@@ -4,6 +4,8 @@
     <item android:id="@+id/mnuMercaderista" android:title="@string/resumen_venta_menu_mercaderista"/>
 	
     <item android:id="@+id/mnuVendedores" android:title="@string/resumen_venta_menu_vendedores"/>
+
+    <item android:id="@+id/mnuClienteCreditos" android:title="@string/resumen_venta_menu_clientescreditos"/>
     <item android:id="@+id/mnuConfrontacion" android:title="@string/resumen_venta_menu_confrontacion"/>
     <item android:id="@+id/mnuConsultas" android:title="@string/resumen_venta_menu_consulta"/>
 </menu>

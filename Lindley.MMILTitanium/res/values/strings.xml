@@ -76,6 +76,7 @@
     <string name="resumen_venta_menu_vendedores">Vendedores</string>
     <string name="resumen_venta_menu_consulta">Consultas</string>
     <string name="resumen_venta_menu_confrontacion">Confrontación</string>
+    <string name="resumen_venta_menu_clientescreditos">Clientes Créditos</string>
     <string name="resumen_venta_descripcion_column">Descripción</string>
     <string name="resumen_venta_indicador_column"> </string>
     <string name="resumen_venta_valor_column">Valor</string>
@@ -97,6 +98,6 @@
     <string name="clientecreditos_activity_title">Clientes con Créditos</string>
     <string name="clientecreditos_column_codigo">Código</string>
     <string name="clientecreditos_column_cliente">Cliente</string>
-    <string name="clientecreditos_column_disponible">Imp.Disp.</string>
-    <string name="clientecreditos_column_vencido">Imp.Venc.</string>
+    <string name="clientecreditos_column_disponible">Disponib.</string>
+    <string name="clientecreditos_column_vencido">Vencido</string>
 </resources>

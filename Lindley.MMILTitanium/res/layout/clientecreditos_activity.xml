@@ -38,6 +38,7 @@
 	                android:layout_width="0dip"
 	                android:layout_weight="2"
 	              	style="@style/TextViewHead"
+	              	android:gravity="right"
 	                android:text="@string/clientecreditos_column_disponible"/>
 	              
 	              <TextView
@@ -45,6 +46,7 @@
 	                android:layout_width="0dip"
 	                android:layout_weight="2"
 	              	style="@style/TextViewHead"
+	              	android:gravity="right"
 	                android:text="@string/clientecreditos_column_vencido"/>
 	              
               
