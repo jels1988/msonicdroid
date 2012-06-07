@@ -8,7 +8,7 @@ public class PedidosServiceRequest {
 	@SerializedName("DEP")
 	public String codigoDeposito;
 
-	@SerializedName("DEP")
+	@SerializedName("VEN")
 	public String codigoVendedor;
 	
 }

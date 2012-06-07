@@ -11,8 +11,12 @@ import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -55,7 +59,7 @@ public class DetallePedidosActivity extends ListActivityBase {
 		protected void process() {
 			// TODO Auto-generated method stub
 		  pedidoServiceProxy.codigoDeposito=codigoCDA;
-		  pedidoServiceProxy.codigoVendedor=codigoCDA;
+		  pedidoServiceProxy.codigoVendedor=codigoVendedor;
 		  pedidoServiceProxy.execute();
 			
 		}
@@ -100,7 +104,36 @@ public class DetallePedidosActivity extends ListActivityBase {
 		}
 		
 		
+		@Override
+		public boolean onCreateOptionsMenu(Menu menu) {
+			// TODO Auto-generated method stub
+			
+			MenuInflater inflater = getMenuInflater();
+			inflater.inflate(R.menu.detallepedidos_menu, menu);
+			return true;
+		}
 	
+		
+		
+
+		@Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+
+		    switch (item.getItemId()) {
+		    case R.id.mnuPedidoMapa:
+		    	Intent intent = new Intent(this, ListaPedidosActivity.class);
+		    	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra(ListaPedidosActivity.CODIGO_VENDEDOR_KEY, codigoVendedor);
+				intent.putExtra(ListaPedidosActivity.CODIGO_CDA_KEY, codigoCDA);
+				intent.putExtra(ListaPedidosActivity.NOMBRE_VENDEDOR_KEY, nombreVendedor);
+		    	startActivity(intent);		    	
+		    	return true;
+		    	
+		       default:
+		            return super.onOptionsItemSelected(item);
+		    }
+		}
+		
 		
 		public static class DetallePedido_Adapter extends ArrayAdapter<PedidoTO>{
 			
