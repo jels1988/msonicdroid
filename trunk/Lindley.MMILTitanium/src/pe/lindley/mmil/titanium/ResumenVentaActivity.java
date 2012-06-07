@@ -162,6 +162,14 @@ public class ResumenVentaActivity extends ListActivityBase {
 	        	intent3.putExtra(ConfrontacionActivity.NOMBRE_CDA_KEY, nombre_cda);
 		    	startActivity(intent3);
 	        	return true;
+	        case R.id.mnuClienteCreditos:
+	        	Intent intent4 = new Intent(this, ClienteCreditosActivity.class);
+	        	intent4.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        	intent4.putExtra(ClienteCreditosActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+	        	intent4.putExtra(ClienteCreditosActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+	        	intent4.putExtra(ClienteCreditosActivity.NOMBRE_CDA_KEY, nombre_cda);
+		    	startActivity(intent4);
+	        	return true;
 	        case R.id.mnuConsultas:
 	            return true;
 	        default:
