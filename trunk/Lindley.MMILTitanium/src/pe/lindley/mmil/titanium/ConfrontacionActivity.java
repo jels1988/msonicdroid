@@ -7,6 +7,7 @@ import pe.lindley.mmil.titanium.ws.service.ConfrontacionProxy;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -102,13 +103,13 @@ public class ConfrontacionActivity extends ListActivityBase {
 	}
 	
 	
-	/*
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.mix_producto_menu, menu);
+		inflater.inflate(R.menu.confrontacion_menu, menu);
 		return true;
 	}
 
@@ -150,12 +151,29 @@ public class ConfrontacionActivity extends ListActivityBase {
 				intent.putExtra(ListaVendedoresActivity.NOMBRE_CDA_KEY, nombre_cda);
 		    	startActivity(intent);
 	            return true;
+	        case R.id.mnuMix:
+	        	Intent intent21 = new Intent(this, MixProductoActivity.class);
+	        	intent21.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        	intent21.putExtra(ResumenMercaderistaActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+	        	intent21.putExtra(ResumenMercaderistaActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+	        	intent21.putExtra(ResumenMercaderistaActivity.NOMBRE_CDA_KEY, nombre_cda);
+		    	startActivity(intent21);
+		    	
+	            return true;
+	        case R.id.mnuClienteCreditos:
+	        	Intent intent4 = new Intent(this, ClienteCreditosActivity.class);
+	        	intent4.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        	intent4.putExtra(ClienteCreditosActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+	        	intent4.putExtra(ClienteCreditosActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+	        	intent4.putExtra(ClienteCreditosActivity.NOMBRE_CDA_KEY, nombre_cda);
+		    	startActivity(intent4);
+	        	return true;
 	        case R.id.mnuConsultas:
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
-	}*/
+	}
 
 	
 	public static class Confrontaciono_Adapter extends ArrayAdapter<ConfrontacionTO>{
