@@ -75,6 +75,7 @@
     <string name="resumen_venta_menu_mix">Mix</string>
     <string name="resumen_venta_menu_vendedores">Vendedores</string>
     <string name="resumen_venta_menu_consulta">Consultas</string>
+    <string name="resumen_venta_menu_confrontacion">Confrontación</string>
     <string name="resumen_venta_descripcion_column">Descripción</string>
     <string name="resumen_venta_indicador_column"> </string>
     <string name="resumen_venta_valor_column">Valor</string>
@@ -83,12 +84,11 @@
     <string name="mix_producto_producto_column">Producto</string>
     <string name="mix_producto_cunitaria_column">C.Unitarias</string>
     <string name="mix_producto_cfisica_column">C.Físicas</string>
-    
     <string name="detalle_pedido_activity_title">Detalle de Pedidos</string>
     <string name="detalle_pedido_column_numero">Número</string>
     <string name="detalle_pedido_column_cliente">Cliente</string>
     <string name="detalle_pedido_column_hora">Hora</string>
     <string name="detalle_pedido_column_estado">Estado</string>
-    
     <string name="detalle_pedido_menu_mapa">Mapa</string>
+    <string name="confrontacion_activity_title">Confrontación</string>
 </resources>

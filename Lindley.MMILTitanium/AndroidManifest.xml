@@ -28,29 +28,18 @@
         </activity>
 
 
-		<activity android:name=".ResumenVentaActivity" android:configChanges="keyboardHidden|orientation">
-		</activity>
-		
-		<activity android:name=".ResumenMercaderistaActivity" android:configChanges="keyboardHidden|orientation">
-		</activity>
-		
-		<activity android:name=".MixProductoActivity" android:configChanges="keyboardHidden|orientation">
-		</activity>
-		
-		
-		
+		<activity android:name=".ResumenVentaActivity" android:configChanges="keyboardHidden|orientation"></activity>
+		<activity android:name=".ResumenMercaderistaActivity" android:configChanges="keyboardHidden|orientation"></activity>
+		<activity android:name=".MixProductoActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".ListaSupervisorActivity" android:configChanges="keyboardHidden|orientation"></activity>
-        
         <activity android:name=".TableroActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".TableroGraficoActivity" android:configChanges="keyboardHidden|orientation"></activity>
-        
-        
         <activity android:name=".ListaVendedoresActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".ListaPedidosActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".ListaTeleventaActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".TableroGraficoActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".DetallePedidosActivity" android:configChanges="keyboardHidden|orientation"></activity>
-        
+        <activity android:name=".ConfrontacionActivity" android:configChanges="keyboardHidden|orientation"></activity>
         
         
         
