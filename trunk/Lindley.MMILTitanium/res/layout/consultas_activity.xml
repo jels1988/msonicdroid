@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:background="@color/custom_theme_color_blanco">
+    
+      <com.thira.examples.actionbar.widget.ActionBar
+		android:id="@+id/actionBar" 
+		android:layout_width="fill_parent"
+		android:layout_height="44dip" />
+      
+      
+          <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:text="@string/consultas_activity_codigo"/>
+          
+           <EditText
+               android:id="@+id/txtCliente"
+               android:enabled="true"
+               android:inputType="number" android:maxLength="8"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:hint="@string/consultas_activity_codigo_hint"/>
+          
+           <Button android:text="@string/consultas_activity_consultar"
+               		android:layout_height="wrap_content"
+            		android:layout_width="fill_parent"
+            		android:onClick="btnConsultarCliente_onClick"
+            		android:focusable="false"
+            		/>
+
+</LinearLayout>
