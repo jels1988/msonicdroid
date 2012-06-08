@@ -4,6 +4,7 @@ import java.util.List;
 
 import pe.lindley.mmil.titanium.ws.service.ClientesCreditosProxy;
 import pe.lindley.mmil.titanium.ws.service.ConfrontacionProxy;
+import pe.lindley.mmil.titanium.ws.service.ConsultarClienteProxy;
 import pe.lindley.mmil.titanium.ws.service.ListarMapVendedorProxy;
 import pe.lindley.mmil.titanium.ws.service.ListarSupervisorProxy;
 import pe.lindley.mmil.titanium.ws.service.ListarVendedorProxy;
@@ -41,7 +42,7 @@ public class App extends RoboApplication {
 				bind(PedidoServiceProxy.class).in(Singleton.class);
 				bind(ConfrontacionProxy.class).in(Singleton.class);
 				bind(ClientesCreditosProxy.class).in(Singleton.class);
-				
+				bind(ConsultarClienteProxy.class).in(Singleton.class);
 				
 			}
 		});

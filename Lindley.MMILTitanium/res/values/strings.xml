@@ -102,9 +102,17 @@
     <string name="clientecreditos_column_cliente">Cliente</string>
     <string name="clientecreditos_column_disponible">Disponib.</string>
     <string name="clientecreditos_column_vencido">Vencido</string>
-    
-    <string name="consultarcliente_activity_cliente">Consultar Cliente</string>
-    <string name="consultarcliente_activity_codigo">Código Cliente:</string>
-    <string name="consultarcliente_activity_codigo_hint">Ingresar código Cliente:</string>
-    <string name="consultarcliente_activity_consultar">Consultar Cliente:</string>
+    <string name="consultas_activity_cliente">Consultar Cliente</string>
+    <string name="consultas_activity_codigo">Código</string>
+    <string name="consultas_activity_codigo_hint">Ingresar código Cliente:</string>
+    <string name="consultas_activity_consultar">Último Pedido</string>
+    <string name="consultas_activity_codigo_empty">Debes ingresar el código.</string>
+    <string name="consultas_activity_codigo">Código</string>
+    <string name="consultas_activity_nombre">Nombre</string>
+    <string name="consultas_activity_direccion">Dirección</string>
+    <string name="consultas_activity_grupo_numero">Numero</string>
+    <string name="consultas_activity_grupo_tipo">Tipo</string>
+    <string name="consultas_activity_grupo_estado">Estado</string>
+    <string name="consultas_activity_grupo_transportista">Transportista</string>
+    <string name="consultas_activity_consulta_title">Consulta Cliente</string>
 </resources>

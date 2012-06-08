@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pe.lindley.mmil.titanium"
-    android:versionCode="4"
-    android:versionName="1.3" >
+    android:versionCode="5"
+    android:versionName="1.4" >
 
  
     <application
@@ -41,7 +41,9 @@
         <activity android:name=".DetallePedidosActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".ConfrontacionActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".ClienteCreditosActivity" android:configChanges="keyboardHidden|orientation"></activity>
+        <activity android:name=".ConsultasActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".ConsultarClienteActivity" android:configChanges="keyboardHidden|orientation"></activity>
+        
         
     </application>
 

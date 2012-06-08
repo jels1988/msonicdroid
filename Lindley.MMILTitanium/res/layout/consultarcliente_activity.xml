@@ -1,29 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
     android:orientation="vertical" 
-    android:background="@color/custom_theme_color_blanco">
+    android:layout_margin="1dip">
     
-      <com.thira.examples.actionbar.widget.ActionBar
+     <com.thira.examples.actionbar.widget.ActionBar
 		android:id="@+id/actionBar" 
 		android:layout_width="fill_parent"
 		android:layout_height="44dip" />
-      
-      
-          <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:text="@string/consultarcliente_activity_codigo"/>
-          
-           <EditText
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:hint="@string/consultarcliente_activity_codigo_hint"/>
-          
-           <Button android:text="@string/consultarcliente_activity_consultar"
-               		android:layout_height="wrap_content"
-            		android:layout_width="fill_parent"
-            		/>
+     
+    
+     <TableLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/custom_theme_color_blanco">
+    
+    <TableRow>
+    	
+        <TextView android:layout_weight="1"   android:layout_height="fill_parent" android:layout_width="0dip" android:text="@string/consultas_activity_codigo"/>
+	    <TextView android:id="@+id/txtCodigo" android:layout_weight="2" android:layout_height="wrap_content" android:layout_width="0dip"/>
+	</TableRow>
+	
+     <TableRow>
+    	
+        <TextView android:layout_weight="1" android:layout_height="fill_parent" android:layout_width="0dip" android:text="@string/consultas_activity_nombre"/>
+	    <TextView android:id="@+id/txtNombre" android:layout_weight="2" android:layout_height="wrap_content" android:layout_width="0dip"/>
+	</TableRow>
+	    
+	    <TableRow>
+    	
+        <TextView android:layout_weight="1" android:layout_height="fill_parent" android:layout_width="0dip" android:text="@string/consultas_activity_direccion"/>
+	    <TextView android:id="@+id/txtDireccion" android:layout_weight="2" android:layout_height="wrap_content" android:layout_width="0dip"/>
+	</TableRow>
+</TableLayout>
+
+     
+     <ExpandableListView
+        android:id="@+id/android:list"
+  		 android:clickable="true"
+         android:layout_width="fill_parent"
+  android:layout_height="wrap_content">
+  </ExpandableListView>
+     <TextView android:id="@+id/android:empty" android:layout_width="fill_parent" android:layout_height="fill_parent"></TextView>
 
 </LinearLayout>
