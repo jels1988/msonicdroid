@@ -132,8 +132,10 @@ public class ListaVendedoresActivity extends ListActivityBase {
 	 @Override
 		public boolean onMenuItemSelected(int featureId, MenuItem item) {
 			// TODO Auto-generated method stub
-			if(item.getItemId()==R.id.mnuPedidos){
+			if(item.getItemId()==R.id.mnuMapas){
 				showDialog(0);
+			}else if(item.getItemId()==R.id.mnuPedidos){
+				showDialog(1);
 			}
 			return super.onMenuItemSelected(featureId, item);
 		}
@@ -157,6 +159,7 @@ public class ListaVendedoresActivity extends ListActivityBase {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle(R.string.listavendedores_activity_title_dialog);
 			
+			
 			builder.setSingleChoiceItems(arrAdap,-1, new DialogInterface.OnClickListener() {
 			    public void onClick(DialogInterface dialog, int item) {
 			    	item_selected = item;
@@ -165,26 +168,42 @@ public class ListaVendedoresActivity extends ListActivityBase {
 			    }
 			});
 			
-			builder.setPositiveButton(R.string.listasupervisores_activity_title_dialog_Aceptar, new DialogInterface.OnClickListener() {
+			if(id==0){
+				builder.setPositiveButton(R.string.listasupervisores_activity_title_dialog_Aceptar, new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int id) {
+			        	if(item_selected>-1){
+				        	Intent i = new Intent(getApplicationContext(),ListaPedidosActivity.class);
+				        	i.putExtra(ListaPedidosActivity.CODIGO_CDA_KEY, codigoCda);
+				        	i.putExtra(ListaPedidosActivity.CODIGO_VENDEDOR_KEY, codigoVendedor);
+				        	i.putExtra(ListaPedidosActivity.NOMBRE_VENDEDOR_KEY, nombreVendedor);
+				        	startActivity(i);
+				        	dialog.dismiss();
+			        	}
+			        }
+			    });
+			}else{
+				builder.setPositiveButton(R.string.listasupervisores_activity_title_dialog_Aceptar, new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int id) {
+			        	if(item_selected>-1){
+			        		Intent intent = new Intent(getApplicationContext(), DetallePedidosActivity.class);
+							intent.putExtra(DetallePedidosActivity.CODIGO_VENDEDOR_KEY, codigoVendedor);
+							intent.putExtra(DetallePedidosActivity.CODIGO_CDA_KEY, codigoCda);
+							intent.putExtra(DetallePedidosActivity.NOMBRE_VENDEDOR_KEY, nombreVendedor);
+					    	startActivity(intent);
+				        	dialog.dismiss();
+			        	}
+			        }
+			    });
 				
-		        public void onClick(DialogInterface dialog, int id) {
-		        	if(item_selected>-1){
-			        	Intent i = new Intent(getApplicationContext(),ListaPedidosActivity.class);
-			        	i.putExtra(ListaPedidosActivity.CODIGO_CDA_KEY, codigoCda);
-			        	i.putExtra(ListaPedidosActivity.CODIGO_VENDEDOR_KEY, codigoVendedor);
-			        	i.putExtra(ListaPedidosActivity.NOMBRE_VENDEDOR_KEY, nombreVendedor);
-			        	startActivity(i);
-			        	dialog.dismiss();
-		        	}
-		        }
-		    });
-
+			}
+			
 			builder.setNegativeButton(R.string.listasupervisores_activity_title_dialog_Cancelar, new DialogInterface.OnClickListener() {
-
+				
 		        public void onClick(DialogInterface dialog, int id) {
 		        	 dialog.dismiss();
 		        }
 		    });
+			
 			AlertDialog alert = builder.create();
 			
 		    

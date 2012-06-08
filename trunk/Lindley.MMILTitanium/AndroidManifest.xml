@@ -41,7 +41,7 @@
         <activity android:name=".DetallePedidosActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".ConfrontacionActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".ClienteCreditosActivity" android:configChanges="keyboardHidden|orientation"></activity>
-        
+        <activity android:name=".ConsultarClienteActivity" android:configChanges="keyboardHidden|orientation"></activity>
         
     </application>
 
