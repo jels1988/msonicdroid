@@ -41,6 +41,7 @@
     <string name="listasupervisores_menu_eficienciaglobal">Eficiencia Global</string>
     <string name="listasupervisores_menu_planvisita">Plan de Visita</string>
     <string name="listasupervisores_menu_eficienciapreventa">Eficiencia Preventa</string>
+    <string name="listasupervisores_activity_vendedores_column">Vendedores</string>
     <string name="listavendedores_activity_cuota_column">Cuota</string>
     <string name="listavendedores_activity_eficienciaglobal_column">Eficiencia Global</string>
     <string name="listavendedores_activity_planvisitas_column">Plan de Visita</string>
@@ -52,6 +53,7 @@
     <string name="listavendedores_activity_importe_column">Importe</string>
     <string name="listavendedores_activity_tiempoefectivo_column">T. Efectivo</string>
     <string name="listavendedores_menu_pedidos">Pedidos</string>
+    <string name="listavendedores_menu_mapa">Mapa</string>
     <string name="listavendedores_activity_title_dialog">Seleccionar Vendedor</string>
     <string name="lista_televendedores_activity_title">Televendedores</string>
     <string name="listatelevendedores_nombre_column">Televendedor</string>
@@ -100,4 +102,9 @@
     <string name="clientecreditos_column_cliente">Cliente</string>
     <string name="clientecreditos_column_disponible">Disponib.</string>
     <string name="clientecreditos_column_vencido">Vencido</string>
+    
+    <string name="consultarcliente_activity_cliente">Consultar Cliente</string>
+    <string name="consultarcliente_activity_codigo">Código Cliente:</string>
+    <string name="consultarcliente_activity_codigo_hint">Ingresar código Cliente:</string>
+    <string name="consultarcliente_activity_consultar">Consultar Cliente:</string>
 </resources>

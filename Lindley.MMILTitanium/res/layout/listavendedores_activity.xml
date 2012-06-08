@@ -46,7 +46,7 @@
                 android:layout_width="250dip"
                 android:gravity="left"
                 style="@style/TextViewHead"
-                 android:text="@string/listasupervisores_activity_supervisor_column"/>
+                 android:text="@string/listasupervisores_activity_vendedores_column"/>
               
                  <TextView
                 android:layout_height="wrap_content"
