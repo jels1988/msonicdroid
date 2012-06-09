@@ -161,6 +161,12 @@ public class ResumenMercaderistaActivity extends ListActivityBase {
 		    	startActivity(intent3);
 	        	return true;
 	        case R.id.mnuConsultas:
+	        	Intent intent5 = new Intent(this, ConsultasActivity.class);
+	        	intent5.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        	intent5.putExtra(ConsultasActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+	        	intent5.putExtra(ConsultasActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+	        	intent5.putExtra(ConsultasActivity.NOMBRE_CDA_KEY, nombre_cda);
+		    	startActivity(intent5);
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
