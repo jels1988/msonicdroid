@@ -717,6 +717,65 @@ if(cboDistribuidor.getSelectedItemPosition()==0){
     	String ubicacion = ((TablaTO)cboUbicacion.getSelectedItem()).getCodigo();
     	clienteTO.setUbicacion(ubicacion);
 		
+    	
+    	if(rdTraficoPersonas.getCheckedRadioButtonId()==-1){
+    		
+    		MessageBox.showSimpleDialog(this,
+					registrar_cliente_title,
+					"Debes responder la pregunta 1.",
+					txtSubCanal_dialog_ok,
+					new OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							rdLocalAvenida.requestFocus();
+							
+						}
+					});
+    		
+    		return;
+    	}
+    	
+    	if(rdLocalAvenida.getCheckedRadioButtonId()==-1){
+    		
+    		MessageBox.showSimpleDialog(this,
+					registrar_cliente_title,
+					"Debes responder la pregunta 3.",
+					txtSubCanal_dialog_ok,
+					new OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							rdLocalAvenida.requestFocus();
+							
+						}
+					});
+    		
+    		return;
+    	}
+    	
+
+    	if(rdLocalEsquina.getCheckedRadioButtonId()==-1){
+    		
+    		MessageBox.showSimpleDialog(this,
+					registrar_cliente_title,
+					"Debes responder la pregunta 4.",
+					txtSubCanal_dialog_ok,
+					new OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							rdLocalEsquina.requestFocus();
+							
+						}
+					});
+    		
+    		return;
+    	}
+
     	clienteTO.setTraficoPersonas((rdTraficoPersonas.getCheckedRadioButtonId()==R.id.rdTraficoPersonasSi)?1:0);
     	clienteTO.setColegioNido((chkColegioNido.isChecked()?1:0));
     	clienteTO.setEducacionSuperior((chkEducacionSuperior.isChecked()?1:0));
