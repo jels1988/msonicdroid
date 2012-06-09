@@ -3,7 +3,7 @@
     <!--desa: 0GnqeXeroFjywL9df0WrJpTEwFsWxFYCGqDe6xw-->
     <!--prod: 0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A-->
     <string name="app_name">Route to Market</string>
-    <string name="apikey">0GnqeXeroFjywL9df0WrJpTEwFsWxFYCGqDe6xw</string>
+    <string name="apikey">0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A</string>
     <!-- GENERAL -->
     <string name="error_not_network_message">Por favor, verifica tu conexión de datos o intenta en unos minutos.</string>
     <string name="wait_message">Por favor, espera un momento.</string>

@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="urlWebView">http://197.1.1.87/rtm/LanzadorApp/ImageViewService.svc</string>
-	<!-- 197.1.1.87 -->
-	<string name="urlwsLogin">http://197.1.1.87/rtm/LanzadorApp/SeguridadService.svc</string>
-	<!--string name="urlwsCliente">http://197.1.1.87/rtm/prospector2/SincronizarCliente.svc</string-->
-	<string name="urlwsCliente">http://197.1.1.87/rtm/prospector2/SincronizarCliente.svc</string>
+    <string name="urlWebView">http://java.cdaandino.com/rtm/LanzadorApp/ImageViewService.svc</string>
+	<!-- java.cdaandino.com -->
+	<string name="urlwsLogin">http://java.cdaandino.com/rtm/LanzadorApp/SeguridadService.svc</string>
+	<!--string name="urlwsCliente">http://java.cdaandino.com/rtm/prospector2/SincronizarCliente.svc</string-->
+	<string name="urlwsCliente">http://java.cdaandino.com/rtm/prospector2/SincronizarCliente.svc</string>
 	
 	
-	<string name="urlwsProfit">http://197.1.1.87/rtm/Profit/ProfitHistoryService.svc</string>
-	<string name="urlwsEquipoFrio">http://197.1.1.87/rtm/EquiposFrio/EquiposFrioService.svc</string>
-	<string name="urlwsOMParametros">http://197.1.1.87/rtm/ordenest/SincronizarService.svc</string>
-	<string name="urlwsOMSeguridad">http://197.1.1.87/rtm/ordenest/SeguridadService.svc</string>
-	<string name="urlwsRed">http://197.1.1.87/rtm/Red/RedService.svc</string>
-	<string name="urlwsExMulti">http://197.1.1.87/rtm/LanzadorApp/FileService.svc</string>	
+	<string name="urlwsProfit">http://java.cdaandino.com/rtm/Profit/ProfitHistoryService.svc</string>
+	<string name="urlwsEquipoFrio">http://java.cdaandino.com/rtm/EquiposFrio/EquiposFrioService.svc</string>
+	<string name="urlwsOMParametros">http://java.cdaandino.com/rtm/ordenest/SincronizarService.svc</string>
+	<string name="urlwsOMSeguridad">http://java.cdaandino.com/rtm/ordenest/SeguridadService.svc</string>
+	<string name="urlwsRed">http://java.cdaandino.com/rtm/Red/RedService.svc</string>
+	<string name="urlwsExMulti">http://java.cdaandino.com/rtm/LanzadorApp/FileService.svc</string>	
 	    	    
 	 <!-- FICHA -->
-	<string name="urlwsFichaCliente">http://197.1.1.87/rtm/Ficha/ClienteService.svc</string>
-	<string name="urlwsFichaComercial">http://197.1.1.87/rtm/Ficha/ComercialService.svc</string>
-	<string name="urlwsFichaContacto">http://197.1.1.87/rtm/Ficha/ContactoService.svc</string>
-	<string name="urlwsFichaFigComercial">http://197.1.1.87/rtm/Ficha/FiguraComercialService.svc</string>
-	<string name="urlwsFichaOpMultiple">http://197.1.1.87/rtm/Ficha/OpcionMultipleService.svc</string>
-	<string name="urlwsFichaVisualizacion">http://197.1.1.87/rtm/Ficha/VisualizacionService.svc</string>
-	<string name="urlwsFichaEncuesta">http://197.1.1.87/rtm/Ficha/EncuestaService.svc</string>
+	<string name="urlwsFichaCliente">http://java.cdaandino.com/rtm/Ficha/ClienteService.svc</string>
+	<string name="urlwsFichaComercial">http://java.cdaandino.com/rtm/Ficha/ComercialService.svc</string>
+	<string name="urlwsFichaContacto">http://java.cdaandino.com/rtm/Ficha/ContactoService.svc</string>
+	<string name="urlwsFichaFigComercial">http://java.cdaandino.com/rtm/Ficha/FiguraComercialService.svc</string>
+	<string name="urlwsFichaOpMultiple">http://java.cdaandino.com/rtm/Ficha/OpcionMultipleService.svc</string>
+	<string name="urlwsFichaVisualizacion">http://java.cdaandino.com/rtm/Ficha/VisualizacionService.svc</string>
+	<string name="urlwsFichaEncuesta">http://java.cdaandino.com/rtm/Ficha/EncuestaService.svc</string>
 	
 	 <!-- MMIL -->  
-	<string name="urlwsMMILCda">http://197.1.1.87/rtm/MMIL/CdaService.svc</string>	
-	<string name="urlwsMMILPoligonoMap">http://197.1.1.87/rtm/MMIL/PoligonoMapservice.svc</string>
-	<string name="urlwsMMILMapVendedor">http://197.1.1.87/rtm/MMIL/MapVendedorService.svc</string>
-	<string name="urlwsMMILDashBoard">http://197.1.1.87/rtm/MMIL/DashBoardService.svc</string>	
-	<string name="urlwsMMILPizarra">http://197.1.1.87/rtm/MMIL/PizarraService.svc</string>	
-	<string name="urlwsMMILRegion">http://197.1.1.87/rtm/MMIL/RegionService.svc</string>
-	<string name="urlwsMMILSupervisor">http://197.1.1.87/rtm/MMIL/SupervisorService.svc</string>
-	<string name="urlwsMMILVendedor">http://197.1.1.87/rtm/MMIL/VendedorService.svc</string>
-	<string name="urlwsMMILConfig">http://197.1.1.87/rtm/MMIL/Configuration.svc</string>
+	<string name="urlwsMMILCda">http://java.cdaandino.com/rtm/MMIL/CdaService.svc</string>	
+	<string name="urlwsMMILPoligonoMap">http://java.cdaandino.com/rtm/MMIL/PoligonoMapservice.svc</string>
+	<string name="urlwsMMILMapVendedor">http://java.cdaandino.com/rtm/MMIL/MapVendedorService.svc</string>
+	<string name="urlwsMMILDashBoard">http://java.cdaandino.com/rtm/MMIL/DashBoardService.svc</string>	
+	<string name="urlwsMMILPizarra">http://java.cdaandino.com/rtm/MMIL/PizarraService.svc</string>	
+	<string name="urlwsMMILRegion">http://java.cdaandino.com/rtm/MMIL/RegionService.svc</string>
+	<string name="urlwsMMILSupervisor">http://java.cdaandino.com/rtm/MMIL/SupervisorService.svc</string>
+	<string name="urlwsMMILVendedor">http://java.cdaandino.com/rtm/MMIL/VendedorService.svc</string>
+	<string name="urlwsMMILConfig">http://java.cdaandino.com/rtm/MMIL/Configuration.svc</string>
 	
     <!-- PLAN DESARROLLO -->  
-	<string name="urlwsPDActividad">http://197.1.1.87/rtm/PlanDesarrollo/ActividadService.svc</string>
-	<string name="urlwsPDPrincipal">http://197.1.1.87/rtm/PlanDesarrollo/PlanDesarrolloService.svc/</string>
-	<string name="urlwsPDParametro">http://197.1.1.87/rtm/PlanDesarrollo/ParametrosService.svc</string>
-	<string name="urlwsPDResponsable">http://197.1.1.87/rtm/PlanDesarrollo/ResponsableService.svc</string>
-	<string name="urlwsPDSustento">http://197.1.1.87/rtm/PlanDesarrollo/SustentoService.svc</string>
+	<string name="urlwsPDActividad">http://java.cdaandino.com/rtm/PlanDesarrollo/ActividadService.svc</string>
+	<string name="urlwsPDPrincipal">http://java.cdaandino.com/rtm/PlanDesarrollo/PlanDesarrolloService.svc/</string>
+	<string name="urlwsPDParametro">http://java.cdaandino.com/rtm/PlanDesarrollo/ParametrosService.svc</string>
+	<string name="urlwsPDResponsable">http://java.cdaandino.com/rtm/PlanDesarrollo/ResponsableService.svc</string>
+	<string name="urlwsPDSustento">http://java.cdaandino.com/rtm/PlanDesarrollo/SustentoService.svc</string>
 	<!-- VENTA CERO -->
-	<string name="urlwsVtaCero">http://197.1.1.87/rtm/VentaCero/VentaCeroService.svc</string>
-	<string name="urlwsVtaCeroParam">http://197.1.1.87/rtm/VentaCero/ParametroService.svc</string>
+	<string name="urlwsVtaCero">http://java.cdaandino.com/rtm/VentaCero/VentaCeroService.svc</string>
+	<string name="urlwsVtaCeroParam">http://java.cdaandino.com/rtm/VentaCero/ParametroService.svc</string>
 	   
 	   <!--  	PUNTOS DE INTERES   -->
-	<string name="urlwsPINT">http://197.1.1.87/rtm/PuntosInteres/PuntoInteresService.svc</string>
+	<string name="urlwsPINT">http://java.cdaandino.com/rtm/PuntosInteres/PuntoInteresService.svc</string>
 	
 	<!-- 	PROFIT -->
-	<string name="urlswsProfitNew">http://197.1.1.87/rtm/ProfitNew/ProfitHistoryService.svc</string>
+	<string name="urlswsProfitNew">http://java.cdaandino.com/rtm/ProfitNew/ProfitHistoryService.svc</string>
 	<!-- 	SACC -->
-	<string name="urlswsSACC">http://197.1.1.87/rtm/SACC/SaccService.svc</string>	
+	<string name="urlswsSACC">http://java.cdaandino.com/rtm/SACC/SaccService.svc</string>	
 	
 	    
 	    
