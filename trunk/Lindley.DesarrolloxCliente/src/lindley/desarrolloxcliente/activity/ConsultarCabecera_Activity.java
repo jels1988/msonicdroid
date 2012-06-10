@@ -7,6 +7,7 @@ import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.DesarrolloClienteTO;
+import lindley.desarrolloxcliente.ws.service.ActualizarEstadoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCabeceraProxy;
 import net.msonic.lib.ActivityUtil;
 import net.msonic.lib.ListActivityBase;
@@ -24,6 +25,7 @@ import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
@@ -32,12 +34,17 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarCabeceraProxy ConsultarCabeceraProxy;
+	@Inject ActualizarEstadoProxy actualizarEstadoProxy;
 	private EfficientAdapter adap;
 	ClienteTO cliente;
 	public static MyApplication application;
 	
 	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
 	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
+	
+	public static final int ACCION_ELIMINAR = 1;
+	
+	public static String codigoElimnar;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -103,6 +110,54 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 		super.processError();
 		showToast(error_generico_process);
 	}
+	
+	
+	
+	@Override
+	protected void process(int accion) {
+		// TODO Auto-generated method stub
+		if(accion == ACCION_ELIMINAR)
+		{
+			actualizarEstadoProxy.codigo = codigoElimnar;
+			actualizarEstadoProxy.estado = "E";
+			actualizarEstadoProxy.execute();
+		}
+	}
+	
+	@Override
+	protected void processOk(int accion) {
+		// TODO Auto-generated method stub
+		if(accion == ACCION_ELIMINAR)
+		{
+			boolean isExito = actualizarEstadoProxy.isExito();
+			if (isExito) {
+				int status = actualizarEstadoProxy.getResponse().getStatus();
+				if (status == 0) {
+					showToast("Registro eliminado correctamente.");
+				}
+				else  {
+					showToast(actualizarEstadoProxy.getResponse().getDescripcion());
+				}
+			}
+			else{
+				processError();
+			}
+			super.processOk();
+		}
+	}
+	
+	@Override
+	protected void processError(int accion) {
+		// TODO Auto-generated method stub
+		super.processError(accion);
+		if(accion == ACCION_ELIMINAR)
+		{
+			showToast(error_generico_process);
+		}
+	}
+	
+	
+	
 	
 	
 	public static class EfficientAdapter extends BaseAdapter implements Filterable {
@@ -281,6 +336,8 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 						if(anio == anioActual && mes == mesActual && dia == diaActual)
 						{
 							Log.v("ConsultarCabecera_Activity", "eliminar");
+							ConsultarCabecera_Activity.codigoElimnar = desarrolloTemp.getCodigo();
+							((ConsultarCabecera_Activity)context).process(ConsultarCabecera_Activity.ACCION_ELIMINAR);
 						}
 						else
 						{				
