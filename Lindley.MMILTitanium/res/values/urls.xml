@@ -7,10 +7,4 @@
 	<string name="urlwsLogin">http://java.cdaandino.com/rtm/LanzadorApp/SeguridadService.svc</string>
     <string name="urlwsProfit">http://java.cdaandino.com/rtm/Profit/ProfitHistoryService.svc</string>
     <string name="urlwsFichaFigComercial">http://java.cdaandino.com/rtm/Ficha/FiguraComercialService.svc</string>
-    
-<!--     <string name="urlwsMMILPizarra">http://192.168.0.11/MMIL/PizarraService.svc</string> -->
-<!--   	<string name="urlwsMMILVendedor">http://192.168.0.11/MMIL/VendedorService.svc</string> -->
-<!--     <string name="urlwsMMILSupervisor">http://192.168.0.11/MMIL/SupervisorService.svc</string> -->
-<!--     <string name="urlwsMMILMapVendedor">http://192.168.0.11/MMIL/MapVendedorService.svc</string> -->
-<!--     <string name="urlwsLogin">http://java.cdaandino.com/rtm/LanzadorApp/SeguridadService.svc</string> -->
 </resources>

@@ -14,6 +14,7 @@ import pe.lindley.mmil.titanium.ws.service.MostrarPizarraProxy;
 import pe.lindley.mmil.titanium.ws.service.ObtenerFiguraComercialProxy;
 import pe.lindley.mmil.titanium.ws.service.PedidoServiceProxy;
 import pe.lindley.mmil.titanium.ws.service.ProfitHistoryDetalleProxy;
+import pe.lindley.mmil.titanium.ws.service.ProfitHistoryProxy;
 import pe.lindley.mmil.titanium.ws.service.ResumenMercaderistasProxy;
 import pe.lindley.mmil.titanium.ws.service.ResumenVendedoresProxy;
 
@@ -47,9 +48,7 @@ public class App extends RoboApplication {
 				bind(ConsultarClienteProxy.class).in(Singleton.class);
 				bind(ProfitHistoryDetalleProxy.class).in(Singleton.class);
 				bind(ObtenerFiguraComercialProxy.class).in(Singleton.class);
-				
-				
-				
+				bind(ProfitHistoryProxy.class).in(Singleton.class);
 			}
 		});
 	}
