@@ -15,10 +15,13 @@ import android.widget.TabHost.TabSpec;
 public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 
 	public final static String CODIGO_REGISTRO = "codigo_reg";
+	public final static String ORIGEN_REGISTRO = "origen_reg";
 	
 	private TabHost mTabHost;
 	public String codigoRegistro;
 	public String flagFecha;
+	
+	public String origen;
 	
 	public static MyApplication application;
 	
@@ -38,6 +41,8 @@ public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 		setContentView(R.layout.compromisoprincipal_activity);
 		Intent intent = this.getIntent();
 		codigoRegistro = intent.getStringExtra(CODIGO_REGISTRO);
+		origen = intent.getStringExtra(ORIGEN_REGISTRO);		
+		System.out.println(origen);
 		setupTabHost();
 		setupTab(new TextView(this));
 	}
@@ -64,6 +69,7 @@ public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 		tabview = createTabView(mTabHost.getContext(), "COMBOS");
 		Intent combos = new Intent(this, InformacionAdicional_Activity.class);
 		combos.putExtra(InformacionAdicional_Activity.COD_GESTION, codigoRegistro);
+		combos.putExtra(InformacionAdicional_Activity.ORIGEN, origen);		
 		setContent = mTabHost.newTabSpec("COMBOS").setIndicator(tabview).setContent(combos);
 		mTabHost.addTab(setContent);		
 	}

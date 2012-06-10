@@ -209,6 +209,7 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 					finish();
 					Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.compromisoprincipalopen");
 					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, idRegistro);					
+					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "N");
 					startActivity(compromisoOpen);
 				}
 				else  {

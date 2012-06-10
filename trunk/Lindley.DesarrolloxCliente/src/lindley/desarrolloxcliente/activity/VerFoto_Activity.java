@@ -68,6 +68,7 @@ public class VerFoto_Activity extends ActivityBase {
 			
 			Intent intent = new Intent("lindley.desarrolloxcliente.webviewverfoto");
 			intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, fileName);
+			intent.putExtra(WebViewVerFoto_Activity.TITULO_FOTO, " ");
 			startActivity(intent);	
 			
 			super.process();

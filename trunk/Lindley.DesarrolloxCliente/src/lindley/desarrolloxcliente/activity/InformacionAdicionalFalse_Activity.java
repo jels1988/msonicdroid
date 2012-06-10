@@ -69,6 +69,8 @@ public class InformacionAdicionalFalse_Activity extends ActivityBase {
 	public static final String TIPO_PRESENTACION = "3";
 	public static final String TIPO_POSICION = "2";
 	public static final String NO = "N";
+	
+	@InjectExtra(value="ORIGEN", optional = true) String origen_act;
 			
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -289,8 +291,25 @@ public class InformacionAdicionalFalse_Activity extends ActivityBase {
 	       			if (status == 0) {
 	       				setAdapterApplication();
 	       				showToast("Los registros se cerrarón satisfactoriamente.");
-	       				Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
-						startActivity(cabecera);
+	       				
+	       				this.finish();
+	       				if(origen_act!=null)
+	       				{
+	       					if(origen_act.equals("1"))
+	       					{
+	       						Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
+	       						startActivity(cabecera);
+	       					}
+	       					else
+	       					{
+	       						this.finish();
+	       					}
+	       					
+	       				}
+	       				else
+	       				{
+	       					this.finish();
+	       				}
 	       			}
 	       			else  {
 	       				showToast(cerrarCompromisoProxy.getResponse().getDescripcion());
