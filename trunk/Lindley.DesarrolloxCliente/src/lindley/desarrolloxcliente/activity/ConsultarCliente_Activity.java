@@ -469,6 +469,7 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					Intent cabecera = new Intent(context, ConsultarCabecera_Activity.class);
+					cabecera.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					context.startActivity(cabecera);
 									
 				}

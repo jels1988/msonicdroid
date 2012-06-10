@@ -98,6 +98,13 @@
                             style="@style/TextViewHead"
                             android:text="" />
                          
+                         <TextView
+                            android:layout_width="50dip"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            style="@style/TextViewHead"
+                            android:text="" />
+                         
                     </TableRow>
                 </TableLayout>
 
