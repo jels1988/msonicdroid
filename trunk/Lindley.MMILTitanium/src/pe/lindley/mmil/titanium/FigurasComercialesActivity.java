@@ -1,6 +1,8 @@
 package pe.lindley.mmil.titanium;
 
 import java.util.List;
+
+import pe.lindley.mmil.titanium.to.FiguraComercialTO;
 import pe.lindley.mmil.titanium.ws.service.ObtenerFiguraComercialProxy;
 
 import android.content.Context;

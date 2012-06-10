@@ -2,9 +2,7 @@ package pe.lindley.mmil.titanium.ws.bean;
 
 import java.util.List;
 
-import pe.lindley.mmil.titanium.FiguraComercialTO;
-
-
+import pe.lindley.mmil.titanium.to.FiguraComercialTO;
 
 import com.google.gson.annotations.SerializedName;
 
