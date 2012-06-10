@@ -107,6 +107,8 @@ public class MyApplication extends RoboApplication {
 		this.clienteTO = clienteTO;
 	}
 	
+	public ClienteTO cliente;
+	public String codigoCliente;
 //	public synchronized lindley.desarrolloxcliente.adapter.AccionTradeTOAdapter getAdapterAccionTrade(List<AccionTradeTO> listaAcciones){
 //		ArrayList<AccionTradeTO> listaAccionTrade = new ArrayList<AccionTradeTO>();
 //		AccionTradeTO accionTradeTO = new AccionTradeTO();

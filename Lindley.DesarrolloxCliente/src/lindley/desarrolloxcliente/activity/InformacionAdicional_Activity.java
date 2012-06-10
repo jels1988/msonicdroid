@@ -79,6 +79,9 @@ public class InformacionAdicional_Activity extends ActivityBase {
 	public static final String TIPO_POSICION = "2";
 	public static final String NO = "N";
 			
+	public static final String ORIGEN = "origen_act";
+	@InjectExtra(ORIGEN) String origen_act;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -507,8 +510,29 @@ public class InformacionAdicional_Activity extends ActivityBase {
 	       			if (status == 0) {
 	       				setAdapterApplication();
 	       				showToast("Los registros se cerrarón satisfactoriamente.");
-	       				Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
-						startActivity(cabecera);
+	       				
+	       				this.finish();
+	       				
+//	       				Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
+//						startActivity(cabecera);
+//	       				finish();
+						if(origen_act!=null)
+	       				{
+	       					if(origen_act.equals("1"))
+	       					{
+	       						Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
+	       						startActivity(cabecera);
+	       					}
+	       					else
+	       					{
+	       						this.finish();
+	       					}
+	       					
+	       				}
+	       				else
+	       				{
+	       					this.finish();
+	       				}
 	       			}
 	       			else  {
 	       				showToast(cerrarCompromisoProxy.getResponse().getDescripcion());
@@ -527,11 +551,33 @@ public class InformacionAdicional_Activity extends ActivityBase {
 	       				setAdapterApplication();
 	       				showToast("Los registros se actualizarón correctamente.");
 	       				
+	       				this.finish();
 	       				Intent intentService = new Intent("lindley.desarrolloxcliente.uploadFileService");
 	       				startService(intentService);
 	       				
-	       				Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.consultarcabecera");
-						startActivity(compromisoOpen);
+	       				this.finish();
+	       				if(origen_act!=null)
+	       				{
+	       					if(origen_act.equals("N"))
+	       					{
+	       						Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
+	       						startActivity(cabecera);
+	       					}
+	       					else if(origen_act.equals("A"))
+	       					{
+	       						finish();	
+	       					}
+	       					else
+	       					{
+	       						finish();
+	       					}
+	       					
+	       				}
+	       				else
+	       				{
+	       					this.finish();
+	       				}
+//	       				finish();
 	       			}
 	       			else  {
 	       				showToast(actualizarCompromisoProxy.getResponse().getDescripcion());

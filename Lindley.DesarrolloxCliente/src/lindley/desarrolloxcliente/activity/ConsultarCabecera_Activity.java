@@ -52,13 +52,15 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
         mActionBar.setHomeLogo(R.drawable.header_logo);
     }
 
-    /*
+    
     @Override
     public void onBackPressed() {
     // check if page 2 is open
-    	Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
-		startActivity(intent);
-    }*/
+    	finish();
+//    	Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
+//		startActivity(intent);
+//    	finish();
+    }
     
     @Override
 	protected void onStart() {
@@ -219,7 +221,8 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 						if(anio == anioActual && mes == mesActual && dia == diaActual)
 						{
 							Intent compromisoOpen = new Intent(context, CompromisoPrincipalOpen_Resumen.class);
-							compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, desarrolloTemp.getCodigo());							
+							compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
+							compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "A");	
 							context.startActivity(compromisoOpen);							
 						}
 						else

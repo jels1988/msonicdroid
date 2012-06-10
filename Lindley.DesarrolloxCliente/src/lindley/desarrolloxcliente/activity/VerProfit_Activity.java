@@ -85,6 +85,13 @@ public class VerProfit_Activity extends ActivityBase {
 		processAsync();
 	}
 
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		finish();
+	}
+	
 	public void selectTheme(int themeSelection) {
 
 		switch (themeSelection) {

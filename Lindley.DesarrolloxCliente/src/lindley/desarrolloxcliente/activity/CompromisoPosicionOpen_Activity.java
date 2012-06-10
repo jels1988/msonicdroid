@@ -634,12 +634,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 					// TODO Auto-generated method stub
 					if((posicionTO.fotoInicial==null)||(posicionTO.fotoInicial.compareTo("")==0)){
 						
-						((CompromisoPosicionOpen_Activity)context).takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionTO);
-						
-						
-												
-						
-						
+						((CompromisoPosicionOpen_Activity)context).takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionTO);						
 						
 						
 					}else{
@@ -664,7 +659,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 								
 								
 								Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
-								intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.fotoInicial);
+								intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.fotoInicial.toString());
 								context.startActivity(intent);
 							}
 							

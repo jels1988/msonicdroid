@@ -78,17 +78,36 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 		txtDni.addTextChangedListener(txtDniTextWatcher);
 		txtRazonSocial.addTextChangedListener(txtRazonSocialTextWatcher);
 		
+		MyApplication application = (MyApplication)contextProvider.get().getApplicationContext();
+		
 		if(codigoCliente!=null){
 			
-			
-			MyApplication application = (MyApplication)contextProvider.get().getApplicationContext();
+			application.codigoCliente = codigoCliente;
 			UsuarioTO usuarioTO = JSONHelper.desSerializar(usuario, UsuarioTO.class);
 			application.setUsuarioTO(usuarioTO);
 		
 			txtCodigo.setText(codigoCliente);
 			processAsync();
 		}
-		
+		else
+		{
+			if(application.cliente != null)
+			{
+				txtCodigo.setText(application.cliente.getCodigo());
+				List<ClienteTO> clientes = new ArrayList<ClienteTO>();
+				clientes.add(application.cliente);
+				adap = new EfficientAdapter(this, clientes);
+				setListAdapter(adap);
+			}
+			else
+			{				
+				UsuarioTO usuarioTO = JSONHelper.desSerializar(usuario, UsuarioTO.class);
+				application.setUsuarioTO(usuarioTO);
+				codigoCliente = application.codigoCliente;
+				txtCodigo.setText(application.codigoCliente);
+				processAsync();
+			}
+		}		
     }
     
 	private TextWatcher txtRucTextWatcher = new TextWatcher() {
@@ -288,6 +307,7 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 				application.setClienteTO(cliente);
 				List<ClienteTO> clientes = new ArrayList<ClienteTO>();
 				clientes.add(cliente);
+				application.cliente = cliente;
 				adap = new EfficientAdapter(this, clientes);
 				setListAdapter(adap);
 			}
@@ -321,9 +341,13 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub	
 				finish();
-				int pid = android.os.Process.myPid(); 
-				android.os.Process.killProcess(pid);
-				//onDestroy();
+//				int pid = android.os.Process.myPid(); 
+//				android.os.Process.killProcess(pid);
+//				onDestroy();
+//				System.exit(0);
+
+//				MyApplication application = (MyApplication)getApplicationContext();
+//				application.cliente = new ClienteTO();
 			}
 			
 		}, confirm_exit_no, new android.content.DialogInterface.OnClickListener() {
@@ -344,7 +368,11 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 				// TODO Auto-generated method stub	
 //				int pid = android.os.Process.myPid(); 
 //				android.os.Process.killProcess(pid);
-				onDestroy();				
+				onDestroy();			
+//				System.exit(0);
+
+//				MyApplication application = (MyApplication)getApplicationContext();
+//				application.cliente = new ClienteTO();
 			}
 			
 		}, confirm_exit_no, new android.content.DialogInterface.OnClickListener() {
@@ -469,7 +497,7 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					Intent cabecera = new Intent(context, ConsultarCabecera_Activity.class);
-					cabecera.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					//cabecera.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					context.startActivity(cabecera);
 									
 				}
