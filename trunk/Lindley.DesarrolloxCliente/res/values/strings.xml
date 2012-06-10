@@ -15,7 +15,7 @@
     <string name="login_activity_txtlogin_empty">Debes ingresar tu usuario</string>
     <string name="login_activity_txtpassword_empty">Debes ingresar tu password</string>
     <string name="oportunidad_activity_boton_guardar">Guardar</string>
-    <string name="consultarcliente_activity_title">Consultar Cliente</string>
+    <string name="consultarcliente_activity_title">ADN - Consultar Cliente</string>
     <string name="consultarcliente_activity_codigo">Código :</string>
     <string name="consultarcliente_activity_codigo_hint">Ingresar Código</string>
     <string name="consultarcliente_activity_ruc">Ruc :</string>
@@ -91,7 +91,7 @@
     <string name="compromiso_quitar">Quitar</string>
     <string name="app_salir">Salir</string>
     <string name="confirm_exit_title">Salir</string>
-    <string name="confirm_exit_message">¿Desea salir de la aplicación?</string>
+    <string name="confirm_exit_message">¿Desea salir de ADN?</string>
     <string name="confirm_exit_yes">SI</string>
     <string name="confirm_exit_no">NO</string>
     <string name="btn_cancelar">Cancelar</string>
