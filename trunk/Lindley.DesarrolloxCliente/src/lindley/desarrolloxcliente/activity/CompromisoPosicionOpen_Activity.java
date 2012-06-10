@@ -644,7 +644,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 						
 					}else{
 
-						MessageBox.showConfirmDialog(context, "Confirmacion", "ÀDesea reemplazar la foto?", "Si",
+						MessageBox.showConfirmDialog(context, "Confirmacion", "¿Desea reemplazar la foto?", "Si",
 								new android.content.DialogInterface.OnClickListener() {
 							
 							public void onClick(DialogInterface dialog, int which) {
