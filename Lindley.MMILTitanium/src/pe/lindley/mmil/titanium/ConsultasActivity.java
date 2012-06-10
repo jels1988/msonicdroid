@@ -115,6 +115,24 @@ public class ConsultasActivity extends ActivityBase {
 		intent.putExtra(ProfitHistoryDatosComercialesActivity.NOMBRE_CDA_KEY, nombre_cda);
 		intent.putExtra(ProfitHistoryDatosComercialesActivity.CODIGO_CLIENTE_KEY, txtCliente.getText().toString());
 		intent.putExtra(ProfitHistoryDatosComercialesActivity.TIPO_KEY, ProfitHistoryDatosComercialesActivity.TIPO_AVANCE_RESUMEN);
-	startActivity(intent);
+		startActivity(intent);
+  }
+  
+  
+  public void btnProfit_onClick(View v){
+	  
+	  String codigoCliente = txtCliente.getText().toString();
+	  	if(codigoCliente==null||codigoCliente.compareTo("")==0){
+	  		txtCliente.setError(txtcodigo_empty);
+	  		return;
+	  	}
+	  
+		Intent intent = new Intent(this, ProfitMensualActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.putExtra(ProfitMensualActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+		intent.putExtra(ProfitMensualActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+		intent.putExtra(ProfitMensualActivity.NOMBRE_CDA_KEY, nombre_cda);
+		intent.putExtra(ProfitMensualActivity.CODIGO_CLIENTE_KEY, txtCliente.getText().toString());
+		startActivity(intent);
   }
 }

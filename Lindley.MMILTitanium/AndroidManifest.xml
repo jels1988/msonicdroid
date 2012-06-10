@@ -45,6 +45,12 @@
         <activity android:name=".ConsultarClienteActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".ProfitHistoryDatosComercialesActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".FigurasComercialesActivity" android:configChanges="keyboardHidden|orientation"></activity>
+        <activity android:name=".ProfitMensualActivity" android:configChanges="keyboardHidden|orientation"></activity>
+        <activity android:name=".HistoryMensualGrafico" android:configChanges="keyboardHidden|orientation"></activity>
+        <activity android:name=".ProfitComparativoMensualGrafico" android:configChanges="keyboardHidden|orientation"></activity>
+        
+        
+        
         
         
     </application>

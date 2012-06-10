@@ -106,12 +106,10 @@
     <string name="consultas_activity_codigo">Código</string>
     <string name="consultas_activity_codigo_hint">Ingresar código Cliente:</string>
     <string name="consultas_activity_consultar">Último Pedido</string>
-    
-    
     <string name="consultas_activity_datos_avance_resumen">Datos Avance Resumen</string>
     <string name="consultas_activity_datos_comerciales">Datos Comerciales</string>
     <string name="consultas_activity_figuras_comerciales">Figuras Comerciales</string>
-    
+    <string name="consultas_activity_figuras_profit">Profit</string>
     <string name="consultas_activity_codigo_empty">Debes ingresar el código.</string>
     <string name="consultas_activity_codigo">Código</string>
     <string name="consultas_activity_nombre">Nombre</string>
@@ -121,9 +119,75 @@
     <string name="consultas_activity_grupo_estado">Estado</string>
     <string name="consultas_activity_grupo_transportista">Transportista</string>
     <string name="consultas_activity_consulta_title">Consulta Cliente</string>
-    
     <string name="profitdatoscomerciales_activity_title_datoscomerciales">Datos Comerciales</string>
     <string name="profitdatoscomerciales_activity_title_avanceresumen">Datos Avance Resumen</string>
     <string name="profitdatoscomerciales_activity_title_figurascomerciales">Figuras Comerciales</string>
+    <string name="profitdatoscomerciales_activity_title_profithistory">Profit History</string>
+    <string name="profitmensual_activity_title">Profit History</string>
+    <string name="profitmensual_activity_tipo">Tipo</string>
+    <string name="profitmensual_activity_anio">Año</string>
+    <string name="profitmensual_activity_mes">Mes</string>
+    <string name="profitmensual_activity_mes_hint">Seleccionar Mes</string>
+    <string name="profitmensual_activity_campo">Campo</string>
+    <string name="profitmensual_activity_campo_hint">Seleccionar Campo</string>
+    <string name="profitmensual_activity_aceptar">Aceptar</string>
+    <string-array name="profit_campo">
+        <item>Cajas Físicas Acumuladas</item>
+        <item>Cajas Unitarias Acumuladas</item>
+        <item>Importe Facturado</item>
+        <item>Importe Utilidad</item>
+    </string-array>
+    <string-array name="profit_tipo">
+        <item>Histórico Mensual</item>
+        <item>Histórico Mensual Comparativo</item>
+        <item>Histórico Semanal</item>
+    </string-array>
+    <string-array name="meses_array">
+        <item>Enero</item>
+        <item>Febrero</item>
+        <item>Marzo</item>
+        <item>Abril</item>
+        <item>Mayo</item>
+        <item>Junio</item>
+        <item>Julio</item>
+        <item>Agosto</item>
+        <item>Septiembre</item>
+        <item>Octubre</item>
+        <item>Noviembre</item>
+        <item>Diciembre</item>
+    </string-array>
+    <string-array name="meses_abrev_array">
+        <item>EN</item>
+        <item>FE</item>
+        <item>MA</item>
+        <item>AB</item>
+        <item>MA</item>
+        <item>JN</item>
+        <item>JL</item>
+        <item>AG</item>
+        <item>SE</item>
+        <item>OC</item>
+        <item>NO</item>
+        <item>DI</item>
+    </string-array>
+    <string-array name="meses_colores_array">
+        <item>#FF0000</item>
+        <item>#04B404</item>
+        <item>#B40486</item>
+        <item>#0404B4</item>
+        <item>#DF013A</item>
+        <item>#424242</item>
+        <item>#00BFFF</item>
+        <item>#FAAC58</item>
+        <item>#0000FF</item>
+        <item>#DF01D7</item>
+        <item>#BDBDBD</item>
+        <item>#151515</item>
+    </string-array>
+    
+    
+    
+    
+    <string name="history_mensual_title">Profit</string>
     
 </resources>

@@ -55,5 +55,15 @@
             		android:focusable="false"
             		android:layout_margin="2dip"
             		/>
+      		
+      		<Button android:text="@string/consultas_activity_figuras_profit"
+               		android:layout_height="wrap_content"
+            		android:layout_width="fill_parent"
+            		android:onClick="btnProfit_onClick"
+            		android:focusable="false"
+            		android:layout_margin="2dip"
+            		/>
+      		
+      		
 
 </LinearLayout>
