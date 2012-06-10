@@ -70,7 +70,7 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 		mActionBar.setSubTitle(cliente.getCodigo() + " - "
 				+ cliente.getNombre());
 		mActionBar.setHomeLogo(R.drawable.header_logo);
-		MessageBox.showConfirmDialog(this, "Posici—n: ",
+		MessageBox.showConfirmDialog(this, "Posicion: ",
 				"", "Activos de Lindley",
 				new android.content.DialogInterface.OnClickListener() {
 					@Override
