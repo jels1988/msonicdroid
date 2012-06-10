@@ -124,7 +124,7 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 	     */
 	    public View getView(final int position, View convertView, ViewGroup parent) {
 	    	DesarrolloClienteTO desarrollo = (DesarrolloClienteTO) getItem(position);
-	    	ViewHolder holder;
+	    	final ViewHolder holder;
 
 	      if (convertView == null) {
 	        convertView = mInflater.inflate(R.layout.cabeceracliente_content, null);
@@ -144,7 +144,8 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 	    	holder.txViewestado = (TextView) convertView.findViewById(R.id.txViewestado);	    	
 	    	holder.txViewVerDetalle = (Button) convertView.findViewById(R.id.txViewVerDetalle);	  
 	    	holder.txViewVerResumen = (Button) convertView.findViewById(R.id.txViewVerResumen);
-	        
+	    	holder.btnEliminar = (Button) convertView.findViewById(R.id.btnEliminar);
+	    	
 	        convertView.setTag(holder);
 	      } else {
 	        // Get the ViewHolder back to get fast access to the TextView
@@ -237,6 +238,59 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 				}
 			});
 	      
+	      holder.btnEliminar.setOnClickListener(new OnClickListener() {
+	    	  DesarrolloClienteTO desarrolloTemp = (DesarrolloClienteTO) getItem(position);
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					//if(position == 0)
+					
+					int anio = 0, anioActual;    
+		    	    int mes = 0, mesActual;  
+		    	    int dia = 0, diaActual;
+		    	    String fecha = desarrolloTemp.getFecha();
+
+					Calendar c = Calendar.getInstance();
+		    	    anioActual = c.get(Calendar.YEAR);        
+			    	mesActual = c.get(Calendar.MONTH);        
+			    	diaActual = c.get(Calendar.DAY_OF_MONTH); 
+			    	
+			    	if(fecha.length() >= 10)
+					{
+			    		dia =  Integer.parseInt(fecha.substring(0, 2));
+				    	mes  =  Integer.parseInt(fecha.substring(3, 5))-1;
+				    	anio  =  Integer.parseInt(fecha.substring(6));
+				    }
+			    	
+			    	application.anio = ActivityUtil.pad(anio);
+					application.mes = ActivityUtil.pad(mes+1);
+					application.dia = ActivityUtil.pad(dia);
+					
+					Log.v("ConsultarCabecera_Activity", anio+"");
+					Log.v("ConsultarCabecera_Activity", anioActual+"");
+					Log.v("ConsultarCabecera_Activity", mes+"");
+					Log.v("ConsultarCabecera_Activity", mesActual+"");
+					Log.v("ConsultarCabecera_Activity", dia+"");
+					Log.v("ConsultarCabecera_Activity", diaActual+"");
+					
+					if(desarrolloTemp.getEstado().equals("A"))
+					{											
+						if(anio == anioActual && mes == mesActual && dia == diaActual)
+						{
+							Log.v("ConsultarCabecera_Activity", "eliminar");
+						}
+						else
+						{				
+							holder.btnEliminar.setEnabled(false);
+						}						
+					}
+					else
+					{
+						holder.btnEliminar.setEnabled(false);
+					}
+				}
+			});
+	      
 	      return convertView;
 	    }
 
@@ -252,6 +306,7 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 	    	Button txViewVerDetalle;	    	
 	    	
 	    	Button txViewVerResumen;
+	    	Button btnEliminar;
 	    	
 	    }
 	    

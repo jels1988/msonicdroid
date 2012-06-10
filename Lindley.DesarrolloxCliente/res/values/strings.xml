@@ -116,4 +116,5 @@
         <item>SI</item>
         <item>NV</item>
     </string-array>
+    <string name="eliminar_evaluacion">Eliminar</string>        
 </resources>
