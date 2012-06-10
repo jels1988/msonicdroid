@@ -106,6 +106,12 @@
     <string name="consultas_activity_codigo">Código</string>
     <string name="consultas_activity_codigo_hint">Ingresar código Cliente:</string>
     <string name="consultas_activity_consultar">Último Pedido</string>
+    
+    
+    <string name="consultas_activity_datos_avance_resumen">Datos Avance Resumen</string>
+    <string name="consultas_activity_datos_comerciales">Datos Comerciales</string>
+    <string name="consultas_activity_figuras_comerciales">Figuras Comerciales</string>
+    
     <string name="consultas_activity_codigo_empty">Debes ingresar el código.</string>
     <string name="consultas_activity_codigo">Código</string>
     <string name="consultas_activity_nombre">Nombre</string>
@@ -115,4 +121,9 @@
     <string name="consultas_activity_grupo_estado">Estado</string>
     <string name="consultas_activity_grupo_transportista">Transportista</string>
     <string name="consultas_activity_consulta_title">Consulta Cliente</string>
+    
+    <string name="profitdatoscomerciales_activity_title_datoscomerciales">Datos Comerciales</string>
+    <string name="profitdatoscomerciales_activity_title_avanceresumen">Datos Avance Resumen</string>
+    <string name="profitdatoscomerciales_activity_title_figurascomerciales">Figuras Comerciales</string>
+    
 </resources>

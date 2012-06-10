@@ -27,8 +27,33 @@
            <Button android:text="@string/consultas_activity_consultar"
                		android:layout_height="wrap_content"
             		android:layout_width="fill_parent"
-            		android:onClick="btnConsultarCliente_onClick"
+            		android:onClick="btnUltimoPedido_onClick"
             		android:focusable="false"
+            		android:layout_margin="2dip"
+            		/>
+
+           <Button android:text="@string/consultas_activity_datos_avance_resumen"
+               		android:layout_height="wrap_content"
+            		android:layout_width="fill_parent"
+            		android:onClick="btnDatosResumen_onClick"
+            		android:focusable="false"
+            		android:layout_margin="2dip"
+            		/>
+           
+           <Button android:text="@string/consultas_activity_datos_comerciales"
+               		android:layout_height="wrap_content"
+            		android:layout_width="fill_parent"
+            		android:onClick="btnDatosComerciales_onClick"
+            		android:focusable="false"
+            		android:layout_margin="2dip"
+            		/>
+           	
+      		<Button android:text="@string/consultas_activity_figuras_comerciales"
+               		android:layout_height="wrap_content"
+            		android:layout_width="fill_parent"
+            		android:onClick="btnFigurasComerciales_onClick"
+            		android:focusable="false"
+            		android:layout_margin="2dip"
             		/>
 
 </LinearLayout>

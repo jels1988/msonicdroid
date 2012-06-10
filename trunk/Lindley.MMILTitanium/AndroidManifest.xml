@@ -43,6 +43,8 @@
         <activity android:name=".ClienteCreditosActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".ConsultasActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".ConsultarClienteActivity" android:configChanges="keyboardHidden|orientation"></activity>
+        <activity android:name=".ProfitHistoryDatosComercialesActivity" android:configChanges="keyboardHidden|orientation"></activity>
+        <activity android:name=".FigurasComercialesActivity" android:configChanges="keyboardHidden|orientation"></activity>
         
         
     </application>

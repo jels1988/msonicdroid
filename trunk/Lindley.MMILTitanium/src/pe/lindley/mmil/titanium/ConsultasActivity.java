@@ -48,7 +48,7 @@ public class ConsultasActivity extends ActivityBase {
   }
   
 
-  public void btnConsultarCliente_onClick(View v){
+  public void btnUltimoPedido_onClick(View v){
 	  	
 	  	String codigoCliente = txtCliente.getText().toString();
 	  	if(codigoCliente==null||codigoCliente.compareTo("")==0){
@@ -63,5 +63,58 @@ public class ConsultasActivity extends ActivityBase {
 		intent.putExtra(ConsultarClienteActivity.NOMBRE_CDA_KEY, nombre_cda);
 		intent.putExtra(ConsultarClienteActivity.CODIGO_CLIENTE_KEY, txtCliente.getText().toString());
     	startActivity(intent);
+  }
+  
+  
+  public void btnFigurasComerciales_onClick(View v){
+	  
+	  String codigoCliente = txtCliente.getText().toString();
+	  	if(codigoCliente==null||codigoCliente.compareTo("")==0){
+	  		txtCliente.setError(txtcodigo_empty);
+	  		return;
+	  	}
+	  
+		Intent intent = new Intent(this, FigurasComercialesActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.putExtra(ProfitHistoryDatosComercialesActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+		intent.putExtra(ProfitHistoryDatosComercialesActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+		intent.putExtra(ProfitHistoryDatosComercialesActivity.NOMBRE_CDA_KEY, nombre_cda);
+		intent.putExtra(ProfitHistoryDatosComercialesActivity.CODIGO_CLIENTE_KEY, txtCliente.getText().toString());
+		
+		startActivity(intent);
+  }
+  
+  public void btnDatosResumen_onClick(View v){
+	  String codigoCliente = txtCliente.getText().toString();
+	  	if(codigoCliente==null||codigoCliente.compareTo("")==0){
+	  		txtCliente.setError(txtcodigo_empty);
+	  		return;
+	  	}
+	  
+		Intent intent = new Intent(this, ProfitHistoryDatosComercialesActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.putExtra(ProfitHistoryDatosComercialesActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+		intent.putExtra(ProfitHistoryDatosComercialesActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+		intent.putExtra(ProfitHistoryDatosComercialesActivity.NOMBRE_CDA_KEY, nombre_cda);
+		intent.putExtra(ProfitHistoryDatosComercialesActivity.CODIGO_CLIENTE_KEY, txtCliente.getText().toString());
+		intent.putExtra(ProfitHistoryDatosComercialesActivity.TIPO_KEY, ProfitHistoryDatosComercialesActivity.TIPO_DATOS_COMERCIALES);
+		startActivity(intent);
+  }
+  
+  public void btnDatosComerciales_onClick(View v){
+	  String codigoCliente = txtCliente.getText().toString();
+	  	if(codigoCliente==null||codigoCliente.compareTo("")==0){
+	  		txtCliente.setError(txtcodigo_empty);
+	  		return;
+	  	}
+	  
+		Intent intent = new Intent(this, ProfitHistoryDatosComercialesActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.putExtra(ProfitHistoryDatosComercialesActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+		intent.putExtra(ProfitHistoryDatosComercialesActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+		intent.putExtra(ProfitHistoryDatosComercialesActivity.NOMBRE_CDA_KEY, nombre_cda);
+		intent.putExtra(ProfitHistoryDatosComercialesActivity.CODIGO_CLIENTE_KEY, txtCliente.getText().toString());
+		intent.putExtra(ProfitHistoryDatosComercialesActivity.TIPO_KEY, ProfitHistoryDatosComercialesActivity.TIPO_AVANCE_RESUMEN);
+	startActivity(intent);
   }
 }
