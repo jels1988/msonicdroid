@@ -16,7 +16,7 @@ import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.ActivityBase;
 
-public class ProfitComparativoMensualGrafico extends ActivityBase {
+public class ProfitSemanalGrafico extends ActivityBase {
 
 	public static final String NOMBRE_CDA_KEY="NOMBRE_CDA";
 	public static final String CODIGO_DEPOSITO_KEY = "CODIGO_DEPOSITO";
@@ -24,9 +24,7 @@ public class ProfitComparativoMensualGrafico extends ActivityBase {
 	public static final String CODIGO_CLIENTE_KEY = "CODIGO_CLIENTE";
 	public static final String TITULOS_KEY="TITULOS";
 	public static final String VALORES_KEY="VALORES";
-	public static final String VALORES_ANTERIOR_KEY="VALORES_ANTERIOR";
 	public static final String CAMPO_KEY="CAMPO_KEY";
-	public static final String ANIO_KEY = "ANIO_KEY";
 	
 	
 	@InjectExtra(CODIGO_SUPERVISOR_KEY) String codigoSupervisor;
@@ -36,8 +34,8 @@ public class ProfitComparativoMensualGrafico extends ActivityBase {
 	@InjectExtra(CAMPO_KEY) String campo;
 	@InjectExtra(TITULOS_KEY) String[] titulo;
 	@InjectExtra(VALORES_KEY) double[] valores;
-	@InjectExtra(VALORES_ANTERIOR_KEY) double[] valores_anterior;
-	@InjectExtra(ANIO_KEY) int anio;
+	
+	
 	
 	
 	@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
@@ -54,7 +52,7 @@ public class ProfitComparativoMensualGrafico extends ActivityBase {
 	        setContentView(R.layout.tablerro_grafico);
 	        
 	        mActionBar.setHomeLogo(R.drawable.header_logo);
-	        mActionBar.setTitle(R.string.history_comparativo_title);
+	        mActionBar.setTitle(R.string.history_semanal_title);
 	        mActionBar.setSubTitle(codigoCliente + " / " + campo);
 	        
 	        chart = new TChart(this);
@@ -69,30 +67,19 @@ public class ProfitComparativoMensualGrafico extends ActivityBase {
 			bar.getMarks().setTransparent(true);
 			bar.getMarks().getFont().setColor(Color.yellow);
 			bar.getMarks().getFont().setSize(13);
-			bar.setColor(Color.fromCode("#FF0000"));
-			bar.setTitle(String.valueOf(anio));
+			//bar.setColor(Color.fromCode("#FF0000"));
+			bar.setTitle("Esperado");
 			
-			
-			Bar3D bar2 = new Bar3D(chart.getChart());
-			bar2.setMarksLocation(MarksLocation.Center);
-			bar2.setMarksOnBar(true);
-			bar2.setMarksLocation(MarksLocation.Center);
-			bar2.getMarks().setStyle(MarksStyle.VALUE);
-			bar2.getMarks().setTransparent(true);
-			bar2.getMarks().getFont().setColor(Color.yellow);
-			bar2.getMarks().getFont().setSize(13);
-			bar2.setColor(Color.fromCode("#6d1e7e"));
-			bar2.setTitle(String.valueOf(anio-1));
-			
+			String[] colores = getResources().getStringArray(R.array.meses_colores_array);
+
 			for (int i = 0; i < titulo.length; i++) {
-				bar.add(valores[i],titulo[i]);
-				bar2.add(valores_anterior[i]);
+				bar.add(valores[i],titulo[i],Color.fromCode(colores[i]));
 			}
 			
 			
 			chart.getAspect().setView3D(true);
 		      
-		      chart.getPanel().setColor(Color.silver);
+			chart.getPanel().setColor(Color.silver);
 		      chart.getWalls().setVisible(false);
 		      chart.getAxes().getLeft().getLabels().getFont().setColor(Color.BLACK);
 		      chart.getAxes().getBottom().getLabels().getFont().setColor(Color.BLACK);
@@ -106,7 +93,7 @@ public class ProfitComparativoMensualGrafico extends ActivityBase {
 		      chart.getAxes().getBottom().getGrid().setVisible(true);
 		      
 		      
-			chart.getLegend().setVisible(true);
+			chart.getLegend().setVisible(false);
 			chart.getLegend().setAlignment(LegendAlignment.BOTTOM);
 			//chart.getHeader().setText(this.getResources().getString(R.string.tablero_activity_title));
 			chart.getHeader().setVisible(false);

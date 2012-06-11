@@ -14,6 +14,8 @@ import roboguice.inject.InjectView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -59,7 +61,7 @@ public class ProfitMensualActivity extends ActivityBase {
 			
 	      mActionBar.setHomeLogo(R.drawable.header_logo);
 	      mActionBar.setTitle(R.string.profitmensual_activity_title);
-	      mActionBar.setSubTitle(nombre_cda);
+	      mActionBar.setSubTitle(nombre_cda + " / " + codigoCliente);
 	      
 	      ArrayAdapter<CharSequence> adapterMes = ArrayAdapter.createFromResource(this, R.array.meses_array, android.R.layout.simple_spinner_item);
 	      adapterMes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -68,6 +70,22 @@ public class ProfitMensualActivity extends ActivityBase {
 	      ArrayAdapter<CharSequence> adapterTipo = ArrayAdapter.createFromResource(this, R.array.profit_tipo, android.R.layout.simple_spinner_item);
 	      adapterTipo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	      cboHistoryTipo.setAdapter(adapterTipo);
+	      
+	      cboHistoryTipo.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				executeWS=true;
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+	      });
 	      
 	      ArrayAdapter<CharSequence> adapterCampo = ArrayAdapter.createFromResource(this, R.array.profit_campo, android.R.layout.simple_spinner_item);
 	      adapterCampo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -87,6 +105,21 @@ public class ProfitMensualActivity extends ActivityBase {
 			ArrayAdapter<String> adapterAnios = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,anios);
 			adapterAnios.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			cboHistoryAnio.setAdapter(adapterAnios);
+			cboHistoryAnio.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+				@Override
+				public void onItemSelected(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					// TODO Auto-generated method stub
+					executeWS=true;
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 	}
 
 	
@@ -108,6 +141,7 @@ public class ProfitMensualActivity extends ActivityBase {
 	 		int campoIndex = cboHistoryCampo.getSelectedItemPosition();
 	 		int anio = Integer.parseInt(cboHistoryAnio.getSelectedItem().toString());
 			int tipo = cboHistoryTipo.getSelectedItemPosition();
+	 		int mes = cboHistoryMes.getSelectedItemPosition();
 	 		
 	 		if(tipo==0){
 	 			double[] anioActual = new double[12];
@@ -196,6 +230,51 @@ public class ProfitMensualActivity extends ActivityBase {
 				intent.putExtra(ProfitComparativoMensualGrafico.ANIO_KEY, anio);
 				startActivity(intent);
 	 			
+	 		}else{
+	 			
+	 			double[] anioActual = new double[5];
+	 			String[] tituloSemana = new String[5];
+	 			int index=0;
+	 			
+				for (HistoryDetalleTO data : profitHistoryProxy.getResponse().detalle) {		
+					if (data.mes == mes+1) {
+						
+						tituloSemana[index] = String.valueOf(data.semana) ;
+						
+						
+						switch (campoIndex){
+							case CAJAS_FISICAS_ACUMULADAS:
+								anioActual[index] = data.cajasFacturadas;
+								break;
+							case CAJAS_UNITARIAS_ACUMULADAS:
+								anioActual[index] = data.cajasUnitarias;
+								break;
+							case IMPORTE_FACTURADO:
+								anioActual[index] = data.importeFacturado;
+								break;
+							case IMPORTE_UTILIDAD:
+								anioActual[index] = data.utilidad;
+								break;
+						}
+						
+						index++;
+					}
+					
+				}	
+				
+				
+				Intent intent = new Intent(this,ProfitSemanalGrafico.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra(ProfitSemanalGrafico.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+				intent.putExtra(ProfitSemanalGrafico.CODIGO_DEPOSITO_KEY, codigoCda);
+				intent.putExtra(ProfitSemanalGrafico.NOMBRE_CDA_KEY, nombre_cda);
+				intent.putExtra(ProfitSemanalGrafico.CODIGO_CLIENTE_KEY, codigoCliente);
+				intent.putExtra(ProfitSemanalGrafico.TITULOS_KEY, tituloSemana);
+				intent.putExtra(ProfitSemanalGrafico.VALORES_KEY, anioActual);
+				intent.putExtra(ProfitSemanalGrafico.CAMPO_KEY, campo);
+				
+				startActivity(intent);
+				
 	 		}
 			
 			
