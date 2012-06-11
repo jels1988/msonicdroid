@@ -66,7 +66,7 @@ public class HistoryMensualGrafico extends ActivityBase {
 			bar.setMarksLocation(MarksLocation.End);
 			bar.getMarks().setStyle(MarksStyle.VALUE);
 			bar.getMarks().setTransparent(true);
-			bar.getMarks().getFont().setColor(Color.white);
+			bar.getMarks().getFont().setColor(Color.yellow);
 			bar.getMarks().getFont().setSize(13);
 			//bar.setColor(Color.fromCode("#FF0000"));
 			bar.setTitle("Esperado");
@@ -80,7 +80,7 @@ public class HistoryMensualGrafico extends ActivityBase {
 			
 			chart.getAspect().setView3D(true);
 		      
-		      chart.getPanel().setColor(Color.WHITE);
+			  chart.getPanel().setColor(Color.silver);
 		      chart.getWalls().setVisible(false);
 		      chart.getAxes().getLeft().getLabels().getFont().setColor(Color.BLACK);
 		      chart.getAxes().getBottom().getLabels().getFont().setColor(Color.BLACK);
