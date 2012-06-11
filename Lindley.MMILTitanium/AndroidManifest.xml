@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pe.lindley.mmil.titanium"
-    android:versionCode="5"
-    android:versionName="1.4" >
+    android:versionCode="6"
+    android:versionName="1.5" >
 
  
     <application
@@ -48,6 +48,9 @@
         <activity android:name=".ProfitMensualActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".HistoryMensualGrafico" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".ProfitComparativoMensualGrafico" android:configChanges="keyboardHidden|orientation"></activity>
+        <activity android:name=".ProfitSemanalGrafico" android:configChanges="keyboardHidden|orientation"></activity>
+        
+        
         
         
         
