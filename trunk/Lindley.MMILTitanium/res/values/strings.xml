@@ -184,10 +184,7 @@
         <item>#BDBDBD</item>
         <item>#151515</item>
     </string-array>
-    
-    
-    
-    
     <string name="history_mensual_title">Profit</string>
-    
+    <string name="history_comparativo_title">Profit Mensual Comparativo</string>
+    <string name="history_semanal_title">Profit Semanal</string>
 </resources>
