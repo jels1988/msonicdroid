@@ -62,15 +62,16 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
         mActionBar.setHomeLogo(R.drawable.header_logo);
     }
 
-    
+    /*
     @Override
     public void onBackPressed() {
     // check if page 2 is open
-    	finish();
-//    	Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
-//		startActivity(intent);
+    	//finish();
+    	//Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
+    	//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		//startActivity(intent);
 //    	finish();
-    }
+    }*/
     
     @Override
 	protected void onStart() {

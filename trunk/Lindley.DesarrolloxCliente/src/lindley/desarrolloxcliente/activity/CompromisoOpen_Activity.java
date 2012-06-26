@@ -176,7 +176,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 				posicionAdapterVacio = true;
 				if(posicionAdapterVacio)
 				{
-					showToast("Debe editar valores de la pestaña posición.");
+					showToast("Debe editar valores de la pesta–a posici—n.");
 					return false;
 				}
 			}

@@ -251,19 +251,15 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 				view = inflator.inflate(R.layout.skuprioritario_content, null);
 				final ViewHolder viewHolder = new ViewHolder();
 
-				viewHolder.txViewSKU = (TextView) view
-						.findViewById(R.id.txViewSKU);
-				viewHolder.chkValActual = (Spinner) view
-						.findViewById(R.id.chkValActual);
+				viewHolder.txViewSKU = (TextView) view.findViewById(R.id.txViewSKU);
+				viewHolder.chkValActual = (Spinner) view.findViewById(R.id.chkValActual);
 				
 				viewHolder.chkValActual.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 					@Override
-					public void onItemSelected(AdapterView<?> arg0, View arg1,
-							int arg2, long arg3) {
+					public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
 						// TODO Auto-generated method stub
-						SKUPresentacionTO skuPresentacion = (SKUPresentacionTO) viewHolder.chkValActual
-								.getTag();
+						SKUPresentacionTO skuPresentacion = (SKUPresentacionTO) viewHolder.chkValActual.getTag();
 						if(arg2==0){
 							skuPresentacion.valorActual = RESPUESTA_NO;
 						}else if(arg2==1){
@@ -280,14 +276,16 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 					}
 				});
 
+				ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(application.getApplicationContext(),R.array.sku_estados,android.R.layout.simple_spinner_item);
+				adap.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+				viewHolder.chkValActual.setAdapter(adap);
+				
 				view.setTag(viewHolder);
-				viewHolder.chkValActual.setTag(this.skuPresentaciones
-						.get(position));
+				viewHolder.chkValActual.setTag(this.skuPresentaciones.get(position));
 
 			} else {
 				view = convertView;
-				((ViewHolder) view.getTag()).chkValActual
-						.setTag(this.skuPresentaciones.get(position));
+				((ViewHolder) view.getTag()).chkValActual.setTag(this.skuPresentaciones.get(position));
 			}
 
 			ViewHolder holder = (ViewHolder) view.getTag();
@@ -295,9 +293,7 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 
 			holder.txViewSKU.setText(skuPresentacion.getDescripcionSKU());
 			
-			ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(application.getApplicationContext(),R.array.sku_estados,android.R.layout.simple_spinner_item);
-			adap.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-			holder.chkValActual.setAdapter(adap);
+			
 		      
 			if (this.skuPresentaciones.get(position).valorActual.equalsIgnoreCase(RESPUESTA_NO)) {
 				holder.chkValActual.setSelection(0);

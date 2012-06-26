@@ -3,7 +3,7 @@
     <!--desa: 0GnqeXeroFjywL9df0WrJpTEwFsWxFYCGqDe6xw-->
     <!--prod: 0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A-->
     <string name="app_name">Desarrollo por Cliente</string>
-    <string name="apikey">0GnqeXeroFjywL9df0WrJpTEwFsWxFYCGqDe6xw</string>
+    <string name="apikey">0GnqeXeroFjx1WO86oHtJzekPzOFGJhZmKYDe4A</string>
     <string name="login_activity_title">Login</string>
     <string name="login_activity_ingresar">Ingresar</string>
     <string name="login_activity_usuario">Usuario :</string>
@@ -116,5 +116,5 @@
         <item>SI</item>
         <item>NV</item>
     </string-array>
-    <string name="eliminar_evaluacion">Eliminar</string>        
+    <string name="eliminar_evaluacion">Eliminar</string>
 </resources>
