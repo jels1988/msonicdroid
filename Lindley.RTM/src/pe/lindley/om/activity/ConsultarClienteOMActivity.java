@@ -210,10 +210,10 @@ public View getView(final int position, View convertView,
 	
 	if(clienteTO.getClubExito()!=null && clienteTO.getClubExito().compareTo("S")==0){
 		//convertView.setBackgroundResource(R.drawable.club_exito);
-		holder.btn_clubexito.setVisibility(View.VISIBLE);
+		//holder.btn_clubexito.setVisibility(View.VISIBLE);
 		holder.imgClubExito.setVisibility(View.VISIBLE);
 	}else{
-		holder.btn_clubexito.setVisibility(View.GONE);
+		//holder.btn_clubexito.setVisibility(View.GONE);
 		holder.imgClubExito.setVisibility(View.GONE);
 	}
 	
