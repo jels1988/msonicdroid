@@ -79,6 +79,12 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 				viewHolder.txViewSKU = (TextView) view.findViewById(R.id.txViewSKU);
 				viewHolder.chkValActual = (TextView) view.findViewById(R.id.chkValActual);
 				viewHolder.chkValComp = (Spinner) view.findViewById(R.id.chkValComp);
+				
+				ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(application.getApplicationContext(),R.array.confirmacion,android.R.layout.simple_spinner_item);
+				adap.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+				viewHolder.chkValComp.setAdapter(adap);
+				
+				
 						    	
 				viewHolder.chkValComp.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -109,9 +115,7 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 			}
 			
 			ViewHolder holder = (ViewHolder) view.getTag();
-			ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(application.getApplicationContext(),R.array.confirmacion,android.R.layout.simple_spinner_item);
-			adap.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-			holder.chkValComp.setAdapter(adap);
+			
 						 
 			holder.txViewSKU.setText(this.skuPresentaciones.get(position).descripcionSKU);
 						
