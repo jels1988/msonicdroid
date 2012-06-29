@@ -10,4 +10,8 @@ public class ResumenValueTO {
 	@SerializedName("val")
 	public String valor;
 	
+	@SerializedName("val2")
+	public String valor2;
+	
+	
 }

@@ -140,6 +140,7 @@ public class ConsultarResumen_Activity extends ListActivityBase {
 	        holder = new ViewHolder();
 	        holder.txtId = (TextView) convertView.findViewById(R.id.txtId);
 	        holder.txtValor = (TextView) convertView.findViewById(R.id.txtValor);
+	        holder.txtValor2 = (TextView) convertView.findViewById(R.id.txtValor2);
 	        
 	        convertView.setTag(holder);
 	      } else {
@@ -151,6 +152,7 @@ public class ConsultarResumen_Activity extends ListActivityBase {
 	      
 	      holder.txtId.setText(historyValueTO.descripcion);
 	      holder.txtValor.setText(historyValueTO.valor);
+	      holder.txtValor2.setText(historyValueTO.valor2);
 	      
 	      return convertView;
 	    }
@@ -158,6 +160,7 @@ public class ConsultarResumen_Activity extends ListActivityBase {
 	    static class ViewHolder {
 	    	TextView txtId;
 	    	TextView txtValor;
+	    	TextView txtValor2;
 	    }
 
 	    @Override

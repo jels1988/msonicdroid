@@ -5,7 +5,8 @@
   android:orientation="horizontal"
   android:layout_height="match_parent">
   
-  <TextView android:id="@+id/txtId" android:layout_height="wrap_content" android:layout_weight="2" android:layout_width="fill_parent" android:text="1"></TextView>
-  <TextView android:id="@+id/txtValor" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="fill_parent" android:text="2"></TextView>
+  <TextView android:id="@+id/txtId" android:layout_height="wrap_content" android:layout_weight="2" android:layout_width="0dip" android:text="1"></TextView>
+  <TextView android:id="@+id/txtValor" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="0dip" android:text="2"></TextView>
+  <TextView android:id="@+id/txtValor2" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="0dip" android:text="2"></TextView>
   
 </LinearLayout>
