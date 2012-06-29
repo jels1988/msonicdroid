@@ -27,12 +27,13 @@
         <RadioGroup
             android:id="@+id/radGrSS"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/radSSNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingRight="10dip"
                 android:checked="true"
                 android:text="NO" />
 
@@ -72,13 +73,14 @@
         <RadioGroup
             android:id="@+id/radGrMS"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/radMSNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
+                android:paddingRight="10dip"
                 android:text="NO" />
 
             <RadioButton

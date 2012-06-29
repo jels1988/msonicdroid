@@ -17,7 +17,9 @@ import net.msonic.lib.MessageBox;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -134,6 +136,7 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 
 	@Override
 	public void onBackPressed() {
+		
 		MessageBox.showConfirmDialog(this, confirm_atras_title,
 				confirm_atras_message, confirm_atras_yes,
 				new android.content.DialogInterface.OnClickListener() {
@@ -162,23 +165,36 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 	}
 
 	public void btnGuardar_click(View view) {
-		List<SKUPresentacionTO> skuPresentaciones = application.guardarSKUPresentacion;
-
-		if (skuPresentaciones == null) {
-			skuPresentaciones = new ArrayList<SKUPresentacionTO>();
-		} else {
-			skuPresentaciones.clear();
-		}
-
-		EfficientAdapter adap = (EfficientAdapter) getListAdapter();
-
-		if (adap == null) {
-			adap = new EfficientAdapter(this,
-					new ArrayList<SKUPresentacionTO>());
-		}
 		
-		application.guardarSKUPresentacion = adap.skuPresentaciones;
-		processAsync(ACCION_GUARDAR);
+		final Activity ctx=this;
+		
+		MessageBox.showConfirmDialog(this, "Confirmar", "ÀDesea guardar datos seleccionados?", "Si", new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				List<SKUPresentacionTO> skuPresentaciones = application.guardarSKUPresentacion;
+
+				if (skuPresentaciones == null) {
+					skuPresentaciones = new ArrayList<SKUPresentacionTO>();
+				} else {
+					skuPresentaciones.clear();
+				}
+
+				EfficientAdapter adap = (EfficientAdapter) getListAdapter();
+
+				if (adap == null) {
+					adap = new EfficientAdapter(ctx,new ArrayList<SKUPresentacionTO>());
+				}
+				
+				application.guardarSKUPresentacion = adap.skuPresentaciones;
+				processAsync(ACCION_GUARDAR);
+			}
+		}, "No",null);
+		
+		
+		
+		
 	}
 
 	@Override
