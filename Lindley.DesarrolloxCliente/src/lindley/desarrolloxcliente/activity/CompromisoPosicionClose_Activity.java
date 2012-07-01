@@ -196,6 +196,7 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 					{
 						Intent intent = new Intent("lindley.desarrolloxcliente.webviewverfoto");
 						intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.fotoInicial);
+						intent.putExtra(WebViewVerFoto_Activity.TITULO_FOTO, "Foto Inicial Compromiso.");
 						context.startActivity(intent);
 					}
 					else
@@ -220,6 +221,7 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 					{
 						Intent intent = new Intent("lindley.desarrolloxcliente.webviewverfoto");
 						intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionTO.fotoFinal);
+						intent.putExtra(WebViewVerFoto_Activity.TITULO_FOTO, "Foto Final Cumplimiento.");
 						context.startActivity(intent);
 					}
 					else

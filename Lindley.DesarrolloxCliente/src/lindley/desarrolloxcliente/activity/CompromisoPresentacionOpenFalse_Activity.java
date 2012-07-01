@@ -128,11 +128,12 @@ public class CompromisoPresentacionOpenFalse_Activity extends ListActivityBase {
 			
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub	
-				finish();
-				/*
-				Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
+				
+				
+				Intent intent = new Intent("lindley.desarrolloxcliente.consultarcabecera");
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
-				*/
+				
 			}
 			
 		}, confirm_cancelar_no, new android.content.DialogInterface.OnClickListener() {
@@ -276,9 +277,19 @@ public class CompromisoPresentacionOpenFalse_Activity extends ListActivityBase {
        			int status = cerrarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
        				setAdapterApplication();
+       				
+       				Intent intentService = new Intent("lindley.desarrolloxcliente.uploadFileService");
+	       			startService(intentService);
+
+
+       				
        				showToast("Los registros se cerraron satisfactoriamente.");
-       				Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
+       				
+       				Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");
+       				cabecera.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(cabecera);
+					
+					finish();
        			}
        			else  {
        				showToast(cerrarCompromisoProxy.getResponse().getDescripcion());

@@ -78,10 +78,20 @@ public class FotoBLL {
 	}
 	
 	public ArrayList<FileTO> Listar(){
-		ArrayList<FileTO> detalles;
-		dbHelper.openDataBase();
-		detalles = fotoDAO.listar();
-		dbHelper.close();
+		
+		ArrayList<FileTO> detalles=null;
+		
+		try{
+			dbHelper.openDataBase();
+			detalles = fotoDAO.listar();
+		}catch(Exception e){
+			Log.e(TAG_LOG, "Listar", e);
+		}finally{
+			dbHelper.close();
+		}
+		
+		
+		
 		return detalles;
 	}
 }

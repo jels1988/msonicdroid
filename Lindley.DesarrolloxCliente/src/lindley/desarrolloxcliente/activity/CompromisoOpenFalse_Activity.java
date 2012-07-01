@@ -98,10 +98,11 @@ public class CompromisoOpenFalse_Activity extends ListActivityBase {
 			
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub	
-				/*
-				Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
-				startActivity(intent);
-				*/
+				
+				Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");
+				cabecera.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(cabecera);
+				
 			}
 			
 		}, confirm_cancelar_no, new android.content.DialogInterface.OnClickListener() {
@@ -139,7 +140,7 @@ public class CompromisoOpenFalse_Activity extends ListActivityBase {
 				openAdapterVacio = true;
 				if(openAdapterVacio)
 				{
-					showToast("Debe editar valores de la pestaña inventario.");
+					showToast("Debe editar valores de la pesta–a inventario.");
 					return false;
 				}
 			}
@@ -149,7 +150,7 @@ public class CompromisoOpenFalse_Activity extends ListActivityBase {
 				posicionAdapterVacio = true;
 				if(posicionAdapterVacio)
 				{
-					showToast("Debe editar valores de la pestaña posición.");
+					showToast("Debe editar valores de la pesta–a posicion.");
 					return false;
 				}
 			}
@@ -159,7 +160,7 @@ public class CompromisoOpenFalse_Activity extends ListActivityBase {
 				presentacionAdapterVacio = true;
 				if(presentacionAdapterVacio)
 				{
-					showToast("Debe editar valores de la pestaña presentación.");
+					showToast("Debe editar valores de la pesta–a presentacion.");
 					return false;
 				}
 			}
@@ -275,9 +276,16 @@ public class CompromisoOpenFalse_Activity extends ListActivityBase {
     		boolean isExito = cerrarCompromisoProxy.isExito();
        		if (isExito) {
        			int status = cerrarCompromisoProxy.getResponse().getStatus();
+       			
+       			
+       			
        			if (status == 0) {
+       				
+       				Intent servicioFoto = new Intent("lindley.desarrolloxcliente.uploadFileService");
+       				startService(servicioFoto);
+       				
        				setAdapterApplication();
-       				showToast("Los registros se cerrarón satisfactoriamente.");
+       				showToast("Los registros se cerraron satisfactoriamente.");
        				Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
 					startActivity(cabecera);
        			}

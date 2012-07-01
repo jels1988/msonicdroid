@@ -45,7 +45,8 @@ public class CompromisoClose_Activity extends ListActivityBase {
     public void onCreate(Bundle savedInstanceState) {
     	inicializarRecursos();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.compromisoclose_activity);        
+        setContentView(R.layout.compromisoclose_activity);      
+        
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
 		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());

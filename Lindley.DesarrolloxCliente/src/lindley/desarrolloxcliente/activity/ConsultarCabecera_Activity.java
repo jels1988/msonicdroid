@@ -17,7 +17,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,6 +35,7 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarCabeceraProxy ConsultarCabeceraProxy;
 	@Inject ActualizarEstadoProxy actualizarEstadoProxy;
+	
 	private EfficientAdapter adap;
 	ClienteTO cliente;
 	public static MyApplication application;
@@ -43,7 +43,9 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
 	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
 	
+	
 	public static final int ACCION_ELIMINAR = 1;
+	
 	
 	public static String codigoElimnar;
 	
@@ -62,16 +64,16 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
         mActionBar.setHomeLogo(R.drawable.header_logo);
     }
 
-    /*
+    
     @Override
     public void onBackPressed() {
     // check if page 2 is open
     	//finish();
-    	//Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
-    	//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		//startActivity(intent);
+    	Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
+    	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
 //    	finish();
-    }*/
+    }
     
     @Override
 	protected void onStart() {
@@ -185,7 +187,9 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 	     *      android.view.ViewGroup)
 	     */
 	    public View getView(final int position, View convertView, ViewGroup parent) {
+	    	
 	    	DesarrolloClienteTO desarrollo = (DesarrolloClienteTO) getItem(position);
+	    	
 	    	final ViewHolder holder;
 
 	      if (convertView == null) {
@@ -214,6 +218,32 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 	        // and the ImageView.
 	        holder = (ViewHolder) convertView.getTag();
 	      }
+	      
+	      
+	      int anio = 0, anioActual;    
+  	      int mes = 0, mesActual;  
+  	      int dia = 0, diaActual;
+  	      String fecha = desarrollo.getFecha();
+  	     
+  	      
+		  Calendar c = Calendar.getInstance();
+		  anioActual = c.get(Calendar.YEAR);        
+	      mesActual = c.get(Calendar.MONTH) + 1;        
+	      diaActual = c.get(Calendar.DAY_OF_MONTH); 
+	      dia =  Integer.parseInt(fecha.substring(0, 2));
+    	  mes  =  Integer.parseInt(fecha.substring(3, 5));
+    	  anio  =  Integer.parseInt(fecha.substring(6));
+		    
+	    	
+	    	if(!(anio == anioActual && mes == mesActual && dia == diaActual))
+	    	{
+	    		holder.btnEliminar.setVisibility(View.INVISIBLE);
+	    	}else{
+	    		holder.btnEliminar.setVisibility(View.VISIBLE);
+	    	}
+	    	
+	      
+	      
 	      
 	      holder.txViewCodigo.setText(desarrollo.getCodigo());
 	      holder.txViewFecha.setText(desarrollo.getFecha());
@@ -269,12 +299,14 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 					application.mes = ActivityUtil.pad(mes+1);
 					application.dia = ActivityUtil.pad(dia);
 					
+					/*
 					Log.v("ConsultarCabecera_Activity", anio+"");
 					Log.v("ConsultarCabecera_Activity", anioActual+"");
 					Log.v("ConsultarCabecera_Activity", mes+"");
 					Log.v("ConsultarCabecera_Activity", mesActual+"");
 					Log.v("ConsultarCabecera_Activity", dia+"");
-					Log.v("ConsultarCabecera_Activity", diaActual+"");
+					Log.v("ConsultarCabecera_Activity", diaActual+"");*/
+					
 					
 					if(desarrolloTemp.getEstado().equals("A"))
 					{											
@@ -301,6 +333,11 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 				}
 			});
 	      
+	      
+	      
+	    	
+	    	
+	    	  
 	      holder.btnEliminar.setOnClickListener(new OnClickListener() {
 	    	  DesarrolloClienteTO desarrolloTemp = (DesarrolloClienteTO) getItem(position);
 				@Override
@@ -329,18 +366,20 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 					application.mes = ActivityUtil.pad(mes+1);
 					application.dia = ActivityUtil.pad(dia);
 					
+					/*
 					Log.v("ConsultarCabecera_Activity", anio+"");
 					Log.v("ConsultarCabecera_Activity", anioActual+"");
 					Log.v("ConsultarCabecera_Activity", mes+"");
 					Log.v("ConsultarCabecera_Activity", mesActual+"");
 					Log.v("ConsultarCabecera_Activity", dia+"");
 					Log.v("ConsultarCabecera_Activity", diaActual+"");
+					*/
 					
 					if(desarrolloTemp.getEstado().equals("A"))
 					{											
 						if(anio == anioActual && mes == mesActual && dia == diaActual)
 						{	
-							MessageBox.showConfirmDialog(context, "Confirmacion", "¿Desea eliminar el registro?", "Si",
+							MessageBox.showConfirmDialog(context, "Confirmacion", "ÀDesea eliminar el registro?", "Si",
 									new android.content.DialogInterface.OnClickListener() {
 								
 								public void onClick(DialogInterface dialog, int which) {
