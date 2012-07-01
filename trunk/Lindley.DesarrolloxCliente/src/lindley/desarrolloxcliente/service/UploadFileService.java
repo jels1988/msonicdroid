@@ -44,7 +44,7 @@ public class UploadFileService extends RoboService {
 		super.onStart(intent, startId);
 		
 
-		UploadFileTask uploadFileTask = new UploadFileTask(fileUploadProxy, fotoBLL);
+		UploadFileTask uploadFileTask = new UploadFileTask(getApplicationContext(), fileUploadProxy, fotoBLL);
 		final Executor executor = Executors.newSingleThreadExecutor();
 		executor.execute( uploadFileTask.future() );
 		

@@ -9,6 +9,7 @@ import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarClienteProxy;
+import lindley.desarrolloxcliente.ws.service.ConsultarEvaluacionesAbiertasProxy;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
@@ -57,6 +58,9 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 	@InjectResource(R.string.confirm_exit_message)  String confirm_exit_message;
 	@InjectResource(R.string.confirm_exit_yes) 		String confirm_exit_yes;
 	@InjectResource(R.string.confirm_exit_no) 		String confirm_exit_no;
+	
+	@Inject ConsultarEvaluacionesAbiertasProxy consultarEvaluacionesAbiertasProxy;
+	public static final int ACCION_CONSULTAR = 2;
 	
 	private EfficientAdapter adap;
 	
@@ -333,6 +337,43 @@ public class ConsultarCliente_Activity extends ListActivityBase {
     	System.exit(1);
     }
     
+    private int registros_abiertos=-1;
+    
+	@Override
+	protected void process(int accion) {
+		// TODO Auto-generated method stub
+		if(accion==ACCION_CONSULTAR){
+			consultarEvaluacionesAbiertasProxy.codigoCliente = codigoCliente;
+			consultarEvaluacionesAbiertasProxy.execute();
+		}
+	}
+	
+	@Override
+	protected void processOk(int accion) {
+		// TODO Auto-generated method stub
+		if(accion==ACCION_CONSULTAR){
+			boolean isExito = consultarEvaluacionesAbiertasProxy.isExito();
+			if (isExito) {
+				int status = consultarEvaluacionesAbiertasProxy.getResponse().getStatus();
+				if (status == 0) {
+					registros_abiertos=consultarEvaluacionesAbiertasProxy.getResponse().EvaluacionesAbiertas;
+					
+					super.processOk();
+					
+					if(registros_abiertos<=0){
+						Intent oportunidad = new Intent(this, ConsultarOportunidad_Activity.class);
+						startActivity(oportunidad);
+					}else{
+						showToast("El cliente tiene una evaluaci˜n abierta.");
+					}
+					
+				}else{
+					super.processError();
+				}
+			}
+		}
+	}
+	
     @Override
     public void onBackPressed() {
     	// TODO Auto-generated method stub
@@ -389,10 +430,10 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 	public static class EfficientAdapter extends BaseAdapter implements
 			Filterable {
 		private LayoutInflater mInflater;
-		private Context context;
+		private ConsultarCliente_Activity context;
 		private List<ClienteTO> clientes;
 
-		public EfficientAdapter(Context context, List<ClienteTO> clientes) {
+		public EfficientAdapter(ConsultarCliente_Activity context, List<ClienteTO> clientes) {
 			// Cache the LayoutInflate to avoid asking for a new one each time.
 			mInflater = LayoutInflater.from(context);
 			this.context = context;
@@ -508,8 +549,7 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					Intent oportunidad = new Intent(context, ConsultarOportunidad_Activity.class);
-					context.startActivity(oportunidad);
+					context.processAsync(ACCION_CONSULTAR);
 					
 				}
 			});

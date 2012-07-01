@@ -10,6 +10,7 @@ import lindley.desarrolloxcliente.ws.service.FileUploadProxy;
 
 
 import roboguice.util.RoboAsyncTask;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
 
@@ -17,8 +18,12 @@ public class UploadFileTask extends RoboAsyncTask<String> {
 
 	  private FileUploadProxy fileUploadProxy;
 	  private FotoBLL fotoBLL;
+	  private Context ctx;
+	
 	  
-	  public UploadFileTask(FileUploadProxy fileUploadProxy,FotoBLL fotoBLL){
+	  public UploadFileTask(Context ctx,FileUploadProxy fileUploadProxy,FotoBLL fotoBLL){
+		  super(ctx);
+		this.ctx=ctx;
 		this.fileUploadProxy = fileUploadProxy;
 		this.fotoBLL=fotoBLL;
 	  }
@@ -32,7 +37,8 @@ public class UploadFileTask extends RoboAsyncTask<String> {
 		super.onSuccess(t);
 		
 		Intent intentService = new Intent("lindley.desarrolloxcliente.uploadFileService");
-		contextProvider.get().stopService(intentService);
+		ctx.stopService(intentService);
+		//contextProvider.get().stopService(intentService);
       
 	}
 
@@ -42,7 +48,8 @@ public class UploadFileTask extends RoboAsyncTask<String> {
 	public String call() throws Exception {
 		// TODO Auto-generated method stub
 		
-		File path = new File( Environment.getExternalStorageDirectory(), contextProvider.get().getPackageName());
+		File path = new File( Environment.getExternalStorageDirectory(), getContext().getPackageName());
+		//File path = new File( Environment.getExternalStorageDirectory(), contextProvider.get().getPackageName());
 		ArrayList<FileTO> archivos = fotoBLL.Listar();
 		
 		if(archivos!=null && archivos.size()>=0){

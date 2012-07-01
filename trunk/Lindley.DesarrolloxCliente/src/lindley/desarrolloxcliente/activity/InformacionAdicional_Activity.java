@@ -266,10 +266,11 @@ public class InformacionAdicional_Activity extends ActivityBase {
 			
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub	
-				/*
-				Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
-				startActivity(intent);*/
-				finish();
+				
+				Intent intent = new Intent("lindley.desarrolloxcliente.consultarcabecera");
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+				
 			}
 			
 		}, confirm_cancelar_no, new android.content.DialogInterface.OnClickListener() {
@@ -509,7 +510,7 @@ public class InformacionAdicional_Activity extends ActivityBase {
 	       			int status = cerrarCompromisoProxy.getResponse().getStatus();
 	       			if (status == 0) {
 	       				setAdapterApplication();
-	       				showToast("Los registros se cerrarón satisfactoriamente.");
+	       				showToast("Los registros se cerraron satisfactoriamente.");
 	       				
 	       				this.finish();
 	       				
@@ -549,7 +550,7 @@ public class InformacionAdicional_Activity extends ActivityBase {
 	       			int status = actualizarCompromisoProxy.getResponse().getStatus();
 	       			if (status == 0) {
 	       				setAdapterApplication();
-	       				showToast("Los registros se actualizarón correctamente.");
+	       				showToast("Los registros se actualizaron correctamente.");
 	       				
 	       				this.finish();
 	       				Intent intentService = new Intent("lindley.desarrolloxcliente.uploadFileService");

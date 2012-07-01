@@ -2,15 +2,19 @@ package lindley.desarrolloxcliente;
 import java.util.ArrayList;
 import java.util.List;
 
+import roboguice.RoboGuice;
+
 import net.msonic.lib.DBHelper;
 import net.msonic.lib.DBHelperProvider;
 
 
+import android.app.Application;
 import android.widget.ArrayAdapter;
 
 import com.google.inject.Inject;
 import com.google.inject.Module;
 import com.google.inject.Singleton;
+import com.google.inject.util.Modules;
 
 import lindley.desarrolloxcliente.activity.CompromisoOpenFalse_Activity;
 import lindley.desarrolloxcliente.activity.CompromisoOpen_Activity;
@@ -32,28 +36,18 @@ import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
-import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
-import lindley.desarrolloxcliente.ws.service.ActualizarEstadoProxy;
-import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
-import lindley.desarrolloxcliente.ws.service.ConsultarArticulosCanjeProxy;
-import lindley.desarrolloxcliente.ws.service.ConsultarCompromisoProxy;
-import lindley.desarrolloxcliente.ws.service.ConsultarFotoExitoProxy;
-import lindley.desarrolloxcliente.ws.service.ConsultarInformacionComboProxy;
-import lindley.desarrolloxcliente.ws.service.ConsultarNuevaOportunidadProxy;
-import lindley.desarrolloxcliente.ws.service.ConsultarOportunidadProxy;
-import lindley.desarrolloxcliente.ws.service.ConsultarProfitProxy;
-import lindley.desarrolloxcliente.ws.service.ConsultarResumenProxy;
-import lindley.desarrolloxcliente.ws.service.ConsultarSKUPrioritarioProxy;
-import lindley.desarrolloxcliente.ws.service.GuardarDesarrolloProxy;
-import lindley.desarrolloxcliente.ws.service.GuardarNuevoDesarrolloProxy;
-import lindley.desarrolloxcliente.ws.service.LoginProxy;
-import lindley.desarrolloxcliente.ws.service.ConsultarClienteProxy;
-import lindley.desarrolloxcliente.ws.service.ConsultarCabeceraProxy;
-import roboguice.application.RoboApplication;
-import roboguice.config.AbstractAndroidModule;
 
-public class MyApplication extends RoboApplication {
+//import roboguice.application.RoboApplication;
+//import roboguice.config.AbstractAndroidModule;
 
+public class MyApplication extends Application {
+
+		/*
+	 @Override
+	    public void onCreate() {
+	        RoboGuice.setBaseApplicationInjector(this, RoboGuice.DEFAULT_STAGE, Modules.override(RoboGuice.newDefaultRoboModule(this)).with(new MyCustomModule()));
+	    }*/
+	
 	@Inject FotoBLL fotoBLL;
 	@Inject FotoDAO fotoDAO; 
 	
@@ -140,6 +134,7 @@ public class MyApplication extends RoboApplication {
     //holder.cboAccTrade.setAdapter(adapAccionTradeTO);
     
 	
+	/*
 	@Override
 	protected void addApplicationModules(List<Module> modules){	
 		
@@ -148,6 +143,7 @@ public class MyApplication extends RoboApplication {
 			protected void configure() {
 				// TODO Auto-generated method stub
 				bind(DBHelper.class).toProvider(DBHelperProvider.class).in(Singleton.class);
+				
 				
 				bind(LoginProxy.class).in(Singleton.class);				
 				bind(ConsultarClienteProxy.class).in(Singleton.class);
@@ -165,13 +161,12 @@ public class MyApplication extends RoboApplication {
 				bind(ConsultarNuevaOportunidadProxy.class).in(Singleton.class);
 				bind(ConsultarInformacionComboProxy.class).in(Singleton.class);
 				bind(ConsultarResumenProxy.class).in(Singleton.class);
-				
 				bind(ActualizarEstadoProxy.class).in(Singleton.class);
 								
 				bind(FotoBLL.class).in(Singleton.class);
 				bind(FotoDAO.class).in(Singleton.class);
 			}});
-	}
+	}*/
 
 	public ArrayList<OportunidadTO> getOportunidadesDesarrollador() {
 		return oportunidadesDesarrollador;

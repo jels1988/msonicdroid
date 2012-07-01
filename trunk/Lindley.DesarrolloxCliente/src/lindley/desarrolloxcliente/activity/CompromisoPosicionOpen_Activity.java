@@ -153,10 +153,13 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
 			
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub	
-				finish();
-				/*
-				Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
-				startActivity(intent);*/
+				
+				
+				Intent intent = new Intent("lindley.desarrolloxcliente.consultarcabecera");
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+				
+				//finish();
 			}
 			
 		}, confirm_cancelar_no, new android.content.DialogInterface.OnClickListener() {
@@ -381,6 +384,10 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
        			int status = cerrarCompromisoProxy.getResponse().getStatus();
        			if (status == 0) {
        				setAdapterApplication();
+       				
+       				Intent intentService = new Intent("lindley.desarrolloxcliente.uploadFileService");
+	       			startService(intentService);
+	       			
        				showToast("Los registros se cerraron satisfactoriamente.");
        				Intent cabecera = new Intent("lindley.desarrolloxcliente.consultarcabecera");					
 					startActivity(cabecera);

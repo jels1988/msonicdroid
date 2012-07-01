@@ -65,6 +65,7 @@ public class VerProfit_Activity extends ActivityBase {
 		// TODO Auto-generated method stub
 		inicializarRecursos();
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.profitchartview_activity);
 		application = (MyApplication) getApplicationContext();
 		cliente = application.getClienteTO();
