@@ -80,12 +80,22 @@ public class HttpPoster {
 		HttpParams httpParams = new BasicHttpParams();
 		HttpConnectionParams.setConnectionTimeout(httpParams, this.timeOut);
 		HttpConnectionParams.setSoTimeout(httpParams, this.timeOut);
+		
+		
 
 		DefaultHttpClient httpClient = new DefaultHttpClient(httpParams);
+		
 
 		HttpPost httpPost = new HttpPost(this.url);
+	
+		
 		httpPost.addHeader("Content-Type", this.contentType);
-
+		httpPost.addHeader("Pragma", "no-cache");
+		httpPost.addHeader("Cache-Control", "no-cache");
+		httpPost.addHeader("Expires", "-1");
+		
+		
+		
 		Log.d("RQ",request);
 		
 		StringBuffer sf = new StringBuffer();
