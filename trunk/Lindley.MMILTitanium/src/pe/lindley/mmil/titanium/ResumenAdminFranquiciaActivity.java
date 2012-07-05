@@ -2,13 +2,9 @@ package pe.lindley.mmil.titanium;
 
 import java.util.ArrayList;
 
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
-import com.google.inject.Inject;
 import pe.lindley.mmil.titanium.to.ResumenVentaTO;
 import pe.lindley.mmil.titanium.ws.service.ResumenVendedoresProxy;
 import roboguice.inject.InjectExtra;
-
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +16,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ResumenVentaActivity extends net.msonic.lib.sherlock.ListActivityBase {
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
+import com.google.inject.Inject;
+
+
+public class ResumenAdminFranquiciaActivity extends net.msonic.lib.sherlock.ListActivityBase {
 	
 	public static final String NOMBRE_CDA_KEY="NOMBRE_CDA";
 	public static final String CODIGO_DEPOSITO_KEY = "CODIGO_DEPOSITO";
@@ -41,8 +41,7 @@ public class ResumenVentaActivity extends net.msonic.lib.sherlock.ListActivityBa
       inicializarRecursos();
       
       setContentView(R.layout.resumenventa_activity);
-      
-      setTitle(R.string.resumen_venta_activity_title);
+      setTitle(R.string.resumen_adminfranquicia_activity_title);
       getSupportActionBar().setSubtitle(nombre_cda);
       
       /*
@@ -59,7 +58,7 @@ public class ResumenVentaActivity extends net.msonic.lib.sherlock.ListActivityBa
   @Override
 	protected void process() {
 		// TODO Auto-generated method stub
-	  resumenVentaProxy.metodoRest = ResumenVendedoresProxy.RESUMEN_VENTAS;
+	  resumenVentaProxy.metodoRest = ResumenVendedoresProxy.RESUMEN_FRANQUICIA;
 	  resumenVentaProxy.codigoDeposito=codigoCda;
 	  resumenVentaProxy.codigoSupervisor=codigoSupervisor;
 	  resumenVentaProxy.execute();

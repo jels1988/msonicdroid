@@ -109,12 +109,21 @@ public class LoginActivity extends net.msonic.lib.sherlock.ActivityBase {
 				
 				//*******************
 				//TEMPORAL
-				//usuarioTO.rolId="9";
-				//usuarioTO.codigoSap="00351";
-				//usuarioTO.codigoDeposito="C4";
+				usuarioTO.rolId="9";
+				usuarioTO.codigoSap="00351";
+				usuarioTO.codigoDeposito="C4";
+				usuarioTO.descripcionDeposito="deposito";
 				//*******************
 				
 				
+				
+				Intent intent = new Intent(this, ResumenAdminFranquiciaActivity.class);
+				intent.putExtra(ResumenVentaActivity.CODIGO_SUPERVISOR_KEY, usuarioTO.codigoSap.trim());
+				intent.putExtra(ResumenVentaActivity.CODIGO_DEPOSITO_KEY, usuarioTO.codigoDeposito.trim());
+				intent.putExtra(ResumenVentaActivity.NOMBRE_CDA_KEY, usuarioTO.descripcionDeposito.trim());
+		    	startActivity(intent);
+				
+				/*
 				if(usuarioTO.rolId.compareToIgnoreCase("7")==0){ //GERENTE
 					Intent intent = new Intent(this, TableroActivity.class);
 					intent.putExtra(TableroActivity.CODIGO_CDA_KEY, usuarioTO.codigoDeposito.trim());
@@ -128,22 +137,9 @@ public class LoginActivity extends net.msonic.lib.sherlock.ActivityBase {
 					intent.putExtra(ResumenVentaActivity.NOMBRE_CDA_KEY, usuarioTO.descripcionDeposito.trim());
 			    	startActivity(intent);
 					
-			    	/*
-			    	Intent intent = new Intent(this, ListaVendedoresActivity.class);
-					intent.putExtra(ListaVendedoresActivity.CODIGO_SUPERVISOR_KEY, usuarioTO.codigoSap.trim());
-					intent.putExtra(ListaVendedoresActivity.CODIGO_CDA_KEY, usuarioTO.codigoDeposito.trim());
-					intent.putExtra(ListaVendedoresActivity.NOMBRE_CDA_KEY, usuarioTO.descripcionDeposito.trim());
-			    	startActivity(intent);
-					*/
 			    	
 				}else if(usuarioTO.rolId.compareToIgnoreCase("9")==0){//VENDEDOR
 					
-					/*
-					Intent intent = new Intent(this, ListaPedidosActivity.class);
-					intent.putExtra(ListaPedidosActivity.CODIGO_VENDEDOR_KEY, usuarioTO.codigoSap.trim());
-					intent.putExtra(ListaPedidosActivity.CODIGO_CDA_KEY, usuarioTO.codigoDeposito.trim());
-					intent.putExtra(ListaPedidosActivity.NOMBRE_VENDEDOR_KEY, usuarioTO.nombres.trim());
-			    	startActivity(intent);*/
 					
 					Intent intent = new Intent(this, DetallePedidosActivity.class);
 					intent.putExtra(DetallePedidosActivity.CODIGO_VENDEDOR_KEY, usuarioTO.codigoSap.trim());
@@ -153,7 +149,7 @@ public class LoginActivity extends net.msonic.lib.sherlock.ActivityBase {
 			    	
 				}else{
 					message = usuario_no_tiene_acceso;
-				}
+				}*/
 				
 			}else{
 				message = String.format(
