@@ -19,12 +19,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
+//import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.ListActivityBase;
 
-public class MixProductoActivity extends ListActivityBase {
+public class MixProductoActivity extends net.msonic.lib.sherlock.ListActivityBase {
 	
 	public static final String NOMBRE_CDA_KEY="NOMBRE_CDA";
 	public static final String CODIGO_DEPOSITO_KEY = "CODIGO_DEPOSITO";
@@ -37,7 +38,7 @@ public class MixProductoActivity extends ListActivityBase {
 	
 	@Inject MixProductoProxy mixProductoProxy;
 	
-	@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
+	//@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
 	  /** Called when the activity is first created. */
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -46,9 +47,13 @@ public class MixProductoActivity extends ListActivityBase {
       
       setContentView(R.layout.mixproducto_activity);
       
+      /*
       mActionBar.setHomeLogo(R.drawable.header_logo);
       mActionBar.setTitle(R.string.mix_producto_activity_title);
-      mActionBar.setSubTitle(nombre_cda);
+      mActionBar.setSubTitle(nombre_cda);*/
+      
+      setTitle(R.string.mix_producto_activity_title);
+      getSupportActionBar().setSubtitle(nombre_cda);
       
       processAsync();
       
@@ -105,6 +110,7 @@ public class MixProductoActivity extends ListActivityBase {
 	
 	
 	
+	/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
@@ -112,6 +118,39 @@ public class MixProductoActivity extends ListActivityBase {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.mix_producto_menu, menu);
 		return true;
+	}*/
+	
+	
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		// TODO Auto-generated method stub
+		
+		getSupportMenuInflater().inflate(R.menu.mix_producto_menu, menu);
+		
+		
+
+        menu.add("Refresh")
+            .setIcon(R.drawable.reload)
+            .setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				
+				@Override
+				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+					// TODO Auto-generated method stub
+					processAsync();
+					return true;
+				}
+			})
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+            
+        	
+
+        
+		/*
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.resumen_venta_menu, menu);
+		*/
+		return true;
+	
 	}
 
 
@@ -120,7 +159,8 @@ public class MixProductoActivity extends ListActivityBase {
 
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(
+			com.actionbarsherlock.view.MenuItem item) {
 	    // Handle item selection
 	    switch (item.getItemId()) {
 	    case R.id.mnuVentas:

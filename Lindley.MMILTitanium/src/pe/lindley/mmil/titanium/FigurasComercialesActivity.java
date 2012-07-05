@@ -8,6 +8,7 @@ import pe.lindley.mmil.titanium.ws.service.ObtenerFiguraComercialProxy;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,6 +16,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
@@ -22,7 +24,7 @@ import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import net.msonic.lib.ListActivityBase;
 
-public class FigurasComercialesActivity extends ListActivityBase {
+public class FigurasComercialesActivity extends net.msonic.lib.sherlock.ListActivityBase {
 
 	
 	public static final String NOMBRE_CDA_KEY="NOMBRE_CDA";
@@ -36,7 +38,7 @@ public class FigurasComercialesActivity extends ListActivityBase {
 	@InjectExtra(CODIGO_CLIENTE_KEY) String codigoCliente;
 	
 	@Inject ObtenerFiguraComercialProxy 	obtenerFiguraComercialProxy;
-	@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
+	//@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
 
 	
 	@Override
@@ -48,8 +50,10 @@ public class FigurasComercialesActivity extends ListActivityBase {
 		
 		setContentView(R.layout.profitdatoscomerciales_activity);
 		
-		mActionBar.setHomeLogo(R.drawable.header_logo);
-		mActionBar.setTitle(R.string.profitdatoscomerciales_activity_title_figurascomerciales);
+		//mActionBar.setHomeLogo(R.drawable.header_logo);
+		//mActionBar.setTitle(R.string.profitdatoscomerciales_activity_title_figurascomerciales);
+		
+		setTitle(R.string.profitdatoscomerciales_activity_title_figurascomerciales);
 		
 		//mActionBar.setSubTitle(cliente_descripcion);
 		processAsync();
@@ -93,6 +97,35 @@ public class FigurasComercialesActivity extends ListActivityBase {
 		showToast(message);
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		// TODO Auto-generated method stub
+		
+		
+        menu.add("Refresh")
+            .setIcon(R.drawable.reload)
+            .setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				
+				@Override
+				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+					// TODO Auto-generated method stub
+					processAsync();
+					return true;
+				}
+			})
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+            
+        	
+
+        
+		/*
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.resumen_venta_menu, menu);
+		*/
+		return true;
+	
+	}
+	
 	public static class EfficientAdapter extends BaseAdapter implements Filterable {
 	    private LayoutInflater mInflater;
 	    private List<FiguraComercialTO> detalles;

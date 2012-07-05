@@ -12,11 +12,9 @@ import com.steema.teechart.legend.LegendAlignment;
 import com.steema.teechart.styles.Bar3D;
 import com.steema.teechart.styles.MarksStyle;
 import com.steema.teechart.styles.CustomBar.MarksLocation;
-import com.thira.examples.actionbar.widget.ActionBar;
 
-import net.msonic.lib.ActivityBase;
 
-public class ProfitSemanalGrafico extends ActivityBase {
+public class ProfitSemanalGrafico extends net.msonic.lib.sherlock.ActivityBase {
 
 	public static final String NOMBRE_CDA_KEY="NOMBRE_CDA";
 	public static final String CODIGO_DEPOSITO_KEY = "CODIGO_DEPOSITO";
@@ -38,7 +36,7 @@ public class ProfitSemanalGrafico extends ActivityBase {
 	
 	
 	
-	@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
+	//@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
 	@InjectView(R.id.linearLayoutTchart) LinearLayout linearLayout;
 	
 	private TChart chart;
@@ -50,10 +48,16 @@ public class ProfitSemanalGrafico extends ActivityBase {
 	        inicializarRecursos();
 	        
 	        setContentView(R.layout.tablerro_grafico);
-	        
+	        /*
 	        mActionBar.setHomeLogo(R.drawable.header_logo);
 	        mActionBar.setTitle(R.string.history_semanal_title);
 	        mActionBar.setSubTitle(codigoCliente + " / " + campo);
+	        */
+	        
+	        setTitle(R.string.history_semanal_title);
+	        getSupportActionBar().setSubtitle(codigoCliente + " / " + campo);
+	        
+	        
 	        
 	        chart = new TChart(this);
 	        linearLayout.addView(chart);

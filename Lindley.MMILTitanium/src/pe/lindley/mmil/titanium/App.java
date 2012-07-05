@@ -1,7 +1,7 @@
 package pe.lindley.mmil.titanium;
 
+/*
 import java.util.List;
-
 import pe.lindley.mmil.titanium.ws.service.ClientesCreditosProxy;
 import pe.lindley.mmil.titanium.ws.service.ConfrontacionProxy;
 import pe.lindley.mmil.titanium.ws.service.ConsultarClienteProxy;
@@ -17,15 +17,19 @@ import pe.lindley.mmil.titanium.ws.service.ProfitHistoryDetalleProxy;
 import pe.lindley.mmil.titanium.ws.service.ProfitHistoryProxy;
 import pe.lindley.mmil.titanium.ws.service.ResumenMercaderistasProxy;
 import pe.lindley.mmil.titanium.ws.service.ResumenVendedoresProxy;
-
 import com.google.inject.Module;
 import com.google.inject.Singleton;
+*/
+import android.app.Application;
 
-import roboguice.application.RoboApplication;
-import roboguice.config.AbstractAndroidModule;
 
-public class App extends RoboApplication {
 
+//import roboguice.application.RoboApplication;
+//import roboguice.config.AbstractAndroidModule;
+
+public class App extends Application {
+	
+	/*
 	@Override
 	protected void addApplicationModules(List<Module> modules){	
 		
@@ -51,5 +55,5 @@ public class App extends RoboApplication {
 				bind(ProfitHistoryProxy.class).in(Singleton.class);
 			}
 		});
-	}
+	}*/
 }

@@ -1,26 +1,40 @@
 package pe.lindley.mmil.titanium;
 
-
-
 import pe.lindley.mmil.titanium.to.UsuarioTO;
 import pe.lindley.mmil.titanium.ws.service.LoginProxy;
-//import net.msonic.lib.ActivityBase;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
-
 import com.google.inject.Inject;
-
+import net.msonic.lib.sherlock.ActivityBase;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class LoginActivity extends net.msonic.lib.sherlock.ActivityBase {
+
+public class TestActivity extends ActivityBase {
+
+	/*
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Used to put dark icons on light action bar
+       
+		/*
+        menu.add("Save")
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
+        menu.add("Search")
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 	
-	
-	
-	
+        
+        menu.add("Refresh")
+            .setIcon(com.actionbarsherlock.R.drawable.icon_rojo)
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+
+        return true;
+    }*/
+
 	@InjectView(R.id.btnLogin) 	Button 	btnLogin;
 	@InjectView(R.id.txtUsuario) 	TextView 	txtUsuario;
 	@InjectView(R.id.txtPassword) 	TextView 	txtPassword;
@@ -40,9 +54,13 @@ public class LoginActivity extends net.msonic.lib.sherlock.ActivityBase {
         super.onCreate(savedInstanceState);
         inicializarRecursos();
         
-        setContentView(R.layout.login_activity);
         
-        setTitle(R.string.login_activity_title);
+        this.setTitle(R.string.login_activity_title);
+        
+        setContentView(R.layout.login2_activity);
+        
+        //mActionBar.setHomeLogo(R.drawable.header_logo);
+        //mActionBar.setTitle(R.string.login_activity_title);
         
         /*
         txtPassword.setOnKeyListener(new OnKeyListener() {			

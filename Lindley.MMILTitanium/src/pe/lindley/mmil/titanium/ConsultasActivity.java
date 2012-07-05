@@ -14,7 +14,7 @@ import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.ActivityBase;
 
-public class ConsultasActivity extends ActivityBase {
+public class ConsultasActivity extends net.msonic.lib.sherlock.ActivityBase {
 
 	
 	public static final String NOMBRE_CDA_KEY="NOMBRE_CDA";
@@ -28,7 +28,7 @@ public class ConsultasActivity extends ActivityBase {
 	
 	@Inject ClientesCreditosProxy clientesCreditosProxy;
 	
-	@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
+	//@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
 	@InjectView(R.id.txtCliente)  		EditText 	txtCliente;
 	
 	  /** Called when the activity is first created. */
@@ -39,9 +39,15 @@ public class ConsultasActivity extends ActivityBase {
       
       setContentView(R.layout.consultas_activity);
       
+      /*
       mActionBar.setHomeLogo(R.drawable.header_logo);
       mActionBar.setTitle(R.string.consultas_activity_cliente);
       mActionBar.setSubTitle(nombre_cda);
+      */
+      
+      setTitle(R.string.consultas_activity_cliente);
+      getSupportActionBar().setSubtitle(nombre_cda);
+      
       
       //processAsync();
       

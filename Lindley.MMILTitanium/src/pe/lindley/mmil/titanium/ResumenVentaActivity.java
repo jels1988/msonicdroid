@@ -1,12 +1,12 @@
 package pe.lindley.mmil.titanium;
 
 import java.util.ArrayList;
+
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
 import pe.lindley.mmil.titanium.to.ResumenVentaTO;
 import pe.lindley.mmil.titanium.ws.service.ResumenVendedoresProxy;
 import roboguice.inject.InjectExtra;
-import roboguice.inject.InjectView;
 
 
 import android.app.Activity;
@@ -21,9 +21,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import net.msonic.lib.ListActivityBase;
 
-public class ResumenVentaActivity extends ListActivityBase {
+public class ResumenVentaActivity extends net.msonic.lib.sherlock.ListActivityBase {
 	
 	public static final String NOMBRE_CDA_KEY="NOMBRE_CDA";
 	public static final String CODIGO_DEPOSITO_KEY = "CODIGO_DEPOSITO";
@@ -36,7 +35,7 @@ public class ResumenVentaActivity extends ListActivityBase {
 	
 	@Inject ResumenVendedoresProxy resumenVentaProxy;
 	
-	@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
+	//@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
 	  /** Called when the activity is first created. */
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -45,9 +44,14 @@ public class ResumenVentaActivity extends ListActivityBase {
       
       setContentView(R.layout.resumenventa_activity);
       
+      setTitle(R.string.resumen_venta_activity_title);
+      getSupportActionBar().setSubtitle(nombre_cda);
+      
+      /*
       mActionBar.setHomeLogo(R.drawable.header_logo);
       mActionBar.setTitle(R.string.resumen_venta_activity_title);
       mActionBar.setSubTitle(nombre_cda);
+      */
       
       processAsync();
       
@@ -104,10 +108,9 @@ public class ResumenVentaActivity extends ListActivityBase {
   
   
   
-  
-  
-  
-  
+	/*
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
@@ -120,6 +123,7 @@ public class ResumenVentaActivity extends ListActivityBase {
 
 
 
+	
 
 
 	@Override
@@ -184,9 +188,109 @@ public class ResumenVentaActivity extends ListActivityBase {
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
+	*/
 
 
 
+
+
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		// TODO Auto-generated method stub
+		
+		getSupportMenuInflater().inflate(R.menu.resumen_venta_menu, menu);
+		
+		
+
+        menu.add("Refresh")
+            .setIcon(R.drawable.reload)
+            .setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				
+				@Override
+				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+					// TODO Auto-generated method stub
+					processAsync();
+					return true;
+				}
+			})
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+            
+        	
+
+        
+		/*
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.resumen_venta_menu, menu);
+		*/
+		return true;
+	
+	}
+
+
+
+	@Override
+	public boolean onOptionsItemSelected(
+			com.actionbarsherlock.view.MenuItem item) {
+		// TODO Auto-generated method stub
+		  switch (item.getItemId()) {
+	        case R.id.mnuMercaderista:
+	        	
+	        	Intent intent1 = new Intent(this, ResumenMercaderistaActivity.class);
+	        	intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        	intent1.putExtra(ResumenMercaderistaActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+	        	intent1.putExtra(ResumenMercaderistaActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+	        	intent1.putExtra(ResumenMercaderistaActivity.NOMBRE_CDA_KEY, nombre_cda);
+		    	startActivity(intent1);
+		    	
+	            return true;
+	        case R.id.mnuMix:
+	        	
+	        	Intent intent2 = new Intent(this, MixProductoActivity.class);
+	        	intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        	intent2.putExtra(ResumenMercaderistaActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+	        	intent2.putExtra(ResumenMercaderistaActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+	        	intent2.putExtra(ResumenMercaderistaActivity.NOMBRE_CDA_KEY, nombre_cda);
+		    	startActivity(intent2);
+		    	
+	            return true;
+	        case R.id.mnuVendedores:
+	        	Intent intent = new Intent(this, ListaVendedoresActivity.class);
+	        	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra(ListaVendedoresActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+				intent.putExtra(ListaVendedoresActivity.CODIGO_CDA_KEY, codigoCda);
+				intent.putExtra(ListaVendedoresActivity.NOMBRE_CDA_KEY, nombre_cda);
+		    	startActivity(intent);
+	            return true;
+	        case R.id.mnuConfrontacion:
+	        	Intent intent3 = new Intent(this, ConfrontacionActivity.class);
+	        	intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        	intent3.putExtra(ConfrontacionActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+	        	intent3.putExtra(ConfrontacionActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+	        	intent3.putExtra(ConfrontacionActivity.NOMBRE_CDA_KEY, nombre_cda);
+		    	startActivity(intent3);
+	        	return true;
+	        case R.id.mnuClienteCreditos:
+	        	Intent intent4 = new Intent(this, ClienteCreditosActivity.class);
+	        	intent4.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        	intent4.putExtra(ClienteCreditosActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+	        	intent4.putExtra(ClienteCreditosActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+	        	intent4.putExtra(ClienteCreditosActivity.NOMBRE_CDA_KEY, nombre_cda);
+		    	startActivity(intent4);
+	        	return true;
+	        case R.id.mnuConsultas:
+	        	
+	        	Intent intent5 = new Intent(this, ConsultasActivity.class);
+	        	intent5.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        	intent5.putExtra(ConsultasActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+	        	intent5.putExtra(ConsultasActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+	        	intent5.putExtra(ConsultasActivity.NOMBRE_CDA_KEY, nombre_cda);
+		    	startActivity(intent5);
+		    	
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
 
 
 

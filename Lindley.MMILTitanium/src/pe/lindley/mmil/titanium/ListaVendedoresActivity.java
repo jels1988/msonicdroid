@@ -7,6 +7,7 @@ import pe.lindley.mmil.titanium.ws.service.ListarVendedorProxy;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
@@ -29,14 +30,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import net.msonic.lib.ListActivityBase;
 
-public class ListaVendedoresActivity extends ListActivityBase {
+public class ListaVendedoresActivity extends net.msonic.lib.sherlock.ListActivityBase {
 	
 	public static final String CODIGO_SUPERVISOR_KEY="CODIGO_SUPERVISOR";
 	public static final String CODIGO_CDA_KEY="CODIGO_CDA_KEY";
 	public static final String NOMBRE_CDA_KEY="NOMBRE_CDA";
 	
 	
-	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
+	//@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ListarVendedorProxy 	listarVendedorProxy;
 	
 	ListView 	lstSupervisor;
@@ -56,9 +57,15 @@ public class ListaVendedoresActivity extends ListActivityBase {
 	        
 	        setContentView(R.layout.listavendedores_activity);
 	        
+	        
+	        
+	        setTitle(R.string.lista_vendedores_activity_title);
+	        getSupportActionBar().setSubtitle(nombre_cda);
+	        
+	        /*
 	        mActionBar.setHomeLogo(R.drawable.header_logo);
 	        mActionBar.setTitle(R.string.lista_vendedores_activity_title);
-	        mActionBar.setSubTitle(nombre_cda);
+	        mActionBar.setSubTitle(nombre_cda);*/
 	        
 	        lstSupervisor = getListView();
 	        processAsync();
@@ -120,13 +127,46 @@ public class ListaVendedoresActivity extends ListActivityBase {
 		}
 		
 		
-	 
+	 /*
 	 @Override
 		public boolean onCreateOptionsMenu(Menu menu) {
 			// TODO Auto-generated method stub
 		 	MenuInflater menuInflater = new MenuInflater(this);
 		 	menuInflater.inflate(R.menu.listavendedores_menu, menu);
 			return super.onCreateOptionsMenu(menu);
+		}*/
+		
+		
+		@Override
+		public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+			// TODO Auto-generated method stub
+			
+			getSupportMenuInflater().inflate(R.menu.listavendedores_menu, menu);
+			
+			
+
+	        menu.add("Refresh")
+	            .setIcon(R.drawable.reload)
+	            .setOnMenuItemClickListener(new OnMenuItemClickListener() {
+					
+					@Override
+					public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+						// TODO Auto-generated method stub
+						processAsync();
+						return true;
+					}
+				})
+	            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+	            
+	        	
+
+	        
+			/*
+			MenuInflater inflater = getMenuInflater();
+			inflater.inflate(R.menu.resumen_venta_menu, menu);
+			*/
+			return true;
+		
 		}
 
 	 @Override
