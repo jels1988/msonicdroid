@@ -16,7 +16,7 @@ import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.ActivityBase;
 
-public class HistoryMensualGrafico extends ActivityBase {
+public class HistoryMensualGrafico extends net.msonic.lib.sherlock.ActivityBase {
 
 	
 	public static final String NOMBRE_CDA_KEY="NOMBRE_CDA";
@@ -39,7 +39,7 @@ public class HistoryMensualGrafico extends ActivityBase {
 	
 	
 	
-	@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
+	// @InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
 	@InjectView(R.id.linearLayoutTchart) LinearLayout linearLayout;
 	
 	private TChart chart;
@@ -52,10 +52,14 @@ public class HistoryMensualGrafico extends ActivityBase {
 	        
 	        setContentView(R.layout.tablerro_grafico);
 	        
+	        /*
 	        mActionBar.setHomeLogo(R.drawable.header_logo);
 	        mActionBar.setTitle(R.string.history_mensual_title);
 	        mActionBar.setSubTitle(codigoCliente + " / " + campo);
+	        */
 	        
+	        setTitle(R.string.history_mensual_title);
+	        getSupportActionBar().setTitle(codigoCliente + " / " + campo);
 	        chart = new TChart(this);
 	        linearLayout.addView(chart);
 	        

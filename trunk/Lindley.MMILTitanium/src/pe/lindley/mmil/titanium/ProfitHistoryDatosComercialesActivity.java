@@ -10,6 +10,7 @@ import roboguice.inject.InjectView;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -17,12 +18,13 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.ListActivityBase;
 
-public class ProfitHistoryDatosComercialesActivity extends ListActivityBase {
+public class ProfitHistoryDatosComercialesActivity extends net.msonic.lib.sherlock.ListActivityBase {
 	
 	public static final String NOMBRE_CDA_KEY="NOMBRE_CDA";
 	public static final String CODIGO_DEPOSITO_KEY = "CODIGO_DEPOSITO";
@@ -40,7 +42,7 @@ public class ProfitHistoryDatosComercialesActivity extends ListActivityBase {
 	public static final int TIPO_AVANCE_RESUMEN=1;
 	
 	@Inject ProfitHistoryDetalleProxy 	profitHistoryDetalleProxy;
-	@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
+	//@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
 
 	
 	@Override
@@ -50,13 +52,13 @@ public class ProfitHistoryDatosComercialesActivity extends ListActivityBase {
 		inicializarRecursos();
 		setContentView(R.layout.profitdatoscomerciales_activity);
 		
-		mActionBar.setHomeLogo(R.drawable.header_logo);
+		//mActionBar.setHomeLogo(R.drawable.header_logo);
 		
 		if(TIPO_DATOS_COMERCIALES==tipoConsulta)
-			mActionBar.setTitle(R.string.profitdatoscomerciales_activity_title_avanceresumen);
+			setTitle(R.string.profitdatoscomerciales_activity_title_avanceresumen);
 		else
 			
-			mActionBar.setTitle(R.string.profitdatoscomerciales_activity_title_datoscomerciales);
+			setTitle(R.string.profitdatoscomerciales_activity_title_datoscomerciales);
 		
 		//mActionBar.setSubTitle(cliente_descripcion);
 		processAsync();
@@ -107,6 +109,38 @@ public class ProfitHistoryDatosComercialesActivity extends ListActivityBase {
 		}
 		super.processError();
 		showToast(message);
+	}
+	
+	
+	
+	
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		// TODO Auto-generated method stub
+		
+		
+        menu.add("Refresh")
+            .setIcon(R.drawable.reload)
+            .setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				
+				@Override
+				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+					// TODO Auto-generated method stub
+					processAsync();
+					return true;
+				}
+			})
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+            
+        	
+
+        
+		/*
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.resumen_venta_menu, menu);
+		*/
+		return true;
+	
 	}
 
 	public static class EfficientAdapter extends BaseAdapter implements Filterable {

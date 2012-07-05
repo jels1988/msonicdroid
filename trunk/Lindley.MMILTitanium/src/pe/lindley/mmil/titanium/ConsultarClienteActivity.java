@@ -20,11 +20,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 import net.msonic.lib.ExpandableListActivityBase;
 
-public class ConsultarClienteActivity extends ExpandableListActivityBase {
+public class ConsultarClienteActivity extends net.msonic.lib.sherlock.ExpandableListActivityBase {
 
 
 	public static final String NOMBRE_CDA_KEY="NOMBRE_CDA";
@@ -39,7 +41,7 @@ public class ConsultarClienteActivity extends ExpandableListActivityBase {
 	
 	@Inject ConsultarClienteProxy consultarClienteProxy;
 	
-	@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
+	//@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
 	@InjectView(R.id.txtCodigo)  		TextView 	txtCodigo;
 	@InjectView(R.id.txtNombre)  		TextView 	txtNombre;
 	@InjectView(R.id.txtDireccion)  		TextView 	txtDireccion;
@@ -54,10 +56,15 @@ public class ConsultarClienteActivity extends ExpandableListActivityBase {
       
       setContentView(R.layout.consultarcliente_activity);
       
+      /*
      mActionBar.setHomeLogo(R.drawable.header_logo);
       mActionBar.setTitle(R.string.consultas_activity_consulta_title);
       mActionBar.setSubTitle(nombre_cda);
-     
+     */
+      
+      setTitle(R.string.consultas_activity_consulta_title);
+      getSupportActionBar().setSubtitle(nombre_cda);
+      
       processAsync();
       
   }
@@ -124,7 +131,7 @@ public class ConsultarClienteActivity extends ExpandableListActivityBase {
   
   
   
-  
+  /*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
@@ -132,6 +139,41 @@ public class ConsultarClienteActivity extends ExpandableListActivityBase {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.resumen_venta_menu, menu);
 		return true;
+	}*/
+	
+	
+
+
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		// TODO Auto-generated method stub
+		
+		getSupportMenuInflater().inflate(R.menu.resumen_venta_menu, menu);
+		
+		
+
+        menu.add("Refresh")
+            .setIcon(R.drawable.reload)
+            .setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				
+				@Override
+				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+					// TODO Auto-generated method stub
+					processAsync();
+					return true;
+				}
+			})
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+            
+        	
+
+        
+		/*
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.resumen_venta_menu, menu);
+		*/
+		return true;
+	
 	}
 
 
@@ -139,8 +181,10 @@ public class ConsultarClienteActivity extends ExpandableListActivityBase {
 
 
 
+
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(
+			com.actionbarsherlock.view.MenuItem item) {
 	    // Handle item selection
 	    switch (item.getItemId()) {
 	        case R.id.mnuMercaderista:

@@ -22,7 +22,7 @@ import android.widget.Spinner;
 import net.msonic.lib.ActivityBase;
 import net.msonic.lib.MessageBox;
 
-public class ProfitMensualActivity extends ActivityBase {
+public class ProfitMensualActivity extends net.msonic.lib.sherlock.ActivityBase {
 
 	public static final int CAJAS_FISICAS_ACUMULADAS=0;
 	public static final int CAJAS_UNITARIAS_ACUMULADAS=1;
@@ -40,7 +40,7 @@ public class ProfitMensualActivity extends ActivityBase {
 	@InjectExtra(NOMBRE_CDA_KEY) String nombre_cda;
 	@InjectExtra(CODIGO_CLIENTE_KEY) String codigoCliente;
 	
-	@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
+	//@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
 	
 	
 	
@@ -59,9 +59,15 @@ public class ProfitMensualActivity extends ActivityBase {
 		inicializarRecursos();
 		setContentView(R.layout.profitmensual_activity);
 			
+		 /*
 	      mActionBar.setHomeLogo(R.drawable.header_logo);
 	      mActionBar.setTitle(R.string.profitmensual_activity_title);
 	      mActionBar.setSubTitle(nombre_cda + " / " + codigoCliente);
+	      */
+		
+		  setTitle(R.string.profitmensual_activity_title);
+	      getSupportActionBar().setSubtitle(codigoCliente + " / " + nombre_cda);
+	      
 	      
 	      ArrayAdapter<CharSequence> adapterMes = ArrayAdapter.createFromResource(this, R.array.meses_array, android.R.layout.simple_spinner_item);
 	      adapterMes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

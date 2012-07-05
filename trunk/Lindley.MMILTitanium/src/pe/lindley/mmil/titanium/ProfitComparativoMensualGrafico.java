@@ -16,7 +16,7 @@ import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.ActivityBase;
 
-public class ProfitComparativoMensualGrafico extends ActivityBase {
+public class ProfitComparativoMensualGrafico extends net.msonic.lib.sherlock.ActivityBase {
 
 	public static final String NOMBRE_CDA_KEY="NOMBRE_CDA";
 	public static final String CODIGO_DEPOSITO_KEY = "CODIGO_DEPOSITO";
@@ -40,7 +40,7 @@ public class ProfitComparativoMensualGrafico extends ActivityBase {
 	@InjectExtra(ANIO_KEY) int anio;
 	
 	
-	@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
+	//@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
 	@InjectView(R.id.linearLayoutTchart) LinearLayout linearLayout;
 	
 	private TChart chart;
@@ -53,10 +53,15 @@ public class ProfitComparativoMensualGrafico extends ActivityBase {
 	        
 	        setContentView(R.layout.tablerro_grafico);
 	        
+	        /*
 	        mActionBar.setHomeLogo(R.drawable.header_logo);
 	        mActionBar.setTitle(R.string.history_comparativo_title);
 	        mActionBar.setSubTitle(codigoCliente + " / " + campo);
+	        */
 	        
+	        setTitle(R.string.history_comparativo_title);
+	        getSupportActionBar().setSubtitle(codigoCliente + " / " + campo);
+
 	        chart = new TChart(this);
 	        linearLayout.addView(chart);
 	        

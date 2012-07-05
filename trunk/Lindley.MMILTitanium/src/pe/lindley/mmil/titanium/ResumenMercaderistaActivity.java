@@ -18,12 +18,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
-import net.msonic.lib.ListActivityBase;
 
-public class ResumenMercaderistaActivity extends ListActivityBase {
+public class ResumenMercaderistaActivity extends net.msonic.lib.sherlock.ListActivityBase {
+	
 	public static final String NOMBRE_CDA_KEY="NOMBRE_CDA";
 	public static final String CODIGO_DEPOSITO_KEY = "CODIGO_DEPOSITO";
 	public static final String CODIGO_SUPERVISOR_KEY = "CODIGO_SUPERVISOR";
@@ -36,7 +37,7 @@ public class ResumenMercaderistaActivity extends ListActivityBase {
 	
 	@Inject ResumenMercaderistasProxy resumenMercaderistasProxy;
 	
-	@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
+	//@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
 	  /** Called when the activity is first created. */
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -45,10 +46,15 @@ public class ResumenMercaderistaActivity extends ListActivityBase {
       
       setContentView(R.layout.resumenventa_activity);
       
-      mActionBar.setHomeLogo(R.drawable.header_logo);
+     // mActionBar.setHomeLogo(R.drawable.header_logo);
+      
+      setTitle(R.string.resumen_mercaderista_activity_title);
+      getSupportActionBar().setSubtitle(nombre_cda);
+      
+      /*
       mActionBar.setTitle(R.string.resumen_mercaderista_activity_title);
       mActionBar.setSubTitle(nombre_cda);
-      
+      */
       processAsync();
       
   }
@@ -102,26 +108,43 @@ public class ResumenMercaderistaActivity extends ListActivityBase {
 		showToast(message);
 	}
   
-  
-  
-  
-  
-  
-  
+	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		// TODO Auto-generated method stub
 		
+		getSupportMenuInflater().inflate(R.menu.resumen_venta_menu, menu);
+		
+		
+
+        menu.add("Refresh")
+            .setIcon(R.drawable.reload)
+            .setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				
+				@Override
+				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+					// TODO Auto-generated method stub
+					processAsync();
+					return true;
+				}
+			})
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+            
+        	
+
+        
+		/*
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.resumen_mercaderista_menu, menu);
+		inflater.inflate(R.menu.resumen_venta_menu, menu);
+		*/
 		return true;
+	
 	}
-
-
+  
 
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
 	    // Handle item selection
 	    switch (item.getItemId()) {
 	        case R.id.mnuVentas:
@@ -174,32 +197,6 @@ public class ResumenMercaderistaActivity extends ListActivityBase {
 	}
 
 
-
-
-	/*
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    // Handle item selection
-	    switch (item.getItemId()) {
-	        case R.id.mnuMercaderista:
-	            return true;
-	        case R.id.mnuMix:
-	            return true;
-	        case R.id.mnuVendedores:
-	        	Intent intent = new Intent(this, ListaVendedoresActivity.class);
-				intent.putExtra(ListaVendedoresActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
-				intent.putExtra(ListaVendedoresActivity.CODIGO_CDA_KEY, codigoCda);
-				intent.putExtra(ListaVendedoresActivity.NOMBRE_CDA_KEY, nombre_cda);
-		    	startActivity(intent);
-	            return true;
-	        case R.id.mnuConsultas:
-	            return true;
-	        default:
-	            return super.onOptionsItemSelected(item);
-	    }
-	}
-*/
 
 
 
