@@ -9,15 +9,24 @@ import net.msonic.lib.ProxyBase;
 
 public class ResumenVendedoresProxy extends ProxyBase<ResumenVentaResponse> {
 
+	
+	public static final int RESUMEN_VENTAS=0;
+	public static final int RESUMEN_FRANQUICIA=1;
+	
 	public String codigoDeposito;
 	public String codigoSupervisor;
+	public int metodoRest;
 	
 	@InjectResource(R.string.urlwsMMILSupervisor)protected String urlWS;
 	
 	@Override
 	protected String getUrl() {
 		// TODO Auto-generated method stub
-		return urlWS + "/ResumenVendedores";
+		if(metodoRest==0){
+			return urlWS + "/ResumenVendedores";
+		}else{
+			return urlWS + "/ResumenAdminFranquicia";
+		}
 	}
 
 	@Override
