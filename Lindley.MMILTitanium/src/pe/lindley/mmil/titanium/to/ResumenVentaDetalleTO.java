@@ -18,6 +18,9 @@ public class ResumenVentaDetalleTO {
 	@SerializedName("CUO")
 	public String cuota;
 	
+	@SerializedName("VEN")
+	public String vendido;
+	
 	@SerializedName("CPR")
 	public String clientesProgramados;
 	
