@@ -41,6 +41,9 @@ public class Modulo extends AbstractModule {
 		bind(ObtenerFiguraComercialProxy.class).in(Singleton.class);
 		bind(ProfitHistoryProxy.class).in(Singleton.class);
 		bind(ResumenAdminFranquiciaProxy.class).in(Singleton.class);
+		bind(ResumenJefeVentasActivity.class).in(Singleton.class);
+		
+		
 	
 	}
 
