@@ -13,6 +13,7 @@ import pe.lindley.mmil.titanium.ws.service.ObtenerFiguraComercialProxy;
 import pe.lindley.mmil.titanium.ws.service.PedidoServiceProxy;
 import pe.lindley.mmil.titanium.ws.service.ProfitHistoryDetalleProxy;
 import pe.lindley.mmil.titanium.ws.service.ProfitHistoryProxy;
+import pe.lindley.mmil.titanium.ws.service.ResumenGerenteVentasDepositosProxy;
 import pe.lindley.mmil.titanium.ws.service.ResumenGerenteVentasProxy;
 import pe.lindley.mmil.titanium.ws.service.ResumenJefeComercialesProxy;
 import pe.lindley.mmil.titanium.ws.service.ResumenMercaderistasProxy;
@@ -45,6 +46,9 @@ public class Modulo extends AbstractModule {
 		bind(ResumenAdminFranquiciaProxy.class).in(Singleton.class);
 		bind(ResumenJefeComercialesProxy.class).in(Singleton.class);
 		bind(ResumenGerenteVentasProxy.class).in(Singleton.class);
+		bind(ResumenGerenteVentasDepositosProxy.class).in(Singleton.class);
+		
+		
 	
 	}
 
