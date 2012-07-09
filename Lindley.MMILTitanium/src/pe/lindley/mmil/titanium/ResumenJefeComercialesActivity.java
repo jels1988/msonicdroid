@@ -233,7 +233,7 @@ public class ResumenJefeComercialesActivity extends net.msonic.lib.sherlock.Acti
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		// TODO Auto-generated method stub
 		
-		getSupportMenuInflater().inflate(R.menu.resumen_admin_menu, menu);
+		getSupportMenuInflater().inflate(R.menu.resumen_jefecomercial_menu, menu);
 		
 		
 
