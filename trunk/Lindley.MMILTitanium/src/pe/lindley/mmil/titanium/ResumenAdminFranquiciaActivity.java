@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import pe.lindley.mmil.titanium.to.ResumenVentaDetalleTO;
 import pe.lindley.mmil.titanium.to.ResumenVentaTO;
-import pe.lindley.mmil.titanium.ws.service.ResumenVentasProxy;
+import pe.lindley.mmil.titanium.ws.service.ResumenAdminFranquiciaProxy;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.app.Activity;
@@ -48,7 +48,7 @@ public class ResumenAdminFranquiciaActivity extends net.msonic.lib.sherlock.Acti
 	@InjectView(R.id.hView) HorizontalScrollView hView;
 	
 	
-	@Inject ResumenVentasProxy resumenVentasProxy;
+	@Inject ResumenAdminFranquiciaProxy resumenVentasProxy;
 	
 	int item_selected = -1; // select at 0
 	String codigoSupervisor=null;

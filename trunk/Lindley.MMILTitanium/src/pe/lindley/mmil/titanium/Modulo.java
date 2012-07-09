@@ -15,7 +15,7 @@ import pe.lindley.mmil.titanium.ws.service.ProfitHistoryDetalleProxy;
 import pe.lindley.mmil.titanium.ws.service.ProfitHistoryProxy;
 import pe.lindley.mmil.titanium.ws.service.ResumenMercaderistasProxy;
 import pe.lindley.mmil.titanium.ws.service.ResumenVendedoresProxy;
-import pe.lindley.mmil.titanium.ws.service.ResumenVentasProxy;
+import pe.lindley.mmil.titanium.ws.service.ResumenAdminFranquiciaProxy;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
@@ -40,7 +40,7 @@ public class Modulo extends AbstractModule {
 		bind(ProfitHistoryDetalleProxy.class).in(Singleton.class);
 		bind(ObtenerFiguraComercialProxy.class).in(Singleton.class);
 		bind(ProfitHistoryProxy.class).in(Singleton.class);
-		bind(ResumenVentasProxy.class).in(Singleton.class);
+		bind(ResumenAdminFranquiciaProxy.class).in(Singleton.class);
 	
 	}
 
