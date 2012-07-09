@@ -115,38 +115,35 @@ public class LoginActivity extends net.msonic.lib.sherlock.ActivityBase {
 				usuarioTO.descripcionDeposito="deposito";*/
 				//*******************
 				
-				
-				
 				Intent intent = new Intent(this, ResumenAdminFranquiciaActivity.class);
 				intent.putExtra(ResumenAdminFranquiciaActivity.CODIGO_ADMIN_FRANQUINCIA_KEY, usuarioTO.codigoSap.trim());
 				intent.putExtra(ResumenAdminFranquiciaActivity.CODIGO_DEPOSITO_KEY, usuarioTO.codigoDeposito.trim());
 				intent.putExtra(ResumenAdminFranquiciaActivity.NOMBRE_CDA_KEY, usuarioTO.descripcionDeposito.trim());
 		    	startActivity(intent);
-				
+		    	
 				/*
 				if(usuarioTO.rolId.compareToIgnoreCase("7")==0){ //GERENTE
 					Intent intent = new Intent(this, TableroActivity.class);
 					intent.putExtra(TableroActivity.CODIGO_CDA_KEY, usuarioTO.codigoDeposito.trim());
 			    	startActivity(intent);
 				}else if(usuarioTO.rolId.compareToIgnoreCase("8")==0){//SUPERVISOR
-					
-					
 					Intent intent = new Intent(this, ResumenVentaActivity.class);
 					intent.putExtra(ResumenVentaActivity.CODIGO_SUPERVISOR_KEY, usuarioTO.codigoSap.trim());
 					intent.putExtra(ResumenVentaActivity.CODIGO_DEPOSITO_KEY, usuarioTO.codigoDeposito.trim());
 					intent.putExtra(ResumenVentaActivity.NOMBRE_CDA_KEY, usuarioTO.descripcionDeposito.trim());
 			    	startActivity(intent);
-					
-			    	
 				}else if(usuarioTO.rolId.compareToIgnoreCase("9")==0){//VENDEDOR
-					
-					
 					Intent intent = new Intent(this, DetallePedidosActivity.class);
 					intent.putExtra(DetallePedidosActivity.CODIGO_VENDEDOR_KEY, usuarioTO.codigoSap.trim());
 					intent.putExtra(DetallePedidosActivity.CODIGO_CDA_KEY, usuarioTO.codigoDeposito.trim());
 					intent.putExtra(DetallePedidosActivity.NOMBRE_VENDEDOR_KEY, usuarioTO.nombres.trim());
 			    	startActivity(intent);
-			    	
+				}else if(usuarioTO.rolId.compareToIgnoreCase("10")==0){//ADMINISTRADOR FRANQUICIA
+					Intent intent = new Intent(this, ResumenAdminFranquiciaActivity.class);
+					intent.putExtra(ResumenAdminFranquiciaActivity.CODIGO_ADMIN_FRANQUINCIA_KEY, usuarioTO.codigoSap.trim());
+					intent.putExtra(ResumenAdminFranquiciaActivity.CODIGO_DEPOSITO_KEY, usuarioTO.codigoDeposito.trim());
+					intent.putExtra(ResumenAdminFranquiciaActivity.NOMBRE_CDA_KEY, usuarioTO.descripcionDeposito.trim());
+			    	startActivity(intent);
 				}else{
 					message = usuario_no_tiene_acceso;
 				}*/
