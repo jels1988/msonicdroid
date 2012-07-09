@@ -109,18 +109,18 @@ public class LoginActivity extends net.msonic.lib.sherlock.ActivityBase {
 				
 				//*******************
 				//TEMPORAL
-				usuarioTO.rolId="9";
+				/*usuarioTO.rolId="9";
 				usuarioTO.codigoSap="00351";
 				usuarioTO.codigoDeposito="C4";
-				usuarioTO.descripcionDeposito="deposito";
+				usuarioTO.descripcionDeposito="deposito";*/
 				//*******************
 				
 				
 				
 				Intent intent = new Intent(this, ResumenAdminFranquiciaActivity.class);
-				intent.putExtra(ResumenVentaActivity.CODIGO_SUPERVISOR_KEY, usuarioTO.codigoSap.trim());
-				intent.putExtra(ResumenVentaActivity.CODIGO_DEPOSITO_KEY, usuarioTO.codigoDeposito.trim());
-				intent.putExtra(ResumenVentaActivity.NOMBRE_CDA_KEY, usuarioTO.descripcionDeposito.trim());
+				intent.putExtra(ResumenAdminFranquiciaActivity.CODIGO_ADMIN_FRANQUINCIA_KEY, usuarioTO.codigoSap.trim());
+				intent.putExtra(ResumenAdminFranquiciaActivity.CODIGO_DEPOSITO_KEY, usuarioTO.codigoDeposito.trim());
+				intent.putExtra(ResumenAdminFranquiciaActivity.NOMBRE_CDA_KEY, usuarioTO.descripcionDeposito.trim());
 		    	startActivity(intent);
 				
 				/*

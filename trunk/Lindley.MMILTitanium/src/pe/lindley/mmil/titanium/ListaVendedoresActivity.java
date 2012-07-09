@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import pe.lindley.mmil.titanium.to.VendedorTO;
 import pe.lindley.mmil.titanium.ws.service.ListarVendedorProxy;
 import roboguice.inject.InjectExtra;
-import roboguice.inject.InjectView;
 
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -18,8 +16,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +24,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import net.msonic.lib.ListActivityBase;
 
 public class ListaVendedoresActivity extends net.msonic.lib.sherlock.ListActivityBase {
 	

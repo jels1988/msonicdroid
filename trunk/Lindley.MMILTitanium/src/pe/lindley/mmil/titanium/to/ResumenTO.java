@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class ResumenTO {
 	
-	@SerializedName("RES")
+	@SerializedName("CAB")
 	public ArrayList<ResumenVentaTO> resumen;
 	
 	@SerializedName("DET")

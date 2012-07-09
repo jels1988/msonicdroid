@@ -59,7 +59,6 @@ public class ResumenVentaActivity extends net.msonic.lib.sherlock.ListActivityBa
   @Override
 	protected void process() {
 		// TODO Auto-generated method stub
-	  resumenVentaProxy.metodoRest = ResumenVendedoresProxy.RESUMEN_VENTAS;
 	  resumenVentaProxy.codigoDeposito=codigoCda;
 	  resumenVentaProxy.codigoSupervisor=codigoSupervisor;
 	  resumenVentaProxy.execute();
