@@ -115,7 +115,11 @@ public class LoginActivity extends net.msonic.lib.sherlock.ActivityBase {
 				usuarioTO.descripcionDeposito="deposito";*/
 				//*******************
 				
-				
+
+				Intent intent = new Intent(this, ResumenGerenteVentasActivity.class);
+				intent.putExtra(ResumenGerenteVentasActivity.CODIGO_GERENTE_VENTA_KEY, usuarioTO.codigoSap.trim());
+				intent.putExtra(ResumenGerenteVentasActivity.NOMBRE_GERENTE_KEY, usuarioTO.descripcionDeposito.trim());
+		    	startActivity(intent);
 				
 		    	
 				/*
