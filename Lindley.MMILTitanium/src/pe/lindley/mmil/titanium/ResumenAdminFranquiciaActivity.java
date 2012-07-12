@@ -168,35 +168,7 @@ public class ResumenAdminFranquiciaActivity extends net.msonic.lib.sherlock.Acti
 			        }
 			    });
  			
- 			/*
- 			if(id==0){
- 				builder.setPositiveButton(R.string.listasupervisores_activity_title_dialog_Aceptar, new DialogInterface.OnClickListener() {
- 			        public void onClick(DialogInterface dialog, int id) {
- 			        	if(item_selected>-1){
- 				        	Intent i = new Intent(getApplicationContext(),ListaPedidosActivity.class);
- 				        	i.putExtra(ListaPedidosActivity.CODIGO_CDA_KEY, codigoCda);
- 				        	i.putExtra(ListaPedidosActivity.CODIGO_VENDEDOR_KEY, codigoVendedor);
- 				        	i.putExtra(ListaPedidosActivity.NOMBRE_VENDEDOR_KEY, nombreVendedor);
- 				        	startActivity(i);
- 				        	dialog.dismiss();
- 			        	}
- 			        }
- 			    });
- 			}else{
- 				builder.setPositiveButton(R.string.listasupervisores_activity_title_dialog_Aceptar, new DialogInterface.OnClickListener() {
- 			        public void onClick(DialogInterface dialog, int id) {
- 			        	if(item_selected>-1){
- 			        		Intent intent = new Intent(getApplicationContext(), DetallePedidosActivity.class);
- 							intent.putExtra(DetallePedidosActivity.CODIGO_VENDEDOR_KEY, codigoVendedor);
- 							intent.putExtra(DetallePedidosActivity.CODIGO_CDA_KEY, codigoCda);
- 							intent.putExtra(DetallePedidosActivity.NOMBRE_VENDEDOR_KEY, nombreVendedor);
- 					    	startActivity(intent);
- 				        	dialog.dismiss();
- 			        	}
- 			        }
- 			    });
- 				
- 			}*/
+ 			
  			
  			builder.setNegativeButton(R.string.listasupervisores_activity_title_dialog_Cancelar, new DialogInterface.OnClickListener() {
  				

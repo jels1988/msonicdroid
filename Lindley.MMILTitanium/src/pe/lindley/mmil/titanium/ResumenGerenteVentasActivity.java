@@ -35,9 +35,9 @@ public class ResumenGerenteVentasActivity extends net.msonic.lib.sherlock.Activi
 	
 	public static final String NOMBRE_GERENTE_KEY="NOMBRE_CDA";
 	//public static final String CODIGO_DEPOSITO_KEY = "CODIGO_DEPOSITO";
-	public static final String CODIGO_GERENTE_VENTA_KEY = "CODIGO_JEFE_COMERCIAL";
+	public static final String CODIGO_GERENTE_VENTA_KEY = "CODIGO_GERENTE_VENTA";
 	
-	@InjectExtra(CODIGO_GERENTE_VENTA_KEY) String codigoJefeComercial;
+	@InjectExtra(CODIGO_GERENTE_VENTA_KEY) String codigoGerenteVenta;
 	//@InjectExtra(CODIGO_DEPOSITO_KEY) String codigoCda;
 	@InjectExtra(NOMBRE_GERENTE_KEY) String nombre_cda;
 	
@@ -51,8 +51,8 @@ public class ResumenGerenteVentasActivity extends net.msonic.lib.sherlock.Activi
 	@Inject ResumenGerenteVentasProxy resumenGerenteVentasProxy;
 	
 	int item_selected = -1; // select at 0
-	String codigoSupervisor=null;
-	String nombreSupervisor=null;
+	String codigoCda=null;
+	String nombreCda=null;
 	
 	//@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
 	  /** Called when the activity is first created. */
@@ -116,7 +116,7 @@ public class ResumenGerenteVentasActivity extends net.msonic.lib.sherlock.Activi
 	protected void process() {
 		// TODO Auto-generated method stub
 	  resumenGerenteVentasProxy.codigoDeposito="";
-	  resumenGerenteVentasProxy.codigoSupervisor=codigoJefeComercial;
+	  resumenGerenteVentasProxy.codigoSupervisor=codigoGerenteVenta;
 	  resumenGerenteVentasProxy.execute();
 		
 	}
@@ -143,25 +143,25 @@ public class ResumenGerenteVentasActivity extends net.msonic.lib.sherlock.Activi
 
  			// TODO Auto-generated method stub
  			AlertDialog.Builder builder = new AlertDialog.Builder(this);
- 			builder.setTitle(R.string.resumen_adminfranquicia_seleccionar_supervisores);
+ 			builder.setTitle("Seleccionar Dep—sito");
  			
  			
  			
  			builder.setSingleChoiceItems(arrAdap,-1, new DialogInterface.OnClickListener() {
  			    public void onClick(DialogInterface dialog, int item) {
  			    	item_selected = item;
- 			    	codigoSupervisor =adapter.detalle.get(item_selected).codigo;
- 			    	nombreSupervisor=adapter.detalle.get(item_selected).descripcion;
+ 			    	codigoCda =adapter.detalle.get(item_selected).codigo;
+ 			    	nombreCda=adapter.detalle.get(item_selected).descripcion;
  			    }
  			});
  			
  			builder.setPositiveButton(R.string.listasupervisores_activity_title_dialog_Aceptar, new DialogInterface.OnClickListener() {
 			        public void onClick(DialogInterface dialog, int id) {
 			        	if(item_selected>-1){
-				        		Intent intent = new Intent(getApplicationContext(), ResumenAdminFranquiciaActivity.class);
-								intent.putExtra(ResumenAdminFranquiciaActivity.CODIGO_ADMIN_FRANQUINCIA_KEY, codigoSupervisor);
-								//intent.putExtra(ResumenAdminFranquiciaActivity.CODIGO_DEPOSITO_KEY, codigoCda);
-								intent.putExtra(ResumenAdminFranquiciaActivity.NOMBRE_CDA_KEY, nombreSupervisor);
+				        		Intent intent = new Intent(getApplicationContext(), ResumenGerenteVentasDepositosActivity.class);
+								intent.putExtra(ResumenGerenteVentasDepositosActivity.CODIGO_GERENTE_VENTA_KEY, codigoGerenteVenta);
+								intent.putExtra(ResumenGerenteVentasDepositosActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+								intent.putExtra(ResumenGerenteVentasDepositosActivity.NOMBRE_CDA_KEY, nombreCda);
 						    	startActivity(intent);
 					        	dialog.dismiss();
 			        	}

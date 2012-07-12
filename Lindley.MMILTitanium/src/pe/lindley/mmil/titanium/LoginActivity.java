@@ -115,15 +115,12 @@ public class LoginActivity extends net.msonic.lib.sherlock.ActivityBase {
 				usuarioTO.descripcionDeposito="deposito";*/
 				//*******************
 				
-
 				Intent intent = new Intent(this, ResumenGerenteVentasActivity.class);
 				intent.putExtra(ResumenGerenteVentasActivity.CODIGO_GERENTE_VENTA_KEY, usuarioTO.codigoSap.trim());
 				intent.putExtra(ResumenGerenteVentasActivity.NOMBRE_GERENTE_KEY, usuarioTO.descripcionDeposito.trim());
 		    	startActivity(intent);
 				
-		    	
 				/*
-				
 				if(usuarioTO.rolId.compareToIgnoreCase("7")==0){ //GERENTE
 					
 					//Intent intent = new Intent(this, TableroActivity.class);
@@ -153,7 +150,7 @@ public class LoginActivity extends net.msonic.lib.sherlock.ActivityBase {
 					intent.putExtra(ResumenAdminFranquiciaActivity.CODIGO_DEPOSITO_KEY, usuarioTO.codigoDeposito.trim());
 					intent.putExtra(ResumenAdminFranquiciaActivity.NOMBRE_CDA_KEY, usuarioTO.descripcionDeposito.trim());
 			    	startActivity(intent);
-				}else if(usuarioTO.rolId.compareToIgnoreCase("11")==0){//ADMINISTRADOR FRANQUICIA
+				}else if(usuarioTO.rolId.compareToIgnoreCase("11")==0){//JEFE COMERCIAL
 					Intent intent = new Intent(this, ResumenJefeComercialesActivity.class);
 					intent.putExtra(ResumenJefeComercialesActivity.CODIGO_JEFE_COMERCIAL_KEY, usuarioTO.codigoSap.trim());
 					intent.putExtra(ResumenJefeComercialesActivity.CODIGO_DEPOSITO_KEY, usuarioTO.codigoDeposito.trim());
@@ -161,8 +158,8 @@ public class LoginActivity extends net.msonic.lib.sherlock.ActivityBase {
 			    	startActivity(intent);
 				}else{
 					message = usuario_no_tiene_acceso;
-				}
-				*/
+				}*/
+				
 				
 			}else{
 				message = String.format(
