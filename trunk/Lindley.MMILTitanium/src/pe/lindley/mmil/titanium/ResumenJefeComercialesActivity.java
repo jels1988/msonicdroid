@@ -144,7 +144,7 @@ public class ResumenJefeComercialesActivity extends net.msonic.lib.sherlock.Acti
 
  			// TODO Auto-generated method stub
  			AlertDialog.Builder builder = new AlertDialog.Builder(this);
- 			builder.setTitle(R.string.resumen_adminfranquicia_seleccionar_supervisores);
+ 			builder.setTitle("Seleccionar Jefe Comercial");
  			
  			
  			
