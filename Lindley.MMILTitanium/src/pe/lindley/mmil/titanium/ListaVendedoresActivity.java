@@ -165,14 +165,15 @@ public class ListaVendedoresActivity extends net.msonic.lib.sherlock.ListActivit
 		}
 
 	 @Override
-		public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		public boolean onOptionsItemSelected(
+				com.actionbarsherlock.view.MenuItem item) {
 			// TODO Auto-generated method stub
 			if(item.getItemId()==R.id.mnuMapas){
 				showDialog(0);
 			}else if(item.getItemId()==R.id.mnuPedidos){
 				showDialog(1);
 			}
-			return super.onMenuItemSelected(featureId, item);
+			return super.onOptionsItemSelected(item);
 		}
 
 	 @Override
