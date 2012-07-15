@@ -3,6 +3,7 @@ package pe.lindley.mmil.titanium;
 import pe.lindley.mmil.titanium.ws.service.ClientesCreditosProxy;
 import pe.lindley.mmil.titanium.ws.service.ConfrontacionProxy;
 import pe.lindley.mmil.titanium.ws.service.ConsultarClienteProxy;
+import pe.lindley.mmil.titanium.ws.service.ConsultarMercaderistaDetalleProxy;
 import pe.lindley.mmil.titanium.ws.service.ListarMapVendedorProxy;
 import pe.lindley.mmil.titanium.ws.service.ListarSupervisorProxy;
 import pe.lindley.mmil.titanium.ws.service.ListarVendedorProxy;
@@ -47,6 +48,8 @@ public class Modulo extends AbstractModule {
 		bind(ResumenJefeComercialesProxy.class).in(Singleton.class);
 		bind(ResumenGerenteVentasProxy.class).in(Singleton.class);
 		bind(ResumenGerenteVentasDepositosProxy.class).in(Singleton.class);
+		bind(ConsultarMercaderistaDetalleProxy.class).in(Singleton.class);
+		
 		
 		
 		

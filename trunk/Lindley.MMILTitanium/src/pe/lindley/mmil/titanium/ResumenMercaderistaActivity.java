@@ -2,9 +2,7 @@ package pe.lindley.mmil.titanium;
 
 import java.util.ArrayList;
 
-import pe.lindley.mmil.titanium.ResumenJefeComercialesActivity.ResumenDetalleVenta_Adapter;
 import pe.lindley.mmil.titanium.to.MercaderistaTO;
-import pe.lindley.mmil.titanium.to.ResumenVentaDetalleTO;
 import pe.lindley.mmil.titanium.ws.service.ResumenMercaderistasProxy;
 import roboguice.inject.InjectExtra;
 import android.app.Activity;
@@ -82,11 +80,13 @@ public class ResumenMercaderistaActivity extends net.msonic.lib.sherlock.ListAct
  			builder.setPositiveButton(R.string.listasupervisores_activity_title_dialog_Aceptar, new DialogInterface.OnClickListener() {
 			        public void onClick(DialogInterface dialog, int id) {
 			        	if(item_selected>-1){
-			        		/*Intent intent = new Intent(getApplicationContext(), ResumenAdminFranquiciaActivity.class);
-							intent.putExtra(ResumenAdminFranquiciaActivity.CODIGO_ADMIN_FRANQUINCIA_KEY, codigoSupervisor);
-							intent.putExtra(ResumenAdminFranquiciaActivity.CODIGO_DEPOSITO_KEY, codigoCda);
-							intent.putExtra(ResumenAdminFranquiciaActivity.NOMBRE_CDA_KEY, nombreSupervisor);
-					    	startActivity(intent);*/
+			        		Intent intent = new Intent(getApplicationContext(), ClientesAtendidosActivity.class);
+							intent.putExtra(ClientesAtendidosActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
+							intent.putExtra(ClientesAtendidosActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+							intent.putExtra(ClientesAtendidosActivity.NOMBRE_CDA_KEY, nombre_cda);
+							intent.putExtra(ClientesAtendidosActivity.CODIGO_MERCADERISTA_KEY, codigoMercaderista);
+							intent.putExtra(ClientesAtendidosActivity.NOMBRE_MERCADERISTA_KEY, nombreMercaderista);
+					    	startActivity(intent);
 				        	dialog.dismiss();
 			        	}
 			        }
