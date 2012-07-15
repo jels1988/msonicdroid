@@ -13,5 +13,8 @@ public class ResumenVentaResponse extends ResponseBase {
 	
 	@SerializedName("RVN")
 	public ArrayList<ResumenVentaTO> resumenVenta;
+	
+	@SerializedName("RMC")
+	public ArrayList<ResumenVentaTO> resumenMercaderista;
 
 }

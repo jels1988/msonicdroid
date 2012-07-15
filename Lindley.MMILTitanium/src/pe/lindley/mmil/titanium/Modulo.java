@@ -49,6 +49,7 @@ public class Modulo extends AbstractModule {
 		bind(ResumenGerenteVentasDepositosProxy.class).in(Singleton.class);
 		
 		
+		
 	
 	}
 
