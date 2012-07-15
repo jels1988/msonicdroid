@@ -20,7 +20,7 @@ public class ResumenVendedoresProxy extends ProxyBase<ResumenVentaResponse> {
 	protected String getUrl() {
 		// TODO Auto-generated method stub
 		
-			return urlWS + "/ResumenVendedores";
+			return urlWS + "/ResumenVentas";
 		
 	}
 

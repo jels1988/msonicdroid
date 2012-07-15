@@ -2,25 +2,30 @@ package pe.lindley.mmil.titanium;
 
 import java.util.ArrayList;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.google.inject.Inject;
 import pe.lindley.mmil.titanium.to.ResumenVentaTO;
 import pe.lindley.mmil.titanium.ws.service.ResumenVendedoresProxy;
 import roboguice.inject.InjectExtra;
+import roboguice.inject.InjectView;
 
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
-public class ResumenVentaActivity extends net.msonic.lib.sherlock.ListActivityBase {
+public class ResumenVentaActivity extends net.msonic.lib.sherlock.ActivityBase implements ActionBar.TabListener  {
 	
 	public static final String NOMBRE_CDA_KEY="NOMBRE_CDA";
 	public static final String CODIGO_DEPOSITO_KEY = "CODIGO_DEPOSITO";
@@ -32,6 +37,9 @@ public class ResumenVentaActivity extends net.msonic.lib.sherlock.ListActivityBa
 	
 	
 	@Inject ResumenVendedoresProxy resumenVentaProxy;
+	
+	@InjectView(R.id.lstVendedores) ListView lstVendedores;
+	@InjectView(R.id.lstMercaderistas) ListView lstMercaderistas;
 	
 	//@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
 	  /** Called when the activity is first created. */
@@ -45,16 +53,53 @@ public class ResumenVentaActivity extends net.msonic.lib.sherlock.ListActivityBa
       setTitle(R.string.resumen_venta_activity_title);
       getSupportActionBar().setSubtitle(nombre_cda);
       
-      /*
-      mActionBar.setHomeLogo(R.drawable.header_logo);
-      mActionBar.setTitle(R.string.resumen_venta_activity_title);
-      mActionBar.setSubTitle(nombre_cda);
-      */
+      
+      getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+      
+      ActionBar.Tab tab = getSupportActionBar().newTab();
+      tab.setText("Vendedores");
+      tab.setTabListener(this);
+      getSupportActionBar().addTab(tab);
+      
+      
+      ActionBar.Tab tab2 = getSupportActionBar().newTab();
+      tab2.setText("Mercaderistas");
+      tab2.setTabListener(this);
+      getSupportActionBar().addTab(tab2);
       
       processAsync();
       
   }
 	
+  
+  @Override
+ 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+ 		// TODO Auto-generated method stub
+ 	  if(tab.getPosition()==0){
+ 		  lstVendedores.setVisibility(View.VISIBLE);
+ 		 lstMercaderistas.setVisibility(View.GONE);  
+ 		  
+ 		  //hView.setVisibility(View.GONE);
+ 	  }else{
+ 		 lstVendedores.setVisibility(View.GONE);
+  		 lstMercaderistas.setVisibility(View.VISIBLE);  
+ 	  }
+ 		
+ 	}
+
+
+ 	@Override
+ 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+ 		// TODO Auto-generated method stub
+ 		
+ 	}
+
+
+ 	@Override
+ 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
+ 		// TODO Auto-generated method stub
+ 		
+ 	}
   
   @Override
 	protected void process() {
@@ -76,8 +121,15 @@ public class ResumenVentaActivity extends net.msonic.lib.sherlock.ListActivityBa
 			if (status == 0) {
 				
 				ArrayList<ResumenVentaTO> resumenVenta = resumenVentaProxy.getResponse().resumenVenta;
-				ResumenVenta_Adapter adapterSupervisor = new ResumenVenta_Adapter(this, resumenVenta);
-				getListView().setAdapter(adapterSupervisor);
+				ResumenVenta_Adapter adapterVendedor = new ResumenVenta_Adapter(this, resumenVenta);
+				lstVendedores.setAdapter(adapterVendedor);
+				
+				
+				ArrayList<ResumenVentaTO> resumenMercaderista = resumenVentaProxy.getResponse().resumenMercaderista;
+				ResumenVenta_Adapter adapterMercaderista = new ResumenVenta_Adapter(this, resumenMercaderista);
+				lstMercaderistas.setAdapter(adapterMercaderista);
+				
+				//getListView().setAdapter(adapterSupervisor);
 				
 				super.processOk();
 			}else{

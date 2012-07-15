@@ -1,13 +1,13 @@
 package pe.lindley.mmil.titanium.ws.service;
 
 import pe.lindley.mmil.titanium.R;
+import pe.lindley.mmil.titanium.ws.bean.ConsultarMercaderistaResponse;
 import pe.lindley.mmil.titanium.ws.bean.ResumenVentaRequest;
-import pe.lindley.mmil.titanium.ws.bean.ResumenVentaResponse;
 import roboguice.inject.InjectResource;
 import net.msonic.lib.JSONHelper;
 import net.msonic.lib.ProxyBase;
 
-public class ResumenMercaderistasProxy extends ProxyBase<ResumenVentaResponse> {
+public class ResumenMercaderistasProxy extends ProxyBase<ConsultarMercaderistaResponse> {
 
 	public String codigoDeposito;
 	public String codigoSupervisor;
@@ -17,7 +17,7 @@ public class ResumenMercaderistasProxy extends ProxyBase<ResumenVentaResponse> {
 	@Override
 	protected String getUrl() {
 		// TODO Auto-generated method stub
-		return urlWS + "/ResumenMercaderista";
+		return urlWS + "/ConsultarMercaderista";
 	}
 
 	@Override
@@ -32,9 +32,9 @@ public class ResumenMercaderistasProxy extends ProxyBase<ResumenVentaResponse> {
 	}
 
 	@Override
-	protected ResumenVentaResponse responseText(String json) {
+	protected ConsultarMercaderistaResponse responseText(String json) {
 		// TODO Auto-generated method stub
-		ResumenVentaResponse response =  JSONHelper.desSerializar(json,ResumenVentaResponse.class);
+		ConsultarMercaderistaResponse response =  JSONHelper.desSerializar(json,ConsultarMercaderistaResponse.class);
 		return response;
 	}
 

@@ -1,26 +1,24 @@
 package pe.lindley.mmil.titanium;
 
 import java.util.ArrayList;
-import pe.lindley.mmil.titanium.to.ResumenVentaTO;
+
+import pe.lindley.mmil.titanium.to.MercaderistaTO;
 import pe.lindley.mmil.titanium.ws.service.ResumenMercaderistasProxy;
 import roboguice.inject.InjectExtra;
-import roboguice.inject.InjectView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
 
 
 public class ResumenMercaderistaActivity extends net.msonic.lib.sherlock.ListActivityBase {
@@ -44,7 +42,7 @@ public class ResumenMercaderistaActivity extends net.msonic.lib.sherlock.ListAct
       super.onCreate(savedInstanceState);
       inicializarRecursos();
       
-      setContentView(R.layout.resumenventa_activity);
+      setContentView(R.layout.resumenmercaderista_activity);
       
      // mActionBar.setHomeLogo(R.drawable.header_logo);
       
@@ -79,9 +77,9 @@ public class ResumenMercaderistaActivity extends net.msonic.lib.sherlock.ListAct
 			int status = resumenMercaderistasProxy.getResponse().getStatus();
 			if (status == 0) {
 				
-				ArrayList<ResumenVentaTO> resumenVenta = resumenMercaderistasProxy.getResponse().resumenVenta;
-				ResumenVenta_Adapter adapterSupervisor = new ResumenVenta_Adapter(this, resumenVenta);
-				getListView().setAdapter(adapterSupervisor);
+				ArrayList<MercaderistaTO> resumenMercaderista = resumenMercaderistasProxy.getResponse().mercaderistas;
+				Tablero_Adapter adapterMercaderista = new Tablero_Adapter(this, resumenMercaderista);
+				getListView().setAdapter(adapterMercaderista);
 				
 				super.processOk();
 			}else{
@@ -202,24 +200,23 @@ public class ResumenMercaderistaActivity extends net.msonic.lib.sherlock.ListAct
 
 
 
-	public static class ResumenVenta_Adapter extends ArrayAdapter<ResumenVentaTO>{
-		
-		   private final ArrayList<ResumenVentaTO> detalle;
+	public static class Tablero_Adapter extends ArrayAdapter<MercaderistaTO>{
+		   private final ArrayList<MercaderistaTO> detalle;
 		   private final Activity context;
 		
 					
-		   private static final int IND_VERDE = 3;
-		   private static final int IND_AMARRILLO = 2;
-		   private static final int IND_ROJO = 1;
+		   private static final int IND_VERDE = 0;
+		   private static final int IND_AMARRILLO = 1;
+		   private static final int IND_ROJO = 2;
 		   
-		   
-		   public ResumenVenta_Adapter(Activity context,ArrayList<ResumenVentaTO> detalle){
-				super(context, R.layout.resumenventa_content, detalle);
+			public Tablero_Adapter(Activity context,ArrayList<MercaderistaTO> detalle){
+				super(context, R.layout.resumenmercaderista_content, detalle);
 				this.detalle = detalle;
 				this.context = context;
+			
 			}
-		   
-		   
+			
+			
 			
 			public int getCount() {
 				// TODO Auto-generated method stub
@@ -230,73 +227,118 @@ public class ResumenMercaderistaActivity extends net.msonic.lib.sherlock.ListAct
 				}
 			}
 			
-			public ResumenVentaTO getItem(int position) {
+			
+			public MercaderistaTO getItem(int position) {
 				// TODO Auto-generated method stub
 				return this.detalle.get(position);
 			}
 			
+			
 			public long getItemId(int position) {
 				// TODO Auto-generated method stub
-				return 0;
+				return position;
 			}
 			
 			
+			Integer selectedLocation = null;
+
+			public void onItemClick(AdapterView<?> adapter, View view, int location,
+			                long arg3) {
+			            selectedLocation = location;
+			        }
 			
+		
 			
 			public View getView(int position, View convertView, ViewGroup parent) {
 				// TODO Auto-generated method stub
 				
 				View view = null;	
 				
+			    
+				
 				if (convertView == null) {
 					
 					LayoutInflater inflator = context.getLayoutInflater();
-					view = inflator.inflate(R.layout.resumenventa_content, null);
-					
+					view = inflator.inflate(R.layout.resumenmercaderista_content, null);
+				    
+				    
 					final ViewHolder holder = new ViewHolder();
+					view.setClickable(true);
 					
-					holder.imgIndicador = (ImageView)view.findViewById(R.id.imgIndicador);
-					holder.txtDescripcion = (TextView) view.findViewById(R.id.txtDescripcion);
-					holder.txtValor = (TextView)view.findViewById(R.id.txtValor);
-					
+					holder.txtCodigo = (TextView)view.findViewById(R.id.txtCodigo);
+					holder.txtNombre = (TextView)view.findViewById(R.id.txtNombre);
+					holder.txtClienteProgramados = (TextView) view.findViewById(R.id.txtClienteProgramados);
+					holder.txtClienteVisitados = (TextView) view.findViewById(R.id.txtClienteVisitados);
+					holder.txtClienteAtendidos = (TextView) view.findViewById(R.id.txtClienteAtendidos);
+					holder.txtClienteNoAtendidos = (TextView) view.findViewById(R.id.txtClienteNoAtendidos);
+					holder.txtTiempoEfectivo = (TextView) view.findViewById(R.id.txtTiempoEfectivo);
+					holder.txtPrimerRegistro = (TextView) view.findViewById(R.id.txtPrimerRegistro);
+					holder.txtUltimoRegistro = (TextView) view.findViewById(R.id.txtUltimoRegistro);
+					holder.txtAvance = (TextView) view.findViewById(R.id.txtAvance);
+					holder.imgColor = (ImageView) view.findViewById(R.id.imgColor);
+
 					view.setTag(holder);
-					holder.txtValor.setTag(this.detalle.get(position));
-					
+					holder.txtCodigo.setTag(this.detalle.get(position));
 				}else{
 					view = convertView;
-					((ViewHolder) view.getTag()).txtValor.setTag(this.detalle.get(position));
+					((ViewHolder) view.getTag()).txtCodigo.setTag(this.detalle.get(position));
 				}
 				
+				
+				
+				MercaderistaTO mercaderistaTO = this.detalle.get(position);
+				
 				ViewHolder holder = (ViewHolder) view.getTag();
+				holder.txtCodigo.setText(String.valueOf(mercaderistaTO.codigo));
+				holder.txtNombre.setText(mercaderistaTO.descripcion);
+				holder.txtClienteProgramados.setText(mercaderistaTO.programados);
+				holder.txtClienteVisitados.setText(mercaderistaTO.visitados);
+				holder.txtClienteAtendidos.setText(mercaderistaTO.atendidos);
+				holder.txtClienteNoAtendidos.setText(mercaderistaTO.noAtendidos);
+				holder.txtTiempoEfectivo.setText(mercaderistaTO.tiempoEjecutado);
+				holder.txtPrimerRegistro.setText(mercaderistaTO.horaInicio);
+				holder.txtUltimoRegistro.setText(mercaderistaTO.horaFin);
+				holder.txtAvance.setText(mercaderistaTO.planVisita);
 				
-				holder.txtDescripcion.setText(this.detalle.get(position).descripcion);
-				holder.txtValor.setText(this.detalle.get(position).valor);
+				if(mercaderistaTO.indicador!=null){
+					 switch(Integer.parseInt(mercaderistaTO.indicador))
+				      {
+				      	case IND_VERDE:
+				      		holder.imgColor.setImageResource(R.drawable.icon_verde);
+				    	  break;
+				      	case IND_AMARRILLO:
+				      		holder.imgColor.setImageResource(R.drawable.icon_amarrillo);
+				      		break;
+				      	case IND_ROJO:
+				      		holder.imgColor.setImageResource(R.drawable.icon_rojo);
+				      		break;	 
+				       }	
+					}
 				
-				holder.imgIndicador.setImageResource(R.drawable.icon_white);
 				
-				 switch(Integer.parseInt(this.detalle.get(position).indicador))
-			      {
-			      	case IND_VERDE:
-			      		holder.imgIndicador.setImageResource(R.drawable.icon_verde);
-			    	  break;
-			      	case IND_AMARRILLO:
-			      		holder.imgIndicador.setImageResource(R.drawable.icon_amarrillo);
-			      		break;
-			      	case IND_ROJO:
-			      		holder.imgIndicador.setImageResource(R.drawable.icon_rojo);
-			      		break;	 
-			       }
+				
+				
 				return view;
 				
 			}
 			
-			
 			private class ViewHolder {
-				 public ImageView imgIndicador;
-				 public TextView txtDescripcion;
-				 public TextView txtValor;
-					 
-			 }
-			
-	}
+				
+				
+				public TextView txtCodigo;
+				public TextView txtNombre;
+				public TextView txtClienteProgramados;
+				public TextView txtClienteVisitados;
+				public TextView txtClienteAtendidos;
+				public TextView txtClienteNoAtendidos;
+				public TextView txtTiempoEfectivo;
+				public TextView txtPrimerRegistro;
+				public TextView txtUltimoRegistro;
+				public TextView txtAvance;
+				public ImageView imgColor;
+				
+			}
+		   
+	 }
 }
+
