@@ -2,13 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" 
-    android:layout_margin="1dip">
+    android:orientation="vertical" >
     
-    <com.thira.examples.actionbar.widget.ActionBar
+    <!--com.thira.examples.actionbar.widget.ActionBar
 		android:id="@+id/actionBar" 
 		android:layout_width="fill_parent"
-		android:layout_height="44dip" />
+		android:layout_height="44dip" /-->
 
      <TableLayout
                 android:layout_width="fill_parent"
@@ -38,12 +37,18 @@
       
       </TableLayout>
               
-     <ListView android:id="@+id/android:list"
+     <ListView android:id="@+id/lstVendedores"
   		 android:clickable="true"
   		android:addStatesFromChildren="true"
           android:choiceMode="singleChoice"
          android:layout_width="fill_parent"
   android:layout_height="wrap_content"/>
      
+      <ListView android:id="@+id/lstMercaderistas"
+  		 android:clickable="true"
+  		android:addStatesFromChildren="true"
+          android:choiceMode="singleChoice"
+         android:layout_width="fill_parent"
+  android:layout_height="wrap_content"/>
 
 </LinearLayout>
