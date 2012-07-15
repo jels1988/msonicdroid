@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/mnuVentas" android:title="@string/resumen_venta_menu_ventas"/>
-	<item android:id="@+id/mnuMix" android:title="@string/resumen_venta_menu_mix"/>
-    <item android:id="@+id/mnuVendedores" android:title="@string/resumen_venta_menu_vendedores"/>
-    <item android:id="@+id/mnuConfrontacion" android:title="@string/resumen_venta_menu_confrontacion"/>
-    <item android:id="@+id/mnuConsultas" android:title="@string/resumen_venta_menu_consulta"/>
+    <item android:id="@+id/mnuClientesAtendidos" android:title="@string/resumen_mercaderista_menu_clientes_atendidos"/>
+	
 </menu>
