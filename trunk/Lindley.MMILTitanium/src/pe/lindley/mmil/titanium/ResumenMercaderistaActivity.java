@@ -46,7 +46,7 @@ public class ResumenMercaderistaActivity extends net.msonic.lib.sherlock.ListAct
       
      // mActionBar.setHomeLogo(R.drawable.header_logo);
       
-      setTitle(R.string.resumen_mercaderista_activity_title);
+      setTitle(R.string.resumen_mercaderista_title);
       getSupportActionBar().setSubtitle(nombre_cda);
       
       /*
