@@ -73,7 +73,7 @@
     <string name="login_activity_txtpassword_empty">Debes ingresar tu password</string>
     <string name="resumen_venta_activity_title">Resumen de Venta</string>
     <string name="resumen_venta_menu_ventas">Ventas</string>
-    <string name="resumen_venta_menu_mercaderista">Mercaderista</string>
+    <string name="resumen_venta_menu_mercaderista">Mercaderistas</string>
     <string name="resumen_venta_menu_mix">Mix</string>
     <string name="resumen_venta_menu_vendedores">Vendedores</string>
     <string name="resumen_venta_menu_consulta">Consultas</string>
@@ -82,7 +82,7 @@
     <string name="resumen_venta_descripcion_column">Descripción</string>
     <string name="resumen_venta_indicador_column"> </string>
     <string name="resumen_venta_valor_column">Valor</string>
-    <string name="resumen_mercaderista_activity_title">Resumen de Mercaderistas</string>
+    <string name="resumen_mercaderista_activity_title">Resumen de Mercaderista</string>
     <string name="mix_producto_activity_title">Mix de Productos</string>
     <string name="mix_producto_producto_column">Producto</string>
     <string name="mix_producto_cunitaria_column">C.Unitarias</string>
@@ -187,4 +187,43 @@
     <string name="history_mensual_title">Profit</string>
     <string name="history_comparativo_title">Profit Mensual Comparativo</string>
     <string name="history_semanal_title">Profit Semanal</string>
+    <string name="resumen_adminfranquicia_activity_title">Adm. de Franquicia</string>
+    <string name="resumen_adminfranquicia_column_codigo">Código</string>
+    <string name="resumen_adminfranquicia_column_supervisores">Descripción</string>
+    <string name="resumen_adminfranquicia_column_avance">Avance</string>
+    <string name="resumen_adminfranquicia_column_cuota">Cuota</string>
+    <string name="resumen_adminfranquicia_column_vendido">Vendido</string>
+    <string name="resumen_adminfranquicia_column_cliprogramados">Cli.Programados</string>
+    <string name="resumen_adminfranquicia_column_clivistados">Cli.Vistados</string>
+    <string name="resumen_adminfranquicia_column_conpedidos">C/Pedidos</string>
+    <string name="resumen_adminfranquicia_column_sinpedidos">S/Pedidos</string>
+    <string name="resumen_adminfranquicia_menu_supervisores">Supervisores</string>
+    <string name="resumen_adminfranquicia_seleccionar_supervisores">Seleccionar Supervisores</string>
+    <string name="resumen_jefecomercial_activity_title">Jefe Comerciales</string>
+    <string name="resumen_jefecomercial_menu_adminfranquincia">Admin. Franquicia</string>
+    <string name="resumen_gerenteventas_activity_title">Gerente de Ventas</string>
+    <string name="resumen_gerenteventas_menu_depositos">Depósitos</string>
+    <string name="resumen_gerenteventas_menu_jefeventas">Jefe de Ventas</string>
+    <string name="resumen_mercaderista_title">Mercaderistas</string>
+    <string name="resumen_mercaderista_menu_clientes_atendidos">Clientes Atendidos</string>
+    <string name="resumen_mercaderista_column_codigo">Código</string>
+    <string name="resumen_mercaderista_column_nombre">Descripción</string>
+    <string name="resumen_mercaderista_column_programdos">Cli.Programados</string>
+    <string name="resumen_mercaderista_column_visitados">Cli.Visitados</string>
+    <string name="resumen_mercaderista_column_atendidos">Cli.Atendidos</string>
+    <string name="resumen_mercaderista_column_no_atendidos">Cli.No Atendidos</string>
+    <string name="resumen_mercaderista_column_tiempo_efectivo">T.Efectivo</string>
+    <string name="resumen_mercaderista_column_primer_registro">Pri.Registro</string>
+    <string name="resumen_mercaderista_column_ultimo_registro">Ult.Registro</string>
+    <string name="resumen_mercaderista_column_porcentaje">% Avance</string>
+    <string name="resumen_mercaderista_column_indicador"/>
+    
+    
+    <string name="cliente_atendidos_activity_title">Clientes Atendidos</string>
+    <string name="cliente_atendidos_activity_column_codigo">Código</string>
+    <string name="cliente_atendidos_activity_column_cliente">Cliente</string>
+    <string name="cliente_atendidos_activity_column_direccion">Dirección</string>
+    <string name="cliente_atendidos_activity_column_hora_inicio">Hora Inicio</string>
+    <string name="cliente_atendidos_activity_column_hora_fin">Hora Fin</string>
+    <string name="cliente_atendidos_activity_column_tiempo_efectivo">T.Efectivo</string>
 </resources>
