@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+        
+     
+         <HorizontalScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_margin="1dip"
+            android:layout_weight="1"
+            android:focusable="false"
+ 			android:clickable="false"
+            android:fillViewport="true">
+            
+                 <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+ 	android:clickable="false"
+            android:orientation="vertical" >
+
+            <TableLayout
+                android:layout_width="910dip"
+                android:layout_height="wrap_content">
+        		
+                
+                 <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+                     
+                     <TextView
+                android:id="@+id/txtCodigo"
+                android:layout_height="wrap_content"
+                android:layout_width="100dip"
+                android:gravity="left"
+                style="@style/TextViewHead"
+                android:text="@string/cliente_atendidos_activity_column_codigo"/>
+            
+              <TextView
+                android:id="@+id/txtNombre"
+                android:layout_height="wrap_content"
+                android:layout_width="250dip"
+                android:gravity="left"
+                style="@style/TextViewHead"
+                android:text="@string/cliente_atendidos_activity_column_cliente"/>
+              
+                      
+               <TextView
+                android:id="@+id/txtDireccion"
+                android:layout_height="wrap_content"
+                android:layout_width="200dip"
+                android:gravity="left"
+			style="@style/TextViewHead"
+			android:text="@string/cliente_atendidos_activity_column_direccion"/>
+               
+               <TextView
+                android:id="@+id/txtHoraInicio"
+                android:layout_height="wrap_content"
+                android:layout_width="120dip"
+                android:gravity="left"
+                style="@style/TextViewHead"
+                android:text="@string/cliente_atendidos_activity_column_hora_inicio"/>
+              
+               <TextView
+                android:id="@+id/txtHoraFin"
+                android:layout_height="wrap_content"
+                android:layout_width="120dip"
+                android:gravity="left"
+                style="@style/TextViewHead"
+                android:text="@string/cliente_atendidos_activity_column_hora_fin"/>
+              
+               
+ 				<TextView
+                android:id="@+id/txtTiempoEfectivo"
+                android:layout_height="wrap_content"
+                android:layout_width="120dip"
+                android:gravity="left"
+                style="@style/TextViewHead"
+                android:text="@string/cliente_atendidos_activity_column_tiempo_efectivo"/>
+ 					
+ 				    
+                  
+                     
+          
+              </TableRow>
+             </TableLayout>
+              <ListView android:id="@+id/android:list"
+		android:clickable="true"
+		android:addStatesFromChildren="true"
+        android:choiceMode="singleChoice"
+       	android:layout_width="fill_parent"
+		android:layout_height="wrap_content"/>
+          
+                   
+             </LinearLayout>
+       </HorizontalScrollView>
+
+</LinearLayout>

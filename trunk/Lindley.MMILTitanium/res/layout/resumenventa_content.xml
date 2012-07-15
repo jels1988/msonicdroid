@@ -7,9 +7,9 @@
     
     <TableRow android:gravity="center_vertical">
     
-	    <TextView android:id="@+id/txtDescripcion" android:layout_weight="3" android:layout_height="wrap_content" android:layout_width="0dip"/>
+	    <TextView android:id="@+id/txtDescripcion" android:layout_marginLeft="2dip" android:layout_weight="3" android:layout_height="wrap_content" android:layout_width="0dip"/>
 	    <ImageView android:id="@+id/imgIndicador" android:layout_weight="1" android:layout_height="wrap_content" android:layout_width="0dip"/>
-	    <TextView android:id="@+id/txtValor" android:layout_weight="2" android:layout_height="wrap_content" android:layout_width="0dip" android:gravity="right"/>
+	    <TextView android:id="@+id/txtValor" android:layout_marginRight="6dip" android:layout_weight="2" android:layout_height="wrap_content" android:layout_width="0dip" android:gravity="right"/>
 
     </TableRow>
 </TableLayout>

@@ -1,0 +1,62 @@
+<TableLayout
+ xmlns:android="http://schemas.android.com/apk/res/android"
+ android:layout_height="wrap_content"
+ 	android:layout_width="wrap_content"
+ 	android:background="@color/custom_theme_color_blanco"
+ 	android:addStatesFromChildren="true"
+      android:stretchColumns="*"
+        android:shrinkColumns="*">
+ 
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent">
+            
+              <TextView
+                android:id="@+id/txtCodigo"
+                android:layout_height="wrap_content"
+                android:layout_width="100dip"
+                android:gravity="left"
+                />
+            
+              <TextView
+                android:id="@+id/txtNombre"
+                android:layout_height="wrap_content"
+                android:layout_width="250dip"
+                android:gravity="left"
+                />
+
+                      
+               <TextView
+                android:id="@+id/txtDireccion"
+                android:layout_height="wrap_content"
+                android:layout_width="200dip"
+                android:gravity="left"
+                />
+               
+               <TextView
+                android:id="@+id/txtHoraInicio"
+                android:layout_height="wrap_content"
+                android:layout_width="120dip"
+                android:gravity="left"
+                />
+              
+               <TextView
+                android:id="@+id/txtHoraFin"
+                android:layout_height="wrap_content"
+                android:layout_width="120dip"
+                android:gravity="left"
+                />
+              
+               
+ 				<TextView
+                android:id="@+id/txtTiempoEfectivo"
+                android:layout_height="wrap_content"
+                android:layout_width="120dip"
+                android:gravity="left"
+                />
+             
+       
+        </TableRow>
+    
+ 
+ </TableLayout>

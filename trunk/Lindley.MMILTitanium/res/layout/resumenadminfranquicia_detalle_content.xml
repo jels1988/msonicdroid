@@ -1,0 +1,85 @@
+<TableLayout
+ xmlns:android="http://schemas.android.com/apk/res/android"
+ android:layout_height="wrap_content"
+ 	android:layout_width="wrap_content"
+ 	android:background="@color/custom_theme_color_blanco"
+ 	android:addStatesFromChildren="true"
+      android:stretchColumns="*"
+        android:shrinkColumns="*">
+ 
+    	
+
+    
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent">
+            
+              <TextView
+                android:id="@+id/txtCodigo"
+                android:layout_height="wrap_content"
+                android:layout_width="50dip"
+                android:gravity="left"/>
+            
+              <TextView
+                android:id="@+id/txtDescripcion"
+                android:layout_height="wrap_content"
+                android:layout_width="250dip"
+                android:gravity="left"/>
+              
+                      
+                   <TextView
+                android:id="@+id/txtAvance"
+                android:layout_height="wrap_content"
+                android:layout_width="120dip"
+                android:gravity="left"/>
+              
+                <TextView
+                android:id="@+id/txtCuota"
+                android:layout_height="wrap_content"
+                android:layout_width="120dip"
+                android:gravity="left"/>
+                
+               <TextView
+                android:id="@+id/txtVendido"
+                android:layout_height="wrap_content"
+                android:layout_width="120dip"
+                android:gravity="left"/>
+
+         
+
+          <TextView
+                android:id="@+id/txtCliProgramados"
+                android:layout_height="wrap_content"
+                android:layout_width="120dip"
+                android:gravity="left"/>
+                
+          
+                    
+     	
+     	 
+
+         <TextView
+                android:id="@+id/txtCliVisitados"
+                android:layout_height="wrap_content"
+                android:layout_width="120dip"
+                android:gravity="left"/>
+
+             <TextView
+                android:id="@+id/txtConPedido"
+                android:layout_height="wrap_content"
+                android:layout_width="120dip"
+                android:gravity="left"/>
+         
+             
+                <TextView
+                android:id="@+id/txtSinPedido"
+                android:layout_height="wrap_content"
+                android:layout_width="120dip"
+                android:gravity="left"/>
+                
+    
+                
+        </TableRow>
+    
+ 
+ </TableLayout>
