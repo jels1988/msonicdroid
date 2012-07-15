@@ -2,10 +2,15 @@ package pe.lindley.mmil.titanium;
 
 import java.util.ArrayList;
 
+import pe.lindley.mmil.titanium.ResumenJefeComercialesActivity.ResumenDetalleVenta_Adapter;
 import pe.lindley.mmil.titanium.to.MercaderistaTO;
+import pe.lindley.mmil.titanium.to.ResumenVentaDetalleTO;
 import pe.lindley.mmil.titanium.ws.service.ResumenMercaderistasProxy;
 import roboguice.inject.InjectExtra;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,7 +40,72 @@ public class ResumenMercaderistaActivity extends net.msonic.lib.sherlock.ListAct
 	
 	@Inject ResumenMercaderistasProxy resumenMercaderistasProxy;
 	
-	//@InjectView(R.id.actionBar)  		ActionBar 	mActionBar;
+	int item_selected = -1; // select at 0
+	String codigoMercaderista=null;
+	String nombreMercaderista=null;
+	
+	
+	
+	
+	 @Override
+	 	protected Dialog onCreateDialog(int id) {
+	 		 
+		  
+		  	final Tablero_Adapter adapter = (Tablero_Adapter)getListView().getAdapter();
+		  
+		  
+	 		 ArrayList<String> mercaderistas = new ArrayList<String>();
+	 			
+	 			if(adapter!=null){
+	 				for (MercaderistaTO mercaderistaTO : adapter.detalle) {
+	 					mercaderistas.add(mercaderistaTO.descripcion);
+	 				}
+	 			}
+	 			
+	 	
+ 			final String[] values = mercaderistas.toArray(new String[mercaderistas.size()]);
+ 			ArrayAdapter<String> arrAdap = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, android.R.id.text1, values);
+ 			
+	 		// TODO Auto-generated method stub
+ 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+ 			builder.setTitle("Seleccionar Mercaderista");
+ 			
+ 			
+ 			builder.setSingleChoiceItems(arrAdap,-1, new DialogInterface.OnClickListener() {
+ 			    public void onClick(DialogInterface dialog, int item) {
+ 			    	item_selected = item;
+ 			    	codigoMercaderista =adapter.detalle.get(item_selected).codigo;
+ 			    	nombreMercaderista=adapter.detalle.get(item_selected).descripcion;
+ 			    }
+ 			});
+ 			
+ 			builder.setPositiveButton(R.string.listasupervisores_activity_title_dialog_Aceptar, new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int id) {
+			        	if(item_selected>-1){
+			        		/*Intent intent = new Intent(getApplicationContext(), ResumenAdminFranquiciaActivity.class);
+							intent.putExtra(ResumenAdminFranquiciaActivity.CODIGO_ADMIN_FRANQUINCIA_KEY, codigoSupervisor);
+							intent.putExtra(ResumenAdminFranquiciaActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+							intent.putExtra(ResumenAdminFranquiciaActivity.NOMBRE_CDA_KEY, nombreSupervisor);
+					    	startActivity(intent);*/
+				        	dialog.dismiss();
+			        	}
+			        }
+			    });
+ 			
+ 			builder.setNegativeButton(R.string.listasupervisores_activity_title_dialog_Cancelar, new DialogInterface.OnClickListener() {
+ 				
+ 		        public void onClick(DialogInterface dialog, int id) {
+ 		        	 dialog.dismiss();
+ 		        }
+ 		    });
+ 			
+ 			AlertDialog alert = builder.create();
+ 			
+ 		    
+ 			alert.setCanceledOnTouchOutside(true);
+ 			
+ 			return builder.create();
+	 }
 	  /** Called when the activity is first created. */
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -111,7 +181,7 @@ public class ResumenMercaderistaActivity extends net.msonic.lib.sherlock.ListAct
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		// TODO Auto-generated method stub
 		
-		getSupportMenuInflater().inflate(R.menu.resumen_venta_menu, menu);
+		getSupportMenuInflater().inflate(R.menu.resumen_mercaderista_menu, menu);
 		
 		
 
@@ -145,49 +215,8 @@ public class ResumenMercaderistaActivity extends net.msonic.lib.sherlock.ListAct
 	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
 	    // Handle item selection
 	    switch (item.getItemId()) {
-	        case R.id.mnuVentas:
-	        	
-	        	Intent intent1 = new Intent(this, ResumenVentaActivity.class);
-	        	intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	        	intent1.putExtra(ResumenMercaderistaActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
-	        	intent1.putExtra(ResumenMercaderistaActivity.CODIGO_DEPOSITO_KEY, codigoCda);
-	        	intent1.putExtra(ResumenMercaderistaActivity.NOMBRE_CDA_KEY, nombre_cda);
-		    	startActivity(intent1);
-		    	
-	            return true;
-	        case R.id.mnuMix:
-	        	
-	        	Intent intent2 = new Intent(this, MixProductoActivity.class);
-	        	intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	        	intent2.putExtra(ResumenMercaderistaActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
-	        	intent2.putExtra(ResumenMercaderistaActivity.CODIGO_DEPOSITO_KEY, codigoCda);
-	        	intent2.putExtra(ResumenMercaderistaActivity.NOMBRE_CDA_KEY, nombre_cda);
-		    	startActivity(intent2);
-		    	
-	            return true;
-	        case R.id.mnuVendedores:
-	        	Intent intent = new Intent(this, ListaVendedoresActivity.class);
-	        	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent.putExtra(ListaVendedoresActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
-				intent.putExtra(ListaVendedoresActivity.CODIGO_CDA_KEY, codigoCda);
-				intent.putExtra(ListaVendedoresActivity.NOMBRE_CDA_KEY, nombre_cda);
-		    	startActivity(intent);
-	            return true;
-	        case R.id.mnuConfrontacion:
-	        	Intent intent3 = new Intent(this, ConfrontacionActivity.class);
-	        	intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	        	intent3.putExtra(ConfrontacionActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
-	        	intent3.putExtra(ConfrontacionActivity.CODIGO_DEPOSITO_KEY, codigoCda);
-	        	intent3.putExtra(ConfrontacionActivity.NOMBRE_CDA_KEY, nombre_cda);
-		    	startActivity(intent3);
-	        	return true;
-	        case R.id.mnuConsultas:
-	        	Intent intent5 = new Intent(this, ConsultasActivity.class);
-	        	intent5.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	        	intent5.putExtra(ConsultasActivity.CODIGO_SUPERVISOR_KEY, codigoSupervisor);
-	        	intent5.putExtra(ConsultasActivity.CODIGO_DEPOSITO_KEY, codigoCda);
-	        	intent5.putExtra(ConsultasActivity.NOMBRE_CDA_KEY, nombre_cda);
-		    	startActivity(intent5);
+	        case R.id.mnuClientesAtendidos:
+	        	showDialog(0);
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
