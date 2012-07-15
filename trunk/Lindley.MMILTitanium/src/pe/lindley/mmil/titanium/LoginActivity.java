@@ -109,20 +109,14 @@ public class LoginActivity extends net.msonic.lib.sherlock.ActivityBase {
 				
 				//*******************
 				//TEMPORAL
-				usuarioTO.rolId="9";
+				/*usuarioTO.rolId="9";
 				usuarioTO.codigoSap="00351";
 				usuarioTO.codigoDeposito="C4";
-				usuarioTO.descripcionDeposito="deposito";
+				usuarioTO.descripcionDeposito="deposito";*/
 				//*******************
 				
-				Intent intent = new Intent(this, ResumenVentaActivity.class);
-				intent.putExtra(ResumenVentaActivity.CODIGO_SUPERVISOR_KEY, usuarioTO.codigoSap.trim());
-				intent.putExtra(ResumenVentaActivity.CODIGO_DEPOSITO_KEY, usuarioTO.codigoDeposito.trim());
-				intent.putExtra(ResumenVentaActivity.NOMBRE_CDA_KEY, usuarioTO.descripcionDeposito.trim());
-		    	startActivity(intent);
-		    	
 				
-				/*
+				
 				if(usuarioTO.rolId.compareToIgnoreCase("7")==0){ //GERENTE
 					Intent intent = new Intent(this, ResumenGerenteVentasActivity.class);
 					intent.putExtra(ResumenGerenteVentasActivity.CODIGO_GERENTE_VENTA_KEY, usuarioTO.codigoSap.trim());
@@ -155,7 +149,7 @@ public class LoginActivity extends net.msonic.lib.sherlock.ActivityBase {
 			    	startActivity(intent);
 				}else{
 					message = usuario_no_tiene_acceso;
-				}*/
+				}
 				
 				
 			}else{
