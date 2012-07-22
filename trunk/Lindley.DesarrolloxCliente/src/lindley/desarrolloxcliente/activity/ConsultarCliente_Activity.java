@@ -12,7 +12,6 @@ import lindley.desarrolloxcliente.ws.service.ConsultarClienteProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarEvaluacionesAbiertasProxy;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectResource;
-import roboguice.inject.InjectView;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,8 +21,6 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 */
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,23 +32,27 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
 
 import net.msonic.lib.JSONHelper;
-import net.msonic.lib.ListActivityBase;
+//import net.msonic.lib.ListActivityBase;
 import net.msonic.lib.MessageBox;
 
-public class ConsultarCliente_Activity extends ListActivityBase {
+public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActivityBase  {
 
-	@InjectExtra(value="CODIGO_CLIENTE",optional=true) String codigoCliente;
-	@InjectExtra(value="USUARIO",optional=true) String usuario;
+	public static final String CODIGO_CLIENTE_KEY="CODIGO_CLIENTE";
+	public static final String USUARIO_KEY="USUARIO";
 	
-	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
+	@InjectExtra(value=CODIGO_CLIENTE_KEY,optional=true) String codigoCliente;
+	@InjectExtra(value=USUARIO_KEY,optional=true) String usuario;
+	
+	//@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarClienteProxy consultarClienteProxy;
+	/*
 	@InjectView(R.id.txtCodigo)TextView txtCodigo;
 	@InjectView(R.id.txtRuc)TextView txtRuc;
 	@InjectView(R.id.txtDni)TextView txtDni;
 	@InjectView(R.id.txtRazonSocial)TextView txtRazonSocial;
+	*/
 	
 	@InjectResource(R.string.consultarcliente_activity_empty) String parametros_empty;
 	@InjectResource(R.string.confirm_exit_title) 	String confirm_exit_title;
@@ -71,17 +72,30 @@ public class ConsultarCliente_Activity extends ListActivityBase {
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	inicializarRecursos();
+    	
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.consultarcliente_activity);
         
+        /*
+        setContentView(R.layout.consultarcliente_activity);
         mActionBar.setTitle(R.string.consultarcliente_activity_title);
         mActionBar.setHomeLogo(R.drawable.header_logo); 
+        */
         
+        
+        
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        
+        setContentView(R.layout.consultarcliente_activity);
+        
+        setTitle(R.string.consultarcliente_activity_title);
+        
+        /*
         txtCodigo.addTextChangedListener(txtCodigoTextWatcher);
 		txtRuc.addTextChangedListener(txtRucTextWatcher);
 		txtDni.addTextChangedListener(txtDniTextWatcher);
 		txtRazonSocial.addTextChangedListener(txtRazonSocialTextWatcher);
-		
+		*/
+        
 		MyApplication application = (MyApplication)contextProvider.get().getApplicationContext();
 		
 		if(codigoCliente!=null){
@@ -90,14 +104,14 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 			UsuarioTO usuarioTO = JSONHelper.desSerializar(usuario, UsuarioTO.class);
 			application.setUsuarioTO(usuarioTO);
 		
-			txtCodigo.setText(codigoCliente);
+			//txtCodigo.setText(codigoCliente);
 			processAsync();
 		}
 		else
 		{
 			if(application.cliente != null)
 			{
-				txtCodigo.setText(application.cliente.getCodigo());
+				//txtCodigo.setText(application.cliente.getCodigo());
 				List<ClienteTO> clientes = new ArrayList<ClienteTO>();
 				clientes.add(application.cliente);
 				adap = new EfficientAdapter(this, clientes);
@@ -108,12 +122,13 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 				UsuarioTO usuarioTO = JSONHelper.desSerializar(usuario, UsuarioTO.class);
 				application.setUsuarioTO(usuarioTO);
 				codigoCliente = application.codigoCliente;
-				txtCodigo.setText(application.codigoCliente);
+				//txtCodigo.setText(application.codigoCliente);
 				processAsync();
 			}
 		}		
     }
     
+    /*
 	private TextWatcher txtRucTextWatcher = new TextWatcher() {
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before,
@@ -254,14 +269,16 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 
 		}
 	};
+    */
     
     public void btnbuscar_onclick(View view){
-    	//processAsync();
+    	processAsync();
     }
     
     @Override
 	protected boolean executeAsyncPre() {
 		// TODO Auto-generated method stub
+    	/*
 		boolean isCodigo = txtCodigo.getText().toString().trim().equalsIgnoreCase("");
 		boolean isRuc = txtRuc.getText().toString().trim().equalsIgnoreCase("");
 		boolean isDni = txtDni.getText().toString().trim().equalsIgnoreCase("");
@@ -278,7 +295,7 @@ public class ConsultarCliente_Activity extends ListActivityBase {
 			txtRuc.setError(null);
 			txtDni.setError(null);
 			txtRazonSocial.setError(null);
-		}
+		}*/
 
 		return true;
 	}
@@ -286,15 +303,16 @@ public class ConsultarCliente_Activity extends ListActivityBase {
     @Override
 	protected void process() {
 		// TODO Auto-generated method stub
-		String codigo = txtCodigo.getText().toString();
+		/*
+    	String codigo = txtCodigo.getText().toString();
 		String ruc = txtRuc.getText().toString();
 		String dni = txtDni.getText().toString();
 		String razonSocial = txtRazonSocial.getText().toString();
-
-		consultarClienteProxy.setCodigo(codigo);
-		consultarClienteProxy.setRuc(ruc);
+		*/
+		consultarClienteProxy.setCodigo(codigoCliente);
+		/*consultarClienteProxy.setRuc(ruc);
 		consultarClienteProxy.setDni(dni);
-		consultarClienteProxy.setRazonSocial(razonSocial);
+		consultarClienteProxy.setRazonSocial(razonSocial);*/
 
 		consultarClienteProxy.execute();
 	}
