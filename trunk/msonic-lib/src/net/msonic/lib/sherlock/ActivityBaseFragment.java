@@ -3,6 +3,7 @@ package net.msonic.lib.sherlock;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.msonic.lib.R;
 import roboguice.RoboGuice;
 import roboguice.activity.event.OnActivityResultEvent;
 import roboguice.activity.event.OnConfigurationChangedEvent;
@@ -19,13 +20,6 @@ import roboguice.event.EventManager;
 import roboguice.inject.ContentViewListener;
 import roboguice.inject.RoboInjector;
 import roboguice.util.RoboContext;
-import net.msonic.lib.R;
-
-import com.actionbarsherlock.app.SherlockListActivity;
-import com.google.inject.Inject;
-import com.google.inject.Key;
-import com.google.inject.Provider;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -38,25 +32,24 @@ import android.os.Message;
 import android.view.Gravity;
 import android.widget.Toast;
 
-public abstract class ListActivityBase extends SherlockListActivity implements RoboContext {
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.google.inject.Inject;
+import com.google.inject.Key;
+import com.google.inject.Provider;
 
+public class ActivityBaseFragment extends SherlockFragmentActivity implements RoboContext {
+	
 	protected ProgressDialog dialogWait;
+	@Inject  protected Provider<Context> contextProvider;
+	
+	
 	protected String error_not_network_message; 
 	protected String wait_message;
 	protected String error_generico_process;
-	@Inject  protected Provider<Context> contextProvider;
 	
 	protected EventManager eventManager;
     protected HashMap<Key<?>,Object> scopedObjects = new HashMap<Key<?>,Object>();
     
-	
-	public void setSubTitle(CharSequence subTitle){
-		getSupportActionBar().setSubtitle(subTitle);
-	}
-	
-	public void setSubTitle(int resourceId){
-		getSupportActionBar().setSubtitle(resourceId);
-	}
 	
 	protected void inicializarRecursos(){
 		error_not_network_message = getString(R.string.error_not_network_message);
@@ -65,12 +58,15 @@ public abstract class ListActivityBase extends SherlockListActivity implements R
 	}
 	
 	protected boolean executeAsyncPre(int accion){
+		
 		return true;
 	}
 	
 	protected void executeAsyncPost(int accion){
+		
 	}
 	
+
 	protected void process(int accion){
 		
 	}
@@ -99,7 +95,8 @@ public abstract class ListActivityBase extends SherlockListActivity implements R
         	processError(msg.what);
         }
     };
-    protected final void processAsync(final int accion){
+    
+	protected final void processAsync(final int accion){
 		
 		
 		if(!executeAsyncPre(accion)) return;
@@ -128,8 +125,6 @@ public abstract class ListActivityBase extends SherlockListActivity implements R
 		thread.start();
 	}
 	
-
-
 	protected boolean executeAsyncPre(){
 		return true;
 	}
@@ -151,9 +146,12 @@ public abstract class ListActivityBase extends SherlockListActivity implements R
 			dialogWait.dismiss();
 	}
 	
+	
+    
 	final Handler handlerOK = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+        	
             processOk();
         }
     };
@@ -164,10 +162,7 @@ public abstract class ListActivityBase extends SherlockListActivity implements R
         	processError();
         }
     };
-    
-    
 
-    
 	protected final void processAsync(){
 		
 		
@@ -192,10 +187,7 @@ public abstract class ListActivityBase extends SherlockListActivity implements R
 					process();
 					
 					handlerOK.sendEmptyMessage(0);
-					
-					/*
-					if (dialogWait.isShowing())
-						dialogWait.dismiss(); */  
+					  
 					
 				}catch (Exception e) {
 					// TODO: handle exception
@@ -230,9 +222,19 @@ public abstract class ListActivityBase extends SherlockListActivity implements R
 		   return false;
 		}
 	
+	protected void ocultarEspera(){
+    	if (dialogWait.isShowing())
+			dialogWait.dismiss();
+    }
 	
-	
-	@Inject
+    protected void mostrarEspera(){
+    	dialogWait = new ProgressDialog(this);
+		dialogWait.setIndeterminate(true);
+		dialogWait.setMessage(wait_message);
+		dialogWait.show();
+    }
+
+    @Inject
     ContentViewListener ignored; // BUG find a better place to put this
 
     @Override
