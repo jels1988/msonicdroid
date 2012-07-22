@@ -5,7 +5,8 @@
     android:versionName="1.2" >
 
    
-		    
+	 <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+	 		    
     <application
         android:icon="@drawable/clubexito2"
         android:label="@string/app_name" 
@@ -266,12 +267,12 @@
         
         
         
-        <activity android:name=".activity.VerArticulosCanje_Activity" android:configChanges="keyboardHidden|orientation">
+        <!--activity android:name=".activity.VerArticulosCanje_Activity" android:configChanges="keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="lindley.desarrolloxcliente.verarticuloscanje" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>     
+        </activity-->     
    
     
        <activity android:name=".activity.ConsultarResumen_Activity" android:configChanges="keyboardHidden|orientation">
@@ -282,15 +283,14 @@
         </activity>     
     </application>
     
-     <uses-sdk android:minSdkVersion="7" android:maxSdkVersion="10"/>
-	
-	 <uses-permission android:name="android.permission.INTERNET" />
+     <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="15"/>
+    
+     <uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-	<uses-permission android:name="android.permission.CAMERA"/>
         
 </manifest>
