@@ -49,7 +49,7 @@ public class ActivityBase extends SherlockActivity implements RoboContext {
 	
 	protected EventManager eventManager;
     protected HashMap<Key<?>,Object> scopedObjects = new HashMap<Key<?>,Object>();
-    
+    protected boolean validarConexionInternet=true;
 	
 	protected void inicializarRecursos(){
 		error_not_network_message = getString(R.string.error_not_network_message);
@@ -165,10 +165,11 @@ public class ActivityBase extends SherlockActivity implements RoboContext {
 
 	protected final void processAsync(){
 		
-		
-		if(!isNetworkAvailable()){
-			showToast(error_not_network_message);
-			return;
+		if(validarConexionInternet){
+			if(!isNetworkAvailable()){
+				showToast(error_not_network_message);
+				return;
+			}
 		}
 		
 		if(!executeAsyncPre()) return;
