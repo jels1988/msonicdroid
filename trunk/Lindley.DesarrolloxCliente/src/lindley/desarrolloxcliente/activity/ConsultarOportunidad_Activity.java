@@ -2,17 +2,16 @@ package lindley.desarrolloxcliente.activity;
 
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
+import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.negocio.OportunidadBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.GuardarOportunidadTO;
 import lindley.desarrolloxcliente.to.NuevaOportunidadTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarNuevaOportunidadProxy;
-import net.msonic.lib.ActivityUtil;
-import net.msonic.lib.ListActivityBase;
 import net.msonic.lib.MessageBox;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
@@ -29,23 +28,22 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
 
-public class ConsultarOportunidad_Activity extends ListActivityBase {
+public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListActivityBase {
 
-	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
+	
 	@Inject ConsultarNuevaOportunidadProxy consultarOportunidadProxy;
-	private EfficientAdapter adap;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
-	public static ClienteTO cliente;
-	public final String OPORTUNIDAD_SISTEMA = "1";
-	private final String OPORTUNIDAD_DESARROLLADOR_ABIERTO = "A";
-	private MyApplication application;
+	@Inject OportunidadBLL oportunidadBLL;
+	ArrayList<NuevaOportunidadTO> nuevasOportunidades;
+	
+	
+	private EfficientAdapter 	adap;
+	private ClienteTO 			cliente;
+	private MyApplication 		application;
 	
 	@InjectResource(R.string.confirm_atras_title) 	String confirm_atras_title;
 	@InjectResource(R.string.confirm_atras_message) String confirm_atras_message;
@@ -79,12 +77,17 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     public void onCreate(Bundle savedInstanceState) {
     	inicializarRecursos();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.consultaroportunidad_activity);        
-        mActionBar.setTitle(R.string.oportunidad_activity_title);
+        
+        
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        setContentView(R.layout.consultaroportunidad_activity);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
-        mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
-        mActionBar.setHomeLogo(R.drawable.header_logo);
+		
+		setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
+        
+		txtViewFecha.setText(ConstantesApp.getFechaSistema());
+		
         processAsync(); 
     }
     
@@ -95,27 +98,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	
     public void btnSiguiente_click(View view)
     {
-//    	ArrayList<OportunidadTO> oportunidades = application.getOportunidades();
-//    	
-//    	if(oportunidades==null){
-//    		oportunidades = new ArrayList<OportunidadTO>();
-//    	}else{
-//    		oportunidades.clear();
-//    	}
-//    	
-//    	
-//    	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
-//
-//    	if(adap == null)
-//    	{
-//	    	adap = new EfficientAdapter(getApplicationContext(), new ArrayList<OportunidadTO>());
-//    	}
-//    	
-//    	for (OportunidadTO oportunidad : adap.detalles) {
-//    		if(oportunidad.isSeleccionado()){    			    			
-//    			oportunidades.add(oportunidad);
-//    		}
-//		}
+    	
     	
     	ArrayList<GuardarOportunidadTO> oportunidades = application.guardarOportunidades;
     	
@@ -130,7 +113,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 
     	if(adap == null)
     	{
-	    	adap = new EfficientAdapter(getApplicationContext(), new ArrayList<NuevaOportunidadTO>());
+	    	adap = new EfficientAdapter(getApplicationContext(),cliente.getCodigo(), new ArrayList<NuevaOportunidadTO>());
     	}
     	
     	for (NuevaOportunidadTO oportunidad : adap.detalles) {
@@ -168,7 +151,8 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     		Intent intent;
     		String a = "C";
     		finish();
-    		if(a.equals(OPORTUNIDAD_DESARROLLADOR_ABIERTO))
+    		
+    		if(a.equals(ConstantesApp.OPORTUNIDAD_DESARROLLADOR_ABIERTO))
     		{
     			intent= new Intent("lindley.desarrolloxcliente.oportunidaddesarrollador");		
     			startActivity(intent);
@@ -183,21 +167,30 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
     
     @Override
 	protected void process() {
+    	
+    	nuevasOportunidades = oportunidadBLL.consultarNuevasOportunidades(cliente.getCodigo());
+    	adap = new EfficientAdapter(this,cliente.getCodigo(), nuevasOportunidades);
+    	
+    	/*
     	consultarOportunidadProxy.setCodigoCliente(cliente.getCodigo());
-    	consultarOportunidadProxy.setTipoOportunidad(OPORTUNIDAD_SISTEMA);
+    	consultarOportunidadProxy.setTipoOportunidad(ConstantesApp.OPORTUNIDAD_SISTEMA);
     	consultarOportunidadProxy.execute();
+    	*/
 	}
 
     @Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
+    	setListAdapter(adap);
+    	super.processOk();
+    	
+    	/*
 		boolean isExito = consultarOportunidadProxy.isExito();
 		if (isExito) {
 			int status = consultarOportunidadProxy.getResponse().getStatus();
 			if (status == 0) {
-				List<NuevaOportunidadTO> oportunidades = consultarOportunidadProxy
-						.getResponse().listaNuevaOportunidad;
-				adap = new EfficientAdapter(this, oportunidades);
+				List<NuevaOportunidadTO> oportunidades = consultarOportunidadProxy.getResponse().listaNuevaOportunidad;
+				adap = new EfficientAdapter(this,cliente.getCodigo(), oportunidades);
 				final Calendar c = Calendar.getInstance();
 				if(oportunidades.size()>0)
 					txtViewFecha.setText(ActivityUtil.pad(c.get(Calendar.DAY_OF_MONTH)) + "/" + ActivityUtil.pad((c.get(Calendar.MONTH) + 1)) + "/" + c.get(Calendar.YEAR));
@@ -209,8 +202,8 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 		}
 		else{
 			processError();
-		}
-		super.processOk();
+		}*/
+		
 	}
     
     @Override
@@ -220,18 +213,18 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 		showToast(error_generico_process);
 	}
     
-    public static class EfficientAdapter extends BaseAdapter implements Filterable {
-	    private LayoutInflater mInflater;
-	    private Context context;
+    public static class EfficientAdapter extends BaseAdapter {
+	    private LayoutInflater 			mInflater;
+	    private Context 				context;
 	    private List<NuevaOportunidadTO> detalles;
-//	    private MyApplication application;
+	    private String codigoCliente;
 	    
-	    public EfficientAdapter(Context context, List<NuevaOportunidadTO> valores) {
-		      // Cache the LayoutInflate to avoid asking for a new one each time.
+	    
+	    public EfficientAdapter(Context context,String codigoCliente, List<NuevaOportunidadTO> valores) {
 		      mInflater = LayoutInflater.from(context);
 		      this.context = context;
 		      this.detalles = valores;
-//		      this.application = (MyApplication)context.getApplicationContext();
+		      this.codigoCliente = codigoCliente;
 		    }
 	    
 
@@ -247,10 +240,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 
 	      if (convertView == null) {
 	        convertView = mInflater.inflate(R.layout.consultaroportunidad_content, null);
-
-	        // Creates a ViewHolder and store references to the two children
-	        // views
-	        // we want to bind data to.
+	        
 	        holder = new ViewHolder();
 	        	        	        	    	
 	        holder.txViewPro = (TextView) convertView.findViewById(R.id.txViewPro); 
@@ -281,6 +271,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 			});
 	      
 	      
+	      
 	      holder.btnProfit.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -288,7 +279,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 					Intent profit = new Intent(context, VerProfit_Activity.class);
 					profit.putExtra(VerProfit_Activity.ANIO, "");
 					profit.putExtra(VerProfit_Activity.MES, "");
-					profit.putExtra(VerProfit_Activity.CLIENTE, cliente.getCodigo());
+					profit.putExtra(VerProfit_Activity.CLIENTE, codigoCliente);
 					profit.putExtra(VerProfit_Activity.ARTICULO, oportunidad.codigoProducto);
 					profit.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, oportunidad.descripcionProducto);
 					context.startActivity(profit);
@@ -304,13 +295,7 @@ public class ConsultarOportunidad_Activity extends ListActivityBase {
 	    	TextView txViewLegacy;
 	    	Button btnProfit;
 	    }
-	    
-	    @Override
-	    public Filter getFilter() {
-	      // TODO Auto-generated method stub
-	      return null;
-	    }
-
+	   
 	    @Override
 	    public long getItemId(int position) {
 	      // TODO Auto-generated method stub

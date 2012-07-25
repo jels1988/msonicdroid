@@ -8,7 +8,9 @@ import net.msonic.lib.DBHelperProvider;
 import com.google.inject.AbstractModule;
 
 import lindley.desarrolloxcliente.dao.FotoDAO;
+import lindley.desarrolloxcliente.dao.OportunidadDAO;
 import lindley.desarrolloxcliente.negocio.FotoBLL;
+import lindley.desarrolloxcliente.negocio.OportunidadBLL;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ActualizarEstadoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
@@ -58,6 +60,10 @@ public class MyCustomModule extends AbstractModule {
 						
 		bind(FotoBLL.class).in(Singleton.class);
 		bind(FotoDAO.class).in(Singleton.class);
+		
+		
+		bind(OportunidadBLL.class).in(Singleton.class);
+		bind(OportunidadDAO.class).in(Singleton.class);
 	}
 
 }

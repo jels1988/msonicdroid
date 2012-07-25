@@ -22,6 +22,7 @@ import lindley.desarrolloxcliente.activity.CompromisoPosicionOpenFalse_Activity;
 import lindley.desarrolloxcliente.activity.CompromisoPosicionOpen_Activity;
 import lindley.desarrolloxcliente.activity.CompromisoPresentacionOpenFalse_Activity;
 import lindley.desarrolloxcliente.activity.CompromisoPresentacionOpen_Activity;
+import lindley.desarrolloxcliente.activity.TestTAbItem;
 import lindley.desarrolloxcliente.dao.FotoDAO;
 import lindley.desarrolloxcliente.negocio.FotoBLL;
 import lindley.desarrolloxcliente.to.AccionTradeTO;
@@ -83,6 +84,7 @@ public class MyApplication extends Application {
 	public CompromisoPosicionOpen_Activity.EfficientAdapter 	posicionAdapter;
 	public CompromisoPresentacionOpen_Activity.EfficientAdapter presentacionAdapter;
 	public CompromisoOpen_Activity.EfficientAdapter 			openAdapter;
+	public TestTAbItem.EfficientAdapter 			openAdapter2;
 		
 	public ArrayList<CompromisoPosicionTO> listCompromiso;
 	

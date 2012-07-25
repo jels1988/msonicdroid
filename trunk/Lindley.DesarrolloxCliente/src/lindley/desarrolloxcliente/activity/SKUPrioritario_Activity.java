@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.negocio.OportunidadBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarSKUPrioritarioProxy;
 import lindley.desarrolloxcliente.ws.service.GuardarNuevoDesarrolloProxy;
 import net.msonic.lib.ActivityUtil;
-import net.msonic.lib.ListActivityBase;
 import net.msonic.lib.MessageBox;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -32,46 +32,47 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
 
-public class SKUPrioritario_Activity extends ListActivityBase {
-
-	@InjectView(R.id.actionBar)
-	ActionBar mActionBar;
+public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivityBase {
+	
 	private EfficientAdapter adap;
 	public static MyApplication application;
-	ClienteTO cliente;
-	UsuarioTO usuario;
+	private ClienteTO cliente;
+	private UsuarioTO usuario;
+	
 	@Inject	ConsultarSKUPrioritarioProxy consultarSKUPrioritarioProxy;
     @Inject GuardarNuevoDesarrolloProxy guardarNuevoDesarrolloProxy;
 	@InjectView(R.id.txtViewFecha) 		TextView txtViewFecha;
+	@Inject OportunidadBLL oportunidadBLL;
+	
 	public static final String RESPUESTA_SI = "S";
 	public static final String RESPUESTA_NO = "N";
 	public static final String RESPUESTA_NO_TIENE = "T";
-	public final int ACCION_GUARDAR = 1;
+	public static final int ACCION_GUARDAR = 1;
 
-	@InjectResource(R.string.confirm_atras_title)
-	String confirm_atras_title;
-	@InjectResource(R.string.confirm_atras_message)
-	String confirm_atras_message;
-	@InjectResource(R.string.confirm_atras_yes)
-	String confirm_atras_yes;
-	@InjectResource(R.string.confirm_atras_no)
-	String confirm_atras_no;
+	@InjectResource(R.string.confirm_atras_title)	String confirm_atras_title;
+	@InjectResource(R.string.confirm_atras_message)	String confirm_atras_message;
+	@InjectResource(R.string.confirm_atras_yes)		String confirm_atras_yes;
+	@InjectResource(R.string.confirm_atras_no)		String confirm_atras_no;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		inicializarRecursos();
 		super.onCreate(savedInstanceState);
+		
+		getSupportActionBar().setDisplayShowHomeEnabled(false);
+		
 		setContentView(R.layout.skuprioritario_activity);
-		mActionBar.setTitle(R.string.skuprioritario_activity_title);
+		
+		setTitle(R.string.skuprioritario_activity_title);
+		
 		application = (MyApplication) getApplicationContext();
 		cliente = application.getClienteTO();
 		usuario = application.getUsuarioTO();
-		mActionBar.setSubTitle(cliente.getCodigo() + " - "
-				+ cliente.getNombre());
-		mActionBar.setHomeLogo(R.drawable.header_logo);
+		
+		setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
+		
 		MessageBox.showConfirmDialog(this, "Posicion: ",
 				"", "Activos de Lindley",
 				new android.content.DialogInterface.OnClickListener() {
@@ -95,19 +96,28 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 
 	@Override
 	protected void process() {
+		
+		/*
 		consultarSKUPrioritarioProxy.codigoCluster = cliente.getCluster();
 		consultarSKUPrioritarioProxy.execute();
+		*/
+		
+		String cluster = cliente.getCluster();
+		ArrayList<SKUPresentacionTO> skuPresentaciones = oportunidadBLL.consultarSKUPresentacion(cluster);
+		adap = new EfficientAdapter(this, skuPresentaciones);
+		
 	}
-
+	
+	
 	@Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
+		/*
 		boolean isExito = consultarSKUPrioritarioProxy.isExito();
 		if (isExito) {
 			int status = consultarSKUPrioritarioProxy.getResponse().getStatus();
 			if (status == 0) {
-				List<SKUPresentacionTO> listaSKUPresentacion = consultarSKUPrioritarioProxy
-						.getResponse().listaSKUPresentacion;
+				List<SKUPresentacionTO> listaSKUPresentacion = consultarSKUPrioritarioProxy.getResponse().listaSKUPresentacion;
 				adap = new EfficientAdapter(this, listaSKUPresentacion);
 				final Calendar c = Calendar.getInstance();
 				if (listaSKUPresentacion.size() > 0)
@@ -123,7 +133,10 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 			}
 		} else {
 			processError();
-		}
+		}*/
+		
+		setListAdapter(adap);
+		txtViewFecha.setText(ConstantesApp.getFechaSistema());
 		super.processOk();
 	}
 
@@ -223,10 +236,20 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 				if (status == 0) {
 					String idRegistro = guardarNuevoDesarrolloProxy.getResponse().getCodCabecera();
 					finish();
+					
+					
+					Intent compromisoOpen = new Intent(this,TestTabs.class);
+					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, idRegistro);					
+					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "N");
+					startActivity(compromisoOpen);
+					
+					/*
 					Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.compromisoprincipalopen");
 					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, idRegistro);					
 					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "N");
 					startActivity(compromisoOpen);
+					*/
+					
 				}
 				else  {
 					showToast(guardarNuevoDesarrolloProxy.getResponse().getDescripcion());
@@ -246,8 +269,7 @@ public class SKUPrioritario_Activity extends ListActivityBase {
 		showToast(error_generico_process);
 	}
 	
-	public static class EfficientAdapter extends
-			ArrayAdapter<SKUPresentacionTO> {
+	public static class EfficientAdapter extends ArrayAdapter<SKUPresentacionTO> {
 		private Activity context;
 		private List<SKUPresentacionTO> skuPresentaciones;
 

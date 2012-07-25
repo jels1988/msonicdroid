@@ -10,7 +10,7 @@ import lindley.desarrolloxcliente.to.DesarrolloClienteTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarEstadoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCabeceraProxy;
 import net.msonic.lib.ActivityUtil;
-import net.msonic.lib.ListActivityBase;
+//import net.msonic.lib.ListActivityBase;
 import net.msonic.lib.MessageBox;
 import roboguice.inject.InjectView;
 import android.content.Context;
@@ -30,14 +30,14 @@ import android.widget.TextView;
 import com.google.inject.Inject;
 import com.thira.examples.actionbar.widget.ActionBar;
 
-public class ConsultarCabecera_Activity extends ListActivityBase {
+public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActivityBase  {
 
-	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
+	//@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarCabeceraProxy ConsultarCabeceraProxy;
 	@Inject ActualizarEstadoProxy actualizarEstadoProxy;
 	
 	private EfficientAdapter adap;
-	ClienteTO cliente;
+	private ClienteTO cliente;
 	public static MyApplication application;
 	
 	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
@@ -56,12 +56,19 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
     public void onCreate(Bundle savedInstanceState) {
     	inicializarRecursos();
         super.onCreate(savedInstanceState);
+        
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        
         setContentView(R.layout.cabeceracliente_activity);        
-        mActionBar.setTitle(R.string.cabeceracliente_activity_title);
+        setTitle(R.string.cabeceracliente_activity_title);
+        //mActionBar.setTitle(R.string.cabeceracliente_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
-		mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
-        mActionBar.setHomeLogo(R.drawable.header_logo);
+		
+		getSupportActionBar().setSubtitle(cliente.getCodigo() + " - " + cliente.getNombre());
+		
+		//mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
+        //mActionBar.setHomeLogo(R.drawable.header_logo);
     }
 
     
@@ -234,7 +241,7 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
     	  mes  =  Integer.parseInt(fecha.substring(3, 5));
     	  anio  =  Integer.parseInt(fecha.substring(6));
 		    
-	    	
+    	
 	    	if(!(anio == anioActual && mes == mesActual && dia == diaActual))
 	    	{
 	    		holder.btnEliminar.setVisibility(View.INVISIBLE);
@@ -374,6 +381,9 @@ public class ConsultarCabecera_Activity extends ListActivityBase {
 					Log.v("ConsultarCabecera_Activity", dia+"");
 					Log.v("ConsultarCabecera_Activity", diaActual+"");
 					*/
+					
+					
+					
 					
 					if(desarrolloTemp.getEstado().equals("A"))
 					{											
