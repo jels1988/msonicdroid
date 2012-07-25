@@ -100,12 +100,66 @@
  	<item name="android:clickable">false</item>
 </style>
 
+<style name="TextAppearance.Sherlock.Widget.ActionBar.Title.Inverse.Custom" parent="Widget">
+    <item name="android:textSize">@dimen/abs__action_bar_title_text_size</item>
+    <item name="android:textColor">@color/custom_theme_color_blanco</item>
+</style>
+
+ <style name="TextAppearance.Sherlock.Widget.ActionBar.Subtitle.Inverse.Custom" parent="Widget">
+        <item name="android:textSize">@dimen/abs__action_bar_subtitle_text_size</item>
+        <item name="android:textColor">@color/custom_theme_color_blanco</item>
+    </style>
+    
+ <style name="Widget.Styled.ActionBar"
+           parent="Widget.Sherlock.Light.ActionBar.Solid.Inverse">
+        <item name="background">@drawable/background</item>
+        <item name="android:background">@drawable/background</item>
+        <item name="titleTextStyle">@style/TextAppearance.Sherlock.Widget.ActionBar.Title.Inverse.Custom</item>
+        <item name="subtitleTextStyle">@style/TextAppearance.Sherlock.Widget.ActionBar.Subtitle.Inverse.Custom</item>
+         <item name="android:paddingLeft">0dip</item>
+    <item name="android:paddingTop">0dip</item>
+    <item name="android:paddingRight">0dip</item>
+    <item name="android:paddingBottom">0dip</item>
+    </style>
+    
+    <style name="TextAppearance.Sherlock.Widget.ActionBar.Title.Inverse" parent="TextAppearance.Sherlock.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">15dip</item>
+        <item name="android:textColor">@color/custom_theme_color_rojo</item>
+        <item name="android:textStyle">bold</item>	
+    </style>
+    
+    <style name="TextAppearance.Sherlock.Widget.ActionBar.Subtitle.Inverse" parent="TextAppearance.Sherlock.Widget.ActionBar.Subtitle.Inverse">
+        <item name="android:textSize">12dip</item>
+        <item name="android:textColor">@color/custom_theme_color_rojo</item>
+    </style>
+    
+    
+    <style name="Widget.Sherlock.ActionBar.TabBar" parent="Widget.Sherlock.ActionBar.TabBar">
+	    <item name="android:background">@color/custom_theme_color_blanco</item>
+	</style>
+
+    <style name="Widget.Sherlock.ActionBar.TabText" parent="Widget.Sherlock.ActionBar.TabText">
+	    <item name="android:textAppearance">@android:style/TextAppearance.Medium</item>
+	    <item name="android:textColor">@color/custom_theme_color_rojo</item>
+	    <item name="android:textSize">12sp</item>
+	</style>
+    
 
 
-<style name="CustomTheme">
+<style name="CustomTheme" parent="Theme.Sherlock.Light">
 
-    <item name="android:windowBackground">@color/custom_theme_color_amarillo</item>
-	<item name="android:colorForegroundInverse">@color/custom_theme_color_amarillo</item>
+     <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
+    <item name="titleTextStyle">@style/TextAppearance.Sherlock.Widget.ActionBar.Title.Inverse</item>
+    <item name="subtitleTextStyle">@style/TextAppearance.Sherlock.Widget.ActionBar.Subtitle.Inverse</item>
+    
+    
+    
+    <item name="actionBarTabBarStyle">@style/Widget.Sherlock.ActionBar.TabBar</item>
+    <item name="actionBarTabTextStyle">@style/Widget.Sherlock.ActionBar.TabText</item>
+   
+    
+    <item name="android:windowBackground">@color/custom_theme_color_blanco</item>
+	<item name="android:colorForegroundInverse">@color/custom_theme_color_blanco</item>
 	<item name="android:colorBackground">@color/custom_theme_color_letra</item>
 	<item name="android:disabledAlpha">0.5</item>
 	<item name="android:backgroundDimAmount">0.6</item>
@@ -131,8 +185,9 @@
 
 
     
-<style name="CustomThemeWhite">
+<style name="CustomThemeWhite" >
 
+    
     <item name="android:windowBackground">@color/custom_theme_color_blanco</item>
 	<item name="android:colorForegroundInverse">@color/custom_theme_color_blanco</item>
 	<item name="android:colorBackground">@color/custom_theme_color_letra</item>

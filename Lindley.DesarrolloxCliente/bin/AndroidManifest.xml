@@ -21,14 +21,26 @@
          
         <activity android:name="DireccionActivity" android:configChanges="keyboardHidden|orientation"/>
         
+        <activity android:name=".activity.TestTabs" android:configChanges="keyboardHidden|orientation">
+            
+           
+        </activity>
+        
+       
+        
+        
+        
+        
         <activity
             android:name=".activity.Login_Activity"
             android:label="@string/app_name" 
             android:noHistory="true">
-            <!--intent-filter>
+             
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter-->
+            </intent-filter>
+            
         </activity>
         
         <activity android:name=".activity.ConsultarCliente_Activity" android:configChanges="keyboardHidden|orientation">

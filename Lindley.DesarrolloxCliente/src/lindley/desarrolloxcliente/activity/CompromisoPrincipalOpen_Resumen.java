@@ -34,15 +34,17 @@ public class CompromisoPrincipalOpen_Resumen extends TabActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
+		
 		application = (MyApplication)getApplicationContext();
 		application.listInventarioCompromiso = null;
 		application.listPosicionCompromiso = null;
 		application.listPresentacionCompromiso = null;
+		
 		setContentView(R.layout.compromisoprincipal_activity);
 		Intent intent = this.getIntent();
 		codigoRegistro = intent.getStringExtra(CODIGO_REGISTRO);
 		origen = intent.getStringExtra(ORIGEN_REGISTRO);		
-		System.out.println(origen);
+		
 		setupTabHost();
 		setupTab(new TextView(this));
 	}

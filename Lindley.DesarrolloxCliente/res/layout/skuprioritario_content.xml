@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"  -->
 
     <TableLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,7 +20,7 @@
                 android:id="@+id/txViewSKU"
                 android:layout_width="150dip"
                 android:layout_height="40dip"
-                android:gravity="left"
+                android:gravity="left|center_vertical"
                 android:text="" />
             
             <Spinner
@@ -31,9 +31,9 @@
 
         </TableRow>
 
-        <View
+        <!--View
             android:layout_height="2dip"
-            android:background="#FF909090" />
+            android:background="#FF909090" /-->
     </TableLayout>
 
-</LinearLayout>
+<!--/LinearLayout -->
