@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ public class ActivityBase extends RoboActivity {
 	protected String error_not_network_message; 
 	protected String wait_message;
 	protected String error_generico_process;
-	
+	protected boolean validarConexionInternet=true;
 	
 	protected void inicializarRecursos(){
 		error_not_network_message = getString(R.string.error_not_network_message);
@@ -138,10 +139,13 @@ public class ActivityBase extends RoboActivity {
 
 	protected final void processAsync(){
 		
+		Log.d(ActivityBase.class.getName(), String.format("VALIDAR CONEXION INTERNET %s",validarConexionInternet));
 		
-		if(!isNetworkAvailable()){
-			showToast(error_not_network_message);
-			return;
+		if(validarConexionInternet){
+			if(!isNetworkAvailable()){
+				showToast(error_not_network_message);
+				return;
+			}
 		}
 		
 		if(!executeAsyncPre()) return;
