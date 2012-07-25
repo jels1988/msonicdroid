@@ -6,12 +6,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public  class  DBHelper extends SQLiteOpenHelper{
 	
+	private static final String TAG = DBHelper.class.getSimpleName();
 	private static final String DATABASE_NAME = "prospector.db";
 	private static final int DATABASE_VERSION = 1;
 	private String DB_PATH =null;
@@ -129,6 +132,24 @@ public  class  DBHelper extends SQLiteOpenHelper{
 		
 	}
 
+	
+	public Cursor rawQuery(String SQL,String[] selectionArgs){
+		
+		Log.d(TAG, String.format("SQL: %s",SQL));
+		
+		if(selectionArgs!=null){
+			int index=0;
+			for (String parametro : selectionArgs) {
+				Log.d(TAG, String.format("PARA[%s]: %s",index++,parametro));
+			}
+		}
+		
+		Cursor cursor = getDataBase().rawQuery(SQL,selectionArgs);
+		
+		Log.d(TAG, String.format("ROWCOUNT: %s",cursor.getCount()));
+		
+		return cursor;
+	}
 
 	
 		
