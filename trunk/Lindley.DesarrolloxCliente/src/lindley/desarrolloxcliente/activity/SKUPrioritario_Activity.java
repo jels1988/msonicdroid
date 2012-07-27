@@ -1,7 +1,6 @@
 package lindley.desarrolloxcliente.activity;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import lindley.desarrolloxcliente.ConstantesApp;
@@ -9,11 +8,11 @@ import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.OportunidadBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
+import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarSKUPrioritarioProxy;
 import lindley.desarrolloxcliente.ws.service.GuardarNuevoDesarrolloProxy;
-import net.msonic.lib.ActivityUtil;
 import net.msonic.lib.MessageBox;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
@@ -36,18 +35,18 @@ import com.google.inject.Inject;
 public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivityBase {
 	
 	private EfficientAdapter adap;
-	public static MyApplication application;
+	
+	public  MyApplication application;
 	private ClienteTO cliente;
 	private UsuarioTO usuario;
+	private EvaluacionTO evaluacion;
 	
 	@Inject	ConsultarSKUPrioritarioProxy consultarSKUPrioritarioProxy;
     @Inject GuardarNuevoDesarrolloProxy guardarNuevoDesarrolloProxy;
 	@InjectView(R.id.txtViewFecha) 		TextView txtViewFecha;
 	@Inject OportunidadBLL oportunidadBLL;
 	
-	public static final String RESPUESTA_SI = "S";
-	public static final String RESPUESTA_NO = "N";
-	public static final String RESPUESTA_NO_TIENE = "T";
+	
 	public static final int ACCION_GUARDAR = 1;
 
 	@InjectResource(R.string.confirm_atras_title)	String confirm_atras_title;
@@ -68,10 +67,11 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 		setTitle(R.string.skuprioritario_activity_title);
 		
 		application = (MyApplication) getApplicationContext();
-		cliente = application.getClienteTO();
-		usuario = application.getUsuarioTO();
+		cliente = application.cliente;
+		usuario = application.usuario;
+		evaluacion = application.evaluacion;
 		
-		setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
+		setSubTitle(String.format("%s - %s", cliente.getCodigo() ,cliente.getNombre()));
 		
 		MessageBox.showConfirmDialog(this, "Posicion: ",
 				"", "Activos de Lindley",
@@ -79,7 +79,9 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
-						application.activosLindley = RESPUESTA_SI;
+						
+						evaluacion.activosLindley = ConstantesApp.RESPUESTA_SI;
+						//application.activosLindley = ConstantesApp.RESPUESTA_SI;
 						processAsync();
 					}
 
@@ -87,7 +89,8 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
-						application.activosLindley = RESPUESTA_NO;
+						evaluacion.activosLindley = ConstantesApp.RESPUESTA_NO;
+						//application.activosLindley = ConstantesApp.RESPUESTA_NO;
 						processAsync();
 					}
 
@@ -186,6 +189,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
+				/*
 				List<SKUPresentacionTO> skuPresentaciones = application.guardarSKUPresentacion;
 
 				if (skuPresentaciones == null) {
@@ -198,9 +202,11 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 
 				if (adap == null) {
 					adap = new EfficientAdapter(ctx,new ArrayList<SKUPresentacionTO>());
-				}
+				}*/
+				//application.guardarSKUPresentacion = adap.skuPresentaciones;
 				
-				application.guardarSKUPresentacion = adap.skuPresentaciones;
+				evaluacion.skuPresentacion = adap.skuPresentaciones;
+				
 				processAsync(ACCION_GUARDAR);
 			}
 		}, "No",null);
@@ -215,6 +221,13 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 		// TODO Auto-generated method stub
 		if(accion == ACCION_GUARDAR)
 		{
+			
+			evaluacion.activosLindley = cliente.getCodigo();
+			evaluacion.codigoUsuario = usuario.getCodigoSap();
+			evaluacion.codigoFe = cliente.getCluster();
+			
+			
+			/*
 			guardarNuevoDesarrolloProxy.oportunidadSistema = application.guardarOportunidades;
 			guardarNuevoDesarrolloProxy.listSKUPresentacion = application.guardarSKUPresentacion;
 			guardarNuevoDesarrolloProxy.activosLindley = application.activosLindley;
@@ -222,6 +235,9 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 			guardarNuevoDesarrolloProxy.codigoUsuario = usuario.getCodigoSap();
 			guardarNuevoDesarrolloProxy.codigoFDE = cliente.getCluster();
 			guardarNuevoDesarrolloProxy.execute();
+			*/
+			
+			
 		}
 	}
 	
@@ -299,11 +315,11 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 						// TODO Auto-generated method stub
 						SKUPresentacionTO skuPresentacion = (SKUPresentacionTO) viewHolder.chkValActual.getTag();
 						if(arg2==0){
-							skuPresentacion.valorActual = RESPUESTA_NO;
+							skuPresentacion.valorActual = ConstantesApp.RESPUESTA_NO;
 						}else if(arg2==1){
-							skuPresentacion.valorActual = RESPUESTA_SI;
+							skuPresentacion.valorActual = ConstantesApp.RESPUESTA_SI;
 						}else{
-							skuPresentacion.valorActual = RESPUESTA_NO_TIENE ;
+							skuPresentacion.valorActual = ConstantesApp.RESPUESTA_NO_TIENE ;
 						}
 					}
 
@@ -314,7 +330,10 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 					}
 				});
 
-				ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(application.getApplicationContext(),R.array.sku_estados,android.R.layout.simple_spinner_item);
+				ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(context.getApplicationContext(),
+																				R.array.sku_estados,
+																				android.R.layout.simple_spinner_item);
+				
 				adap.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 				viewHolder.chkValActual.setAdapter(adap);
 				
@@ -333,9 +352,9 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 			
 			
 		      
-			if (this.skuPresentaciones.get(position).valorActual.equalsIgnoreCase(RESPUESTA_NO)) {
+			if (this.skuPresentaciones.get(position).valorActual.equalsIgnoreCase(ConstantesApp.RESPUESTA_NO)) {
 				holder.chkValActual.setSelection(0);
-			} else if (this.skuPresentaciones.get(position).valorActual.equalsIgnoreCase(RESPUESTA_SI)) {
+			} else if (this.skuPresentaciones.get(position).valorActual.equalsIgnoreCase(ConstantesApp.RESPUESTA_SI)) {
 				holder.chkValActual.setSelection(1);
 			}else {
 				holder.chkValActual.setSelection(2);

@@ -32,7 +32,7 @@ public class OportunidadDAO {
 		
 			skuPresentacionTO.setCodigoSKU(String.format("%s",cursor.getInt(cursor.getColumnIndex("codigo"))));
 			skuPresentacionTO.setDescripcionSKU(cursor.getString(cursor.getColumnIndex("descripcion")));
-			skuPresentacionTO.valorActual = ConstantesApp.SKU_RESPUESTA_NO;
+			skuPresentacionTO.valorActual = ConstantesApp.RESPUESTA_NO;
 			
 			skus.add(skuPresentacionTO);
 		}

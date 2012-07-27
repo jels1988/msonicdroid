@@ -9,7 +9,7 @@ import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.OportunidadBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.GuardarOportunidadTO;
+import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.NuevaOportunidadTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarNuevaOportunidadProxy;
 import net.msonic.lib.MessageBox;
@@ -43,6 +43,7 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 	
 	private EfficientAdapter 	adap;
 	private ClienteTO 			cliente;
+	private EvaluacionTO 		evaluacion;
 	private MyApplication 		application;
 	
 	@InjectResource(R.string.confirm_atras_title) 	String confirm_atras_title;
@@ -56,9 +57,6 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 		 MessageBox.showConfirmDialog(this, confirm_atras_title, confirm_atras_message, confirm_atras_yes, new android.content.DialogInterface.OnClickListener() {
 				
 				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub	
-					/*Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
-					startActivity(intent);*/
 					finish();
 				}
 				
@@ -81,10 +79,16 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
         
         getSupportActionBar().setDisplayShowHomeEnabled(false);
         setContentView(R.layout.consultaroportunidad_activity);
+        
         application = (MyApplication)getApplicationContext();
-		cliente = application.getClienteTO();
+		cliente = application.cliente;
 		
-		setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
+		//CREAMOS UNA NUEVA EVALUACION
+		application.evaluacion = new EvaluacionTO();
+		evaluacion = application.evaluacion;
+		
+		
+		setSubTitle(String.format("%s %s", cliente.getCodigo(),cliente.getNombre()));
         
 		txtViewFecha.setText(ConstantesApp.getFechaSistema());
 		
@@ -99,55 +103,41 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
     public void btnSiguiente_click(View view)
     {
     	
-    	
+    	/*
     	ArrayList<GuardarOportunidadTO> oportunidades = application.guardarOportunidades;
-    	
-    	if(oportunidades==null){
-    		oportunidades = new ArrayList<GuardarOportunidadTO>();
-    	}else{
-    		oportunidades.clear();
-    	}
-    	
+    	oportunidades = new ArrayList<GuardarOportunidadTO>();
+    	*/
     	
     	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
 
-    	if(adap == null)
-    	{
-	    	adap = new EfficientAdapter(getApplicationContext(),cliente.getCodigo(), new ArrayList<NuevaOportunidadTO>());
-    	}
-    	
     	for (NuevaOportunidadTO oportunidad : adap.detalles) {
     		if(oportunidad.seleccionado){    
+    			evaluacion.oportunidades.add(oportunidad);
+    			/*
     			GuardarOportunidadTO guardar = new GuardarOportunidadTO();
     			guardar.codigoProducto = oportunidad.codigoProducto;
     			oportunidades.add(guardar);
+    			*/
     		}
 		}
-    	application.guardarOportunidades = oportunidades;
+    	
+    	//application.guardarOportunidades = oportunidades;
 
     	int maximoValor = 2;
-    	int filasSeleccionadas=oportunidades.size();
+    	int filasSeleccionadas=evaluacion.oportunidades.size();
     	
     	if(filasSeleccionadas == 0){
-    		MessageBox.showSimpleDialog(this, "Mensaje", "Debe seleccionar como m’nimo una acci—n.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-				}
-				
-			});
+    		MessageBox.showSimpleDialog(this, "Mensaje", "Debe seleccionar como m’nimo una acci—n.", "Aceptar", null);
     	}
     	else if(filasSeleccionadas>maximoValor){
-    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede seleccionar como m‡ximo " + maximoValor +" acciones.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-				}
-				
-			});
+    		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede seleccionar como m‡ximo " + maximoValor +" acciones.", "Aceptar",null);
     	}else{
+    		
+    		
+    		Intent intent = new Intent("lindley.desarrolloxcliente.skuprioritario");
+    		startActivity(intent);
+    		
+    		/*
     		Intent intent;
     		String a = "C";
     		finish();
@@ -162,6 +152,7 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
     			intent = new Intent("lindley.desarrolloxcliente.skuprioritario");
     			startActivity(intent);
     		}
+    		*/
     	}
     }
     
