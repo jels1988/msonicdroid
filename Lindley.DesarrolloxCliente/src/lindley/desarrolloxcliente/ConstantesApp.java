@@ -5,9 +5,15 @@ import android.text.format.DateFormat;
 public final class ConstantesApp {
 
 	
+	public static final String RESPUESTA_SI = "S";
+	public static final String RESPUESTA_NO = "N";
+	public static final String RESPUESTA_NO_TIENE = "T";
+	
+	/*
 	public static final String SKU_RESPUESTA_SI = "S";
 	public static final String SKU_RESPUESTA_NO = "N";
 	public static final String SKU_RESPUESTA_NO_TIENE = "T";
+	*/
 	
 	
 	public final static String OPORTUNIDAD_SISTEMA = "1";

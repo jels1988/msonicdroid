@@ -132,6 +132,7 @@ public class Login_Activity extends net.msonic.lib.sherlock.ActivityBase{
 		usuarioFromPreferencia = JSONHelper.desSerializar(usuario_data_key, UsuarioTO.class);
 		
 	}
+	
 	private void savePreferencia(String usuario,String password,UsuarioTO usuarioTO){
 		Log.d(TAG, String.format("GUARDANDO CREDENCIALES: %s",usuario));
 		

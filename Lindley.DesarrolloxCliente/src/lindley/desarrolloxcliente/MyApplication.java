@@ -2,19 +2,11 @@ package lindley.desarrolloxcliente;
 import java.util.ArrayList;
 import java.util.List;
 
-import roboguice.RoboGuice;
-
-import net.msonic.lib.DBHelper;
-import net.msonic.lib.DBHelperProvider;
-
 
 import android.app.Application;
 import android.widget.ArrayAdapter;
 
 import com.google.inject.Inject;
-import com.google.inject.Module;
-import com.google.inject.Singleton;
-import com.google.inject.util.Modules;
 
 import lindley.desarrolloxcliente.activity.CompromisoOpenFalse_Activity;
 import lindley.desarrolloxcliente.activity.CompromisoOpen_Activity;
@@ -29,6 +21,7 @@ import lindley.desarrolloxcliente.to.AccionTradeTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.CompromisoPosicionTO;
 import lindley.desarrolloxcliente.to.CompromisoTO;
+import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.GuardarOportunidadTO;
 import lindley.desarrolloxcliente.to.InformacionAdicionalTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
@@ -52,15 +45,20 @@ public class MyApplication extends Application {
 	@Inject FotoBLL fotoBLL;
 	@Inject FotoDAO fotoDAO; 
 	
-	private UsuarioTO usuarioTO;
-	private ClienteTO clienteTO;
+	public UsuarioTO usuario;
+	public ClienteTO cliente;
+	public EvaluacionTO evaluacion;
+	
+	
 	
 	private ArrayList<OportunidadTO> oportunidadesDesarrollador; 
 	private ArrayList<OportunidadTO> oportunidades;
 	
 	///Agregado 10/04/2012
-	public ArrayList<GuardarOportunidadTO> guardarOportunidades;
-	public String activosLindley = "";
+	//public ArrayList<GuardarOportunidadTO> guardarOportunidades;
+	
+	
+	//public String activosLindley = "";
 	public List<SKUPresentacionTO> guardarSKUPresentacion;
 	public String anio;
 	public String mes;
@@ -89,22 +87,21 @@ public class MyApplication extends Application {
 	public ArrayList<CompromisoPosicionTO> listCompromiso;
 	
 	public UsuarioTO getUsuarioTO() {
-		return usuarioTO;
+		return usuario;
 	}
 
 	public void setUsuarioTO(UsuarioTO usuarioTO) {
-		this.usuarioTO = usuarioTO;
+		this.usuario = usuarioTO;
 	}
 	
 	public ClienteTO getClienteTO() {
-		return clienteTO;
+		return cliente;
 	}
 
 	public void setClienteTO(ClienteTO clienteTO) {
-		this.clienteTO = clienteTO;
+		this.cliente = clienteTO;
 	}
 	
-	public ClienteTO cliente;
 	public String codigoCliente;
 //	public synchronized lindley.desarrolloxcliente.adapter.AccionTradeTOAdapter getAdapterAccionTrade(List<AccionTradeTO> listaAcciones){
 //		ArrayList<AccionTradeTO> listaAccionTrade = new ArrayList<AccionTradeTO>();
