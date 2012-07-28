@@ -5,6 +5,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -140,7 +146,7 @@ public  class  DBHelper extends SQLiteOpenHelper{
 		if(selectionArgs!=null){
 			int index=0;
 			for (String parametro : selectionArgs) {
-				Log.d(TAG, String.format("PARA[%s]: %s",index++,parametro));
+				Log.d(TAG, String.format("PARA[%s]: %s",index+1,parametro));
 			}
 		}
 		
@@ -150,7 +156,35 @@ public  class  DBHelper extends SQLiteOpenHelper{
 		
 		return cursor;
 	}
-
 	
+	
+	private void logContentValues(ContentValues values){
+		Log.d(TAG, "PARAMETROS");
+		if(values!=null){
+			Set<Entry<String, Object>> listaValues=values.valueSet();
+			Iterator<Map.Entry<String, Object>> itr = listaValues.iterator();
+			
+			
+			
+			while (itr.hasNext()) {
+				
+				Map.Entry<String, Object> me = itr.next(); 
+		        String key = me.getKey().toString();
+		        Object value =  me.getValue();
+
+		        Log.d(TAG, String.format("[%s]=: '%s'",key, (String)(value == null?null:value.toString())));
+		        
+			}
+		}else{
+			Log.d(TAG, "SIN PARAMETROS");
+		}
+	}
+	public long insertOrThrow(String table,ContentValues values){
+		Log.d(TAG, String.format("TABLE: %s",table));
+		logContentValues(values);
+		
+		long id = this.getDataBase().insertOrThrow(table, null, values);
+		return id;
+	}
 		
 }
