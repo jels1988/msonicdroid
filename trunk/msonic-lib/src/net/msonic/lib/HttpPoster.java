@@ -95,7 +95,7 @@ public class HttpPoster {
 		httpPost.addHeader("Expires", "-1");
 		
 		
-		
+		Log.d("URL",this.url);
 		Log.d("RQ",request);
 		
 		StringBuffer sf = new StringBuffer();
