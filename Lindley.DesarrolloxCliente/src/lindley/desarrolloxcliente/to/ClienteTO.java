@@ -1,48 +1,59 @@
 package lindley.desarrolloxcliente.to;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ClienteTO {
 	
+	
+	@Expose(serialize = false)
+	public long id;
+	
 	@SerializedName("COD")
-	private String codigo;
+	public String codigo;
 	
 	@SerializedName("FEC")
-	private String fecha;	
+	public String fecha;	
 	
 	@SerializedName("NOM")
-	private String nombre;
+	public String nombre;
 	
 	@SerializedName("FRE") 
-	private String frecuencia;
+	public String frecuencia;
 	
 	@SerializedName("ALC")
-	private String alcance;
+	public double alcance;
 	
 	@SerializedName("FAL")
-	private String falta;
+	public double falta;
 	
 	@SerializedName("CLU")
-	private String cluster;
+	public String cluster;
 	
 	@SerializedName("MC")
-	private String mc;
+	public String mc;
 	
 	@SerializedName("PUN")
-	private String nroPuntos;
+	public int nroPuntos;
 	
 	@SerializedName("SIG")
-	private String nivelCanje;
+	public int nivelCanje;
 
 	@SerializedName("LAT")
-	private double latitud;
+	public double latitud;
 
 	@SerializedName("LNG")
-	private double longitud;
+	public double longitud;
 	
 	@SerializedName("DIR")
-	private String direccion;
+	public String direccion;
+	
+	
+	@Expose(serialize = false)
+	public int evaluacionesAbiertas;
 	        
+	
+	/*
 	public String getCodigo() {
 		return codigo;
 	}
@@ -67,11 +78,11 @@ public class ClienteTO {
 		this.nombre = nombre;
 	}
 
-	public String getFrecuencia() {
+	public double getFrecuencia() {
 		return frecuencia;
 	}
 
-	public void setFrecuencia(String frecuencia) {
+	public void setFrecuencia(double frecuencia) {
 		this.frecuencia = frecuencia;
 	}
 
@@ -145,6 +156,6 @@ public class ClienteTO {
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
-	}
+	}*/
 		
 }

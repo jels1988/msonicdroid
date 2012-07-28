@@ -77,14 +77,14 @@ public class CompromisoPresentacionOpenFalse_Activity extends ListActivityBase {
 		setContentView(R.layout.consultarpresentacioncompromisoopenfalse_activity);
 		application = (MyApplication) getApplicationContext();
 		cliente = application.getClienteTO();
-		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
+		txtViewCliente.setText(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 		processAsync();
 		
 	}
 
 	@Override
 	protected void process() {
-		consultarPresentacionProxy.setCodigoCliente(cliente.getCodigo());
+		consultarPresentacionProxy.setCodigoCliente(cliente.codigo);
 		consultarPresentacionProxy.setCodigoRegistro(codigoGestion);
 		consultarPresentacionProxy.execute();
 	}

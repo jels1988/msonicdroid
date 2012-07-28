@@ -88,7 +88,7 @@ public class TestTAbItem extends ListBaseFragment {
          application = (MyApplication)getActivity().getApplicationContext();
 	 	 cliente = application.getClienteTO();
 	 	 codigoRegistro = getArguments().getString(CODIGO_REGISTRO);
-	 	txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
+	 	txtViewCliente.setText(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 	 	
          
          if(VISTA_CARGADA==0){
@@ -106,7 +106,7 @@ public class TestTAbItem extends ListBaseFragment {
 
 	@Override
 	protected void process() {
-    	consultarCompromisoProxy.setCodigoCliente(cliente.getCodigo());
+    	consultarCompromisoProxy.setCodigoCliente(cliente.codigo);
     	consultarCompromisoProxy.setCodigoRegistro(codigoRegistro);
     	consultarCompromisoProxy.execute();
 	}
@@ -242,7 +242,7 @@ public class TestTAbItem extends ListBaseFragment {
 					Intent profit = new Intent(context, VerProfit_Activity.class);
 					profit.putExtra(VerProfit_Activity.ANIO, "");
 					profit.putExtra(VerProfit_Activity.MES, "");
-					profit.putExtra(VerProfit_Activity.CLIENTE, cliente.getCodigo());
+					profit.putExtra(VerProfit_Activity.CLIENTE, cliente.codigo);
 					profit.putExtra(VerProfit_Activity.ARTICULO, compromiso.codigoProducto);
 					profit.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, compromiso.descripcionProducto);
 					context.startActivity(profit);

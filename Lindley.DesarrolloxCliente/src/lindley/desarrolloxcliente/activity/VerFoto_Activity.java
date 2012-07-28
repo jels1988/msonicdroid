@@ -47,7 +47,7 @@ public class VerFoto_Activity extends ActivityBase {
 		mActionBar.setTitle(R.string.ver_foto_activity_title);
 		application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
-		mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
+		mActionBar.setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 		processAsync();
 	}
 	

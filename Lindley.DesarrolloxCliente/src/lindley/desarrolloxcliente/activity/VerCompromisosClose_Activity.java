@@ -35,7 +35,7 @@ public class VerCompromisosClose_Activity extends ListActivityBase {
 		 mActionBar.setTitle(R.string.compromiso_title);
 		 application = (MyApplication)getApplicationContext();
 		 cliente = application.getClienteTO();
-		 mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
+		 mActionBar.setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 		 mActionBar.setHomeLogo(R.drawable.header_logo);
 
 		 if(application.listCompromiso == null)

@@ -1,5 +1,8 @@
 package lindley.desarrolloxcliente.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.msonic.lib.DBHelper;
 
 import android.database.Cursor;
@@ -12,17 +15,18 @@ public class ClienteDAO {
 	
 	@Inject	protected DBHelper dbHelper;
 	
-	public ClienteTO ConsultaCliente(String codigo){
+	public List<ClienteTO> listarByCodigo(String codigo){
 		
-		String SQL = "select id,codigo,fecha,nombre,frecuencia,proyAlcance,proyFalta,cluster,mc,puntos,siguiente,direccion,latitud,longitud " +
-					"from sku where cluster = ?1";
+		String SQL = "select id,codigo,fecha,nombre,frecuencia,proyAlcance,proyFalta,cluster,mc,puntos,siguiente,direccion,latitud,longitud,abiertas " +
+					"from cliente where codigo = ?1";
 		
 		String[] args = new String[] {codigo};
 		Cursor cursor = dbHelper.rawQuery(SQL,args);
 		
-		ClienteTO clienteTO=null;
+		ClienteTO clienteTO; 
+		List<ClienteTO> listado=new ArrayList<ClienteTO>();
 		
-		if(cursor.moveToNext()){
+		while(cursor.moveToNext()){
 			clienteTO = new ClienteTO();
 			clienteTO.id = cursor.getLong(cursor.getColumnIndex("id"));
 			clienteTO.codigo = cursor.getString(cursor.getColumnIndex("codigo"));
@@ -38,10 +42,16 @@ public class ClienteDAO {
 			clienteTO.direccion = cursor.getString(cursor.getColumnIndex("direccion"));
 			clienteTO.latitud = cursor.getDouble(cursor.getColumnIndex("latitud"));
 			clienteTO.longitud = cursor.getDouble(cursor.getColumnIndex("longitud"));
+			clienteTO.evaluacionesAbiertas = cursor.getInt(cursor.getColumnIndex("abiertas"));
+			
+			
+			listado.add(clienteTO);
 			
 		}
 		
-		return clienteTO;
+		cursor.close();
+		
+		return listado;
 		
 	}
 	

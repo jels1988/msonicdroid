@@ -69,7 +69,7 @@ public class VerProfit_Activity extends ActivityBase {
 		setContentView(R.layout.profitchartview_activity);
 		application = (MyApplication) getApplicationContext();
 		cliente = application.getClienteTO();
-		mActionBar.setTitle(cliente.getCodigo() + " - " + cliente.getNombre());
+		mActionBar.setTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 		mActionBar.setHomeLogo(R.drawable.header_logo);
 		LinearLayout group = (LinearLayout) findViewById(R.id.linearLayoutTchart);
 		chart = new TChart(this);

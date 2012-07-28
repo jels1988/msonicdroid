@@ -9,8 +9,10 @@ import com.google.inject.AbstractModule;
 
 import lindley.desarrolloxcliente.dao.FotoDAO;
 import lindley.desarrolloxcliente.dao.OportunidadDAO;
+import lindley.desarrolloxcliente.negocio.ClienteBLL;
 import lindley.desarrolloxcliente.negocio.FotoBLL;
 import lindley.desarrolloxcliente.negocio.OportunidadBLL;
+import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ActualizarEstadoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
@@ -64,6 +66,11 @@ public class MyCustomModule extends AbstractModule {
 		
 		bind(OportunidadBLL.class).in(Singleton.class);
 		bind(OportunidadDAO.class).in(Singleton.class);
+		
+
+		bind(ClienteBLL.class).in(Singleton.class);
+		bind(ClienteTO.class).in(Singleton.class);
+		
 	}
 
 }

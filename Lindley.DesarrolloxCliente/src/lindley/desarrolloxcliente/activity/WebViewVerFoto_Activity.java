@@ -45,7 +45,7 @@ public class WebViewVerFoto_Activity extends ActivityBase {
 		 mActionBar.setHomeLogo(R.drawable.header_logo);
 		 application = (MyApplication)getApplicationContext();
 		 cliente = application.getClienteTO();
-		 mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
+		 mActionBar.setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 		 
 		WebSettings webSettings = wvwFoto.getSettings();
 		webSettings.setJavaScriptEnabled(true);

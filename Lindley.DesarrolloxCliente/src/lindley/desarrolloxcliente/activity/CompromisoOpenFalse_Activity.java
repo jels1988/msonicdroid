@@ -86,7 +86,9 @@ public class CompromisoOpenFalse_Activity extends ListActivityBase {
         setContentView(R.layout.compromisoopenfalse_activity);        
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
-		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
+		
+		
+		txtViewCliente.setText(String.format("%s - %s", cliente.codigo ,cliente.nombre));
         processAsync();
         
     }
@@ -239,7 +241,7 @@ public class CompromisoOpenFalse_Activity extends ListActivityBase {
     
     @Override
 	protected void process() {
-    	consultarCompromisoProxy.setCodigoCliente(cliente.getCodigo());
+    	consultarCompromisoProxy.setCodigoCliente(cliente.codigo);
     	consultarCompromisoProxy.setCodigoRegistro(codigoRegistro);
     	consultarCompromisoProxy.execute();
 	}
@@ -523,7 +525,7 @@ public class CompromisoOpenFalse_Activity extends ListActivityBase {
 					Intent profit = new Intent(context, VerProfit_Activity.class);
 					profit.putExtra(VerProfit_Activity.ANIO, application.anio);
 					profit.putExtra(VerProfit_Activity.MES, application.mes);
-					profit.putExtra(VerProfit_Activity.CLIENTE, cliente.getCodigo());
+					profit.putExtra(VerProfit_Activity.CLIENTE, cliente.codigo);
 					profit.putExtra(VerProfit_Activity.ARTICULO, compromiso.codigoProducto);
 					profit.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, compromiso.descripcionProducto);
 					context.startActivity(profit);

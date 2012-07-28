@@ -111,7 +111,7 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
         mActionBar.setTitle(R.string.consultarposicion_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
-		mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
+		mActionBar.setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
         mActionBar.setHomeLogo(R.drawable.header_logo);
     	MessageBox.showConfirmDialog(this, "Posición-Activos", "¿Tiene activos de la empresa ?", "SI", new android.content.DialogInterface.OnClickListener() {
 			@Override
@@ -134,7 +134,7 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
     
     @Override
    	protected void process() {
-    	consultarPosicionProxy.setCodigoCliente(cliente.getCodigo());
+    	consultarPosicionProxy.setCodigoCliente(cliente.codigo);
     	consultarPosicionProxy.setRespuesta(respuesta);       	
     	consultarPosicionProxy.execute();
    	}
