@@ -27,4 +27,10 @@ public final class ConstantesApp {
 	public final static String getFechaSistema(){
 		return DateFormat.format("dd/MM/yyyy", new java.util.Date()).toString();
 	}
+	
+	public final static String formatPorcentaje(double number,int decimales){
+		
+		return String.format("%s", number);
+		
+	}
 }

@@ -54,7 +54,7 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 //        mActionBar.setTitle(R.string.consultarpresentacioncompromisoclose_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
-		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
+		txtViewCliente.setText(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 //        mActionBar.setSubTitle(cliente.getNombre());
 //        mActionBar.setHomeLogo(R.drawable.header_logo);
         processAsync(); 
@@ -62,7 +62,7 @@ public class CompromisoPresentacionClose_Activity extends ListActivityBase {
 	
     @Override
    	protected void process() {
-    	consultarPresentacionCompromisoProxy.setCodigoCliente(cliente.getCodigo());
+    	consultarPresentacionCompromisoProxy.setCodigoCliente(cliente.codigo);
     	consultarPresentacionCompromisoProxy.setCodigoRegistro(codigoGestion);
     	consultarPresentacionCompromisoProxy.execute();
    	}

@@ -54,7 +54,7 @@ public class ConsultarResumen_Activity extends ListActivityBase {
 		 mActionBar.setTitle(R.string.resumen_activity_title);
 		application = (MyApplication)getApplicationContext();
 	   cliente = application.getClienteTO();
-		mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
+		mActionBar.setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
         mActionBar.setHomeLogo(R.drawable.header_logo);
         
 		

@@ -65,6 +65,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 
 	public static final String TIPO_PRESENTACION = "3";
 	public static final String TIPO_POSICION = "2";
+	
 	public static final String NO = "N";
 	public static final String SI = "S";
 	
@@ -97,8 +98,9 @@ public class CompromisoOpen_Activity extends ListActivityBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.compromisoopen_activity);        
         application = (MyApplication)getApplicationContext();
-		cliente = application.getClienteTO();
-		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
+		cliente = application.cliente;
+		
+		txtViewCliente.setText(String.format("%s - %s", cliente.codigo ,cliente.nombre));
         processAsync();        
     }
     
@@ -343,7 +345,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
     
     @Override
 	protected void process() {
-    	consultarCompromisoProxy.setCodigoCliente(cliente.getCodigo());
+    	consultarCompromisoProxy.setCodigoCliente(cliente.codigo);
     	consultarCompromisoProxy.setCodigoRegistro(codigoRegistro);
     	consultarCompromisoProxy.execute();
 	}
@@ -538,7 +540,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 					Intent profit = new Intent(context, VerProfit_Activity.class);
 					profit.putExtra(VerProfit_Activity.ANIO, "");
 					profit.putExtra(VerProfit_Activity.MES, "");
-					profit.putExtra(VerProfit_Activity.CLIENTE, cliente.getCodigo());
+					profit.putExtra(VerProfit_Activity.CLIENTE, cliente.codigo);
 					profit.putExtra(VerProfit_Activity.ARTICULO, compromiso.codigoProducto);
 					profit.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, compromiso.descripcionProducto);
 					context.startActivity(profit);

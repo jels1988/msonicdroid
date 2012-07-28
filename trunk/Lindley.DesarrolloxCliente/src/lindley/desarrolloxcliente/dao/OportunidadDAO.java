@@ -20,7 +20,7 @@ public class OportunidadDAO {
 	public ArrayList<SKUPresentacionTO> consultarSKUPresentacion(String cluster){
 		ArrayList<SKUPresentacionTO> skus = new ArrayList<SKUPresentacionTO>();
 		
-		String SQL = "select codigo,descripcion from sku where cluster = ?";
+		String SQL = "select codigo,descripcion from sku where cluster = ?1";
 		
 		String[] args = new String[] {cluster};
 		Cursor cursor = dbHelper.rawQuery(SQL,args);

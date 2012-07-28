@@ -88,7 +88,7 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 		evaluacion = application.evaluacion;
 		
 		
-		setSubTitle(String.format("%s %s", cliente.getCodigo(),cliente.getNombre()));
+		setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
         
 		txtViewFecha.setText(ConstantesApp.getFechaSistema());
 		
@@ -159,8 +159,8 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
     @Override
 	protected void process() {
     	
-    	nuevasOportunidades = oportunidadBLL.consultarNuevasOportunidades(cliente.getCodigo());
-    	adap = new EfficientAdapter(this,cliente.getCodigo(), nuevasOportunidades);
+    	nuevasOportunidades = oportunidadBLL.consultarNuevasOportunidades(cliente.codigo);
+    	adap = new EfficientAdapter(this,cliente.codigo, nuevasOportunidades);
     	
     	/*
     	consultarOportunidadProxy.setCodigoCliente(cliente.getCodigo());

@@ -58,7 +58,8 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 //        mActionBar.setTitle(R.string.consultarposicioncompromisoclose_activity_title);
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
-		txtViewCliente.setText(cliente.getCodigo() + " - " + cliente.getNombre());
+		txtViewCliente.setText(String.format("%s - %s", cliente.codigo ,cliente.nombre));
+		
 //        mActionBar.setSubTitle(cliente.getNombre());
 //        mActionBar.setHomeLogo(R.drawable.header_logo);
         processAsync(); 
@@ -66,7 +67,7 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
     
     @Override
    	protected void process() {
-    	consultarPosicionCompromisoProxy.setCodigoCliente(cliente.getCodigo());
+    	consultarPosicionCompromisoProxy.setCodigoCliente(cliente.codigo);
     	//consultarPosicionCompromisoProxy.setRespuesta(respuesta);       	
     	consultarPosicionCompromisoProxy.setCodigoGestion(codigoGestion);
     	consultarPosicionCompromisoProxy.execute();
@@ -252,7 +253,7 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 					else
 					{
 						Intent intent = new Intent("lindley.desarrolloxcliente.listarfotoexito");
-						intent.putExtra(ListarFotoExito_Activity.ID_CLUSTER, cliente.getCluster() );
+						intent.putExtra(ListarFotoExito_Activity.ID_CLUSTER, cliente.cluster );
 						context.startActivity(intent);
 					}
 				}

@@ -4,12 +4,12 @@ package lindley.desarrolloxcliente.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.negocio.ClienteBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
-import lindley.desarrolloxcliente.ws.service.ConsultarClienteProxy;
-import lindley.desarrolloxcliente.ws.service.ConsultarEvaluacionesAbiertasProxy;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectResource;
 import android.content.Context;
@@ -26,8 +26,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -45,28 +43,17 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 	@InjectExtra(value=CODIGO_CLIENTE_KEY,optional=true) String codigoCliente;
 	@InjectExtra(value=USUARIO_KEY,optional=true) String usuario;
 	
-	//@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
-	@Inject ConsultarClienteProxy consultarClienteProxy;
-	/*
-	@InjectView(R.id.txtCodigo)TextView txtCodigo;
-	@InjectView(R.id.txtRuc)TextView txtRuc;
-	@InjectView(R.id.txtDni)TextView txtDni;
-	@InjectView(R.id.txtRazonSocial)TextView txtRazonSocial;
-	*/
-	
+	@Inject ClienteBLL clienteBLL;
+		
 	@InjectResource(R.string.consultarcliente_activity_empty) String parametros_empty;
 	@InjectResource(R.string.confirm_exit_title) 	String confirm_exit_title;
 	@InjectResource(R.string.confirm_exit_message)  String confirm_exit_message;
 	@InjectResource(R.string.confirm_exit_yes) 		String confirm_exit_yes;
 	@InjectResource(R.string.confirm_exit_no) 		String confirm_exit_no;
 	
-	@Inject ConsultarEvaluacionesAbiertasProxy consultarEvaluacionesAbiertasProxy;
-	public static final int ACCION_CONSULTAR = 2;
 	
 	private EfficientAdapter adap;
-	
-	//public static String file_name="";
-	//private static final int TAKE_PHOTO_CODE = 1;
+
 	
     /** Called when the activity is first created. */
     @Override
@@ -74,12 +61,6 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
     	inicializarRecursos();
     	
         super.onCreate(savedInstanceState);
-        
-        /*
-        setContentView(R.layout.consultarcliente_activity);
-        mActionBar.setTitle(R.string.consultarcliente_activity_title);
-        mActionBar.setHomeLogo(R.drawable.header_logo); 
-        */
         
         
         
@@ -89,13 +70,7 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
         
         setTitle(R.string.consultarcliente_activity_title);
         
-        /*
-        txtCodigo.addTextChangedListener(txtCodigoTextWatcher);
-		txtRuc.addTextChangedListener(txtRucTextWatcher);
-		txtDni.addTextChangedListener(txtDniTextWatcher);
-		txtRazonSocial.addTextChangedListener(txtRazonSocialTextWatcher);
-		*/
-        
+       
 		MyApplication application = (MyApplication)contextProvider.get().getApplicationContext();
 		
 		if(codigoCliente!=null){
@@ -104,14 +79,12 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 			UsuarioTO usuarioTO = JSONHelper.desSerializar(usuario, UsuarioTO.class);
 			application.setUsuarioTO(usuarioTO);
 		
-			//txtCodigo.setText(codigoCliente);
 			processAsync();
 		}
 		else
 		{
 			if(application.cliente != null)
 			{
-				//txtCodigo.setText(application.cliente.getCodigo());
 				List<ClienteTO> clientes = new ArrayList<ClienteTO>();
 				clientes.add(application.cliente);
 				adap = new EfficientAdapter(this, clientes);
@@ -122,204 +95,32 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 				UsuarioTO usuarioTO = JSONHelper.desSerializar(usuario, UsuarioTO.class);
 				application.setUsuarioTO(usuarioTO);
 				codigoCliente = application.codigoCliente;
-				//txtCodigo.setText(application.codigoCliente);
 				processAsync();
 			}
 		}		
     }
     
-    /*
-	private TextWatcher txtRucTextWatcher = new TextWatcher() {
-		@Override
-		public void onTextChanged(CharSequence s, int start, int before,
-				int count) {
-			// TODO Auto-generated method stub
-			if (txtRuc.getText() != null) {
-
-				txtCodigo.removeTextChangedListener(txtCodigoTextWatcher);
-				txtDni.removeTextChangedListener(txtDniTextWatcher);
-				txtRazonSocial.removeTextChangedListener(txtRazonSocialTextWatcher);
-
-				txtCodigo.setText(null);
-				txtDni.setText(null);
-				txtRazonSocial.setText(null);
-
-				txtCodigo.addTextChangedListener(txtCodigoTextWatcher);
-				txtDni.addTextChangedListener(txtDniTextWatcher);
-				txtRazonSocial.addTextChangedListener(txtRazonSocialTextWatcher);
-			}
-		}
-
-		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count,
-				int after) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void afterTextChanged(Editable s) {
-			// TODO Auto-generated method stub
-
-		}
-	};
-
-	private TextWatcher txtDniTextWatcher = new TextWatcher() {
-
-		@Override
-		public void onTextChanged(CharSequence s, int start, int before,
-				int count) {
-			// TODO Auto-generated method stub
-			if (txtDni.getText() != null) {
-				txtCodigo.removeTextChangedListener(txtCodigoTextWatcher);
-				txtRuc.removeTextChangedListener(txtRucTextWatcher);
-				txtRazonSocial.removeTextChangedListener(txtRazonSocialTextWatcher);
-
-				txtCodigo.setText(null);
-				txtRuc.setText(null);
-				txtRazonSocial.setText(null);
-				
-				txtCodigo.addTextChangedListener(txtCodigoTextWatcher);
-				txtRuc.addTextChangedListener(txtRucTextWatcher);
-				txtRazonSocial.addTextChangedListener(txtRazonSocialTextWatcher);
-
-			}
-		}
-
-		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count,
-				int after) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void afterTextChanged(Editable s) {
-			// TODO Auto-generated method stub
-
-		}
-	};
-	
-	private TextWatcher txtCodigoTextWatcher = new TextWatcher() {
-		@Override
-		public void onTextChanged(CharSequence s, int start, int before,
-				int count) {
-			// TODO Auto-generated method stub
-			if (txtCodigo.getText() != null) {
-
-				txtRuc.removeTextChangedListener(txtRucTextWatcher);
-				txtDni.removeTextChangedListener(txtDniTextWatcher);
-				txtRazonSocial.removeTextChangedListener(txtRazonSocialTextWatcher);
-
-				txtRuc.setText(null);
-				txtDni.setText(null);
-				txtRazonSocial.setText(null);
-
-				txtRuc.addTextChangedListener(txtRucTextWatcher);
-				txtDni.addTextChangedListener(txtDniTextWatcher);
-				txtRazonSocial.addTextChangedListener(txtRazonSocialTextWatcher);
-			}
-		}
-
-		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count,
-				int after) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void afterTextChanged(Editable s) {
-			// TODO Auto-generated method stub
-
-		}
-	};
-	
-	private TextWatcher txtRazonSocialTextWatcher = new TextWatcher() {
-		@Override
-		public void onTextChanged(CharSequence s, int start, int before,
-				int count) {
-			// TODO Auto-generated method stub
-			if (txtCodigo.getText() != null) {
-
-				txtRuc.removeTextChangedListener(txtRucTextWatcher);
-				txtDni.removeTextChangedListener(txtDniTextWatcher);
-				txtCodigo.removeTextChangedListener(txtCodigoTextWatcher);
-
-				txtRuc.setText(null);
-				txtDni.setText(null);
-				txtCodigo.setText(null);
-
-				txtRuc.addTextChangedListener(txtRucTextWatcher);
-				txtDni.addTextChangedListener(txtDniTextWatcher);
-				txtCodigo.addTextChangedListener(txtCodigoTextWatcher);
-			}
-		}
-
-		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count,
-				int after) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void afterTextChanged(Editable s) {
-			// TODO Auto-generated method stub
-
-		}
-	};
-    */
-    
+   
     public void btnbuscar_onclick(View view){
     	processAsync();
     }
     
-    @Override
-	protected boolean executeAsyncPre() {
-		// TODO Auto-generated method stub
-    	/*
-		boolean isCodigo = txtCodigo.getText().toString().trim().equalsIgnoreCase("");
-		boolean isRuc = txtRuc.getText().toString().trim().equalsIgnoreCase("");
-		boolean isDni = txtDni.getText().toString().trim().equalsIgnoreCase("");
-		boolean isRazonSocial = txtRazonSocial.getText().toString().trim().equalsIgnoreCase("");
-
-		if (isCodigo && isRuc && isDni && isRazonSocial) {
-			txtCodigo.setError(parametros_empty);
-			txtRuc.setError(parametros_empty);
-			txtDni.setError(parametros_empty);
-			txtRazonSocial.setError(parametros_empty);
-			return false;
-		} else {
-			txtCodigo.setError(null);
-			txtRuc.setError(null);
-			txtDni.setError(null);
-			txtRazonSocial.setError(null);
-		}*/
-
-		return true;
-	}
+   
     
     @Override
 	protected void process() {
 		// TODO Auto-generated method stub
-		/*
-    	String codigo = txtCodigo.getText().toString();
-		String ruc = txtRuc.getText().toString();
-		String dni = txtDni.getText().toString();
-		String razonSocial = txtRazonSocial.getText().toString();
-		*/
+    	adap = new EfficientAdapter(this,clienteBLL.listarByCodigo(codigoCliente));
+    	/*
 		consultarClienteProxy.setCodigo(codigoCliente);
-		/*consultarClienteProxy.setRuc(ruc);
-		consultarClienteProxy.setDni(dni);
-		consultarClienteProxy.setRazonSocial(razonSocial);*/
-
 		consultarClienteProxy.execute();
+		*/
 	}
     
     @Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
+    	/*
 		boolean isExito = consultarClienteProxy.isExito();
 		if (isExito) {
 			int status = consultarClienteProxy.getResponse().getStatus();
@@ -338,6 +139,8 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 				showToast(consultarClienteProxy.getResponse().getDescripcion());
 			}
 		}
+		*/
+    	setListAdapter(adap);
 		super.processOk();
 	}
     
@@ -355,42 +158,6 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
     	System.exit(1);
     }
     
-    private int registros_abiertos=-1;
-    
-	@Override
-	protected void process(int accion) {
-		// TODO Auto-generated method stub
-		if(accion==ACCION_CONSULTAR){
-			consultarEvaluacionesAbiertasProxy.codigoCliente = codigoCliente;
-			consultarEvaluacionesAbiertasProxy.execute();
-		}
-	}
-	
-	@Override
-	protected void processOk(int accion) {
-		// TODO Auto-generated method stub
-		if(accion==ACCION_CONSULTAR){
-			boolean isExito = consultarEvaluacionesAbiertasProxy.isExito();
-			if (isExito) {
-				int status = consultarEvaluacionesAbiertasProxy.getResponse().getStatus();
-				if (status == 0) {
-					registros_abiertos=consultarEvaluacionesAbiertasProxy.getResponse().EvaluacionesAbiertas;
-					
-					super.processOk();
-					
-					if(registros_abiertos<=0){
-						Intent oportunidad = new Intent(this, ConsultarOportunidad_Activity.class);
-						startActivity(oportunidad);
-					}else{
-						showToast("El cliente tiene una evaluaci˜n abierta.");
-					}
-					
-				}else{
-					super.processError();
-				}
-			}
-		}
-	}
 	
     @Override
     public void onBackPressed() {
@@ -400,13 +167,6 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub	
 				finish();
-//				int pid = android.os.Process.myPid(); 
-//				android.os.Process.killProcess(pid);
-//				onDestroy();
-//				System.exit(0);
-
-//				MyApplication application = (MyApplication)getApplicationContext();
-//				application.cliente = new ClienteTO();
 			}
 			
 		}, confirm_exit_no, new android.content.DialogInterface.OnClickListener() {
@@ -445,8 +205,7 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 
     }
     
-	public static class EfficientAdapter extends BaseAdapter implements
-			Filterable {
+	public static class EfficientAdapter extends BaseAdapter {
 		private LayoutInflater mInflater;
 		private ConsultarCliente_Activity context;
 		private List<ClienteTO> clientes;
@@ -485,27 +244,16 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 				// we want to bind data to.
 				holder = new ViewHolder();
 				
-				holder.txtFecha = (TextView) convertView
-						.findViewById(R.id.txtFecha);
-				holder.txtCodigo = (TextView) convertView
-						.findViewById(R.id.txtCodigo);
-				holder.txtNombre = (TextView) convertView
-						.findViewById(R.id.txtNombre);
-				holder.txtFrecuencia = (TextView) convertView
-						.findViewById(R.id.txtFrecuencia);
-				holder.txtAlcance = (TextView) convertView
-						.findViewById(R.id.txtAlcance);
-				holder.txtFalta = (TextView) convertView
-						.findViewById(R.id.txtFalta);
-				holder.txtCluster = (TextView) convertView
-						.findViewById(R.id.txtCluster);
-				holder.txtMC = (TextView) convertView
-						.findViewById(R.id.txtMC);
-				holder.txtNPuntos = (TextView) convertView
-						.findViewById(R.id.txtNPuntos);
-				holder.txtSigNivel = (TextView) convertView
-						.findViewById(R.id.txtSigNivel);
-				
+				holder.txtFecha = (TextView) convertView.findViewById(R.id.txtFecha);
+				holder.txtCodigo = (TextView) convertView.findViewById(R.id.txtCodigo);
+				holder.txtNombre = (TextView) convertView.findViewById(R.id.txtNombre);
+				holder.txtFrecuencia = (TextView) convertView.findViewById(R.id.txtFrecuencia);
+				holder.txtAlcance = (TextView) convertView.findViewById(R.id.txtAlcance);
+				holder.txtFalta = (TextView) convertView.findViewById(R.id.txtFalta);
+				holder.txtCluster = (TextView) convertView.findViewById(R.id.txtCluster);
+				holder.txtMC = (TextView) convertView.findViewById(R.id.txtMC);
+				holder.txtNPuntos = (TextView) convertView.findViewById(R.id.txtNPuntos);
+				holder.txtSigNivel = (TextView) convertView.findViewById(R.id.txtSigNivel);
 				holder.imgDireccion = (ImageButton) convertView.findViewById(R.id.btn_direccion);
 				holder.imgCabecera = (ImageButton) convertView.findViewById(R.id.btn_cabecera);
 				holder.imgNuevo = (ImageButton) convertView.findViewById(R.id.btn_nuevo);
@@ -517,20 +265,26 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 				// and the ImageView.
 				holder = (ViewHolder) convertView.getTag();
 			}
-			holder.txtFecha.setText(cliente.getFecha());
-			holder.txtCodigo.setText(cliente.getCodigo());
-			holder.txtNombre.setText(cliente.getNombre());
-			holder.txtFrecuencia.setText(cliente.getFrecuencia());
-			holder.txtAlcance.setText(cliente.getAlcance() + " %");
-			if(cliente.getFalta().equals(""))cliente.setFalta("0");
-			holder.txtFalta.setText(cliente.getFalta() + " CU");
-			holder.txtCluster.setText(cliente.getCluster());
-			holder.txtMC.setText(cliente.getMc());
-			holder.txtNPuntos.setText(cliente.getNroPuntos());
-			holder.txtSigNivel.setText(cliente.getNivelCanje());
+			holder.txtFecha.setText(cliente.fecha);
+			holder.txtCodigo.setText(cliente.codigo);
+			holder.txtNombre.setText(cliente.nombre);
 			
-			double lat = cliente.getLatitud();
-			double lng = cliente.getLongitud();
+			holder.txtFrecuencia.setText(cliente.frecuencia);
+			holder.txtAlcance.setText(ConstantesApp.formatPorcentaje(cliente.alcance,2));
+			
+			//holder.txtAlcance.setText(cliente.getAlcance() + " %");
+			//if(cliente.getFalta().equals(""))cliente.setFalta("0");
+			
+			
+	
+			holder.txtFalta.setText(String.format("%s CU", cliente.falta));
+			holder.txtCluster.setText(cliente.cluster);
+			holder.txtMC.setText(cliente.mc);
+			holder.txtNPuntos.setText(String.format("%s", cliente.nroPuntos));
+			holder.txtSigNivel.setText(String.format("%s", cliente.nivelCanje));
+			
+			double lat = cliente.latitud;
+			double lng = cliente.longitud;
 
 			if (lat != 0 && lng != 0) {
 				holder.imgDireccion.setVisibility(View.VISIBLE);
@@ -543,9 +297,9 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					Intent direccionCliente = new Intent(context, lindley.desarrolloxcliente.DireccionActivity.class);
-					direccionCliente.putExtra(lindley.desarrolloxcliente.DireccionActivity.LATITUD_KEY,clienteTemporal.getLatitud());
-					direccionCliente.putExtra(lindley.desarrolloxcliente.DireccionActivity.LONGITUD_KEY,clienteTemporal.getLongitud());
-					direccionCliente.putExtra(lindley.desarrolloxcliente.DireccionActivity.DIRECCION_KEY,clienteTemporal.getDireccion());
+					direccionCliente.putExtra(lindley.desarrolloxcliente.DireccionActivity.LATITUD_KEY,clienteTemporal.latitud);
+					direccionCliente.putExtra(lindley.desarrolloxcliente.DireccionActivity.LONGITUD_KEY,clienteTemporal.longitud);
+					direccionCliente.putExtra(lindley.desarrolloxcliente.DireccionActivity.DIRECCION_KEY,clienteTemporal.direccion);
 					context.startActivity(direccionCliente);
 				}
 			});
@@ -567,7 +321,15 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					context.processAsync(ACCION_CONSULTAR);
+					ClienteTO clienteTemporal = (ClienteTO) getItem(position);
+					if(clienteTemporal.evaluacionesAbiertas>0){
+						context.showToast("El cliente tiene una evaluaci—n abierta.");
+					}else{
+						MyApplication app = (MyApplication)context.getApplication();
+						app.cliente=clienteTemporal;
+						Intent oportunidad = new Intent(context, ConsultarOportunidad_Activity.class);
+						context.startActivity(oportunidad);
+					}
 					
 				}
 			});
@@ -602,12 +364,7 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 			ImageButton imgArticulo;
 		}
 
-		@Override
-		public Filter getFilter() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
+		
 		@Override
 		public long getItemId(int position) {
 			// TODO Auto-generated method stub
@@ -634,45 +391,6 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 	}
 	
 	
-	/*
-	public void takePhoto(){
-    	file_name = String.format("%d.jpg", System.currentTimeMillis());
-    	 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-    	intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(this)) ); 
-    	intent.putExtra(MediaStore.EXTRA_MEDIA_TITLE, "TITULO");
-    	startActivityForResult(intent, TAKE_PHOTO_CODE);
-    }
 
-	 private File getTempFile(Context context){
-		    
-		   final File path = new File( Environment.getExternalStorageDirectory(), context.getPackageName() );
-		   
-		    if(!path.exists()){
-		    	path.mkdir();
-		    }
-		    
-		    
-		    return new File(path, file_name); 
-		    }
-	 
-	 @Override
-	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    if (resultCode == RESULT_OK) {
-	    		switch(requestCode){
-	    			case TAKE_PHOTO_CODE:{
-	    				savePhoto();
-	    				//processAsync();
-	    				break;
-	    			}
-	    		}
-
-	    }
-	  }
-	 
-	public void savePhoto(){
-		//documentoTO.setNombreArchivo(file_name);
-		//documentoTO.setEsLocal(DocumentoTO.LOCAL);
-		//clienteBLL.guardarDocumento(clienteId, documentoTO);
-	}*/
 
 }

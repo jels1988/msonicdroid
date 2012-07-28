@@ -65,7 +65,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
         application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
 		
-		getSupportActionBar().setSubtitle(cliente.getCodigo() + " - " + cliente.getNombre());
+		getSupportActionBar().setSubtitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 		
 		//mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
         //mActionBar.setHomeLogo(R.drawable.header_logo);
@@ -91,7 +91,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 
 	@Override
 	protected void process() {
-    	ConsultarCabeceraProxy.setCodigoCliente(cliente.getCodigo());
+    	ConsultarCabeceraProxy.setCodigoCliente(cliente.codigo);
     	ConsultarCabeceraProxy.execute();
 	}
     

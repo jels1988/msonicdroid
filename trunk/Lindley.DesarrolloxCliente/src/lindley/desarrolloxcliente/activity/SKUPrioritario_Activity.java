@@ -67,11 +67,12 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 		setTitle(R.string.skuprioritario_activity_title);
 		
 		application = (MyApplication) getApplicationContext();
+		
 		cliente = application.cliente;
 		usuario = application.usuario;
 		evaluacion = application.evaluacion;
 		
-		setSubTitle(String.format("%s - %s", cliente.getCodigo() ,cliente.getNombre()));
+		setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 		
 		MessageBox.showConfirmDialog(this, "Posicion: ",
 				"", "Activos de Lindley",
@@ -105,7 +106,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 		consultarSKUPrioritarioProxy.execute();
 		*/
 		
-		String cluster = cliente.getCluster();
+		String cluster = cliente.cluster;
 		ArrayList<SKUPresentacionTO> skuPresentaciones = oportunidadBLL.consultarSKUPresentacion(cluster);
 		adap = new EfficientAdapter(this, skuPresentaciones);
 		
@@ -222,9 +223,9 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 		if(accion == ACCION_GUARDAR)
 		{
 			
-			evaluacion.activosLindley = cliente.getCodigo();
+			evaluacion.activosLindley = cliente.codigo;
 			evaluacion.codigoUsuario = usuario.getCodigoSap();
-			evaluacion.codigoFe = cliente.getCluster();
+			evaluacion.codigoFe = cliente.cluster;
 			
 			
 			/*

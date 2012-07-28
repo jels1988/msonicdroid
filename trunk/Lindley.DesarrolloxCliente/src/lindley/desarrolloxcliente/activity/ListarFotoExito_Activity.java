@@ -42,7 +42,7 @@ public class ListarFotoExito_Activity extends ListActivityBase {
 		setContentView(R.layout.listarfotoexito_ativity);
 		application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
-        mActionBar.setTitle(cliente.getCodigo() + " - " + cliente.getNombre());
+        mActionBar.setTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
         mActionBar.setHomeLogo(R.drawable.header_logo);
         processAsync();
 	}

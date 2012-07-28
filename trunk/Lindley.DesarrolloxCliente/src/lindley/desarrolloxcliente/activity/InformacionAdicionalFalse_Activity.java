@@ -83,7 +83,7 @@ public class InformacionAdicionalFalse_Activity extends ActivityBase {
 		application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
 		usuario = application.getUsuarioTO();
-		mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
+		mActionBar.setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
         mActionBar.setHomeLogo(R.drawable.header_logo);    
         processAsync();
 	}
