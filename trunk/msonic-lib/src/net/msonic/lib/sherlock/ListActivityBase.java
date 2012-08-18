@@ -49,7 +49,8 @@ public abstract class ListActivityBase extends SherlockListActivity implements R
 	protected EventManager eventManager;
     protected HashMap<Key<?>,Object> scopedObjects = new HashMap<Key<?>,Object>();
     
-	
+    protected boolean validarConexionInternet=true;
+    
 	public void setSubTitle(CharSequence subTitle){
 		getSupportActionBar().setSubtitle(subTitle);
 	}
@@ -170,10 +171,11 @@ public abstract class ListActivityBase extends SherlockListActivity implements R
     
 	protected final void processAsync(){
 		
-		
-		if(!isNetworkAvailable()){
-			showToast(error_not_network_message);
-			return;
+		if(validarConexionInternet){
+			if(!isNetworkAvailable()){
+				showToast(error_not_network_message);
+				return;
+			}
 		}
 		
 		if(!executeAsyncPre()) return;
