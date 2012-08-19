@@ -3,7 +3,7 @@ package lindley.desarrolloxcliente.dao;
 import java.util.ArrayList;
 
 import lindley.desarrolloxcliente.ConstantesApp;
-import lindley.desarrolloxcliente.to.NuevaOportunidadTO;
+import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import net.msonic.lib.DBHelper;
 
@@ -29,9 +29,9 @@ public class OportunidadDAO {
 		
 		while(cursor.moveToNext()){
 			skuPresentacionTO = new SKUPresentacionTO();
-		
-			skuPresentacionTO.setCodigoSKU(String.format("%s",cursor.getInt(cursor.getColumnIndex("codigo"))));
-			skuPresentacionTO.setDescripcionSKU(cursor.getString(cursor.getColumnIndex("descripcion")));
+	
+			skuPresentacionTO.codigoSKU  = String.format("%s",cursor.getInt(cursor.getColumnIndex("codigo")));
+			skuPresentacionTO.descripcionSKU = cursor.getString(cursor.getColumnIndex("descripcion"));
 			skuPresentacionTO.valorActual = ConstantesApp.RESPUESTA_NO;
 			
 			skus.add(skuPresentacionTO);
@@ -42,11 +42,11 @@ public class OportunidadDAO {
 		return skus;
 	}
 	
-	public ArrayList<NuevaOportunidadTO> consultarNuevasOportunidades(String codigoCliente){
+	public ArrayList<OportunidadTO> consultarNuevasOportunidades(String codigoCliente){
 		
-		ArrayList<NuevaOportunidadTO> nuevasOportunidades = new ArrayList<NuevaOportunidadTO>();
+		ArrayList<OportunidadTO> nuevasOportunidades = new ArrayList<OportunidadTO>();
 		
-		String SQL = "select pc.codigoProducto,p.descripcion,p.legacy from producto_cliente pc inner join producto p " +
+		String SQL = "select p.productoId,pc.codigoProducto,p.descripcion,p.legacy from oportunidad_cliente pc inner join producto p " +
 					 "on pc.codigoProducto = p.codigo " +
 					 "where pc.codigoCliente = ?";
 		
@@ -54,10 +54,11 @@ public class OportunidadDAO {
 		String[] args = new String[] {codigoCliente};
 		Cursor cursor = dbHelper.rawQuery(SQL,args);
 		
-		NuevaOportunidadTO nuevaOportunidadTO;
+		OportunidadTO nuevaOportunidadTO;
 		
 		while(cursor.moveToNext()){
-			nuevaOportunidadTO = new NuevaOportunidadTO();
+			nuevaOportunidadTO = new OportunidadTO();
+			nuevaOportunidadTO.productoId = cursor.getLong(cursor.getColumnIndex("productoId"));
 			nuevaOportunidadTO.codigoProducto = cursor.getString(cursor.getColumnIndex("codigoProducto"));
 			nuevaOportunidadTO.descripcionProducto = cursor.getString(cursor.getColumnIndex("descripcion"));
 			nuevaOportunidadTO.codigoLegacy = cursor.getString(cursor.getColumnIndex("legacy"));

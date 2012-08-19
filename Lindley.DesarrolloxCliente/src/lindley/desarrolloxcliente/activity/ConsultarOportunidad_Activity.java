@@ -10,7 +10,7 @@ import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.OportunidadBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
-import lindley.desarrolloxcliente.to.NuevaOportunidadTO;
+import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarNuevaOportunidadProxy;
 import net.msonic.lib.MessageBox;
 import roboguice.inject.InjectResource;
@@ -38,7 +38,7 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 	@Inject ConsultarNuevaOportunidadProxy consultarOportunidadProxy;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	@Inject OportunidadBLL oportunidadBLL;
-	ArrayList<NuevaOportunidadTO> nuevasOportunidades;
+	ArrayList<OportunidadTO> nuevasOportunidades;
 	
 	
 	private EfficientAdapter 	adap;
@@ -75,7 +75,7 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
     public void onCreate(Bundle savedInstanceState) {
     	inicializarRecursos();
         super.onCreate(savedInstanceState);
-        
+    	this.validarConexionInternet=false;
         
         getSupportActionBar().setDisplayShowHomeEnabled(false);
         setContentView(R.layout.consultaroportunidad_activity);
@@ -102,26 +102,16 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 	
     public void btnSiguiente_click(View view)
     {
-    	
-    	/*
-    	ArrayList<GuardarOportunidadTO> oportunidades = application.guardarOportunidades;
-    	oportunidades = new ArrayList<GuardarOportunidadTO>();
-    	*/
+    
     	
     	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
 
-    	for (NuevaOportunidadTO oportunidad : adap.detalles) {
+    	for (OportunidadTO oportunidad : adap.detalles) {
     		if(oportunidad.seleccionado){    
     			evaluacion.oportunidades.add(oportunidad);
-    			/*
-    			GuardarOportunidadTO guardar = new GuardarOportunidadTO();
-    			guardar.codigoProducto = oportunidad.codigoProducto;
-    			oportunidades.add(guardar);
-    			*/
     		}
 		}
     	
-    	//application.guardarOportunidades = oportunidades;
 
     	int maximoValor = 2;
     	int filasSeleccionadas=evaluacion.oportunidades.size();
@@ -162,11 +152,6 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
     	nuevasOportunidades = oportunidadBLL.consultarNuevasOportunidades(cliente.codigo);
     	adap = new EfficientAdapter(this,cliente.codigo, nuevasOportunidades);
     	
-    	/*
-    	consultarOportunidadProxy.setCodigoCliente(cliente.getCodigo());
-    	consultarOportunidadProxy.setTipoOportunidad(ConstantesApp.OPORTUNIDAD_SISTEMA);
-    	consultarOportunidadProxy.execute();
-    	*/
 	}
 
     @Override
@@ -174,27 +159,7 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 		// TODO Auto-generated method stub
     	setListAdapter(adap);
     	super.processOk();
-    	
-    	/*
-		boolean isExito = consultarOportunidadProxy.isExito();
-		if (isExito) {
-			int status = consultarOportunidadProxy.getResponse().getStatus();
-			if (status == 0) {
-				List<NuevaOportunidadTO> oportunidades = consultarOportunidadProxy.getResponse().listaNuevaOportunidad;
-				adap = new EfficientAdapter(this,cliente.getCodigo(), oportunidades);
-				final Calendar c = Calendar.getInstance();
-				if(oportunidades.size()>0)
-					txtViewFecha.setText(ActivityUtil.pad(c.get(Calendar.DAY_OF_MONTH)) + "/" + ActivityUtil.pad((c.get(Calendar.MONTH) + 1)) + "/" + c.get(Calendar.YEAR));
-				setListAdapter(adap);
-			}
-			else  {
-				showToast(consultarOportunidadProxy.getResponse().getDescripcion());
-			}
-		}
-		else{
-			processError();
-		}*/
-		
+
 	}
     
     @Override
@@ -207,11 +172,11 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
     public static class EfficientAdapter extends BaseAdapter {
 	    private LayoutInflater 			mInflater;
 	    private Context 				context;
-	    private List<NuevaOportunidadTO> detalles;
+	    private List<OportunidadTO> detalles;
 	    private String codigoCliente;
 	    
 	    
-	    public EfficientAdapter(Context context,String codigoCliente, List<NuevaOportunidadTO> valores) {
+	    public EfficientAdapter(Context context,String codigoCliente, List<OportunidadTO> valores) {
 		      mInflater = LayoutInflater.from(context);
 		      this.context = context;
 		      this.detalles = valores;
@@ -226,7 +191,7 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 	     *      android.view.ViewGroup)
 	     */
 	    public View getView(final int position, View convertView, ViewGroup parent) {
-	    	final NuevaOportunidadTO oportunidad = (NuevaOportunidadTO) getItem(position);
+	    	final OportunidadTO oportunidad = (OportunidadTO) getItem(position);
 	    	ViewHolder holder;
 
 	      if (convertView == null) {
@@ -241,8 +206,6 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 	        	    	
 	        convertView.setTag(holder);
 	      } else {
-	        // Get the ViewHolder back to get fast access to the TextView
-	        // and the ImageView.
 	        holder = (ViewHolder) convertView.getTag();
 	      }
 	      

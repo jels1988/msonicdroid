@@ -1,14 +1,16 @@
 package lindley.desarrolloxcliente.to;
 
+
 import com.google.gson.annotations.SerializedName;
 
 public class SKUPresentacionTO {
 	
+	
 	@SerializedName("CSKU")
-	private String codigoSKU;
+	public String codigoSKU;
 	
 	@SerializedName("DSKU")
-	private String descripcionSKU;
+	public String descripcionSKU;
 	
 	@SerializedName("SLC")
 	public String valorActual;

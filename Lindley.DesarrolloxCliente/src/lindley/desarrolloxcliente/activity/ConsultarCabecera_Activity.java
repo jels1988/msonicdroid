@@ -10,9 +10,7 @@ import lindley.desarrolloxcliente.to.DesarrolloClienteTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarEstadoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCabeceraProxy;
 import net.msonic.lib.ActivityUtil;
-//import net.msonic.lib.ListActivityBase;
 import net.msonic.lib.MessageBox;
-import roboguice.inject.InjectView;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,7 +26,6 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
 
 public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActivityBase  {
 
