@@ -33,8 +33,18 @@ public class EvaluacionDAO {
 		
 		values.put("evaluacionId", evaluacionTO.evaluacionId);
 		values.put("productoId", oportunidadTO.productoId);
+		values.put("codigoProducto", oportunidadTO.codigoProducto);
+		values.put("concrecion", oportunidadTO.concrecion);
+		values.put("sovi", oportunidadTO.sovi);
+		values.put("respetaPrecio", oportunidadTO.cumplePrecio);
+		values.put("numeroSabores", oportunidadTO.numeroSabores);
+		values.put("puntosCocaCola", oportunidadTO.puntosCocaCola);
+		values.put("puntosBonus", oportunidadTO.puntosBonus);
+		values.put("fechaProceso", oportunidadTO.fecha);
+		
 		
 		long id= dbHelper.insertOrThrow("evaluacion_oportunidad", values);
+		oportunidadTO.oportunidadId = id;
 		
 		return id;
 		

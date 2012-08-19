@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.to.OportunidadTO;
+import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import net.msonic.lib.DBHelper;
 
@@ -14,7 +15,7 @@ import com.google.inject.Inject;
 public class OportunidadDAO {
 	
 	@Inject	protected DBHelper dbHelper;
-	
+	@Inject protected PeriodoTO periodoTO;
 	
 	
 	public ArrayList<SKUPresentacionTO> consultarSKUPresentacion(String cluster){
@@ -46,12 +47,17 @@ public class OportunidadDAO {
 		
 		ArrayList<OportunidadTO> nuevasOportunidades = new ArrayList<OportunidadTO>();
 		
-		String SQL = "select p.productoId,pc.codigoProducto,p.descripcion,p.legacy from oportunidad_cliente pc inner join producto p " +
-					 "on pc.codigoProducto = p.codigo " +
-					 "where pc.codigoCliente = ?";
+		String SQL = "select p.productoId,oc.codigoProducto,p.descripcion,p.legacy," +
+					"oc.concrecion,oc.sovi,oc.respetaPrecio,oc.numeroSabores,oc.puntosCocaCola,oc.puntosBonus,oc.fechaProceso " +
+					 "from oportunidad_cliente oc inner join producto p " +
+					 "on oc.codigoProducto = p.codigo " +
+					 "where oc.anio = ? and oc.mes = ? and oc.codigoCliente = ?";
 		
 
-		String[] args = new String[] {codigoCliente};
+		String[] args = new String[] {String.valueOf(periodoTO.anio),
+									  String.valueOf(periodoTO.mes),
+									  codigoCliente};
+		
 		Cursor cursor = dbHelper.rawQuery(SQL,args);
 		
 		OportunidadTO nuevaOportunidadTO;
@@ -62,6 +68,13 @@ public class OportunidadDAO {
 			nuevaOportunidadTO.codigoProducto = cursor.getString(cursor.getColumnIndex("codigoProducto"));
 			nuevaOportunidadTO.descripcionProducto = cursor.getString(cursor.getColumnIndex("descripcion"));
 			nuevaOportunidadTO.codigoLegacy = cursor.getString(cursor.getColumnIndex("legacy"));
+			nuevaOportunidadTO.concrecion = cursor.getString(cursor.getColumnIndex("concrecion"));
+			nuevaOportunidadTO.sovi = cursor.getString(cursor.getColumnIndex("sovi"));
+			nuevaOportunidadTO.cumplePrecio = cursor.getString(cursor.getColumnIndex("respetaPrecio"));
+			nuevaOportunidadTO.numeroSabores = String.valueOf(cursor.getInt(cursor.getColumnIndex("numeroSabores")));
+			nuevaOportunidadTO.puntosCocaCola = String.valueOf(cursor.getInt(cursor.getColumnIndex("puntosCocaCola")));
+			nuevaOportunidadTO.puntosBonus = String.valueOf(cursor.getInt(cursor.getColumnIndex("puntosBonus")));
+			nuevaOportunidadTO.fecha = String.valueOf(cursor.getInt(cursor.getColumnIndex("fechaProceso")));
 			nuevasOportunidades.add(nuevaOportunidadTO);
 			
 		}
