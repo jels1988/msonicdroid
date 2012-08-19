@@ -2,6 +2,7 @@ package lindley.desarrolloxcliente.to;
 
 import java.util.ArrayList;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class OportunidadTO {
@@ -10,47 +11,54 @@ public class OportunidadTO {
 	{
 		listaAccionesTrade = new ArrayList<AccionTradeTO>();
 	}
-
+	
+	@Expose()
+	public long productoId;
+	
 	@SerializedName("FEC")
-	private String fecha;
+	public String fecha;
 
 	@SerializedName("CPRO")
-	private String codigoProducto;
+	public String codigoProducto;
 
 	@SerializedName("DPRO")
-	private String descripcionProducto;
+	public String descripcionProducto;
 
 	@SerializedName("CNR")
-	private String concrecion;
+	public String concrecion;
 
 	@SerializedName("SOVI")
-	private String sovi;
+	public String sovi;
 
 	@SerializedName("RPRE") 
-	private String cumplePrecio;
+	public String cumplePrecio;
 
 	@SerializedName("NSB")
-	private String numeroSabores;
+	public String numeroSabores;
 
 	@SerializedName("PCC")
-	private String puntosCocaCola;
+	public String puntosCocaCola;
 
 	@SerializedName("PBN")
-	private String puntosBonus;
+	public String puntosBonus;
 
 	@SerializedName("FECO")
-	private String fechaOportunidad;
+	public String fechaOportunidad;
 	
 	@SerializedName("TRD")
-	private ArrayList<AccionTradeTO> listaAccionesTrade;
+	public ArrayList<AccionTradeTO> listaAccionesTrade;
 
 	@SerializedName("CAT")
-	private String accioneTrade;
+	public String accioneTrade;
 	
 	@SerializedName("DAT")
-	private String descripcionAccioneTrade;
+	public String descripcionAccioneTrade;
 	
-	private boolean seleccionado;
+
+	@SerializedName("LEG")
+	public String codigoLegacy;
+	
+	public boolean seleccionado;
 	
 	public String getFecha() {
 		return fecha;

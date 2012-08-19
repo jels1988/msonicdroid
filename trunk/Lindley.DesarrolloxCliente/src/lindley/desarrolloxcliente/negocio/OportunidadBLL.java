@@ -3,7 +3,7 @@ package lindley.desarrolloxcliente.negocio;
 import java.util.ArrayList;
 
 import lindley.desarrolloxcliente.dao.OportunidadDAO;
-import lindley.desarrolloxcliente.to.NuevaOportunidadTO;
+import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import net.msonic.lib.DBHelper;
 
@@ -37,8 +37,8 @@ public class OportunidadBLL {
 		
 	}
 	
-	public ArrayList<NuevaOportunidadTO> consultarNuevasOportunidades(String codigoCliente){
-		ArrayList<NuevaOportunidadTO> nuevasOportunidades=null;
+	public ArrayList<OportunidadTO> consultarNuevasOportunidades(String codigoCliente){
+		ArrayList<OportunidadTO> nuevasOportunidades=null;
 		try{
 			dbHelper.openDataBase();
 			nuevasOportunidades = oportunidadDAO.consultarNuevasOportunidades(codigoCliente);

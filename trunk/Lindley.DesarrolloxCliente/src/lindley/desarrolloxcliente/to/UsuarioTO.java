@@ -76,34 +76,34 @@ public class UsuarioTO {
 	}
 	
 	@SerializedName("NOM")
-	private String nombres;
+	public String nombres;
 	
 	@SerializedName("CSP")
-	private String codigoSap;
+	public String codigoSap;
 	
 	@SerializedName("Rol")
-	private String rol;
+	public String rol;
 	
 	@SerializedName("CDDEP")
-	private String codigoDeposito;
+	public String codigoDeposito;
 	
 	@SerializedName("PWD")
-	private String password;
+	public String password;
 	
 	@SerializedName("CDRUT")
-	private String codigoRuta;
+	public String codigoRuta;
 	
 	@SerializedName("MPER")
-	private HashMap<String,String> moduloPermisos;
+	public HashMap<String,String> moduloPermisos;
 	
 	@SerializedName("OPER")
-	private HashMap<String,String> opcionPermisos;
+	public HashMap<String,String> opcionPermisos;
 	
 	@SerializedName("RolId")
-	private String rolId;
+	public String rolId;
 	
 	@SerializedName("CSB")
-	private String codigoBasis;
+	public String codigoBasis;
 
 	public String getRolId() {
 		return rolId;

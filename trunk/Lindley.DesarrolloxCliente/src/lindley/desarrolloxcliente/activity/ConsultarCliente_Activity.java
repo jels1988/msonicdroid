@@ -59,9 +59,10 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	inicializarRecursos();
+    
     	
         super.onCreate(savedInstanceState);
-        
+    	this.validarConexionInternet=false;
         
         
         getSupportActionBar().setDisplayShowHomeEnabled(false);
@@ -73,8 +74,8 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
        
 		MyApplication application = (MyApplication)contextProvider.get().getApplicationContext();
 		
+		
 		if(codigoCliente!=null){
-			
 			application.codigoCliente = codigoCliente;
 			UsuarioTO usuarioTO = JSONHelper.desSerializar(usuario, UsuarioTO.class);
 			application.setUsuarioTO(usuarioTO);
@@ -102,6 +103,7 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
     
    
     public void btnbuscar_onclick(View view){
+    	
     	processAsync();
     }
     

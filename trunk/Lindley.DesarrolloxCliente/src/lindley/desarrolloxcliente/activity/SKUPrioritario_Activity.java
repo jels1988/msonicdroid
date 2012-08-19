@@ -6,6 +6,7 @@ import java.util.List;
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.negocio.EvaluacionBLL;
 import lindley.desarrolloxcliente.negocio.OportunidadBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
@@ -36,7 +37,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 	
 	private EfficientAdapter adap;
 	
-	public  MyApplication application;
+	private  MyApplication application;
 	private ClienteTO cliente;
 	private UsuarioTO usuario;
 	private EvaluacionTO evaluacion;
@@ -45,7 +46,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
     @Inject GuardarNuevoDesarrolloProxy guardarNuevoDesarrolloProxy;
 	@InjectView(R.id.txtViewFecha) 		TextView txtViewFecha;
 	@Inject OportunidadBLL oportunidadBLL;
-	
+	@Inject EvaluacionBLL evaluacionBLL;
 	
 	public static final int ACCION_GUARDAR = 1;
 
@@ -59,6 +60,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 		// TODO Auto-generated method stub
 		inicializarRecursos();
 		super.onCreate(savedInstanceState);
+		this.validarConexionInternet=false;
 		
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		
@@ -207,8 +209,18 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 				//application.guardarSKUPresentacion = adap.skuPresentaciones;
 				
 				evaluacion.skuPresentacion = adap.skuPresentaciones;
+				evaluacion.codigoUsuario = usuario.codigoSap;
+				evaluacion.codigoFe = cliente.cluster;
+				evaluacion.codigoCliente = cliente.codigo;
 				
-				processAsync(ACCION_GUARDAR);
+				evaluacionBLL.save(evaluacion);
+				
+				
+				Intent compromisoOpen = new Intent(ctx,TestTabs.class);
+				compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, "0");					
+				compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "N");
+				startActivity(compromisoOpen);
+			
 			}
 		}, "No",null);
 		
@@ -217,36 +229,43 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 		
 	}
 
+	/*
 	@Override
 	protected void process(int accion) {
 		// TODO Auto-generated method stub
 		if(accion == ACCION_GUARDAR)
 		{
 			
-			evaluacion.activosLindley = cliente.codigo;
+			//evaluacion.activosLindley = cliente.codigo;
 			evaluacion.codigoUsuario = usuario.getCodigoSap();
 			evaluacion.codigoFe = cliente.cluster;
 			
 			
-			/*
-			guardarNuevoDesarrolloProxy.oportunidadSistema = application.guardarOportunidades;
-			guardarNuevoDesarrolloProxy.listSKUPresentacion = application.guardarSKUPresentacion;
-			guardarNuevoDesarrolloProxy.activosLindley = application.activosLindley;
-			guardarNuevoDesarrolloProxy.codigoCliente = cliente.getCodigo();
-			guardarNuevoDesarrolloProxy.codigoUsuario = usuario.getCodigoSap();
-			guardarNuevoDesarrolloProxy.codigoFDE = cliente.getCluster();
-			guardarNuevoDesarrolloProxy.execute();
-			*/
+			
+			//guardarNuevoDesarrolloProxy.oportunidadSistema = application.guardarOportunidades;
+			//guardarNuevoDesarrolloProxy.listSKUPresentacion = application.guardarSKUPresentacion;
+			//guardarNuevoDesarrolloProxy.activosLindley = application.activosLindley;
+			//guardarNuevoDesarrolloProxy.codigoCliente = cliente.getCodigo();
+			//guardarNuevoDesarrolloProxy.codigoUsuario = usuario.getCodigoSap();
+			//guardarNuevoDesarrolloProxy.codigoFDE = cliente.getCluster();
+			//guardarNuevoDesarrolloProxy.execute();
+			
 			
 			
 		}
-	}
+	}*/
 	
 	@Override
 	protected void processOk(int accion) {
 		// TODO Auto-generated method stub
 		if(accion == ACCION_GUARDAR)
     	{
+			
+			Intent compromisoOpen = new Intent(this,TestTabs.class);
+			compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, "0");					
+			compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "N");
+			startActivity(compromisoOpen);
+			/*
 			boolean isExito = guardarNuevoDesarrolloProxy.isExito();
 			if (isExito) {
 				int status = guardarNuevoDesarrolloProxy.getResponse().getStatus();
@@ -260,12 +279,12 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "N");
 					startActivity(compromisoOpen);
 					
-					/*
-					Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.compromisoprincipalopen");
-					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, idRegistro);					
-					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "N");
-					startActivity(compromisoOpen);
-					*/
+					
+					//Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.compromisoprincipalopen");
+					//compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, idRegistro);					
+					//compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "N");
+					//startActivity(compromisoOpen);
+					
 					
 				}
 				else  {
@@ -274,7 +293,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 			}
 			else{
 				processError();
-			}
+			}*/
 			super.processOk();
     	}
 	}
