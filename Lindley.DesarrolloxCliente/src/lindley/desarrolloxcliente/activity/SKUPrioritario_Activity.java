@@ -216,8 +216,8 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 				evaluacionBLL.save(evaluacion);
 				
 				
-				Intent compromisoOpen = new Intent(ctx,TestTabs.class);
-				compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, "0");					
+				Intent compromisoOpen = new Intent(ctx,EvaluacionTabs_Activity.class);
+				compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, String.valueOf(evaluacion.evaluacionId));					
 				compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "N");
 				startActivity(compromisoOpen);
 			
@@ -261,7 +261,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 		if(accion == ACCION_GUARDAR)
     	{
 			
-			Intent compromisoOpen = new Intent(this,TestTabs.class);
+			Intent compromisoOpen = new Intent(this,EvaluacionTabs_Activity.class);
 			compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, "0");					
 			compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "N");
 			startActivity(compromisoOpen);

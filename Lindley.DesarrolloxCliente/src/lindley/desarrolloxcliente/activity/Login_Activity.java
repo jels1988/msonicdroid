@@ -3,6 +3,7 @@ package lindley.desarrolloxcliente.activity;
 import net.msonic.lib.JSONHelper;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.LoginProxy;
 import roboguice.inject.InjectResource;
@@ -25,7 +26,8 @@ public class Login_Activity extends net.msonic.lib.sherlock.ActivityBase{
 	@InjectResource(R.string.login_activity_txtlogin_empty) String txtlogin_empty;
 	@InjectResource(R.string.login_activity_txtpassword_empty) String txtpassword_empty;
 	@Inject 						LoginProxy 	loginProxy;
-
+	@Inject 	 					PeriodoTO 	periodoTO;
+	
 	@InjectView(R.id.btnLogin) 	Button 	btnLogin;
 	private boolean isConectadoInternet=false;
 	
@@ -42,6 +44,8 @@ public class Login_Activity extends net.msonic.lib.sherlock.ActivityBase{
         setContentView(R.layout.login_activity);
         setTitle(R.string.login_activity_title);
        
+        periodoTO.anio = 2012;
+        periodoTO.mes=8;
 	
 		txtUsuario.requestFocus();
 	
