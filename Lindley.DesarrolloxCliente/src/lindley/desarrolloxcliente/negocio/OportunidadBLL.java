@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import lindley.desarrolloxcliente.dao.OportunidadDAO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
+import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import net.msonic.lib.DBHelper;
 
@@ -17,7 +18,7 @@ public class OportunidadBLL {
 	private static final String TAG_LOG = OportunidadBLL.class.getSimpleName();
 	@Inject protected DBHelper dbHelper;
 	@Inject protected OportunidadDAO oportunidadDAO;
-	
+	@Inject protected PeriodoTO periodoTO;
 	
 	
 	public ArrayList<SKUPresentacionTO> consultarSKUPresentacion(String cluster){
