@@ -117,4 +117,19 @@
         <item>NV</item>
     </string-array>
     <string name="eliminar_evaluacion">Eliminar</string>
+    
+    
+    
+    
+    <string name="compromisoopen_content_puntos">Puntos:</string>
+    <string name="compromisoopen_content_legacy">Legacy:</string>
+    <string name="compromisoopen_content_producto">Producto:</string>
+    <string name="compromisoopen_content_concreciones">CONCRECIONES</string>
+    <string name="compromisoopen_content_actual">Actual:</string>
+    <string name="compromisoopen_content_compromiso">Compromiso:</string>
+    <string name="compromisoopen_content_sovi">SOVI</string>
+    <string name="compromisoopen_content_marcaprecio">MARCA PRECIO</string>
+    <string name="compromisoopen_content_sabores">SABORES</string>
+    <string name="compromisoopen_content_acciones_trade">Acciones Trade:</string>
+    <string name="compromisoopen_content_fecha">Fecha:</string>
 </resources>
