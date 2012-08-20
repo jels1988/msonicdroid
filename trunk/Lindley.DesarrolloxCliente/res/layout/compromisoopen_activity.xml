@@ -48,7 +48,7 @@
             android:text="" />
     </LinearLayout>
 
-    <HorizontalScrollView
+    <!--HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
@@ -252,7 +252,17 @@
                 android:drawSelectorOnTop="false"
                 android:focusable="false" />
         </LinearLayout>
-    </HorizontalScrollView>
+    </HorizontalScrollView-->
+    
+    
+       <ListView
+                android:id="@+id/android:list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="2dip"
+                android:layout_marginTop="2dip"
+                android:drawSelectorOnTop="false"
+                android:focusable="false" />
 
     <LinearLayout
         android:layout_width="fill_parent"
