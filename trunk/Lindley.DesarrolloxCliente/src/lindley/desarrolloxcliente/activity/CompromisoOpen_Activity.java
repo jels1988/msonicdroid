@@ -357,8 +357,7 @@ public class CompromisoOpen_Activity extends ListActivityBase {
 		if (isExito) {
 			int status = consultarCompromisoProxy.getResponse().getStatus();
 			if (status == 0) {
-				compromisos = consultarCompromisoProxy
-						.getResponse().getListaCompromiso();
+				compromisos = consultarCompromisoProxy.getResponse().getListaCompromiso();
 				
 				if(compromisos.size()>0)
 				{

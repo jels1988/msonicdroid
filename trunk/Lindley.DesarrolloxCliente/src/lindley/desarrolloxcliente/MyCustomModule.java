@@ -16,6 +16,7 @@ import lindley.desarrolloxcliente.negocio.EvaluacionBLL;
 import lindley.desarrolloxcliente.negocio.FotoBLL;
 import lindley.desarrolloxcliente.negocio.OportunidadBLL;
 
+import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.ActualizarEstadoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
@@ -76,6 +77,9 @@ public class MyCustomModule extends AbstractModule {
 		
 		bind(EvaluacionBLL.class).in(Singleton.class);
 		bind(EvaluacionDAO.class).in(Singleton.class);
+		
+		
+		bind(PeriodoTO.class).in(Singleton.class);
 		
 		
 		

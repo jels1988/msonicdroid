@@ -7,10 +7,15 @@ import com.google.gson.annotations.SerializedName;
 
 public class OportunidadTO {
 	
+	
+	
 	public OportunidadTO()
 	{
 		listaAccionesTrade = new ArrayList<AccionTradeTO>();
 	}
+	
+	@Expose()
+	public long oportunidadId;
 	
 	@Expose()
 	public long productoId;
