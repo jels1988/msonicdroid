@@ -15,7 +15,7 @@ import lindley.desarrolloxcliente.ws.service.ConsultarNuevaOportunidadProxy;
 import net.msonic.lib.MessageBox;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
-import android.content.Context;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -169,15 +169,14 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 		showToast(error_generico_process);
 	}
     
-    public static class EfficientAdapter extends BaseAdapter {
-	    private LayoutInflater 			mInflater;
-	    private Context 				context;
+    public static class EfficientAdapter extends ArrayAdapter<OportunidadTO> {
+	    private Activity 				context;
 	    private List<OportunidadTO> detalles;
 	    private String codigoCliente;
 	    
 	    
-	    public EfficientAdapter(Context context,String codigoCliente, List<OportunidadTO> valores) {
-		      mInflater = LayoutInflater.from(context);
+	    public EfficientAdapter(Activity context,String codigoCliente, List<OportunidadTO> valores) {
+	    	super(context, R.layout.consultaroportunidad_content, valores);
 		      this.context = context;
 		      this.detalles = valores;
 		      this.codigoCliente = codigoCliente;
@@ -191,6 +190,65 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 	     *      android.view.ViewGroup)
 	     */
 	    public View getView(final int position, View convertView, ViewGroup parent) {
+	    	
+	    	
+	    	View view = null;
+			if (convertView == null) {
+				
+				
+				LayoutInflater inflator = context.getLayoutInflater();
+				view = inflator.inflate(R.layout.consultaroportunidad_content, null);
+				final ViewHolder viewHolder = new ViewHolder();
+				
+				viewHolder.chkSeleccion = (CheckBox) view.findViewById(R.id.chkSeleccion);
+				viewHolder.txViewPro = (TextView) view.findViewById(R.id.txViewPro); 
+				viewHolder.btnProfit = (Button) view.findViewById(R.id.btnProfit);
+				viewHolder.txViewLegacy = (TextView) view.findViewById(R.id.txViewLegacy);
+				
+				view.setTag(viewHolder);
+				
+				viewHolder.chkSeleccion.setTag(this.detalles.get(position));
+				
+				viewHolder.chkSeleccion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						// TODO Auto-generated method stub
+						OportunidadTO oportunidadTO = (OportunidadTO) viewHolder.chkSeleccion.getTag();
+						oportunidadTO.seleccionado = isChecked;
+					}
+				});
+			   
+				
+				viewHolder.btnProfit.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							OportunidadTO oportunidadTO = (OportunidadTO) viewHolder.chkSeleccion.getTag();
+							Intent profit = new Intent(context, VerProfit_Activity.class);
+							profit.putExtra(VerProfit_Activity.ANIO, "");
+							profit.putExtra(VerProfit_Activity.MES, "");
+							profit.putExtra(VerProfit_Activity.CLIENTE, codigoCliente);
+							profit.putExtra(VerProfit_Activity.ARTICULO, oportunidadTO.codigoProducto);
+							profit.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, oportunidadTO.descripcionProducto);
+							context.startActivity(profit);
+						}
+					});
+					
+			}else{
+				view = convertView;
+				((ViewHolder) view.getTag()).chkSeleccion.setTag(this.detalles.get(position));
+			}
+			
+			ViewHolder holder = (ViewHolder) view.getTag();
+			OportunidadTO oportunidadTO = detalles.get(position);
+			
+			holder.txViewPro.setText(oportunidadTO.descripcionProducto);
+			holder.txViewLegacy.setText(oportunidadTO.codigoLegacy);
+			holder.chkSeleccion.setChecked(oportunidadTO.seleccionado);
+			
+			return view;
+			
+			/*
 	    	final OportunidadTO oportunidad = (OportunidadTO) getItem(position);
 	    	ViewHolder holder;
 
@@ -205,22 +263,20 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 	        holder.chkSeleccion = (CheckBox) convertView.findViewById(R.id.chkSeleccion);
 	        	    	
 	        convertView.setTag(holder);
+	        
 	      } else {
 	        holder = (ViewHolder) convertView.getTag();
 	      }
 	      
 	      holder.txViewPro.setText(" "+oportunidad.descripcionProducto);
 	      holder.txViewLegacy.setText(oportunidad.codigoLegacy);
+	  
 	      holder.chkSeleccion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-				
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 					// TODO Auto-generated method stub
-					if(isChecked){
-						oportunidad.seleccionado = true;
-					}else{
-						oportunidad.seleccionado = false;
-					}
+					
+					oportunidad.seleccionado = isChecked;
 				}
 			});
 	      
@@ -238,9 +294,9 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 					profit.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, oportunidad.descripcionProducto);
 					context.startActivity(profit);
 				}
-			});
+			});*/
 	      
-	      return convertView;
+	      
 	    }
 
 	    static class ViewHolder {   
@@ -250,28 +306,7 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 	    	Button btnProfit;
 	    }
 	   
-	    @Override
-	    public long getItemId(int position) {
-	      // TODO Auto-generated method stub
-	      return position;
-	    }
-
-	    @Override
-	    public int getCount() {
-	      // TODO Auto-generated method stub
-	      //return data.length;
-	    	if(detalles==null){
-	    		return 0;
-	    	}else{
-	    		return detalles.size();
-	    	}
-	    }
-
-	    @Override
-	    public Object getItem(int position) {
-	      // TODO Auto-generated method stub
-	    	return detalles.get(position);
-	    }
+	    
 
 	  }
 

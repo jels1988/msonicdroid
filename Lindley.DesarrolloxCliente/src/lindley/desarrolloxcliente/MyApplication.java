@@ -22,9 +22,9 @@ import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.CompromisoPosicionTO;
 import lindley.desarrolloxcliente.to.CompromisoTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
-import lindley.desarrolloxcliente.to.GuardarOportunidadTO;
 import lindley.desarrolloxcliente.to.InformacionAdicionalTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
+import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
@@ -36,14 +36,12 @@ import lindley.desarrolloxcliente.to.UsuarioTO;
 
 public class MyApplication extends Application {
 
-		/*
-	 @Override
-	    public void onCreate() {
-	        RoboGuice.setBaseApplicationInjector(this, RoboGuice.DEFAULT_STAGE, Modules.override(RoboGuice.newDefaultRoboModule(this)).with(new MyCustomModule()));
-	    }*/
 	
-	@Inject FotoBLL fotoBLL;
-	@Inject FotoDAO fotoDAO; 
+	
+	
+	
+	@Inject protected FotoBLL fotoBLL;
+	@Inject protected FotoDAO fotoDAO; 
 	
 	public UsuarioTO usuario;
 	public ClienteTO cliente;

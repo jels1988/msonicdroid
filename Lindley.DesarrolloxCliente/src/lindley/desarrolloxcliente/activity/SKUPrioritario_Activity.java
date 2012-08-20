@@ -213,7 +213,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 				evaluacion.codigoFe = cliente.cluster;
 				evaluacion.codigoCliente = cliente.codigo;
 				
-				evaluacionBLL.save(evaluacion);
+				//evaluacionBLL.save(evaluacion);
 				
 				
 				Intent compromisoOpen = new Intent(ctx,EvaluacionTabs_Activity.class);
@@ -327,7 +327,6 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 
 				viewHolder.txViewSKU = (TextView) view.findViewById(R.id.txViewSKU);
 				viewHolder.chkValActual = (Spinner) view.findViewById(R.id.chkValActual);
-				
 				viewHolder.chkValActual.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 					@Override
