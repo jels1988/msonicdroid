@@ -24,7 +24,6 @@ import lindley.desarrolloxcliente.to.CompromisoTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.InformacionAdicionalTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
-import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;

@@ -1,6 +1,7 @@
 package lindley.desarrolloxcliente.to;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -51,7 +52,7 @@ public class OportunidadTO {
 	public String fechaOportunidad;
 	
 	@SerializedName("TRD")
-	public ArrayList<AccionTradeTO> listaAccionesTrade;
+	public List<AccionTradeTO> listaAccionesTrade;
 
 	@SerializedName("CAT")
 	public String accioneTrade;
@@ -62,6 +63,12 @@ public class OportunidadTO {
 
 	@SerializedName("LEG")
 	public String codigoLegacy;
+	
+	public String puntosSugeridos;
+	public String soviActual;
+	public String concrecionActual;
+	public int numeroSaboresActual;
+	public String cumplePrecioActual;
 	
 	public boolean seleccionado;
 	
@@ -137,7 +144,7 @@ public class OportunidadTO {
 		this.puntosBonus = puntosBonus;
 	}
 
-	public ArrayList<AccionTradeTO> getListaAccionesTrade() {
+	public List<AccionTradeTO> getListaAccionesTrade() {
 		return listaAccionesTrade;
 	}
 
