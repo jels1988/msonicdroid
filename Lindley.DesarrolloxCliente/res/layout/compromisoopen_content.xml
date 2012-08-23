@@ -5,30 +5,30 @@
         android:layout_height="wrap_content">
 
         <TableRow>
-               <TextView style="@style/TextViewHead" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/compromisoopen_content_puntos"/>
-               <TextView android:id="@+id/txViewPuntos"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="3"  />
+               <TextView style="@style/TextViewHead" android:layout_width="wrap_content" android:layout_height="30dip" android:text="@string/compromisoopen_content_puntos" android:gravity="center_vertical"/>
+               <TextView android:id="@+id/txViewPuntos"  android:layout_width="wrap_content" android:layout_height="30dip" android:layout_weight="3"  android:gravity="center_vertical"/>
         </TableRow>
         
-        <TableRow>
-            <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/compromisoopen_content_legacy" />
-            <TextView android:id="@+id/txViewLegacy" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="3"/>
-        </TableRow>
-        
-        
-        <TableRow>
-            <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/compromisoopen_content_producto" />
-            <TextView android:id="@+id/txViewPro" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="3"/>
+        <TableRow android:layout_height="13dip">
+            <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="30dip" android:text="@string/compromisoopen_content_legacy" android:gravity="center_vertical" />
+            <TextView android:id="@+id/txViewLegacy" android:layout_width="wrap_content" android:layout_height="30dip" android:layout_weight="3" android:gravity="center_vertical"/>
         </TableRow>
         
         
+        <TableRow>
+            <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="30dip" android:text="@string/compromisoopen_content_producto" android:gravity="center_vertical"/>
+            <TextView android:id="@+id/txViewPro" android:layout_width="wrap_content" android:layout_height="30dip" android:layout_weight="3" android:gravity="center_vertical"/>
+        </TableRow>
+        
+        
         
         <TableRow>
-            <TextView style="@style/TextViewHead"  android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1"  android:text="@string/compromisoopen_content_concreciones" android:gravity="center_horizontal" />
+            <TextView style="@style/TextViewHead"  android:layout_width="fill_parent" android:layout_height="30dip" android:layout_weight="1"  android:text="@string/compromisoopen_content_concreciones" android:gravity="center_horizontal|center_vertical" />
         </TableRow>
         
          <TableRow>
-            <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent"  android:text="@string/compromisoopen_content_actual" />
-            <TextView android:id="@+id/cboConcrecion" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3"/>
+            <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="30dip"  android:text="@string/compromisoopen_content_actual" />
+            <TextView android:id="@+id/cboConcrecion" android:layout_width="wrap_content" android:layout_height="30dip" android:layout_weight="3"/>
         </TableRow>
         
           <TableRow>
@@ -37,22 +37,22 @@
         </TableRow>
          
         <TableRow>
-            <TextView style="@style/TextViewHead"  android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1" android:text="@string/compromisoopen_content_sovi" android:gravity="center_horizontal" />
+            <TextView style="@style/TextViewHead"  android:layout_width="fill_parent" android:layout_height="30dip" android:layout_weight="1" android:text="@string/compromisoopen_content_sovi" android:gravity="center_horizontal|center_vertical" />
         </TableRow>
         
         
         <TableRow>
             <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent"  android:text="@string/compromisoopen_content_actual" />
-            <EditText android:id="@+id/txViewSOVI" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:inputType="numberDecimal" android:clickable="true" android:maxLength="5"/>
+            <EditText android:id="@+id/txViewSOVI" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:inputType="numberDecimal" android:clickable="true" android:focusableInTouchMode="true" android:maxLength="5"/>
         </TableRow>
         
         <TableRow>
-            <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent"  android:text="@string/compromisoopen_content_actual" />
-            <EditText android:id="@+id/txViewSOVICmp" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:inputType="numberDecimal" android:clickable="true" android:maxLength="5"/>
+            <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent"  android:text="@string/compromisoopen_content_compromiso" />
+            <EditText android:id="@+id/txViewSOVICmp" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:inputType="numberDecimal" android:clickable="true" android:focusableInTouchMode="true" android:maxLength="5"/>
         </TableRow>
         
 		<TableRow>
-            <TextView style="@style/TextViewHead"  android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1" android:text="@string/compromisoopen_content_marcaprecio" android:gravity="center_horizontal" />
+            <TextView style="@style/TextViewHead"  android:layout_width="fill_parent" android:layout_height="30dip" android:layout_weight="1" android:text="@string/compromisoopen_content_marcaprecio" android:gravity="center_horizontal|center_vertical" />
         </TableRow>
 
         <TableRow>
@@ -66,12 +66,12 @@
         </TableRow>
         		
        	<TableRow>
-            <TextView style="@style/TextViewHead"  android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1" android:text="@string/compromisoopen_content_sabores" android:gravity="center_horizontal" />
+            <TextView style="@style/TextViewHead"  android:layout_width="fill_parent" android:layout_height="30dip" android:layout_weight="1" android:text="@string/compromisoopen_content_sabores" android:gravity="center_horizontal|center_vertical" />
         </TableRow>
         
        <TableRow>
-            <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/compromisoopen_content_actual" />
-            <TextView android:id="@+id/txViewSabores" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3"/>
+            <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="30dip" android:text="@string/compromisoopen_content_actual" />
+            <TextView android:id="@+id/txViewSabores" android:layout_width="wrap_content" android:layout_height="30dip" android:layout_weight="3"/>
        </TableRow>
        
          <TableRow>
