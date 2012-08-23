@@ -7,6 +7,7 @@ import java.util.List;
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.negocio.AccionTradeBLL;
 import lindley.desarrolloxcliente.negocio.OportunidadBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
@@ -45,6 +46,7 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 	private ClienteTO 			cliente;
 	private EvaluacionTO 		evaluacion;
 	private MyApplication 		application;
+	@Inject private AccionTradeBLL 		accionTradeBLL;
 	
 	@InjectResource(R.string.confirm_atras_title) 	String confirm_atras_title;
 	@InjectResource(R.string.confirm_atras_message) String confirm_atras_message;
@@ -109,6 +111,7 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
     	for (OportunidadTO oportunidad : adap.detalles) {
     		if(oportunidad.seleccionado){    
     			evaluacion.oportunidades.add(oportunidad);
+    			oportunidad.listaAccionesTrade = accionTradeBLL.listarByProducto(oportunidad.codigoProducto);
     		}
 		}
     	

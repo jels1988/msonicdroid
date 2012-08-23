@@ -16,10 +16,10 @@ public class AccionTradeTO {
 	}
 	
 	@SerializedName("COD")
-	private String codigo;
+	public String codigo;
 
 	@SerializedName("DES")
-	private String descripcion;
+	public String descripcion;
 
 	public String getCodigo() {
 		return codigo;

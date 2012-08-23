@@ -7,10 +7,12 @@ import net.msonic.lib.DBHelperProvider;
 
 import com.google.inject.AbstractModule;
 
+import lindley.desarrolloxcliente.dao.AccionTradeDAO;
 import lindley.desarrolloxcliente.dao.ClienteDAO;
 import lindley.desarrolloxcliente.dao.EvaluacionDAO;
 import lindley.desarrolloxcliente.dao.FotoDAO;
 import lindley.desarrolloxcliente.dao.OportunidadDAO;
+import lindley.desarrolloxcliente.negocio.AccionTradeBLL;
 import lindley.desarrolloxcliente.negocio.ClienteBLL;
 import lindley.desarrolloxcliente.negocio.EvaluacionBLL;
 import lindley.desarrolloxcliente.negocio.FotoBLL;
@@ -77,6 +79,10 @@ public class MyCustomModule extends AbstractModule {
 		
 		bind(EvaluacionBLL.class).in(Singleton.class);
 		bind(EvaluacionDAO.class).in(Singleton.class);
+		
+		bind(AccionTradeBLL.class).in(Singleton.class);
+		bind(AccionTradeDAO.class).in(Singleton.class);
+		
 		
 		
 		bind(PeriodoTO.class).in(Singleton.class);
