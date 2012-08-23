@@ -259,8 +259,8 @@
                 android:id="@+id/android:list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="2dip"
-                android:layout_marginTop="2dip"
+                android:layout_marginBottom="0dip"
+                android:layout_marginTop="0dip"
                 android:drawSelectorOnTop="false"
                 android:focusable="false" />
 
