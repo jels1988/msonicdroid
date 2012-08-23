@@ -105,6 +105,7 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
     public void btnSiguiente_click(View view)
     {
     
+    	evaluacion.oportunidades.clear();
     	
     	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
 
