@@ -157,13 +157,17 @@ public class ResumenGerenteVentasActivity extends net.msonic.lib.sherlock.Activi
  			
  			builder.setPositiveButton(R.string.listasupervisores_activity_title_dialog_Aceptar, new DialogInterface.OnClickListener() {
 			        public void onClick(DialogInterface dialog, int id) {
+			        	
+			        	
 			        	if(item_selected>-1){
-				        		Intent intent = new Intent(getApplicationContext(), ResumenGerenteVentasDepositosActivity.class);
-								intent.putExtra(ResumenGerenteVentasDepositosActivity.CODIGO_GERENTE_VENTA_KEY, codigoGerenteVenta);
-								intent.putExtra(ResumenGerenteVentasDepositosActivity.CODIGO_DEPOSITO_KEY, codigoCda);
-								intent.putExtra(ResumenGerenteVentasDepositosActivity.NOMBRE_CDA_KEY, nombreCda);
-						    	startActivity(intent);
-					        	dialog.dismiss();
+			        			
+					        		Intent intent = new Intent(getApplicationContext(), ResumenGerenteVentasDepositosActivity.class);
+									intent.putExtra(ResumenGerenteVentasDepositosActivity.CODIGO_GERENTE_VENTA_KEY, codigoGerenteVenta);
+									intent.putExtra(ResumenGerenteVentasDepositosActivity.CODIGO_DEPOSITO_KEY, codigoCda);
+									intent.putExtra(ResumenGerenteVentasDepositosActivity.NOMBRE_CDA_KEY, nombreCda);
+							    	startActivity(intent);
+						        	dialog.dismiss();
+			        			
 			        	}
 			        }
 			    });
@@ -270,7 +274,11 @@ public class ResumenGerenteVentasActivity extends net.msonic.lib.sherlock.Activi
 	        case R.id.mnuDepositos:
 		    	showDialog(0);
 	            return true;
-	        
+	       
+	        case R.id.mnuGrafico:
+		    	showDialog(1);
+	            return true;
+	            
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
