@@ -4,6 +4,7 @@ import java.util.List;
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.to.AccionTradeTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
 import android.app.Activity;
@@ -126,7 +127,33 @@ public class Compromisos_Activity extends ListBaseFragment {
 					      if(holder.txViewAccTrade.getCount() > 1)
 					    	  holder.txViewAccTrade.setSelection(1);
 					      
-						 				    	
+						 
+					      holder.txViewAccTrade.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+								@Override
+								public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
+									OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
+									
+									// TODO Auto-generated method stub
+									if(arg2 > 0){
+										oportunidadTO.descAccionTrade = (((AccionTradeTO)arg0.getSelectedItem()).getDescripcion());
+										oportunidadTO.codigoAccionTrade = (((AccionTradeTO)arg0.getSelectedItem()).getCodigo());
+									}else{
+										oportunidadTO.descAccionTrade  = "";
+										oportunidadTO.codigoAccionTrade = "";
+									}
+								}
+
+								@Override
+								public void onNothingSelected(AdapterView<?> arg0) {
+									// TODO Auto-generated method stub
+									OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
+									oportunidadTO.descAccionTrade  = "";
+									oportunidadTO.codigoAccionTrade = "";
+								}
+								
+							});
+					      
 						  holder.cboConcrecionCmp.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 								@Override

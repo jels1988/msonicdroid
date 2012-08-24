@@ -69,6 +69,8 @@ public class OportunidadTO {
 	public String concrecionActual;
 	public int numeroSaboresActual;
 	public String cumplePrecioActual;
+	public String descAccionTrade;
+	public String codigoAccionTrade;
 	
 	public boolean seleccionado;
 	

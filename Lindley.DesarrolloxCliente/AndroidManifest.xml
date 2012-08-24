@@ -292,7 +292,23 @@
                 <action android:name="lindley.desarrolloxcliente.consultarresumen" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>     
+        </activity>
+        
+         <activity android:name=".activity.EvaluacionTabs_Activity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>            					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+         <activity android:name=".activity.Compromisos_Activity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>            					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+         
+       
+       
+       
     </application>
     
      <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="15"/>
