@@ -146,7 +146,7 @@ public  class  DBHelper extends SQLiteOpenHelper{
 		if(selectionArgs!=null){
 			int index=0;
 			for (String parametro : selectionArgs) {
-				Log.d(TAG, String.format("PARA[%s]: %s",index+1,parametro));
+				Log.d(TAG, String.format("PARA[%s]: %s",index++,parametro));
 			}
 		}
 		
@@ -184,6 +184,7 @@ public  class  DBHelper extends SQLiteOpenHelper{
 		logContentValues(values);
 		
 		long id = this.getDataBase().insertOrThrow(table, null, values);
+		Log.d(TAG, String.format("ID: %s",id));
 		return id;
 	}
 		
