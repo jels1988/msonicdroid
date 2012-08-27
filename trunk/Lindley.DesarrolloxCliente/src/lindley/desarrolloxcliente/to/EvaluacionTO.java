@@ -10,6 +10,7 @@ public class EvaluacionTO {
 	public EvaluacionTO(){
 		oportunidades =  new ArrayList<OportunidadTO>();
 		skuPresentacion = new ArrayList<SKUPresentacionTO>();
+		posiciones = new ArrayList<PosicionCompromisoTO>();
 	}
 	
 	@Expose()
@@ -21,4 +22,5 @@ public class EvaluacionTO {
 	
 	public List<OportunidadTO> oportunidades;
 	public List<SKUPresentacionTO> skuPresentacion;
+	public List<PosicionCompromisoTO> posiciones;
 }

@@ -36,6 +36,7 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
         mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
         
         mTabManager.addTab(mTabHost.newTabSpec("Inventario").setIndicator("Inventario"),Compromisos_Activity.class,getIntent().getExtras());
+        mTabManager.addTab(mTabHost.newTabSpec("Posicion").setIndicator("Posici—n"),Posicion_Activity.class,getIntent().getExtras());
         
         if (savedInstanceState != null) {
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
