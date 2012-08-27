@@ -1,90 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-
     <TableLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/tableLayout"
-        android:layout_width="800dip"
-        android:layout_height="wrap_content"
-        android:shrinkColumns="*"
-        android:stretchColumns="*" >
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-             <TextView
-                android:id="@+id/TextViewRpsta"
-                android:layout_width="20dip"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:text="" />
-             
-              <TextView
-                android:id="@+id/txViewPuntos"
-                android:layout_width="40dip"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="" />
-             
-             <Button
-                android:id="@+id/btnFotoInicial"
-                android:layout_width="60dip"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:text="@string/ver_fotoInicial" />
-
-            <Button
-                android:id="@+id/btnFotoExito"
-                android:layout_width="60dip"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:layout_gravity="center"
-                android:text="@string/ver_fotoExito" />
-            
-            <TextView
-                android:id="@+id/txViewRed"
-                android:layout_width="30dip"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="" />
-
-            <TextView
-                android:id="@+id/txViewMaximo"
-                android:layout_width="30dip"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="" />
-           
-
-            <EditText                
-                android:id="@+id/txViewAccComp"
-                android:layout_width="100dip"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:layout_gravity="center_vertical"
-                android:maxLength="50"
-                android:text="" />
-
-            <LinearLayout android:layout_width="120dip" android:layout_height="match_parent" android:orientation="horizontal" android:gravity="center">
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+		
+         <TableRow>
+               <TextView style="@style/TextViewHead" android:layout_width="wrap_content" android:layout_height="30dip" android:text="@string/posicionopen_content_activos" android:gravity="center_vertical"/>
+               <TextView android:id="@+id/TextViewRpsta"  android:layout_width="wrap_content" android:layout_height="30dip" android:layout_weight="3"  android:gravity="center_vertical"/>
+        </TableRow>
+        
+        <TableRow>
+               <TextView style="@style/TextViewHead" android:layout_width="wrap_content" android:layout_height="30dip" android:text="@string/compromisoopen_content_puntos" android:gravity="center_vertical"/>
+               <TextView android:id="@+id/txViewPuntos"  android:layout_width="wrap_content" android:layout_height="30dip" android:layout_weight="3"  android:gravity="center_vertical"/>
+        </TableRow>
+        
+        <TableRow>
+            <TextView style="@style/TextViewHead"  android:layout_width="fill_parent" android:layout_height="30dip" android:layout_weight="1"  android:text="@string/posicionopen_content_red" android:gravity="center_horizontal|center_vertical" />
+        </TableRow>
+        
+        <TableRow>
+               <TextView style="@style/TextViewHead" android:layout_width="wrap_content" android:layout_height="30dip" android:text="@string/posicionopen_content_exhibicion" android:gravity="center_vertical"/>
+               <TextView android:id="@+id/txViewRed"  android:layout_width="wrap_content" android:layout_height="30dip" android:layout_weight="3"  android:gravity="center_vertical"/>
+        </TableRow>
+        
+         <TableRow>
+               <TextView style="@style/TextViewHead" android:layout_width="wrap_content" android:layout_height="30dip" android:text="@string/posicionopen_content_puntomax" android:gravity="center_vertical"/>
+               <TextView android:id="@+id/txViewMaximo"  android:layout_width="wrap_content" android:layout_height="30dip" android:layout_weight="3"  android:gravity="center_vertical"/>
+        </TableRow>
+        
+         <TableRow>
+               <TextView style="@style/TextViewHead" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/posicionopen_content_observacion" android:gravity="center_vertical"/>
+               <EditText android:id="@+id/txViewAccComp"  android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="3"  android:gravity="center_vertical" android:maxLength="50"/>
+        </TableRow>
+        
+        <TableRow>  
+            <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent"  android:text="@string/posicionopen_content_fechacompromiso" android:gravity="center_vertical" />
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:orientation="horizontal" android:gravity="center_vertical">
                 
                  <EditText
                 android:id="@+id/txEditFecha"
-                android:layout_width="100dip"
-                android:layout_height="wrap_content"
+            	android:layout_width="0dip" 
+            	android:layout_height="fill_parent" 
+            	android:layout_weight="1"
                 android:clickable="true"
-                android:editable="false"
-                android:maxLength="10"
-                android:text="" />    
-                                 
+                android:maxLength="10"/>    
+                
                  <ImageButton android:id="@+id/btnFecha" 
                      android:layout_height="wrap_content"
                       android:layout_width="wrap_content" 
@@ -93,12 +53,38 @@
                       android:src="@drawable/btn_calendario"/>
                 
             </LinearLayout>
+        </TableRow>
+        
+        
+         <TableRow>  
+			
+             <View android:layout_width="1dip" android:layout_height="1dip"/>
+             
+             <Button
+                android:id="@+id/btnFotoInicial"
+                android:layout_width="70dip"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dip"
+                android:focusable="false"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="@string/ver_fotoInicial" />
+
+            <Button
+                android:id="@+id/btnFotoExito"
+                android:layout_width="70dip"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dip"
+                android:focusable="false"
+                android:layout_gravity="center"
+                android:text="@string/ver_fotoExito" />
+
+      
+		
+           
+
+       
 		        
         </TableRow>
 
-        <View
-            android:layout_height="2dip"
-            android:background="#FF909090" />
     </TableLayout>
-
-</LinearLayout>

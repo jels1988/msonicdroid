@@ -117,10 +117,6 @@
         <item>NV</item>
     </string-array>
     <string name="eliminar_evaluacion">Eliminar</string>
-    
-    
-    
-    
     <string name="compromisoopen_content_puntos">Puntos:</string>
     <string name="compromisoopen_content_legacy">Legacy:</string>
     <string name="compromisoopen_content_producto">Producto:</string>
@@ -132,4 +128,12 @@
     <string name="compromisoopen_content_sabores">SABORES</string>
     <string name="compromisoopen_content_acciones_trade">Acciones Trade:</string>
     <string name="compromisoopen_content_fecha">Fecha:</string>
+    
+    <string name="posicionopen_content_activos">Activos Lindley:</string>
+    <string name="posicionopen_content_puntos">Puntos:</string>
+    <string name="posicionopen_content_red">Red</string>
+    <string name="posicionopen_content_exhibicion">Std.Exhibición</string>
+    <string name="posicionopen_content_puntomax">Puntos Máximo:</string>
+    <string name="posicionopen_content_observacion">Observación:</string>
+    <string name="posicionopen_content_fechacompromiso">Fecha Compromiso:</string>
 </resources>
