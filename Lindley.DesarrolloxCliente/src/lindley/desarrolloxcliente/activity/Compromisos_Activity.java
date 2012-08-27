@@ -1,6 +1,7 @@
 package lindley.desarrolloxcliente.activity;
 import java.util.List;
 
+
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
@@ -8,13 +9,17 @@ import lindley.desarrolloxcliente.to.AccionTradeTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.View.OnFocusChangeListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -36,6 +41,7 @@ public class Compromisos_Activity extends ListBaseFragment {
 	 
 	 @Override public void onActivityCreated(Bundle savedInstanceState) {
          super.onActivityCreated(savedInstanceState);
+         
          if(VISTA_CARGADA==0){
 	 		VISTA_CARGADA=1;
 	 		application = (MyApplication) getActivity().getApplicationContext();
@@ -254,6 +260,31 @@ public class Compromisos_Activity extends ListBaseFragment {
 								}
 							});
 						  
+						    holder.btnFecha.setOnClickListener(new OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									// TODO Auto-generated method stub
+									OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
+									 int[] factores = ConstantesApp.getFechaFactores(oportunidadTO.fechaOportunidad);
+									 
+									 DatePickerDialog picker = new DatePickerDialog(context, new OnDateSetListener() {
+										
+										@Override
+										public void onDateSet(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
+											// TODO Auto-generated method stub
+											OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
+											String mes = ConstantesApp.RPad(String.valueOf(monthOfYear+1),2,'0');
+											String dia = ConstantesApp.RPad(String.valueOf(dayOfMonth),2,'0');
+											String fecha = String.format("%s/%s/%s", dia,mes, year);
+											oportunidadTO.fechaOportunidad=fecha;
+											holder.txEditFecha.setText(oportunidadTO.fechaOportunidad);
+										}
+									}, factores[0],factores[1], factores[2]);
+									 
+									 picker.show();
+								}
+							});
+						    
 						  ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(this.context.getApplicationContext(),R.array.confirmacion,android.R.layout.simple_spinner_item);
 						  adap.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 						  holder.cboCumPrecio.setAdapter(adap);
@@ -277,6 +308,7 @@ public class Compromisos_Activity extends ListBaseFragment {
 					ViewHolder holder = (ViewHolder) view.getTag();
 					
 					OportunidadTO oportunidadTO = this.detalle.get(position);
+					
 					holder.txViewPuntos.setText(oportunidadTO.puntosSugeridos);
 					holder.txViewPro.setText(oportunidadTO.descripcionProducto);
 					holder.txViewLegacy.setText(oportunidadTO.codigoLegacy);
@@ -289,8 +321,9 @@ public class Compromisos_Activity extends ListBaseFragment {
 					 holder.txViewSOVI.setText(oportunidadTO.sovi);
 				     holder.txViewSOVICmp.setText(oportunidadTO.soviActual);
 				     holder.txViewSabores.setText(oportunidadTO.numeroSabores);
-				     
+				     holder.txEditFecha.setText(oportunidadTO.fechaOportunidad);
 				    
+				 
 					  
 					  
 					return view;
