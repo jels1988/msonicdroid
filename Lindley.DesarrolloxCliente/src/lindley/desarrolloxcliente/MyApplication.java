@@ -46,6 +46,7 @@ public class MyApplication extends Application {
 	public ClienteTO cliente;
 	public EvaluacionTO evaluacion;
 	
+	public int compromisoPosicion=-1;
 	
 	
 	private ArrayList<OportunidadTO> oportunidadesDesarrollador; 

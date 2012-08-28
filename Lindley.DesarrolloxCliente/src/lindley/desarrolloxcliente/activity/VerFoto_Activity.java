@@ -4,8 +4,6 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 
-import com.thira.examples.actionbar.widget.ActionBar;
-
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
@@ -22,13 +20,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.widget.ImageView;
-import net.msonic.lib.ActivityBase;
 
-public class VerFoto_Activity extends ActivityBase {
+
+public class VerFoto_Activity extends net.msonic.lib.sherlock.ActivityBase {
 
 	public static final String FILE_NAME = "FILE_NAME";
 	
-	@InjectView(R.id.actionBar)	ActionBar mActionBar;
+	//@InjectView(R.id.actionBar)	ActionBar mActionBar;
 	@InjectExtra(FILE_NAME)		String fileName;
 	@InjectView(R.id.imgFoto)	ImageView imgVer;
 	private Bitmap bitmap;
@@ -44,10 +42,12 @@ public class VerFoto_Activity extends ActivityBase {
 		inicializarRecursos();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.verfoto_activity);
-		mActionBar.setTitle(R.string.ver_foto_activity_title);
+		this.validarConexionInternet=false;
+		
+		setTitle(R.string.ver_foto_activity_title);
 		application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
-		mActionBar.setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
+		setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 		processAsync();
 	}
 	

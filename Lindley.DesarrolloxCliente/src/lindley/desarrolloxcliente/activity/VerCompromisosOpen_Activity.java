@@ -7,8 +7,9 @@ import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.CompromisoPosicionTO;
-import net.msonic.lib.ListActivityBase;
-import roboguice.inject.InjectView;
+import lindley.desarrolloxcliente.to.EvaluacionTO;
+//import net.msonic.lib.ListActivityBase;
+//import roboguice.inject.InjectView;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,15 +19,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
-import com.thira.examples.actionbar.widget.ActionBar;
+//import com.thira.examples.actionbar.widget.ActionBar;
 
-public class VerCompromisosOpen_Activity extends ListActivityBase {
+public class VerCompromisosOpen_Activity extends net.msonic.lib.sherlock.ListActivityBase {
 
-	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
+	//@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	private EfficientAdapter adap;
 	private MyApplication application;
 	ClienteTO cliente;
-	//List<CompromisoPosicionTO> listCompromisoPosicionTO = new ArrayList<CompromisoPosicionTO>();
+	private int posicion=-1;
+	private EvaluacionTO evaluacion;
 	 
 	
 	@Override
@@ -34,27 +36,34 @@ public class VerCompromisosOpen_Activity extends ListActivityBase {
 		// TODO Auto-generated method stub
 		inicializarRecursos();
 		super.onCreate(savedInstanceState);
-		 setContentView(R.layout.vercompromisosopen_activity);    
-		 mActionBar.setTitle(R.string.compromiso_title);
+		 setContentView(R.layout.vercompromisosopen_activity);   
+		 this.validarConexionInternet=false;
+		 setTitle(R.string.compromiso_title);
 		 application = (MyApplication)getApplicationContext();
-		 cliente = application.getClienteTO();
-		 mActionBar.setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
-		 mActionBar.setHomeLogo(R.drawable.header_logo);
+		 
+ 		 evaluacion = application.evaluacion;
+ 		 cliente = application.cliente;
+		 posicion = application.compromisoPosicion;
+		 
+		 setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
+		 
 
-		 if(application.listCompromiso == null)
-			 application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
-		 adap = new EfficientAdapter(this, application.listCompromiso);
+		 if(evaluacion.posiciones.get(posicion)==null){
+			 evaluacion.posiciones.get(posicion).listCompromisos = new ArrayList<CompromisoPosicionTO>();
+		 }
+		 
+		 adap = new EfficientAdapter(this, evaluacion.posiciones.get(posicion).listCompromisos);
 		 setListAdapter(adap);
 	}
 	
 	public void btnGuardar_click(View view)
 	{
-		for(CompromisoPosicionTO comp : application.listCompromiso)
+		/*for(CompromisoPosicionTO comp : application.evaluacion.posiciones.get(posicion).listCompromisos)
 		{
 			if(comp.getDescripcion().equals(""))
 				comp.setDescripcion("  ");
 			
-		}
+		}*/
 		finish();
 	}
 	
@@ -62,14 +71,14 @@ public class VerCompromisosOpen_Activity extends ListActivityBase {
 	{
 		CompromisoPosicionTO compromiso = new CompromisoPosicionTO();
 		compromiso.setDescripcion("");
-		application.listCompromiso.add(compromiso);
+		evaluacion.posiciones.get(posicion).listCompromisos.add(compromiso);
 		adap.notifyDataSetChanged();
 	}
 	
 	public void btnQuitar_click(View view)
 	{
-		if(!application.listCompromiso.isEmpty())
-			application.listCompromiso.remove(application.listCompromiso.size()-1);
+		if(!evaluacion.posiciones.get(posicion).listCompromisos.isEmpty())
+			evaluacion.posiciones.get(posicion).listCompromisos.remove(evaluacion.posiciones.get(posicion).listCompromisos.size()-1);
 		adap.notifyDataSetChanged();
 	}
 	

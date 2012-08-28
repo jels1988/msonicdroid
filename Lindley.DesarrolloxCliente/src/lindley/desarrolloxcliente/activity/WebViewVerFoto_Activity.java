@@ -93,7 +93,6 @@ public class WebViewVerFoto_Activity extends ActivityBase {
 
 		fotoNombre = fotoNombre.substring(0, (fotoNombre.length()-4));
 		String url = this.urlwb;
-		System.out.println(fotoNombre);
 		wvwFoto.loadUrl( url + DESARROLLO_X_CLIENTE + fotoNombre );
 		//wvwFoto.loadUrl("http://java.cdaandino.com/rtm/LanzadorApp/ImageViewService.svc"+ DESARROLLO_X_CLIENTE + "12_20599_1332711988984");
 	}
