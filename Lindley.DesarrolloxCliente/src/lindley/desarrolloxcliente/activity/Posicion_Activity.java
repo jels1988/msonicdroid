@@ -5,8 +5,11 @@ import java.util.List;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +30,8 @@ import lindley.desarrolloxcliente.negocio.PosicionBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
+import net.msonic.lib.MessageBox;
+import net.msonic.lib.UploadFileUtil;
 import net.msonic.lib.sherlock.ListBaseFragment;
 
 public class Posicion_Activity extends ListBaseFragment  {
@@ -38,6 +43,10 @@ public class Posicion_Activity extends ListBaseFragment  {
 	
 	EfficientAdapter oportunidades;
 	
+	public static String file_name="";
+	private static final int TAKE_PHOTO_INICIAL_CODE = 1;
+	//private static final int TAKE_PHOTO_FINAL_CODE = 2;
+	
 	 @Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			 return inflater.inflate(R.layout.consultarposicioncompromisoopen_activity, container,false);
@@ -47,6 +56,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 		 
 		 @Override public void onActivityCreated(Bundle savedInstanceState) {
 	         super.onActivityCreated(savedInstanceState);
+	         this.validarConexionInternet=false;
 	         
 	         if(VISTA_CARGADA==0){
 		 		VISTA_CARGADA=1;
@@ -78,10 +88,26 @@ public class Posicion_Activity extends ListBaseFragment  {
 			super.processOk();
 		}
 
+		private PosicionCompromisoTO posicionCompromisoFotoTO;
+		
+		public void takePhoto(int accion,PosicionCompromisoTO posicionTO ){
+	    	
+	    	this.posicionCompromisoFotoTO = posicionTO;
+	    	file_name = UploadFileUtil.GenerarFileName(12,"jpg");
+	    	 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	    	intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(ConstantesApp.getTempFile(getActivity(),file_name))); 
+	    	intent.putExtra(MediaStore.EXTRA_MEDIA_TITLE, "TITULO");
+	    	getActivity().startActivityForResult(intent, accion);
+	    	
+	    
+	    }
 
+		
 
 		public static class EfficientAdapter extends ArrayAdapter<PosicionCompromisoTO>{
-
+			
+		    
+		    
 			 private final List<PosicionCompromisoTO> detalle;
 			 private final Activity context;
 			 private final ClienteTO cliente;
@@ -195,6 +221,47 @@ public class Posicion_Activity extends ListBaseFragment  {
 									}
 								}
 							});
+							
+							/*
+							holder.btnFotoInicial.setOnClickListener(new OnClickListener() {
+
+								@Override
+								public void onClick(View v) {
+									// TODO Auto-generated method stub
+									PosicionCompromisoTO posicionCompromisoTO = (PosicionCompromisoTO) holder.TextViewRpsta.getTag();
+									
+									if((posicionCompromisoTO.fotoInicial==null)||(posicionCompromisoTO.fotoInicial.compareTo("")==0)){
+										
+										((CompromisoPosicionOpen_Activity)context).takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionTO);						
+										
+										
+									}else{
+
+										MessageBox.showConfirmDialog(context, "Confirmacion", "¿Desea reemplazar la foto?", "Si",
+												new android.content.DialogInterface.OnClickListener() {
+											
+											public void onClick(DialogInterface dialog, int which) {
+												// TODO Auto-generated method stub	
+												((CompromisoPosicionOpen_Activity)context).takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionTO);
+												
+											}
+											
+										}, "No", new android.content.DialogInterface.OnClickListener() {
+
+											public void onClick(DialogInterface dialog, int which) {
+												// TODO Auto-generated method stub
+												
+												
+												Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
+												intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.fotoInicial.toString());
+												context.startActivity(intent);
+											}
+											
+										});  
+
+								    }						
+							     }
+							});*/
 							 
 							view.setTag(holder);
 					    	holder.TextViewRpsta.setTag(this.detalle.get(position));

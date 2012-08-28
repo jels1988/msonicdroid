@@ -1,7 +1,10 @@
 package lindley.desarrolloxcliente;
 
+import java.io.File;
 import java.util.Calendar;
 
+import android.content.Context;
+import android.os.Environment;
 import android.text.format.DateFormat;
 
 public final class ConstantesApp {
@@ -102,4 +105,14 @@ public final class ConstantesApp {
 		
 		return factores;
 	}
+	
+	 public static File getTempFile(Context context,String file_name){
+		    
+		   final File path = new File( Environment.getExternalStorageDirectory(), context.getPackageName() );
+		   
+		    if(!path.exists()){
+		    	path.mkdir();
+		    }
+		    return new File(path, file_name); 
+		    }
 }
