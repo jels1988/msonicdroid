@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.FotoBLL;
@@ -448,22 +449,14 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
     	this.posicionTO = posicionTO;
     	file_name = UploadFileUtil.GenerarFileName(12,"jpg");
     	 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-    	intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile(this)) ); 
+    	intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(ConstantesApp.getTempFile(this,file_name))); 
     	intent.putExtra(MediaStore.EXTRA_MEDIA_TITLE, "TITULO");
     	startActivityForResult(intent, accion);
     	
     	
     }
 
-	 private File getTempFile(Context context){
-		    
-		   final File path = new File( Environment.getExternalStorageDirectory(), context.getPackageName() );
-		   
-		    if(!path.exists()){
-		    	path.mkdir();
-		    }
-		    return new File(path, file_name); 
-		    }
+	
 	 
 	 @Override
 	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
