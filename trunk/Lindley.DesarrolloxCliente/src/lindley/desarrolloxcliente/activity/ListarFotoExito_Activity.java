@@ -4,12 +4,11 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.negocio.FotoClusterBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.FotoExitoTO;
-import lindley.desarrolloxcliente.ws.service.ConsultarFotoExitoProxy;
-import net.msonic.lib.ListActivityBase;
+//import lindley.desarrolloxcliente.ws.service.ConsultarFotoExitoProxy;
 import roboguice.inject.InjectExtra;
-import roboguice.inject.InjectView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,17 +21,20 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
+//import com.thira.examples.actionbar.widget.ActionBar;
 
-public class ListarFotoExito_Activity extends ListActivityBase {
+public class ListarFotoExito_Activity extends net.msonic.lib.sherlock.ListActivityBase {
 
-	@InjectView(R.id.actionBar) ActionBar mActionBar;
-	@Inject ConsultarFotoExitoProxy consultarFotoExitoProxy;
+	//@InjectView(R.id.actionBar) ActionBar mActionBar;
+	//@Inject ConsultarFotoExitoProxy consultarFotoExitoProxy;
 	public static final String ID_CLUSTER = "clusterId";
 	@InjectExtra(ID_CLUSTER) String cluster; 
+	@Inject FotoClusterBLL fotoClusterBLL;
+	
 	
 	private ClienteTO cliente;
 	private MyApplication application;
+	private EfficientAdapter adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,23 +42,31 @@ public class ListarFotoExito_Activity extends ListActivityBase {
 		inicializarRecursos();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.listarfotoexito_ativity);
+		this.validarConexionInternet=false;
+		
 		application = (MyApplication)getApplicationContext();
 		cliente = application.getClienteTO();
-        mActionBar.setTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
-        mActionBar.setHomeLogo(R.drawable.header_logo);
+		
+		 setTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
+		 
+        //mActionBar.setTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
+        //mActionBar.setHomeLogo(R.drawable.header_logo);
         processAsync();
 	}
 	
 	@Override
 	protected void process() {
-		consultarFotoExitoProxy.cluster = cluster;
-		consultarFotoExitoProxy.execute();
+		List<FotoExitoTO> listado = fotoClusterBLL.listar(cluster);
+		adapter = new EfficientAdapter(this, listado);
 	}
 
 	@Override
 	protected void processOk() {
+		setListAdapter(adapter);
+		super.processOk();
+		
+		/*
 		boolean isExito = consultarFotoExitoProxy.isExito();
-
 		if (isExito) {
 			int status = consultarFotoExitoProxy.getResponse().getStatus();
 			if (status == 0) {
@@ -70,10 +80,11 @@ public class ListarFotoExito_Activity extends ListActivityBase {
 
 		} else {
 			processError();
-		}
+		}*/
 
 	}
 
+	/*
 	@Override
 	protected void processError() {
 		String message;
@@ -84,7 +95,7 @@ public class ListarFotoExito_Activity extends ListActivityBase {
 		}
 		super.processError();
 		showToast(message);
-	}
+	}*/
 	
 
 	public static class EfficientAdapter extends ArrayAdapter<FotoExitoTO> {
@@ -129,9 +140,15 @@ public class ListarFotoExito_Activity extends ListActivityBase {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
+					/*
 					Intent intent = new Intent("lindley.desarrolloxcliente.webviewverfoto");
 					intent.putExtra(WebViewVerFoto_Activity.TITULO_FOTO, fotoExito.titulo);
 					intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, fotoExito.nombre);
+					*/
+					
+					Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
+					intent.putExtra(VerFoto_Activity.FILE_NAME, fotoExito.nombre);
+					
 					context.startActivity(intent);	
 				}
 			});

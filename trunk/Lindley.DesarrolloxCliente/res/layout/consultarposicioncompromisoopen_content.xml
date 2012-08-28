@@ -56,32 +56,29 @@
         </TableRow>
         
         
-         <TableRow>  
-			
-             <View android:layout_width="1dip" android:layout_height="1dip"/>
+         <TableRow android:gravity="right">  
              
-             <Button
-                android:id="@+id/btnFotoInicial"
-                android:layout_width="70dip"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dip"
-                android:focusable="false"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:text="@string/ver_fotoInicial" />
-
-            <Button
-                android:id="@+id/btnFotoExito"
-                android:layout_width="70dip"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dip"
-                android:focusable="false"
-                android:layout_gravity="center"
-                android:text="@string/ver_fotoExito" />
-
-      
+             
+                   <Button
+		                android:id="@+id/btnFotoInicial"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:layout_margin="2dip"
+		                android:focusable="false"
+		                android:gravity="center"
+		                android:layout_gravity="center"
+		                android:text="@string/ver_fotoInicial" />
 		
-           
+		            <Button
+		                android:id="@+id/btnFotoExito"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:layout_margin="2dip"
+		                android:focusable="false"
+		                android:layout_gravity="center"
+		                android:text="@string/ver_fotoExito" />
+            
+          
 
        
 		        
