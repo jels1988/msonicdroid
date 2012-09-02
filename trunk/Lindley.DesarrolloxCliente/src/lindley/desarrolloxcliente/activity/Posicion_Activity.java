@@ -26,6 +26,7 @@ import com.google.inject.Inject;
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.negocio.FotoBLL;
 import lindley.desarrolloxcliente.negocio.PosicionBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
@@ -38,14 +39,20 @@ public class Posicion_Activity extends ListBaseFragment  {
 
 	private EvaluacionTO evaluacion;
 	private  MyApplication application;
-	@Inject PosicionBLL posicionBLL;
 	private ClienteTO cliente;
 	
+	@Inject PosicionBLL posicionBLL;
+	@Inject FotoBLL fotoBLL;
+	
+	
+	
+	
+
 	EfficientAdapter oportunidades;
 	
 	public static String file_name="";
 	private static final int TAKE_PHOTO_INICIAL_CODE = 1;
-	//private static final int TAKE_PHOTO_FINAL_CODE = 2;
+	private static final int TAKE_PHOTO_FINAL_CODE = 2;
 	
 	 @Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,7 +83,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 			// TODO Auto-generated method stub
 			 List<PosicionCompromisoTO> detalle = posicionBLL.consultarOportunidadesPoscion(evaluacion.codigoCliente);
 			 evaluacion.posiciones = detalle;
-			 oportunidades = new EfficientAdapter(getActivity(),cliente, detalle);
+			 oportunidades = new EfficientAdapter(this,cliente, detalle);
 		}
 
 		
@@ -90,6 +97,42 @@ public class Posicion_Activity extends ListBaseFragment  {
 
 		private PosicionCompromisoTO posicionCompromisoFotoTO;
 		
+		
+		@Override
+		public void onActivityResult(int requestCode, int resultCode,Intent data) {
+			// TODO Auto-generated method stub
+			super.onActivityResult(requestCode, resultCode, data);
+			
+				if (resultCode == getActivity().RESULT_OK) {
+		    		switch(requestCode){
+		    			case TAKE_PHOTO_INICIAL_CODE:{
+		    				savePhoto(TAKE_PHOTO_INICIAL_CODE);
+		    				break;
+		    			}
+		    			case TAKE_PHOTO_FINAL_CODE:{
+		    				savePhoto(TAKE_PHOTO_FINAL_CODE);
+		    				break;
+		    			}
+		    		}
+	
+		    }
+		}
+		
+		public void savePhoto(int accion){
+			if(TAKE_PHOTO_INICIAL_CODE==accion)
+			{
+				this.posicionCompromisoFotoTO.fotoInicial = file_name;
+				fotoBLL.save(file_name);
+			}
+			else
+			{
+				this.posicionCompromisoFotoTO.fotoInicial = file_name;
+				fotoBLL.save(file_name);
+			}
+		}
+
+
+
 		public void takePhoto(int accion,PosicionCompromisoTO posicionTO ){
 	    	
 	    	this.posicionCompromisoFotoTO = posicionTO;
@@ -97,8 +140,9 @@ public class Posicion_Activity extends ListBaseFragment  {
 	    	 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 	    	intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(ConstantesApp.getTempFile(getActivity(),file_name))); 
 	    	intent.putExtra(MediaStore.EXTRA_MEDIA_TITLE, "TITULO");
-	    	getActivity().startActivityForResult(intent, accion);
+	    	//getActivity().startActivityForResult(intent, accion);
 	    	
+	    	startActivityForResult(intent, accion);
 	    
 	    }
 
@@ -111,12 +155,14 @@ public class Posicion_Activity extends ListBaseFragment  {
 			 private final List<PosicionCompromisoTO> detalle;
 			 private final Activity context;
 			 private final ClienteTO cliente;
+			 private final Posicion_Activity posicion_Activity;
 			 
-			  public EfficientAdapter(Activity context,ClienteTO cliente,List<PosicionCompromisoTO> detalle){
-					super(context, R.layout.consultarposicioncompromisoopen_content, detalle);
+			  public EfficientAdapter(Posicion_Activity posicion_Activity,ClienteTO cliente,List<PosicionCompromisoTO> detalle){
+					super(posicion_Activity.getActivity(), R.layout.consultarposicioncompromisoopen_content, detalle);
 					this.detalle = detalle;
-					this.context = context;
+					this.context = posicion_Activity.getActivity();
 					this.cliente=cliente;
+					this.posicion_Activity=posicion_Activity;
 				}
 			  
 				public int getCount() {
@@ -222,27 +268,30 @@ public class Posicion_Activity extends ListBaseFragment  {
 								}
 							});
 							
-							/*
+							
 							holder.btnFotoInicial.setOnClickListener(new OnClickListener() {
 
 								@Override
 								public void onClick(View v) {
 									// TODO Auto-generated method stub
-									PosicionCompromisoTO posicionCompromisoTO = (PosicionCompromisoTO) holder.TextViewRpsta.getTag();
+									final PosicionCompromisoTO posicionCompromisoTO = (PosicionCompromisoTO) holder.TextViewRpsta.getTag();
 									
 									if((posicionCompromisoTO.fotoInicial==null)||(posicionCompromisoTO.fotoInicial.compareTo("")==0)){
 										
-										((CompromisoPosicionOpen_Activity)context).takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionTO);						
+										
+										posicion_Activity.takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionCompromisoTO);
+										//((Posicion_Activity)context).takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionCompromisoTO);						
 										
 										
 									}else{
 
-										MessageBox.showConfirmDialog(context, "Confirmacion", "¿Desea reemplazar la foto?", "Si",
+										MessageBox.showConfirmDialog(context, "Confirmacion", "ÀDesea reemplazar la foto?", "Si",
 												new android.content.DialogInterface.OnClickListener() {
 											
 											public void onClick(DialogInterface dialog, int which) {
 												// TODO Auto-generated method stub	
-												((CompromisoPosicionOpen_Activity)context).takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionTO);
+												posicion_Activity.takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionCompromisoTO);
+												//((Posicion_Activity)context).takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionCompromisoTO);
 												
 											}
 											
@@ -253,7 +302,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 												
 												
 												Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
-												intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.fotoInicial.toString());
+												intent.putExtra(VerFoto_Activity.FILE_NAME, posicionCompromisoTO.fotoInicial.toString());
 												context.startActivity(intent);
 											}
 											
@@ -261,7 +310,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 
 								    }						
 							     }
-							});*/
+							});
 							 
 							view.setTag(holder);
 					    	holder.TextViewRpsta.setTag(this.detalle.get(position));
