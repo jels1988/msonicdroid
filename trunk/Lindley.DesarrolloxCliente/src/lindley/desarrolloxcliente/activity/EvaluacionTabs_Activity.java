@@ -28,6 +28,9 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+ 
+
+        
         
         setContentView(R.layout.frameng_tabs);
         mTabHost = (TabHost)findViewById(android.R.id.tabhost);
@@ -41,6 +44,7 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
         if (savedInstanceState != null) {
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
         }
+        
     }
     
     @Override
