@@ -103,7 +103,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 			// TODO Auto-generated method stub
 			super.onActivityResult(requestCode, resultCode, data);
 			
-				if (resultCode == getActivity().RESULT_OK) {
+				if (resultCode == Activity.RESULT_OK) {
 		    		switch(requestCode){
 		    			case TAKE_PHOTO_INICIAL_CODE:{
 		    				savePhoto(TAKE_PHOTO_INICIAL_CODE);
