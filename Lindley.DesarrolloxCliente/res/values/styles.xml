@@ -133,16 +133,42 @@
         <item name="android:textColor">@color/custom_theme_color_rojo</item>
     </style>
     
-    
-    <style name="Widget.Sherlock.ActionBar.TabBar" parent="Widget.Sherlock.ActionBar.TabBar">
-	    <item name="android:background">@color/custom_theme_color_blanco</item>
-	</style>
+    <style name="Widget.Sherlock.ActionBar.TabView" parent="Widget">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">@drawable/tab_selector</item>
+        <item name="android:paddingLeft">16dip</item>
+        <item name="android:paddingRight">16dip</item>
+    </style>
+    <style name="Widget.Sherlock.Light.ActionBar.TabView" parent="Widget.Sherlock.ActionBar.TabView">
+    </style>
+    <style name="Widget.Sherlock.Light.ActionBar.TabView.Inverse">
+    </style>
 
-    <style name="Widget.Sherlock.ActionBar.TabText" parent="Widget.Sherlock.ActionBar.TabText">
-	    <item name="android:textAppearance">@android:style/TextAppearance.Medium</item>
-	    <item name="android:textColor">@color/custom_theme_color_rojo</item>
-	    <item name="android:textSize">12sp</item>
-	</style>
+    <style name="Widget.Sherlock.ActionBar.TabBar" parent="Widget">
+        <item name="android:divider">?attr/actionBarDivider</item>
+        <item name="android:showDividers">middle</item>
+        <item name="android:dividerPadding">12dip</item>
+    </style>
+    <style name="Widget.Sherlock.Light.ActionBar.TabBar" parent="Widget.Sherlock.ActionBar.TabBar">
+    </style>
+    <style name="Widget.Sherlock.Light.ActionBar.TabBar.Inverse">
+    </style>
+
+    <style name="Widget.Sherlock.ActionBar.TabText" parent="Widget">
+        <item name="android:textAppearance">@null</item>
+        <item name="android:textColor">@color/custom_theme_color_rojo</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:maxLines">2</item>
+    </style>
+    <style name="Widget.Sherlock.Light.ActionBar.TabText" parent="Widget.Sherlock.ActionBar.TabText">
+    </style>
+    <style name="Widget.Sherlock.Light.ActionBar.TabText.Inverse">
+        <item name="android:textColor">?attr/textColorPrimaryInverse</item>
+    </style>
+
     
 
 
@@ -154,10 +180,13 @@
     
     
     
-    <item name="actionBarTabBarStyle">@style/Widget.Sherlock.ActionBar.TabBar</item>
-    <item name="actionBarTabTextStyle">@style/Widget.Sherlock.ActionBar.TabText</item>
    
+   <item name="actionBarTabStyle">@style/Widget.Sherlock.Light.ActionBar.TabView</item>
+   <item name="actionBarTabBarStyle">@style/Widget.Sherlock.Light.ActionBar.TabBar</item>
+   <item name="actionBarTabTextStyle">@style/Widget.Sherlock.Light.ActionBar.TabText</item>
     
+
+        
     <item name="android:windowBackground">@color/custom_theme_color_blanco</item>
 	<item name="android:colorForegroundInverse">@color/custom_theme_color_blanco</item>
 	<item name="android:colorBackground">@color/custom_theme_color_letra</item>
