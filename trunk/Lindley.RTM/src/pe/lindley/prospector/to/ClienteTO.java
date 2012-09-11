@@ -24,6 +24,9 @@ public class ClienteTO {
 
     public static int FICHA_SIN_CAMBIOS = 0;
 	public static int FICHA_TIENE_CAMBIOS = 1;
+	
+	public static String ORIGEN_PROSPECCION_CLIENTES="0";
+	public static String ORIGEN_CREACION_CLIENTES="1";
     
 	private int clienteId;
 	 
@@ -177,6 +180,47 @@ public class ClienteTO {
 
      @SerializedName("docs")
      private ArrayList<DocumentoEnviarTO> documentos;
+     
+     @SerializedName("RTV")
+     public String rutaTeleventa;
+     
+     @SerializedName("STV")
+     public String segmentoTeleventa;
+     
+
+     @SerializedName("ETV")
+     public String secuenciaTeleventa;
+     
+     @SerializedName("SAP")
+     public String codigoSap;
+     
+     @SerializedName("TNG")
+     public String tipoNegocio;
+     
+     @SerializedName("ORG")
+     public String origenRegistro=ORIGEN_PROSPECCION_CLIENTES;
+     
+     /*
+     [JsonProperty(PropertyName = "RTV")]
+             public string RutaTeleventa { get; set; }
+
+            [JsonProperty(PropertyName = "STV")]
+             public string SegmentoTeleventa { get; set; }
+
+            [JsonProperty(PropertyName = "ETV")]
+             public string SecuenciaTeleventa { get; set; }
+
+            [JsonProperty(PropertyName = "SAP")]
+             public string CodigoSap { get; set; }
+
+            [JsonProperty(PropertyName = "TNG")]
+             public string TipoNegocio { get; set; }
+
+            [JsonProperty(PropertyName = "ORG")]
+             public string OrigenRegistro { get; set; }
+
+
+            */
      
 	public String getCodigo() {
 		return codigo;
