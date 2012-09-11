@@ -120,7 +120,8 @@ public class LoginActivity extends net.msonic.lib.sherlock.ActivityBase {
 				if(usuarioTO.rolId.compareToIgnoreCase("7")==0){ //GERENTE
 					Intent intent = new Intent(this, ResumenGerenteVentasActivity.class);
 					intent.putExtra(ResumenGerenteVentasActivity.CODIGO_GERENTE_VENTA_KEY, usuarioTO.codigoSap.trim());
-					intent.putExtra(ResumenGerenteVentasActivity.NOMBRE_GERENTE_KEY, usuarioTO.descripcionDeposito.trim());
+					//intent.putExtra(ResumenGerenteVentasActivity.NOMBRE_GERENTE_KEY, usuarioTO.descripcionDeposito.trim());
+					intent.putExtra(ResumenGerenteVentasActivity.NOMBRE_GERENTE_KEY, usuarioTO.nombres.trim());
 			    	startActivity(intent);
 			    	
 				}else if(usuarioTO.rolId.compareToIgnoreCase("8")==0){//SUPERVISOR
