@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+<color name="custom_theme_color_amarillo">#F2F2F2</color> 
+<color name="custom_theme_color_amarillo_alterno">#ffdd00</color> 
+
+<color name="custom_theme_color_lila">#6d1e7e</color>
+<color name="custom_theme_color_blanco">#FFFFFF</color>
+<color name="custom_theme_color_negro">#000000</color>
+<color name="custom_theme_color_plomo">#1C1C1C</color> 
+<color name="custom_theme_color_verde">#dbc7db</color>
+<color name="custom_theme_color_red">#E3001B</color>
+
+
+
+<color name="transparent">#00000000</color>
+ 
+
+
+  
+ 
+ <style name="WindowTitleCustom" parent="android:TextAppearance.WindowTitle">
+ 	   <item name="android:textColor">@color/custom_theme_color_blanco</item>
+       <item name="android:textStyle">bold</item>
+</style>
+
+ <style name="WindowTitleBackgroundCustom">
+      <item name="android:background">@color/custom_theme_color_lila</item>
+</style>
+
+<style name="EditTextCustom" parent="@android:style/Widget.EditText">
+ 	<item name="android:focusable">true</item>
+ 	<item name="android:focusableInTouchMode">true</item>
+ 	<item name="android:clickable">true</item>
+	<item name="android:textColor">@color/custom_theme_color_negro</item>
+</style>
+
+<style name="TextViewCustom" parent="@android:style/Widget.TextView">
+ 	<item name="android:focusable">false</item>
+ 	<item name="android:focusableInTouchMode">false</item>
+ 	<item name="android:clickable">true</item>
+	<item name="android:textColor">@color/custom_theme_color_blanco</item>
+	<!--item name="android:textStyle">bold</item-->
+</style>
+
+<style name="TextViewLabel" parent="@android:style/Widget.TextView">
+ 	<item name="android:focusable">false</item>
+ 	<item name="android:focusableInTouchMode">false</item>
+ 	<item name="android:clickable">true</item>
+	<item name="android:textColor">@color/custom_theme_color_blanco</item>
+	<item name="android:background">@color/custom_theme_color_negro</item>
+	<item name="android:textStyle">bold</item>
+</style>
+
+<style name="TextViewCustomHight" parent="@android:style/Widget.TextView">
+ 	<item name="android:focusable">false</item>
+ 	<item name="android:focusableInTouchMode">false</item>
+ 	<item name="android:clickable">true</item>
+	<item name="android:textColor">@color/custom_theme_color_plomo</item>
+	<item name="android:textStyle">bold</item>
+</style>
+
+<style name="ButtonCustom" parent="@android:style/Widget.Button">
+ 	<item name="android:focusable">true</item>
+ 	<item name="android:focusableInTouchMode">true</item>
+ 	<item name="android:clickable">true</item>
+	<item name="android:textColor">@color/custom_theme_color_blanco</item>
+	<item name="android:background">@drawable/button_selector</item>
+</style>
+
+<style name="TextViewHead" parent="@android:style/Widget.TextView">
+ 	<item name="android:focusable">false</item>
+ 	<item name="android:focusableInTouchMode">false</item>
+ 	<item name="android:clickable">true</item>
+	<item name="android:textColor">@color/custom_theme_color_blanco</item>
+	<item name="android:background">@color/custom_theme_color_red</item>
+	<item name="android:textStyle">bold</item>		
+</style>
+
+
+<style name="TextViewCustom2" parent="@android:style/Widget.TextView">
+ 	<item name="android:focusable">true</item>
+ 	<item name="android:focusableInTouchMode">true</item>
+ 	<item name="android:clickable">true</item>
+	<item name="android:textColor">@color/custom_theme_color_blanco</item>
+	<item name="android:textStyle">bold</item>
+</style>
+
+<style name="ButtonCustomWhite" parent="@android:style/Widget.Button">
+ 	<item name="android:focusable">true</item>
+ 	<item name="android:focusableInTouchMode">true</item>
+ 	<item name="android:clickable">true</item>
+ 	<item name="android:gravity">left|center_vertical</item>
+ 	<item name="android:textSize">16dp</item>
+	<item name="android:textColor">@color/custom_theme_color_negro</item>
+</style>
+
+<style name="MyListView" parent="@android:style/Widget.ListView">
+ 	<item name="android:cacheColorHint">#00000000</item>
+</style>
+
+
+<style name="RadioButtonCustom" parent="@android:style/Widget.CompoundButton.RadioButton">
+ 	<item name="android:textColor">@color/custom_theme_color_negro</item>
+</style>
+
+<style name="CheckBoxCustom" parent="@android:style/Widget.CompoundButton.CheckBox">
+ 	<item name="android:textColor">@color/custom_theme_color_negro</item>
+</style>
+
+    <style name="Widget.Styled.ActionBar"
+           parent="Widget.Sherlock.Light.ActionBar.Solid.Inverse">
+        <item name="background">@drawable/background</item>
+        <item name="android:background">@drawable/background</item>
+    </style>
+    
+    <style name="TextAppearance.Sherlock.Widget.ActionBar.Title.Inverse" parent="TextAppearance.Sherlock.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">15dip</item>
+        <item name="android:textColor">@color/custom_theme_color_plomo</item>
+        <item name="android:textStyle">bold</item>	
+    </style>
+    
+    <style name="TextAppearance.Sherlock.Widget.ActionBar.Subtitle.Inverse" parent="TextAppearance.Sherlock.Widget.ActionBar.Subtitle.Inverse">
+        <item name="android:textSize">12dip</item>
+        <item name="android:textColor">@color/custom_theme_color_plomo</item>
+    </style>
+    
+    
+    <style name="Widget.Sherlock.ActionBar.TabBar" parent="Widget.Sherlock.ActionBar.TabBar">
+	    <item name="android:background">@color/custom_theme_color_blanco</item>
+	</style>
+
+    <style name="Widget.Sherlock.ActionBar.TabText" parent="Widget.Sherlock.ActionBar.TabText">
+	    <item name="android:textAppearance">@android:style/TextAppearance.Medium</item>
+	    <item name="android:textColor">@color/custom_theme_color_plomo</item>
+	    <item name="android:textSize">12sp</item>
+	</style>
+    
+   
+    
+    <!--style name="Widget.Sherlock.ActionBar.TabView" parent="Widget">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">@drawable/tab_selector</item>
+        <item name="android:paddingLeft">16dip</item>
+        <item name="android:paddingRight">16dip</item>
+    </style-->
+    
+
+<style name="CustomTheme" parent="Theme.Sherlock.Light">
+
+    <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
+    <item name="titleTextStyle">@style/TextAppearance.Sherlock.Widget.ActionBar.Title.Inverse</item>
+    <item name="subtitleTextStyle">@style/TextAppearance.Sherlock.Widget.ActionBar.Subtitle.Inverse</item>
+    
+    
+    
+    <item name="actionBarTabBarStyle">@style/Widget.Sherlock.ActionBar.TabBar</item>
+    <item name="actionBarTabTextStyle">@style/Widget.Sherlock.ActionBar.TabText</item>
+    <!--item name="actionBarTabStyle">@style/Widget.Sherlock.ActionBar.TabView</item-->
+    
+    
+<!--     <item name="android:windowBackground">@color/custom_theme_color_amarillo</item> -->
+<item name="android:windowBackground">@drawable/background_lindley</item>
+	
+
+	<item name="android:colorForegroundInverse">@color/custom_theme_color_amarillo</item>
+	<item name="android:colorBackground">@color/custom_theme_color_lila</item>
+	<item name="android:disabledAlpha">0.5</item>
+	<item name="android:backgroundDimAmount">0.6</item>
+
+  <!-- Window attributes -->
+     <item name="android:windowFrame">@null</item>
+     <item name="android:windowNoTitle">true</item>
+     <item name="android:windowFullscreen">false</item>
+     <item name="android:windowIsFloating">false</item>
+	 <item name="android:windowTitleSize">35dip</item>
+	 <item name="android:windowTitleStyle">@style/WindowTitleCustom</item>
+	 <item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackgroundCustom</item>
+     <item name="android:windowSoftInputMode">stateUnspecified|adjustUnspecified</item>
+     
+ 	<item name="android:editTextStyle">@style/EditTextCustom</item>
+ 	<item name="android:textViewStyle">@style/TextViewCustom</item>
+ 	<item name="android:buttonStyle">@style/ButtonCustom</item>
+ 	<item name="android:listViewStyle">@style/MyListView</item>
+ 	<item name="android:radioButtonStyle">@style/RadioButtonCustom</item>
+ 	<item name="android:checkboxStyle">@style/CheckBoxCustom</item>
+ 	
+ 	
+</style>
+
+<style name="CustomThemeWhite">
+
+<!--     <item name="android:windowBackground">@color/custom_theme_color_blanco</item> -->
+    <item name="android:windowBackground">@drawable/background_lindley</item>
+	<item name="android:colorForegroundInverse">@color/custom_theme_color_blanco</item>
+<!-- 	<item name="android:colorBackground">@color/custom_theme_color_lila</item> -->
+	<item name="android:colorBackground">@drawable/background_lindley</item>
+	<item name="android:disabledAlpha">0.5</item>
+	<item name="android:backgroundDimAmount">0.6</item>
+
+  <!-- Window attributes -->
+     <item name="android:windowFrame">@null</item>
+     <item name="android:windowNoTitle">true</item>
+     <item name="android:windowFullscreen">false</item>
+     <item name="android:windowIsFloating">false</item>
+	 <item name="android:windowTitleSize">35dip</item>
+	 <item name="android:windowTitleStyle">@style/WindowTitleCustom</item>
+	 <item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackgroundCustom</item>
+     <item name="android:windowSoftInputMode">stateUnspecified|adjustUnspecified</item>
+     
+         
+ 	<item name="android:editTextStyle">@style/EditTextCustom</item>
+ 	<item name="android:textViewStyle">@style/TextViewCustom</item>
+ 	<item name="android:buttonStyle">@style/ButtonCustom</item>
+ 	<item name="android:listViewStyle">@style/MyListView</item>
+ 	<item name="android:radioButtonStyle">@style/RadioButtonCustom</item>
+ 	<item name="android:checkboxStyle">@style/CheckBoxCustom</item>
+</style>
+
+</resources>

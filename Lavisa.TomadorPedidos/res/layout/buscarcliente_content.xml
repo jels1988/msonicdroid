@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" 
+            style="@style/TextViewHead"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="1dip">
+       <TextView
+          	android:layout_height="wrap_content" 
+          	android:layout_width="wrap_content"
+          	android:text="@string/buscarcliente_content_resumen_title"
+          	style="@style/TextViewHead"/>
+     </TableRow>
+     
+	<TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="5">
+       <TextView
+          	android:layout_weight="1" 
+          	android:layout_height="wrap_content" 
+          	android:layout_width="fill_parent"
+          	android:text="@string/buscarcliente_content_descripcion"
+          	style="@style/TextViewHead" />
+                
+       <TextView
+	    android:id="@+id/txtDescripcion"
+	   	android:layout_weight="4" 
+	   	android:layout_height="wrap_content" 
+	   	android:layout_width="fill_parent"
+	   	android:layout_margin="1dip"/>
+    </TableRow>
+    
+	<TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="5">
+       <TextView
+          	android:layout_weight="1" 
+          	android:layout_height="wrap_content" 
+          	android:layout_width="fill_parent"
+          	android:text="@string/buscarcliente_content_documento"
+          	style="@style/TextViewHead" />
+                
+       <TextView
+	    android:id="@+id/txtDocumento"
+	   	android:layout_weight="4" 
+	   	android:layout_height="wrap_content" 
+	   	android:layout_width="fill_parent"
+	   	android:layout_margin="1dip"/>
+    </TableRow>
+    
+	<TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="5">
+       <TextView
+          	android:layout_weight="1" 
+          	android:layout_height="wrap_content" 
+          	android:layout_width="fill_parent"
+          	android:text="@string/buscarcliente_content_deuda"
+          	style="@style/TextViewHead" />
+                
+       <TextView
+	    android:id="@+id/txtDeuda"
+	   	android:layout_weight="4" 
+	   	android:layout_height="wrap_content" 
+	   	android:layout_width="fill_parent"
+	   	android:layout_margin="1dip"/>
+    </TableRow>
+    
+	<TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="5">
+       <TextView
+          	android:layout_weight="1" 
+          	android:layout_height="wrap_content" 
+          	android:layout_width="fill_parent"
+          	android:text="@string/buscarcliente_content_venta"
+          	style="@style/TextViewHead" />
+        
+       <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:weightSum="4">
+           
+            <ImageView android:id="@+id/imgGalones"
+           	android:layout_weight="1" 
+           	android:layout_height="wrap_content" 
+           	android:contentDescription="@string/buscarcliente_content_venta"
+           	android:layout_width="0dip"/>
+       
+	       <TextView
+		    android:id="@+id/txtGalones"
+		   	android:layout_weight="3" 
+		   	android:layout_height="wrap_content" 
+		   	android:layout_width="fill_parent"
+		   	android:layout_margin="1dip"/>
+	       
+       </LinearLayout>
+      
+    </TableRow>
+    
+	<TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" 
+            style="@style/TextViewHead"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="1dip">
+       <TextView
+          	android:layout_height="wrap_content" 
+          	android:layout_width="wrap_content"
+          	android:text="@string/buscarcliente_content_credito_title"
+          	style="@style/TextViewHead"/>
+     </TableRow>
+	
+	<TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="5">
+       <TextView
+          	android:layout_weight="1" 
+          	android:layout_height="wrap_content" 
+          	android:layout_width="fill_parent"
+          	android:text="@string/buscarcliente_content_credito_limite"
+          	style="@style/TextViewHead" />
+                
+       <TextView
+	    android:id="@+id/txtCreditoLimite"
+	   	android:layout_weight="4" 
+	   	android:layout_height="wrap_content" 
+	   	android:layout_width="fill_parent"
+	   	android:layout_margin="1dip"/>
+    </TableRow>
+    
+	<TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="5">
+       <TextView
+          	android:layout_weight="1" 
+          	android:layout_height="wrap_content" 
+          	android:layout_width="fill_parent"
+          	android:text="@string/buscarcliente_content_credito_disponible"
+          	style="@style/TextViewHead" />
+                
+       <TextView
+	    android:id="@+id/txtCreditoDisponible"
+	   	android:layout_weight="4" 
+	   	android:layout_height="wrap_content" 
+	   	android:layout_width="fill_parent"
+	   	android:layout_margin="1dip"/>
+    </TableRow>
+    
+	<TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="5">
+       <TextView
+          	android:layout_weight="1" 
+          	android:layout_height="wrap_content" 
+          	android:layout_width="fill_parent"
+          	android:text="@string/buscarcliente_content_credito_encartera"
+          	style="@style/TextViewHead" />
+                
+       <TextView
+	    android:id="@+id/txtCreditoCartera"
+	   	android:layout_weight="4" 
+	   	android:layout_height="wrap_content" 
+	   	android:layout_width="fill_parent"
+	   	android:layout_margin="1dip"/>
+    </TableRow>
+    
+		<TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="5">
+       <TextView
+          	android:layout_weight="1" 
+          	android:layout_height="wrap_content" 
+          	android:layout_width="fill_parent"
+          	android:text="@string/buscarcliente_content_credito_totalvencido"
+          	style="@style/TextViewHead" />
+                
+       <TextView
+	    android:id="@+id/txtTotalVencido"
+	   	android:layout_weight="4" 
+	   	android:layout_height="wrap_content" 
+	   	android:layout_width="fill_parent"
+	   	android:layout_margin="1dip"/>
+    </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" 
+            android:gravity="right"
+            android:layout_marginBottom="1dip" android:layout_span="2">
+       
+        
+                   <Button 
+			    android:layout_width="wrap_content" 
+			    android:layout_margin="1dip"
+			    android:layout_height="wrap_content" 
+			    android:text="@string/buscarcliente_content_credito_ubicacion" 
+			    android:focusable="false"/>
+                   
+                  <Button 
+			    android:layout_width="wrap_content" 
+			    android:layout_margin="1dip"
+			    android:layout_height="wrap_content" 
+			    android:text="@string/buscarcliente_content_credito_letras" 
+			    android:focusable="false"/>
+                  
+                 <Button
+                     android:id="@+id/btnAddPedido"
+			    android:layout_width="wrap_content" 
+			    android:layout_margin="1dip"
+			    android:layout_height="wrap_content" 
+			    android:text="@string/buscarcliente_content_credito_agregarpedido" 
+			    android:focusable="false"/>
+			   
+			
+   
+   
+     </TableRow>
+
+</TableLayout>
