@@ -12,7 +12,7 @@ public class LoginActivity extends net.msonic.lib.sherlock.ActivityBase {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         inicializarRecursos();
-        
+        this.validarConexionInternet=false;
         setContentView(R.layout.login_activity);
         
         

@@ -25,7 +25,7 @@ public class BuscarClienteActivity extends net.msonic.lib.sherlock.ListActivityB
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         inicializarRecursos();
-        
+        this.validarConexionInternet=false;
         setContentView(R.layout.buscarcliente_activity);
         setTitle(R.string.buscarcliente_activity_title);
         
