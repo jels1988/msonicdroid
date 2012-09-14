@@ -32,6 +32,8 @@
         <activity android:name=".BuscarClienteActivity" android:configChanges="keyboardHidden|orientation"/>
         <activity android:name=".PedidoActivity" android:configChanges="keyboardHidden|orientation"/>
         
+            <activity android:name=".DialogTest" android:theme="@style/Theme.Sherlock.Dialog"/>
+            
         
     </application>
     

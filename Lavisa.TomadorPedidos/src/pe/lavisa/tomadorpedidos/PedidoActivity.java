@@ -1,7 +1,10 @@
 package pe.lavisa.tomadorpedidos;
 
 import roboguice.inject.InjectExtra;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 public class PedidoActivity extends net.msonic.lib.sherlock.ActivityBase  {
 	
@@ -22,5 +25,23 @@ public class PedidoActivity extends net.msonic.lib.sherlock.ActivityBase  {
 	        
 	        setSubTitle(cliente_descripcion);
 	        
+	     
+	        
 	    }
+	 
+	 
+	 public void btnBuscar_onlick(View v){
+		   Intent intent = new Intent(this,DialogTest.class);
+	        startActivityForResult(intent, 0);
+	 }
+
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		Log.d(PedidoActivity.class.getSimpleName(), String.valueOf(resultCode));
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+	 
+	 
 }
