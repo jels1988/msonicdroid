@@ -31,4 +31,14 @@
     <string name="buscarcliente_content_credito_letras">Letras</string>
     <string name="buscarcliente_content_credito_ubicacion">Ubicación</string>
     <string name="pedido_activity_title">Pedido</string>
+    <string name="buscarproducto_activity_title">Buscar Productos</string>
+    <string name="buscarproducto_activity_descripcion">Descripción:</string>
+    <string name="buscarproducto_activity_descripcion_hint">Ingresar Descripción</string>
+    <string name="buscarproducto_activity_cancelar">Cancelar</string>
+    <string name="buscarproducto_activity_producto_frecuente">Producto Frecuente</string>
+    <string name="buscarproducto_activity_producto_alternativo">Producto Alternativo</string>
+    <string name="buscarproducto_activity_nunca_comprado">Nunca Comprado</string>
+    
+    
+    <string name="productoestrategia_activity_title">Estrategia</string>
 </resources>
