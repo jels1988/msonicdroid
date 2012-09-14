@@ -40,9 +40,16 @@ public class BuscarProductoActivity extends net.msonic.lib.sherlock.ListActivity
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(ctx,ProductoEstrategiaActivity.class);
-				startActivity(intent);
-				return true;
+				if(adapter!=null){
+					ProductoTO productoTO = adapter.getItem(arg2);
+					Intent intent = new Intent(ctx,ProductoEstrategiaActivity.class);
+					intent.putExtra(ProductoEstrategiaActivity.PRODUCTO_ID_KEY, productoTO.id);
+					intent.putExtra(ProductoEstrategiaActivity.PRODUCTO_DESCRIPCION_KEY, productoTO.descripcion);
+					startActivity(intent);
+					return true;
+				}
+				return false;
+				
 			}
 		});
 		
