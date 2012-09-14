@@ -13,7 +13,7 @@
       </TableRow>
       
        <TableRow>
-        <EditText android:id="@+id/txtProducto" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/buscarcliente_activity_documento_hint" android:text="" android:layout_weight="1" android:inputType="textCapCharacters" android:maxLength="50" android:singleLine="true"/>
+        <EditText android:id="@+id/txtProducto" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="@string/pedido_activity_producto_hint" android:text="" android:layout_weight="1" android:inputType="textCapCharacters" android:maxLength="50" android:singleLine="true"/>
         <ImageButton android:onClick="btnBuscar_onlick" android:src="@drawable/search" android:contentDescription="@string/pedido_activity_producto_hint" ></ImageButton>
       </TableRow>
    
