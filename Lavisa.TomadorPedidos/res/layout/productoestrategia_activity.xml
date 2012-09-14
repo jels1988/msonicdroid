@@ -4,5 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+    <TextView android:layout_width="fill_parent"  android:layout_height="wrap_content" 
+        android:text="Nuestro Advance 4T es un aceite especializado para motos de alta calidad usado en ...., y usted va a tener S/. X más margen (Precio Castrol $200), además incluye nuestra nueva promoción de..."
+        android:layout_margin="2dip"/>
 
+    <TextView android:layout_width="fill_parent"  android:layout_height="wrap_content" 
+        android:text="Nuestro Advance 4T es un aceite especializado para motos de alta calidad usado en ...., y usted va a tener S/. X más margen (Precio Castrol $200), además incluye nuestra nueva promoción de..."
+        android:layout_margin="2dip"/>
+    
 </LinearLayout>
