@@ -3,6 +3,7 @@ package pe.lavisa.tomadorpedidos;
 import java.util.ArrayList;
 import java.util.List;
 
+import pe.lavisa.tomadorpedidos.to.ClienteTO;
 import pe.lavisa.tomadorpedidos.to.PedidoDetalleTO;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
@@ -11,8 +12,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -132,6 +135,17 @@ public class PedidoActivity extends net.msonic.lib.sherlock.ListActivityBase  {
 					holder.txtProducto = (TextView) view.findViewById(R.id.txtProducto);
 					holder.txtCantidad = (TextView)view.findViewById(R.id.txtCantidad);
 					holder.txtPrecio = (TextView)view.findViewById(R.id.txtPrecio);
+					holder.btnEliminar = (Button)view.findViewById(R.id.btnEliminar);
+					holder.btnEliminar.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							PedidoDetalleTO pedidoDetalleTO = (PedidoDetalleTO) holder.txtProducto.getTag();
+							detalle.remove(pedidoDetalleTO);
+							notifyDataSetInvalidated();
+						}
+					});
 					
 					view.setTag(holder);
 					holder.txtProducto.setTag(this.detalle.get(position));
@@ -157,6 +171,7 @@ public class PedidoActivity extends net.msonic.lib.sherlock.ListActivityBase  {
 				 public TextView txtProducto;
 				 public TextView txtCantidad;
 				 public TextView txtPrecio;
+				 public Button btnEliminar;
 					 
 			 }
 			
