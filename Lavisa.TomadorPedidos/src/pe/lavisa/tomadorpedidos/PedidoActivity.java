@@ -31,7 +31,7 @@ public class PedidoActivity extends net.msonic.lib.sherlock.ActivityBase  {
 	 
 	 
 	 public void btnBuscar_onlick(View v){
-		   Intent intent = new Intent(this,DialogTest.class);
+		   Intent intent = new Intent(this,BuscarProductoActivity.class);
 	        startActivityForResult(intent, 0);
 	 }
 
