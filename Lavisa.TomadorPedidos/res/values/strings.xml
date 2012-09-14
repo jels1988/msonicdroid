@@ -30,7 +30,6 @@
     <string name="buscarcliente_content_credito_agregarpedido">+Pedido</string>
     <string name="buscarcliente_content_credito_letras">Letras</string>
     <string name="buscarcliente_content_credito_ubicacion">Ubicación</string>
-    
     <string name="buscarproducto_activity_title">Buscar Productos</string>
     <string name="buscarproducto_activity_descripcion">Descripción:</string>
     <string name="buscarproducto_activity_descripcion_hint">Ingresar Descripción</string>
@@ -39,22 +38,18 @@
     <string name="buscarproducto_activity_producto_alternativo">Producto Alternativo</string>
     <string name="buscarproducto_activity_nunca_comprado">Nunca Comprado</string>
     <string name="productoestrategia_activity_title">Estrategia</string>
-    
     <string name="pedido_activity_title">Pedido</string>
     <string name="pedido_activity_add_producto">+Producto</string>
     <string name="pedido_activity_producto">Producto:</string>
     <string name="pedido_activity_producto_hint">Seleccionar Producto</string>
     <string name="pedido_activity_cantidad">Cantidad:</string>
-    <string name="pedido_activity_cantidad_hint">Ingresar Cantidad</string>
+    <string name="pedido_activity_cantidad_hint">Cantidad</string>
     <string name="pedido_activity_precio">Precio:</string>
     <string name="pedido_activity_agregar">+</string>
-    
     <string-array name="pedido_activity_lista_precio">
         <item>3</item>
         <item>8</item>
         <item>9</item>
     </string-array>
-    
     <string name="pedido_content_eliminar">-</string>
-    
 </resources>
