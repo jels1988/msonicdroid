@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <TableRow>
+    	
+           
+	     <ImageView android:id="@+id/imgIndicador"
+              	android:layout_height="wrap_content" 
+              	android:layout_width="fill_parent"
+              	android:contentDescription="@string/app_name"/>
+                     
+	         
+          <TextView
+              android:id="@+id/txtDescripcion"
+              android:layout_width="fill_parent"
+              android:layout_height="30dip"
+              android:layout_margin="1dip" />
+
+    </TableRow>
+   
+</TableLayout>
