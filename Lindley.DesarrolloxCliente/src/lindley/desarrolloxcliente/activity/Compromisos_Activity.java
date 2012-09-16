@@ -31,6 +31,7 @@ public class Compromisos_Activity extends ListBaseFragment {
 
 	private EvaluacionTO evaluacion;
 	private  MyApplication application;
+	private EfficientAdapter oportunidades;
 	
 	 @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,14 +42,15 @@ public class Compromisos_Activity extends ListBaseFragment {
 	 
 	 @Override public void onActivityCreated(Bundle savedInstanceState) {
          super.onActivityCreated(savedInstanceState);
-         
+         inicializarRecursos();
+         this.validarConexionInternet=false;
          if(VISTA_CARGADA==0){
 	 		VISTA_CARGADA=1;
 	 		application = (MyApplication) getActivity().getApplicationContext();
 	 		evaluacion = application.evaluacion;
 	 		
-	 		EfficientAdapter oportunidades = new EfficientAdapter(getActivity(),evaluacion.oportunidades);
-			setListAdapter(oportunidades);
+	 		 processAsync();
+			
 			
          }
          
@@ -56,6 +58,17 @@ public class Compromisos_Activity extends ListBaseFragment {
 	 
 	 
 	 
+
+	 @Override
+	protected void process() {
+		 oportunidades = new EfficientAdapter(getActivity(),evaluacion.oportunidades);
+	 }
+	 
+	 @Override
+	 protected void processOk() {
+		 setListAdapter(oportunidades);
+		 super.processOk();
+	 }
 	 
 	 public static class EfficientAdapter extends ArrayAdapter<OportunidadTO>{
 

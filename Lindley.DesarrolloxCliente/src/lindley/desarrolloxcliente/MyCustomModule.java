@@ -14,6 +14,7 @@ import lindley.desarrolloxcliente.dao.FotoClusterDAO;
 import lindley.desarrolloxcliente.dao.FotoDAO;
 import lindley.desarrolloxcliente.dao.OportunidadDAO;
 import lindley.desarrolloxcliente.dao.PosicionDAO;
+import lindley.desarrolloxcliente.dao.PresentacionDAO;
 import lindley.desarrolloxcliente.negocio.AccionTradeBLL;
 import lindley.desarrolloxcliente.negocio.ClienteBLL;
 import lindley.desarrolloxcliente.negocio.EvaluacionBLL;
@@ -21,6 +22,7 @@ import lindley.desarrolloxcliente.negocio.FotoBLL;
 import lindley.desarrolloxcliente.negocio.FotoClusterBLL;
 import lindley.desarrolloxcliente.negocio.OportunidadBLL;
 import lindley.desarrolloxcliente.negocio.PosicionBLL;
+import lindley.desarrolloxcliente.negocio.PresentacionBLL;
 
 import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
@@ -89,6 +91,10 @@ public class MyCustomModule extends AbstractModule {
 		
 		bind(PosicionBLL.class).in(Singleton.class);
 		bind(PosicionDAO.class).in(Singleton.class);
+		
+		
+		bind(PresentacionBLL.class).in(Singleton.class);
+		bind(PresentacionDAO.class).in(Singleton.class);
 		
 		bind(FotoClusterBLL.class).in(Singleton.class);
 		bind(FotoClusterDAO.class).in(Singleton.class);

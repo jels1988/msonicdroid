@@ -63,6 +63,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 		 
 		 @Override public void onActivityCreated(Bundle savedInstanceState) {
 	         super.onActivityCreated(savedInstanceState);
+	         inicializarRecursos();
 	         this.validarConexionInternet=false;
 	         
 	         if(VISTA_CARGADA==0){
