@@ -20,10 +20,10 @@ public class PresentacionDAO {
 	@Inject	protected DBHelper dbHelper;
 	@Inject protected PeriodoTO periodoTO;
 	
-	public List<PresentacionCompromisoTO> consultarOportunidadesPosicion(String codigoCliente,String tipoAgrupacion){
+	public List<PresentacionCompromisoTO> consultarOportunidadesPresentacion(String codigoCliente,String tipoAgrupacion){
 		List<PresentacionCompromisoTO> lista = new ArrayList<PresentacionCompromisoTO>();
 		
-		String SQL = "SELECT tipoAgrupacion,cdfde,fechaRed,"+
+		String SQL = "SELECT tipoAgrupacion,cdfde,fechaRed,variableRed,"+
 					"puntosSugeridos,puntosBonus,puntosGanados,fechaProceso,cumplio,origen,proceso,estado " +
 					"FROM presentacion_cliente " +
 					"WHERE anio = ?1 and mes= ?2 and codigoCliente= ?3 and tipoAgrupacion = ?4";
