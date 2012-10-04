@@ -15,7 +15,12 @@ public class SKUPresentacionTO {
 	@SerializedName("SLC")
 	public String valorActual;
 	
-
+	@SerializedName("CMP")
+	public String compromiso;
+	
+	
+	public String cumplio;
+	
 	public String getCodigoSKU() {
 		return codigoSKU;
 	}
