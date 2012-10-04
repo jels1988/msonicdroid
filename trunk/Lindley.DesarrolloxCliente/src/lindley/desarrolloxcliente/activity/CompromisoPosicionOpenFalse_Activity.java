@@ -18,6 +18,7 @@ import lindley.desarrolloxcliente.to.CompromisoTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
+import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.CerrarCompromisoProxy;
@@ -264,7 +265,7 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
     			cerrar.cumplio = presentacion.cumplio;
     			
     			List<CerrarSKUPresentacionTO> listCerrarSKUPresentacionTO = new ArrayList<CerrarSKUPresentacionTO>();
-    			for(SKUPresentacionCompromisoTO sku : presentacion.listaSKU)
+    			for(SKUPresentacionTO sku : presentacion.listaSKU)
     			{
     				CerrarSKUPresentacionTO cerrarSku = new CerrarSKUPresentacionTO();
     				cerrarSku.codigoSKU = sku.codigoSKU;
