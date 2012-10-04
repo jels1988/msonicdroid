@@ -20,6 +20,7 @@ import lindley.desarrolloxcliente.to.InformacionAdicionalTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
+import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import lindley.desarrolloxcliente.to.UpdateInformacionAdicionalTO;
 import lindley.desarrolloxcliente.to.UpdateInventarioTO;
 import lindley.desarrolloxcliente.to.UpdatePosicionTO;
@@ -284,7 +285,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
     			cerrar.cumplio = presentacion.cumplio;
     			
     			List<CerrarSKUPresentacionTO> listCerrarSKUPresentacionTO = new ArrayList<CerrarSKUPresentacionTO>();
-    			for(SKUPresentacionCompromisoTO sku : presentacion.listaSKU)
+    			for(SKUPresentacionTO sku : presentacion.listaSKU)
     			{
     				CerrarSKUPresentacionTO cerrarSku = new CerrarSKUPresentacionTO();
     				cerrarSku.codigoSKU = sku.codigoSKU;
@@ -346,7 +347,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
     			update.fechaCompromiso = presentacion.fechaCompromiso;
     			
     			List<UpdateSKUPresentacionTO> skucompromisos = new ArrayList<UpdateSKUPresentacionTO>();
-    			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  presentacion.listaSKU)
+    			for(SKUPresentacionTO skupresentacionCompromisoTO :  presentacion.listaSKU)
     			{
     				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
     				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.codigoSKU;
