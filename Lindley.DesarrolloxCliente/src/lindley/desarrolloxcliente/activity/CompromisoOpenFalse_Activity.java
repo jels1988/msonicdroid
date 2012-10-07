@@ -217,7 +217,7 @@ public class CompromisoOpenFalse_Activity extends ListActivityBase {
     			cerrar.cumplio = presentacion.cumplio;
     			
     			List<CerrarSKUPresentacionTO> listCerrarSKUPresentacionTO = new ArrayList<CerrarSKUPresentacionTO>();
-    			for(SKUPresentacionTO sku : presentacion.listaSKU)
+    			for(SKUPresentacionCompromisoTO sku : presentacion.listaSKU)
     			{
     				CerrarSKUPresentacionTO cerrarSku = new CerrarSKUPresentacionTO();
     				cerrarSku.codigoSKU = sku.codigoSKU;
