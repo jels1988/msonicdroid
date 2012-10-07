@@ -8,13 +8,16 @@ public class PresentacionCompromisoTO {
 
 	public PresentacionCompromisoTO()
     {
-        listaSKU = new ArrayList<SKUPresentacionTO>();
+        listaSKU = new ArrayList<SKUPresentacionCompromisoTO>();
     }
     	
   
     @SerializedName("LSKU")
-    public ArrayList<SKUPresentacionTO> listaSKU;
-
+    //public ArrayList<SKUPresentacionTO> listaSKU;
+    public ArrayList<SKUPresentacionCompromisoTO> listaSKU;
+    
+    
+    
     @SerializedName("FCM")
     public String fechaCompromiso;
 

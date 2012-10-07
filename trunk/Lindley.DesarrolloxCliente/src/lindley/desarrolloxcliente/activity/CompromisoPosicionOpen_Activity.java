@@ -285,7 +285,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
     			cerrar.cumplio = presentacion.cumplio;
     			
     			List<CerrarSKUPresentacionTO> listCerrarSKUPresentacionTO = new ArrayList<CerrarSKUPresentacionTO>();
-    			for(SKUPresentacionTO sku : presentacion.listaSKU)
+    			for(SKUPresentacionCompromisoTO sku : presentacion.listaSKU)
     			{
     				CerrarSKUPresentacionTO cerrarSku = new CerrarSKUPresentacionTO();
     				cerrarSku.codigoSKU = sku.codigoSKU;
@@ -347,7 +347,7 @@ public class CompromisoPosicionOpen_Activity extends ListActivityBase {
     			update.fechaCompromiso = presentacion.fechaCompromiso;
     			
     			List<UpdateSKUPresentacionTO> skucompromisos = new ArrayList<UpdateSKUPresentacionTO>();
-    			for(SKUPresentacionTO skupresentacionCompromisoTO :  presentacion.listaSKU)
+    			for(SKUPresentacionCompromisoTO skupresentacionCompromisoTO :  presentacion.listaSKU)
     			{
     				UpdateSKUPresentacionTO updateSKUPresentacionTO = new UpdateSKUPresentacionTO();
     				updateSKUPresentacionTO.codigoSKU = skupresentacionCompromisoTO.codigoSKU;
