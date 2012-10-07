@@ -2,6 +2,10 @@ package lindley.desarrolloxcliente.activity;
 
 import java.util.HashMap;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+
 import roboguice.inject.InjectExtra;
 
 import lindley.desarrolloxcliente.R;
@@ -10,6 +14,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.widget.TabHost;
 import net.msonic.lib.sherlock.ActivityBaseFragment;
@@ -56,8 +61,25 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
     }
     
     
-    
-    
+   
+	   @Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		   
+		   MenuInflater menuInflater = new MenuInflater(this);
+		   menuInflater.inflate(R.menu.evaluacion_tabs_menu, menu);
+		   
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	   @Override
+		public boolean onMenuItemSelected(int featureId, MenuItem item) {
+			// TODO Auto-generated method stub
+			if(item.getItemId()==R.id.mnuGrabar){
+				Log.d("test", "Test");
+			}
+			return super.onMenuItemSelected(featureId, item);
+		}
     public static class TabManager implements TabHost.OnTabChangeListener {
         private final FragmentActivity mActivity;
         private final TabHost mTabHost;
