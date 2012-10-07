@@ -312,6 +312,12 @@
             </intent-filter>
         </activity>
        
+          <activity android:name=".activity.Combos_Activity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>            					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
        
     </application>
     
