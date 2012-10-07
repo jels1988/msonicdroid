@@ -335,10 +335,13 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 						SKUPresentacionTO skuPresentacion = (SKUPresentacionTO) viewHolder.chkValActual.getTag();
 						if(arg2==0){
 							skuPresentacion.valorActual = ConstantesApp.RESPUESTA_NO;
+							skuPresentacion.compromiso = ConstantesApp.RESPUESTA_NO;
 						}else if(arg2==1){
 							skuPresentacion.valorActual = ConstantesApp.RESPUESTA_SI;
+							skuPresentacion.compromiso = ConstantesApp.RESPUESTA_SI;
 						}else{
 							skuPresentacion.valorActual = ConstantesApp.RESPUESTA_NO_TIENE ;
+							skuPresentacion.compromiso = ConstantesApp.RESPUESTA_NO_TIENE;
 						}
 					}
 

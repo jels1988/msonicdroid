@@ -1,6 +1,5 @@
 package lindley.desarrolloxcliente.activity;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -20,7 +19,6 @@ import lindley.desarrolloxcliente.to.InformacionAdicionalTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
-import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import lindley.desarrolloxcliente.to.UpdateInformacionAdicionalTO;
 import lindley.desarrolloxcliente.to.UpdateInventarioTO;
 import lindley.desarrolloxcliente.to.UpdatePosicionTO;
@@ -39,7 +37,6 @@ import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
