@@ -41,6 +41,7 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
         mTabManager.addTab(mTabHost.newTabSpec("Inventario").setIndicator("Inventario"),Compromisos_Activity.class,getIntent().getExtras());
         mTabManager.addTab(mTabHost.newTabSpec("Posicion").setIndicator("Posici—n"),Posicion_Activity.class,getIntent().getExtras());
         mTabManager.addTab(mTabHost.newTabSpec("Presentacion").setIndicator("Presentaci—n"),Presentacion_Activity.class,getIntent().getExtras());
+        mTabManager.addTab(mTabHost.newTabSpec("Combos").setIndicator("Combos"),Combos_Activity.class,getIntent().getExtras());
         
         if (savedInstanceState != null) {
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
