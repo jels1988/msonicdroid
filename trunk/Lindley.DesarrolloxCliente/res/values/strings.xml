@@ -137,10 +137,6 @@
     <string name="posicionopen_content_observacion">Observación:</string>
     <string name="posicionopen_content_fechacompromiso">Fecha Compromiso:</string>
     
-    <!-- RECURSOS GENERALES -->
-    
-    <string name="error_not_network_message">Por favor, verifica tu conexión de datos o intenta en unos minutos.</string>
-    <string name="wait_message">Por favor, espera un momento.</string>
-    <string name="error_generico_process">Ocurrio un error al procesar la  operación, por favor vuelve a intentar.</string>
+   
     
 </resources>
