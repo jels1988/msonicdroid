@@ -34,7 +34,7 @@ public class OportunidadDAO {
 			skuPresentacionTO.codigoSKU  = String.format("%s",cursor.getInt(cursor.getColumnIndex("codigo")));
 			skuPresentacionTO.descripcionSKU = cursor.getString(cursor.getColumnIndex("descripcion"));
 			skuPresentacionTO.valorActual = ConstantesApp.RESPUESTA_NO;
-			
+			skuPresentacionTO.compromiso = ConstantesApp.RESPUESTA_NO;
 			skus.add(skuPresentacionTO);
 		}
 		

@@ -5,9 +5,8 @@ import java.util.List;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
-import net.msonic.lib.ListActivityBase;
-import roboguice.inject.InjectView;
+import lindley.desarrolloxcliente.to.EvaluacionTO;
+import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,14 +18,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.thira.examples.actionbar.widget.ActionBar;
+public class SKUPrioritarioCompromiso_Activity extends  net.msonic.lib.sherlock.ListActivityBase  {
 
-public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
+	
+	private EvaluacionTO evaluacion;
+	private  MyApplication application;
+	private ClienteTO cliente;
 
-	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	private EfficientAdapter adap;
-	public static MyApplication application;
-	ClienteTO cliente;
+	
 		
 	public static final String RESPUESTA_SI = "S";
 	public static final String RESPUESTA_NO = "N";
@@ -36,10 +36,78 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 	public static final String DATO_NO = "NO";
 	public static final String DATO_NO_TIENE = "NV";
 	
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		inicializarRecursos();
+		super.onCreate(savedInstanceState);
+		this.validarConexionInternet=false;
+		
+		setContentView(R.layout.skuprioritario_activity);
+		
+		getSupportActionBar().setDisplayShowHomeEnabled(false);
+		
+		setTitle(R.string.skuprioritario_activity_title);
+		
+		application = (MyApplication) getApplicationContext();
+		
+		cliente = application.cliente;
+		evaluacion = application.evaluacion;
+		
+		setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
+		
+		processAsync();
+	}
+	/*
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		
+		 return inflater.inflate(R.layout.skuprioritariocompromiso_activity, container,false);
+		   
+	 }
+	
+	
+	@Override public void onActivityCreated(Bundle savedInstanceState) {
+		 inicializarRecursos(); 
+	       this.validarConexionInternet=false;
+	       
+		super.onActivityCreated(savedInstanceState);
+      
+        if(VISTA_CARGADA==0){
+	 		VISTA_CARGADA=1;
+	 	
+	 		application = (MyApplication) getActivity().getApplicationContext();
+	 		evaluacion = application.evaluacion;
+	 		cliente = application.cliente;
+	 		
+	 		//processAsync();
+			
+        }
+        
+	 }*/
+	
+	
+	 @Override
+	 protected void process() {
+		 adap = new EfficientAdapter(this, evaluacion.skuPresentacion);
+		 
+	 
+	 }
+	
+	 @Override
+	protected void processOk() {
+		// TODO Auto-generated method stub
+		 setListAdapter(adap);
+		 super.processOk();
+	}
+	
+	/*
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		inicializarRecursos();
+		 this.validarConexionInternet=false;
+		 
 		super.onCreate(savedInstanceState);
 		 setContentView(R.layout.skuprioritariocompromiso_activity);    
 		 mActionBar.setTitle(R.string.skuprioritario_activity_title);
@@ -48,20 +116,22 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 		 mActionBar.setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 		 mActionBar.setHomeLogo(R.drawable.header_logo);
 		 
+		 evaluacion.skuPresentacion
+		 
 		 adap = new EfficientAdapter(this, application.listSKUPresentacionCompromiso);
 		 setListAdapter(adap);
-	}
+	}*/
 	
 	public void btnOK_click(View view)
 	{
-		finish();
+		//finish();
 	}
 	
-	public static class EfficientAdapter extends ArrayAdapter<SKUPresentacionCompromisoTO> {
+	public static class EfficientAdapter extends ArrayAdapter<SKUPresentacionTO> {
     	private Activity context;
-		private List<SKUPresentacionCompromisoTO> skuPresentaciones;
+		private List<SKUPresentacionTO> skuPresentaciones;
 
-		public EfficientAdapter(Activity context, List<SKUPresentacionCompromisoTO> skuPresentaciones ){
+		public EfficientAdapter(Activity context, List<SKUPresentacionTO> skuPresentaciones ){
 			super(context, R.layout.skuprioritariocompromiso_content, skuPresentaciones);
 			this.context=context;
 			this.skuPresentaciones = skuPresentaciones;
@@ -79,20 +149,16 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 				viewHolder.txViewSKU = (TextView) view.findViewById(R.id.txViewSKU);
 				viewHolder.chkValActual = (TextView) view.findViewById(R.id.chkValActual);
 				viewHolder.chkValComp = (Spinner) view.findViewById(R.id.chkValComp);
-				
-				ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(application.getApplicationContext(),R.array.confirmacion,android.R.layout.simple_spinner_item);
-				adap.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-				viewHolder.chkValComp.setAdapter(adap);
+			
 				
 				
-						    	
 				viewHolder.chkValComp.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 					@Override
 					public void onItemSelected(AdapterView<?> arg0, View arg1,
 							int arg2, long arg3) {
 						// TODO Auto-generated method stub
-						SKUPresentacionCompromisoTO skuPresentacion = (SKUPresentacionCompromisoTO) viewHolder.chkValComp.getTag();
+						SKUPresentacionTO skuPresentacion = (SKUPresentacionTO) viewHolder.chkValComp.getTag();
 						if(arg2==0){
 							skuPresentacion.compromiso = RESPUESTA_NO;
 						}else{
@@ -106,6 +172,16 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 						
 					}
 				});
+				
+				
+				
+				ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(context.getApplicationContext(),
+																					R.array.confirmacion,
+																					android.R.layout.simple_spinner_item);
+				adap.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+				viewHolder.chkValComp.setAdapter(adap);
+				
+				
 								
 				view.setTag(viewHolder);
 				viewHolder.chkValComp.setTag(this.skuPresentaciones.get(position));
@@ -116,15 +192,16 @@ public class SKUPrioritarioCompromiso_Activity extends ListActivityBase {
 			
 			ViewHolder holder = (ViewHolder) view.getTag();
 			
-						 
-			holder.txViewSKU.setText(this.skuPresentaciones.get(position).descripcionSKU);
-						
 			
-			if(this.skuPresentaciones.get(position).actual.compareToIgnoreCase(RESPUESTA_SI) == 0)
+			 
+			holder.txViewSKU.setText(this.skuPresentaciones.get(position).descripcionSKU);
+			
+					
+			if(this.skuPresentaciones.get(position).valorActual.compareToIgnoreCase(RESPUESTA_SI) == 0)
 			{
 				holder.chkValActual.setText(DATO_SI);
 			}
-			else if(this.skuPresentaciones.get(position).actual.compareToIgnoreCase(RESPUESTA_NO) == 0)
+			else if(this.skuPresentaciones.get(position).valorActual.compareToIgnoreCase(RESPUESTA_NO) == 0)
 			{
 				holder.chkValActual.setText(DATO_NO);
 			}
