@@ -137,6 +137,7 @@
     <string name="posicionopen_content_observacion">Observación:</string>
     <string name="posicionopen_content_fechacompromiso">Fecha Compromiso:</string>
     
-   
+   <string name="evaluacion_tabs_menu_grabar">Grabar</string>
+   <string name="evaluacion_msg_error_sovi">Los valores de SOVI deben ser mayores a 0</string>
     
 </resources>

@@ -1,5 +1,6 @@
 package lindley.desarrolloxcliente.activity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.actionbarsherlock.view.Menu;
@@ -8,7 +9,12 @@ import com.actionbarsherlock.view.MenuItem;
 
 import roboguice.inject.InjectExtra;
 
+import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.activity.CompromisoOpen_Activity.EfficientAdapter;
+import lindley.desarrolloxcliente.to.CompromisoTO;
+import lindley.desarrolloxcliente.to.EvaluacionTO;
+import lindley.desarrolloxcliente.to.OportunidadTO;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,6 +27,9 @@ import net.msonic.lib.sherlock.ActivityBaseFragment;
 
 public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 
+	
+	public final static String TAG = EvaluacionTabs_Activity.class.getName();
+	
 	public final static String CODIGO_REGISTRO = "codigo_reg";
 	public final static String ORIGEN_REGISTRO = "origen_reg";
 	
@@ -76,7 +85,41 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 		public boolean onMenuItemSelected(int featureId, MenuItem item) {
 			// TODO Auto-generated method stub
 			if(item.getItemId()==R.id.mnuGrabar){
-				Log.d("test", "Test");
+				
+				MyApplication application = (MyApplication)getApplicationContext();
+				EvaluacionTO evaluacion = application.evaluacion;
+				
+				
+				
+				
+				
+				
+				if(evaluacion.oportunidades == null || evaluacion.oportunidades.isEmpty())
+				{				
+					application.openAdapter = new EfficientAdapter(getApplicationContext(), new ArrayList<CompromisoTO>());				
+					/*openAdapterVacio = true;
+					if(openAdapterVacio)
+					{*/
+						showToast("Debe editar valores de la pesta–a inventario.");
+						return false;
+					//}
+				}
+				
+				for(OportunidadTO comp : evaluacion.oportunidades)
+				{
+					if(Integer.parseInt(comp.sovi)<=0 || Integer.parseInt(comp.soviActual)<=0)
+					{
+						String msg = getString(R.string.evaluacion_msg_error_sovi);
+						Log.d(TAG, msg);
+						showToast(msg);
+						return false;
+					}
+				}
+				
+				
+				Log.d(TAG, "validar evaluaci—n");
+				
+				
 			}
 			return super.onMenuItemSelected(featureId, item);
 		}
