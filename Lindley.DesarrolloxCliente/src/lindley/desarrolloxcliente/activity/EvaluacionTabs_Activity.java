@@ -15,6 +15,8 @@ import lindley.desarrolloxcliente.activity.CompromisoOpen_Activity.EfficientAdap
 import lindley.desarrolloxcliente.to.CompromisoTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
+import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
+import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -90,7 +92,7 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 				EvaluacionTO evaluacion = application.evaluacion;
 				
 				
-				
+				String msg = "";
 				
 				
 				
@@ -100,7 +102,9 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 					/*openAdapterVacio = true;
 					if(openAdapterVacio)
 					{*/
-						showToast("Debe editar valores de la pesta–a inventario.");
+					
+						msg = getString(R.string.evaluacion_msg_error_inventario);
+						showToast(msg);
 						return false;
 					//}
 				}
@@ -109,14 +113,28 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 				{
 					if(Integer.parseInt(comp.sovi)<=0 || Integer.parseInt(comp.soviActual)<=0)
 					{
-						String msg = getString(R.string.evaluacion_msg_error_sovi);
-						Log.d(TAG, msg);
+						msg = getString(R.string.evaluacion_msg_error_sovi);
 						showToast(msg);
 						return false;
 					}
 				}
 				
+				if(evaluacion.posiciones == null || evaluacion.posiciones.isEmpty())
+				{				
+					msg = getString(R.string.evaluacion_msg_error_posicion);
+					showToast(msg);
+					return false; 
+				}
 				
+				if(evaluacion.presentaciones == null || evaluacion.presentaciones.isEmpty())
+				{				
+					msg = getString(R.string.evaluacion_msg_error_presentacion);
+					showToast(msg);
+					return false; 
+				}
+				
+
+
 				Log.d(TAG, "validar evaluaci—n");
 				
 				
