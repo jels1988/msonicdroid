@@ -13,6 +13,7 @@ public class OportunidadTO {
 	public OportunidadTO()
 	{
 		listaAccionesTrade = new ArrayList<AccionTradeTO>();
+		
 	}
 	
 	@Expose()

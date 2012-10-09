@@ -34,6 +34,7 @@ public class EvaluacionDAO {
 		values.put("evaluacionId", evaluacionTO.evaluacionId);
 		values.put("productoId", oportunidadTO.productoId);
 		values.put("codigoProducto", oportunidadTO.codigoProducto);
+		values.put("producto", oportunidadTO.descripcionProducto);
 		values.put("concrecion", oportunidadTO.concrecion);
 		values.put("sovi", oportunidadTO.sovi);
 		values.put("respetaPrecio", oportunidadTO.cumplePrecio);
@@ -55,6 +56,7 @@ public class EvaluacionDAO {
 		
 		values.put("evaluacionId", evaluacionTO.evaluacionId);
 		values.put("skuId", skuPresentacionTO.codigoSKU);
+		values.put("sku", skuPresentacionTO.descripcionSKU);
 		values.put("valorActual", skuPresentacionTO.valorActual);
 		
 		

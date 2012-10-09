@@ -6,17 +6,17 @@ import java.util.HashMap;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.inject.Inject;
 
 import roboguice.inject.InjectExtra;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.activity.CompromisoOpen_Activity.EfficientAdapter;
+import lindley.desarrolloxcliente.negocio.EvaluacionBLL;
 import lindley.desarrolloxcliente.to.CompromisoTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
-import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
-import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -37,6 +37,7 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 	
     @InjectExtra(CODIGO_REGISTRO)public String codigoRegistro;
     @InjectExtra(ORIGEN_REGISTRO)public String origen;
+	@Inject EvaluacionBLL evaluacionBLL;
 	
 	private TabHost mTabHost;
     private TabManager mTabManager;
@@ -91,7 +92,7 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 				MyApplication application = (MyApplication)getApplicationContext();
 				EvaluacionTO evaluacion = application.evaluacion;
 				
-				
+				evaluacionBLL.save(evaluacion);
 				String msg = "";
 				
 				
@@ -111,7 +112,7 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 				
 				for(OportunidadTO comp : evaluacion.oportunidades)
 				{
-					if(Integer.parseInt(comp.sovi)<=0 || Integer.parseInt(comp.soviActual)<=0)
+					if(comp.soviActual==null || comp.soviActual.trim().compareTo("")==0 || Integer.parseInt(comp.sovi)<=0 || Integer.parseInt(comp.soviActual)<=0)
 					{
 						msg = getString(R.string.evaluacion_msg_error_sovi);
 						showToast(msg);
