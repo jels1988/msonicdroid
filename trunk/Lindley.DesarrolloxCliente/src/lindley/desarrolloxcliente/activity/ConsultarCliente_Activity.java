@@ -9,6 +9,7 @@ import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.ClienteBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
+import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectResource;
@@ -307,9 +308,13 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 			});
 			
 			holder.imgCabecera.setOnClickListener(new OnClickListener() {
-
+				ClienteTO clienteTemporal = (ClienteTO) getItem(position);
+				
 				@Override
 				public void onClick(View v) {
+					MyApplication app = (MyApplication)context.getApplication();
+					app.cliente=clienteTemporal;
+					
 					// TODO Auto-generated method stub
 					Intent cabecera = new Intent(context, ConsultarCabecera_Activity.class);
 					//cabecera.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -329,6 +334,14 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 					}else{
 						MyApplication app = (MyApplication)context.getApplication();
 						app.cliente=clienteTemporal;
+						app.evaluacion = new EvaluacionTO();
+						app.evaluacion.fecha = ConstantesApp.getFechaSistemaAS400();
+						app.evaluacion.hora = ConstantesApp.getHoraSistemaAS400();
+						app.evaluacion.horaCierre="";
+						app.evaluacion.fechaCierre="";
+						app.evaluacion.serverId=0;
+						app.evaluacion.estado=ConstantesApp.OPORTUNIDAD_ABIERTA;
+						
 						Intent oportunidad = new Intent(context, ConsultarOportunidad_Activity.class);
 						context.startActivity(oportunidad);
 					}

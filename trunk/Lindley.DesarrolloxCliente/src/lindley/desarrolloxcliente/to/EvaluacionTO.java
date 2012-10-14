@@ -16,10 +16,20 @@ public class EvaluacionTO {
 	
 	@Expose()
 	public long evaluacionId;
+	public long serverId;
+	
+	
 	public String codigoCliente;
 	public String activosLindley;
 	public String codigoFe; //cluster
 	public String codigoUsuario;
+	
+	public String fecha;
+	public String hora;
+	public String fechaCierre;
+	public String horaCierre;
+	
+	public String estado;
 	
 	public List<OportunidadTO> oportunidades;
 	public List<SKUPresentacionTO> skuPresentacion;

@@ -1,17 +1,18 @@
 package lindley.desarrolloxcliente.activity;
 
-import java.util.Calendar;
 import java.util.List;
 
+import net.msonic.lib.MessageBox;
+
+import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.negocio.EvaluacionBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.DesarrolloClienteTO;
+import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarEstadoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCabeceraProxy;
-import net.msonic.lib.ActivityUtil;
-import net.msonic.lib.MessageBox;
-import android.content.Context;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,10 +20,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
@@ -32,6 +31,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	//@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	@Inject ConsultarCabeceraProxy ConsultarCabeceraProxy;
 	@Inject ActualizarEstadoProxy actualizarEstadoProxy;
+	@Inject EvaluacionBLL evaluacionBLL;
 	
 	private EfficientAdapter adap;
 	private ClienteTO cliente;
@@ -46,7 +46,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	
 	public static String codigoElimnar;
 	
-	List<DesarrolloClienteTO> cabecera;
+	List<EvaluacionTO> cabecera;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -58,14 +58,12 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
         
         setContentView(R.layout.cabeceracliente_activity);        
         setTitle(R.string.cabeceracliente_activity_title);
-        //mActionBar.setTitle(R.string.cabeceracliente_activity_title);
         application = (MyApplication)getApplicationContext();
-		cliente = application.getClienteTO();
+		cliente = application.cliente;
 		
 		getSupportActionBar().setSubtitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 		
-		//mActionBar.setSubTitle(cliente.getCodigo() + " - " + cliente.getNombre());
-        //mActionBar.setHomeLogo(R.drawable.header_logo);
+
     }
 
     
@@ -88,10 +86,18 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 
 	@Override
 	protected void process() {
-    	ConsultarCabeceraProxy.setCodigoCliente(cliente.codigo);
-    	ConsultarCabeceraProxy.execute();
+    	//ConsultarCabeceraProxy.setCodigoCliente(cliente.codigo);
+    	//ConsultarCabeceraProxy.execute();
+		cabecera = evaluacionBLL.List(cliente.codigo);
 	}
     
+	@Override
+	protected void processOk() {
+		adap = new EfficientAdapter(this, cabecera);
+		setListAdapter(adap);
+		super.processOk();
+	}
+	/*
     @Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
@@ -119,7 +125,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 		// TODO Auto-generated method stub
 		super.processError();
 		showToast(error_generico_process);
-	}
+	}*/
 	
 	
 	
@@ -171,16 +177,16 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	
 	
 	
-	public static class EfficientAdapter extends BaseAdapter implements Filterable {
-	    private LayoutInflater mInflater;
-	    private Context context;
-	    private List<DesarrolloClienteTO> detalles;
+	public static class EfficientAdapter extends ArrayAdapter<EvaluacionTO> {
+	   
+	    private Activity 		context;
+	    private List<EvaluacionTO> detalles;
 	    
-	    public EfficientAdapter(Context context, List<DesarrolloClienteTO> valores) {
+	    public EfficientAdapter(Activity context, List<EvaluacionTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
-		      mInflater = LayoutInflater.from(context);
-		      this.context = context;
-		      this.detalles = valores;
+	    		super(context, R.layout.cabeceracliente_content, valores);
+	    		this.context = context;
+	    		this.detalles = valores;
 		    }
 	    
 
@@ -192,54 +198,126 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	     */
 	    public View getView(final int position, View convertView, ViewGroup parent) {
 	    	
-	    	DesarrolloClienteTO desarrollo = (DesarrolloClienteTO) getItem(position);
 	    	
-	    	final ViewHolder holder;
+	    
+	    	View view = null;
+			if (convertView == null) {
+				LayoutInflater inflator = context.getLayoutInflater();
+				view = inflator.inflate(R.layout.cabeceracliente_content, null);
+				final ViewHolder viewHolder = new ViewHolder();
+				
+				viewHolder.txViewCodigo = (TextView) view.findViewById(R.id.txViewCodigo); 
+				viewHolder.txViewFecha = (TextView) view.findViewById(R.id.txViewFecha);
+				viewHolder.txViewHora =  (TextView) view.findViewById(R.id.txViewHora);
+				viewHolder.txViewFechaCierre = (TextView) view.findViewById(R.id.txViewFechaCierre);  	    	
+				viewHolder.txViewHoraCierre = (TextView) view.findViewById(R.id.txViewHoraCierre);		    		          	
+				viewHolder.txViewestado = (TextView) view.findViewById(R.id.txViewestado);	    	
+				viewHolder.txViewVerDetalle = (Button) view.findViewById(R.id.txViewVerDetalle);	  
+				viewHolder.txViewVerResumen = (Button) view.findViewById(R.id.txViewVerResumen);
+				viewHolder.btnEliminar = (Button) view.findViewById(R.id.btnEliminar);
+				
+				
+				
+				viewHolder.txViewVerResumen.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						EvaluacionTO evaluacionTO = (EvaluacionTO) viewHolder.txViewCodigo.getTag();
+						
+						Intent compromisoOpen = new Intent(context, ConsultarResumen_Activity.class);
+						compromisoOpen.putExtra(ConsultarResumen_Activity.CODIGO_REGISTRO_KEY, evaluacionTO.evaluacionId);							
+						context.startActivity(compromisoOpen);		
+					}
+			    	  
+			      });
+				
+				viewHolder.txViewVerDetalle.setOnClickListener(new OnClickListener() {
 
-	      if (convertView == null) {
-	        convertView = mInflater.inflate(R.layout.cabeceracliente_content, null);
+					@Override
+					public void onClick(View arg0) {
+						// TODO Auto-generated method stub
+						EvaluacionTO evaluacionTO = (EvaluacionTO) viewHolder.txViewCodigo.getTag();
+						
+						if(evaluacionTO.estado.equals(ConstantesApp.OPORTUNIDAD_ABIERTA)){
+							if(evaluacionTO.fecha.equals(ConstantesApp.getFechaSistemaAS400())){
+								Intent compromisoOpen = new Intent(context, CompromisoPrincipalOpen_Resumen.class);
+								compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, evaluacionTO.evaluacionId);
+								compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "A");	
+								context.startActivity(compromisoOpen);	
+							}else{
+								Intent compromisoOpenFalse = new Intent(context, CompromisoPrincipalOpenFalse_Resumen.class);
+								compromisoOpenFalse.putExtra(CompromisoPrincipalOpenFalse_Resumen.CODIGO_REGISTRO, evaluacionTO.evaluacionId);
+								context.startActivity(compromisoOpenFalse);
+							}
+						}else{
+							Intent compromisoClose = new Intent(context, CompromisoPrincipalClose_Resumen.class);
+							compromisoClose.putExtra(CompromisoPrincipalClose_Resumen.CODIGO_REGISTRO, evaluacionTO.evaluacionId);
+							context.startActivity(compromisoClose);
+						}
+					}
+				  });
+				
+				
+				viewHolder.btnEliminar.setOnClickListener(new OnClickListener() {
 
-	        // Creates a ViewHolder and store references to the two children
-	        // views
-	        // we want to bind data to.
-	        holder = new ViewHolder();
-	        	        
-	        holder.txViewCodigo = (TextView) convertView.findViewById(R.id.txViewCodigo); 
-	        holder.txViewFecha = (TextView) convertView.findViewById(R.id.txViewFecha);
-	        holder.txViewHora =  (TextView) convertView.findViewById(R.id.txViewHora);
-//	        holder.txViewCreado =  (TextView) convertView.findViewById(R.id.txViewCreado);   
-	        holder.txViewFechaCierre = (TextView) convertView.findViewById(R.id.txViewFechaCierre);  	    	
-	    	holder.txViewHoraCierre = (TextView) convertView.findViewById(R.id.txViewHoraCierre);		    	
-//	    	holder.txViewCerrado = (TextView) convertView.findViewById(R.id.txViewCerrado);	          	
-	    	holder.txViewestado = (TextView) convertView.findViewById(R.id.txViewestado);	    	
-	    	holder.txViewVerDetalle = (Button) convertView.findViewById(R.id.txViewVerDetalle);	  
-	    	holder.txViewVerResumen = (Button) convertView.findViewById(R.id.txViewVerResumen);
-	    	holder.btnEliminar = (Button) convertView.findViewById(R.id.btnEliminar);
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						final EvaluacionTO evaluacionTO = (EvaluacionTO) viewHolder.txViewCodigo.getTag();
+						
+						if(evaluacionTO.estado.equals(ConstantesApp.OPORTUNIDAD_ABIERTA)){
+							if(evaluacionTO.fecha.equals(ConstantesApp.getFechaSistemaAS400())){
+								MessageBox.showConfirmDialog(context, "Confirmacion", "ÀDesea eliminar el registro?", "Si",
+										new android.content.DialogInterface.OnClickListener() {
+									
+									public void onClick(DialogInterface dialog, int which) {
+										// TODO Auto-generated method stub	
+										
+										ConsultarCabecera_Activity.codigoElimnar = String.valueOf(evaluacionTO.serverId) ;
+										((ConsultarCabecera_Activity)context).processAsync(ConsultarCabecera_Activity.ACCION_ELIMINAR);
+						
+									}
+									
+								}, "No", new android.content.DialogInterface.OnClickListener() {
+
+									public void onClick(DialogInterface dialog, int which) {
+										// TODO Auto-generated method stub
+										
+									}
+									
+								});  
+							}
+						}
+					}
+					
+				});
+				
+				view.setTag(viewHolder);
+				
+				viewHolder.txViewCodigo.setTag(this.detalles.get(position));
+				
+				
+				
+			}else{
+				view = convertView;
+				((ViewHolder) view.getTag()).txViewCodigo.setTag(this.detalles.get(position));
+			}
 	    	
-	        convertView.setTag(holder);
-	      } else {
-	        // Get the ViewHolder back to get fast access to the TextView
-	        // and the ImageView.
-	        holder = (ViewHolder) convertView.getTag();
-	      }
-	      
-	      
-	      int anio = 0, anioActual;    
-  	      int mes = 0, mesActual;  
-  	      int dia = 0, diaActual;
-  	      String fecha = desarrollo.getFecha();
-  	     
-  	      
-		  Calendar c = Calendar.getInstance();
-		  anioActual = c.get(Calendar.YEAR);        
-	      mesActual = c.get(Calendar.MONTH) + 1;        
-	      diaActual = c.get(Calendar.DAY_OF_MONTH); 
-	      dia =  Integer.parseInt(fecha.substring(0, 2));
-    	  mes  =  Integer.parseInt(fecha.substring(3, 5));
-    	  anio  =  Integer.parseInt(fecha.substring(6));
-		    
-    	
-	    	if(!(anio == anioActual && mes == mesActual && dia == diaActual))
+			ViewHolder holder = (ViewHolder) view.getTag();
+			EvaluacionTO evaluacionTO = detalles.get(position);
+	    	
+		  holder.txViewCodigo.setText(String.valueOf(evaluacionTO.serverId));
+	      holder.txViewFecha.setText(ConstantesApp.formatFecha(String.valueOf(evaluacionTO.fecha)));
+	      holder.txViewHora.setText(ConstantesApp.formatHora(String.valueOf(evaluacionTO.hora))); 
+	      holder.txViewFechaCierre.setText(ConstantesApp.formatFecha(String.valueOf(evaluacionTO.fechaCierre)));
+	      holder.txViewHoraCierre.setText(ConstantesApp.formatHora(String.valueOf(evaluacionTO.horaCierre)));
+		      
+	      if(evaluacionTO.estado.equals(ConstantesApp.OPORTUNIDAD_ABIERTA))
+	    	  holder.txViewestado.setText("Abierto");
+	      else
+	    	  holder.txViewestado.setText("Cerrado");
+			
+	      if(!(evaluacionTO.fecha.equals(ConstantesApp.getFechaSistemaAS400())))
 	    	{
 	    		holder.btnEliminar.setVisibility(View.INVISIBLE);
 	    	}else{
@@ -248,228 +326,25 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	    	
 	      
 	      
-	      
-	      holder.txViewCodigo.setText(desarrollo.getCodigo());
-	      holder.txViewFecha.setText(desarrollo.getFecha());
-	      holder.txViewHora.setText(desarrollo.getHora()); 
-//	      holder.txViewCreado.setText(desarrollo.getUserCrea());
-	      holder.txViewFechaCierre.setText(desarrollo.getFechaCierre());
-	      holder.txViewHoraCierre.setText(desarrollo.getHoraCierre());
-//	      holder.txViewCerrado.setText(desarrollo.getUserCierra());
-	      
-	      //if(position == 0)
-	      if(desarrollo.getEstado().equals("A"))
-	    	  holder.txViewestado.setText("Abierto");
-	      else
-	    	  holder.txViewestado.setText("Cerrado");
-	      
-	      holder.txViewVerResumen.setOnClickListener(new OnClickListener() {
-	    	  DesarrolloClienteTO desarrolloTemp = (DesarrolloClienteTO) getItem(position);
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent compromisoOpen = new Intent(context, ConsultarResumen_Activity.class);
-				compromisoOpen.putExtra(ConsultarResumen_Activity.CODIGO_REGISTRO_KEY, desarrolloTemp.getCodigo());							
-				context.startActivity(compromisoOpen);		
-			}
-	    	  
-	      });
-	      
-	      holder.txViewVerDetalle.setOnClickListener(new OnClickListener() {
-	    	  DesarrolloClienteTO desarrolloTemp = (DesarrolloClienteTO) getItem(position);
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					//if(position == 0)
-					
-					int anio = 0, anioActual;    
-		    	    int mes = 0, mesActual;  
-		    	    int dia = 0, diaActual;
-		    	    String fecha = desarrolloTemp.getFecha();
-
-					Calendar c = Calendar.getInstance();
-		    	    anioActual = c.get(Calendar.YEAR);        
-			    	mesActual = c.get(Calendar.MONTH);        
-			    	diaActual = c.get(Calendar.DAY_OF_MONTH); 
-			    	
-			    	if(fecha.length() >= 10)
-					{
-			    		dia =  Integer.parseInt(fecha.substring(0, 2));
-				    	mes  =  Integer.parseInt(fecha.substring(3, 5))-1;
-				    	anio  =  Integer.parseInt(fecha.substring(6));
-				    }
-			    	
-			    	application.anio = ActivityUtil.pad(anio);
-					application.mes = ActivityUtil.pad(mes+1);
-					application.dia = ActivityUtil.pad(dia);
-					
-					/*
-					Log.v("ConsultarCabecera_Activity", anio+"");
-					Log.v("ConsultarCabecera_Activity", anioActual+"");
-					Log.v("ConsultarCabecera_Activity", mes+"");
-					Log.v("ConsultarCabecera_Activity", mesActual+"");
-					Log.v("ConsultarCabecera_Activity", dia+"");
-					Log.v("ConsultarCabecera_Activity", diaActual+"");*/
-					
-					
-					if(desarrolloTemp.getEstado().equals("A"))
-					{											
-						if(anio == anioActual && mes == mesActual && dia == diaActual)
-						{
-							Intent compromisoOpen = new Intent(context, CompromisoPrincipalOpen_Resumen.class);
-							compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
-							compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "A");	
-							context.startActivity(compromisoOpen);							
-						}
-						else
-						{				
-							Intent compromisoOpenFalse = new Intent(context, CompromisoPrincipalOpenFalse_Resumen.class);
-							compromisoOpenFalse.putExtra(CompromisoPrincipalOpenFalse_Resumen.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
-							context.startActivity(compromisoOpenFalse);
-						}						
-					}
-					else
-					{
-						Intent compromisoClose = new Intent(context, CompromisoPrincipalClose_Resumen.class);
-						compromisoClose.putExtra(CompromisoPrincipalClose_Resumen.CODIGO_REGISTRO, desarrolloTemp.getCodigo());
-						context.startActivity(compromisoClose);
-					}
-				}
-			});
-	      
-	      
-	      
+			
+			
 	    	
-	    	
-	    	  
-	      holder.btnEliminar.setOnClickListener(new OnClickListener() {
-	    	  DesarrolloClienteTO desarrolloTemp = (DesarrolloClienteTO) getItem(position);
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					//if(position == 0)
-					
-					int anio = 0, anioActual;    
-		    	    int mes = 0, mesActual;  
-		    	    int dia = 0, diaActual;
-		    	    String fecha = desarrolloTemp.getFecha();
-
-					Calendar c = Calendar.getInstance();
-		    	    anioActual = c.get(Calendar.YEAR);        
-			    	mesActual = c.get(Calendar.MONTH);        
-			    	diaActual = c.get(Calendar.DAY_OF_MONTH); 
-			    	
-			    	if(fecha.length() >= 10)
-					{
-			    		dia =  Integer.parseInt(fecha.substring(0, 2));
-				    	mes  =  Integer.parseInt(fecha.substring(3, 5))-1;
-				    	anio  =  Integer.parseInt(fecha.substring(6));
-				    }
-			    	
-			    	application.anio = ActivityUtil.pad(anio);
-					application.mes = ActivityUtil.pad(mes+1);
-					application.dia = ActivityUtil.pad(dia);
-					
-					/*
-					Log.v("ConsultarCabecera_Activity", anio+"");
-					Log.v("ConsultarCabecera_Activity", anioActual+"");
-					Log.v("ConsultarCabecera_Activity", mes+"");
-					Log.v("ConsultarCabecera_Activity", mesActual+"");
-					Log.v("ConsultarCabecera_Activity", dia+"");
-					Log.v("ConsultarCabecera_Activity", diaActual+"");
-					*/
-					
-					
-					
-					
-					if(desarrolloTemp.getEstado().equals("A"))
-					{											
-						if(anio == anioActual && mes == mesActual && dia == diaActual)
-						{	
-							MessageBox.showConfirmDialog(context, "Confirmacion", "ÀDesea eliminar el registro?", "Si",
-									new android.content.DialogInterface.OnClickListener() {
-								
-								public void onClick(DialogInterface dialog, int which) {
-									// TODO Auto-generated method stub	
-									/*Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
-									intent.putExtra(VerFoto_Activity.FILE_NAME, posicionTO.fotoInicial);
-									context.startActivity(intent);*/
-									
-									ConsultarCabecera_Activity.codigoElimnar = desarrolloTemp.getCodigo();
-									((ConsultarCabecera_Activity)context).processAsync(ConsultarCabecera_Activity.ACCION_ELIMINAR);
-									
-//									ConsultarCabecera_Activity cabecera_Activity = (ConsultarCabecera_Activity)context;
-//									cabecera_Activity.processAsync(ConsultarCabecera_Activity.ACCION_ELIMINAR);									
-								}
-								
-							}, "No", new android.content.DialogInterface.OnClickListener() {
-
-								public void onClick(DialogInterface dialog, int which) {
-									// TODO Auto-generated method stub
-									
-								}
-								
-							});  
-						}
-						else
-						{				
-							holder.btnEliminar.setEnabled(false);
-						}						
-					}
-					else
-					{
-						holder.btnEliminar.setEnabled(false);
-					}
-				}
-			});
-	      
-	      return convertView;
+		  	return view;
 	    }
 
 	    static class ViewHolder {   
 	    	TextView txViewCodigo;
 	    	TextView txViewFecha;
 	    	TextView txViewHora;
-//	    	TextView txViewCreado;
 	    	TextView txViewFechaCierre;  	    	
-	    	TextView txViewHoraCierre;    	
-//	    	TextView txViewCerrado;    	
+	    	TextView txViewHoraCierre;    	    	
 	    	TextView txViewestado;
 	    	Button txViewVerDetalle;	    	
-	    	
 	    	Button txViewVerResumen;
 	    	Button btnEliminar;
 	    	
 	    }
-	    
-	    @Override
-	    public Filter getFilter() {
-	      // TODO Auto-generated method stub
-	      return null;
-	    }
-
-	    @Override
-	    public long getItemId(int position) {
-	      // TODO Auto-generated method stub
-	      return position;
-	    }
-
-	    @Override
-	    public int getCount() {
-	      // TODO Auto-generated method stub
-	      //return data.length;
-	    	if(detalles==null){
-	    		return 0;
-	    	}else{
-	    		return detalles.size();
-	    	}
-	    }
-
-	    @Override
-	    public Object getItem(int position) {
-	      // TODO Auto-generated method stub
-	    	return detalles.get(position);
-	    }
+	
 
 	  }
 }
