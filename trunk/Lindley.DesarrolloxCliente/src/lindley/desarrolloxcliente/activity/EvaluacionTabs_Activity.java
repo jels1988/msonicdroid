@@ -35,8 +35,9 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 	public final static String CODIGO_REGISTRO = "codigo_reg";
 	public final static String ORIGEN_REGISTRO = "origen_reg";
 	
-    @InjectExtra(CODIGO_REGISTRO)public String codigoRegistro;
-    @InjectExtra(ORIGEN_REGISTRO)public String origen;
+   @InjectExtra(CODIGO_REGISTRO)public String codigoRegistro;
+   @InjectExtra(ORIGEN_REGISTRO)public String origen;
+    
 	@Inject EvaluacionBLL evaluacionBLL;
 	
 	private TabHost mTabHost;
@@ -46,7 +47,10 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
  
-
+        Compromisos_Activity.VISTA_CARGADA=0;
+        Posicion_Activity.VISTA_CARGADA=0;
+        Presentacion_Activity.VISTA_CARGADA=0;
+        Combos_Activity.VISTA_CARGADA=0;
         
         
         setContentView(R.layout.frameng_tabs);

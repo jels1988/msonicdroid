@@ -33,7 +33,7 @@ public class Presentacion_Activity extends ListBaseFragment {
 	private EvaluacionTO evaluacion;
 	private  MyApplication application;
 	private ClienteTO cliente;
-	private static int VISTA_CARGADA=0;
+	public static int VISTA_CARGADA=0;
 	
 	@Inject PresentacionBLL presentacionBLL;
 	

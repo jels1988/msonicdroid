@@ -12,7 +12,6 @@ import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarEstadoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCabeceraProxy;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,7 +41,8 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	
 	
 	public static final int ACCION_ELIMINAR = 1;
-	
+	public static final int ACCION_CARGAR_EVALUACION = 2;
+	public long evaluacionId=0;
 	
 	public static String codigoElimnar;
 	
@@ -97,6 +97,10 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 		setListAdapter(adap);
 		super.processOk();
 	}
+	
+	
+	
+	
 	/*
     @Override
 	protected void processOk() {
@@ -132,18 +136,33 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	@Override
 	protected void process(int accion) {
 		// TODO Auto-generated method stub
-		if(accion == ACCION_ELIMINAR)
+		/*if(accion == ACCION_ELIMINAR)
 		{
 			actualizarEstadoProxy.codigo = codigoElimnar;
 			actualizarEstadoProxy.estado = "E";
 			actualizarEstadoProxy.execute();
+		}*/
+		
+		
+		if(accion==ACCION_CARGAR_EVALUACION){
+			application.evaluacion = evaluacionBLL.GetById(evaluacionId);
 		}
 	}
 	
 	@Override
 	protected void processOk(int accion) {
+		
+		if(ACCION_CARGAR_EVALUACION==accion){
+			super.processOk();
+			Intent evaluacionTabsActivity = new Intent(this, EvaluacionTabs_Activity.class);
+			evaluacionTabsActivity.putExtra(EvaluacionTabs_Activity.CODIGO_REGISTRO, "0");
+			evaluacionTabsActivity.putExtra(EvaluacionTabs_Activity.ORIGEN_REGISTRO, "0");
+			
+			//compromisoOpen.putExtra(ConsultarResumen_Activity.CODIGO_REGISTRO_KEY, this.evaluacionId);							
+			startActivity(evaluacionTabsActivity);
+		}
 		// TODO Auto-generated method stub
-		if(accion == ACCION_ELIMINAR)
+		/*if(accion == ACCION_ELIMINAR)
 		{
 			boolean isExito = actualizarEstadoProxy.isExito();
 			if (isExito) {
@@ -160,7 +179,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 			}
 			super.processOk();
 			processAsync();
-		}
+		}*/
 	}
 	
 	@Override
@@ -179,10 +198,10 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	
 	public static class EfficientAdapter extends ArrayAdapter<EvaluacionTO> {
 	   
-	    private Activity 		context;
+	    private ConsultarCabecera_Activity 		context;
 	    private List<EvaluacionTO> detalles;
 	    
-	    public EfficientAdapter(Activity context, List<EvaluacionTO> valores) {
+	    public EfficientAdapter(ConsultarCabecera_Activity context, List<EvaluacionTO> valores) {
 		      // Cache the LayoutInflate to avoid asking for a new one each time.
 	    		super(context, R.layout.cabeceracliente_content, valores);
 	    		this.context = context;
@@ -223,10 +242,11 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						EvaluacionTO evaluacionTO = (EvaluacionTO) viewHolder.txViewCodigo.getTag();
-						
 						Intent compromisoOpen = new Intent(context, ConsultarResumen_Activity.class);
 						compromisoOpen.putExtra(ConsultarResumen_Activity.CODIGO_REGISTRO_KEY, evaluacionTO.evaluacionId);							
-						context.startActivity(compromisoOpen);		
+						context.startActivity(compromisoOpen);	
+						
+								
 					}
 			    	  
 			      });
@@ -240,10 +260,14 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 						
 						if(evaluacionTO.estado.equals(ConstantesApp.OPORTUNIDAD_ABIERTA)){
 							if(evaluacionTO.fecha.equals(ConstantesApp.getFechaSistemaAS400())){
+								context.evaluacionId = evaluacionTO.evaluacionId;
+								context.processAsync(ACCION_CARGAR_EVALUACION);
+								/*
 								Intent compromisoOpen = new Intent(context, CompromisoPrincipalOpen_Resumen.class);
 								compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, evaluacionTO.evaluacionId);
 								compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "A");	
 								context.startActivity(compromisoOpen);	
+								*/
 							}else{
 								Intent compromisoOpenFalse = new Intent(context, CompromisoPrincipalOpenFalse_Resumen.class);
 								compromisoOpenFalse.putExtra(CompromisoPrincipalOpenFalse_Resumen.CODIGO_REGISTRO, evaluacionTO.evaluacionId);
