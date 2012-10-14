@@ -42,6 +42,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	
 	public static final int ACCION_ELIMINAR = 1;
 	public static final int ACCION_CARGAR_EVALUACION = 2;
+	public static final int ACCION_VERIFICAR_EVALUACION = 3;
 	public long evaluacionId=0;
 	
 	public static String codigoElimnar;
@@ -144,7 +145,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 		}*/
 		
 		
-		if(accion==ACCION_CARGAR_EVALUACION){
+		if(ACCION_CARGAR_EVALUACION==accion || ACCION_VERIFICAR_EVALUACION==accion){
 			application.evaluacion = evaluacionBLL.GetById(evaluacionId);
 		}
 	}
@@ -160,7 +161,15 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 			
 			//compromisoOpen.putExtra(ConsultarResumen_Activity.CODIGO_REGISTRO_KEY, this.evaluacionId);							
 			startActivity(evaluacionTabsActivity);
+		}else if(ACCION_VERIFICAR_EVALUACION==accion){
+			super.processOk();
+			Intent verificacionTabsActivity = new Intent(this, VerificacionTabs_Activity.class);
+			verificacionTabsActivity.putExtra(EvaluacionTabs_Activity.CODIGO_REGISTRO, "0");
+			verificacionTabsActivity.putExtra(EvaluacionTabs_Activity.ORIGEN_REGISTRO, "0");
+			startActivity(verificacionTabsActivity);
 		}
+		
+		
 		// TODO Auto-generated method stub
 		/*if(accion == ACCION_ELIMINAR)
 		{
@@ -258,10 +267,15 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 						// TODO Auto-generated method stub
 						EvaluacionTO evaluacionTO = (EvaluacionTO) viewHolder.txViewCodigo.getTag();
 						
+						context.evaluacionId = evaluacionTO.evaluacionId;
+						
 						if(evaluacionTO.estado.equals(ConstantesApp.OPORTUNIDAD_ABIERTA)){
 							if(evaluacionTO.fecha.equals(ConstantesApp.getFechaSistemaAS400())){
-								context.evaluacionId = evaluacionTO.evaluacionId;
-								context.processAsync(ACCION_CARGAR_EVALUACION);
+								
+								
+								context.processAsync(ACCION_VERIFICAR_EVALUACION);
+								
+								//context.processAsync(ACCION_CARGAR_EVALUACION);
 								/*
 								Intent compromisoOpen = new Intent(context, CompromisoPrincipalOpen_Resumen.class);
 								compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, evaluacionTO.evaluacionId);
@@ -269,9 +283,11 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 								context.startActivity(compromisoOpen);	
 								*/
 							}else{
-								Intent compromisoOpenFalse = new Intent(context, CompromisoPrincipalOpenFalse_Resumen.class);
+								context.processAsync(ACCION_VERIFICAR_EVALUACION);
+								//VerficacionTabs_Activity
+								/*Intent compromisoOpenFalse = new Intent(context, CompromisoPrincipalOpenFalse_Resumen.class);
 								compromisoOpenFalse.putExtra(CompromisoPrincipalOpenFalse_Resumen.CODIGO_REGISTRO, evaluacionTO.evaluacionId);
-								context.startActivity(compromisoOpenFalse);
+								context.startActivity(compromisoOpenFalse);*/
 							}
 						}else{
 							Intent compromisoClose = new Intent(context, CompromisoPrincipalClose_Resumen.class);
