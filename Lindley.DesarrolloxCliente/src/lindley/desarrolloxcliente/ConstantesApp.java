@@ -28,15 +28,42 @@ public final class ConstantesApp {
 	
 	
 	public final static String OPORTUNIDAD_SISTEMA = "1";
-	
-	
 	public final static String OPORTUNIDAD_DESARROLLADOR_ABIERTO = "A";
-	
+	public final static String OPORTUNIDAD_ABIERTA = "A";
 	
 	
 	
 	public final static String getFechaSistema(){
 		return DateFormat.format("dd/MM/yyyy", new java.util.Date()).toString();
+	}
+	
+	public final static String getFormatFecha(String fecha){
+		if(fecha==null) return "";
+		int[] factores = getFechaFactores(fecha);
+		String fechaFormat = String.format("%s/%s/%s", factores[2],factores[1], factores[0]);
+		return fechaFormat;
+	}
+	
+	public final static String formatFecha(String fecha){
+		if(fecha==null) return "";
+		String[] factores = getFechaFactoresAS400(fecha);
+		String fechaFormat = String.format("%s/%s/%s", factores[2],factores[1], factores[0]);
+		return fechaFormat;
+	}
+	
+	public final static String formatHora(String hora){
+		if(hora==null) return "";
+		String[] factores = getHoraFactoresAS400(hora);
+		String horaFormat = String.format("%s:%s", factores[0],factores[1]);
+		return horaFormat;
+	}
+	
+	public final static String getFechaSistemaAS400(){
+		return DateFormat.format("yyyyMMdd", new java.util.Date()).toString();
+	}
+	
+	public final static String getHoraSistemaAS400(){
+		return DateFormat.format("kkmm", new java.util.Date()).toString();
 	}
 	
 	public final static String formatPorcentaje(double number,int decimales){
@@ -59,28 +86,7 @@ public final class ConstantesApp {
 		  return String.format("%" + (length - str.length()) + "s", "").replace(" ", String.valueOf(car)) +str;
 		}
 	
-	
-		/*
-	public final static String getFechaFormatAS400(String fecha){
 
-		if(null!=fecha){
-			if (fecha.length() >= 7) {
-				
-				int anio = Integer.parseInt(fecha.substring(0, 4));
-				int mes = Integer.parseInt(fecha.substring(4, 6)) - 1;
-				int dia = Integer.parseInt(fecha.substring(6));
-				
-				final Calendar calendar = Calendar.getInstance();
-				calendar.set(anio, mes, dia);
-				
-				return DateFormat.format("dd/MM/yyyy", calendar).toString();
-			}else{
-				return "";
-			}
-		}else{
-			return "";
-		}
-	}*/
 	
 	public final static int[] getFechaFactores(String fecha){
 		
@@ -100,6 +106,52 @@ public final class ConstantesApp {
 			factores[0]= Integer.parseInt(fecha.substring(6));
 			factores[1] = Integer.parseInt(fecha.substring(3, 5	))-1;
 			factores[2] = Integer.parseInt(fecha.substring(0,2));
+			
+		}
+		
+		return factores;
+	}
+	
+	public final static String[] getFechaFactoresAS400(String fecha){
+		
+		String[] factores = new String[3];
+		
+		final Calendar calendar = Calendar.getInstance();
+		factores[0] = String.valueOf(calendar.get(Calendar.YEAR));        
+		factores[1] = String.valueOf(calendar.get(Calendar.MONTH));        
+		factores[2] = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+		
+		if(null==fecha){
+			return factores;
+		}
+		
+
+		if (fecha.length() >= 8) {
+			factores[0]= fecha.substring(0,4);
+			factores[1] = fecha.substring(4,6);
+			factores[2] = fecha.substring(6,8);
+		}
+		
+		return factores;
+		
+	}
+	public final static String[] getHoraFactoresAS400(String hora){
+		
+	String[] factores = new String[2];
+	
+		final Calendar calendar = Calendar.getInstance();
+		factores[0] = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)) ;        
+		factores[1] = String.valueOf(calendar.get(Calendar.MINUTE));        
+	
+		
+		if(null==hora){
+			return factores;
+		}
+		
+		
+		if (hora.length() >= 4) {
+			factores[0]= hora.substring(0,2);
+			factores[1] = hora.substring(2,4);
 			
 		}
 		

@@ -86,7 +86,7 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 		cliente = application.cliente;
 		
 		//CREAMOS UNA NUEVA EVALUACION
-		application.evaluacion = new EvaluacionTO();
+
 		evaluacion = application.evaluacion;
 		
 		
