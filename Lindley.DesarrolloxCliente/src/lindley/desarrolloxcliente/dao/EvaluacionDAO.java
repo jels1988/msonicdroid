@@ -135,6 +135,7 @@ public class EvaluacionDAO {
 				skuPresentacionTO.codigoSKU = cursor.getString(cursor.getColumnIndex("skuId"));
 				skuPresentacionTO.descripcionSKU = cursor.getString(cursor.getColumnIndex("sku"));
 				skuPresentacionTO.valorActual = cursor.getString(cursor.getColumnIndex("valorActual"));
+				skuPresentacionTO.compromiso = cursor.getString(cursor.getColumnIndex("compromiso"));
 				evaluacionTO.skuPresentacion.add(skuPresentacionTO);
 			}
 			cursor.close();
@@ -171,6 +172,7 @@ public class EvaluacionDAO {
 		values.put("skuId", skuPresentacionTO.codigoSKU);
 		values.put("sku", skuPresentacionTO.descripcionSKU);
 		values.put("valorActual", skuPresentacionTO.valorActual);
+		values.put("compromiso", skuPresentacionTO.compromiso);
 		
 		
 		long id= dbHelper.insertOrThrow("evaluacion_sku_presentacion", values);

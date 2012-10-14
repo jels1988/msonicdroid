@@ -31,7 +31,7 @@ public class Combos_Activity extends FragmentBase {
 			 return inflater.inflate(R.layout.informacionadicional_activity, container,false);
 		 }
 	 
-	 private static int VISTA_CARGADA=0;
+	 public static int VISTA_CARGADA=0;
 	 
 	 
 	 @Override public void onActivityCreated(Bundle savedInstanceState) {

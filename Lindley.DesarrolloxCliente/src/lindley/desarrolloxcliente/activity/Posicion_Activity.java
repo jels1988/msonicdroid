@@ -59,7 +59,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 			 return inflater.inflate(R.layout.consultarposicioncompromisoopen_activity, container,false);
 		 }
 		 
-		 private static int VISTA_CARGADA=0;
+		 public static int VISTA_CARGADA=0;
 		 
 		 @Override public void onActivityCreated(Bundle savedInstanceState) {
 	         super.onActivityCreated(savedInstanceState);

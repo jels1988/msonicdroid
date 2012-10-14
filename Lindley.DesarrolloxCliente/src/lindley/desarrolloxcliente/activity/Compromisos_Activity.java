@@ -38,7 +38,7 @@ public class Compromisos_Activity extends ListBaseFragment {
 		 return inflater.inflate(R.layout.compromisoopen_activity, container,false);
 	 }
 	 
-	 private static int VISTA_CARGADA=0;
+	 public static int VISTA_CARGADA=0;
 	 
 	 @Override public void onActivityCreated(Bundle savedInstanceState) {
          super.onActivityCreated(savedInstanceState);
