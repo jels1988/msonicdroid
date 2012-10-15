@@ -150,9 +150,32 @@ public class CompromisosVerificacion_Activity extends ListBaseFragment {
 				      else
 				    	  holder.cboConcrecion.setText(ConstantesApp.RESPUESTA_NO_LARGA);
 					
+					if(oportunidadTO.concrecionActual.equalsIgnoreCase(ConstantesApp.RESPUESTA_SI))
+						  holder.cboConcrecionCmp.setText(ConstantesApp.RESPUESTA_SI_LARGA);
+				      else
+				    	  holder.cboConcrecionCmp.setText(ConstantesApp.RESPUESTA_NO_LARGA);
+					
 					 holder.txViewSOVI.setText(oportunidadTO.sovi);
 				     holder.txViewSOVICmp.setText(oportunidadTO.soviActual);
+				    
+					
+					
+					if(oportunidadTO.cumplePrecio.equalsIgnoreCase(ConstantesApp.RESPUESTA_SI))
+						holder.cboCumPrecio.setText(ConstantesApp.RESPUESTA_SI_LARGA);
+				     else
+				    	holder.cboCumPrecio.setText(ConstantesApp.RESPUESTA_NO_LARGA);
+					
+					if(oportunidadTO.cumplePrecioActual.equalsIgnoreCase(ConstantesApp.RESPUESTA_SI))
+						holder.cboCumPrecioCmp.setText(ConstantesApp.RESPUESTA_SI_LARGA);
+				     else
+				    	holder.cboCumPrecioCmp.setText(ConstantesApp.RESPUESTA_NO_LARGA);
+					
+					
+					 
 				     holder.txViewSabores.setText(oportunidadTO.numeroSabores);
+				     holder.cboSaboresCmp.setText(oportunidadTO.numeroSaboresActual);
+				     
+				     
 				     holder.txEditFecha.setText(oportunidadTO.fechaOportunidad);
 					  
 					return view;

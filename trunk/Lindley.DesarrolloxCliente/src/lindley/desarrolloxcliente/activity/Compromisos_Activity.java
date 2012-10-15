@@ -255,14 +255,14 @@ public class Compromisos_Activity extends ListBaseFragment {
 									
 									// TODO Auto-generated method stub
 									if(arg2==0){
-										oportunidadTO.numeroSaboresActual = 2;
+										oportunidadTO.numeroSaboresActual = "2";
 									} else if(arg2 == 1){
-										oportunidadTO.numeroSaboresActual = 3;
+										oportunidadTO.numeroSaboresActual = "3";
 									} else if(arg2 == 2){
-										oportunidadTO.numeroSaboresActual = 4;
+										oportunidadTO.numeroSaboresActual = "4";
 									}
 									else{
-										oportunidadTO.numeroSaboresActual = 0;
+										oportunidadTO.numeroSaboresActual = "0";
 									}
 								}
 
