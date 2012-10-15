@@ -14,8 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class CompromisosVerificacion_Activity extends ListBaseFragment {
 
@@ -127,6 +130,53 @@ public class CompromisosVerificacion_Activity extends ListBaseFragment {
 				    	holder.txViewAccTrade = (TextView) view.findViewById(R.id.txViewAccTrade);	
 				    	holder.txEditFecha = (TextView) view.findViewById(R.id.txEditFecha);	    	
 				    	
+				    	holder.chkViewConcrecion = (CheckBox) view.findViewById(R.id.chkViewConcrecion);
+				    	holder.chkViewConcrecion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+								
+								@Override
+								public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+									// TODO Auto-generated method stub
+									OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
+									oportunidadTO.concrecionCumple=(isChecked)?1:0;
+								}
+							});
+				    	 
+				    	holder.chkViewSOVI = (CheckBox) view.findViewById(R.id.chkViewSOVI);
+				    	holder.chkViewSOVI.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+							
+							@Override
+							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+								// TODO Auto-generated method stub
+								OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
+								oportunidadTO.soviCumple=(isChecked)?1:0;
+							}
+						});
+				    	
+				    	holder.chkViewPrecio = (CheckBox) view.findViewById(R.id.chkViewPrecio);
+				    	holder.chkViewPrecio.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+							
+							@Override
+							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+								// TODO Auto-generated method stub
+								OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
+								oportunidadTO.cumplePrecioCumple=(isChecked)?1:0;
+							}
+						});
+				    	
+				    	
+				    	holder.chkViewSabor = (CheckBox) view.findViewById(R.id.chkViewSabor);
+				    	holder.chkViewSabor.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+							
+							@Override
+							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+								// TODO Auto-generated method stub
+								OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
+								oportunidadTO.numeroSaboresCumple =(isChecked)?1:0;
+							}
+						});
+				    	
+				    	
+
 				    	view.setTag(holder);
 				    	holder.txViewPuntos.setTag(this.detalle.get(position));
 				    	
@@ -205,6 +255,12 @@ public class CompromisosVerificacion_Activity extends ListBaseFragment {
 			    	TextView txViewAccTrade;    	
 			    	
 			    	TextView txEditFecha;
+			    	
+			    	CheckBox chkViewConcrecion;
+			    	CheckBox chkViewSOVI;
+			    	CheckBox chkViewPrecio;
+			    	CheckBox chkViewSabor;
+			    	
 			    	
 			    }
 			  

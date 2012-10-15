@@ -47,7 +47,7 @@ public class VerificacionTabs_Activity extends ActivityBaseFragment {
         super.onCreate(savedInstanceState);
  
         CompromisosVerificacion_Activity.VISTA_CARGADA=0;
-        Posicion_Activity.VISTA_CARGADA=0;
+        PosicionVerificacion_Activity.VISTA_CARGADA=0;
         Presentacion_Activity.VISTA_CARGADA=0;
         Combos_Activity.VISTA_CARGADA=0;
         
@@ -59,7 +59,7 @@ public class VerificacionTabs_Activity extends ActivityBaseFragment {
         mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
         
         mTabManager.addTab(mTabHost.newTabSpec("Inventario").setIndicator("Inventario"),CompromisosVerificacion_Activity.class,getIntent().getExtras());
-        mTabManager.addTab(mTabHost.newTabSpec("Posicion").setIndicator("Posici—n"),Posicion_Activity.class,getIntent().getExtras());
+        mTabManager.addTab(mTabHost.newTabSpec("Posicion").setIndicator("Posici—n"),PosicionVerificacion_Activity.class,getIntent().getExtras());
         mTabManager.addTab(mTabHost.newTabSpec("Presentacion").setIndicator("Presentaci—n"),Presentacion_Activity.class,getIntent().getExtras());
         mTabManager.addTab(mTabHost.newTabSpec("Combos").setIndicator("Combos"),Combos_Activity.class,getIntent().getExtras());
         

@@ -143,5 +143,5 @@
    <string name="evaluacion_msg_error_posicion">Debe editar valores de la pestaña posición.</string>
    <string name="evaluacion_msg_error_presentacion">Debe editar valores de la pestaña presentación.</string>
    
-    
+    <string name="isOK">OK?</string>
 </resources>
