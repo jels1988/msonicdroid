@@ -33,7 +33,7 @@
         
           <TableRow>
             <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/compromisoopen_content_compromiso" android:gravity="center_vertical" />
-            <Spinner android:id="@+id/cboConcrecionCmp" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:gravity="center_vertical"/>
+            <TextView android:id="@+id/cboConcrecionCmp" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:gravity="center_vertical"/>
         </TableRow>
          
         <TableRow>
@@ -43,12 +43,12 @@
         
         <TableRow>
             <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent"  android:text="@string/compromisoopen_content_actual"  android:gravity="center_vertical"/>
-            <EditText android:id="@+id/txViewSOVI" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:inputType="numberDecimal" android:clickable="true" android:focusableInTouchMode="true" android:maxLength="5" android:gravity="center_vertical"/>
+            <TextView android:id="@+id/txViewSOVI" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3"  android:clickable="true" android:focusableInTouchMode="true" android:maxLength="5" android:gravity="center_vertical"/>
         </TableRow>
         
         <TableRow>
             <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent"  android:text="@string/compromisoopen_content_compromiso" android:gravity="center_vertical" />
-            <EditText android:id="@+id/txViewSOVICmp" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:inputType="numberDecimal" android:clickable="true" android:focusableInTouchMode="true" android:maxLength="5" android:gravity="center_vertical"/>
+            <TextView android:id="@+id/txViewSOVICmp" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3"  android:clickable="true" android:focusableInTouchMode="true" android:maxLength="5" android:gravity="center_vertical"/>
         </TableRow>
         
 		<TableRow>
@@ -57,12 +57,12 @@
 
         <TableRow>
             <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent"  android:text="@string/compromisoopen_content_actual" android:gravity="center_vertical" />
-            <Spinner android:id="@+id/cboCumPrecio" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3"  android:gravity="center_vertical"/>
+            <TextView android:id="@+id/cboCumPrecio" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3"  android:gravity="center_vertical"/>
         </TableRow>
         
         <TableRow>
             <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/compromisoopen_content_compromiso" android:gravity="center_vertical"/>
-            <Spinner android:id="@+id/cboCumPrecioCmp" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:gravity="center_vertical"/>
+            <TextView android:id="@+id/cboCumPrecioCmp" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:gravity="center_vertical"/>
         </TableRow>
         		
        	<TableRow>
@@ -76,51 +76,20 @@
        
          <TableRow>
             <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/compromisoopen_content_compromiso" android:gravity="center_vertical" />
-            <Spinner android:id="@+id/cboSaboresCmp" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:gravity="center_vertical" />
+            <TextView android:id="@+id/cboSaboresCmp" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:gravity="center_vertical" />
         </TableRow>
         		
         <TableRow>
             <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/compromisoopen_content_acciones_trade" android:gravity="center_vertical" />
-            <Spinner android:id="@+id/txViewAccTrade" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:gravity="center_vertical" />
+            <TextView android:id="@+id/txViewAccTrade" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:gravity="center_vertical" />
         </TableRow>
        	
         <TableRow>  
             <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent"  android:text="@string/compromisoopen_content_fecha" android:gravity="center_vertical" />
-            <LinearLayout android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:orientation="horizontal" android:gravity="center_vertical">
-                
-                 <EditText
-                android:id="@+id/txEditFecha"
-            	android:layout_width="0dip" 
-            	android:layout_height="fill_parent" 
-            	android:layout_weight="1"
-                android:clickable="true"
-                android:maxLength="10"/>    
-                
-                 <ImageButton android:id="@+id/btnFecha" 
-                     android:layout_height="wrap_content"
-                      android:layout_width="wrap_content" 
-                      android:layout_gravity="center_vertical"
-                      android:focusable="false" 
-                      android:src="@drawable/btn_calendario"/>
-                
-            </LinearLayout>
-        </TableRow>
-       	
-        
-        <TableRow>
-                        
-		
-			
-			<ImageButton
-                android:id="@+id/btnProfit"
-                android:layout_width="10dip"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:focusable="false"
-                android:src="@drawable/bar_chart" />
-
-
+            <TextView android:id="@+id/txEditFecha" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:gravity="center_vertical" />
             
+           
         </TableRow>
 
+     
     </TableLayout>
