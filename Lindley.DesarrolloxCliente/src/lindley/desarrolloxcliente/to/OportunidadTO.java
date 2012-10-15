@@ -33,16 +33,25 @@ public class OportunidadTO {
 
 	@SerializedName("CNR")
 	public String concrecion;
-
+	public String concrecionActual;
+	public int concrecionCumple;
+	
 	@SerializedName("SOVI")
 	public String sovi;
-
+	public String soviActual;
+	public int soviCumple;
+	
+	
 	@SerializedName("RPRE") 
 	public String cumplePrecio;
+	public String cumplePrecioActual;
+	public int cumplePrecioCumple;
 
 	@SerializedName("NSB")
 	public String numeroSabores;
-
+	public String numeroSaboresActual;
+	public int numeroSaboresCumple;
+	
 	@SerializedName("PCC")
 	public String puntosCocaCola;
 
@@ -66,10 +75,10 @@ public class OportunidadTO {
 	public String codigoLegacy;
 	
 	public String puntosSugeridos;
-	public String soviActual;
-	public String concrecionActual;
-	public int numeroSaboresActual;
-	public String cumplePrecioActual;
+	
+	
+	
+	
 	public String descAccionTrade;
 	public String codigoAccionTrade;
 	

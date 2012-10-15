@@ -108,13 +108,28 @@ public class EvaluacionDAO {
 				oportunidadTO.productoId=cursor.getLong(cursor.getColumnIndex("productoId"));
 				oportunidadTO.codigoProducto = cursor.getString(cursor.getColumnIndex("codigoProducto"));
 				oportunidadTO.descripcionProducto = cursor.getString(cursor.getColumnIndex("producto"));
+				
 				oportunidadTO.concrecion = cursor.getString(cursor.getColumnIndex("concrecion"));
+				oportunidadTO.concrecionActual = cursor.getString(cursor.getColumnIndex("concrecionActual"));
+				oportunidadTO.concrecionCumple=cursor.getInt(cursor.getColumnIndex("concrecionCumple"));
+				
 				oportunidadTO.sovi = cursor.getString(cursor.getColumnIndex("sovi"));
+				oportunidadTO.soviActual = cursor.getString(cursor.getColumnIndex("soviActual"));
+				oportunidadTO.soviCumple=cursor.getInt(cursor.getColumnIndex("soviCumple"));
+				
+				
 				oportunidadTO.cumplePrecio = cursor.getString(cursor.getColumnIndex("respetaPrecio"));
+				oportunidadTO.cumplePrecioActual = cursor.getString(cursor.getColumnIndex("respetaPrecioActual"));
+				oportunidadTO.cumplePrecioCumple=cursor.getInt(cursor.getColumnIndex("respetaPrecioCumple"));
+				
 				oportunidadTO.numeroSabores = cursor.getString(cursor.getColumnIndex("numeroSabores"));
+				oportunidadTO.numeroSaboresActual = cursor.getString(cursor.getColumnIndex("numeroSaboresActual"));
+				oportunidadTO.numeroSaboresCumple=cursor.getInt(cursor.getColumnIndex("numeroSaboresCumple"));
+				
 				oportunidadTO.puntosCocaCola = cursor.getString(cursor.getColumnIndex("puntosCocaCola"));
 				oportunidadTO.puntosBonus = cursor.getString(cursor.getColumnIndex("puntosBonus"));
 				oportunidadTO.fecha = cursor.getString(cursor.getColumnIndex("fechaProceso"));
+				
 				evaluacionTO.oportunidades.add(oportunidadTO);
 			}
 			
@@ -149,14 +164,26 @@ public class EvaluacionDAO {
 		values.put("productoId", oportunidadTO.productoId);
 		values.put("codigoProducto", oportunidadTO.codigoProducto);
 		values.put("producto", oportunidadTO.descripcionProducto);
+		
 		values.put("concrecion", oportunidadTO.concrecion);
+		values.put("concrecionActual", oportunidadTO.concrecionActual);
+		values.put("concrecionCumple", oportunidadTO.concrecionCumple);
+		
 		values.put("sovi", oportunidadTO.sovi);
+		values.put("soviActual", oportunidadTO.soviActual);
+		values.put("soviCumple", oportunidadTO.soviCumple);
+		
 		values.put("respetaPrecio", oportunidadTO.cumplePrecio);
+		values.put("respetaPrecioActual", oportunidadTO.cumplePrecioActual);
+		values.put("respetaPrecioCumple", oportunidadTO.cumplePrecioCumple);
+		
 		values.put("numeroSabores", oportunidadTO.numeroSabores);
+		values.put("numeroSaboresActual", oportunidadTO.numeroSaboresActual);
+		values.put("numeroSaboresCumple", oportunidadTO.numeroSaboresCumple);
+		
 		values.put("puntosCocaCola", oportunidadTO.puntosCocaCola);
 		values.put("puntosBonus", oportunidadTO.puntosBonus);
 		values.put("fechaProceso", oportunidadTO.fecha);
-		
 		
 		long id= dbHelper.insertOrThrow("evaluacion_oportunidad", values);
 		oportunidadTO.oportunidadId = id;
