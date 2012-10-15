@@ -37,6 +37,11 @@
         </TableRow>
          
         <TableRow>
+            <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/isOK" android:gravity="center_vertical" />
+            <CheckBox android:id="@+id/chkViewConcrecion" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:gravity="center_vertical"/>
+        </TableRow>
+        
+        <TableRow>
             <TextView style="@style/TextViewHead"  android:layout_width="fill_parent" android:layout_height="30dip" android:layout_weight="1" android:text="@string/compromisoopen_content_sovi" android:gravity="center_horizontal|center_vertical" />
         </TableRow>
         
@@ -49,6 +54,11 @@
         <TableRow>
             <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent"  android:text="@string/compromisoopen_content_compromiso" android:gravity="center_vertical" />
             <TextView android:id="@+id/txViewSOVICmp" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3"  android:clickable="true" android:focusableInTouchMode="true" android:maxLength="5" android:gravity="center_vertical"/>
+        </TableRow>
+        
+        <TableRow>
+            <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/isOK" android:gravity="center_vertical" />
+            <CheckBox android:id="@+id/chkViewSOVI" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:gravity="center_vertical"/>
         </TableRow>
         
 		<TableRow>
@@ -65,6 +75,11 @@
             <TextView android:id="@+id/cboCumPrecioCmp" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:gravity="center_vertical"/>
         </TableRow>
         		
+        <TableRow>
+            <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/isOK" android:gravity="center_vertical" />
+            <CheckBox android:id="@+id/chkViewPrecio" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:gravity="center_vertical"/>
+        </TableRow>
+        
        	<TableRow>
             <TextView style="@style/TextViewHead"  android:layout_width="fill_parent" android:layout_height="30dip" android:layout_weight="1" android:text="@string/compromisoopen_content_sabores" android:gravity="center_horizontal|center_vertical" />
         </TableRow>
@@ -78,7 +93,12 @@
             <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/compromisoopen_content_compromiso" android:gravity="center_vertical" />
             <TextView android:id="@+id/cboSaboresCmp" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:gravity="center_vertical" />
         </TableRow>
-        		
+        
+         <TableRow>
+            <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/isOK" android:gravity="center_vertical" />
+            <CheckBox android:id="@+id/chkViewSabor" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:gravity="center_vertical"/>
+        </TableRow>
+        
         <TableRow>
             <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/compromisoopen_content_acciones_trade" android:gravity="center_vertical" />
             <TextView android:id="@+id/txViewAccTrade" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="3" android:gravity="center_vertical" />
