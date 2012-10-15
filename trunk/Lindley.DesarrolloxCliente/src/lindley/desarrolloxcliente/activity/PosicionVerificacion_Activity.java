@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
@@ -205,6 +206,7 @@ public class PosicionVerificacion_Activity extends ListBaseFragment  {
 							holder.txViewAccComp = (TextView) view.findViewById(R.id.txViewAccComp);
 							holder.txEditFecha = (TextView) view.findViewById(R.id.txEditFecha);
 							
+							holder.chkCumplio = (CheckBox) view.findViewById(R.id.chkCumplio); 
 														
 							holder.btnFotoExito.setOnClickListener(new OnClickListener() {
 
@@ -309,6 +311,8 @@ public class PosicionVerificacion_Activity extends ListBaseFragment  {
 							holder.btnFotoExito.setText(R.string.ver_fotoExito);
 						}
 						
+						holder.txViewPuntos.setText(posicionTO.observacion);
+						holder.txEditFecha.setText(ConstantesApp.formatFecha(posicionTO.fechaCompromiso));
 						
 						return view;
 				  }
@@ -323,6 +327,7 @@ public class PosicionVerificacion_Activity extends ListBaseFragment  {
 				    	Button 	 btnFotoExito;
 				    	TextView txViewAccComp;
 				    	TextView txEditFecha;
+				    	CheckBox chkCumplio;
 				    }
 			  
 		 }

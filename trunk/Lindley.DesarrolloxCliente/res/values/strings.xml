@@ -144,4 +144,7 @@
    <string name="evaluacion_msg_error_presentacion">Debe editar valores de la pestaña presentación.</string>
    
     <string name="isOK">OK?</string>
+    
+    <string name="presentacionopen_content_puntos">Puntos:</string>
+    <string name="presentacionopen_content_fecha">Fecha Compromiso:</string>
 </resources>

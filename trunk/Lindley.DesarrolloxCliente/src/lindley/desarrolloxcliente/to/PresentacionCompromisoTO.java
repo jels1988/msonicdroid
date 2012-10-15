@@ -39,4 +39,7 @@ public class PresentacionCompromisoTO {
     
     public String fechaEncuesta;
     
+    //@SerializedName("CUM")
+    public int isOk;
+    
 }

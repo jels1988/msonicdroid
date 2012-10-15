@@ -48,8 +48,8 @@ public class VerificacionTabs_Activity extends ActivityBaseFragment {
  
         CompromisosVerificacion_Activity.VISTA_CARGADA=0;
         PosicionVerificacion_Activity.VISTA_CARGADA=0;
-        Presentacion_Activity.VISTA_CARGADA=0;
-        Combos_Activity.VISTA_CARGADA=0;
+        PresentacionVerificacion_Activity.VISTA_CARGADA=0;
+        CombosVerificacion_Activity.VISTA_CARGADA=0;
         
         
         setContentView(R.layout.frameng_tabs);
@@ -60,8 +60,8 @@ public class VerificacionTabs_Activity extends ActivityBaseFragment {
         
         mTabManager.addTab(mTabHost.newTabSpec("Inventario").setIndicator("Inventario"),CompromisosVerificacion_Activity.class,getIntent().getExtras());
         mTabManager.addTab(mTabHost.newTabSpec("Posicion").setIndicator("Posici—n"),PosicionVerificacion_Activity.class,getIntent().getExtras());
-        mTabManager.addTab(mTabHost.newTabSpec("Presentacion").setIndicator("Presentaci—n"),Presentacion_Activity.class,getIntent().getExtras());
-        mTabManager.addTab(mTabHost.newTabSpec("Combos").setIndicator("Combos"),Combos_Activity.class,getIntent().getExtras());
+        mTabManager.addTab(mTabHost.newTabSpec("Presentacion").setIndicator("Presentaci—n"),PresentacionVerificacion_Activity.class,getIntent().getExtras());
+        mTabManager.addTab(mTabHost.newTabSpec("Combos").setIndicator("Combos"),CombosVerificacion_Activity.class,getIntent().getExtras());
         
         if (savedInstanceState != null) {
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
