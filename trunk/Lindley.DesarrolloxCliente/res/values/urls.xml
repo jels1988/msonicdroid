@@ -3,7 +3,8 @@
     
 	<!-- java.cdaandino.com -->
 	<string name="urlwsLogin">http://java.cdaandino.com/rtm/LanzadorApp/SeguridadService.svc</string>
-	<string name="urlwsDesarrolloxCliente">http://java.cdaandino.com/rtm/DesarrolloxCliente/FotoExitoService.svc</string>
+	<string name="urlwsDesarrolloxCliente">http://java.cdaandino.com/rtm/DesarrolloxCliente2/FotoExitoService.svc</string>
+	<string name="urlwsDescargaService">http://java.cdaandino.com/rtm/DesarrolloxCliente2/DescargaService.svc</string>
 	<string name="urlWebView">http://java.cdaandino.com/rtm/LanzadorApp/ImageViewService.svc</string>	
 
 <!-- 	<string name="urlwsLogin">http://java.cdaandino.com/rtm/LanzadorApp/SeguridadService.svc</string> -->
