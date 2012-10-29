@@ -2,6 +2,8 @@ package lindley.desarrolloxcliente.activity;
 
 import lindley.desarrolloxcliente.negocio.DescargaBLL;
 import lindley.desarrolloxcliente.to.PeriodoTO;
+import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProductoProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarProductosProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarOportunidadesProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarSkuProxy;
@@ -19,15 +21,21 @@ public class DescargaData_Activity extends ActivityBase {
 	public static final int DESCARGAR_PRODUCTO=0;
 	public static final int DESCARGAR_OPORTUNIDAD=1;
 	public static final int DESCARGAR_SKU=2;
+	public static final int DESCARGAR_ACCIONESTRADE=3;
+	public static final int DESCARGAR_ACCIONESTRADEPRODUCTO=4;
 	
 	public static final int GUARDAR_PRODUCTO=10;
 	public static final int GUARDAR_OPORTUNIDAD=11;
 	public static final int GUARDAR_SKU=12;
+	public static final int GUARDAR_ACCIONESTRADE=13;
+	public static final int GUARDAR_ACCIONESTRADEPRODUCTO=14;
+	
 	
 	@Inject DescargarProductosProxy descagarProductosProxy;
 	@Inject DescargarOportunidadesProxy descargarOportunidadesProxy;
 	@Inject DescargarSkuProxy descargarSkuProxy;
-	
+	@Inject DescargarAccionesTradeProxy descargarAccionesTradeProxy;
+	@Inject DescargarAccionesTradeProductoProxy descargarAccionesTradeProductoProxy;
 	
 	
 	@Inject DescargaBLL descargaBLL;
@@ -44,6 +52,9 @@ public class DescargaData_Activity extends ActivityBase {
 		processAsync(DESCARGAR_PRODUCTO);
 		processAsync(DESCARGAR_OPORTUNIDAD);
 		processAsync(DESCARGAR_SKU);
+		
+		processAsync(DESCARGAR_ACCIONESTRADE);
+		processAsync(DESCARGAR_ACCIONESTRADEPRODUCTO);
 	}
 	
 	
@@ -68,6 +79,12 @@ public class DescargaData_Activity extends ActivityBase {
 		case DESCARGAR_SKU:
 			descargarSkuProxy.execute();
 			break;
+		case DESCARGAR_ACCIONESTRADE:
+			descargarAccionesTradeProxy.execute();
+			break;
+		case DESCARGAR_ACCIONESTRADEPRODUCTO:
+			descargarAccionesTradeProductoProxy.execute();
+			break;
 		case GUARDAR_PRODUCTO:
 			descargaBLL.saveProducto(descagarProductosProxy.getResponse().productos);
 			break;
@@ -76,6 +93,12 @@ public class DescargaData_Activity extends ActivityBase {
 			break;
 		case GUARDAR_SKU:
 			descargaBLL.saveSku(descargarSkuProxy.getResponse().skus);
+			break;
+		case GUARDAR_ACCIONESTRADE:
+			descargaBLL.saveAccionTrade(descargarAccionesTradeProxy.getResponse().acciones);
+			break;
+		case GUARDAR_ACCIONESTRADEPRODUCTO:
+			descargaBLL.saveAccionTradeProducto(descargarAccionesTradeProductoProxy.getResponse().accionesProducto);
 			break;
 		default:
 			break;
@@ -157,13 +180,67 @@ public class DescargaData_Activity extends ActivityBase {
 				super.processOk();
 				showToast(message);
 			}
+		}else if(accion==DESCARGAR_ACCIONESTRADE){
+			boolean isExito = descargarAccionesTradeProxy.isExito();
+			String message="";
+			
+			int status = descargarAccionesTradeProxy.getResponse().getStatus();
+			
+			if (isExito) {
+				if (status == 0) {
+					
+					processAsync(GUARDAR_ACCIONESTRADE);
+					//showToast("DESCARGO OPORTUNIDADES");
+				}else{
+					message = descargarAccionesTradeProxy.getResponse().getDescripcion();
+						
+					Log.d(TAG,message);
+					
+					//super.processOk(DESCARGAR_PRODUCTO);
+					//showToast(message);
+				}
+			}else{
+				message=error_generico_process;
+				super.processOk();
+				showToast(message);
+			}
+		}else if(accion==DESCARGAR_ACCIONESTRADEPRODUCTO){
+			boolean isExito = descargarAccionesTradeProductoProxy.isExito();
+			String message="";
+			
+			int status = descargarAccionesTradeProductoProxy.getResponse().getStatus();
+			
+			if (isExito) {
+				if (status == 0) {
+					
+					processAsync(GUARDAR_ACCIONESTRADEPRODUCTO);
+					//showToast("DESCARGO OPORTUNIDADES");
+				}else{
+					message = descargarAccionesTradeProductoProxy.getResponse().getDescripcion();
+						
+					Log.d(TAG,message);
+					
+					//super.processOk(DESCARGAR_PRODUCTO);
+					//showToast(message);
+				}
+			}else{
+				message=error_generico_process;
+				super.processOk();
+				showToast(message);
+			}
 		}else if(accion==GUARDAR_PRODUCTO){
 			showToast("PRODUCTOS GUARDAR");
 		}else if(accion==GUARDAR_OPORTUNIDAD){
 			showToast("OPORTUNIDAD GUARDAR");
 		}else if(accion==GUARDAR_SKU){
 			showToast("sku GUARDAR");
+		}else if(accion==GUARDAR_ACCIONESTRADE){
+			showToast("guardar GUARDAR_ACCIONESTRADE");
+		}else if(accion==GUARDAR_ACCIONESTRADEPRODUCTO){
+			showToast("guardar GUARDAR_ACCIONESTRADEPRODUCTO");
 		}
+		
+		
 	}
 	@Override
 	protected void processError() {
