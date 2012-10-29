@@ -51,7 +51,7 @@ public class DescargaData_Activity extends ActivityBase {
 		
 		processAsync(DESCARGAR_PRODUCTO);
 		processAsync(DESCARGAR_OPORTUNIDAD);
-		processAsync(DESCARGAR_SKU);
+		//processAsync(DESCARGAR_SKU);
 		
 		processAsync(DESCARGAR_ACCIONESTRADE);
 		processAsync(DESCARGAR_ACCIONESTRADEPRODUCTO);
