@@ -9,6 +9,7 @@ import com.google.inject.AbstractModule;
 
 import lindley.desarrolloxcliente.dao.AccionTradeDAO;
 import lindley.desarrolloxcliente.dao.ClienteDAO;
+import lindley.desarrolloxcliente.dao.DescargaDAO;
 import lindley.desarrolloxcliente.dao.EvaluacionDAO;
 import lindley.desarrolloxcliente.dao.FotoClusterDAO;
 import lindley.desarrolloxcliente.dao.FotoDAO;
@@ -17,6 +18,7 @@ import lindley.desarrolloxcliente.dao.PosicionDAO;
 import lindley.desarrolloxcliente.dao.PresentacionDAO;
 import lindley.desarrolloxcliente.negocio.AccionTradeBLL;
 import lindley.desarrolloxcliente.negocio.ClienteBLL;
+import lindley.desarrolloxcliente.negocio.DescargaBLL;
 import lindley.desarrolloxcliente.negocio.EvaluacionBLL;
 import lindley.desarrolloxcliente.negocio.FotoBLL;
 import lindley.desarrolloxcliente.negocio.FotoClusterBLL;
@@ -38,6 +40,9 @@ import lindley.desarrolloxcliente.ws.service.ConsultarOportunidadProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarProfitProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarResumenProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarSKUPrioritarioProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarProductosProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarOportunidadesProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarSkuProxy;
 import lindley.desarrolloxcliente.ws.service.GuardarDesarrolloProxy;
 import lindley.desarrolloxcliente.ws.service.GuardarNuevoDesarrolloProxy;
 import lindley.desarrolloxcliente.ws.service.LoginProxy;
@@ -70,6 +75,9 @@ public class MyCustomModule extends AbstractModule {
 		bind(ConsultarResumenProxy.class).in(Singleton.class);
 		bind(ActualizarEstadoProxy.class).in(Singleton.class);
 		bind(ConsultarEvaluacionesAbiertasProxy.class).in(Singleton.class);
+		bind(DescargarProductosProxy.class).in(Singleton.class);
+		bind(DescargarOportunidadesProxy.class).in(Singleton.class);
+		bind(DescargarSkuProxy.class).in(Singleton.class);
 		
 						
 		bind(FotoBLL.class).in(Singleton.class);
@@ -103,7 +111,8 @@ public class MyCustomModule extends AbstractModule {
 		
 		bind(PeriodoTO.class).in(Singleton.class);
 		
-		
+		bind(DescargaBLL.class).in(Singleton.class);
+		bind(DescargaDAO.class).in(Singleton.class);
 		
 		
 	}

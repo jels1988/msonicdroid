@@ -6,4 +6,8 @@ public class PeriodoTO {
 	public int mes;
 	public int fecha;
 	public int hora;
+	
+	public String deposito;
+	public String ruta;
+	
 }
