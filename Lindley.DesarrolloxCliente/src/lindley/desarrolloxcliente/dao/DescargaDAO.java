@@ -2,6 +2,8 @@ package lindley.desarrolloxcliente.dao;
 
 
 import lindley.desarrolloxcliente.to.PeriodoTO;
+import lindley.desarrolloxcliente.to.download.AccionTradeProductoTO;
+import lindley.desarrolloxcliente.to.download.AccionTradeTO;
 import lindley.desarrolloxcliente.to.download.OportunidadTO;
 import lindley.desarrolloxcliente.to.download.ProductoTO;
 import lindley.desarrolloxcliente.to.download.SkuTO;
@@ -75,6 +77,38 @@ public class DescargaDAO {
 	
 	public void deleteSku(){
 		dbHelper.delete("sku", null, null);
+	}
+	
+	
+	public void insertAccionTrade(AccionTradeTO accionTradeTO){
+		ContentValues values = new ContentValues();
+		values.put("accionId", accionTradeTO.codigo);
+		values.put("accion", accionTradeTO.descripcion);
+		values.put("estado", "A");
+		
+		dbHelper.insertOrThrow("accion_trade", values);
+		
+	
+	}
+	
+	public void deleteAccionTrade(){
+		dbHelper.delete("accion_trade", null, null);
+	}
+	
+	
+	public void insertAccionTradeProducto(AccionTradeProductoTO accionTradeProductoTO){
+		ContentValues values = new ContentValues();
+		values.put("accionId", accionTradeProductoTO.codigoAccion);
+		values.put("codigoProducto", accionTradeProductoTO.codigoProducto);
+		values.put("estado", "A");
+		
+		dbHelper.insertOrThrow("accion_trade_producto", values);
+		
+	
+	}
+	
+	public void deleteAccionTradeProducto(){
+		dbHelper.delete("accion_trade_producto", null, null);
 	}
 
 }
