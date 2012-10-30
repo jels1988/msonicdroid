@@ -130,7 +130,7 @@ public class VerProfit_Activity extends ActivityBase {
 	}
 
 	@Override
-	protected void process() {
+	protected void process()  throws Exception{
 		// TODO Auto-generated method stub}
 		consultarProfitProxy.anio = this.pf_anio;
 		consultarProfitProxy.mes = this.pf_mes;

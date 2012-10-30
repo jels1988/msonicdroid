@@ -47,8 +47,8 @@ public class OportunidadDAO {
 		
 		ArrayList<OportunidadTO> nuevasOportunidades = new ArrayList<OportunidadTO>();
 		
-		String SQL = "select p.productoId,oc.codigoProducto,p.descripcion,p.legacy," +
-					"oc.concrecion,oc.sovi,oc.respetaPrecio,oc.numeroSabores,oc.puntosCocaCola,oc.puntosBonus,oc.fechaProceso " +
+		String SQL = "select p.productoId,oc.codigoProducto,p.descripcion,oc.legacy," +
+					"oc.concrecion,oc.sovi,oc.respetaPrecio,oc.numeroSabores,oc.fechaProceso " +
 					 "from oportunidad_cliente oc inner join producto p " +
 					 "on oc.codigoProducto = p.codigo " +
 					 "where oc.anio = ? and oc.mes = ? and oc.codigoCliente = ?";
@@ -72,8 +72,8 @@ public class OportunidadDAO {
 			nuevaOportunidadTO.sovi = cursor.getString(cursor.getColumnIndex("sovi"));
 			nuevaOportunidadTO.cumplePrecio = cursor.getString(cursor.getColumnIndex("respetaPrecio"));
 			nuevaOportunidadTO.numeroSabores = String.valueOf(cursor.getInt(cursor.getColumnIndex("numeroSabores")));
-			nuevaOportunidadTO.puntosCocaCola = String.valueOf(cursor.getInt(cursor.getColumnIndex("puntosCocaCola")));
-			nuevaOportunidadTO.puntosBonus = String.valueOf(cursor.getInt(cursor.getColumnIndex("puntosBonus")));
+			nuevaOportunidadTO.puntosCocaCola = "0"; //String.valueOf(cursor.getInt(cursor.getColumnIndex("puntosCocaCola")));
+			nuevaOportunidadTO.puntosBonus = "0"; //String.valueOf(cursor.getInt(cursor.getColumnIndex("puntosBonus")));
 			nuevaOportunidadTO.puntosSugeridos = nuevaOportunidadTO.puntosBonus;
 			nuevaOportunidadTO.fecha = String.valueOf(cursor.getInt(cursor.getColumnIndex("fechaProceso")));
 			nuevasOportunidades.add(nuevaOportunidadTO);

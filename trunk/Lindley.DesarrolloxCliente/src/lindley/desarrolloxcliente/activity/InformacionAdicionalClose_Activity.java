@@ -69,7 +69,7 @@ public class InformacionAdicionalClose_Activity extends ActivityBase {
 	}
 	
 	@Override
-	protected void process() {
+	protected void process() throws Exception{
 		// TODO Auto-generated method stub
 		consultarInformacionComboProxy.codigoRegistro = codigoGestion;
 		consultarInformacionComboProxy.execute();

@@ -58,7 +58,7 @@ public class VerArticulosCanje_Activity extends ListActivityBase {
 	}
 
 	@Override
-	protected void process() {
+	protected void process()  throws Exception{
 		consultarArticulosCanjeProxy.puntos = this.puntos;
 		consultarArticulosCanjeProxy.execute();
 	}

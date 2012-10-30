@@ -36,11 +36,8 @@
             android:name=".activity.Login_Activity"
             android:label="@string/app_name" 
             android:noHistory="true">
-             
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                    
+    
             
         </activity>
         
@@ -334,7 +331,30 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        
+              <activity android:name=".activity.PresentacionVerificacion_Activity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>            					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
            
+           
+           <activity android:name=".activity.CombosVerificacion_Activity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>            					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+           
+           
+               <activity android:name=".activity.DescargaData_Activity" android:configChanges="keyboardHidden|orientation">
+                 					      <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+          
+         
+        </activity>
            
            
        

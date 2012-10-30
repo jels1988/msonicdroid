@@ -182,7 +182,7 @@ public class CompromisoOpenFalse_Activity extends ListActivityBase {
 	}
     
     @Override    
-	protected void process(int accion) {
+	protected void process(int accion)  throws Exception{
     	
     	if(accion == ACCION_CERRAR)
     	{    		
@@ -241,7 +241,7 @@ public class CompromisoOpenFalse_Activity extends ListActivityBase {
 	}
     
     @Override
-	protected void process() {
+	protected void process()  throws Exception{
     	consultarCompromisoProxy.setCodigoCliente(cliente.codigo);
     	consultarCompromisoProxy.setCodigoRegistro(codigoRegistro);
     	consultarCompromisoProxy.execute();
