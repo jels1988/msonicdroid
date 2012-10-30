@@ -102,7 +102,7 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
     }
     
     @Override
-   	protected void process() {
+   	protected void process()  throws Exception{
     	consultarPosicionProxy.setCodigoCliente(cliente.codigo);
     	consultarPosicionProxy.setCodigoGestion(codigoGestion);    	
     	consultarPosicionProxy.execute();
@@ -230,7 +230,7 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
     
 	
 	@Override
-  protected void process(int accion) {
+  protected void process(int accion)  throws Exception{
     	
     	if(accion == ACCION_CERRAR)
     	{    		

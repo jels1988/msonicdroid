@@ -62,7 +62,7 @@ public class VerFoto_Activity extends net.msonic.lib.sherlock.ActivityBase {
 		
 	}
 	@Override
-	protected void process() {
+	protected void process()   throws Exception{
 		
 		if(!existeArchivo(fileName)){
 			

@@ -133,7 +133,7 @@ public class ConsultarPosicion_Activity extends ListActivityBase {
     }
     
     @Override
-   	protected void process() {
+   	protected void process()  throws Exception{
     	consultarPosicionProxy.setCodigoCliente(cliente.codigo);
     	consultarPosicionProxy.setRespuesta(respuesta);       	
     	consultarPosicionProxy.execute();

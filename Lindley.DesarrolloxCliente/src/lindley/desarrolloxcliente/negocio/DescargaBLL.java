@@ -5,6 +5,7 @@ import java.util.List;
 import lindley.desarrolloxcliente.dao.DescargaDAO;
 import lindley.desarrolloxcliente.to.download.AccionTradeProductoTO;
 import lindley.desarrolloxcliente.to.download.AccionTradeTO;
+import lindley.desarrolloxcliente.to.download.ClienteDescargaTO;
 import lindley.desarrolloxcliente.to.download.OportunidadTO;
 import lindley.desarrolloxcliente.to.download.ProductoTO;
 import lindley.desarrolloxcliente.to.download.SkuTO;
@@ -112,6 +113,25 @@ public class DescargaBLL {
 				dbHelper.setTransactionSuccessful();
 			}catch(Exception ex){
 				Log.e(TAG_LOG, "DescargaBLL.saveAccionTradeProducto", ex);
+			} finally {
+				dbHelper.endTransaction();
+				dbHelper.close();
+			}
+		}
+	}
+	
+	public void saveCliente(List<ClienteDescargaTO> lista){
+		synchronized(MyLock)	{
+			try{
+				dbHelper.openDataBase();
+				dbHelper.beginTransaction();
+				descargaDAO.deleteCliente();
+				for (ClienteDescargaTO clienteDescargaTO : lista) {
+					descargaDAO.insertCliente(clienteDescargaTO);
+				}
+				dbHelper.setTransactionSuccessful();
+			}catch(Exception ex){
+				Log.e(TAG_LOG, "DescargaBLL.saveCliente", ex);
 			} finally {
 				dbHelper.endTransaction();
 				dbHelper.close();

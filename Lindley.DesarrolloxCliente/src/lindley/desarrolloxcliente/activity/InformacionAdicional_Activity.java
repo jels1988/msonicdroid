@@ -168,7 +168,7 @@ public class InformacionAdicional_Activity extends ActivityBase {
 	}
 	
 	@Override
-	protected void process() {
+	protected void process()  throws Exception{
 		// TODO Auto-generated method stub
 		
 		
@@ -358,7 +358,7 @@ public class InformacionAdicional_Activity extends ActivityBase {
 				return true;
 			}
 		}
-	    protected void process(int accion) {
+	    protected void process(int accion)  throws Exception{
 			
 	    	if(radMSNo.isChecked())
     			application.informacionAdicional.setComboMS("N");

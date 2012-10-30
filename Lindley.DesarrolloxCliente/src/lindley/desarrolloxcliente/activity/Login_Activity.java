@@ -45,7 +45,7 @@ public class Login_Activity extends net.msonic.lib.sherlock.ActivityBase{
         setTitle(R.string.login_activity_title);
        
         periodoTO.anio = 2012;
-        periodoTO.mes=8;
+        periodoTO.mes=10;
 	
 		txtUsuario.requestFocus();
 	
@@ -90,7 +90,7 @@ public class Login_Activity extends net.msonic.lib.sherlock.ActivityBase{
 	}
 
 	@Override
-	protected void process() {
+	protected void process()  throws Exception{
 
 		
 		String usuario = txtUsuario.getText().toString();
@@ -186,7 +186,7 @@ public class Login_Activity extends net.msonic.lib.sherlock.ActivityBase{
 					
 					String JSONUser = "{\"NOM\":\"MARIA CALERO\",\"CSP\":\"6654\",\"Rol\":\"13\",\"CDDEP\":\"F3\",\"PWD\":\"\",\"CDRUT\":\"\",\"MPER\":{\"1\":\"\",\"2\":\"\",\"3\":\"\",\"7\":\"\",\"9\":\"\",\"10\":\"\",\"11\":\"\"},\"OPER\":{\"20\":\"\",\"10\":\"\",\"11\":\"\",\"12\":\"\",\"13\":\"\",\"21\":\"\",\"14\":\"\",\"30\":\"\",\"31\":\"\",\"32\":\"\",\"33\":\"\",\"34\":\"\",\"35\":\"\",\"36\":\"\",\"300\":\"\",\"350\":\"\",\"351\":\"\",\"320\":\"\",\"310\":\"\",\"311\":\"\",\"15\":\"\"},\"RolId\":\"1\",\"CSB\":\"CT\",\"DDP\":\"ATI SAC\"}";
 					Intent intent = new Intent(this,ConsultarCliente_Activity.class);
-					intent.putExtra(ConsultarCliente_Activity.CODIGO_CLIENTE_KEY, "602");
+					intent.putExtra(ConsultarCliente_Activity.CODIGO_CLIENTE_KEY, "2106");
 					intent.putExtra(ConsultarCliente_Activity.USUARIO_KEY, JSONUser);
 					
 					
@@ -211,7 +211,7 @@ public class Login_Activity extends net.msonic.lib.sherlock.ActivityBase{
 						
 						String JSONUser = "{\"NOM\":\"MARIA CALERO\",\"CSP\":\"6654\",\"Rol\":\"13\",\"CDDEP\":\"F3\",\"PWD\":\"\",\"CDRUT\":\"\",\"MPER\":{\"1\":\"\",\"2\":\"\",\"3\":\"\",\"7\":\"\",\"9\":\"\",\"10\":\"\",\"11\":\"\"},\"OPER\":{\"20\":\"\",\"10\":\"\",\"11\":\"\",\"12\":\"\",\"13\":\"\",\"21\":\"\",\"14\":\"\",\"30\":\"\",\"31\":\"\",\"32\":\"\",\"33\":\"\",\"34\":\"\",\"35\":\"\",\"36\":\"\",\"300\":\"\",\"350\":\"\",\"351\":\"\",\"320\":\"\",\"310\":\"\",\"311\":\"\",\"15\":\"\"},\"RolId\":\"1\",\"CSB\":\"CT\",\"DDP\":\"ATI SAC\"}";
 						Intent intent = new Intent(this,ConsultarCliente_Activity.class);
-						intent.putExtra(ConsultarCliente_Activity.CODIGO_CLIENTE_KEY, "602");
+						intent.putExtra(ConsultarCliente_Activity.CODIGO_CLIENTE_KEY, "2106");
 						intent.putExtra(ConsultarCliente_Activity.USUARIO_KEY, JSONUser);
 						
 						startActivity(intent);

@@ -89,7 +89,7 @@ public class InformacionAdicionalFalse_Activity extends ActivityBase {
 	}
 	
 	@Override
-	protected void process() {
+	protected void process()  throws Exception{
 		// TODO Auto-generated method stub
 		consultarInformacionComboProxy.codigoRegistro = codigoGestion;
 		consultarInformacionComboProxy.execute();
@@ -224,7 +224,7 @@ public class InformacionAdicionalFalse_Activity extends ActivityBase {
 		}
 	    
 	    @Override
-	    protected void process(int accion) {
+	    protected void process(int accion)  throws Exception{
 	    	
 	    	if(accion == ACCION_CERRAR)
 	    	{    		

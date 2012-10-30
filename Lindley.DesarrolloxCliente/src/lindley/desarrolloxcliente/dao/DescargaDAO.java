@@ -4,6 +4,7 @@ package lindley.desarrolloxcliente.dao;
 import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.download.AccionTradeProductoTO;
 import lindley.desarrolloxcliente.to.download.AccionTradeTO;
+import lindley.desarrolloxcliente.to.download.ClienteDescargaTO;
 import lindley.desarrolloxcliente.to.download.OportunidadTO;
 import lindley.desarrolloxcliente.to.download.ProductoTO;
 import lindley.desarrolloxcliente.to.download.SkuTO;
@@ -49,6 +50,7 @@ public class DescargaDAO {
 		values.put("sovi", oportunidadTO.sovi);
 		values.put("respetaPrecio", oportunidadTO.respetoPrecios);
 		values.put("numeroSabores", oportunidadTO.numeroSabores);
+		values.put("legacy", oportunidadTO.legacy);
 		values.put("fechaProceso", 0);
 		
 		long id= dbHelper.insertOrThrow("oportunidad_cliente", values);
@@ -111,4 +113,31 @@ public class DescargaDAO {
 		dbHelper.delete("accion_trade_producto", null, null);
 	}
 
+	public long insertCliente(ClienteDescargaTO clienteDescargaTO){
+		
+		ContentValues values = new ContentValues();
+		values.put("codigo", clienteDescargaTO.codigo);
+		values.put("fecha", clienteDescargaTO.fecha);
+		values.put("nombre", clienteDescargaTO.nombre);
+		values.put("frecuencia", clienteDescargaTO.frecuencia);
+		values.put("proyAlcance", clienteDescargaTO.alcance);
+		values.put("proyFalta", clienteDescargaTO.falta);
+		values.put("cluster", clienteDescargaTO.cluster);
+		values.put("mc", clienteDescargaTO.mc);
+		values.put("puntos", clienteDescargaTO.nroPuntos);
+		values.put("siguiente", clienteDescargaTO.nroPuntos);
+		values.put("direccion", clienteDescargaTO.direccion);
+		values.put("latitud", clienteDescargaTO.latitud);
+		values.put("longitud", clienteDescargaTO.longitud);
+		values.put("abiertas", 0);
+		long id = dbHelper.insertOrThrow("cliente", values);
+		clienteDescargaTO.id=id;
+		return id;
+	
+	}
+	
+	public void deleteCliente(){
+		dbHelper.delete("cliente", null, null);
+	}
+	
 }

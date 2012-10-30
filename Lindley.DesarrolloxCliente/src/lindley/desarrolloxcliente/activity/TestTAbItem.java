@@ -105,7 +105,7 @@ public class TestTAbItem extends ListBaseFragment {
 
 
 	@Override
-	protected void process() {
+	protected void process()  throws Exception{
     	consultarCompromisoProxy.setCodigoCliente(cliente.codigo);
     	consultarCompromisoProxy.setCodigoRegistro(codigoRegistro);
     	consultarCompromisoProxy.execute();

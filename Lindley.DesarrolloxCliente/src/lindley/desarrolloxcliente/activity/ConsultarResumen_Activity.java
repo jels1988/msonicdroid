@@ -62,7 +62,7 @@ public class ConsultarResumen_Activity extends ListActivityBase {
 	}
 	
 	@Override
-	protected void process() {
+	protected void process()  throws Exception{
 		consultarResumenProxy.codigoRegistro = codigo_registro;
 		consultarResumenProxy.execute();
 		

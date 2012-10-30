@@ -54,7 +54,7 @@ public class CompromisoClose_Activity extends ListActivityBase {
     }
     
     @Override
-	protected void process() {
+	protected void process() throws Exception {
     	consultarCompromisoProxy.setCodigoCliente(cliente.codigo);
     	consultarCompromisoProxy.setCodigoRegistro(codigoRegistro);
     	consultarCompromisoProxy.execute();
