@@ -7,6 +7,7 @@ import lindley.desarrolloxcliente.to.download.AccionTradeProductoTO;
 import lindley.desarrolloxcliente.to.download.AccionTradeTO;
 import lindley.desarrolloxcliente.to.download.ClienteDescargaTO;
 import lindley.desarrolloxcliente.to.download.OportunidadTO;
+import lindley.desarrolloxcliente.to.download.PosicionTO;
 import lindley.desarrolloxcliente.to.download.ProductoTO;
 import lindley.desarrolloxcliente.to.download.SkuTO;
 import net.msonic.lib.DBHelper;
@@ -132,6 +133,26 @@ public class DescargaBLL {
 				dbHelper.setTransactionSuccessful();
 			}catch(Exception ex){
 				Log.e(TAG_LOG, "DescargaBLL.saveCliente", ex);
+			} finally {
+				dbHelper.endTransaction();
+				dbHelper.close();
+			}
+		}
+	}
+	
+	
+	public void savePosicion(List<PosicionTO> lista){
+		synchronized(MyLock)	{
+			try{
+				dbHelper.openDataBase();
+				dbHelper.beginTransaction();
+				descargaDAO.deletePosicion();
+				for (PosicionTO posicionTO : lista) {
+					descargaDAO.insertPosicion(posicionTO);
+				}
+				dbHelper.setTransactionSuccessful();
+			}catch(Exception ex){
+				Log.e(TAG_LOG, "DescargaBLL.savePosicion", ex);
 			} finally {
 				dbHelper.endTransaction();
 				dbHelper.close();
