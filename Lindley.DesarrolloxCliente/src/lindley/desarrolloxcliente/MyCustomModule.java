@@ -43,6 +43,7 @@ import lindley.desarrolloxcliente.ws.service.ConsultarSKUPrioritarioProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProductoProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarClienteProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarPosicionProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarProductosProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarOportunidadesProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarSkuProxy;
@@ -84,6 +85,8 @@ public class MyCustomModule extends AbstractModule {
 		bind(DescargarAccionesTradeProxy.class).in(Singleton.class);
 		bind(DescargarAccionesTradeProductoProxy.class).in(Singleton.class);
 		bind(DescargarClienteProxy.class).in(Singleton.class);
+		bind(DescargarPosicionProxy.class).in(Singleton.class);
+		
 						
 		bind(FotoBLL.class).in(Singleton.class);
 		bind(FotoDAO.class).in(Singleton.class);

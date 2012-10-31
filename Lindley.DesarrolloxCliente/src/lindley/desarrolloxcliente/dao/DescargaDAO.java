@@ -6,6 +6,7 @@ import lindley.desarrolloxcliente.to.download.AccionTradeProductoTO;
 import lindley.desarrolloxcliente.to.download.AccionTradeTO;
 import lindley.desarrolloxcliente.to.download.ClienteDescargaTO;
 import lindley.desarrolloxcliente.to.download.OportunidadTO;
+import lindley.desarrolloxcliente.to.download.PosicionTO;
 import lindley.desarrolloxcliente.to.download.ProductoTO;
 import lindley.desarrolloxcliente.to.download.SkuTO;
 import net.msonic.lib.DBHelper;
@@ -138,6 +139,35 @@ public class DescargaDAO {
 	
 	public void deleteCliente(){
 		dbHelper.delete("cliente", null, null);
+	}
+	
+	public long insertPosicion(PosicionTO posicionTO){
+		
+		ContentValues values = new ContentValues();
+		values.put("anio", periodoTO.anio);
+		values.put("mes", periodoTO.mes);
+		values.put("codigoCliente", posicionTO.codigoCliente);
+		values.put("confirmacion", posicionTO.confirmacion);
+		values.put("tipoAgrupacion", posicionTO.tipoAgrupacion);
+		values.put("variableRed", posicionTO.variableRed);
+		values.put("fechaRed", posicionTO.fechaRed);
+		values.put("soviRed", posicionTO.soviRed);
+		values.put("soviMaximo", posicionTO.soviMaximo);
+		values.put("soviDiferencia", posicionTO.soviDiferencia);
+		values.put("puntosSugeridos", posicionTO.puntosSugeridos);
+		values.put("puntosBonus", posicionTO.puntosBonus);
+		values.put("puntosGanados", 0);
+		values.put("fechaProceso", 0);
+		
+		
+		long id = dbHelper.insertOrThrow("posicion_cliente", values);
+		posicionTO.id=id;
+		return id;
+	
+	}
+	
+	public void deletePosicion(){
+		dbHelper.delete("posicion_cliente", null, null);
 	}
 	
 }
