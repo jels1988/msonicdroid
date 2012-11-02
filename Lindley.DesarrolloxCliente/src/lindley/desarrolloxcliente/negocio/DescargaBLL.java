@@ -8,7 +8,9 @@ import lindley.desarrolloxcliente.to.download.AccionTradeTO;
 import lindley.desarrolloxcliente.to.download.ClienteDescargaTO;
 import lindley.desarrolloxcliente.to.download.OportunidadTO;
 import lindley.desarrolloxcliente.to.download.PosicionTO;
+import lindley.desarrolloxcliente.to.download.PresentacionTO;
 import lindley.desarrolloxcliente.to.download.ProductoTO;
+import lindley.desarrolloxcliente.to.download.PuntoTO;
 import lindley.desarrolloxcliente.to.download.SkuTO;
 import net.msonic.lib.DBHelper;
 
@@ -153,6 +155,44 @@ public class DescargaBLL {
 				dbHelper.setTransactionSuccessful();
 			}catch(Exception ex){
 				Log.e(TAG_LOG, "DescargaBLL.savePosicion", ex);
+			} finally {
+				dbHelper.endTransaction();
+				dbHelper.close();
+			}
+		}
+	}
+	
+	public void savePresentacion(List<PresentacionTO> lista){
+		synchronized(MyLock)	{
+			try{
+				dbHelper.openDataBase();
+				dbHelper.beginTransaction();
+				descargaDAO.deletePresentacion();
+				for (PresentacionTO presentacionTO : lista) {
+					descargaDAO.insertPresentacion(presentacionTO);
+				}
+				dbHelper.setTransactionSuccessful();
+			}catch(Exception ex){
+				Log.e(TAG_LOG, "DescargaBLL.savePresentacion", ex);
+			} finally {
+				dbHelper.endTransaction();
+				dbHelper.close();
+			}
+		}
+	}
+	
+	public void savePunto(List<PuntoTO> lista){
+		synchronized(MyLock)	{
+			try{
+				dbHelper.openDataBase();
+				dbHelper.beginTransaction();
+				descargaDAO.deletePunto();
+				for (PuntoTO puntoTO : lista) {
+					descargaDAO.insertPunto(puntoTO);
+				}
+				dbHelper.setTransactionSuccessful();
+			}catch(Exception ex){
+				Log.e(TAG_LOG, "DescargaBLL.savePunto", ex);
 			} finally {
 				dbHelper.endTransaction();
 				dbHelper.close();

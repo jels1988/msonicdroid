@@ -18,7 +18,6 @@ public final class ConstantesApp {
 	public static final String RESPUESTA_NO_LARGA = "N0";
 	public static final String RESPUESTA_SI_LARGA = "SI";
 
-	public static final String CODIGO_ESTANDAR_ANAQUEL = "03";
 	
 	/*
 	public static final String SKU_RESPUESTA_SI = "S";
@@ -32,6 +31,17 @@ public final class ConstantesApp {
 	public final static String OPORTUNIDAD_ABIERTA = "A";
 	
 	
+	public final static String TIPO_AGRUPRACION_INVENTARIO="1";
+	public final static String TIPO_AGRUPRACION_POSICION="2";
+	public final static String TIPO_AGRUPRACION_PRESENTACION="3";
+	
+
+	public static final String VARIABLE_RED_SKU_PRIORITARIOS = "01";
+	public static final String VARIABLE_RED_ESTANDAR_EXHIBICION = "02";
+	public static final String VARIABLE_RED_ESTANDAR_ANAQUEL = "03";
+	public static final String VARIABLE_RED_POSICION_DOMINANTE = "04";
+	public static final String VARIABLE_RED_PRECIO_MERCADO = "05";
+	public static final String VARIABLE_RED_POP = "06";
 	
 	public final static String getFechaSistema(){
 		return DateFormat.format("dd/MM/yyyy", new java.util.Date()).toString();

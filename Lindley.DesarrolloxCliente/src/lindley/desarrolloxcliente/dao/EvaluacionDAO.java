@@ -2,6 +2,7 @@ package lindley.desarrolloxcliente.dao;
 
 import java.util.ArrayList;
 
+import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.to.PeriodoTO;
@@ -208,4 +209,31 @@ public class EvaluacionDAO {
 		
 	}
 	
+	public List<Integer> listarPuntosInventario(){
+		List<Integer> puntos = new ArrayList<Integer>();
+		String SQL = "select puntos from punto where cdarr = ?1 and tppro = ?2";
+		String[] args = new String[] {ConstantesApp.TIPO_AGRUPRACION_INVENTARIO,ConstantesApp.VARIABLE_RED_PRECIO_MERCADO};
+		Cursor cursor = dbHelper.rawQuery(SQL,args);
+		
+		while(cursor.moveToNext()){
+			puntos.add(cursor.getInt(cursor.getColumnIndex("puntos")));
+		}
+		
+		cursor.close();
+		return puntos;
+	}
+	
+	public List<Integer> listarPuntos(String tipoAgrupacion,String variableRed,String activosLindley){
+		List<Integer> puntos = new ArrayList<Integer>();
+		String SQL = "select puntos from punto where cdarr = ?1 and tppro = ?2 and cnd01=?3";
+		String[] args = new String[] {tipoAgrupacion,variableRed,activosLindley};
+		Cursor cursor = dbHelper.rawQuery(SQL,args);
+		
+		while(cursor.moveToNext()){
+			puntos.add(cursor.getInt(cursor.getColumnIndex("puntos")));
+		}
+		
+		cursor.close();
+		return puntos;
+	}
 }

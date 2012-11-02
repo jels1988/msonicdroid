@@ -1,6 +1,5 @@
 package lindley.desarrolloxcliente.activity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lindley.desarrolloxcliente.ConstantesApp;
@@ -8,8 +7,12 @@ import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.EvaluacionBLL;
 import lindley.desarrolloxcliente.negocio.OportunidadBLL;
+import lindley.desarrolloxcliente.negocio.PosicionBLL;
+import lindley.desarrolloxcliente.negocio.PresentacionBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
+import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
+import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarSKUPrioritarioProxy;
@@ -47,8 +50,11 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 	@InjectView(R.id.txtViewFecha) 		TextView txtViewFecha;
 	@Inject OportunidadBLL oportunidadBLL;
 	@Inject EvaluacionBLL evaluacionBLL;
+	@Inject PosicionBLL posicionBLL;
+	@Inject PresentacionBLL presentacionBLL;
 	
 	public static final int ACCION_GUARDAR = 1;
+	public static final int ACCION_CARGAR = 2;
 
 	@InjectResource(R.string.confirm_atras_title)	String confirm_atras_title;
 	@InjectResource(R.string.confirm_atras_message)	String confirm_atras_message;
@@ -103,15 +109,17 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 	@Override
 	protected void process() {
 		
-		/*
-		consultarSKUPrioritarioProxy.codigoCluster = cliente.getCluster();
-		consultarSKUPrioritarioProxy.execute();
-		*/
-		
 		String cluster = cliente.cluster;
-		ArrayList<SKUPresentacionTO> skuPresentaciones = oportunidadBLL.consultarSKUPresentacion(cluster);
-		adap = new EfficientAdapter(this, skuPresentaciones);
+		evaluacion.skuPresentacion = oportunidadBLL.consultarSKUPresentacion(cluster);
+		adap = new EfficientAdapter(this, evaluacion.skuPresentacion);
 		
+		
+		 List<PosicionCompromisoTO> posicion = posicionBLL.consultarOportunidadesPosicion(evaluacion);
+		 evaluacion.posiciones = posicion;
+		 
+		 List<PresentacionCompromisoTO> presentacion = presentacionBLL.consultarOportunidadesPresentacion(evaluacion.codigoCliente);
+		 evaluacion.presentaciones = presentacion;
+		 
 	}
 	
 	
@@ -185,7 +193,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 
 	public void btnGuardar_click(View view) {
 		
-		final Activity ctx=this;
+		
 		
 		MessageBox.showConfirmDialog(this, "Confirmar", "ÀDesea guardar datos seleccionados?", "Si", new OnClickListener() {
 			
@@ -208,18 +216,9 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 				}*/
 				//application.guardarSKUPresentacion = adap.skuPresentaciones;
 				
-				evaluacion.skuPresentacion = adap.skuPresentaciones;
-				evaluacion.codigoUsuario = usuario.codigoSap;
-				evaluacion.codigoFe = cliente.cluster;
-				evaluacion.codigoCliente = cliente.codigo;
-				
-				//evaluacionBLL.save(evaluacion);
-				
-				
-				Intent compromisoOpen = new Intent(ctx,EvaluacionTabs_Activity.class);
-				compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, String.valueOf(evaluacion.evaluacionId));					
-				compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "N");
-				startActivity(compromisoOpen);
+			
+				processAsync(ACCION_GUARDAR);
+			
 			
 			}
 		}, "No",null);
@@ -229,7 +228,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 		
 	}
 
-	/*
+	
 	@Override
 	protected void process(int accion) {
 		// TODO Auto-generated method stub
@@ -237,8 +236,9 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 		{
 			
 			//evaluacion.activosLindley = cliente.codigo;
-			evaluacion.codigoUsuario = usuario.getCodigoSap();
-			evaluacion.codigoFe = cliente.cluster;
+			evaluacion.skuPresentacion = adap.skuPresentaciones;
+			evaluacion.codigoUsuario = usuario.codigoSap;
+			evaluacionBLL.asignarPuntos(evaluacion);
 			
 			
 			
@@ -253,7 +253,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 			
 			
 		}
-	}*/
+	}
 	
 	@Override
 	protected void processOk(int accion) {
@@ -265,6 +265,8 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 			compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, "0");					
 			compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "N");
 			startActivity(compromisoOpen);
+			
+			
 			/*
 			boolean isExito = guardarNuevoDesarrolloProxy.isExito();
 			if (isExito) {

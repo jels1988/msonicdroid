@@ -7,16 +7,17 @@ import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProductoProxy
 import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarClienteProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarPosicionProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarPresentacionProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarProductosProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarOportunidadesProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarPuntoProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarSkuProxy;
 
 
 
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
+
 
 import com.actionbarsherlock.view.Window;
 import com.google.inject.Inject;
@@ -32,6 +33,8 @@ public class DescargaData_Activity extends ActivityBase {
 	public static final int DESCARGAR_ACCIONESTRADEPRODUCTO=4;
 	public static final int DESCARGAR_CLIENTE=5;
 	public static final int DESCARGAR_POSICION=6;
+	public static final int DESCARGAR_PRESENTACION=7;
+	public static final int DESCARGAR_PUNTO=8;
 	
 	public static final int GUARDAR_PRODUCTO=10;
 	public static final int GUARDAR_OPORTUNIDAD=11;
@@ -40,6 +43,8 @@ public class DescargaData_Activity extends ActivityBase {
 	public static final int GUARDAR_ACCIONESTRADEPRODUCTO=14;
 	public static final int GUARDAR_CLIENTE=15;
 	public static final int GUARDAR_POSICION=16;
+	public static final int GUARDAR_PRESENTACION=17;
+	public static final int GUARDAR_PUNTO=18;
 	
 	@Inject DescargarProductosProxy descagarProductosProxy;
 	@Inject DescargarOportunidadesProxy descargarOportunidadesProxy;
@@ -48,6 +53,8 @@ public class DescargaData_Activity extends ActivityBase {
 	@Inject DescargarAccionesTradeProductoProxy descargarAccionesTradeProductoProxy;
 	@Inject DescargarClienteProxy descargarClienteProxy;
 	@Inject DescargarPosicionProxy descargarPosicionProxy;
+	@Inject DescargarPresentacionProxy descargarPresentacionProxy;
+	@Inject DescargarPuntoProxy descargarPuntoProxy;
 	
 	@Inject DescargaBLL descargaBLL;
 	@Inject PeriodoTO periodoTO;
@@ -72,6 +79,8 @@ public class DescargaData_Activity extends ActivityBase {
 		processAsync(DESCARGAR_ACCIONESTRADEPRODUCTO);
 		processAsync(DESCARGAR_CLIENTE);
 		processAsync(DESCARGAR_POSICION);
+		processAsync(DESCARGAR_PRESENTACION);
+		processAsync(DESCARGAR_PUNTO);
 		
 		setSupportProgressBarIndeterminateVisibility(true);
 		
@@ -110,7 +119,7 @@ public class DescargaData_Activity extends ActivityBase {
 	protected void process(int accion) throws Exception {
 		// TODO Auto-generated method stub
 		periodoTO.anio=2012;
-		periodoTO.mes=10;
+		periodoTO.mes=11;
 		periodoTO.deposito="30";
 		periodoTO.ruta="H1";
 		
@@ -143,6 +152,14 @@ public class DescargaData_Activity extends ActivityBase {
 			addContadorProcesos();
 			descargarPosicionProxy.execute();
 			break;
+		case DESCARGAR_PRESENTACION:
+			addContadorProcesos();
+			descargarPresentacionProxy.execute();
+			break;
+		case DESCARGAR_PUNTO:
+			addContadorProcesos();
+			descargarPuntoProxy.execute();
+			break;
 		case GUARDAR_PRODUCTO:
 			addContadorProcesos();
 			descargaBLL.saveProducto(descagarProductosProxy.getResponse().productos);
@@ -171,6 +188,14 @@ public class DescargaData_Activity extends ActivityBase {
 		case GUARDAR_POSICION:
 			addContadorProcesos();
 			descargaBLL.savePosicion(descargarPosicionProxy.getResponse().posiciones);
+			break;
+		case GUARDAR_PRESENTACION:
+			addContadorProcesos();
+			descargaBLL.savePresentacion(descargarPresentacionProxy.getResponse().presentaciones);
+			break;
+		case GUARDAR_PUNTO:
+			addContadorProcesos();
+			descargaBLL.savePunto(descargarPuntoProxy.getResponse().puntos);
 			break;
 		default:
 			break;
@@ -361,6 +386,57 @@ public class DescargaData_Activity extends ActivityBase {
 					showToast(message);
 				}
 			}
+			
+		}else if(accion==DESCARGAR_PRESENTACION){
+			removeContadorProcesos();
+			boolean isExito = descargarPresentacionProxy.isExito();
+			String message="";
+			
+			
+			
+			if(descargarPresentacionProxy.getResponse()!=null){
+				int status = descargarPresentacionProxy.getResponse().getStatus();
+				if (isExito) {
+					if (status == 0) {
+						
+						processAsync(GUARDAR_PRESENTACION);
+						//showToast("DESCARGO OPORTUNIDADES");
+					}else{
+						message = descargarPresentacionProxy.getResponse().getDescripcion();
+							
+						Log.d(TAG,message);
+					}
+				}else{
+					message=error_generico_process;
+					super.processOk();
+					showToast(message);
+				}
+			}
+		}else if(accion==DESCARGAR_PUNTO){
+			removeContadorProcesos();
+			boolean isExito = descargarPuntoProxy.isExito();
+			String message="";
+			
+			
+			
+			if(descargarPuntoProxy.getResponse()!=null){
+				int status = descargarPuntoProxy.getResponse().getStatus();
+				if (isExito) {
+					if (status == 0) {
+						
+						processAsync(GUARDAR_PUNTO);
+						//showToast("DESCARGO OPORTUNIDADES");
+					}else{
+						message = descargarPuntoProxy.getResponse().getDescripcion();
+							
+						Log.d(TAG,message);
+					}
+				}else{
+					message=error_generico_process;
+					super.processOk();
+					showToast(message);
+				}
+			}
 		}else if(accion==GUARDAR_PRODUCTO){
 			removeContadorProcesos();
 			showToast("PRODUCTOS GUARDAR");
@@ -382,6 +458,12 @@ public class DescargaData_Activity extends ActivityBase {
 		}else if(accion==GUARDAR_POSICION){
 			removeContadorProcesos();
 			showToast("guardar GUARDAR_POSICION");
+		}else if(accion==GUARDAR_PRESENTACION){
+			removeContadorProcesos();
+			showToast("guardar GUARDAR_PRESENTACION");
+		}else if(accion==GUARDAR_PUNTO){
+			removeContadorProcesos();
+			showToast("guardar GUARDAR_PUNTO");
 		}
 		
 		
