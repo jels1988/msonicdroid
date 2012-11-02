@@ -2,16 +2,14 @@ package lindley.desarrolloxcliente.to.download;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PosicionTO {
-
+public class PresentacionTO {
 	public long id;
 	
 	@SerializedName("CLI")
 	public String codigoCliente;
 	
 
-	@SerializedName("ACT")
-	public String activo;
+
 	
 	@SerializedName("TAG")
 	public String tipoAgrupacion;
@@ -20,5 +18,9 @@ public class PosicionTO {
 	@SerializedName("VRD")
 	public String variableRed;
 	
+	@SerializedName("FDE")
+	public String fde;
 	
+	@SerializedName("FRD")
+	public int fechaRed;
 }

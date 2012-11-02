@@ -335,6 +335,8 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 						MyApplication app = (MyApplication)context.getApplication();
 						app.cliente=clienteTemporal;
 						app.evaluacion = new EvaluacionTO();
+						app.evaluacion.codigoCliente = clienteTemporal.codigo;
+						app.evaluacion.codigoFe = clienteTemporal.cluster;
 						app.evaluacion.fecha = ConstantesApp.getFechaSistemaAS400();
 						app.evaluacion.hora = ConstantesApp.getHoraSistemaAS400();
 						app.evaluacion.horaCierre="";

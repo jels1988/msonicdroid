@@ -3,9 +3,12 @@ package lindley.desarrolloxcliente.negocio;
 import java.util.ArrayList;
 import java.util.List;
 
+import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.dao.EvaluacionDAO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
+import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
+import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import net.msonic.lib.DBHelper;
 
@@ -82,4 +85,58 @@ public class EvaluacionBLL {
 		
 		return evaluaciones;
 	}
+	
+	public void asignarPuntos(EvaluacionTO evaluacionTO){
+		List<Integer> puntosInventario=null;
+		List<Integer> puntosPosicion=null;
+		List<Integer> puntosPresentacion=null;
+		
+		try{
+			dbHelper.openDataBase();
+			puntosInventario = evaluacionDAO.listarPuntosInventario();
+			
+			puntosPosicion = evaluacionDAO.listarPuntos(ConstantesApp.TIPO_AGRUPRACION_POSICION,
+					 ConstantesApp.VARIABLE_RED_POSICION_DOMINANTE,
+					 evaluacionTO.activosLindley);	
+			
+			puntosPresentacion = evaluacionDAO.listarPuntos(ConstantesApp.TIPO_AGRUPRACION_POSICION,
+					 										ConstantesApp.VARIABLE_RED_ESTANDAR_EXHIBICION,
+					 										evaluacionTO.activosLindley);	
+			
+		}catch(Exception ex){
+			Log.e(TAG_LOG, "EvaluacionBLL.asignarPuntos", ex);
+		} finally {
+			dbHelper.close();
+		}	
+		
+		if((puntosInventario!=null) && (puntosInventario.size()>=evaluacionTO.oportunidades.size())){
+			int i=0;
+			for (OportunidadTO oportunidadTO : evaluacionTO.oportunidades) {
+				oportunidadTO.puntosSugeridos = puntosInventario.get(i).toString();
+				oportunidadTO.puntosCocaCola = puntosInventario.get(i).toString();
+				i++;
+			}
+		}
+		
+		if((puntosPresentacion!=null) && (puntosPresentacion.size()>=evaluacionTO.presentaciones.size())){
+			int i=0;
+			for (PresentacionCompromisoTO presentacionTO : evaluacionTO.presentaciones) {
+				presentacionTO.puntosSugeridos = puntosInventario.get(i).toString();
+				presentacionTO.puntosGanados = puntosInventario.get(i).toString();
+				i++;
+			}
+		}
+		
+		if((puntosPosicion!=null) && (puntosPosicion.size()>=evaluacionTO.posiciones.size())){
+			int i=0;
+			for (PosicionCompromisoTO compromisoTO  : evaluacionTO.posiciones) {
+				compromisoTO.puntosSugeridos = puntosInventario.get(i).toString();
+				compromisoTO.puntosGanados = puntosInventario.get(i).toString();
+				i++;
+			}
+		}
+		
+	}
+	
+	
 }

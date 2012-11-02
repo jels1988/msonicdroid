@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lindley.desarrolloxcliente.ConstantesApp;
+import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 
@@ -18,34 +19,34 @@ public class PosicionDAO {
 	@Inject	protected DBHelper dbHelper;
 	@Inject protected PeriodoTO periodoTO;
 	
-	public List<PosicionCompromisoTO> consultarOportunidadesPosicion(String codigoCliente,String tipoAgrupacion){
+	public List<PosicionCompromisoTO> consultarOportunidadesPosicion(EvaluacionTO evaluacionTO, String tipoAgrupacion){
 		List<PosicionCompromisoTO> lista = new ArrayList<PosicionCompromisoTO>();
 		
 		
-		String SQL = "SELECT anio,mes,codigoCliente,confirmacion,tipoAgrupacion,variableRed,fechaRed,soviRed,"+
-					"soviMaximo,soviDiferencia,puntosSugeridos,puntosBonus,puntosGanados,fechaProceso " +
+		String SQL = "SELECT anio,mes,codigoCliente,tipoAgrupacion,variableRed,fechaProceso " +
 					"FROM posicion_cliente " +
-					"WHERE anio = ?1 and mes= ?2 and codigoCliente= ?3 and tipoAgrupacion = ?4";
+					"WHERE anio = ?1 and mes= ?2 and codigoCliente= ?3 and tipoAgrupacion = ?4 and activo=?5";
 		
 		String[] args = new String[] {
 				  String.valueOf(periodoTO.anio),
 				  String.valueOf(periodoTO.mes),
-				  codigoCliente,
-				  tipoAgrupacion};
+				  evaluacionTO.codigoCliente,
+				  tipoAgrupacion,
+				  evaluacionTO.activosLindley};
 		
 		Cursor cursor = dbHelper.rawQuery(SQL,args);
 		PosicionCompromisoTO compromisoTO;
 		
 		while(cursor.moveToNext()){
 			compromisoTO = new PosicionCompromisoTO();
-			compromisoTO.respuesta = cursor.getString(cursor.getColumnIndex("confirmacion"));
-			compromisoTO.puntosSugeridos = cursor.getString(cursor.getColumnIndex("puntosSugeridos"));
+			compromisoTO.respuesta = ConstantesApp.RESPUESTA_NO;
+			compromisoTO.puntosSugeridos = "0";//cursor.getString(cursor.getColumnIndex("puntosSugeridos"));
 			compromisoTO.codigoVariable = cursor.getString(cursor.getColumnIndex("variableRed"));
 			compromisoTO.fotoInicial = "";
 			compromisoTO.fotoFinal = "";
-			compromisoTO.puntosGanados = cursor.getString(cursor.getColumnIndex("puntosGanados"));
-			compromisoTO.red = cursor.getString(cursor.getColumnIndex("soviRed"));
-			compromisoTO.ptoMaximo = cursor.getString(cursor.getColumnIndex("soviMaximo"));
+			compromisoTO.puntosGanados = "0";//cursor.getString(cursor.getColumnIndex("puntosGanados"));
+			compromisoTO.red = "0";//cursor.getString(cursor.getColumnIndex("soviRed"));
+			compromisoTO.ptoMaximo = "0";//cursor.getString(cursor.getColumnIndex("soviMaximo"));
 			compromisoTO.cumplio = ConstantesApp.RESPUESTA_NO;
 			lista.add(compromisoTO);
 		}

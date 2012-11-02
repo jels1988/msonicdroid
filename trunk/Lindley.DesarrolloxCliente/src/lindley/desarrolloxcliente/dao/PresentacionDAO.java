@@ -23,8 +23,7 @@ public class PresentacionDAO {
 	public List<PresentacionCompromisoTO> consultarOportunidadesPresentacion(String codigoCliente,String tipoAgrupacion){
 		List<PresentacionCompromisoTO> lista = new ArrayList<PresentacionCompromisoTO>();
 		
-		String SQL = "SELECT tipoAgrupacion,cdfde,fechaRed,variableRed,"+
-					"puntosSugeridos,puntosBonus,puntosGanados,fechaProceso,cumplio,origen,proceso,estado " +
+		String SQL = "SELECT tipoAgrupacion,cdfde,variableRed,fechaProceso " +
 					"FROM presentacion_cliente " +
 					"WHERE anio = ?1 and mes= ?2 and codigoCliente= ?3 and tipoAgrupacion = ?4";
 		
@@ -41,9 +40,9 @@ public class PresentacionDAO {
 			presentacionCompromisoTO = new PresentacionCompromisoTO();
 			presentacionCompromisoTO.tipoAgrupacion = cursor.getString(cursor.getColumnIndex("tipoAgrupacion"));
 			presentacionCompromisoTO.codfde = cursor.getString(cursor.getColumnIndex("cdfde"));
-			presentacionCompromisoTO.puntosSugeridos = cursor.getString(cursor.getColumnIndex("puntosSugeridos"));
 			presentacionCompromisoTO.codigoVariable = cursor.getString(cursor.getColumnIndex("variableRed"));
-			presentacionCompromisoTO.puntosGanados = cursor.getString(cursor.getColumnIndex("puntosGanados"));
+			presentacionCompromisoTO.puntosSugeridos = "0";
+			presentacionCompromisoTO.puntosGanados = "0";
 			presentacionCompromisoTO.cumplio = ConstantesApp.RESPUESTA_NO;
 			lista.add(presentacionCompromisoTO);
 		}

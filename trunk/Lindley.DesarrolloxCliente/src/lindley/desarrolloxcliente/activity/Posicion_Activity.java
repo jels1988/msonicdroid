@@ -82,9 +82,9 @@ public class Posicion_Activity extends ListBaseFragment  {
 		 @Override
 		protected void process() {
 			// TODO Auto-generated method stub
-			 List<PosicionCompromisoTO> detalle = posicionBLL.consultarOportunidadesPoscion(evaluacion.codigoCliente);
-			 evaluacion.posiciones = detalle;
-			 oportunidades = new EfficientAdapter(this,cliente, detalle);
+			 /*List<PosicionCompromisoTO> detalle = posicionBLL.consultarOportunidadesPosicion(evaluacion);
+			 evaluacion.posiciones = detalle;*/
+			 oportunidades = new EfficientAdapter(this,cliente, evaluacion.posiciones);
 		}
 
 		
@@ -246,7 +246,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 									// TODO Auto-generated method stub
 									PosicionCompromisoTO posicionCompromisoTO = (PosicionCompromisoTO) holder.TextViewRpsta.getTag();
 									
-									if(posicionCompromisoTO.codigoVariable.compareToIgnoreCase(ConstantesApp.CODIGO_ESTANDAR_ANAQUEL) == 0)
+									if(posicionCompromisoTO.codigoVariable.compareToIgnoreCase(ConstantesApp.VARIABLE_RED_ESTANDAR_ANAQUEL) == 0)
 									{
 										MyApplication application = (MyApplication)context.getApplicationContext();
 										application.compromisoPosicion=position;
@@ -335,7 +335,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 						holder.txViewMaximo.setText(posicionTO.ptoMaximo);
 						holder.txViewPuntos.setText(posicionTO.puntosSugeridos);
 						
-						if(posicionTO.codigoVariable.compareToIgnoreCase(ConstantesApp.CODIGO_ESTANDAR_ANAQUEL) == 0)
+						if(posicionTO.codigoVariable.compareToIgnoreCase(ConstantesApp.VARIABLE_RED_ESTANDAR_ANAQUEL) == 0)
 						{
 							holder.btnFotoExito.setText(R.string.btnExitoText);
 						}else{

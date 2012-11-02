@@ -51,4 +51,7 @@ public class ClienteDescargaTO {
 	@Expose(serialize = false)
 	public int evaluacionesAbiertas;
 	
+	@SerializedName("TPR")
+	public String TPPRO;
+	
 }
