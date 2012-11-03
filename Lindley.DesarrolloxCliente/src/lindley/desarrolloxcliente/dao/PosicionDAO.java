@@ -39,7 +39,7 @@ public class PosicionDAO {
 		
 		while(cursor.moveToNext()){
 			compromisoTO = new PosicionCompromisoTO();
-			compromisoTO.respuesta = ConstantesApp.RESPUESTA_NO;
+			compromisoTO.respuesta = evaluacionTO.activosLindley;
 			compromisoTO.puntosSugeridos = "0";//cursor.getString(cursor.getColumnIndex("puntosSugeridos"));
 			compromisoTO.codigoVariable = cursor.getString(cursor.getColumnIndex("variableRed"));
 			compromisoTO.fotoInicial = "";

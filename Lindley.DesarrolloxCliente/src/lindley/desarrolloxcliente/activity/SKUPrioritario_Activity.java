@@ -90,7 +90,6 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 						// TODO Auto-generated method stub
 						
 						evaluacion.activosLindley = ConstantesApp.RESPUESTA_SI;
-						//application.activosLindley = ConstantesApp.RESPUESTA_SI;
 						processAsync();
 					}
 
@@ -99,7 +98,6 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
 						evaluacion.activosLindley = ConstantesApp.RESPUESTA_NO;
-						//application.activosLindley = ConstantesApp.RESPUESTA_NO;
 						processAsync();
 					}
 
@@ -238,7 +236,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 			//evaluacion.activosLindley = cliente.codigo;
 			evaluacion.skuPresentacion = adap.skuPresentaciones;
 			evaluacion.codigoUsuario = usuario.codigoSap;
-			evaluacionBLL.asignarPuntos(evaluacion);
+			evaluacionBLL.asignarPuntos(evaluacion,cliente);
 			
 			
 			
