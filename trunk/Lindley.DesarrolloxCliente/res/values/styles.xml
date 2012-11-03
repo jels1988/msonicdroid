@@ -169,7 +169,9 @@
         <item name="android:textColor">?attr/textColorPrimaryInverse</item>
     </style>
 
-    
+    <style name="TabText">
+    <item name="android:textColor">@drawable/tab_text_selector</item>
+</style>
 
 
 <style name="CustomTheme" parent="Theme.Sherlock.Light">
