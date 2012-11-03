@@ -17,7 +17,7 @@ public class ClienteDAO {
 	
 	public List<ClienteTO> listarByCodigo(String codigo){
 		
-		String SQL = "select id,codigo,fecha,nombre,frecuencia,proyAlcance,proyFalta,cluster,mc,puntos,siguiente,direccion,latitud,longitud,abiertas " +
+		String SQL = "select id,codigo,fecha,nombre,frecuencia,proyAlcance,proyFalta,cluster,mc,puntos,siguiente,direccion,latitud,longitud,abiertas,tppro " +
 					"from cliente where codigo = ?1";
 		
 		String[] args = new String[] {codigo};
@@ -43,6 +43,7 @@ public class ClienteDAO {
 			clienteTO.latitud = cursor.getDouble(cursor.getColumnIndex("latitud"));
 			clienteTO.longitud = cursor.getDouble(cursor.getColumnIndex("longitud"));
 			clienteTO.evaluacionesAbiertas = cursor.getInt(cursor.getColumnIndex("abiertas"));
+			clienteTO.tppro = cursor.getString(cursor.getColumnIndex("tppro"));
 			
 			
 			listado.add(clienteTO);

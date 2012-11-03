@@ -223,10 +223,17 @@ public class EvaluacionDAO {
 		return puntos;
 	}
 	
-	public List<Integer> listarPuntos(String tipoAgrupacion,String variableRed,String activosLindley){
+	public List<Integer> listarPuntos(String tppro,String tipoAgrupacion,String variableRed,String activosLindley){
 		List<Integer> puntos = new ArrayList<Integer>();
-		String SQL = "select puntos from punto where cdarr = ?1 and tppro = ?2 and cnd01=?3";
-		String[] args = new String[] {tipoAgrupacion,variableRed,activosLindley};
+		String SQL;
+		String[] args;
+		if(activosLindley!=null){
+			SQL = "select puntos from punto where tppro = ?1 and cdarr = ?2 and cdvar=?3 and cnd01=?4";
+			args = new String[] {tppro,tipoAgrupacion,variableRed,activosLindley};
+		}else{
+			SQL = "select puntos from punto where tppro = ?1 and cdarr = ?2 and cdvar=?3";
+			args = new String[] {tppro,tipoAgrupacion,variableRed};
+		}
 		Cursor cursor = dbHelper.rawQuery(SQL,args);
 		
 		while(cursor.moveToNext()){

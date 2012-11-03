@@ -48,6 +48,9 @@ public class ClienteTO {
 	@SerializedName("DIR")
 	public String direccion;
 	
+	@Expose(serialize = false)
+	public String tppro;
+	
 	
 	@Expose(serialize = false)
 	public int evaluacionesAbiertas;
