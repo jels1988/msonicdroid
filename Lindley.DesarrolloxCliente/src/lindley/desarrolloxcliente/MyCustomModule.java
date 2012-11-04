@@ -16,6 +16,7 @@ import lindley.desarrolloxcliente.dao.FotoDAO;
 import lindley.desarrolloxcliente.dao.OportunidadDAO;
 import lindley.desarrolloxcliente.dao.PosicionDAO;
 import lindley.desarrolloxcliente.dao.PresentacionDAO;
+import lindley.desarrolloxcliente.dao.UploadDAO;
 import lindley.desarrolloxcliente.negocio.AccionTradeBLL;
 import lindley.desarrolloxcliente.negocio.ClienteBLL;
 import lindley.desarrolloxcliente.negocio.DescargaBLL;
@@ -25,6 +26,7 @@ import lindley.desarrolloxcliente.negocio.FotoClusterBLL;
 import lindley.desarrolloxcliente.negocio.OportunidadBLL;
 import lindley.desarrolloxcliente.negocio.PosicionBLL;
 import lindley.desarrolloxcliente.negocio.PresentacionBLL;
+import lindley.desarrolloxcliente.negocio.UploadBLL;
 
 import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarCompromisoProxy;
@@ -54,6 +56,7 @@ import lindley.desarrolloxcliente.ws.service.GuardarNuevoDesarrolloProxy;
 import lindley.desarrolloxcliente.ws.service.LoginProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarClienteProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCabeceraProxy;
+import lindley.desarrolloxcliente.ws.service.UploadEvaluacionesProxy;
 
 
 public class MyCustomModule extends AbstractModule {
@@ -90,7 +93,7 @@ public class MyCustomModule extends AbstractModule {
 		bind(DescargarPosicionProxy.class).in(Singleton.class);
 		bind(DescargarPresentacionProxy.class).in(Singleton.class);
 		bind(DescargarPuntoProxy.class).in(Singleton.class);
-		
+		bind(UploadEvaluacionesProxy.class).in(Singleton.class);
 		
 		
 						
@@ -127,6 +130,10 @@ public class MyCustomModule extends AbstractModule {
 		
 		bind(DescargaBLL.class).in(Singleton.class);
 		bind(DescargaDAO.class).in(Singleton.class);
+		
+
+		bind(UploadBLL.class).in(Singleton.class);
+		bind(UploadDAO.class).in(Singleton.class);
 		
 		
 	}

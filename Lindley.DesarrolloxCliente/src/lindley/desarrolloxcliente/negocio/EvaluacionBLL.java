@@ -19,7 +19,7 @@ import com.google.inject.Inject;
 
 public class EvaluacionBLL {
 
-	private static final String TAG_LOG = ClienteBLL.class.getSimpleName();
+	private static final String TAG_LOG = EvaluacionBLL.class.getSimpleName();
 	@Inject protected DBHelper dbHelper;
 	
 	@Inject protected EvaluacionDAO evaluacionDAO;
@@ -36,10 +36,17 @@ public class EvaluacionBLL {
 				evaluacionDAO.insertOportunidad(evaluacionTO, oportunidadTO);
 			}
 			
+			for(PosicionCompromisoTO posicionCompromisoTO:evaluacionTO.posiciones){
+				evaluacionDAO.insertOportunidadPosicion(evaluacionTO, posicionCompromisoTO);
+			}
+			
+			for(PresentacionCompromisoTO presentacionCompromisoTO:evaluacionTO.presentaciones){
+				evaluacionDAO.insertOportunidadPresentacion(evaluacionTO, presentacionCompromisoTO);
+			}
+			
 			for(SKUPresentacionTO skuPresentacionTO:evaluacionTO.skuPresentacion){
 				evaluacionDAO.insertSKUPresentacion(evaluacionTO, skuPresentacionTO);
 			}
-			
 			dbHelper.setTransactionSuccessful();
 			
 		}catch(Exception ex){

@@ -10,7 +10,8 @@ public class PresentacionCompromisoTO {
     {
         listaSKU = new ArrayList<SKUPresentacionCompromisoTO>();
     }
-    	
+    
+	public long id;
   
     @SerializedName("LSKU")
     //public ArrayList<SKUPresentacionTO> listaSKU;
@@ -39,7 +40,6 @@ public class PresentacionCompromisoTO {
     
     public String fechaEncuesta;
     
-    //@SerializedName("CUM")
     public int isOk;
     
 }

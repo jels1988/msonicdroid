@@ -2,6 +2,8 @@ package lindley.desarrolloxcliente.to;
 
 import java.util.ArrayList;
 
+import lindley.desarrolloxcliente.ConstantesApp;
+
 import com.google.gson.annotations.SerializedName;
 
 public class PosicionCompromisoTO {
@@ -9,10 +11,16 @@ public class PosicionCompromisoTO {
 	public PosicionCompromisoTO()
     {
 		listCompromisos = new ArrayList<CompromisoPosicionTO>();
-		cumplio = "N";
+		cumplio = ConstantesApp.RESPUESTA_NO;;
+		fotoInicial = "";
 		fotoFinal = " ";
+		puntosGanados="0";
+		puntosSugeridos="0";
+		red="0";
     }
 
+	public long id;
+	
 	@SerializedName("RSPT")
     public String respuesta;
 	

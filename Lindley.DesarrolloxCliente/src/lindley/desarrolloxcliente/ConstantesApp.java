@@ -17,7 +17,7 @@ public final class ConstantesApp {
 	
 	public static final String RESPUESTA_NO_LARGA = "N0";
 	public static final String RESPUESTA_SI_LARGA = "SI";
-
+	public static final String RESPUESTA_NO_TIENE_LARGA = "NV";
 	
 	/*
 	public static final String SKU_RESPUESTA_SI = "S";

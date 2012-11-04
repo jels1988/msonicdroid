@@ -3,15 +3,12 @@ package lindley.desarrolloxcliente.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import lindley.desarrolloxcliente.ConstantesApp;
+
 import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
-
 import net.msonic.lib.DBHelper;
-
 import android.database.Cursor;
-
 import com.google.inject.Inject;
 
 public class PosicionDAO {
@@ -23,7 +20,7 @@ public class PosicionDAO {
 		List<PosicionCompromisoTO> lista = new ArrayList<PosicionCompromisoTO>();
 		
 		
-		String SQL = "SELECT anio,mes,codigoCliente,tipoAgrupacion,variableRed,fechaProceso " +
+		String SQL = "SELECT variableRed,fechaProceso " +
 					"FROM posicion_cliente " +
 					"WHERE anio = ?1 and mes= ?2 and codigoCliente= ?3 and tipoAgrupacion = ?4 and activo=?5";
 		
@@ -40,22 +37,20 @@ public class PosicionDAO {
 		while(cursor.moveToNext()){
 			compromisoTO = new PosicionCompromisoTO();
 			compromisoTO.respuesta = evaluacionTO.activosLindley;
-			compromisoTO.puntosSugeridos = "0";//cursor.getString(cursor.getColumnIndex("puntosSugeridos"));
 			compromisoTO.codigoVariable = cursor.getString(cursor.getColumnIndex("variableRed"));
-			compromisoTO.fotoInicial = "";
-			compromisoTO.fotoFinal = "";
-			compromisoTO.puntosGanados = "0";//cursor.getString(cursor.getColumnIndex("puntosGanados"));
-			compromisoTO.red = "0";//cursor.getString(cursor.getColumnIndex("soviRed"));
-			compromisoTO.ptoMaximo = "0";//cursor.getString(cursor.getColumnIndex("soviMaximo"));
-			compromisoTO.cumplio = ConstantesApp.RESPUESTA_NO;
 			lista.add(compromisoTO);
 		}
+		
+		
+		
 		
 		cursor.close();
 		
 		
 		return lista;
 	}
+	
+	
 	
 	
 }

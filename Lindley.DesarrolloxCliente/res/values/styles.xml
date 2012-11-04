@@ -26,7 +26,9 @@
 <color name="custom_theme_color_0">#C00000</color> 
 <color name="custom_theme_color_1">#00FF00</color> 
 <color name="custom_theme_color_2">#00FF00</color> 
-  
+
+<string name="custom_row_color">#F0F0F0</string>
+<string name="custom_row_alterning_color">#D2E4FC</string>
  
  <style name="WindowTitleCustom" parent="android:TextAppearance.WindowTitle">
  	   <item name="android:textColor">@color/custom_theme_color_blanco</item>
@@ -170,7 +172,7 @@
     </style>
 
     <style name="TabText">
-    <item name="android:textColor">@drawable/tab_text_selector</item>
+    <item name="android:textColor">@color/custom_theme_color_blanco</item>
 </style>
 
 
