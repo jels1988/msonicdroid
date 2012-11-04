@@ -6,6 +6,8 @@ import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.to.PeriodoTO;
+import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
+import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import net.msonic.lib.DBHelper;
 
@@ -26,17 +28,24 @@ public class EvaluacionDAO {
 		values.put("clienteCodigo", evaluacionTO.codigoCliente);
 		values.put("activosLindley", evaluacionTO.activosLindley);
 		values.put("codigoFe", evaluacionTO.codigoFe);
-		values.put("usuario", evaluacionTO.codigoUsuario);
+		values.put("usuario", evaluacionTO.usuarioCrea);
+		values.put("usuarioCierre", evaluacionTO.usuarioCierre);
 		values.put("fecha", evaluacionTO.fecha);
 		values.put("hora", evaluacionTO.hora);
 		
-		values.put("fechaCierre", evaluacionTO.fecha);
-		values.put("horaCierre", evaluacionTO.hora);
+		values.put("fechaCierre", "0");
+		values.put("horaCierre", "0");
 		values.put("estado", evaluacionTO.estado);
+		values.put("serverId", evaluacionTO.serverId);
+		values.put("combosSS", evaluacionTO.combosSS);
+		values.put("obsSS", evaluacionTO.observacionSS);
+		values.put("combosMS", evaluacionTO.combosMS);
+		values.put("obsMS", evaluacionTO.observacionMS);
+		
 		
 		long id= dbHelper.insertOrThrow("evaluacion", values);
 		
-		evaluacionTO.evaluacionId = id;
+		evaluacionTO.id = id;
 		return id;
 	}
 	
@@ -52,12 +61,12 @@ public class EvaluacionDAO {
 		while(cursor.moveToNext()){
 			EvaluacionTO evaluacionTO=new EvaluacionTO();
 			
-			evaluacionTO.evaluacionId=cursor.getLong(cursor.getColumnIndex("id"));
+			evaluacionTO.id=cursor.getLong(cursor.getColumnIndex("id"));
 			evaluacionTO.serverId=cursor.getLong(cursor.getColumnIndex("serverId"));
 			evaluacionTO.codigoCliente = cursor.getString(cursor.getColumnIndex("clienteCodigo"));
 			evaluacionTO.activosLindley = cursor.getString(cursor.getColumnIndex("activosLindley"));
 			evaluacionTO.codigoFe = cursor.getString(cursor.getColumnIndex("codigoFe"));
-			evaluacionTO.codigoUsuario = cursor.getString(cursor.getColumnIndex("usuario"));
+			evaluacionTO.usuarioCrea = cursor.getString(cursor.getColumnIndex("usuario"));
 			evaluacionTO.fecha = cursor.getString(cursor.getColumnIndex("fecha"));
 			evaluacionTO.hora = cursor.getString(cursor.getColumnIndex("hora"));
 			evaluacionTO.fechaCierre = cursor.getString(cursor.getColumnIndex("fechaCierre"));
@@ -82,11 +91,11 @@ public class EvaluacionDAO {
 		
 		if(cursor.moveToNext()){
 			evaluacionTO = new EvaluacionTO();
-			evaluacionTO.evaluacionId=id;
+			evaluacionTO.id=id;
 			evaluacionTO.codigoCliente = cursor.getString(cursor.getColumnIndex("clienteCodigo"));
 			evaluacionTO.activosLindley = cursor.getString(cursor.getColumnIndex("activosLindley"));
 			evaluacionTO.codigoFe = cursor.getString(cursor.getColumnIndex("codigoFe"));
-			evaluacionTO.codigoUsuario = cursor.getString(cursor.getColumnIndex("usuario"));
+			evaluacionTO.usuarioCrea = cursor.getString(cursor.getColumnIndex("usuario"));
 			evaluacionTO.fecha = cursor.getString(cursor.getColumnIndex("fecha"));
 			evaluacionTO.hora = cursor.getString(cursor.getColumnIndex("hora"));
 		}
@@ -101,7 +110,7 @@ public class EvaluacionDAO {
 			evaluacionTO.oportunidades = new ArrayList<OportunidadTO>();
 			
 			String SQL = "select * from evaluacion_oportunidad where evaluacionId = ?1";
-			String[] args = new String[] {String.valueOf(evaluacionTO.evaluacionId)};
+			String[] args = new String[] {String.valueOf(evaluacionTO.id)};
 			Cursor cursor = dbHelper.rawQuery(SQL,args);
 			
 			while(cursor.moveToNext()){
@@ -143,7 +152,7 @@ public class EvaluacionDAO {
 			evaluacionTO.skuPresentacion = new ArrayList<SKUPresentacionTO>();
 			
 			String SQL = "select * from evaluacion_sku_presentacion where evaluacionId = ?1";
-			String[] args = new String[] {String.valueOf(evaluacionTO.evaluacionId)};
+			String[] args = new String[] {String.valueOf(evaluacionTO.id)};
 			Cursor cursor = dbHelper.rawQuery(SQL,args);
 			
 			while(cursor.moveToNext()){
@@ -161,7 +170,10 @@ public class EvaluacionDAO {
 	public long insertOportunidad(EvaluacionTO evaluacionTO,OportunidadTO oportunidadTO){
 		ContentValues values = new ContentValues();
 		
-		values.put("evaluacionId", evaluacionTO.evaluacionId);
+		values.put("evaluacionId", evaluacionTO.id);
+		values.put("anio", periodoTO.anio);
+		values.put("mes", periodoTO.mes);
+		
 		values.put("productoId", oportunidadTO.productoId);
 		values.put("codigoProducto", oportunidadTO.codigoProducto);
 		values.put("producto", oportunidadTO.descripcionProducto);
@@ -185,6 +197,7 @@ public class EvaluacionDAO {
 		values.put("puntosCocaCola", oportunidadTO.puntosCocaCola);
 		values.put("puntosBonus", oportunidadTO.puntosBonus);
 		values.put("fechaProceso", oportunidadTO.fecha);
+		values.put("legacy", oportunidadTO.codigoLegacy);
 		
 		long id= dbHelper.insertOrThrow("evaluacion_oportunidad", values);
 		oportunidadTO.oportunidadId = id;
@@ -196,7 +209,7 @@ public class EvaluacionDAO {
 	public long insertSKUPresentacion(EvaluacionTO evaluacionTO,SKUPresentacionTO skuPresentacionTO){
 		ContentValues values = new ContentValues();
 		
-		values.put("evaluacionId", evaluacionTO.evaluacionId);
+		values.put("evaluacionId", evaluacionTO.id);
 		values.put("skuId", skuPresentacionTO.codigoSKU);
 		values.put("sku", skuPresentacionTO.descripcionSKU);
 		values.put("valorActual", skuPresentacionTO.valorActual);
@@ -209,6 +222,48 @@ public class EvaluacionDAO {
 		
 	}
 	
+	public long insertOportunidadPosicion(EvaluacionTO evaluacionTO,PosicionCompromisoTO posicionCompromisoTO){
+		
+		ContentValues values = new ContentValues();
+		values.put("evaluacionId", evaluacionTO.id);
+		values.put("codigoVariable", posicionCompromisoTO.codigoVariable);
+		values.put("puntosSugeridos", posicionCompromisoTO.puntosSugeridos);
+		values.put("puntosGanados", posicionCompromisoTO.puntosGanados);
+		values.put("respuesta", posicionCompromisoTO.respuesta);
+		values.put("fotoInicial", posicionCompromisoTO.fotoInicial);
+		values.put("fotoFinal", posicionCompromisoTO.fotoFinal);
+		values.put("red", posicionCompromisoTO.red);
+		values.put("puntosMaximo", posicionCompromisoTO.ptoMaximo);
+		values.put("observacion", posicionCompromisoTO.observacion);
+		values.put("fechaCompromiso", posicionCompromisoTO.fechaCompromiso);
+		values.put("cumple", posicionCompromisoTO.cumplio);
+		
+		long id= dbHelper.insertOrThrow("evaluacion_posicion", values);
+		
+		posicionCompromisoTO.id = id;
+		
+		return id;
+	}
+	
+	public long insertOportunidadPresentacion(EvaluacionTO evaluacionTO,PresentacionCompromisoTO presentacionCompromisoTO){
+		
+		ContentValues values = new ContentValues();
+		values.put("evaluacionId", evaluacionTO.id);
+		values.put("codigoVariable", presentacionCompromisoTO.codigoVariable);
+		values.put("puntosSugeridos", presentacionCompromisoTO.puntosSugeridos);
+		values.put("puntosGanados", presentacionCompromisoTO.puntosGanados);
+		values.put("fechaCompromiso", presentacionCompromisoTO.fechaCompromiso);
+		values.put("tipoAgrupacion", presentacionCompromisoTO.tipoAgrupacion);
+		values.put("codfde", presentacionCompromisoTO.codfde);
+		values.put("cumple", presentacionCompromisoTO.cumplio);
+		
+		long id= dbHelper.insertOrThrow("evaluacion_presentacion", values);
+		
+		presentacionCompromisoTO.id = id;
+		
+		return id;
+	}
+
 	public List<Integer> listarPuntosInventario(){
 		List<Integer> puntos = new ArrayList<Integer>();
 		String SQL = "select puntos from punto where cdarr = ?1 and tppro = ?2";

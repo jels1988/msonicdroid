@@ -2,6 +2,7 @@ package lindley.desarrolloxcliente.activity;
 
 import java.util.List;
 
+import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
@@ -27,7 +28,7 @@ public class SKUPrioritarioCompromiso_Activity extends  net.msonic.lib.sherlock.
 
 	private EfficientAdapter adap;
 	
-		
+	/*
 	public static final String RESPUESTA_SI = "S";
 	public static final String RESPUESTA_NO = "N";
 	public static final String RESPUESTA_NO_TIENE = "T";
@@ -35,6 +36,7 @@ public class SKUPrioritarioCompromiso_Activity extends  net.msonic.lib.sherlock.
 	public static final String DATO_SI = "SI";
 	public static final String DATO_NO = "NO";
 	public static final String DATO_NO_TIENE = "NV";
+	*/
 	
 
 	@Override
@@ -43,7 +45,7 @@ public class SKUPrioritarioCompromiso_Activity extends  net.msonic.lib.sherlock.
 		super.onCreate(savedInstanceState);
 		this.validarConexionInternet=false;
 		
-		setContentView(R.layout.skuprioritario_activity);
+		setContentView(R.layout.skuprioritariocompromiso_activity);
 		
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		
@@ -124,7 +126,7 @@ public class SKUPrioritarioCompromiso_Activity extends  net.msonic.lib.sherlock.
 	
 	public void btnOK_click(View view)
 	{
-		//finish();
+		finish();
 	}
 	
 	public static class EfficientAdapter extends ArrayAdapter<SKUPresentacionTO> {
@@ -160,9 +162,9 @@ public class SKUPrioritarioCompromiso_Activity extends  net.msonic.lib.sherlock.
 						// TODO Auto-generated method stub
 						SKUPresentacionTO skuPresentacion = (SKUPresentacionTO) viewHolder.chkValComp.getTag();
 						if(arg2==0){
-							skuPresentacion.compromiso = RESPUESTA_NO;
+							skuPresentacion.compromiso = ConstantesApp.RESPUESTA_NO;
 						}else{
-							skuPresentacion.compromiso = RESPUESTA_SI;
+							skuPresentacion.compromiso = ConstantesApp.RESPUESTA_SI;
 						}
 					}
 
@@ -197,21 +199,21 @@ public class SKUPrioritarioCompromiso_Activity extends  net.msonic.lib.sherlock.
 			holder.txViewSKU.setText(this.skuPresentaciones.get(position).descripcionSKU);
 			
 					
-			if(this.skuPresentaciones.get(position).valorActual.compareToIgnoreCase(RESPUESTA_SI) == 0)
+			if(this.skuPresentaciones.get(position).valorActual.compareToIgnoreCase(ConstantesApp.RESPUESTA_SI) == 0)
 			{
-				holder.chkValActual.setText(DATO_SI);
+				holder.chkValActual.setText(ConstantesApp.RESPUESTA_SI_LARGA);
 			}
-			else if(this.skuPresentaciones.get(position).valorActual.compareToIgnoreCase(RESPUESTA_NO) == 0)
+			else if(this.skuPresentaciones.get(position).valorActual.compareToIgnoreCase(ConstantesApp.RESPUESTA_NO) == 0)
 			{
-				holder.chkValActual.setText(DATO_NO);
+				holder.chkValActual.setText(ConstantesApp.RESPUESTA_NO_LARGA);
 			}
 			else
 			{
-				holder.chkValActual.setText(DATO_NO_TIENE);
+				holder.chkValActual.setText(ConstantesApp.RESPUESTA_NO_TIENE_LARGA);
 			}
 			
 			
-			if(this.skuPresentaciones.get(position).compromiso.compareToIgnoreCase(RESPUESTA_SI) == 0)
+			if(this.skuPresentaciones.get(position).compromiso.compareToIgnoreCase(ConstantesApp.RESPUESTA_SI) == 0)
 			{
 				holder.chkValComp.setSelection(1);
 			}

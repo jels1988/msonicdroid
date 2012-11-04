@@ -3,6 +3,8 @@ package lindley.desarrolloxcliente.to;
 import java.util.ArrayList;
 import java.util.List;
 
+import lindley.desarrolloxcliente.ConstantesApp;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -13,7 +15,10 @@ public class OportunidadTO {
 	public OportunidadTO()
 	{
 		listaAccionesTrade = new ArrayList<AccionTradeTO>();
-		
+		concrecionActual = ConstantesApp.RESPUESTA_NO;
+		cumplePrecioActual = ConstantesApp.RESPUESTA_NO;
+		numeroSaboresActual = "2";
+		soviActual = "0";
 	}
 	
 	@Expose()

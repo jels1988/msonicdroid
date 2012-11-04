@@ -235,7 +235,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 			
 			//evaluacion.activosLindley = cliente.codigo;
 			evaluacion.skuPresentacion = adap.skuPresentaciones;
-			evaluacion.codigoUsuario = usuario.codigoSap;
+			evaluacion.usuarioCrea = usuario.codigoSap;
 			evaluacionBLL.asignarPuntos(evaluacion,cliente);
 			
 			

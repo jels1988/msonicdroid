@@ -252,7 +252,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 						// TODO Auto-generated method stub
 						EvaluacionTO evaluacionTO = (EvaluacionTO) viewHolder.txViewCodigo.getTag();
 						Intent compromisoOpen = new Intent(context, ConsultarResumen_Activity.class);
-						compromisoOpen.putExtra(ConsultarResumen_Activity.CODIGO_REGISTRO_KEY, evaluacionTO.evaluacionId);							
+						compromisoOpen.putExtra(ConsultarResumen_Activity.CODIGO_REGISTRO_KEY, evaluacionTO.id);							
 						context.startActivity(compromisoOpen);	
 						
 								
@@ -267,7 +267,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 						// TODO Auto-generated method stub
 						EvaluacionTO evaluacionTO = (EvaluacionTO) viewHolder.txViewCodigo.getTag();
 						
-						context.evaluacionId = evaluacionTO.evaluacionId;
+						context.evaluacionId = evaluacionTO.id;
 						
 						if(evaluacionTO.estado.equals(ConstantesApp.OPORTUNIDAD_ABIERTA)){
 							if(evaluacionTO.fecha.equals(ConstantesApp.getFechaSistemaAS400())){
@@ -291,7 +291,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 							}
 						}else{
 							Intent compromisoClose = new Intent(context, CompromisoPrincipalClose_Resumen.class);
-							compromisoClose.putExtra(CompromisoPrincipalClose_Resumen.CODIGO_REGISTRO, evaluacionTO.evaluacionId);
+							compromisoClose.putExtra(CompromisoPrincipalClose_Resumen.CODIGO_REGISTRO, evaluacionTO.id);
 							context.startActivity(compromisoClose);
 						}
 					}

@@ -30,6 +30,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.google.inject.Inject;
 
 import net.msonic.lib.JSONHelper;
@@ -102,8 +105,39 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 		}		
     }
     
+    
+    
    
-    public void btnbuscar_onclick(View view){
+    @Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+    	   MenuInflater menuInflater = new MenuInflater(this);
+		   menuInflater.inflate(R.menu.consultarcliente_menu, menu);
+		   
+		return super.onCreateOptionsMenu(menu);
+	}
+
+
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		if(item.getItemId()==R.id.mnuDescargar){
+			Intent i = new Intent(this, DescargaData_Activity.class);
+			startActivity(i);
+		}
+		else if(item.getItemId()==R.id.mnuEnviar){
+			Intent i = new Intent(this, UploadData_Activity.class);
+			startActivity(i);
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+
+
+
+	public void btnbuscar_onclick(View view){
     	
     	processAsync();
     }

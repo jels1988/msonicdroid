@@ -147,4 +147,7 @@
     
     <string name="presentacionopen_content_puntos">Puntos:</string>
     <string name="presentacionopen_content_fecha">Fecha Compromiso:</string>
+    
+    <string name="consultarcliente_menu_descargar">Descargar</string>
+    <string name="consultarcliente_menu_enviar">Enviar</string>
 </resources>
