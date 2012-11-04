@@ -185,7 +185,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 	}
 	
 	public void btnCancelar_click(View view) {
-		finish();
+		
 		onBackPressed();
 	}
 
@@ -334,14 +334,14 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 						// TODO Auto-generated method stub
 						SKUPresentacionTO skuPresentacion = (SKUPresentacionTO) viewHolder.chkValActual.getTag();
 						if(arg2==0){
-							skuPresentacion.valorActual = ConstantesApp.RESPUESTA_NO;
-							skuPresentacion.compromiso = ConstantesApp.RESPUESTA_NO;
+							skuPresentacion.marcaActual = ConstantesApp.RESPUESTA_NO;
+							skuPresentacion.marcaCompromiso = ConstantesApp.RESPUESTA_NO;
 						}else if(arg2==1){
-							skuPresentacion.valorActual = ConstantesApp.RESPUESTA_SI;
-							skuPresentacion.compromiso = ConstantesApp.RESPUESTA_SI;
+							skuPresentacion.marcaActual = ConstantesApp.RESPUESTA_SI;
+							skuPresentacion.marcaCompromiso = ConstantesApp.RESPUESTA_SI;
 						}else{
-							skuPresentacion.valorActual = ConstantesApp.RESPUESTA_NO_TIENE ;
-							skuPresentacion.compromiso = ConstantesApp.RESPUESTA_NO_TIENE;
+							skuPresentacion.marcaActual = ConstantesApp.RESPUESTA_NO_TIENE ;
+							skuPresentacion.marcaCompromiso = ConstantesApp.RESPUESTA_NO_TIENE;
 						}
 					}
 
@@ -374,9 +374,9 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 			
 			
 		      
-			if (this.skuPresentaciones.get(position).valorActual.equalsIgnoreCase(ConstantesApp.RESPUESTA_NO)) {
+			if (this.skuPresentaciones.get(position).marcaActual.equalsIgnoreCase(ConstantesApp.RESPUESTA_NO)) {
 				holder.chkValActual.setSelection(0);
-			} else if (this.skuPresentaciones.get(position).valorActual.equalsIgnoreCase(ConstantesApp.RESPUESTA_SI)) {
+			} else if (this.skuPresentaciones.get(position).marcaActual.equalsIgnoreCase(ConstantesApp.RESPUESTA_SI)) {
 				holder.chkValActual.setSelection(1);
 			}else {
 				holder.chkValActual.setSelection(2);

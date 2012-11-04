@@ -36,8 +36,8 @@ public class PosicionDAO {
 		
 		while(cursor.moveToNext()){
 			compromisoTO = new PosicionCompromisoTO();
-			compromisoTO.respuesta = evaluacionTO.activosLindley;
 			compromisoTO.codigoVariable = cursor.getString(cursor.getColumnIndex("variableRed"));
+			compromisoTO.tipoAgrupacion = tipoAgrupacion;
 			lista.add(compromisoTO);
 		}
 		

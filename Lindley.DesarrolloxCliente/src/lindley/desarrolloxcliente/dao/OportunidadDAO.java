@@ -21,7 +21,7 @@ public class OportunidadDAO {
 	public ArrayList<SKUPresentacionTO> consultarSKUPresentacion(String cluster){
 		ArrayList<SKUPresentacionTO> skus = new ArrayList<SKUPresentacionTO>();
 		
-		String SQL = "select codigo,descripcion from sku where cluster = ?1";
+		String SQL = "select codigo,descripcion,cluster from sku where cluster = ?1";
 		
 		String[] args = new String[] {cluster};
 		Cursor cursor = dbHelper.rawQuery(SQL,args);
@@ -33,8 +33,13 @@ public class OportunidadDAO {
 	
 			skuPresentacionTO.codigoSKU  = String.format("%s",cursor.getInt(cursor.getColumnIndex("codigo")));
 			skuPresentacionTO.descripcionSKU = cursor.getString(cursor.getColumnIndex("descripcion"));
-			skuPresentacionTO.valorActual = ConstantesApp.RESPUESTA_NO;
-			skuPresentacionTO.compromiso = ConstantesApp.RESPUESTA_NO;
+			skuPresentacionTO.codigoFDE = cursor.getString(cursor.getColumnIndex("cluster"));
+			skuPresentacionTO.tipoAgrupacion = ConstantesApp.TIPO_AGRUPRACION_PRESENTACION;
+			skuPresentacionTO.codigoVariable = ConstantesApp.VARIABLE_RED_PRECIO_MERCADO;
+			skuPresentacionTO.estado=ConstantesApp.OPORTUNIDAD_ABIERTA;
+			skuPresentacionTO.marcaActual = ConstantesApp.RESPUESTA_NO;
+			skuPresentacionTO.marcaCompromiso = ConstantesApp.RESPUESTA_NO;
+			skuPresentacionTO.marcaCumplio = ConstantesApp.RESPUESTA_NO;
 			skus.add(skuPresentacionTO);
 		}
 		

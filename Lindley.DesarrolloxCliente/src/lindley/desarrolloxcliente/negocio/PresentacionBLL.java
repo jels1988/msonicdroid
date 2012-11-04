@@ -2,6 +2,7 @@ package lindley.desarrolloxcliente.negocio;
 
 import java.util.List;
 
+import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.dao.PresentacionDAO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import net.msonic.lib.DBHelper;
@@ -22,7 +23,7 @@ public class PresentacionBLL {
 		
 		try{
 			dbHelper.openDataBase();
-			lista = presentacionDAO.consultarOportunidadesPresentacion(codigoCliente, "3");
+			lista = presentacionDAO.consultarOportunidadesPresentacion(codigoCliente, ConstantesApp.TIPO_AGRUPRACION_PRESENTACION);
 		}catch(Exception ex){
 			Log.e(TAG_LOG, "consultarOportunidadesPresentacion", ex);
 		} finally {

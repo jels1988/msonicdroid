@@ -155,14 +155,26 @@ public class EvaluacionDAO {
 			String[] args = new String[] {String.valueOf(evaluacionTO.id)};
 			Cursor cursor = dbHelper.rawQuery(SQL,args);
 			
-			while(cursor.moveToNext()){
+			/*while(cursor.moveToNext()){
 				SKUPresentacionTO skuPresentacionTO = new SKUPresentacionTO();
 				skuPresentacionTO.codigoSKU = cursor.getString(cursor.getColumnIndex("skuId"));
 				skuPresentacionTO.descripcionSKU = cursor.getString(cursor.getColumnIndex("sku"));
 				skuPresentacionTO.valorActual = cursor.getString(cursor.getColumnIndex("valorActual"));
 				skuPresentacionTO.compromiso = cursor.getString(cursor.getColumnIndex("compromiso"));
 				evaluacionTO.skuPresentacion.add(skuPresentacionTO);
-			}
+				*/
+			/*
+			 	
+
+		values.put("tipoAgrupacion", skuPresentacionTO.tipoAgrupacion);
+		values.put("codigoVariable", skuPresentacionTO.codigoVariable);
+		values.put("codfde", skuPresentacionTO.codigoFDE);
+		values.put("marca", skuPresentacionTO.marcaActual);
+		values.put("marcaCompromiso", skuPresentacionTO.marcaCompromiso);
+		values.put("confirmacion", skuPresentacionTO.confirmacion);
+		values.put("estado", skuPresentacionTO.estado);
+			 * */
+			//}
 			cursor.close();
 		}
 	}
@@ -194,10 +206,17 @@ public class EvaluacionDAO {
 		values.put("numeroSaboresActual", oportunidadTO.numeroSaboresActual);
 		values.put("numeroSaboresCumple", oportunidadTO.numeroSaboresCumple);
 		
-		values.put("puntosCocaCola", oportunidadTO.puntosCocaCola);
+		values.put("puntosSugeridos", oportunidadTO.puntosSugeridos);
 		values.put("puntosBonus", oportunidadTO.puntosBonus);
+		values.put("puntosGanados", oportunidadTO.puntosGanados);
+		
 		values.put("fechaProceso", oportunidadTO.fecha);
 		values.put("legacy", oportunidadTO.codigoLegacy);
+		values.put("codigoAccion", oportunidadTO.codigoAccionTrade);
+		values.put("accion", oportunidadTO.accioneTrade);
+		values.put("origen", oportunidadTO.origen);
+		values.put("estado", oportunidadTO.estado);
+		values.put("confirmacion", oportunidadTO.confirmacion);
 		
 		long id= dbHelper.insertOrThrow("evaluacion_oportunidad", values);
 		oportunidadTO.oportunidadId = id;
@@ -210,11 +229,20 @@ public class EvaluacionDAO {
 		ContentValues values = new ContentValues();
 		
 		values.put("evaluacionId", evaluacionTO.id);
+	
+		
+		values.put("anio", periodoTO.anio);
+		values.put("mes", periodoTO.mes);
 		values.put("skuId", skuPresentacionTO.codigoSKU);
 		values.put("sku", skuPresentacionTO.descripcionSKU);
-		values.put("valorActual", skuPresentacionTO.valorActual);
-		values.put("compromiso", skuPresentacionTO.compromiso);
-		
+		values.put("tipoAgrupacion", skuPresentacionTO.tipoAgrupacion);
+		values.put("codigoVariable", skuPresentacionTO.codigoVariable);
+		values.put("codfde", skuPresentacionTO.codigoFDE);
+		values.put("marca", skuPresentacionTO.marcaActual);
+		values.put("marcaCompromiso", skuPresentacionTO.marcaCompromiso);
+		values.put("confirmacion", skuPresentacionTO.marcaCumplio);
+		values.put("estado", skuPresentacionTO.estado);
+
 		
 		long id= dbHelper.insertOrThrow("evaluacion_sku_presentacion", values);
 		
@@ -226,17 +254,26 @@ public class EvaluacionDAO {
 		
 		ContentValues values = new ContentValues();
 		values.put("evaluacionId", evaluacionTO.id);
+		values.put("anio", periodoTO.anio);
+		values.put("mes", periodoTO.mes);
 		values.put("codigoVariable", posicionCompromisoTO.codigoVariable);
 		values.put("puntosSugeridos", posicionCompromisoTO.puntosSugeridos);
 		values.put("puntosGanados", posicionCompromisoTO.puntosGanados);
-		values.put("respuesta", posicionCompromisoTO.respuesta);
+		values.put("puntosBonus", posicionCompromisoTO.puntosBonus);
+		values.put("soviRed", posicionCompromisoTO.soviRed);
+		values.put("soviMaximo", posicionCompromisoTO.soviMaximo);
+		values.put("soviDiferencia", posicionCompromisoTO.soviDiferencia);
+		values.put("tipoAgrupacion", posicionCompromisoTO.tipoAgrupacion);
+		values.put("fechaEncuesta", evaluacionTO.fecha);
+		values.put("activosLindley", evaluacionTO.activosLindley);
 		values.put("fotoInicial", posicionCompromisoTO.fotoInicial);
 		values.put("fotoFinal", posicionCompromisoTO.fotoFinal);
-		values.put("red", posicionCompromisoTO.red);
-		values.put("puntosMaximo", posicionCompromisoTO.ptoMaximo);
 		values.put("observacion", posicionCompromisoTO.observacion);
-		values.put("fechaCompromiso", posicionCompromisoTO.fechaCompromiso);
-		values.put("cumple", posicionCompromisoTO.cumplio);
+		values.put("fechaCompromiso", evaluacionTO.fecha);
+		values.put("confirmacion", posicionCompromisoTO.cumplio);
+		values.put("origen", posicionCompromisoTO.origen);
+		values.put("estado", posicionCompromisoTO.estado);
+		values.put("confirmacion", posicionCompromisoTO.confirmacion);
 		
 		long id= dbHelper.insertOrThrow("evaluacion_posicion", values);
 		
@@ -249,14 +286,19 @@ public class EvaluacionDAO {
 		
 		ContentValues values = new ContentValues();
 		values.put("evaluacionId", evaluacionTO.id);
-		values.put("codigoVariable", presentacionCompromisoTO.codigoVariable);
-		values.put("puntosSugeridos", presentacionCompromisoTO.puntosSugeridos);
-		values.put("puntosGanados", presentacionCompromisoTO.puntosGanados);
-		values.put("fechaCompromiso", presentacionCompromisoTO.fechaCompromiso);
+		values.put("anio", periodoTO.anio);
+		values.put("mes", periodoTO.mes);
 		values.put("tipoAgrupacion", presentacionCompromisoTO.tipoAgrupacion);
 		values.put("codfde", presentacionCompromisoTO.codfde);
-		values.put("cumple", presentacionCompromisoTO.cumplio);
-		
+		values.put("codigoVariable", presentacionCompromisoTO.codigoVariable);
+		values.put("fechaEncuesta", evaluacionTO.fecha);
+		values.put("puntosSugeridos", presentacionCompromisoTO.puntosSugeridos);
+		values.put("puntosGanados", presentacionCompromisoTO.puntosGanados);
+		values.put("puntosBonus", presentacionCompromisoTO.puntosBonus);
+		values.put("fechaCompromiso", presentacionCompromisoTO.fechaCompromiso);
+		values.put("confirmacion", presentacionCompromisoTO.cumplio);
+		values.put("origen", presentacionCompromisoTO.origen);
+		values.put("estado", presentacionCompromisoTO.estado);
 		long id= dbHelper.insertOrThrow("evaluacion_presentacion", values);
 		
 		presentacionCompromisoTO.id = id;

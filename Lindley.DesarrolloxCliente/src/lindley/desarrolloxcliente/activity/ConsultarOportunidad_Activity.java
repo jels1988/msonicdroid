@@ -99,7 +99,7 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
     
 	public void btnCancelar_click(View view)
 	{
-		onBackPressed();
+		finish();
 	}
 	
     public void btnSiguiente_click(View view)

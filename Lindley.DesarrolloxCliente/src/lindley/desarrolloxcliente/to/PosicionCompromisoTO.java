@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import lindley.desarrolloxcliente.ConstantesApp;
 
-import com.google.gson.annotations.SerializedName;
-
 public class PosicionCompromisoTO {
 
 	public PosicionCompromisoTO()
@@ -16,46 +14,61 @@ public class PosicionCompromisoTO {
 		fotoFinal = " ";
 		puntosGanados="0";
 		puntosSugeridos="0";
-		red="0";
+		puntosBonus="0";
+		soviMaximo="0";
+		soviDiferencia="0";
+		ptoMaximo="0";
+		soviRed="0";
+		
+		activosLindley = ConstantesApp.RESPUESTA_NO;
+		confirmacion =  ConstantesApp.RESPUESTA_NO;
+		origen =  ConstantesApp.OPORTUNIDAD_SISTEMA;
+		estado =  ConstantesApp.OPORTUNIDAD_ABIERTA;
+	
+		
     }
 
 	public long id;
 	
-	@SerializedName("RSPT")
-    public String respuesta;
 	
-    @SerializedName("CVAR")
+    public String activosLindley;
+	
+    
     public String codigoVariable;
-            
-    @SerializedName("PTO")
+    
     public String puntosSugeridos;
-    
-    @SerializedName("PTG")
     public String puntosGanados;
+    public String puntosBonus;
     
-    @SerializedName("FINI")
+    public String soviRed;
+    public String soviMaximo;
+    public String soviDiferencia;
+    
     public String fotoInicial;
+    public String fotoFinal;
+ 
     
-    @SerializedName("RED")
-    public String red;
-
-    @SerializedName("PMX")
     public String ptoMaximo;
     
-    @SerializedName("ACM")
+    
     public String observacion;
     
-    @SerializedName("FCM")
+    
     public String fechaCompromiso;
     
     
-    @SerializedName("CMP")
+    
     public ArrayList<CompromisoPosicionTO> listCompromisos;
     
-    @SerializedName("CUM")
+    
     public String cumplio;
     
-    @SerializedName("FFIN")
-    public String fotoFinal;
+    
+   
+    
+    public String tipoAgrupacion;
+    public String confirmacion;
+	public String origen;
+	public String estado;
     
 }

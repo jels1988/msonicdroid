@@ -6,6 +6,9 @@ import java.util.List;
 import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
 import lindley.desarrolloxcliente.to.upload.OportunidadTO;
+import lindley.desarrolloxcliente.to.upload.PosicionTO;
+import lindley.desarrolloxcliente.to.upload.PresentacionTO;
+import lindley.desarrolloxcliente.to.upload.SkuTO;
 import net.msonic.lib.DBHelper;
 
 import android.database.Cursor;
@@ -17,12 +20,33 @@ public class UploadDAO {
 	@Inject	protected DBHelper dbHelper;
 	@Inject protected PeriodoTO periodoTO;
 	
+	public void deleteEvaluacion(long id){
+		dbHelper.delete("evaluacion", "id=?",new String[]{String.valueOf(id)});
+		dbHelper.delete("evaluacion_oportunidad", "evaluacionId=?",new String[]{String.valueOf(id)});
+		dbHelper.delete("evaluacion_posicion", "evaluacionId=?",new String[]{String.valueOf(id)});
+		dbHelper.delete("evaluacion_presentacion", "evaluacionId=?",new String[]{String.valueOf(id)});
+		dbHelper.delete("evaluacion_sku_presentacion", "evaluacionId=?",new String[]{String.valueOf(id)});
+	}
 	
-	public List<EvaluacionTO> listarEvaluaciones(){
+	public long getCantidadEvaluaciones(){
+		
+		String SQL = "select count(*) as cantidad from evaluacion";
+		long cantidad=0;
+		Cursor cursor = dbHelper.rawQuery(SQL,null);
+		
+		if(cursor.moveToNext()){
+			cantidad= cursor.getLong(cursor.getColumnIndex("cantidad"));
+		}
+		cursor.close();
+		return cantidad;
+		
+	}
+	
+	public List<EvaluacionTO> listarEvaluaciones(int limit){
 		List<EvaluacionTO> evaluaciones = new ArrayList<EvaluacionTO>();
 		
-		String SQL = "select clienteCodigo,activosLindley,codigoFe,usuario,fecha,hora,usuarioCierre,fechaCierre,horaCierre,estado,serverId,combosSS,combosMS,obsSS,obsMS " +
-					 "from evaluacion";
+		String SQL = "select id,clienteCodigo,activosLindley,codigoFe,usuario,fecha,hora,usuarioCierre,fechaCierre,horaCierre,estado,serverId,combosSS,combosMS,obsSS,obsMS " +
+					 "from evaluacion limit " + String.valueOf(limit);
 		
 		Cursor cursor = dbHelper.rawQuery(SQL,null);
 		
@@ -30,6 +54,7 @@ public class UploadDAO {
 		
 		while(cursor.moveToNext()){
 			evaluacionTO = new EvaluacionTO();
+			evaluacionTO.id = cursor.getLong(cursor.getColumnIndex("id"));
 			evaluacionTO.codigoCliente =  cursor.getString(cursor.getColumnIndex("clienteCodigo"));
 			evaluacionTO.activosLindley =  cursor.getString(cursor.getColumnIndex("activosLindley"));
 			evaluacionTO.codigoFDE =  cursor.getString(cursor.getColumnIndex("codigoFe"));
@@ -55,20 +80,35 @@ public class UploadDAO {
 		}
 		cursor.close();
 		
+		for (EvaluacionTO evaluacionTempTO : evaluaciones) {
+			listarOportunidades(evaluacionTempTO);
+		}
+		
+		for (EvaluacionTO evaluacionTempTO : evaluaciones) {
+			listarPosicion(evaluacionTempTO);
+		}
+		
+		for (EvaluacionTO evaluacionTempTO : evaluaciones) {
+			listarPresentacion(evaluacionTempTO);
+		}
+		
+		for (EvaluacionTO evaluacionTempTO : evaluaciones) {
+			listarSku(evaluacionTempTO);
+		}
 		return evaluaciones;
 		
 	}
 	
-	public void listarOportunidades(long evaluacionId,EvaluacionTO evaluacionTO){
+	public void listarOportunidades(EvaluacionTO evaluacionTO){
 		
 		String SQL = "select id,evaluacionId,anio,mes, codigoProducto," +
 							"concrecion,concrecionActual,concrecionCumple,sovi,soviActual,soviCumple," +
-							"respetaPrecio,respetaPrecioActual,respetaPrecioCumple,numeroSabores,numeroSaboresActual," +
-							"numeroSaboresCumple,puntosCocaCola,puntosBonus,fechaProceso,legacy " +
+							"respetaPrecio,respetaPrecioActual,respetaPrecioCumple,numeroSabores,numeroSaboresActual,codigoAccion,accion, " +
+							"numeroSaboresCumple,puntosSugeridos,puntosBonus,puntosGanados,fechaProceso,legacy,confirmacion,origen,estado " +
 							"from evaluacion_oportunidad " +
 							"where evaluacionId = ?1";
 		
-		String[] args = new String[] {String.valueOf(evaluacionTO.serverId)};
+		String[] args = new String[] {String.valueOf(evaluacionTO.id)};
 		Cursor cursor = dbHelper.rawQuery(SQL,args);
 		
 		OportunidadTO oportunidadTO;
@@ -114,4 +154,102 @@ public class UploadDAO {
 		
 		cursor.close();
 	}
+	
+	public void listarPosicion(EvaluacionTO evaluacionTO){
+		String SQL = "select id,evaluacionId,anio,mes,codigoVariable,soviRed,soviMaximo,soviDiferencia," +
+					"puntosSugeridos,puntosGanados,puntosBonus,fotoInicial,fotoFinal,activosLindley," +
+					"observacion,fechaCompromiso,confirmacion,origen,estado " +
+					"from evaluacion_posicion " +
+					"where evaluacionId = ?1";
+
+		String[] args = new String[] {String.valueOf(evaluacionTO.id)};
+		Cursor cursor = dbHelper.rawQuery(SQL,args);
+		
+		PosicionTO posicionTO;
+		while(cursor.moveToNext()){
+			posicionTO = new PosicionTO();
+			posicionTO.anio =  cursor.getInt(cursor.getColumnIndex("anio"));
+			posicionTO.mes =  cursor.getInt(cursor.getColumnIndex("mes"));
+			posicionTO.codigoVariable =  cursor.getString(cursor.getColumnIndex("codigoVariable"));
+			posicionTO.sovir =  cursor.getString(cursor.getColumnIndex("soviRed"));
+			posicionTO.sovirMaximo =  cursor.getString(cursor.getColumnIndex("soviMaximo"));
+			posicionTO.sovirDiferencia =  cursor.getString(cursor.getColumnIndex("soviDiferencia"));
+			posicionTO.puntosSugeridos =  cursor.getString(cursor.getColumnIndex("puntosSugeridos"));
+			posicionTO.puntosGanados =  cursor.getString(cursor.getColumnIndex("puntosGanados"));
+			posicionTO.puntosBonus =  cursor.getString(cursor.getColumnIndex("puntosBonus"));
+			posicionTO.fotoInicial =  cursor.getString(cursor.getColumnIndex("fotoInicial"));
+			posicionTO.fotoFinal =  cursor.getString(cursor.getColumnIndex("fotoFinal"));
+			posicionTO.activosLindley =  cursor.getString(cursor.getColumnIndex("activosLindley"));
+			posicionTO.observacion =  cursor.getString(cursor.getColumnIndex("observacion"));
+			posicionTO.fechaCompromiso =  cursor.getString(cursor.getColumnIndex("fechaCompromiso"));
+			posicionTO.fechaEncuesta="0";
+			posicionTO.confirmacion =  cursor.getString(cursor.getColumnIndex("confirmacion"));
+			posicionTO.origen =  cursor.getString(cursor.getColumnIndex("origen"));
+			posicionTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
+			evaluacionTO.posiciones.add(posicionTO);
+		}
+		cursor.close();
+	}
+	
+	public void listarPresentacion(EvaluacionTO evaluacionTO){
+		String SQL = "select id,evaluacionId,anio,mes,tipoAgrupacion,codfde,codigoVariable,fechaEncuesta," +
+				"puntosSugeridos,puntosGanados,puntosBonus,fechaCompromiso,confirmacion," +
+				"origen,estado " +
+				"from evaluacion_presentacion " +
+				"where evaluacionId = ?1";
+		
+		String[] args = new String[] {String.valueOf(evaluacionTO.id)};
+		Cursor cursor = dbHelper.rawQuery(SQL,args);
+		
+		PresentacionTO presentacionTO;
+		while(cursor.moveToNext()){
+			presentacionTO = new PresentacionTO();
+			presentacionTO.anio =  cursor.getInt(cursor.getColumnIndex("anio"));
+			presentacionTO.mes =  cursor.getInt(cursor.getColumnIndex("mes"));
+			presentacionTO.tipoAgrupacion =  cursor.getString(cursor.getColumnIndex("tipoAgrupacion"));
+			presentacionTO.codigoFDE =  cursor.getString(cursor.getColumnIndex("codfde"));
+			presentacionTO.codigoVariable =  cursor.getString(cursor.getColumnIndex("codigoVariable"));
+			presentacionTO.fechaEncuesta =  "0";
+			presentacionTO.puntosSugeridos =  cursor.getString(cursor.getColumnIndex("puntosSugeridos"));
+			presentacionTO.puntosGanados =  cursor.getString(cursor.getColumnIndex("puntosGanados"));
+			presentacionTO.puntosBonus =  cursor.getString(cursor.getColumnIndex("puntosBonus"));
+			presentacionTO.fechaCompromiso =  "0";
+			presentacionTO.confirmacion =  cursor.getString(cursor.getColumnIndex("confirmacion"));
+			presentacionTO.origen =  cursor.getString(cursor.getColumnIndex("origen"));
+			presentacionTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
+			evaluacionTO.presentaciones.add(presentacionTO);
+		}
+		cursor.close();
+	}
+	
+	public void listarSku(EvaluacionTO evaluacionTO){
+		String SQL = "select id,evaluacionId,anio,mes,tipoAgrupacion,codfde,codigoVariable,skuId," +
+				"sku,marca,marcaCompromiso,confirmacion,estado " +
+				"from evaluacion_sku_presentacion " +
+				"where evaluacionId = ?1";
+
+		String[] args = new String[] {String.valueOf(evaluacionTO.id)};
+		Cursor cursor = dbHelper.rawQuery(SQL,args);
+		
+		SkuTO skuTO;
+		while(cursor.moveToNext()){
+			skuTO = new SkuTO();
+			skuTO.anio =  cursor.getInt(cursor.getColumnIndex("anio"));
+			skuTO.mes =  cursor.getInt(cursor.getColumnIndex("mes"));
+			skuTO.tipoAgrupacion =  cursor.getString(cursor.getColumnIndex("tipoAgrupacion"));
+			skuTO.codigoFDE =  cursor.getString(cursor.getColumnIndex("codfde"));
+			skuTO.codigoVariable =  cursor.getString(cursor.getColumnIndex("codigoVariable"));
+			skuTO.codigoSKU =  cursor.getString(cursor.getColumnIndex("skuId"));
+			skuTO.descripcionSKU =  cursor.getString(cursor.getColumnIndex("sku"));
+			skuTO.marcaActual =  cursor.getString(cursor.getColumnIndex("marca"));
+			skuTO.marcaCompromiso =  cursor.getString(cursor.getColumnIndex("marcaCompromiso"));
+			skuTO.marcaCumplio =  cursor.getString(cursor.getColumnIndex("confirmacion"));
+			skuTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
+			evaluacionTO.skus.add(skuTO);
+		}
+		
+		
+		cursor.close();
+	}
+
 }

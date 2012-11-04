@@ -474,13 +474,13 @@ public class CompromisoPosicionOpenFalse_Activity extends ListActivityBase {
 			final ViewHolder holder = (ViewHolder) view.getTag();
 			final PosicionCompromisoTO posicionTO = posiciones.get(position);
 			
-			if(posicionTO.respuesta.equals("S"))
+			if(posicionTO.activosLindley.equals("S"))
 		    	  holder.TextViewRpsta.setText("SI");
 		      else
 		    	  holder.TextViewRpsta.setText("NO");
 //			
 			holder.txViewAccComp.setText(posicionTO.observacion);
-			holder.txViewRed.setText(posicionTO.red);
+			holder.txViewRed.setText(posicionTO.soviRed);
 			holder.txViewMaximo.setText(posicionTO.ptoMaximo);
 			holder.txViewPuntos.setText(posicionTO.puntosSugeridos);
 			if(posicionTO.codigoVariable.compareToIgnoreCase(ESTANDAR_ANAQUEL) == 0)

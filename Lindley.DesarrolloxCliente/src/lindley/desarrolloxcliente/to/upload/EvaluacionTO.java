@@ -1,11 +1,23 @@
 package lindley.desarrolloxcliente.to.upload;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class EvaluacionTO {
+			
+	public EvaluacionTO(){
+		oportunidades = new ArrayList<OportunidadTO>();
+		posiciones = new ArrayList<PosicionTO>();
+		presentaciones = new ArrayList<PresentacionTO>(); 
+		skus = new ArrayList<SkuTO>();
+	}
 	
+			@Expose()
+	      public long id;
+	  
 			@SerializedName("CLI")
 	        public String codigoCliente;
 
@@ -53,5 +65,14 @@ public class EvaluacionTO {
 	        
 	        @SerializedName("OPO")
 	        public List<OportunidadTO> oportunidades; 
+	        
+	        @SerializedName("POS")
+	        public List<PosicionTO> posiciones;
+	        
+	        @SerializedName("PRE")
+	        public List<PresentacionTO> presentaciones;
+	        
+	        @SerializedName("SKU")
+	        public List<SkuTO> skus;
 	        
 }

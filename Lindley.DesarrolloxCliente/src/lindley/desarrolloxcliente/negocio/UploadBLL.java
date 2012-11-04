@@ -18,14 +18,28 @@ public class UploadBLL {
 	@Inject protected UploadDAO uploadDAO;
 	
 	
-	public List<EvaluacionTO> listarEvaluaciones(){
+	public void deleteEvaluacion(long id){
+		try{
+			dbHelper.openDataBase();
+			dbHelper.beginTransaction();
+			uploadDAO.deleteEvaluacion(id);
+			dbHelper.setTransactionSuccessful();
+		}catch(Exception ex){
+			Log.e(TAG_LOG, "UploadBLL.deleteEvaluacion", ex);
+		} finally {
+			dbHelper.endTransaction();
+			dbHelper.close();
+		}
+	}
+	
+	public List<EvaluacionTO> listarEvaluaciones(int limit){
 		
 		List<EvaluacionTO> evaluaciones=null;
 		
 		try{
 			dbHelper.openDataBase();
 			
-			evaluaciones = uploadDAO.listarEvaluaciones();
+			evaluaciones = uploadDAO.listarEvaluaciones(limit);
 			
 		}catch(Exception ex){
 			Log.e(TAG_LOG, "UploadBLL.listarEvaluaciones", ex);
@@ -34,5 +48,23 @@ public class UploadBLL {
 		}
 		
 		return evaluaciones;
+	}
+	
+	public long getCantidadEvaluaciones(){
+		long cantidadEvaluaciones=0;
+		
+		try{
+			dbHelper.openDataBase();
+			
+			cantidadEvaluaciones = uploadDAO.getCantidadEvaluaciones();
+			
+		}catch(Exception ex){
+			Log.e(TAG_LOG, "UploadBLL.getCantidadEvaluaciones", ex);
+		} finally {
+			dbHelper.close();
+		}
+		
+		return cantidadEvaluaciones;
+		
 	}
 }

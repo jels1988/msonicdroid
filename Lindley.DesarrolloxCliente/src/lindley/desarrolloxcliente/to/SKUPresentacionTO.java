@@ -1,25 +1,18 @@
 package lindley.desarrolloxcliente.to;
 
 
-import com.google.gson.annotations.SerializedName;
-
 public class SKUPresentacionTO {
 	
-	
-	@SerializedName("CSKU")
 	public String codigoSKU;
-	
-	@SerializedName("DSKU")
 	public String descripcionSKU;
+	public String tipoAgrupacion;
+	public String codigoVariable;
+	public String codigoFDE;
+	public String marcaActual;
+	public String marcaCompromiso;
+	public String marcaCumplio;
+	public String estado;
 	
-	@SerializedName("SLC")
-	public String valorActual;
-	
-	@SerializedName("CMP")
-	public String compromiso;
-	
-	
-	public String cumplio;
 	
 	public String getCodigoSKU() {
 		return codigoSKU;

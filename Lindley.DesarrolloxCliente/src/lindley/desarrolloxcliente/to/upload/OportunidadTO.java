@@ -53,7 +53,7 @@ public class OportunidadTO {
 	        @SerializedName("CTR")
 	        public String codigoAccionTrade;
 
-	        @SerializedName("CTR")
+	        @SerializedName("TRA")
 	        public String accionTrade;
 
 	        @SerializedName("PSG")
@@ -79,5 +79,8 @@ public class OportunidadTO {
 
 	         @SerializedName("LEG")
 	        public String legacy;
+	         
+	         @SerializedName("PRO")
+		     public String proceso;
 	         
 }
