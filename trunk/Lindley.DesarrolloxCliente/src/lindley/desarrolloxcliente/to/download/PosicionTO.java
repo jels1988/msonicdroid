@@ -20,5 +20,5 @@ public class PosicionTO {
 	@SerializedName("VRD")
 	public String variableRed;
 	
-	
+
 }

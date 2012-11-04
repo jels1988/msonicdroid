@@ -155,11 +155,11 @@ public class CompromisoPosicionClose_Activity extends ListActivityBase {
 	        holder = (ViewHolder) convertView.getTag();
 	      }
 	      
-	      if(posicionTO.respuesta.equals("S"))
+	      if(posicionTO.activosLindley.equals("S"))
 	    	  holder.TextViewRpsta.setText("SI");
 	      else
 	    	  holder.TextViewRpsta.setText("NO");
-	      holder.txViewRed.setText(posicionTO.red);
+	      holder.txViewRed.setText(posicionTO.soviRed);
 	      holder.txViewMaximo.setText(posicionTO.ptoMaximo);
 	      holder.txViewPuntos.setText(posicionTO.puntosGanados);
 	      holder.txViewAccComp.setText(posicionTO.observacion);	   

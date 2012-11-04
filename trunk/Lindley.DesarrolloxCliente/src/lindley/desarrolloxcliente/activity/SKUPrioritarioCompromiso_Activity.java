@@ -162,9 +162,9 @@ public class SKUPrioritarioCompromiso_Activity extends  net.msonic.lib.sherlock.
 						// TODO Auto-generated method stub
 						SKUPresentacionTO skuPresentacion = (SKUPresentacionTO) viewHolder.chkValComp.getTag();
 						if(arg2==0){
-							skuPresentacion.compromiso = ConstantesApp.RESPUESTA_NO;
+							skuPresentacion.marcaCompromiso = ConstantesApp.RESPUESTA_NO;
 						}else{
-							skuPresentacion.compromiso = ConstantesApp.RESPUESTA_SI;
+							skuPresentacion.marcaCompromiso = ConstantesApp.RESPUESTA_SI;
 						}
 					}
 
@@ -199,11 +199,11 @@ public class SKUPrioritarioCompromiso_Activity extends  net.msonic.lib.sherlock.
 			holder.txViewSKU.setText(this.skuPresentaciones.get(position).descripcionSKU);
 			
 					
-			if(this.skuPresentaciones.get(position).valorActual.compareToIgnoreCase(ConstantesApp.RESPUESTA_SI) == 0)
+			if(this.skuPresentaciones.get(position).marcaActual.compareToIgnoreCase(ConstantesApp.RESPUESTA_SI) == 0)
 			{
 				holder.chkValActual.setText(ConstantesApp.RESPUESTA_SI_LARGA);
 			}
-			else if(this.skuPresentaciones.get(position).valorActual.compareToIgnoreCase(ConstantesApp.RESPUESTA_NO) == 0)
+			else if(this.skuPresentaciones.get(position).marcaActual.compareToIgnoreCase(ConstantesApp.RESPUESTA_NO) == 0)
 			{
 				holder.chkValActual.setText(ConstantesApp.RESPUESTA_NO_LARGA);
 			}
@@ -213,7 +213,7 @@ public class SKUPrioritarioCompromiso_Activity extends  net.msonic.lib.sherlock.
 			}
 			
 			
-			if(this.skuPresentaciones.get(position).compromiso.compareToIgnoreCase(ConstantesApp.RESPUESTA_SI) == 0)
+			if(this.skuPresentaciones.get(position).marcaCompromiso.compareToIgnoreCase(ConstantesApp.RESPUESTA_SI) == 0)
 			{
 				holder.chkValComp.setSelection(1);
 			}

@@ -325,13 +325,13 @@ public class Posicion_Activity extends ListBaseFragment  {
 						
 						PosicionCompromisoTO posicionTO = getItem(position);
 						
-						if(posicionTO.respuesta.equals(ConstantesApp.RESPUESTA_SI))
+						if(posicionTO.activosLindley.equals(ConstantesApp.RESPUESTA_SI))
 					    	  holder.TextViewRpsta.setText(ConstantesApp.RESPUESTA_SI_LARGA);
 					      else
 					    	  holder.TextViewRpsta.setText(ConstantesApp.RESPUESTA_NO_LARGA);
 						
 						holder.txViewAccComp.setText(posicionTO.observacion);
-						holder.txViewRed.setText(posicionTO.red);
+						holder.txViewRed.setText(posicionTO.soviRed);
 						holder.txViewMaximo.setText(posicionTO.ptoMaximo);
 						holder.txViewPuntos.setText(posicionTO.puntosSugeridos);
 						

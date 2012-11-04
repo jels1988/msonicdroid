@@ -2,6 +2,8 @@ package lindley.desarrolloxcliente.to;
 
 import java.util.ArrayList;
 
+import lindley.desarrolloxcliente.ConstantesApp;
+
 import com.google.gson.annotations.SerializedName;
 
 public class PresentacionCompromisoTO {
@@ -9,6 +11,13 @@ public class PresentacionCompromisoTO {
 	public PresentacionCompromisoTO()
     {
         listaSKU = new ArrayList<SKUPresentacionCompromisoTO>();
+        puntosSugeridos = "0";
+        puntosBonus = "0";
+        puntosGanados="0";
+        
+        confirmacion =  ConstantesApp.RESPUESTA_NO;
+		origen =  ConstantesApp.OPORTUNIDAD_SISTEMA;
+		estado =  ConstantesApp.OPORTUNIDAD_ABIERTA;
     }
     
 	public long id;
@@ -19,21 +28,23 @@ public class PresentacionCompromisoTO {
     
     
     
-    @SerializedName("FCM")
+    
     public String fechaCompromiso;
 
-    @SerializedName("PTO")
+    
     public String puntosSugeridos;
     
-    @SerializedName("PTOG")
+    
     public String puntosGanados;
     
-    @SerializedName("CUM")
+    public String puntosBonus;
+    
+    
     public String cumplio;
     
     public String tipoAgrupacion;
     
-    @SerializedName("CVAR")
+    
     public String codigoVariable;
 
     public String codfde;
@@ -41,5 +52,9 @@ public class PresentacionCompromisoTO {
     public String fechaEncuesta;
     
     public int isOk;
+    
+    public String confirmacion;
+   	public String origen;
+   	public String estado;
     
 }

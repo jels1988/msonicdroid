@@ -19,6 +19,17 @@ public class OportunidadTO {
 		cumplePrecioActual = ConstantesApp.RESPUESTA_NO;
 		numeroSaboresActual = "2";
 		soviActual = "0";
+		
+		puntosSugeridos="0";
+		puntosGanados="0";
+		puntosBonus="0";
+		
+		codigoAccionTrade="0";
+		descAccionTrade="";
+		
+		confirmacion =  ConstantesApp.RESPUESTA_NO;
+		origen =  ConstantesApp.OPORTUNIDAD_SISTEMA;
+		estado =  ConstantesApp.OPORTUNIDAD_ABIERTA;
 	}
 	
 	@Expose()
@@ -60,8 +71,7 @@ public class OportunidadTO {
 	@SerializedName("PCC")
 	public String puntosCocaCola;
 
-	@SerializedName("PBN")
-	public String puntosBonus;
+	
 
 	@SerializedName("FECO")
 	public String fechaOportunidad;
@@ -80,12 +90,15 @@ public class OportunidadTO {
 	public String codigoLegacy;
 	
 	public String puntosSugeridos;
-	
-	
+	public String puntosGanados;
+	public String puntosBonus;
 	
 	
 	public String descAccionTrade;
 	public String codigoAccionTrade;
+	public String confirmacion;
+	public String origen;
+	public String estado;
 	
 	public boolean seleccionado;
 	
