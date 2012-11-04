@@ -64,7 +64,7 @@
             </intent-filter>
         </activity>
                 
-        <activity android:name=".activity.ConsultarOportunidad_Activity" android:configChanges="keyboardHidden|orientation">
+        <activity android:name=".activity.ConsultarOportunidad_Activity" android:configChanges="keyboardHidden|orientation" android:noHistory="true">
             <intent-filter>
                 <action android:name="lindley.desarrolloxcliente.consultaroportunidad" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
@@ -205,7 +205,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".activity.SKUPrioritario_Activity" android:configChanges="keyboardHidden|orientation">
+        <activity android:name=".activity.SKUPrioritario_Activity" android:configChanges="keyboardHidden|orientation" android:noHistory="true">
             <intent-filter>
                 <action android:name="lindley.desarrolloxcliente.skuprioritario" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
