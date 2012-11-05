@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/mnuCancelar" android:title="@string/evaluacion_tabs_menu_cancelar"></item>
     <item android:id="@+id/mnuGrabar" android:title="@string/evaluacion_tabs_menu_grabar"></item>
     
 

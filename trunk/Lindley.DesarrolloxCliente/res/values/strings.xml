@@ -138,10 +138,15 @@
     <string name="posicionopen_content_fechacompromiso">Fecha Compromiso:</string>
     
    <string name="evaluacion_tabs_menu_grabar">Grabar</string>
+   <string name="evaluacion_tabs_menu_cancelar">Cancelar</string>
    <string name="evaluacion_msg_error_sovi">Los valores de SOVI deben ser mayores a 0.</string>
+   <string name="evaluacion_msg_error_fecha">Debes indicar las fechas de compromiso.</string>
    <string name="evaluacion_msg_error_inventario">Debe editar valores de la pestaña inventario.</string>
    <string name="evaluacion_msg_error_posicion">Debe editar valores de la pestaña posición.</string>
    <string name="evaluacion_msg_error_presentacion">Debe editar valores de la pestaña presentación.</string>
+   <string name="evaluacion_msg_error_combos">Debe editar valores de la pestaña combos.</string>
+   <string name="evaluacion_msg_grabar_ok">Se guardaron los datos satisfactoriamente.</string>
+   <string name="evaluacion_msg_grabar_error">Error guardaron evaluación, por favor vuelva intentar.</string>
    
     <string name="isOK">OK?</string>
     
@@ -150,4 +155,6 @@
     
     <string name="consultarcliente_menu_descargar">Descargar</string>
     <string name="consultarcliente_menu_enviar">Enviar</string>
+    <string name="consultarcliente_menu_salir">Salir</string>
+    
 </resources>
