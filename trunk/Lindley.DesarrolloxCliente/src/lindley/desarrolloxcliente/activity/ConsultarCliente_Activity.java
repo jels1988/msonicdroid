@@ -131,6 +131,9 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 			Intent i = new Intent(this, UploadData_Activity.class);
 			startActivity(i);
 		}
+		else if(item.getItemId()==R.id.mnuSalir){
+			finish();
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -351,7 +354,6 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 					
 					// TODO Auto-generated method stub
 					Intent cabecera = new Intent(context, ConsultarCabecera_Activity.class);
-					//cabecera.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					context.startActivity(cabecera);
 									
 				}

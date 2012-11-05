@@ -128,7 +128,7 @@ public class DescargaDAO {
 		values.put("cluster", clienteDescargaTO.cluster);
 		values.put("mc", clienteDescargaTO.mc);
 		values.put("puntos", clienteDescargaTO.nroPuntos);
-		values.put("siguiente", clienteDescargaTO.nroPuntos);
+		values.put("siguiente", 0);
 		values.put("direccion", clienteDescargaTO.direccion);
 		values.put("latitud", clienteDescargaTO.latitud);
 		values.put("longitud", clienteDescargaTO.longitud);

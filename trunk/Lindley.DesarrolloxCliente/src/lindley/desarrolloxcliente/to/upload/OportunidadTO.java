@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class OportunidadTO {
 
+			@SerializedName("EID")
+		    public long evaluacionId;
 	
 			@SerializedName("ANI")
 	        public int anio;
@@ -13,6 +15,9 @@ public class OportunidadTO {
 
 	        @SerializedName("ART")
 	        public String codigoArticulo;
+	        
+	        @SerializedName("DART")
+	        public String articulo;
 
 	        @SerializedName("CNR")
 	        public String concrecion;
