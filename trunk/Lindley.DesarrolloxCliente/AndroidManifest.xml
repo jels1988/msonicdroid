@@ -301,7 +301,7 @@
             </intent-filter>
         </activity>
         
-         <activity android:name=".activity.EvaluacionTabs_Activity" android:configChanges="keyboardHidden|orientation">
+         <activity android:name=".activity.EvaluacionTabs_Activity" android:configChanges="keyboardHidden|orientation" android:windowSoftInputMode="adjustPan">
             <intent-filter>            					  
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
