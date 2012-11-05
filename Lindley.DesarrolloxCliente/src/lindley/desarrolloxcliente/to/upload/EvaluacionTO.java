@@ -18,6 +18,8 @@ public class EvaluacionTO {
 			@Expose()
 	      public long id;
 	  
+		
+			
 			@SerializedName("CLI")
 	        public String codigoCliente;
 

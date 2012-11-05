@@ -6,6 +6,11 @@ import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProductoProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarClienteProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionOportunidadProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionPosicionProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionPresentacionProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionSKUProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarPosicionProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarPresentacionProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarProductosProxy;
@@ -35,6 +40,11 @@ public class DescargaData_Activity extends ActivityBase {
 	public static final int DESCARGAR_POSICION=6;
 	public static final int DESCARGAR_PRESENTACION=7;
 	public static final int DESCARGAR_PUNTO=8;
+	public static final int DESCARGAR_EVALUACION=9;
+	public static final int DESCARGAR_EVALUACION_OPORTUNIDAD=20;
+	public static final int DESCARGAR_EVALUACION_POSICION=21;
+	public static final int DESCARGAR_EVALUACION_PRESENTACION=22;
+	public static final int DESCARGAR_EVALUACION_SKU=23;
 	
 	public static final int GUARDAR_PRODUCTO=10;
 	public static final int GUARDAR_OPORTUNIDAD=11;
@@ -45,6 +55,11 @@ public class DescargaData_Activity extends ActivityBase {
 	public static final int GUARDAR_POSICION=16;
 	public static final int GUARDAR_PRESENTACION=17;
 	public static final int GUARDAR_PUNTO=18;
+	public static final int GUARDAR_EVALUACION=19;
+	public static final int GUARDAR_EVALUACION_OPORTUNIDAD=120;
+	public static final int GUARDAR_EVALUACION_POSICION=121;
+	public static final int GUARDAR_EVALUACION_PRESENTACION=122;
+	public static final int GUARDAR_EVALUACION_SKU=123;
 	
 	@Inject DescargarProductosProxy descagarProductosProxy;
 	@Inject DescargarOportunidadesProxy descargarOportunidadesProxy;
@@ -55,6 +70,12 @@ public class DescargaData_Activity extends ActivityBase {
 	@Inject DescargarPosicionProxy descargarPosicionProxy;
 	@Inject DescargarPresentacionProxy descargarPresentacionProxy;
 	@Inject DescargarPuntoProxy descargarPuntoProxy;
+	@Inject DescargarEvaluacionProxy descargarEvaluacionProxy;
+	@Inject DescargarEvaluacionOportunidadProxy descargarEvaluacionOportunidadProxy;
+	@Inject DescargarEvaluacionPosicionProxy descargarEvaluacionPosicionProxy;
+	@Inject DescargarEvaluacionPresentacionProxy descargarEvaluacionPresentacionProxy;
+	@Inject DescargarEvaluacionSKUProxy descargarEvaluacionSKUProxy;
+	
 	
 	@Inject DescargaBLL descargaBLL;
 	@Inject PeriodoTO periodoTO;
@@ -81,18 +102,12 @@ public class DescargaData_Activity extends ActivityBase {
 		processAsync(DESCARGAR_POSICION);
 		processAsync(DESCARGAR_PRESENTACION);
 		processAsync(DESCARGAR_PUNTO);
+		processAsync(DESCARGAR_EVALUACION);
+		
 		
 		setSupportProgressBarIndeterminateVisibility(true);
 		
-		/*ImageView img = (ImageView)findViewById(R.id.spinning_wheel_image);
-		 img.setBackgroundResource(R.drawable.spin_animation);
-
-		 
-		 AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
-
-		 // Start the animation (looped playback by default).
-		 frameAnimation.start();*/
-		 
+	
 		
 	}
 	
@@ -156,10 +171,33 @@ public class DescargaData_Activity extends ActivityBase {
 			addContadorProcesos();
 			descargarPresentacionProxy.execute();
 			break;
+		
 		case DESCARGAR_PUNTO:
 			addContadorProcesos();
 			descargarPuntoProxy.execute();
 			break;
+		case DESCARGAR_EVALUACION:
+			addContadorProcesos();
+			descargarEvaluacionProxy.execute();
+			break;
+		case DESCARGAR_EVALUACION_OPORTUNIDAD:
+			addContadorProcesos();
+			descargarEvaluacionOportunidadProxy.execute();
+			break;
+		case DESCARGAR_EVALUACION_POSICION:
+			addContadorProcesos();
+			descargarEvaluacionPosicionProxy.execute();
+			break;
+				
+		case DESCARGAR_EVALUACION_PRESENTACION:
+			addContadorProcesos();
+			descargarEvaluacionPresentacionProxy.execute();
+			break;
+			
+		case DESCARGAR_EVALUACION_SKU:
+				addContadorProcesos();
+				descargarEvaluacionSKUProxy.execute();
+				break;
 		case GUARDAR_PRODUCTO:
 			addContadorProcesos();
 			descargaBLL.saveProducto(descagarProductosProxy.getResponse().productos);
@@ -196,6 +234,26 @@ public class DescargaData_Activity extends ActivityBase {
 		case GUARDAR_PUNTO:
 			addContadorProcesos();
 			descargaBLL.savePunto(descargarPuntoProxy.getResponse().puntos);
+			break;
+		case GUARDAR_EVALUACION:
+			addContadorProcesos();
+			//descargaBLL.savePunto(descargarPuntoProxy.getResponse().puntos);
+			break;
+		case GUARDAR_EVALUACION_OPORTUNIDAD:
+			addContadorProcesos();
+			//descargaBLL.savePunto(descargarPuntoProxy.getResponse().puntos);
+			break;
+		case GUARDAR_EVALUACION_POSICION:
+			addContadorProcesos();
+			//descargaBLL.savePunto(descargarPuntoProxy.getResponse().puntos);
+			break;
+		case GUARDAR_EVALUACION_PRESENTACION:
+			addContadorProcesos();
+			//descargaBLL.savePunto(descargarPuntoProxy.getResponse().puntos);
+			break;
+		case GUARDAR_EVALUACION_SKU:
+			addContadorProcesos();
+			//descargaBLL.savePunto(descargarPuntoProxy.getResponse().puntos);
 			break;
 		default:
 			break;
@@ -437,6 +495,17 @@ public class DescargaData_Activity extends ActivityBase {
 					showToast(message);
 				}
 			}
+		}else if(accion==DESCARGAR_EVALUACION){
+				removeContadorProcesos();
+				processAsync(GUARDAR_EVALUACION);
+		}else if(accion==DESCARGAR_EVALUACION_OPORTUNIDAD){
+			removeContadorProcesos();
+		}else if(accion==DESCARGAR_EVALUACION_POSICION){
+			removeContadorProcesos();
+		}else if(accion==DESCARGAR_EVALUACION_PRESENTACION){
+			removeContadorProcesos();
+		}else if(accion==DESCARGAR_EVALUACION_SKU){
+			removeContadorProcesos();
 		}else if(accion==GUARDAR_PRODUCTO){
 			removeContadorProcesos();
 			showToast("PRODUCTOS GUARDAR");
@@ -464,7 +533,27 @@ public class DescargaData_Activity extends ActivityBase {
 		}else if(accion==GUARDAR_PUNTO){
 			removeContadorProcesos();
 			showToast("guardar GUARDAR_PUNTO");
+		}else if(accion==GUARDAR_EVALUACION){
+			removeContadorProcesos();
+			processAsync(DESCARGAR_EVALUACION_OPORTUNIDAD);
+			processAsync(DESCARGAR_EVALUACION_POSICION);
+			processAsync(DESCARGAR_EVALUACION_PRESENTACION);
+			processAsync(DESCARGAR_EVALUACION_SKU);
+			showToast("guardar GUARDAR_EVALUACION");
+		}else if(accion==GUARDAR_EVALUACION_OPORTUNIDAD){
+			removeContadorProcesos();
+			showToast("guardar GUARDAR_EVALUACION");
+		}else if(accion==GUARDAR_EVALUACION_POSICION){
+			removeContadorProcesos();
+			showToast("guardar GUARDAR_EVALUACION_POSICION");
+		}else if(accion==GUARDAR_EVALUACION_PRESENTACION){
+			removeContadorProcesos();
+			showToast("guardar GUARDAR_EVALUACION_PRESENTACION");
+		}else if(accion==GUARDAR_EVALUACION_SKU){
+			removeContadorProcesos();
+			showToast("guardar GUARDAR_EVALUACION_SKU");
 		}
+		
 		
 		
 		

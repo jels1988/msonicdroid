@@ -204,6 +204,16 @@ public class Compromisos_Activity extends ListBaseFragment {
 								}
 							});
 						  
+						  holder.txViewSOVI.setOnFocusChangeListener(new OnFocusChangeListener() {
+								
+								@Override
+								public void onFocusChange(View v, boolean hasFocus) {
+									// TODO Auto-generated method stub
+									OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
+									oportunidadTO.sovi = holder.txViewSOVI.getText().toString();
+								}
+							});
+						  
 						    
 						  holder.cboCumPrecio.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -278,7 +288,7 @@ public class Compromisos_Activity extends ListBaseFragment {
 								public void onClick(View v) {
 									// TODO Auto-generated method stub
 									OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
-									 int[] factores = ConstantesApp.getFechaFactores(oportunidadTO.fechaOportunidad);
+									 String[] factores = ConstantesApp.getFechaFactoresAS400(oportunidadTO.fechaOportunidad);
 									 
 									 DatePickerDialog picker = new DatePickerDialog(context, new OnDateSetListener() {
 										
@@ -288,11 +298,11 @@ public class Compromisos_Activity extends ListBaseFragment {
 											OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
 											String mes = ConstantesApp.RPad(String.valueOf(monthOfYear+1),2,'0');
 											String dia = ConstantesApp.RPad(String.valueOf(dayOfMonth),2,'0');
-											String fecha = String.format("%s/%s/%s", dia,mes, year);
+											String fecha = String.format("%s%s%s", year,mes, dia);
 											oportunidadTO.fechaOportunidad=fecha;
-											holder.txEditFecha.setText(oportunidadTO.fechaOportunidad);
+											holder.txEditFecha.setText(ConstantesApp.formatFecha(oportunidadTO.fechaOportunidad));
 										}
-									}, factores[0],factores[1], factores[2]);
+									}, Integer.parseInt(factores[0]) ,Integer.parseInt(factores[1])-1, Integer.parseInt(factores[2]));
 									 
 									 picker.show();
 								}
@@ -334,7 +344,7 @@ public class Compromisos_Activity extends ListBaseFragment {
 					 holder.txViewSOVI.setText(oportunidadTO.sovi);
 				     holder.txViewSOVICmp.setText(oportunidadTO.soviActual);
 				     holder.txViewSabores.setText(oportunidadTO.numeroSabores);
-				     holder.txEditFecha.setText(oportunidadTO.fechaOportunidad);
+				     holder.txEditFecha.setText(ConstantesApp.formatFecha(oportunidadTO.fechaOportunidad));
 				    
 				 
 					  

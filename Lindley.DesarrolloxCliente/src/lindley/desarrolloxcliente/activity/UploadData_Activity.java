@@ -4,6 +4,7 @@ import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.UploadBLL;
 import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
 import lindley.desarrolloxcliente.ws.service.UploadEvaluacionesProxy;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -69,6 +70,8 @@ public class UploadData_Activity extends ActivityBase {
 			Log.d("Evaluaciones Pendientes", String.valueOf(cantidadEvaluaciones));
 			if(cantidadEvaluaciones>0){
 				processAsync(LISTAR_EVALUACIONES);
+				Intent servicioFoto = new Intent("lindley.desarrolloxcliente.uploadFileService");
+   				startService(servicioFoto);
 			}else{
 				setSupportProgressBarIndeterminateVisibility(false);
 			}

@@ -258,7 +258,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 		// TODO Auto-generated method stub
 		if(accion == ACCION_GUARDAR)
     	{
-			
+			finish();
 			Intent compromisoOpen = new Intent(this,EvaluacionTabs_Activity.class);
 			compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, "0");					
 			compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "N");

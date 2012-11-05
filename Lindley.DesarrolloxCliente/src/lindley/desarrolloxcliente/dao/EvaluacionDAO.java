@@ -210,7 +210,7 @@ public class EvaluacionDAO {
 		values.put("puntosBonus", oportunidadTO.puntosBonus);
 		values.put("puntosGanados", oportunidadTO.puntosGanados);
 		
-		values.put("fechaProceso", oportunidadTO.fecha);
+		values.put("fechaProceso", oportunidadTO.fechaOportunidad);
 		values.put("legacy", oportunidadTO.codigoLegacy);
 		values.put("codigoAccion", oportunidadTO.codigoAccionTrade);
 		values.put("accion", oportunidadTO.accioneTrade);

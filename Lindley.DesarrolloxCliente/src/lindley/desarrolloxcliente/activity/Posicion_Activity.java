@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -229,9 +231,9 @@ public class Posicion_Activity extends ListBaseFragment  {
 											PosicionCompromisoTO posicionCompromisoTO = (PosicionCompromisoTO) holder.TextViewRpsta.getTag();
 											String mes = ConstantesApp.RPad(String.valueOf(monthOfYear+1),2,'0');
 											String dia = ConstantesApp.RPad(String.valueOf(dayOfMonth),2,'0');
-											String fecha = String.format("%s/%s/%s", dia,mes, year);
+											String fecha = String.format("%s%s%s", year,mes,dia);
 											posicionCompromisoTO.fechaCompromiso=fecha;
-											holder.txEditFecha.setText(posicionCompromisoTO.fechaCompromiso);
+											holder.txEditFecha.setText(ConstantesApp.formatFecha(posicionCompromisoTO.fechaCompromiso));
 										}
 									}, factores[0],factores[1], factores[2]);
 									 
@@ -312,7 +314,30 @@ public class Posicion_Activity extends ListBaseFragment  {
 								    }						
 							     }
 							});
-							 
+							
+							holder.txViewAccComp.addTextChangedListener(new TextWatcher() {
+								
+								@Override
+								public void onTextChanged(CharSequence s, int start, int before, int count) {
+									// TODO Auto-generated method stub
+									
+								}
+								
+								@Override
+								public void beforeTextChanged(CharSequence s, int start, int count,
+										int after) {
+									// TODO Auto-generated method stub
+									
+								}
+								
+								@Override
+								public void afterTextChanged(Editable s) {
+									// TODO Auto-generated method stub
+									PosicionCompromisoTO posicionCompromisoTO = (PosicionCompromisoTO) holder.TextViewRpsta.getTag();
+									posicionCompromisoTO.observacion=s.toString();
+								}
+							});
+							
 							view.setTag(holder);
 					    	holder.TextViewRpsta.setTag(this.detalle.get(position));
 							
@@ -334,6 +359,8 @@ public class Posicion_Activity extends ListBaseFragment  {
 						holder.txViewRed.setText(posicionTO.soviRed);
 						holder.txViewMaximo.setText(posicionTO.ptoMaximo);
 						holder.txViewPuntos.setText(posicionTO.puntosSugeridos);
+						holder.txEditFecha.setText(ConstantesApp.formatFecha(posicionTO.fechaCompromiso));
+						
 						
 						if(posicionTO.codigoVariable.compareToIgnoreCase(ConstantesApp.VARIABLE_RED_ESTANDAR_ANAQUEL) == 0)
 						{

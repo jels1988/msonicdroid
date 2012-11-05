@@ -1,6 +1,5 @@
 package lindley.desarrolloxcliente.activity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.actionbarsherlock.view.Menu;
@@ -12,17 +11,15 @@ import roboguice.inject.InjectExtra;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
-import lindley.desarrolloxcliente.activity.CompromisoOpen_Activity.EfficientAdapter;
 import lindley.desarrolloxcliente.negocio.EvaluacionBLL;
-import lindley.desarrolloxcliente.to.CompromisoTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
+import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.widget.TabHost;
 import net.msonic.lib.sherlock.ActivityBaseFragment;
@@ -35,6 +32,13 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 	public final static String CODIGO_REGISTRO = "codigo_reg";
 	public final static String ORIGEN_REGISTRO = "origen_reg";
 	
+	private final static String TAB_INVENTARIO="Inventario";
+	private final static String TAB_POSICION="Posicion";
+	private final static String TAB_PRESENTACION="Presentacion";
+	private final static String TAB_COMBOS="Combos";
+	
+	private final static int ACCION_GUARDAR_EVALUACION=0;
+	
    @InjectExtra(CODIGO_REGISTRO)public String codigoRegistro;
    @InjectExtra(ORIGEN_REGISTRO)public String origen;
     
@@ -46,7 +50,8 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
- 
+        this.inicializarRecursos();
+        
         Compromisos_Activity.VISTA_CARGADA=0;
         Posicion_Activity.VISTA_CARGADA=0;
         Presentacion_Activity.VISTA_CARGADA=0;
@@ -59,10 +64,10 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 
         mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
         
-        mTabManager.addTab(mTabHost.newTabSpec("Inventario").setIndicator("Inventario"),Compromisos_Activity.class,getIntent().getExtras());
-        mTabManager.addTab(mTabHost.newTabSpec("Posicion").setIndicator("Posici—n"),Posicion_Activity.class,getIntent().getExtras());
-        mTabManager.addTab(mTabHost.newTabSpec("Presentacion").setIndicator("Presentaci—n"),Presentacion_Activity.class,getIntent().getExtras());
-        mTabManager.addTab(mTabHost.newTabSpec("Combos").setIndicator("Combos"),Combos_Activity.class,getIntent().getExtras());
+        mTabManager.addTab(mTabHost.newTabSpec(TAB_INVENTARIO).setIndicator("Inventario"),Compromisos_Activity.class,getIntent().getExtras());
+        mTabManager.addTab(mTabHost.newTabSpec(TAB_POSICION).setIndicator("Posici—n"),Posicion_Activity.class,getIntent().getExtras());
+        mTabManager.addTab(mTabHost.newTabSpec(TAB_PRESENTACION).setIndicator("Presentaci—n"),Presentacion_Activity.class,getIntent().getExtras());
+        mTabManager.addTab(mTabHost.newTabSpec(TAB_COMBOS).setIndicator("Combos"),Combos_Activity.class,getIntent().getExtras());
         
         if (savedInstanceState != null) {
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
@@ -79,6 +84,38 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
     
    
 	   @Override
+	protected void process(int accion) throws Exception {
+		// TODO Auto-generated method stub
+		   
+		if(ACCION_GUARDAR_EVALUACION==accion){
+			MyApplication application = (MyApplication)getApplicationContext();
+			EvaluacionTO evaluacion = application.evaluacion;
+			evaluacionBLL.save(evaluacion);
+		}
+		super.processOk();
+	}
+
+	@Override
+	protected void processOk(int accion) {
+		// TODO Auto-generated method stub
+		if(ACCION_GUARDAR_EVALUACION==accion){
+			String msg = getString(R.string.evaluacion_msg_grabar_ok);
+			showToast(msg);
+			finish();
+		}
+		
+	}
+
+	@Override
+	protected void processError(int accion) {
+		// TODO Auto-generated method stub
+		if(ACCION_GUARDAR_EVALUACION==accion){
+			String msg = getString(R.string.evaluacion_msg_grabar_error);
+			showToast(msg);
+		}
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		   
@@ -93,56 +130,81 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 			// TODO Auto-generated method stub
 			if(item.getItemId()==R.id.mnuGrabar){
 				
+				
 				MyApplication application = (MyApplication)getApplicationContext();
 				EvaluacionTO evaluacion = application.evaluacion;
 				
-				evaluacionBLL.save(evaluacion);
+			
+				
+				
 				String msg = "";
 				
 				
 				
 				if(evaluacion.oportunidades == null || evaluacion.oportunidades.isEmpty())
 				{				
-					application.openAdapter = new EfficientAdapter(getApplicationContext(), new ArrayList<CompromisoTO>());				
-					/*openAdapterVacio = true;
-					if(openAdapterVacio)
-					{*/
-					
-						msg = getString(R.string.evaluacion_msg_error_inventario);
-						showToast(msg);
-						return false;
-					//}
+					mTabHost.setCurrentTabByTag(TAB_INVENTARIO);
+					msg = getString(R.string.evaluacion_msg_error_inventario);
+					showToast(msg);
+					return false;
 				}
 				
 				for(OportunidadTO comp : evaluacion.oportunidades)
 				{
 					if(comp.soviActual==null || comp.soviActual.trim().compareTo("")==0 || Integer.parseInt(comp.sovi)<=0 || Integer.parseInt(comp.soviActual)<=0)
 					{
+						mTabHost.setCurrentTabByTag(TAB_INVENTARIO);
 						msg = getString(R.string.evaluacion_msg_error_sovi);
+						showToast(msg);
+						return false;
+					}
+					
+					if((comp.fechaOportunidad==null) || (comp.fechaOportunidad.compareTo("")==0)){
+						mTabHost.setCurrentTabByTag(TAB_INVENTARIO);
+						msg = getString(R.string.evaluacion_msg_error_fecha);
 						showToast(msg);
 						return false;
 					}
 				}
 				
-				if(evaluacion.posiciones == null || evaluacion.posiciones.isEmpty())
+				if(evaluacion.posiciones == null || evaluacion.posiciones.isEmpty() || (Posicion_Activity.VISTA_CARGADA==0))
 				{				
+					mTabHost.setCurrentTabByTag(TAB_POSICION);
 					msg = getString(R.string.evaluacion_msg_error_posicion);
 					showToast(msg);
 					return false; 
 				}
 				
-				if(evaluacion.presentaciones == null || evaluacion.presentaciones.isEmpty())
+				for(PosicionCompromisoTO posicion : evaluacion.posiciones)
+				{
+					if((posicion.fechaCompromiso==null) || (posicion.fechaCompromiso.compareTo("")==0)){
+						mTabHost.setCurrentTabByTag(TAB_POSICION);
+						msg = getString(R.string.evaluacion_msg_error_fecha);
+						showToast(msg);
+						return false;
+					}
+				}
+				
+				
+				if(evaluacion.presentaciones == null || evaluacion.presentaciones.isEmpty() || (Presentacion_Activity.VISTA_CARGADA==0))
 				{				
+					mTabHost.setCurrentTabByTag(TAB_PRESENTACION);
 					msg = getString(R.string.evaluacion_msg_error_presentacion);
 					showToast(msg);
 					return false; 
 				}
 				
-
-
-				Log.d(TAG, "validar evaluaci—n");
+				if(Combos_Activity.VISTA_CARGADA==0){
+					mTabHost.setCurrentTabByTag(TAB_COMBOS);
+					msg = getString(R.string.evaluacion_msg_error_combos);
+					showToast(msg);
+					return false; 
+				}
 				
+				processAsync(ACCION_GUARDAR_EVALUACION);
 				
+			}else if(item.getItemId()==R.id.mnuCancelar){
+				finish();
 			}
 			return super.onMenuItemSelected(featureId, item);
 		}

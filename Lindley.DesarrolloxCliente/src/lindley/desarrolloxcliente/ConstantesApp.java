@@ -128,7 +128,7 @@ public final class ConstantesApp {
 		
 		final Calendar calendar = Calendar.getInstance();
 		factores[0] = String.valueOf(calendar.get(Calendar.YEAR));        
-		factores[1] = String.valueOf(calendar.get(Calendar.MONTH));        
+		factores[1] = String.valueOf(calendar.get(Calendar.MONTH)+1);        
 		factores[2] = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
 		
 		if(null==fecha){

@@ -68,6 +68,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
     }
 
     
+    /*
     @Override
     public void onBackPressed() {
     // check if page 2 is open
@@ -76,7 +77,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
     	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 //    	finish();
-    }
+    }*/
     
     @Override
 	protected void onStart() {

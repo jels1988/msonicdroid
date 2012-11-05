@@ -37,43 +37,36 @@ public class OportunidadTO {
 	
 	@Expose()
 	public long productoId;
-	
-	@SerializedName("FEC")
 	public String fecha;
-
-	@SerializedName("CPRO")
 	public String codigoProducto;
-
-	@SerializedName("DPRO")
 	public String descripcionProducto;
-
-	@SerializedName("CNR")
+	
 	public String concrecion;
 	public String concrecionActual;
 	public int concrecionCumple;
 	
-	@SerializedName("SOVI")
+	
 	public String sovi;
 	public String soviActual;
 	public int soviCumple;
 	
 	
-	@SerializedName("RPRE") 
+	 
 	public String cumplePrecio;
 	public String cumplePrecioActual;
 	public int cumplePrecioCumple;
 
-	@SerializedName("NSB")
+	
 	public String numeroSabores;
 	public String numeroSaboresActual;
 	public int numeroSaboresCumple;
 	
-	@SerializedName("PCC")
+	
 	public String puntosCocaCola;
 
 	
 
-	@SerializedName("FECO")
+	
 	public String fechaOportunidad;
 	
 	@SerializedName("TRD")
