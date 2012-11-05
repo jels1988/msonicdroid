@@ -57,9 +57,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
+            android:focusable="true"
             android:maxLength="150" >
-
-            <requestFocus />
+	
         </EditText>
 
         <TextView
@@ -99,10 +99,11 @@
         </TextView>
 
         <EditText
-            android:id="@+id/txtObs"
+            android:id="@+id/txtObsMS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
+            android:focusable="true"
             android:maxLength="150" >
         </EditText>
     </LinearLayout>
@@ -129,7 +130,7 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <LinearLayout
+    <!--LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
@@ -155,6 +156,6 @@
             android:onClick="btnGuardar_click"
             android:text="@string/compromiso_open_guardar" >
         </Button>
-    </LinearLayout>
+    </LinearLayout-->
 
 </LinearLayout>
