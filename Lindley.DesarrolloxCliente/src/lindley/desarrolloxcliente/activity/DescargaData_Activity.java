@@ -20,7 +20,10 @@ import lindley.desarrolloxcliente.ws.service.DescargarSkuProxy;
 
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 
@@ -104,18 +107,19 @@ public class DescargaData_Activity extends ActivityBase {
 		processAsync(DESCARGAR_PUNTO);
 		processAsync(DESCARGAR_EVALUACION);
 		
-		
-		setSupportProgressBarIndeterminateVisibility(true);
-		
 	
-		
 	}
 	
+	
+    
 	private int contadorProcesos=0;
 	
 	private synchronized void addContadorProcesos(){
 		contadorProcesos++;
 		Log.i("up", String.valueOf(contadorProcesos));
+		if(contadorProcesos>0){
+			setSupportProgressBarIndeterminateVisibility(true);
+		}
 	}
 	
 	private synchronized void removeContadorProcesos(){
@@ -126,10 +130,20 @@ public class DescargaData_Activity extends ActivityBase {
 		}
 	}
 	
-
+	  
+		
 
 	
 	
+	@Override
+	protected boolean executeAsyncPre(int accion) {
+		// TODO Auto-generated method stub
+		
+		addContadorProcesos();
+		
+		return super.executeAsyncPre(accion);
+	}
+
 	@Override
 	protected void process(int accion) throws Exception {
 		// TODO Auto-generated method stub
@@ -140,120 +154,119 @@ public class DescargaData_Activity extends ActivityBase {
 		
 		switch (accion) {
 		case DESCARGAR_PRODUCTO:
-			addContadorProcesos();
 			descagarProductosProxy.execute();
 			break;
 		case DESCARGAR_OPORTUNIDAD:
-			addContadorProcesos();
+			
 			descargarOportunidadesProxy.execute();
 			break;
 		case DESCARGAR_SKU:
-			addContadorProcesos();
+			
 			descargarSkuProxy.execute();
 			break;
 		case DESCARGAR_ACCIONESTRADE:
-			addContadorProcesos();
+			
 			descargarAccionesTradeProxy.execute();
 			break;
 		case DESCARGAR_ACCIONESTRADEPRODUCTO:
-			addContadorProcesos();
+			
 			descargarAccionesTradeProductoProxy.execute();
 			break;
 		case DESCARGAR_CLIENTE:
-			addContadorProcesos();
+			
 			descargarClienteProxy.execute();
 			break;
 		case DESCARGAR_POSICION:
-			addContadorProcesos();
+			
 			descargarPosicionProxy.execute();
 			break;
 		case DESCARGAR_PRESENTACION:
-			addContadorProcesos();
+			
 			descargarPresentacionProxy.execute();
 			break;
 		
 		case DESCARGAR_PUNTO:
-			addContadorProcesos();
+			
 			descargarPuntoProxy.execute();
 			break;
 		case DESCARGAR_EVALUACION:
-			addContadorProcesos();
+			
 			descargarEvaluacionProxy.execute();
 			break;
 		case DESCARGAR_EVALUACION_OPORTUNIDAD:
-			addContadorProcesos();
+			
 			descargarEvaluacionOportunidadProxy.execute();
 			break;
 		case DESCARGAR_EVALUACION_POSICION:
-			addContadorProcesos();
+			
 			descargarEvaluacionPosicionProxy.execute();
 			break;
 				
 		case DESCARGAR_EVALUACION_PRESENTACION:
-			addContadorProcesos();
+			
 			descargarEvaluacionPresentacionProxy.execute();
 			break;
 			
 		case DESCARGAR_EVALUACION_SKU:
-				addContadorProcesos();
+				
 				descargarEvaluacionSKUProxy.execute();
 				break;
 		case GUARDAR_PRODUCTO:
-			addContadorProcesos();
+			
 			descargaBLL.saveProducto(descagarProductosProxy.getResponse().productos);
 			break;
 		case GUARDAR_OPORTUNIDAD:
-			addContadorProcesos();
+			
 			descargaBLL.saveOportunidad(descargarOportunidadesProxy.getResponse().oportunidades);
 			break;
 		
 		case GUARDAR_SKU:
-			addContadorProcesos();
+			
 			descargaBLL.saveSku(descargarSkuProxy.getResponse().skus);
 			break;
 		case GUARDAR_ACCIONESTRADE:
-			addContadorProcesos();
+			
 			descargaBLL.saveAccionTrade(descargarAccionesTradeProxy.getResponse().acciones);
 			break;
 		case GUARDAR_ACCIONESTRADEPRODUCTO:
-			addContadorProcesos();
+			
 			descargaBLL.saveAccionTradeProducto(descargarAccionesTradeProductoProxy.getResponse().accionesProducto);
 			break;
 		case GUARDAR_CLIENTE:
-			addContadorProcesos();
+			
 			descargaBLL.saveCliente(descargarClienteProxy.getResponse().clientes);
 			break;
 		case GUARDAR_POSICION:
-			addContadorProcesos();
+			
 			descargaBLL.savePosicion(descargarPosicionProxy.getResponse().posiciones);
 			break;
 		case GUARDAR_PRESENTACION:
-			addContadorProcesos();
+			
 			descargaBLL.savePresentacion(descargarPresentacionProxy.getResponse().presentaciones);
 			break;
 		case GUARDAR_PUNTO:
-			addContadorProcesos();
+			
 			descargaBLL.savePunto(descargarPuntoProxy.getResponse().puntos);
 			break;
 		case GUARDAR_EVALUACION:
-			addContadorProcesos();
-			//descargaBLL.savePunto(descargarPuntoProxy.getResponse().puntos);
+			
+			descargaBLL.saveEvaluacion(descargarEvaluacionProxy.getResponse().evaluaciones);
 			break;
 		case GUARDAR_EVALUACION_OPORTUNIDAD:
-			addContadorProcesos();
-			//descargaBLL.savePunto(descargarPuntoProxy.getResponse().puntos);
+			
+			descargaBLL.saveEvaluacionOportunidad(descargarEvaluacionOportunidadProxy.getResponse().oportunidades);
 			break;
 		case GUARDAR_EVALUACION_POSICION:
-			addContadorProcesos();
-			//descargaBLL.savePunto(descargarPuntoProxy.getResponse().puntos);
+			
+			descargaBLL.saveEvaluacionPosicion(descargarEvaluacionPosicionProxy.getResponse().posiciones);
 			break;
 		case GUARDAR_EVALUACION_PRESENTACION:
-			addContadorProcesos();
-			//descargaBLL.savePunto(descargarPuntoProxy.getResponse().puntos);
+			
+			descargaBLL.saveEvaluacionPresentacion(descargarEvaluacionPresentacionProxy.getResponse().presentaciones);
 			break;
 		case GUARDAR_EVALUACION_SKU:
-			addContadorProcesos();
-			//descargaBLL.savePunto(descargarPuntoProxy.getResponse().puntos);
+			
+			descargaBLL.saveEvaluacionSkus(descargarEvaluacionSKUProxy.getResponse().skus);
 			break;
 		default:
 			break;
@@ -500,12 +513,16 @@ public class DescargaData_Activity extends ActivityBase {
 				processAsync(GUARDAR_EVALUACION);
 		}else if(accion==DESCARGAR_EVALUACION_OPORTUNIDAD){
 			removeContadorProcesos();
+			processAsync(GUARDAR_EVALUACION_OPORTUNIDAD);
 		}else if(accion==DESCARGAR_EVALUACION_POSICION){
 			removeContadorProcesos();
+			processAsync(GUARDAR_EVALUACION_POSICION);
 		}else if(accion==DESCARGAR_EVALUACION_PRESENTACION){
 			removeContadorProcesos();
+			processAsync(GUARDAR_EVALUACION_PRESENTACION);
 		}else if(accion==DESCARGAR_EVALUACION_SKU){
 			removeContadorProcesos();
+			processAsync(GUARDAR_EVALUACION_SKU);
 		}else if(accion==GUARDAR_PRODUCTO){
 			removeContadorProcesos();
 			showToast("PRODUCTOS GUARDAR");
@@ -535,10 +552,11 @@ public class DescargaData_Activity extends ActivityBase {
 			showToast("guardar GUARDAR_PUNTO");
 		}else if(accion==GUARDAR_EVALUACION){
 			removeContadorProcesos();
+			processAsync(DESCARGAR_EVALUACION_SKU);
 			processAsync(DESCARGAR_EVALUACION_OPORTUNIDAD);
 			processAsync(DESCARGAR_EVALUACION_POSICION);
 			processAsync(DESCARGAR_EVALUACION_PRESENTACION);
-			processAsync(DESCARGAR_EVALUACION_SKU);
+			
 			showToast("guardar GUARDAR_EVALUACION");
 		}else if(accion==GUARDAR_EVALUACION_OPORTUNIDAD){
 			removeContadorProcesos();

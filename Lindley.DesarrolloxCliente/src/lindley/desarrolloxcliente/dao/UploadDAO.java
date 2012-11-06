@@ -3,6 +3,7 @@ package lindley.desarrolloxcliente.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
 import lindley.desarrolloxcliente.to.upload.OportunidadTO;
@@ -20,6 +21,9 @@ public class UploadDAO {
 	@Inject	protected DBHelper dbHelper;
 	@Inject protected PeriodoTO periodoTO;
 	
+	
+	
+	
 	public void deleteEvaluacion(long id){
 		dbHelper.delete("evaluacion", "id=?",new String[]{String.valueOf(id)});
 		dbHelper.delete("evaluacion_oportunidad", "evaluacionId=?",new String[]{String.valueOf(id)});
@@ -30,7 +34,7 @@ public class UploadDAO {
 	
 	public long getCantidadEvaluaciones(){
 		
-		String SQL = "select count(*) as cantidad from evaluacion";
+		String SQL = "select count(*) as cantidad from evaluacion where tieneCambios=1";
 		long cantidad=0;
 		Cursor cursor = dbHelper.rawQuery(SQL,null);
 		
@@ -46,9 +50,11 @@ public class UploadDAO {
 		List<EvaluacionTO> evaluaciones = new ArrayList<EvaluacionTO>();
 		
 		String SQL = "select id,clienteCodigo,activosLindley,codigoFe,usuario,fecha,hora,usuarioCierre,fechaCierre,horaCierre,estado,serverId,combosSS,combosMS,obsSS,obsMS " +
-					 "from evaluacion limit " + String.valueOf(limit);
+					 "from evaluacion where tieneCambios=?1 limit " + String.valueOf(limit);
 		
-		Cursor cursor = dbHelper.rawQuery(SQL,null);
+		String[] args = new String[] {String.valueOf(ConstantesApp.EVALUACION_TIENE_CAMBIOS)};
+		
+		Cursor cursor = dbHelper.rawQuery(SQL,args);
 		
 		EvaluacionTO evaluacionTO;
 		

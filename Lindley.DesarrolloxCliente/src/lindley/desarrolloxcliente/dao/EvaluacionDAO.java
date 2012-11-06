@@ -41,6 +41,7 @@ public class EvaluacionDAO {
 		values.put("obsSS", evaluacionTO.observacionSS);
 		values.put("combosMS", evaluacionTO.combosMS);
 		values.put("obsMS", evaluacionTO.observacionMS);
+		values.put("tieneCambios", ConstantesApp.EVALUACION_TIENE_CAMBIOS);
 		
 		
 		long id= dbHelper.insertOrThrow("evaluacion", values);

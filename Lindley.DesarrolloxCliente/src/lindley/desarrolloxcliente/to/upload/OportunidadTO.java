@@ -1,8 +1,12 @@
 package lindley.desarrolloxcliente.to.upload;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class OportunidadTO {
+	
+	@Expose()
+    public long id;
 
 			@SerializedName("EID")
 		    public long evaluacionId;

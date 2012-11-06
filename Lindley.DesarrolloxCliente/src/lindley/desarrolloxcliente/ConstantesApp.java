@@ -9,6 +9,8 @@ import android.text.format.DateFormat;
 
 public final class ConstantesApp {
 
+	public static final int EVALUACION_TIENE_CAMBIOS=1;
+	public static final int EVALUACION_NO_TIENE_CAMBIOS=0;
 	
 	public static final String RESPUESTA_SI = "S";
 	public static final String RESPUESTA_NO = "N";

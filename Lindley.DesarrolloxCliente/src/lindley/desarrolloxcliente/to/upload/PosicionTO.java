@@ -1,10 +1,17 @@
 package lindley.desarrolloxcliente.to.upload;
 
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class PosicionTO {
-	
+		
+	@Expose()
+    public long id;
+
+			@SerializedName("EID")
+		    public long evaluacionId;
+			
 			@SerializedName("ANI")
 	        public int anio;
 

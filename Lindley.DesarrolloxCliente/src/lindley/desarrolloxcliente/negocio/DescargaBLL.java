@@ -12,6 +12,7 @@ import lindley.desarrolloxcliente.to.download.PresentacionTO;
 import lindley.desarrolloxcliente.to.download.ProductoTO;
 import lindley.desarrolloxcliente.to.download.PuntoTO;
 import lindley.desarrolloxcliente.to.download.SkuTO;
+import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
 import net.msonic.lib.DBHelper;
 
 import android.util.Log;
@@ -24,6 +25,105 @@ public class DescargaBLL {
 	@Inject protected DBHelper dbHelper;
 	@Inject protected DescargaDAO descargaDAO;
 	public static String MyLock = "DescargaBLL.Lock";
+	
+	public void saveEvaluacionSkus(List<lindley.desarrolloxcliente.to.upload.SkuTO> lista){
+		synchronized(MyLock)	{
+			try{
+				dbHelper.openDataBase();
+				dbHelper.beginTransaction();
+				
+				descargaDAO.deleteEvaluacionSkus();
+				for (lindley.desarrolloxcliente.to.upload.SkuTO skuTO : lista) {
+					descargaDAO.insertEvaluacionSkus(skuTO);
+				}
+				dbHelper.setTransactionSuccessful();
+			}catch(Exception ex){
+				Log.e(TAG_LOG, "DescargaBLL.saveEvaluacionSkus", ex);
+			} finally {
+				dbHelper.endTransaction();
+				dbHelper.close();
+			}
+		}
+	}
+	
+	public void saveEvaluacionPresentacion(List<lindley.desarrolloxcliente.to.upload.PresentacionTO> lista){
+		synchronized(MyLock)	{
+			try{
+				dbHelper.openDataBase();
+				dbHelper.beginTransaction();
+				
+				descargaDAO.deleteEvaluacionPresentacion();
+				for (lindley.desarrolloxcliente.to.upload.PresentacionTO presentacionTO : lista) {
+					descargaDAO.insertEvaluacionPresentacion(presentacionTO);
+				}
+				dbHelper.setTransactionSuccessful();
+			}catch(Exception ex){
+				Log.e(TAG_LOG, "DescargaBLL.saveEvaluacionPresentacion", ex);
+			} finally {
+				dbHelper.endTransaction();
+				dbHelper.close();
+			}
+		}
+	}
+	
+	public void saveEvaluacionPosicion(List<lindley.desarrolloxcliente.to.upload.PosicionTO> lista){
+		synchronized(MyLock)	{
+			try{
+				dbHelper.openDataBase();
+				dbHelper.beginTransaction();
+				
+				descargaDAO.deleteEvaluacionPosicion();
+				for (lindley.desarrolloxcliente.to.upload.PosicionTO posicionTO : lista) {
+					descargaDAO.insertEvaluacionPosicion(posicionTO);
+				}
+				dbHelper.setTransactionSuccessful();
+			}catch(Exception ex){
+				Log.e(TAG_LOG, "DescargaBLL.saveEvaluacionPosicion", ex);
+			} finally {
+				dbHelper.endTransaction();
+				dbHelper.close();
+			}
+		}
+	}
+	
+	public void saveEvaluacionOportunidad(List<lindley.desarrolloxcliente.to.upload.OportunidadTO> lista){
+		synchronized(MyLock)	{
+			try{
+				dbHelper.openDataBase();
+				dbHelper.beginTransaction();
+				
+				descargaDAO.deleteEvaluacionOportunidad();
+				for (lindley.desarrolloxcliente.to.upload.OportunidadTO oportunidadTO : lista) {
+					descargaDAO.insertEvaluacionOportunidad(oportunidadTO);
+				}
+				dbHelper.setTransactionSuccessful();
+			}catch(Exception ex){
+				Log.e(TAG_LOG, "DescargaBLL.insertEvaluacionOportunidad", ex);
+			} finally {
+				dbHelper.endTransaction();
+				dbHelper.close();
+			}
+		}
+	}
+	
+	public void saveEvaluacion(List<EvaluacionTO> lista){
+		synchronized(MyLock)	{
+			try{
+				dbHelper.openDataBase();
+				dbHelper.beginTransaction();
+				descargaDAO.deleteEvaluacion();
+				for (EvaluacionTO evaluacionTO : lista) {
+					descargaDAO.insertEvaluacion(evaluacionTO);
+				}
+				dbHelper.setTransactionSuccessful();
+			}catch(Exception ex){
+				Log.e(TAG_LOG, "DescargaBLL.saveEvaluacion", ex);
+			} finally {
+				dbHelper.endTransaction();
+				dbHelper.close();
+			}
+		}
+	}
 	
 	public void saveProducto(List<ProductoTO> lista){
 		synchronized(MyLock)	{

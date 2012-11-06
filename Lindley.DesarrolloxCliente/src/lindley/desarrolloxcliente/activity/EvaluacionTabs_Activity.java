@@ -51,6 +51,7 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.inicializarRecursos();
+        this.validarConexionInternet=false;
         
         Compromisos_Activity.VISTA_CARGADA=0;
         Posicion_Activity.VISTA_CARGADA=0;
