@@ -31,7 +31,9 @@ public final class ConstantesApp {
 	public final static String OPORTUNIDAD_SISTEMA = "1";
 	public final static String OPORTUNIDAD_DESARROLLADOR_ABIERTO = "A";
 	public final static String OPORTUNIDAD_ABIERTA = "A";
-	
+	public final static String OPORTUNIDAD_ABIERTA_LARGA = "Abierta";
+	public final static String OPORTUNIDAD_CERRADA = "C";
+	public final static String OPORTUNIDAD_CERRADA_LARGA = "Cerrada";
 	
 	public final static String TIPO_AGRUPRACION_INVENTARIO="1";
 	public final static String TIPO_AGRUPRACION_POSICION="2";

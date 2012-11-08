@@ -15,10 +15,15 @@ import lindley.desarrolloxcliente.ws.service.ConsultarCabeceraProxy;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
@@ -64,7 +69,9 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 		
 		getSupportActionBar().setSubtitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 		
-
+		registerForContextMenu(getListView());
+		getListView().setFocusableInTouchMode(true);
+		 
     }
 
     
@@ -203,6 +210,53 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	}
 	
 	
+	 @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo){    
+        //super.onCreateContextMenu(menu, v, menuInfo);
+
+        AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
+        int position = info.position;
+        if(adap!=null){
+        	EvaluacionTO evaluacionTO =  adap.detalles.get(position);
+        	if(evaluacionTO.fecha.compareTo(ConstantesApp.getFechaSistemaAS400())==0){
+        		getMenuInflater().inflate(R.menu.consultarcabecera_menu1, menu);
+        	}else{
+        		if(evaluacionTO.estado.compareTo(ConstantesApp.OPORTUNIDAD_CERRADA)==0){
+        			getMenuInflater().inflate(R.menu.consultarcabecera_menu2, menu);
+        		}
+        	}
+        }
+        
+        
+        /*
+        if(resumenClientes!=null){
+       	 clienteSeleccionado = resumenClientes.detalle.get(position);
+       	 String title = clienteSeleccionado.descripcion;
+       	 menu.setHeaderTitle(title);
+            getActivity().getMenuInflater().inflate(R.menu.vendedorresumen_clientes_menu, menu);
+        }*/
+        
+	 }
+	
+     @Override
+     public boolean onContextItemSelected(MenuItem item) {
+    	/* Intent intent = null;
+    	 if(item.getItemId()==pe.lavisa.tomadorpedidos.R.id.mnuIniciarAtencion){
+    		 if(null!=clienteSeleccionado){
+    			 intent = new Intent(this.getActivity(),ResumenCliente_Activity.class);
+	    		 intent.putExtra(ClienteDetalle_Activity.CLIENTE_ID_KEY, clienteSeleccionado.id);
+	    		 startActivity(intent);
+    		 }
+    	 }
+    	 else if(item.getItemId()==pe.lavisa.tomadorpedidos.R.id.mnuMantenimiento){
+    		 if(null!=clienteSeleccionado){
+	    		 intent = new Intent(this.getActivity(),ClienteDetalle_Activity.class);
+	    		 intent.putExtra(ClienteDetalle_Activity.CLIENTE_ID_KEY, clienteSeleccionado.id);
+	    		 startActivity(intent);
+    		 }
+    	 }*/
+         return super.onContextItemSelected(item);
+     }
 	
 	
 	
@@ -240,13 +294,14 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 				viewHolder.txViewHora =  (TextView) view.findViewById(R.id.txViewHora);
 				viewHolder.txViewFechaCierre = (TextView) view.findViewById(R.id.txViewFechaCierre);  	    	
 				viewHolder.txViewHoraCierre = (TextView) view.findViewById(R.id.txViewHoraCierre);		    		          	
-				viewHolder.txViewestado = (TextView) view.findViewById(R.id.txViewestado);	    	
-				viewHolder.txViewVerDetalle = (Button) view.findViewById(R.id.txViewVerDetalle);	  
+				viewHolder.txViewestado = (TextView) view.findViewById(R.id.txViewestado);
+				
+				/*viewHolder.txViewVerDetalle = (Button) view.findViewById(R.id.txViewVerDetalle);	  
 				viewHolder.txViewVerResumen = (Button) view.findViewById(R.id.txViewVerResumen);
 				viewHolder.btnEliminar = (Button) view.findViewById(R.id.btnEliminar);
+				*/
 				
-				
-				
+				/*
 				viewHolder.txViewVerResumen.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -276,19 +331,10 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 								
 								context.processAsync(ACCION_VERIFICAR_EVALUACION);
 								
-								//context.processAsync(ACCION_CARGAR_EVALUACION);
-								/*
-								Intent compromisoOpen = new Intent(context, CompromisoPrincipalOpen_Resumen.class);
-								compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, evaluacionTO.evaluacionId);
-								compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "A");	
-								context.startActivity(compromisoOpen);	
-								*/
+								//context.processAsync(ACCION_CARGAR_EVALUACION); 
 							}else{
 								context.processAsync(ACCION_VERIFICAR_EVALUACION);
 								//VerficacionTabs_Activity
-								/*Intent compromisoOpenFalse = new Intent(context, CompromisoPrincipalOpenFalse_Resumen.class);
-								compromisoOpenFalse.putExtra(CompromisoPrincipalOpenFalse_Resumen.CODIGO_REGISTRO, evaluacionTO.evaluacionId);
-								context.startActivity(compromisoOpenFalse);*/
 							}
 						}else{
 							Intent compromisoClose = new Intent(context, CompromisoPrincipalClose_Resumen.class);
@@ -296,9 +342,9 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 							context.startActivity(compromisoClose);
 						}
 					}
-				  });
+				  });*/
 				
-				
+				/*
 				viewHolder.btnEliminar.setOnClickListener(new OnClickListener() {
 
 					@Override
@@ -331,7 +377,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 						}
 					}
 					
-				});
+				});*/
 				
 				view.setTag(viewHolder);
 				
@@ -354,17 +400,18 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	      holder.txViewHoraCierre.setText(ConstantesApp.formatHora(String.valueOf(evaluacionTO.horaCierre)));
 		      
 	      if(evaluacionTO.estado.equals(ConstantesApp.OPORTUNIDAD_ABIERTA))
-	    	  holder.txViewestado.setText("Abierto");
+	    	  holder.txViewestado.setText(ConstantesApp.OPORTUNIDAD_ABIERTA_LARGA);
 	      else
-	    	  holder.txViewestado.setText("Cerrado");
-			
+	    	  holder.txViewestado.setText(ConstantesApp.OPORTUNIDAD_CERRADA_LARGA);
+		
+	     /*
 	      if(!(evaluacionTO.fecha.equals(ConstantesApp.getFechaSistemaAS400())))
 	    	{
 	    		holder.btnEliminar.setVisibility(View.INVISIBLE);
 	    	}else{
 	    		holder.btnEliminar.setVisibility(View.VISIBLE);
 	    	}
-	    	
+	    	*/
 	      
 	      
 			
@@ -380,9 +427,9 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	    	TextView txViewFechaCierre;  	    	
 	    	TextView txViewHoraCierre;    	    	
 	    	TextView txViewestado;
-	    	Button txViewVerDetalle;	    	
+	    	/*Button txViewVerDetalle;	    	
 	    	Button txViewVerResumen;
-	    	Button btnEliminar;
+	    	Button btnEliminar;*/
 	    	
 	    }
 	
