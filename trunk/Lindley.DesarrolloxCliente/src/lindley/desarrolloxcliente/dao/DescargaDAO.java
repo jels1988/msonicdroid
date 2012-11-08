@@ -91,6 +91,10 @@ public class DescargaDAO {
 		dbHelper.delete("evaluacion_sku_presentacion", null, null);
 	}
 	
+	public void deleteEvaluacionPosicionCompromiso(){
+		dbHelper.delete("evaluacion_posicion_compromiso", null, null);
+	}
+	
 	public long insertEvaluacionSkus(lindley.desarrolloxcliente.to.upload.SkuTO sku){
 		
 		long localID = getEvaluacionId(sku.evaluacionId);
@@ -139,6 +143,23 @@ public class DescargaDAO {
 		
 	}
 	
+	public long insertEvaluacionPosicionCompromiso(lindley.desarrolloxcliente.to.upload.PosicionCompromisoTO posicionCompromisoTO){
+		ContentValues values = new ContentValues();
+		
+		long localID = getEvaluacionId(posicionCompromisoTO.evaluacionId);
+		
+		values.put("evaluacionId", localID);
+		values.put("tipoAgrupacion", posicionCompromisoTO.tipoAgrupacion);
+		values.put("codigoVariable", posicionCompromisoTO.codigoVariable);
+		values.put("orden", posicionCompromisoTO.orden);
+		values.put("observacion", posicionCompromisoTO.observacion);
+		values.put("estado", posicionCompromisoTO.estado);
+		
+		long id= dbHelper.insertOrThrow("evaluacion_posicion_compromiso", values);
+		posicionCompromisoTO.id = id;
+		return id;
+		
+	}
 	public long insertEvaluacionPosicion(lindley.desarrolloxcliente.to.upload.PosicionTO posicionTO){
 		ContentValues values = new ContentValues();
 		

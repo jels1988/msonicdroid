@@ -7,6 +7,7 @@ import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProductoProxy
 import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarClienteProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionOportunidadProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionPosicionCompromisoProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionPosicionProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionPresentacionProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionProxy;
@@ -20,10 +21,7 @@ import lindley.desarrolloxcliente.ws.service.DescargarSkuProxy;
 
 
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 
 
@@ -48,6 +46,7 @@ public class DescargaData_Activity extends ActivityBase {
 	public static final int DESCARGAR_EVALUACION_POSICION=21;
 	public static final int DESCARGAR_EVALUACION_PRESENTACION=22;
 	public static final int DESCARGAR_EVALUACION_SKU=23;
+	public static final int DESCARGAR_EVALUACION_POSICION_COMPROMISO=24;
 	
 	public static final int GUARDAR_PRODUCTO=10;
 	public static final int GUARDAR_OPORTUNIDAD=11;
@@ -63,6 +62,7 @@ public class DescargaData_Activity extends ActivityBase {
 	public static final int GUARDAR_EVALUACION_POSICION=121;
 	public static final int GUARDAR_EVALUACION_PRESENTACION=122;
 	public static final int GUARDAR_EVALUACION_SKU=123;
+	public static final int GUARDAR_EVALUACION_POSICION_COMPROMISO=124;
 	
 	@Inject DescargarProductosProxy descagarProductosProxy;
 	@Inject DescargarOportunidadesProxy descargarOportunidadesProxy;
@@ -78,7 +78,7 @@ public class DescargaData_Activity extends ActivityBase {
 	@Inject DescargarEvaluacionPosicionProxy descargarEvaluacionPosicionProxy;
 	@Inject DescargarEvaluacionPresentacionProxy descargarEvaluacionPresentacionProxy;
 	@Inject DescargarEvaluacionSKUProxy descargarEvaluacionSKUProxy;
-	
+	@Inject DescargarEvaluacionPosicionCompromisoProxy descargarEvaluacionPosicionCompromisoProxy;
 	
 	@Inject DescargaBLL descargaBLL;
 	@Inject PeriodoTO periodoTO;
@@ -211,6 +211,10 @@ public class DescargaData_Activity extends ActivityBase {
 				
 				descargarEvaluacionSKUProxy.execute();
 				break;
+				
+		case DESCARGAR_EVALUACION_POSICION_COMPROMISO:
+				descargarEvaluacionPosicionCompromisoProxy.execute();
+				break;
 		case GUARDAR_PRODUCTO:
 			
 			descargaBLL.saveProducto(descagarProductosProxy.getResponse().productos);
@@ -267,6 +271,10 @@ public class DescargaData_Activity extends ActivityBase {
 		case GUARDAR_EVALUACION_SKU:
 			
 			descargaBLL.saveEvaluacionSkus(descargarEvaluacionSKUProxy.getResponse().skus);
+			break;
+		case GUARDAR_EVALUACION_POSICION_COMPROMISO:
+			
+			descargaBLL.saveEvaluacionPosicionCompromiso(descargarEvaluacionPosicionCompromisoProxy.getResponse().compromisos);
 			break;
 		default:
 			break;
@@ -523,6 +531,9 @@ public class DescargaData_Activity extends ActivityBase {
 		}else if(accion==DESCARGAR_EVALUACION_SKU){
 			removeContadorProcesos();
 			processAsync(GUARDAR_EVALUACION_SKU);
+		}else if(accion==DESCARGAR_EVALUACION_POSICION_COMPROMISO){
+			removeContadorProcesos();
+			processAsync(GUARDAR_EVALUACION_POSICION_COMPROMISO);
 		}else if(accion==GUARDAR_PRODUCTO){
 			removeContadorProcesos();
 			showToast("PRODUCTOS GUARDAR");
@@ -556,7 +567,7 @@ public class DescargaData_Activity extends ActivityBase {
 			processAsync(DESCARGAR_EVALUACION_OPORTUNIDAD);
 			processAsync(DESCARGAR_EVALUACION_POSICION);
 			processAsync(DESCARGAR_EVALUACION_PRESENTACION);
-			
+			processAsync(DESCARGAR_EVALUACION_POSICION_COMPROMISO);
 			showToast("guardar GUARDAR_EVALUACION");
 		}else if(accion==GUARDAR_EVALUACION_OPORTUNIDAD){
 			removeContadorProcesos();
@@ -570,6 +581,9 @@ public class DescargaData_Activity extends ActivityBase {
 		}else if(accion==GUARDAR_EVALUACION_SKU){
 			removeContadorProcesos();
 			showToast("guardar GUARDAR_EVALUACION_SKU");
+		}else if(accion==GUARDAR_EVALUACION_POSICION_COMPROMISO){
+			removeContadorProcesos();
+			showToast("guardar GUARDAR_EVALUACION_POSICION_COMPROMISO");
 		}
 		
 		
