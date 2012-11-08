@@ -49,7 +49,7 @@
 <style name="TextViewCustom" parent="@android:style/Widget.TextView">
  	<item name="android:focusable">false</item>
  	<item name="android:focusableInTouchMode">false</item>
- 	<item name="android:clickable">true</item>
+ 	<item name="android:clickable">false</item>
 	<item name="android:textColor">@color/custom_theme_color_letra</item>
 	<!--item name="android:textStyle">bold</item-->
 </style>
@@ -57,7 +57,7 @@
 <style name="TextViewLabel" parent="@android:style/Widget.TextView">
  	<item name="android:focusable">false</item>
  	<item name="android:focusableInTouchMode">false</item>
- 	<item name="android:clickable">true</item>
+ 	<item name="android:clickable">false</item>
 	<item name="android:textColor">@color/custom_theme_color_blanco</item>
 	<item name="android:background">@color/custom_theme_color_0</item>
 	<item name="android:textStyle">bold</item>
@@ -66,7 +66,7 @@
 <style name="TextViewHead" parent="@android:style/Widget.TextView">
  	<item name="android:focusable">false</item>
  	<item name="android:focusableInTouchMode">false</item>
- 	<item name="android:clickable">true</item>
+ 	<item name="android:clickable">false</item>
 	<item name="android:textColor">@color/custom_theme_color_blanco</item>
 	<item name="android:background">@color/custom_theme_color_0</item>
 	<item name="android:textStyle">bold</item>		
@@ -75,7 +75,7 @@
 <style name="TextViewCustomHight" parent="@android:style/Widget.TextView">
  	<item name="android:focusable">false</item>
  	<item name="android:focusableInTouchMode">false</item>
- 	<item name="android:clickable">true</item>
+ 	<item name="android:clickable">false</item>
 	<item name="android:textColor">@color/custom_theme_color_rojo</item>
 	<item name="android:textStyle">bold</item>
 </style>
@@ -89,17 +89,15 @@
 </style>
 
 <style name="TextViewCustom2" parent="@android:style/Widget.TextView">
- 	<item name="android:focusable">true</item>
- 	<item name="android:focusableInTouchMode">true</item>
- 	<item name="android:clickable">true</item>
+ 	<item name="android:focusable">false</item>
+ 	<item name="android:focusableInTouchMode">false</item>
+ 	<item name="android:clickable">false</item>
 	<item name="android:textColor">@color/custom_theme_color_blanco</item>
 	<item name="android:textStyle">bold</item>
 </style>
 
 <style name="MyListView" parent="@android:style/Widget.ListView">
- 	<!-- item name="android:listSelector">@drawable/list_selector</item-->
  	<item name="android:cacheColorHint">#00000000</item>
- 	<item name="android:clickable">false</item>
 </style>
 
 <style name="TextAppearance.Sherlock.Widget.ActionBar.Title.Inverse.Custom" parent="Widget">

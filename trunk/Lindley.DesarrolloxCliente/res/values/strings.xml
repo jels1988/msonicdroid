@@ -157,4 +157,16 @@
     <string name="consultarcliente_menu_enviar">Enviar</string>
     <string name="consultarcliente_menu_salir">Salir</string>
     
+    <string name="consultarcabecera_menu_editar">Editar</string>
+    <string name="consultarcabecera_menu_eliminar">Eliminar</string>
+    <string name="consultarcabecera_menu_detalle">Detalle</string>
+    <string name="consultarcabecera_menu_resumen">Resumen</string>
+    <string name="consultarcabecera_menu_cancelar">Cancelar</string>
+    
+    <string name="consultarcabecera_head_codigo">Código</string>
+    <string name="consultarcabecera_head_fecha">Fecha</string>
+    <string name="consultarcabecera_head_hora">Hora</string>
+    <string name="consultarcabecera_head_fecha_cierre">Fecha Cierre</string>
+    <string name="consultarcabecera_head_hora_cierre">Hora Cierre</string>
+    <string name="consultarcabecera_head_estado">Estado</string>
 </resources>
