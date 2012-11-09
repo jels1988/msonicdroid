@@ -77,8 +77,8 @@ public class OportunidadDAO {
 			nuevaOportunidadTO.sovi = cursor.getString(cursor.getColumnIndex("sovi"));
 			nuevaOportunidadTO.cumplePrecio = cursor.getString(cursor.getColumnIndex("respetaPrecio"));
 			nuevaOportunidadTO.numeroSabores = String.valueOf(cursor.getInt(cursor.getColumnIndex("numeroSabores")));
-			nuevaOportunidadTO.puntosCocaCola = "0"; //String.valueOf(cursor.getInt(cursor.getColumnIndex("puntosCocaCola")));
 			nuevaOportunidadTO.puntosBonus = "0"; //String.valueOf(cursor.getInt(cursor.getColumnIndex("puntosBonus")));
+			nuevaOportunidadTO.puntosGanados = "0"; //String.valueOf(cursor.getInt(cursor.getColumnIndex("puntosBonus")));
 			nuevaOportunidadTO.puntosSugeridos = nuevaOportunidadTO.puntosBonus;
 			nuevaOportunidadTO.fecha = String.valueOf(cursor.getInt(cursor.getColumnIndex("fechaProceso")));
 			nuevasOportunidades.add(nuevaOportunidadTO);

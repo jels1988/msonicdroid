@@ -82,7 +82,7 @@ public class EvaluacionDAO {
 		return evaluaciones;
 	}
 	
-	public EvaluacionTO GetById(long id){
+	public EvaluacionTO getById(long id){
 		
 		EvaluacionTO evaluacionTO=null;
 		
@@ -106,79 +106,8 @@ public class EvaluacionDAO {
 		
 	}
 	
-	public void GetOportunidades(EvaluacionTO evaluacionTO){
-		if(evaluacionTO!=null){
-			evaluacionTO.oportunidades = new ArrayList<OportunidadTO>();
-			
-			String SQL = "select * from evaluacion_oportunidad where evaluacionId = ?1";
-			String[] args = new String[] {String.valueOf(evaluacionTO.id)};
-			Cursor cursor = dbHelper.rawQuery(SQL,args);
-			
-			while(cursor.moveToNext()){
-				OportunidadTO oportunidadTO = new OportunidadTO();
-				oportunidadTO.productoId=cursor.getLong(cursor.getColumnIndex("productoId"));
-				oportunidadTO.codigoProducto = cursor.getString(cursor.getColumnIndex("codigoProducto"));
-				oportunidadTO.descripcionProducto = cursor.getString(cursor.getColumnIndex("producto"));
-				
-				oportunidadTO.concrecion = cursor.getString(cursor.getColumnIndex("concrecion"));
-				oportunidadTO.concrecionActual = cursor.getString(cursor.getColumnIndex("concrecionActual"));
-				oportunidadTO.concrecionCumple=cursor.getInt(cursor.getColumnIndex("concrecionCumple"));
-				
-				oportunidadTO.sovi = cursor.getString(cursor.getColumnIndex("sovi"));
-				oportunidadTO.soviActual = cursor.getString(cursor.getColumnIndex("soviActual"));
-				oportunidadTO.soviCumple=cursor.getInt(cursor.getColumnIndex("soviCumple"));
-				
-				
-				oportunidadTO.cumplePrecio = cursor.getString(cursor.getColumnIndex("respetaPrecio"));
-				oportunidadTO.cumplePrecioActual = cursor.getString(cursor.getColumnIndex("respetaPrecioActual"));
-				oportunidadTO.cumplePrecioCumple=cursor.getInt(cursor.getColumnIndex("respetaPrecioCumple"));
-				
-				oportunidadTO.numeroSabores = cursor.getString(cursor.getColumnIndex("numeroSabores"));
-				oportunidadTO.numeroSaboresActual = cursor.getString(cursor.getColumnIndex("numeroSaboresActual"));
-				oportunidadTO.numeroSaboresCumple=cursor.getInt(cursor.getColumnIndex("numeroSaboresCumple"));
-				
-				oportunidadTO.puntosCocaCola = cursor.getString(cursor.getColumnIndex("puntosCocaCola"));
-				oportunidadTO.puntosBonus = cursor.getString(cursor.getColumnIndex("puntosBonus"));
-				oportunidadTO.fecha = cursor.getString(cursor.getColumnIndex("fechaProceso"));
-				
-				evaluacionTO.oportunidades.add(oportunidadTO);
-			}
-			
-			cursor.close();
-		}
-	}
 	
-	public void GetSKUPresentacion(EvaluacionTO evaluacionTO){
-		if(evaluacionTO!=null){
-			evaluacionTO.skuPresentacion = new ArrayList<SKUPresentacionTO>();
-			
-			String SQL = "select * from evaluacion_sku_presentacion where evaluacionId = ?1";
-			String[] args = new String[] {String.valueOf(evaluacionTO.id)};
-			Cursor cursor = dbHelper.rawQuery(SQL,args);
-			
-			/*while(cursor.moveToNext()){
-				SKUPresentacionTO skuPresentacionTO = new SKUPresentacionTO();
-				skuPresentacionTO.codigoSKU = cursor.getString(cursor.getColumnIndex("skuId"));
-				skuPresentacionTO.descripcionSKU = cursor.getString(cursor.getColumnIndex("sku"));
-				skuPresentacionTO.valorActual = cursor.getString(cursor.getColumnIndex("valorActual"));
-				skuPresentacionTO.compromiso = cursor.getString(cursor.getColumnIndex("compromiso"));
-				evaluacionTO.skuPresentacion.add(skuPresentacionTO);
-				*/
-			/*
-			 	
-
-		values.put("tipoAgrupacion", skuPresentacionTO.tipoAgrupacion);
-		values.put("codigoVariable", skuPresentacionTO.codigoVariable);
-		values.put("codfde", skuPresentacionTO.codigoFDE);
-		values.put("marca", skuPresentacionTO.marcaActual);
-		values.put("marcaCompromiso", skuPresentacionTO.marcaCompromiso);
-		values.put("confirmacion", skuPresentacionTO.confirmacion);
-		values.put("estado", skuPresentacionTO.estado);
-			 * */
-			//}
-			cursor.close();
-		}
-	}
+	
 	
 	public long insertOportunidad(EvaluacionTO evaluacionTO,OportunidadTO oportunidadTO){
 		ContentValues values = new ContentValues();

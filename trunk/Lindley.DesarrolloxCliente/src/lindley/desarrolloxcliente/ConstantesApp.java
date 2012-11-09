@@ -59,14 +59,14 @@ public final class ConstantesApp {
 	}
 	
 	public final static String formatFecha(String fecha){
-		if(fecha==null) return "";
+		if(fecha==null || fecha.equals("") || fecha.equals("0")) return "";
 		String[] factores = getFechaFactoresAS400(fecha);
 		String fechaFormat = String.format("%s/%s/%s", factores[2],factores[1], factores[0]);
 		return fechaFormat;
 	}
 	
 	public final static String formatHora(String hora){
-		if(hora==null) return "";
+		if(hora==null || hora.equals("0") || hora.equals("0"))   return "";
 		String[] factores = getHoraFactoresAS400(hora);
 		String horaFormat = String.format("%s:%s", factores[0],factores[1]);
 		return horaFormat;
