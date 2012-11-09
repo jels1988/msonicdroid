@@ -65,9 +65,9 @@ public class PresentacionVerificacion_Activity  extends ListBaseFragment {
 	 @Override
 	protected void process() {
 		// TODO Auto-generated method stub
-		 List<PresentacionCompromisoTO> detalle = presentacionBLL.consultarOportunidadesPresentacion(evaluacion.codigoCliente);
-		 evaluacion.presentaciones = detalle;
-		 presentaciones = new EfficientAdapter(this.getActivity(),cliente,detalle);
+		// List<PresentacionCompromisoTO> detalle = presentacionBLL.consultarOportunidadesPresentacion(evaluacion.codigoCliente);
+		 //evaluacion.presentaciones = detalle;
+		 //presentaciones = new EfficientAdapter(this.getActivity(),cliente,detalle);
 	}
 	 
 	 

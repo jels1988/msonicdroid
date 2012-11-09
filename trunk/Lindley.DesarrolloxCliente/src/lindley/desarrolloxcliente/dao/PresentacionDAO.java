@@ -9,9 +9,8 @@ import android.database.Cursor;
 
 import com.google.inject.Inject;
 
-import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.to.PeriodoTO;
-import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
+import lindley.desarrolloxcliente.to.upload.PresentacionTO;
 
 
 
@@ -20,8 +19,8 @@ public class PresentacionDAO {
 	@Inject	protected DBHelper dbHelper;
 	@Inject protected PeriodoTO periodoTO;
 	
-	public List<PresentacionCompromisoTO> consultarOportunidadesPresentacion(String codigoCliente,String tipoAgrupacion){
-		List<PresentacionCompromisoTO> lista = new ArrayList<PresentacionCompromisoTO>();
+	public List<PresentacionTO> consultarOportunidadesPresentacion(String codigoCliente,String tipoAgrupacion){
+		List<PresentacionTO> lista = new ArrayList<PresentacionTO>();
 		
 		String SQL = "SELECT tipoAgrupacion,cdfde,variableRed,fechaProceso " +
 					"FROM presentacion_cliente " +
@@ -34,17 +33,15 @@ public class PresentacionDAO {
 				  tipoAgrupacion};
 		
 		Cursor cursor = dbHelper.rawQuery(SQL,args);
-		PresentacionCompromisoTO presentacionCompromisoTO;
+		PresentacionTO presentacionTO;
 		
 		while(cursor.moveToNext()){
-			presentacionCompromisoTO = new PresentacionCompromisoTO();
-			presentacionCompromisoTO.tipoAgrupacion = cursor.getString(cursor.getColumnIndex("tipoAgrupacion"));
-			presentacionCompromisoTO.codfde = cursor.getString(cursor.getColumnIndex("cdfde"));
-			presentacionCompromisoTO.codigoVariable = cursor.getString(cursor.getColumnIndex("variableRed"));
-			presentacionCompromisoTO.puntosSugeridos = "0";
-			presentacionCompromisoTO.puntosGanados = "0";
-			presentacionCompromisoTO.cumplio = ConstantesApp.RESPUESTA_NO;
-			lista.add(presentacionCompromisoTO);
+			presentacionTO = new PresentacionTO();
+			presentacionTO.tipoAgrupacion = cursor.getString(cursor.getColumnIndex("tipoAgrupacion"));
+			presentacionTO.codigoFDE = cursor.getString(cursor.getColumnIndex("cdfde"));
+			presentacionTO.codigoVariable = cursor.getString(cursor.getColumnIndex("variableRed"));
+		
+			lista.add(presentacionTO);
 		}
 		
 		cursor.close();

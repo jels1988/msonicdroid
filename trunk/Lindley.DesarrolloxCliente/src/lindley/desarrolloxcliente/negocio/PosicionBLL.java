@@ -5,8 +5,8 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.dao.PosicionDAO;
-import lindley.desarrolloxcliente.to.EvaluacionTO;
-import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
+import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
+import lindley.desarrolloxcliente.to.upload.PosicionTO;
 import net.msonic.lib.DBHelper;
 
 import android.util.Log;
@@ -19,16 +19,15 @@ public class PosicionBLL {
 	@Inject protected DBHelper dbHelper;
 	@Inject protected PosicionDAO posicionDAO;
 	
-	public List<PosicionCompromisoTO> consultarOportunidadesPosicion(EvaluacionTO evaluacionTO){
+	public List<PosicionTO> consultarOportunidadesPosicion(EvaluacionTO evaluacionTO){
 		
-		List<PosicionCompromisoTO> lista = null;
+		List<PosicionTO> lista = null;
 		
 		try{
 			dbHelper.openDataBase();
-			lista = posicionDAO.consultarOportunidadesPosicion(evaluacionTO, 
-															ConstantesApp.TIPO_AGRUPRACION_POSICION);
+			lista = posicionDAO.consultarOportunidadesPosicion(evaluacionTO, ConstantesApp.TIPO_AGRUPRACION_POSICION);
 		}catch(Exception ex){
-			Log.e(TAG_LOG, "consultarOportunidadesPoscion", ex);
+			Log.e(TAG_LOG, "consultarOportunidadesPosicion", ex);
 		} finally {
 			dbHelper.close();
 		}

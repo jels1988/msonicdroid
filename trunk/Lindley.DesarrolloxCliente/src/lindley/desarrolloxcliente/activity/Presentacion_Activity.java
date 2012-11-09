@@ -9,8 +9,8 @@ import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.PresentacionBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.EvaluacionTO;
-import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
+import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
+import lindley.desarrolloxcliente.to.upload.PresentacionTO;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
@@ -56,7 +56,7 @@ public class Presentacion_Activity extends ListBaseFragment {
 	 		VISTA_CARGADA=1;
 	 	
 	 		application = (MyApplication) getActivity().getApplicationContext();
-	 		evaluacion = application.evaluacion;
+	 		evaluacion = application.evaluacionActual;
 	 		cliente = application.cliente;
 	 		
 	 		processAsync();
@@ -69,8 +69,6 @@ public class Presentacion_Activity extends ListBaseFragment {
 	 @Override
 	protected void process() {
 		// TODO Auto-generated method stub
-		/* List<PresentacionCompromisoTO> detalle = presentacionBLL.consultarOportunidadesPresentacion(evaluacion.codigoCliente);
-		 evaluacion.presentaciones = detalle;*/
 		 presentaciones = new EfficientAdapter(this.getActivity(),cliente,evaluacion.presentaciones);
 	}
 	 
@@ -81,11 +79,11 @@ public class Presentacion_Activity extends ListBaseFragment {
 			setListAdapter(presentaciones);
 			super.processOk();
 		}
-	 public static class EfficientAdapter extends ArrayAdapter<PresentacionCompromisoTO>{
-		 private final List<PresentacionCompromisoTO> detalle;
+	 public static class EfficientAdapter extends ArrayAdapter<PresentacionTO>{
+		 private final List<PresentacionTO> detalle;
 		 private final Activity context;
 		 
-		 public EfficientAdapter(Activity context,ClienteTO cliente,List<PresentacionCompromisoTO> detalle){
+		 public EfficientAdapter(Activity context,ClienteTO cliente,List<PresentacionTO> detalle){
 				super(context, R.layout.consultarpresentacioncompromisoopen_content, detalle);
 				this.detalle = detalle;
 				this.context = context;
@@ -102,7 +100,7 @@ public class Presentacion_Activity extends ListBaseFragment {
 				}
 			}
 			
-			public PresentacionCompromisoTO getItem(int position) {
+			public PresentacionTO getItem(int position) {
 				// TODO Auto-generated method stub
 				return this.detalle.get(position);
 			}
@@ -147,7 +145,7 @@ public class Presentacion_Activity extends ListBaseFragment {
 							@Override
 							public void onClick(View v) {
 								// TODO Auto-generated method stub
-								PresentacionCompromisoTO oportunidadTO = (PresentacionCompromisoTO) holder.txViewPuntos.getTag();
+								PresentacionTO oportunidadTO = (PresentacionTO) holder.txViewPuntos.getTag();
 								 int[] factores = ConstantesApp.getFechaFactores(oportunidadTO.fechaCompromiso);
 								 
 								 DatePickerDialog picker = new DatePickerDialog(context, new OnDateSetListener() {
@@ -155,7 +153,7 @@ public class Presentacion_Activity extends ListBaseFragment {
 									@Override
 									public void onDateSet(DatePicker view,int year, int monthOfYear,int dayOfMonth) {
 										// TODO Auto-generated method stub
-										PresentacionCompromisoTO presentacionCompromisoTO = (PresentacionCompromisoTO)holder.txViewPuntos.getTag();
+										PresentacionTO presentacionCompromisoTO = (PresentacionTO)holder.txViewPuntos.getTag();
 										
 										String mes = ConstantesApp.RPad(String.valueOf(monthOfYear+1),2,'0');
 										String dia = ConstantesApp.RPad(String.valueOf(dayOfMonth),2,'0');
@@ -182,7 +180,7 @@ public class Presentacion_Activity extends ListBaseFragment {
 				
 				ViewHolder holder = (ViewHolder) view.getTag();
 				
-				PresentacionCompromisoTO presentacionCompromisoTO = getItem(position);
+				PresentacionTO presentacionCompromisoTO = getItem(position);
 				holder.txViewPuntos.setText(presentacionCompromisoTO.puntosSugeridos);
 				holder.txEditFecha.setText(presentacionCompromisoTO.fechaCompromiso);
 				

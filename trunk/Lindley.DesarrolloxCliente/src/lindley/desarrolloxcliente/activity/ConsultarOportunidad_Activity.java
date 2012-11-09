@@ -10,8 +10,8 @@ import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.AccionTradeBLL;
 import lindley.desarrolloxcliente.negocio.OportunidadBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.EvaluacionTO;
-import lindley.desarrolloxcliente.to.OportunidadTO;
+import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
+import lindley.desarrolloxcliente.to.upload.OportunidadTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarNuevaOportunidadProxy;
 import net.msonic.lib.MessageBox;
 import roboguice.inject.InjectResource;
@@ -39,7 +39,7 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 	@Inject ConsultarNuevaOportunidadProxy consultarOportunidadProxy;
 	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	@Inject OportunidadBLL oportunidadBLL;
-	ArrayList<OportunidadTO> nuevasOportunidades;
+	ArrayList<lindley.desarrolloxcliente.to.upload.OportunidadTO> nuevasOportunidades;
 	
 	
 	private EfficientAdapter 	adap;
@@ -87,8 +87,8 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 		
 		//CREAMOS UNA NUEVA EVALUACION
 
-		evaluacion = application.evaluacion;
-		
+		application.evaluacionActual = new lindley.desarrolloxcliente.to.upload.EvaluacionTO();
+		evaluacion=application.evaluacionActual;
 		
 		setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
         
@@ -109,10 +109,10 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
     	
     	EfficientAdapter adap = (EfficientAdapter)getListAdapter();
 
-    	for (OportunidadTO oportunidad : adap.detalles) {
+    	for (lindley.desarrolloxcliente.to.upload.OportunidadTO oportunidad : adap.detalles) {
     		if(oportunidad.seleccionado){    
     			evaluacion.oportunidades.add(oportunidad);
-    			oportunidad.listaAccionesTrade = accionTradeBLL.listarByProducto(oportunidad.codigoProducto);
+    			oportunidad.listaAccionesTrade = accionTradeBLL.listarByProducto(oportunidad.codigoArticulo);
     		}
 		}
     	
@@ -126,27 +126,8 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
     	else if(filasSeleccionadas>maximoValor){
     		MessageBox.showSimpleDialog(this, "Mensaje", "Solo puede seleccionar como m‡ximo " + maximoValor +" acciones.", "Aceptar",null);
     	}else{
-    		
-    		
     		Intent intent = new Intent("lindley.desarrolloxcliente.skuprioritario");
     		startActivity(intent);
-    		
-    		/*
-    		Intent intent;
-    		String a = "C";
-    		finish();
-    		
-    		if(a.equals(ConstantesApp.OPORTUNIDAD_DESARROLLADOR_ABIERTO))
-    		{
-    			intent= new Intent("lindley.desarrolloxcliente.oportunidaddesarrollador");		
-    			startActivity(intent);
-    		}
-    		else
-    		{
-    			intent = new Intent("lindley.desarrolloxcliente.skuprioritario");
-    			startActivity(intent);
-    		}
-    		*/
     	}
     }
     
@@ -173,13 +154,13 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 		showToast(error_generico_process);
 	}
     
-    public static class EfficientAdapter extends ArrayAdapter<OportunidadTO> {
+    public static class EfficientAdapter extends ArrayAdapter<lindley.desarrolloxcliente.to.upload.OportunidadTO> {
 	    private Activity 				context;
-	    private List<OportunidadTO> detalles;
+	    private List<lindley.desarrolloxcliente.to.upload.OportunidadTO> detalles;
 	    private String codigoCliente;
 	    
 	    
-	    public EfficientAdapter(Activity context,String codigoCliente, List<OportunidadTO> valores) {
+	    public EfficientAdapter(Activity context,String codigoCliente, List<lindley.desarrolloxcliente.to.upload.OportunidadTO> valores) {
 	    	super(context, R.layout.consultaroportunidad_content, valores);
 		      this.context = context;
 		      this.detalles = valores;
@@ -232,8 +213,8 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 							profit.putExtra(VerProfit_Activity.ANIO, "");
 							profit.putExtra(VerProfit_Activity.MES, "");
 							profit.putExtra(VerProfit_Activity.CLIENTE, codigoCliente);
-							profit.putExtra(VerProfit_Activity.ARTICULO, oportunidadTO.codigoProducto);
-							profit.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, oportunidadTO.descripcionProducto);
+							profit.putExtra(VerProfit_Activity.ARTICULO, oportunidadTO.codigoArticulo);
+							profit.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, oportunidadTO.articulo);
 							context.startActivity(profit);
 						}
 					});
@@ -244,10 +225,10 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 			}
 			
 			ViewHolder holder = (ViewHolder) view.getTag();
-			OportunidadTO oportunidadTO = detalles.get(position);
+			lindley.desarrolloxcliente.to.upload.OportunidadTO oportunidadTO = detalles.get(position);
 			
-			holder.txViewPro.setText(oportunidadTO.descripcionProducto);
-			holder.txViewLegacy.setText(oportunidadTO.codigoLegacy);
+			holder.txViewPro.setText(oportunidadTO.articulo);
+			holder.txViewLegacy.setText(oportunidadTO.legacy);
 			holder.chkSeleccion.setChecked(oportunidadTO.seleccionado);
 			
 			return view;

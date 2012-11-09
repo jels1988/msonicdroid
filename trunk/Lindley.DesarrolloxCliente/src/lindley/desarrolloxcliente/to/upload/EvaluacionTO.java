@@ -3,6 +3,8 @@ package lindley.desarrolloxcliente.to.upload;
 import java.util.ArrayList;
 import java.util.List;
 
+import lindley.desarrolloxcliente.ConstantesApp;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -13,6 +15,9 @@ public class EvaluacionTO {
 		posiciones = new ArrayList<PosicionTO>();
 		presentaciones = new ArrayList<PresentacionTO>(); 
 		skus = new ArrayList<SkuTO>();
+		
+		comboSS=ConstantesApp.RESPUESTA_NO;
+		comboMS=ConstantesApp.RESPUESTA_NO;
 	}
 	
 			@Expose()

@@ -3,7 +3,8 @@ package lindley.desarrolloxcliente.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import lindley.desarrolloxcliente.to.AccionTradeTO;
+import lindley.desarrolloxcliente.to.upload.AccionTradeTO;
+
 import net.msonic.lib.DBHelper;
 
 import android.database.Cursor;

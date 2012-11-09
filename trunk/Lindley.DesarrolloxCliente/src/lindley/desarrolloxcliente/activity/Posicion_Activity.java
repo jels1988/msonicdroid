@@ -31,8 +31,8 @@ import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.FotoBLL;
 import lindley.desarrolloxcliente.negocio.PosicionBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.EvaluacionTO;
-import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
+import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
+import lindley.desarrolloxcliente.to.upload.PosicionTO;
 import net.msonic.lib.MessageBox;
 import net.msonic.lib.UploadFileUtil;
 import net.msonic.lib.sherlock.ListBaseFragment;
@@ -71,7 +71,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 	         if(VISTA_CARGADA==0){
 		 		VISTA_CARGADA=1;
 		 		application = (MyApplication) getActivity().getApplicationContext();
-		 		evaluacion = application.evaluacion;
+		 		evaluacion = application.evaluacionActual;
 		 		cliente = application.cliente;
 		 		
 		 		processAsync();
@@ -98,7 +98,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 			super.processOk();
 		}
 
-		private PosicionCompromisoTO posicionCompromisoFotoTO;
+		private PosicionTO posicionCompromisoFotoTO;
 		
 		
 		@Override
@@ -136,7 +136,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 
 
 
-		public void takePhoto(int accion,PosicionCompromisoTO posicionTO ){
+		public void takePhoto(int accion,PosicionTO posicionTO ){
 	    	
 	    	this.posicionCompromisoFotoTO = posicionTO;
 	    	file_name = UploadFileUtil.GenerarFileName(12,"jpg");
@@ -151,16 +151,16 @@ public class Posicion_Activity extends ListBaseFragment  {
 
 		
 
-		public static class EfficientAdapter extends ArrayAdapter<PosicionCompromisoTO>{
+		public static class EfficientAdapter extends ArrayAdapter<PosicionTO>{
 			
 		    
 		    
-			 private final List<PosicionCompromisoTO> detalle;
+			 private final List<PosicionTO> detalle;
 			 private final Activity context;
 			 private final ClienteTO cliente;
 			 private final Posicion_Activity posicion_Activity;
 			 
-			  public EfficientAdapter(Posicion_Activity posicion_Activity,ClienteTO cliente,List<PosicionCompromisoTO> detalle){
+			  public EfficientAdapter(Posicion_Activity posicion_Activity,ClienteTO cliente,List<PosicionTO> detalle){
 					super(posicion_Activity.getActivity(), R.layout.consultarposicioncompromisoopen_content, detalle);
 					this.detalle = detalle;
 					this.context = posicion_Activity.getActivity();
@@ -177,7 +177,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 					}
 				}
 				
-				public PosicionCompromisoTO getItem(int position) {
+				public PosicionTO getItem(int position) {
 					// TODO Auto-generated method stub
 					return this.detalle.get(position);
 				}
@@ -219,7 +219,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 								@Override
 								public void onClick(View v) {
 									// TODO Auto-generated method stub
-									PosicionCompromisoTO posicionCompromisoTO = (PosicionCompromisoTO) holder.TextViewRpsta.getTag();
+									PosicionTO posicionCompromisoTO = (PosicionTO) holder.TextViewRpsta.getTag();
 									 int[] factores = ConstantesApp.getFechaFactores(posicionCompromisoTO.fechaCompromiso);
 									 
 
@@ -228,7 +228,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 										@Override
 										public void onDateSet(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
 											// TODO Auto-generated method stub
-											PosicionCompromisoTO posicionCompromisoTO = (PosicionCompromisoTO) holder.TextViewRpsta.getTag();
+											PosicionTO posicionCompromisoTO = (PosicionTO) holder.TextViewRpsta.getTag();
 											String mes = ConstantesApp.RPad(String.valueOf(monthOfYear+1),2,'0');
 											String dia = ConstantesApp.RPad(String.valueOf(dayOfMonth),2,'0');
 											String fecha = String.format("%s%s%s", year,mes,dia);
@@ -246,7 +246,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 								@Override
 								public void onClick(View v) {
 									// TODO Auto-generated method stub
-									PosicionCompromisoTO posicionCompromisoTO = (PosicionCompromisoTO) holder.TextViewRpsta.getTag();
+									PosicionTO posicionCompromisoTO = (PosicionTO) holder.TextViewRpsta.getTag();
 									
 									if(posicionCompromisoTO.codigoVariable.compareToIgnoreCase(ConstantesApp.VARIABLE_RED_ESTANDAR_ANAQUEL) == 0)
 									{
@@ -277,7 +277,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 								@Override
 								public void onClick(View v) {
 									// TODO Auto-generated method stub
-									final PosicionCompromisoTO posicionCompromisoTO = (PosicionCompromisoTO) holder.TextViewRpsta.getTag();
+									final PosicionTO posicionCompromisoTO = (PosicionTO) holder.TextViewRpsta.getTag();
 									
 									if((posicionCompromisoTO.fotoInicial==null)||(posicionCompromisoTO.fotoInicial.compareTo("")==0)){
 										
@@ -333,7 +333,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 								@Override
 								public void afterTextChanged(Editable s) {
 									// TODO Auto-generated method stub
-									PosicionCompromisoTO posicionCompromisoTO = (PosicionCompromisoTO) holder.TextViewRpsta.getTag();
+									PosicionTO posicionCompromisoTO = (PosicionTO) holder.TextViewRpsta.getTag();
 									posicionCompromisoTO.observacion=s.toString();
 								}
 							});
@@ -348,7 +348,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 						
 						ViewHolder holder = (ViewHolder) view.getTag();
 						
-						PosicionCompromisoTO posicionTO = getItem(position);
+						PosicionTO posicionTO = getItem(position);
 						
 						if(posicionTO.activosLindley.equals(ConstantesApp.RESPUESTA_SI))
 					    	  holder.TextViewRpsta.setText(ConstantesApp.RESPUESTA_SI_LARGA);
@@ -356,8 +356,8 @@ public class Posicion_Activity extends ListBaseFragment  {
 					    	  holder.TextViewRpsta.setText(ConstantesApp.RESPUESTA_NO_LARGA);
 						
 						holder.txViewAccComp.setText(posicionTO.observacion);
-						holder.txViewRed.setText(posicionTO.soviRed);
-						holder.txViewMaximo.setText(posicionTO.ptoMaximo);
+						holder.txViewRed.setText(posicionTO.sovir);
+						holder.txViewMaximo.setText(posicionTO.sovirMaximo);
 						holder.txViewPuntos.setText(posicionTO.puntosSugeridos);
 						holder.txEditFecha.setText(ConstantesApp.formatFecha(posicionTO.fechaCompromiso));
 						

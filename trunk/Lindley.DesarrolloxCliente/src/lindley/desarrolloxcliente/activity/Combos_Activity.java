@@ -14,7 +14,7 @@ import android.widget.RadioButton;
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
-import lindley.desarrolloxcliente.to.EvaluacionTO;
+import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
 import net.msonic.lib.sherlock.FragmentBase;
 
 public class Combos_Activity extends FragmentBase {
@@ -47,9 +47,9 @@ public class Combos_Activity extends FragmentBase {
         	 
 	 		VISTA_CARGADA=1;
 	 		application = (MyApplication) getActivity().getApplicationContext();
-	 		evaluacion = application.evaluacion;
+	 		evaluacion = application.evaluacionActual;
 	 		
-	 		if(evaluacion.combosSS.equals(ConstantesApp.RESPUESTA_SI)){
+	 		if(evaluacion.comboSS.equals(ConstantesApp.RESPUESTA_SI)){
 	 			radSSSi.setChecked(true);
 	 			radSSNo.setChecked(false);
 	 		}else{
@@ -58,7 +58,7 @@ public class Combos_Activity extends FragmentBase {
 	 		}
 	 		
 
-	 		if(evaluacion.combosMS.equals(ConstantesApp.RESPUESTA_SI)){
+	 		if(evaluacion.comboMS.equals(ConstantesApp.RESPUESTA_SI)){
 	 			radMSSi.setChecked(true);
 	 			radMSNo.setChecked(false);
 	 		}else{
@@ -75,7 +75,7 @@ public class Combos_Activity extends FragmentBase {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				// TODO Auto-generated method stub
-				evaluacion.combosSS=ConstantesApp.RESPUESTA_SI;
+				evaluacion.comboSS=ConstantesApp.RESPUESTA_SI;
 			}
 		});
          
@@ -84,7 +84,7 @@ public class Combos_Activity extends FragmentBase {
  			@Override
  			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
  				// TODO Auto-generated method stub
- 				evaluacion.combosSS=ConstantesApp.RESPUESTA_NO;
+ 				evaluacion.comboSS=ConstantesApp.RESPUESTA_NO;
  			}
  		});
          
@@ -93,7 +93,7 @@ public class Combos_Activity extends FragmentBase {
   			@Override
   			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
   				// TODO Auto-generated method stub
-  				evaluacion.combosMS=ConstantesApp.RESPUESTA_SI;
+  				evaluacion.comboMS=ConstantesApp.RESPUESTA_SI;
   			}
   		});
          
@@ -102,7 +102,7 @@ public class Combos_Activity extends FragmentBase {
    			@Override
    			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
    				// TODO Auto-generated method stub
-   				evaluacion.combosMS=ConstantesApp.RESPUESTA_NO;
+   				evaluacion.comboMS=ConstantesApp.RESPUESTA_NO;
    			}
    		});
         

@@ -6,8 +6,8 @@ import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.EvaluacionTO;
-import lindley.desarrolloxcliente.to.SKUPresentacionTO;
+import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
+import lindley.desarrolloxcliente.to.upload.SkuTO;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,16 +28,6 @@ public class SKUPrioritarioCompromiso_Activity extends  net.msonic.lib.sherlock.
 
 	private EfficientAdapter adap;
 	
-	/*
-	public static final String RESPUESTA_SI = "S";
-	public static final String RESPUESTA_NO = "N";
-	public static final String RESPUESTA_NO_TIENE = "T";
-	
-	public static final String DATO_SI = "SI";
-	public static final String DATO_NO = "NO";
-	public static final String DATO_NO_TIENE = "NV";
-	*/
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,44 +44,17 @@ public class SKUPrioritarioCompromiso_Activity extends  net.msonic.lib.sherlock.
 		application = (MyApplication) getApplicationContext();
 		
 		cliente = application.cliente;
-		evaluacion = application.evaluacion;
+		evaluacion = application.evaluacionActual;
 		
 		setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 		
 		processAsync();
 	}
-	/*
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		
-		 return inflater.inflate(R.layout.skuprioritariocompromiso_activity, container,false);
-		   
-	 }
-	
-	
-	@Override public void onActivityCreated(Bundle savedInstanceState) {
-		 inicializarRecursos(); 
-	       this.validarConexionInternet=false;
-	       
-		super.onActivityCreated(savedInstanceState);
-      
-        if(VISTA_CARGADA==0){
-	 		VISTA_CARGADA=1;
-	 	
-	 		application = (MyApplication) getActivity().getApplicationContext();
-	 		evaluacion = application.evaluacion;
-	 		cliente = application.cliente;
-	 		
-	 		//processAsync();
-			
-        }
-        
-	 }*/
-	
+
 	
 	 @Override
 	 protected void process() {
-		 adap = new EfficientAdapter(this, evaluacion.skuPresentacion);
+		 adap = new EfficientAdapter(this, evaluacion.skus);
 		 
 	 
 	 }
@@ -103,37 +66,17 @@ public class SKUPrioritarioCompromiso_Activity extends  net.msonic.lib.sherlock.
 		 super.processOk();
 	}
 	
-	/*
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		inicializarRecursos();
-		 this.validarConexionInternet=false;
-		 
-		super.onCreate(savedInstanceState);
-		 setContentView(R.layout.skuprioritariocompromiso_activity);    
-		 mActionBar.setTitle(R.string.skuprioritario_activity_title);
-		 application = (MyApplication)getApplicationContext();
-		 cliente = application.getClienteTO();
-		 mActionBar.setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
-		 mActionBar.setHomeLogo(R.drawable.header_logo);
-		 
-		 evaluacion.skuPresentacion
-		 
-		 adap = new EfficientAdapter(this, application.listSKUPresentacionCompromiso);
-		 setListAdapter(adap);
-	}*/
 	
 	public void btnOK_click(View view)
 	{
 		finish();
 	}
 	
-	public static class EfficientAdapter extends ArrayAdapter<SKUPresentacionTO> {
+	public static class EfficientAdapter extends ArrayAdapter<SkuTO> {
     	private Activity context;
-		private List<SKUPresentacionTO> skuPresentaciones;
+		private List<SkuTO> skuPresentaciones;
 
-		public EfficientAdapter(Activity context, List<SKUPresentacionTO> skuPresentaciones ){
+		public EfficientAdapter(Activity context, List<SkuTO> skuPresentaciones ){
 			super(context, R.layout.skuprioritariocompromiso_content, skuPresentaciones);
 			this.context=context;
 			this.skuPresentaciones = skuPresentaciones;
@@ -160,7 +103,7 @@ public class SKUPrioritarioCompromiso_Activity extends  net.msonic.lib.sherlock.
 					public void onItemSelected(AdapterView<?> arg0, View arg1,
 							int arg2, long arg3) {
 						// TODO Auto-generated method stub
-						SKUPresentacionTO skuPresentacion = (SKUPresentacionTO) viewHolder.chkValComp.getTag();
+						SkuTO skuPresentacion = (SkuTO) viewHolder.chkValComp.getTag();
 						if(arg2==0){
 							skuPresentacion.marcaCompromiso = ConstantesApp.RESPUESTA_NO;
 						}else{
