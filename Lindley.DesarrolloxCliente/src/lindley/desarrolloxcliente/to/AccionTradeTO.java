@@ -1,6 +1,5 @@
 package lindley.desarrolloxcliente.to;
 
-import com.google.gson.annotations.SerializedName;
 
 public class AccionTradeTO {
 
@@ -15,10 +14,7 @@ public class AccionTradeTO {
 		this.descripcion = descripcion;
 	}
 	
-	@SerializedName("COD")
 	public String codigo;
-
-	@SerializedName("DES")
 	public String descripcion;
 
 	public String getCodigo() {

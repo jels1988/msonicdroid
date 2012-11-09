@@ -27,10 +27,6 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 
 	
 	public final static String TAG = EvaluacionTabs_Activity.class.getName();
-	
-	//public final static String CODIGO_REGISTRO = "codigo_reg";
-	//public final static String ORIGEN_REGISTRO = "origen_reg";
-	
 	private final static String TAB_INVENTARIO="Inventario";
 	private final static String TAB_POSICION="Posicion";
 	private final static String TAB_PRESENTACION="Presentacion";
@@ -38,9 +34,6 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 	
 	private final static int ACCION_GUARDAR_EVALUACION=0;
 	
-   //@InjectExtra(CODIGO_REGISTRO)public String codigoRegistro;
-   //@InjectExtra(ORIGEN_REGISTRO)public String origen;
-    
 	@Inject EvaluacionBLL evaluacionBLL;
 	
 	private TabHost mTabHost;

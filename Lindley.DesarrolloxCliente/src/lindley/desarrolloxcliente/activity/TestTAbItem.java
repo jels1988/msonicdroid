@@ -401,7 +401,7 @@ public class TestTAbItem extends ListBaseFragment {
 			  holder.cboCumPrecioCmp.setSelection(0);
 		  
 		  
-		  holder.txViewAccTrade.setAdapter(application.getAdapterAccionTrade(compromiso.listaAccionesTrade));
+		  //holder.txViewAccTrade.setAdapter(application.getAdapterAccionTrade(compromiso.listaAccionesTrade));
 
 	      if(holder.txViewAccTrade.getCount() > 1)
 	    	  holder.txViewAccTrade.setSelection(1);

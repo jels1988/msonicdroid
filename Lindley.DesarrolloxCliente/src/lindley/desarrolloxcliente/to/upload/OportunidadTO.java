@@ -1,12 +1,19 @@
 package lindley.desarrolloxcliente.to.upload;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class OportunidadTO {
-	
-	@Expose()
-    public long id;
+		public OportunidadTO(){
+			listaAccionesTrade = new ArrayList<AccionTradeTO>();
+		}
+		
+		@Expose()
+	    public long id;
 
 			@SerializedName("EID")
 		    public long evaluacionId;
@@ -92,4 +99,5 @@ public class OportunidadTO {
 	         @SerializedName("PRO")
 		     public String proceso;
 	         
+	         public List<AccionTradeTO> listaAccionesTrade;
 }

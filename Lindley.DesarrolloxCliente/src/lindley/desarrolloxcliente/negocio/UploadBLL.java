@@ -32,6 +32,25 @@ public class UploadBLL {
 		}
 	}
 	
+	
+	public EvaluacionTO listarEvaluacionById(long id){
+		
+		EvaluacionTO evaluacion=null;
+		
+		try{
+			dbHelper.openDataBase();
+			
+			evaluacion = uploadDAO.listarEvaluacionById(id);
+			
+		}catch(Exception ex){
+			Log.e(TAG_LOG, "UploadBLL.listarEvaluacionById", ex);
+		} finally {
+			dbHelper.close();
+		}
+		
+		return evaluacion;
+	}
+
 	public List<EvaluacionTO> listarEvaluaciones(int limit){
 		
 		List<EvaluacionTO> evaluaciones=null;
