@@ -5,6 +5,7 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.dao.EvaluacionDAO;
+import lindley.desarrolloxcliente.dao.UploadDAO;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.OportunidadTO;
@@ -23,7 +24,21 @@ public class EvaluacionBLL {
 	@Inject protected DBHelper dbHelper;
 	
 	@Inject protected EvaluacionDAO evaluacionDAO;
+	@Inject protected UploadDAO uploadDAO;
 	
+	public void delete(long id){
+		try{
+			dbHelper.openDataBase();
+			dbHelper.beginTransaction();
+			uploadDAO.deleteEvaluacion(id);
+			dbHelper.setTransactionSuccessful();
+		}catch(Exception ex){
+			Log.e(TAG_LOG, "EvaluacionBLL.delete", ex);
+		} finally {
+			dbHelper.endTransaction();
+			dbHelper.close();
+		}
+	}
 	public void save(EvaluacionTO evaluacionTO){
 		
 		try{
@@ -58,15 +73,15 @@ public class EvaluacionBLL {
 	}
 	
 	
-	public EvaluacionTO GetById(long id){
+	public EvaluacionTO getById(long id){
 		EvaluacionTO evaluacionTO = null;
 		
 		try{
 			dbHelper.openDataBase();
 			
-			evaluacionTO = evaluacionDAO.GetById(id);
-			evaluacionDAO.GetOportunidades(evaluacionTO);
-			evaluacionDAO.GetSKUPresentacion(evaluacionTO);
+			//evaluacionTO = evaluacionDAO.GetById(id);
+			//evaluacionDAO.GetOportunidades(evaluacionTO);
+			//evaluacionDAO.GetSKUPresentacion(evaluacionTO);
 			
 			
 			
@@ -125,7 +140,6 @@ public class EvaluacionBLL {
 			int i=0;
 			for (OportunidadTO oportunidadTO : evaluacionTO.oportunidades) {
 				oportunidadTO.puntosSugeridos = puntosInventario.get(i).toString();
-				oportunidadTO.puntosCocaCola = puntosInventario.get(i).toString();
 				i++;
 			}
 		}
@@ -134,7 +148,6 @@ public class EvaluacionBLL {
 			int i=0;
 			for (PosicionCompromisoTO compromisoTO  : evaluacionTO.posiciones) {
 				compromisoTO.puntosSugeridos = puntosPosicion.get(i).toString();
-				compromisoTO.puntosGanados = puntosPosicion.get(i).toString();
 				i++;
 			}
 		}

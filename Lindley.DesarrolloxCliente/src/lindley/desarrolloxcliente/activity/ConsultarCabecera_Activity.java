@@ -2,8 +2,6 @@ package lindley.desarrolloxcliente.activity;
 
 import java.util.List;
 
-import net.msonic.lib.MessageBox;
-
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
@@ -12,30 +10,27 @@ import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarEstadoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCabeceraProxy;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
 
 public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActivityBase  {
 
-	//@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
+	
 	@Inject ConsultarCabeceraProxy ConsultarCabeceraProxy;
 	@Inject ActualizarEstadoProxy actualizarEstadoProxy;
 	@Inject EvaluacionBLL evaluacionBLL;
+	
 	
 	private EfficientAdapter adap;
 	private ClienteTO cliente;
@@ -46,9 +41,12 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	
 	
 	public static final int ACCION_ELIMINAR = 1;
+	public static final int ACCION_EDITAR = 2;
+	
 	public static final int ACCION_CARGAR_EVALUACION = 2;
 	public static final int ACCION_VERIFICAR_EVALUACION = 3;
-	public long evaluacionId=0;
+	
+	public long evaluacionId=-1;
 	
 	public static String codigoElimnar;
 	
@@ -74,17 +72,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 		 
     }
 
-    
-    /*
-    @Override
-    public void onBackPressed() {
-    // check if page 2 is open
-    	//finish();
-    	Intent intent = new Intent("lindley.desarrolloxcliente.consultarcliente");
-    	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(intent);
-//    	finish();
-    }*/
+
     
     @Override
 	protected void onStart() {
@@ -95,8 +83,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 
 	@Override
 	protected void process() {
-    	//ConsultarCabeceraProxy.setCodigoCliente(cliente.codigo);
-    	//ConsultarCabeceraProxy.execute();
+		evaluacionId=-1;
 		cabecera = evaluacionBLL.List(cliente.codigo);
 	}
     
@@ -110,151 +97,87 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	
 	
 	
-	/*
-    @Override
-	protected void processOk() {
-		// TODO Auto-generated method stub
-		boolean isExito = ConsultarCabeceraProxy.isExito();
-		if (isExito) {
-			int status = ConsultarCabeceraProxy.getResponse().getStatus();
-			if (status == 0) {
-				List<DesarrolloClienteTO> cabecera = ConsultarCabeceraProxy
-						.getResponse().getListaDesarrolloCliente();
-				adap = new EfficientAdapter(this, cabecera);
-				setListAdapter(adap);
-			}
-			else  {
-				showToast(ConsultarCabeceraProxy.getResponse().getDescripcion());
-			}
-		}
-		else{
-			processError();
-		}
-		super.processOk();
-	}
-
-	@Override
-	protected void processError() {
-		// TODO Auto-generated method stub
-		super.processError();
-		showToast(error_generico_process);
-	}*/
-	
-	
 	
 	@Override
 	protected void process(int accion) {
-		// TODO Auto-generated method stub
-		/*if(accion == ACCION_ELIMINAR)
-		{
-			actualizarEstadoProxy.codigo = codigoElimnar;
-			actualizarEstadoProxy.estado = "E";
-			actualizarEstadoProxy.execute();
-		}*/
-		
-		
-		if(ACCION_CARGAR_EVALUACION==accion || ACCION_VERIFICAR_EVALUACION==accion){
-			application.evaluacion = evaluacionBLL.GetById(evaluacionId);
+		switch (accion) {
+		case ACCION_ELIMINAR:
+			evaluacionBLL.delete(evaluacionId);
+			break;
+		case ACCION_EDITAR:
+			application.evaluacion = evaluacionBLL.getById(evaluacionId);
+		default:
+			break;
 		}
 	}
 	
 	@Override
 	protected void processOk(int accion) {
-		
-		if(ACCION_CARGAR_EVALUACION==accion){
-			super.processOk();
-			Intent evaluacionTabsActivity = new Intent(this, EvaluacionTabs_Activity.class);
-			evaluacionTabsActivity.putExtra(EvaluacionTabs_Activity.CODIGO_REGISTRO, "0");
-			evaluacionTabsActivity.putExtra(EvaluacionTabs_Activity.ORIGEN_REGISTRO, "0");
-			
-			//compromisoOpen.putExtra(ConsultarResumen_Activity.CODIGO_REGISTRO_KEY, this.evaluacionId);							
-			startActivity(evaluacionTabsActivity);
-		}else if(ACCION_VERIFICAR_EVALUACION==accion){
-			super.processOk();
-			Intent verificacionTabsActivity = new Intent(this, VerificacionTabs_Activity.class);
-			verificacionTabsActivity.putExtra(EvaluacionTabs_Activity.CODIGO_REGISTRO, "0");
-			verificacionTabsActivity.putExtra(EvaluacionTabs_Activity.ORIGEN_REGISTRO, "0");
-			startActivity(verificacionTabsActivity);
+		switch (accion) {
+		case ACCION_ELIMINAR:
+			super.processOk(accion);
+			processAsync();
+			break;
+		case ACCION_EDITAR:
+			super.processOk(accion);
+			Intent compromisoOpen = new Intent(this,EvaluacionTabs_Activity.class);
+			startActivity(compromisoOpen);
+			break;
+		default:
+			break;
 		}
 		
-		
-		// TODO Auto-generated method stub
-		/*if(accion == ACCION_ELIMINAR)
-		{
-			boolean isExito = actualizarEstadoProxy.isExito();
-			if (isExito) {
-				int status = actualizarEstadoProxy.getResponse().getStatus();
-				if (status == 0) {
-					showToast("Registro eliminado correctamente.");					
-				}
-				else  {
-					showToast(actualizarEstadoProxy.getResponse().getDescripcion());
-				}
-			}
-			else{
-				processError();
-			}
-			super.processOk();
-			processAsync();
-		}*/
+	
 	}
 	
 	@Override
 	protected void processError(int accion) {
 		// TODO Auto-generated method stub
-		super.processError(accion);
-		if(accion == ACCION_ELIMINAR)
-		{
+		switch (accion) {
+		case ACCION_ELIMINAR:
 			showToast(error_generico_process);
+			super.processOk();
+			break;
+		case ACCION_EDITAR:
+			showToast(error_generico_process);
+			super.processOk();
+			break;
+		default:
+			break;
 		}
 	}
 	
 	
 	 @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo){    
-        //super.onCreateContextMenu(menu, v, menuInfo);
-
         AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
         int position = info.position;
         if(adap!=null){
         	EvaluacionTO evaluacionTO =  adap.detalles.get(position);
-        	if(evaluacionTO.fecha.compareTo(ConstantesApp.getFechaSistemaAS400())==0){
+        	evaluacionId = evaluacionTO.id;
+        	
+        	if(evaluacionTO.fecha.compareTo(ConstantesApp.getFechaSistemaAS400())==0 && 
+        	   evaluacionTO.estado.compareTo(ConstantesApp.OPORTUNIDAD_ABIERTA)==0){
         		getMenuInflater().inflate(R.menu.consultarcabecera_menu1, menu);
         	}else{
-        		if(evaluacionTO.estado.compareTo(ConstantesApp.OPORTUNIDAD_CERRADA)==0){
+        		if(evaluacionTO.estado.compareTo(ConstantesApp.OPORTUNIDAD_ABIERTA)==0){
         			getMenuInflater().inflate(R.menu.consultarcabecera_menu2, menu);
+        		}else{
+        			getMenuInflater().inflate(R.menu.consultarcabecera_menu3, menu);
         		}
         	}
         }
-        
-        
-        /*
-        if(resumenClientes!=null){
-       	 clienteSeleccionado = resumenClientes.detalle.get(position);
-       	 String title = clienteSeleccionado.descripcion;
-       	 menu.setHeaderTitle(title);
-            getActivity().getMenuInflater().inflate(R.menu.vendedorresumen_clientes_menu, menu);
-        }*/
         
 	 }
 	
      @Override
      public boolean onContextItemSelected(MenuItem item) {
-    	/* Intent intent = null;
-    	 if(item.getItemId()==pe.lavisa.tomadorpedidos.R.id.mnuIniciarAtencion){
-    		 if(null!=clienteSeleccionado){
-    			 intent = new Intent(this.getActivity(),ResumenCliente_Activity.class);
-	    		 intent.putExtra(ClienteDetalle_Activity.CLIENTE_ID_KEY, clienteSeleccionado.id);
-	    		 startActivity(intent);
-    		 }
+    	 if(item.getItemId()==R.id.mnuEliminar){
+    		 processAsync(ACCION_ELIMINAR);
+    		 
+    	 }else if(item.getItemId()==R.id.mnuEditar){
+    		 processAsync(ACCION_EDITAR);
     	 }
-    	 else if(item.getItemId()==pe.lavisa.tomadorpedidos.R.id.mnuMantenimiento){
-    		 if(null!=clienteSeleccionado){
-	    		 intent = new Intent(this.getActivity(),ClienteDetalle_Activity.class);
-	    		 intent.putExtra(ClienteDetalle_Activity.CLIENTE_ID_KEY, clienteSeleccionado.id);
-	    		 startActivity(intent);
-    		 }
-    	 }*/
          return super.onContextItemSelected(item);
      }
 	
@@ -403,20 +326,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	    	  holder.txViewestado.setText(ConstantesApp.OPORTUNIDAD_ABIERTA_LARGA);
 	      else
 	    	  holder.txViewestado.setText(ConstantesApp.OPORTUNIDAD_CERRADA_LARGA);
-		
-	     /*
-	      if(!(evaluacionTO.fecha.equals(ConstantesApp.getFechaSistemaAS400())))
-	    	{
-	    		holder.btnEliminar.setVisibility(View.INVISIBLE);
-	    	}else{
-	    		holder.btnEliminar.setVisibility(View.VISIBLE);
-	    	}
-	    	*/
-	      
-	      
-			
-			
-	    	
+	
 		  	return view;
 	    }
 
@@ -426,11 +336,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	    	TextView txViewHora;
 	    	TextView txViewFechaCierre;  	    	
 	    	TextView txViewHoraCierre;    	    	
-	    	TextView txViewestado;
-	    	/*Button txViewVerDetalle;	    	
-	    	Button txViewVerResumen;
-	    	Button btnEliminar;*/
-	    	
+	    	TextView txViewestado;	    	
 	    }
 	
 

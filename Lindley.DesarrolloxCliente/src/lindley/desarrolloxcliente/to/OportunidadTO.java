@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lindley.desarrolloxcliente.ConstantesApp;
-
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class OportunidadTO {
@@ -32,11 +30,14 @@ public class OportunidadTO {
 		estado =  ConstantesApp.OPORTUNIDAD_ABIERTA;
 	}
 	
-	@Expose()
-	public long oportunidadId;
 	
-	@Expose()
+	public long oportunidadId;
 	public long productoId;
+    public long evaluacionId;
+    public int anio;
+    public int mes;
+    public String codigoArticulo;
+	
 	public String fecha;
 	public String codigoProducto;
 	public String descripcionProducto;
@@ -62,7 +63,7 @@ public class OportunidadTO {
 	public int numeroSaboresCumple;
 	
 	
-	public String puntosCocaCola;
+	//public String puntosCocaCola;
 
 	
 
@@ -151,14 +152,7 @@ public class OportunidadTO {
 		this.numeroSabores = numeroSabores;
 	}
 
-	public String getPuntosCocaCola() {
-		return puntosCocaCola;
-	}
-
-	public void setPuntosCocaCola(String puntosCocaCola) {
-		this.puntosCocaCola = puntosCocaCola;
-	}
-
+	
 	public String getPuntosBonus() {
 		return puntosBonus;
 	}

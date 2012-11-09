@@ -45,6 +45,7 @@ public class MyApplication extends Application {
 	public UsuarioTO usuario;
 	public ClienteTO cliente;
 	public EvaluacionTO evaluacion;
+	public lindley.desarrolloxcliente.to.upload.EvaluacionTO evaluacionCliente;
 	
 	public int compromisoPosicion=-1;
 	
