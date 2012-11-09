@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+		
+         <TableRow>
+               <TextView style="@style/TextViewHead" android:layout_width="wrap_content" android:layout_height="30dip" android:text="@string/posicionopen_content_activos" android:gravity="center_vertical"/>
+               <TextView android:id="@+id/TextViewRpsta"  android:layout_width="wrap_content" android:layout_height="30dip" android:layout_weight="3"  android:gravity="center_vertical"/>
+        </TableRow>
+        
+        <TableRow>
+               <TextView style="@style/TextViewHead" android:layout_width="wrap_content" android:layout_height="30dip" android:text="@string/compromisoopen_content_puntos" android:gravity="center_vertical"/>
+               <TextView android:id="@+id/txViewPuntos"  android:layout_width="wrap_content" android:layout_height="30dip" android:layout_weight="3"  android:gravity="center_vertical"/>
+        </TableRow>
+        
+        <TableRow>
+            <TextView style="@style/TextViewHead"  android:layout_width="fill_parent" android:layout_height="30dip" android:layout_weight="1"  android:text="@string/posicionopen_content_red" android:gravity="center_horizontal|center_vertical" />
+        </TableRow>
+        
+        <TableRow>
+               <TextView style="@style/TextViewHead" android:layout_width="wrap_content" android:layout_height="30dip" android:text="@string/posicionopen_content_exhibicion" android:gravity="center_vertical"/>
+               <TextView android:id="@+id/txViewRed"  android:layout_width="wrap_content" android:layout_height="30dip" android:layout_weight="3"  android:gravity="center_vertical"/>
+        </TableRow>
+        
+         <TableRow>
+               <TextView style="@style/TextViewHead" android:layout_width="wrap_content" android:layout_height="30dip" android:text="@string/posicionopen_content_puntomax" android:gravity="center_vertical"/>
+               <TextView android:id="@+id/txViewMaximo"  android:layout_width="wrap_content" android:layout_height="30dip" android:layout_weight="3"  android:gravity="center_vertical"/>
+        </TableRow>
+        
+         <TableRow>
+               <TextView style="@style/TextViewHead" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/posicionopen_content_observacion" android:gravity="center_vertical"/>
+               <TextView android:id="@+id/txViewAccComp"  android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="3"  android:gravity="center_vertical" android:maxLength="50"/>
+        </TableRow>
+        
+        <TableRow>  
+            <TextView style="@style/TextViewHead"  android:layout_width="wrap_content" android:layout_height="fill_parent"  android:text="@string/posicionopen_content_fechacompromiso" android:gravity="center_vertical" />
+               <TextView
+                android:id="@+id/txEditFecha"
+            	android:layout_width="0dip" 
+            	android:layout_height="fill_parent" 
+            	android:layout_weight="1"/>    
+        </TableRow>
+        
+        
+         <TableRow android:gravity="right">  
+             
+             
+                   <Button
+		                android:id="@+id/btnFotoInicial"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:layout_margin="2dip"
+		                android:focusable="false"
+		                android:gravity="center"
+		                android:layout_gravity="center"
+		                android:text="@string/ver_fotoInicial" />
+		
+		            <Button
+		                android:id="@+id/btnFotoExito"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:layout_margin="2dip"
+		                android:focusable="false"
+		                android:layout_gravity="center"
+		                android:text="@string/ver_fotoExito" />
+            
+          
+
+       
+		        
+        </TableRow>
+
+    </TableLayout>
