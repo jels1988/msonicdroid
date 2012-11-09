@@ -17,6 +17,7 @@ public class PosicionTO {
 		puntosSugeridos="0";
 		puntosBonus="0";
 		sovirMaximo = "0";
+		sovirDiferencia="0";
 		sovir="0";
 		
 		activosLindley = ConstantesApp.RESPUESTA_NO;

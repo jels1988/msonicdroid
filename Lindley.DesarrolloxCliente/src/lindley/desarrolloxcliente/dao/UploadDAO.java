@@ -51,7 +51,7 @@ public class UploadDAO {
 		String SQL = "select id,clienteCodigo,activosLindley,codigoFe,usuario,fecha,hora,usuarioCierre,fechaCierre,horaCierre,estado,serverId,combosSS,combosMS,obsSS,obsMS " +
 					 "from evaluacion where id=?1";
 		
-		String[] args = new String[] {String.valueOf(ConstantesApp.EVALUACION_TIENE_CAMBIOS)};
+		String[] args = new String[] {String.valueOf(id)};
 		
 		Cursor cursor = dbHelper.rawQuery(SQL,args);
 		

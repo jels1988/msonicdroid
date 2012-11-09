@@ -156,7 +156,7 @@ public class Compromisos_Activity extends ListBaseFragment {
 										oportunidadTO.codigoAccionTrade = (((AccionTradeTO)arg0.getSelectedItem()).codigo);
 										oportunidadTO.accionTrade = (((AccionTradeTO)arg0.getSelectedItem()).descripcion);
 									}else{
-										oportunidadTO.codigoAccionTrade  = "";
+										oportunidadTO.codigoAccionTrade  = "0";
 										oportunidadTO.accionTrade = "";
 									}
 								}
@@ -165,7 +165,7 @@ public class Compromisos_Activity extends ListBaseFragment {
 								public void onNothingSelected(AdapterView<?> arg0) {
 									// TODO Auto-generated method stub
 									OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
-									oportunidadTO.codigoAccionTrade  = "";
+									oportunidadTO.codigoAccionTrade  = "0";
 									oportunidadTO.accionTrade = "";
 								}
 								
