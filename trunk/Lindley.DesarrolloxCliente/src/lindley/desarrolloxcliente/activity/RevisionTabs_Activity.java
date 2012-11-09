@@ -57,7 +57,7 @@ public class RevisionTabs_Activity extends ActivityBaseFragment {
         mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
         
         mTabManager.addTab(mTabHost.newTabSpec(TAB_INVENTARIO).setIndicator("Inventario"),RevisionCompromisos_Activity.class,getIntent().getExtras());
-        //mTabManager.addTab(mTabHost.newTabSpec(TAB_POSICION).setIndicator("Posici—n"),Posicion_Activity.class,getIntent().getExtras());
+        mTabManager.addTab(mTabHost.newTabSpec(TAB_POSICION).setIndicator("Posici—n"),RevisionPosicion_Activity.class,getIntent().getExtras());
         //mTabManager.addTab(mTabHost.newTabSpec(TAB_PRESENTACION).setIndicator("Presentaci—n"),Presentacion_Activity.class,getIntent().getExtras());
         //mTabManager.addTab(mTabHost.newTabSpec(TAB_COMBOS).setIndicator("Combos"),Combos_Activity.class,getIntent().getExtras());
         
