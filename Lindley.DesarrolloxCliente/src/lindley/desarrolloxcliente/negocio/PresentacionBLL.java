@@ -4,7 +4,7 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.dao.PresentacionDAO;
-import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
+import lindley.desarrolloxcliente.to.upload.PresentacionTO;
 import net.msonic.lib.DBHelper;
 
 import android.util.Log;
@@ -17,8 +17,8 @@ public class PresentacionBLL {
 	@Inject protected DBHelper dbHelper;
 	@Inject protected PresentacionDAO presentacionDAO;
 	
-	public List<PresentacionCompromisoTO> consultarOportunidadesPresentacion(String codigoCliente){
-		List<PresentacionCompromisoTO> lista = null;
+	public List<PresentacionTO> consultarOportunidadesPresentacion(String codigoCliente){
+		List<PresentacionTO> lista = null;
 		
 		
 		try{

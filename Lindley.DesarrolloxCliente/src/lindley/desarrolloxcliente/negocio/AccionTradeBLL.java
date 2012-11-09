@@ -3,7 +3,7 @@ package lindley.desarrolloxcliente.negocio;
 import java.util.List;
 
 import lindley.desarrolloxcliente.dao.AccionTradeDAO;
-import lindley.desarrolloxcliente.to.AccionTradeTO;
+import lindley.desarrolloxcliente.to.upload.AccionTradeTO;
 import net.msonic.lib.DBHelper;
 
 import android.util.Log;

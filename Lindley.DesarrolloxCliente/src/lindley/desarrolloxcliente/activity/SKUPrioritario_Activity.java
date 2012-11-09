@@ -10,11 +10,11 @@ import lindley.desarrolloxcliente.negocio.OportunidadBLL;
 import lindley.desarrolloxcliente.negocio.PosicionBLL;
 import lindley.desarrolloxcliente.negocio.PresentacionBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.EvaluacionTO;
-import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
-import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
-import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
+import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
+import lindley.desarrolloxcliente.to.upload.PosicionTO;
+import lindley.desarrolloxcliente.to.upload.PresentacionTO;
+import lindley.desarrolloxcliente.to.upload.SkuTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarSKUPrioritarioProxy;
 import lindley.desarrolloxcliente.ws.service.GuardarNuevoDesarrolloProxy;
 import net.msonic.lib.MessageBox;
@@ -78,7 +78,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 		
 		cliente = application.cliente;
 		usuario = application.usuario;
-		evaluacion = application.evaluacion;
+		evaluacion = application.evaluacionActual;
 		
 		setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 		
@@ -106,16 +106,22 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 
 	@Override
 	protected void process() {
+		evaluacion.codigoCliente = cliente.codigo;
+		evaluacion.usuarioCreacion = usuario.codigoSap;
+		evaluacion.fechaCreacion = ConstantesApp.getFechaSistemaAS400();
+		evaluacion.horaCreacion = ConstantesApp.getHoraSistemaAS400();
+		evaluacion.estado = ConstantesApp.OPORTUNIDAD_ABIERTA;
+		evaluacion.codigoFDE = cliente.cluster;
 		
 		String cluster = cliente.cluster;
-		evaluacion.skuPresentacion = oportunidadBLL.consultarSKUPresentacion(cluster);
-		adap = new EfficientAdapter(this, evaluacion.skuPresentacion);
+		evaluacion.skus = oportunidadBLL.consultarSKUPresentacion(cluster);
+		adap = new EfficientAdapter(this, evaluacion.skus);
 		
 		
-		 List<PosicionCompromisoTO> posicion = posicionBLL.consultarOportunidadesPosicion(evaluacion);
+		 List<PosicionTO> posicion = posicionBLL.consultarOportunidadesPosicion(evaluacion);
 		 evaluacion.posiciones = posicion;
 		 
-		 List<PresentacionCompromisoTO> presentacion = presentacionBLL.consultarOportunidadesPresentacion(evaluacion.codigoCliente);
+		 List<PresentacionTO> presentacion = presentacionBLL.consultarOportunidadesPresentacion(evaluacion.codigoCliente);
 		 evaluacion.presentaciones = presentacion;
 		 
 	}
@@ -124,28 +130,6 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 	@Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
-		/*
-		boolean isExito = consultarSKUPrioritarioProxy.isExito();
-		if (isExito) {
-			int status = consultarSKUPrioritarioProxy.getResponse().getStatus();
-			if (status == 0) {
-				List<SKUPresentacionTO> listaSKUPresentacion = consultarSKUPrioritarioProxy.getResponse().listaSKUPresentacion;
-				adap = new EfficientAdapter(this, listaSKUPresentacion);
-				final Calendar c = Calendar.getInstance();
-				if (listaSKUPresentacion.size() > 0)
-					txtViewFecha.setText(ActivityUtil.pad(c
-							.get(Calendar.DAY_OF_MONTH))
-							+ "/"
-							+ ActivityUtil.pad((c.get(Calendar.MONTH) + 1))
-							+ "/" + c.get(Calendar.YEAR));
-				setListAdapter(adap);
-			} else {
-				showToast(consultarSKUPrioritarioProxy.getResponse()
-						.getDescripcion());
-			}
-		} else {
-			processError();
-		}*/
 		
 		setListAdapter(adap);
 		txtViewFecha.setText(ConstantesApp.getFechaSistema());
@@ -198,23 +182,6 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
-				/*
-				List<SKUPresentacionTO> skuPresentaciones = application.guardarSKUPresentacion;
-
-				if (skuPresentaciones == null) {
-					skuPresentaciones = new ArrayList<SKUPresentacionTO>();
-				} else {
-					skuPresentaciones.clear();
-				}
-
-				EfficientAdapter adap = (EfficientAdapter) getListAdapter();
-
-				if (adap == null) {
-					adap = new EfficientAdapter(ctx,new ArrayList<SKUPresentacionTO>());
-				}*/
-				//application.guardarSKUPresentacion = adap.skuPresentaciones;
-				
-			
 				processAsync(ACCION_GUARDAR);
 			
 			
@@ -232,22 +199,9 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 		// TODO Auto-generated method stub
 		if(accion == ACCION_GUARDAR)
 		{
-			
-			//evaluacion.activosLindley = cliente.codigo;
-			evaluacion.skuPresentacion = adap.skuPresentaciones;
-			evaluacion.usuarioCrea = usuario.codigoSap;
+			evaluacion.skus = adap.skuPresentaciones;
+		
 			evaluacionBLL.asignarPuntos(evaluacion,cliente);
-			
-			
-			
-			//guardarNuevoDesarrolloProxy.oportunidadSistema = application.guardarOportunidades;
-			//guardarNuevoDesarrolloProxy.listSKUPresentacion = application.guardarSKUPresentacion;
-			//guardarNuevoDesarrolloProxy.activosLindley = application.activosLindley;
-			//guardarNuevoDesarrolloProxy.codigoCliente = cliente.getCodigo();
-			//guardarNuevoDesarrolloProxy.codigoUsuario = usuario.getCodigoSap();
-			//guardarNuevoDesarrolloProxy.codigoFDE = cliente.getCluster();
-			//guardarNuevoDesarrolloProxy.execute();
-			
 			
 			
 		}
@@ -260,40 +214,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
     	{
 			finish();
 			Intent compromisoOpen = new Intent(this,EvaluacionTabs_Activity.class);
-			//compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, "0");					
-			//compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "N");
 			startActivity(compromisoOpen);
-			
-			
-			/*
-			boolean isExito = guardarNuevoDesarrolloProxy.isExito();
-			if (isExito) {
-				int status = guardarNuevoDesarrolloProxy.getResponse().getStatus();
-				if (status == 0) {
-					String idRegistro = guardarNuevoDesarrolloProxy.getResponse().getCodCabecera();
-					finish();
-					
-					
-					Intent compromisoOpen = new Intent(this,TestTabs.class);
-					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, idRegistro);					
-					compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "N");
-					startActivity(compromisoOpen);
-					
-					
-					//Intent compromisoOpen = new Intent("lindley.desarrolloxcliente.compromisoprincipalopen");
-					//compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.CODIGO_REGISTRO, idRegistro);					
-					//compromisoOpen.putExtra(CompromisoPrincipalOpen_Resumen.ORIGEN_REGISTRO, "N");
-					//startActivity(compromisoOpen);
-					
-					
-				}
-				else  {
-					showToast(guardarNuevoDesarrolloProxy.getResponse().getDescripcion());
-				}
-			}
-			else{
-				processError();
-			}*/
 			super.processOk();
     	}
 	}
@@ -305,12 +226,11 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 		showToast(error_generico_process);
 	}
 	
-	public static class EfficientAdapter extends ArrayAdapter<SKUPresentacionTO> {
+	public static class EfficientAdapter extends ArrayAdapter<SkuTO> {
 		private Activity context;
-		private List<SKUPresentacionTO> skuPresentaciones;
+		private List<SkuTO> skuPresentaciones;
 
-		public EfficientAdapter(Activity context,
-				List<SKUPresentacionTO> skuPresentaciones) {
+		public EfficientAdapter(Activity context,List<SkuTO> skuPresentaciones) {
 			super(context, R.layout.skuprioritario_content, skuPresentaciones);
 			this.context = context;
 			this.skuPresentaciones = skuPresentaciones;
@@ -332,7 +252,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 					@Override
 					public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
 						// TODO Auto-generated method stub
-						SKUPresentacionTO skuPresentacion = (SKUPresentacionTO) viewHolder.chkValActual.getTag();
+						SkuTO skuPresentacion = (SkuTO) viewHolder.chkValActual.getTag();
 						if(arg2==0){
 							skuPresentacion.marcaActual = ConstantesApp.RESPUESTA_NO;
 							skuPresentacion.marcaCompromiso = ConstantesApp.RESPUESTA_NO;
@@ -368,9 +288,9 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 			}
 
 			ViewHolder holder = (ViewHolder) view.getTag();
-			SKUPresentacionTO skuPresentacion = skuPresentaciones.get(position);
+			SkuTO skuPresentacion = skuPresentaciones.get(position);
 
-			holder.txViewSKU.setText(skuPresentacion.getDescripcionSKU());
+			holder.txViewSKU.setText(skuPresentacion.descripcionSKU);
 			
 			
 		      

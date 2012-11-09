@@ -1,11 +1,30 @@
 package lindley.desarrolloxcliente.to.upload;
 
 
+import lindley.desarrolloxcliente.ConstantesApp;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class PosicionTO {
 		
+	public PosicionTO(){
+		
+		confirmacion = ConstantesApp.RESPUESTA_NO;;
+		fotoInicial = "";
+		fotoFinal = " ";
+		puntosGanados="0";
+		puntosSugeridos="0";
+		puntosBonus="0";
+		sovirMaximo = "0";
+		sovir="0";
+		
+		activosLindley = ConstantesApp.RESPUESTA_NO;
+		confirmacion =  ConstantesApp.RESPUESTA_NO;
+		origen =  ConstantesApp.OPORTUNIDAD_SISTEMA;
+		estado =  ConstantesApp.OPORTUNIDAD_ABIERTA;
+	}
+	
 	@Expose()
     public long id;
 

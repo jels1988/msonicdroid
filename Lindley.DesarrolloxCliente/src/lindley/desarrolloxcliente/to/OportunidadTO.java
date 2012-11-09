@@ -69,18 +69,10 @@ public class OportunidadTO {
 
 	
 	public String fechaOportunidad;
-	
-	@SerializedName("TRD")
 	public List<AccionTradeTO> listaAccionesTrade;
-
-	@SerializedName("CAT")
 	public String accioneTrade;
-	
-	@SerializedName("DAT")
 	public String descripcionAccioneTrade;
-	
 
-	@SerializedName("LEG")
 	public String codigoLegacy;
 	
 	public String puntosSugeridos;

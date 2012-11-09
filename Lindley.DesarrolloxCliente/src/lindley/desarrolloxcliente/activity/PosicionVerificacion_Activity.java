@@ -10,6 +10,7 @@ import lindley.desarrolloxcliente.negocio.PosicionBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
+import lindley.desarrolloxcliente.to.upload.PosicionTO;
 import net.msonic.lib.MessageBox;
 import net.msonic.lib.UploadFileUtil;
 import net.msonic.lib.sherlock.ListBaseFragment;
@@ -77,9 +78,9 @@ public class PosicionVerificacion_Activity extends ListBaseFragment  {
 		 @Override
 		protected void process() {
 			// TODO Auto-generated method stub
-			 List<PosicionCompromisoTO> detalle = posicionBLL.consultarOportunidadesPosicion(evaluacion);
-			 evaluacion.posiciones = detalle;
-			 oportunidades = new EfficientAdapter(this,cliente, detalle);
+			 //List<PosicionTO> detalle = posicionBLL.consultarOportunidadesPosicion(evaluacion);
+			 //evaluacion.posiciones = detalle;
+			 //oportunidades = new EfficientAdapter(this,cliente, detalle);
 		}
 
 		

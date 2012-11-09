@@ -12,6 +12,8 @@ import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
+import lindley.desarrolloxcliente.to.upload.PosicionTO;
+import lindley.desarrolloxcliente.to.upload.PresentacionTO;
 import net.msonic.lib.DBHelper;
 
 import android.util.Log;
@@ -109,7 +111,7 @@ public class EvaluacionBLL {
 		return evaluaciones;
 	}
 	
-	public void asignarPuntos(EvaluacionTO evaluacionTO,ClienteTO clienteTO){
+	public void asignarPuntos(lindley.desarrolloxcliente.to.upload.EvaluacionTO evaluacionTO,ClienteTO clienteTO){
 		List<Integer> puntosInventario=null;
 		List<Integer> puntosPosicion=null;
 		List<Integer> puntosPresentacion=null;
@@ -138,7 +140,7 @@ public class EvaluacionBLL {
 		
 		if((puntosInventario!=null) && (puntosInventario.size()>=evaluacionTO.oportunidades.size())){
 			int i=0;
-			for (OportunidadTO oportunidadTO : evaluacionTO.oportunidades) {
+			for (lindley.desarrolloxcliente.to.upload.OportunidadTO oportunidadTO : evaluacionTO.oportunidades) {
 				oportunidadTO.puntosSugeridos = puntosInventario.get(i).toString();
 				i++;
 			}
@@ -146,7 +148,7 @@ public class EvaluacionBLL {
 		
 		if((puntosPosicion!=null) && (puntosPosicion.size()>=evaluacionTO.presentaciones.size())){
 			int i=0;
-			for (PosicionCompromisoTO compromisoTO  : evaluacionTO.posiciones) {
+			for (PosicionTO compromisoTO  : evaluacionTO.posiciones) {
 				compromisoTO.puntosSugeridos = puntosPosicion.get(i).toString();
 				i++;
 			}
@@ -155,9 +157,8 @@ public class EvaluacionBLL {
 		if((puntosPresentacion!=null) && (puntosPresentacion.size()>=evaluacionTO.posiciones.size())){
 			
 			int i=0;
-			for (PresentacionCompromisoTO presentacionTO : evaluacionTO.presentaciones) {
+			for (PresentacionTO presentacionTO : evaluacionTO.presentaciones) {
 				presentacionTO.puntosSugeridos = puntosPresentacion.get(i).toString();
-				presentacionTO.puntosGanados = puntosPresentacion.get(i).toString();
 				i++;
 			}
 		}

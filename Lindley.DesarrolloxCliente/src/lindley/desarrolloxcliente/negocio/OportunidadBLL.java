@@ -3,9 +3,9 @@ package lindley.desarrolloxcliente.negocio;
 import java.util.ArrayList;
 
 import lindley.desarrolloxcliente.dao.OportunidadDAO;
-import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.to.PeriodoTO;
-import lindley.desarrolloxcliente.to.SKUPresentacionTO;
+import lindley.desarrolloxcliente.to.upload.OportunidadTO;
+import lindley.desarrolloxcliente.to.upload.SkuTO;
 import net.msonic.lib.DBHelper;
 
 import android.util.Log;
@@ -21,8 +21,8 @@ public class OportunidadBLL {
 	@Inject protected PeriodoTO periodoTO;
 	
 	
-	public ArrayList<SKUPresentacionTO> consultarSKUPresentacion(String cluster){
-		ArrayList<SKUPresentacionTO> listaSku=null;
+	public ArrayList<SkuTO> consultarSKUPresentacion(String cluster){
+		ArrayList<SkuTO> listaSku=null;
 		
 		try{
 			dbHelper.openDataBase();

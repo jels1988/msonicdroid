@@ -3,9 +3,8 @@ package lindley.desarrolloxcliente.dao;
 import java.util.ArrayList;
 
 import lindley.desarrolloxcliente.ConstantesApp;
-import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.to.PeriodoTO;
-import lindley.desarrolloxcliente.to.SKUPresentacionTO;
+import lindley.desarrolloxcliente.to.upload.SkuTO;
 import net.msonic.lib.DBHelper;
 
 import android.database.Cursor;
@@ -18,18 +17,18 @@ public class OportunidadDAO {
 	@Inject protected PeriodoTO periodoTO;
 	
 	
-	public ArrayList<SKUPresentacionTO> consultarSKUPresentacion(String cluster){
-		ArrayList<SKUPresentacionTO> skus = new ArrayList<SKUPresentacionTO>();
+	public ArrayList<SkuTO> consultarSKUPresentacion(String cluster){
+		ArrayList<SkuTO> skus = new ArrayList<SkuTO>();
 		
 		String SQL = "select codigo,descripcion,cluster from sku where cluster = ?1";
 		
 		String[] args = new String[] {cluster};
 		Cursor cursor = dbHelper.rawQuery(SQL,args);
 		
-		SKUPresentacionTO skuPresentacionTO;
+		lindley.desarrolloxcliente.to.upload.SkuTO skuPresentacionTO;
 		
 		while(cursor.moveToNext()){
-			skuPresentacionTO = new SKUPresentacionTO();
+			skuPresentacionTO = new SkuTO();
 	
 			skuPresentacionTO.codigoSKU  = String.format("%s",cursor.getInt(cursor.getColumnIndex("codigo")));
 			skuPresentacionTO.descripcionSKU = cursor.getString(cursor.getColumnIndex("descripcion"));
@@ -48,9 +47,9 @@ public class OportunidadDAO {
 		return skus;
 	}
 	
-	public ArrayList<OportunidadTO> consultarNuevasOportunidades(String codigoCliente){
+	public ArrayList<lindley.desarrolloxcliente.to.upload.OportunidadTO> consultarNuevasOportunidades(String codigoCliente){
 		
-		ArrayList<OportunidadTO> nuevasOportunidades = new ArrayList<OportunidadTO>();
+		ArrayList<lindley.desarrolloxcliente.to.upload.OportunidadTO> nuevasOportunidades = new ArrayList<lindley.desarrolloxcliente.to.upload.OportunidadTO>();
 		
 		String SQL = "select p.productoId,oc.codigoProducto,p.descripcion,oc.legacy," +
 					"oc.concrecion,oc.sovi,oc.respetaPrecio,oc.numeroSabores,oc.fechaProceso " +
@@ -65,22 +64,22 @@ public class OportunidadDAO {
 		
 		Cursor cursor = dbHelper.rawQuery(SQL,args);
 		
-		OportunidadTO nuevaOportunidadTO;
+		lindley.desarrolloxcliente.to.upload.OportunidadTO nuevaOportunidadTO;
 		
 		while(cursor.moveToNext()){
-			nuevaOportunidadTO = new OportunidadTO();
+			nuevaOportunidadTO = new lindley.desarrolloxcliente.to.upload.OportunidadTO();
 			nuevaOportunidadTO.productoId = cursor.getLong(cursor.getColumnIndex("productoId"));
-			nuevaOportunidadTO.codigoProducto = cursor.getString(cursor.getColumnIndex("codigoProducto"));
-			nuevaOportunidadTO.descripcionProducto = cursor.getString(cursor.getColumnIndex("descripcion"));
-			nuevaOportunidadTO.codigoLegacy = cursor.getString(cursor.getColumnIndex("legacy"));
+			nuevaOportunidadTO.codigoArticulo = cursor.getString(cursor.getColumnIndex("codigoProducto"));
+			nuevaOportunidadTO.articulo = cursor.getString(cursor.getColumnIndex("descripcion"));
+			nuevaOportunidadTO.legacy = cursor.getString(cursor.getColumnIndex("legacy"));
 			nuevaOportunidadTO.concrecion = cursor.getString(cursor.getColumnIndex("concrecion"));
 			nuevaOportunidadTO.sovi = cursor.getString(cursor.getColumnIndex("sovi"));
-			nuevaOportunidadTO.cumplePrecio = cursor.getString(cursor.getColumnIndex("respetaPrecio"));
+			nuevaOportunidadTO.respetoPrecio = cursor.getString(cursor.getColumnIndex("respetaPrecio"));
 			nuevaOportunidadTO.numeroSabores = String.valueOf(cursor.getInt(cursor.getColumnIndex("numeroSabores")));
 			nuevaOportunidadTO.puntosBonus = "0"; //String.valueOf(cursor.getInt(cursor.getColumnIndex("puntosBonus")));
 			nuevaOportunidadTO.puntosGanados = "0"; //String.valueOf(cursor.getInt(cursor.getColumnIndex("puntosBonus")));
-			nuevaOportunidadTO.puntosSugeridos = nuevaOportunidadTO.puntosBonus;
-			nuevaOportunidadTO.fecha = String.valueOf(cursor.getInt(cursor.getColumnIndex("fechaProceso")));
+			nuevaOportunidadTO.puntosSugeridos = "0";
+			//nuevaOportunidadTO.fechaCompromiso = String.valueOf(cursor.getInt(cursor.getColumnIndex("fechaProceso")));
 			nuevasOportunidades.add(nuevaOportunidadTO);
 			
 		}
