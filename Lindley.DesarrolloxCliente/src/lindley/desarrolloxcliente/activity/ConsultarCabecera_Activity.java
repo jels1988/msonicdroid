@@ -35,14 +35,13 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	
 	private EfficientAdapter adap;
 	private ClienteTO cliente;
-	public static MyApplication application;
+	public  MyApplication application;
 	
-	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
-	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
 	
 	
 	public static final int ACCION_ELIMINAR = 1;
 	public static final int ACCION_EDITAR = 2;
+	public static final int ACCION_DETALLE= 3;
 	
 	public static final int ACCION_CARGAR_EVALUACION = 2;
 	public static final int ACCION_VERIFICAR_EVALUACION = 3;
@@ -107,6 +106,8 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 			break;
 		case ACCION_EDITAR:
 			application.evaluacionActual = uploadBLL.listarEvaluacionById(evaluacionId);
+		case ACCION_DETALLE:
+			application.evaluacionActual = uploadBLL.listarEvaluacionById(evaluacionId);
 		default:
 			break;
 		}
@@ -121,8 +122,13 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 			break;
 		case ACCION_EDITAR:
 			super.processOk(accion);
-			Intent compromisoOpen = new Intent(this,EvaluacionTabs_Activity.class);
-			startActivity(compromisoOpen);
+			Intent evaluacionActivity = new Intent(this,EvaluacionTabs_Activity.class);
+			startActivity(evaluacionActivity);
+			break;
+		case ACCION_DETALLE:
+			super.processOk(accion);
+			Intent verificacionActivity = new Intent(this,RevisionTabs_Activity.class);
+			startActivity(verificacionActivity);
 			break;
 		default:
 			break;
@@ -173,12 +179,21 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	
      @Override
      public boolean onContextItemSelected(MenuItem item) {
-    	 if(item.getItemId()==R.id.mnuEliminar){
-    		 processAsync(ACCION_ELIMINAR);
-    		 
-    	 }else if(item.getItemId()==R.id.mnuEditar){
-    		 processAsync(ACCION_EDITAR);
-    	 }
+    	 switch (item.getItemId()) {
+		case R.id.mnuEliminar:
+			processAsync(ACCION_ELIMINAR);
+			break;
+		case R.id.mnuEditar:
+			 processAsync(ACCION_EDITAR);
+			break;
+		case R.id.mnuDetalle:
+			 processAsync(ACCION_DETALLE);
+			break;
+		default:
+			break;
+		}
+    	 
+    	 
          return super.onContextItemSelected(item);
      }
 	
