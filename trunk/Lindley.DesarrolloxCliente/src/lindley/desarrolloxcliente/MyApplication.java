@@ -45,7 +45,7 @@ public class MyApplication extends Application {
 	public UsuarioTO usuario;
 	public ClienteTO cliente;
 	public EvaluacionTO evaluacion;
-	public lindley.desarrolloxcliente.to.upload.EvaluacionTO evaluacionCliente;
+	public lindley.desarrolloxcliente.to.upload.EvaluacionTO evaluacionActual;
 	
 	public int compromisoPosicion=-1;
 	
@@ -113,6 +113,21 @@ public class MyApplication extends Application {
 //		return accionTradeTOAdapter;
 //	}
 	
+	public synchronized ArrayAdapter<lindley.desarrolloxcliente.to.upload.AccionTradeTO> getAdapterAccionTrade(List<lindley.desarrolloxcliente.to.upload.AccionTradeTO> listaAcciones){
+		ArrayList<lindley.desarrolloxcliente.to.upload.AccionTradeTO> listaAccionTrade = new ArrayList<lindley.desarrolloxcliente.to.upload.AccionTradeTO>();
+		lindley.desarrolloxcliente.to.upload.AccionTradeTO accionTradeTO = new lindley.desarrolloxcliente.to.upload.AccionTradeTO();
+		accionTradeTO.codigo="0";
+		accionTradeTO.descripcion="--Seleccionar--";
+		listaAccionTrade.addAll(listaAcciones);
+		listaAccionTrade.add(0,accionTradeTO);				
+		
+		ArrayAdapter<lindley.desarrolloxcliente.to.upload.AccionTradeTO> adapAccionTradeTO = new ArrayAdapter<lindley.desarrolloxcliente.to.upload.AccionTradeTO>( getApplicationContext(), android.R.layout.simple_spinner_item, listaAccionTrade);
+	    adapAccionTradeTO.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		
+		
+		return adapAccionTradeTO;
+	}
+	/*
 	public synchronized ArrayAdapter<AccionTradeTO> getAdapterAccionTrade(List<AccionTradeTO> listaAcciones){
 		ArrayList<AccionTradeTO> listaAccionTrade = new ArrayList<AccionTradeTO>();
 		AccionTradeTO accionTradeTO = new AccionTradeTO();
@@ -126,7 +141,8 @@ public class MyApplication extends Application {
 		
 		
 		return adapAccionTradeTO;
-	}
+	}*/
+	
 	//ArrayAdapter<AccionTradeTO> adapAccionTradeTO = new ArrayAdapter<AccionTradeTO>( (ConsultarOportunidad_Activity)context, android.R.layout.simple_spinner_item, oportunidad.getListaAccionesTrade());
     //adapAccionTradeTO.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     //holder.cboAccTrade.setAdapter(adapAccionTradeTO);

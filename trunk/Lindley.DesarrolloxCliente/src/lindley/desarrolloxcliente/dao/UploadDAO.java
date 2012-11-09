@@ -45,6 +45,55 @@ public class UploadDAO {
 		return cantidad;
 		
 	}
+	public EvaluacionTO listarEvaluacionById(long id){
+		
+		
+		String SQL = "select id,clienteCodigo,activosLindley,codigoFe,usuario,fecha,hora,usuarioCierre,fechaCierre,horaCierre,estado,serverId,combosSS,combosMS,obsSS,obsMS " +
+					 "from evaluacion where id=?1";
+		
+		String[] args = new String[] {String.valueOf(ConstantesApp.EVALUACION_TIENE_CAMBIOS)};
+		
+		Cursor cursor = dbHelper.rawQuery(SQL,args);
+		
+		EvaluacionTO evaluacionTO=null;
+		
+		while(cursor.moveToNext()){
+			evaluacionTO = new EvaluacionTO();
+			evaluacionTO.id = cursor.getLong(cursor.getColumnIndex("id"));
+			evaluacionTO.codigoCliente =  cursor.getString(cursor.getColumnIndex("clienteCodigo"));
+			evaluacionTO.activosLindley =  cursor.getString(cursor.getColumnIndex("activosLindley"));
+			evaluacionTO.codigoFDE =  cursor.getString(cursor.getColumnIndex("codigoFe"));
+			evaluacionTO.usuarioCreacion =  cursor.getString(cursor.getColumnIndex("usuario"));
+			evaluacionTO.fechaCreacion =  cursor.getString(cursor.getColumnIndex("fecha"));
+			evaluacionTO.horaCreacion =  cursor.getString(cursor.getColumnIndex("hora"));
+			
+			evaluacionTO.usuarioCierre =  cursor.getString(cursor.getColumnIndex("usuarioCierre"));
+			evaluacionTO.fechaCierre =  cursor.getString(cursor.getColumnIndex("fechaCierre"));
+			evaluacionTO.horaCierre =  cursor.getString(cursor.getColumnIndex("horaCierre"));
+			
+			evaluacionTO.comboSS =  cursor.getString(cursor.getColumnIndex("combosSS"));
+			evaluacionTO.comboMS =  cursor.getString(cursor.getColumnIndex("combosMS"));
+			evaluacionTO.observacionSS =  cursor.getString(cursor.getColumnIndex("obsSS"));
+			evaluacionTO.observacionMS =  cursor.getString(cursor.getColumnIndex("obsMS"));
+			
+			evaluacionTO.horaCierre =  cursor.getString(cursor.getColumnIndex("horaCierre"));
+			
+			evaluacionTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
+			evaluacionTO.serverId =  cursor.getLong(cursor.getColumnIndex("serverId"));
+			
+			
+		}
+		cursor.close();
+		
+		
+		listarOportunidades(evaluacionTO);
+		listarPosicion(evaluacionTO);
+		listarPresentacion(evaluacionTO);
+		listarSku(evaluacionTO);
+		
+		return evaluacionTO;
+		
+	}
 	
 	public List<EvaluacionTO> listarEvaluaciones(int limit){
 		List<EvaluacionTO> evaluaciones = new ArrayList<EvaluacionTO>();
@@ -107,7 +156,7 @@ public class UploadDAO {
 	
 	public void listarOportunidades(EvaluacionTO evaluacionTO){
 		
-		String SQL = "select id,evaluacionId,anio,mes, codigoProducto," +
+		String SQL = "select id,evaluacionId,anio,mes, codigoProducto,producto," +
 							"concrecion,concrecionActual,concrecionCumple,sovi,soviActual,soviCumple," +
 							"respetaPrecio,respetaPrecioActual,respetaPrecioCumple,numeroSabores,numeroSaboresActual,codigoAccion,accion, " +
 							"numeroSaboresCumple,puntosSugeridos,puntosBonus,puntosGanados,fechaProceso,legacy,confirmacion,origen,estado " +
@@ -124,6 +173,7 @@ public class UploadDAO {
 			oportunidadTO.anio =  cursor.getInt(cursor.getColumnIndex("anio"));
 			oportunidadTO.mes =  cursor.getInt(cursor.getColumnIndex("mes"));
 			oportunidadTO.codigoArticulo =  cursor.getString(cursor.getColumnIndex("codigoProducto"));
+			oportunidadTO.articulo =  cursor.getString(cursor.getColumnIndex("producto"));
 			
 			oportunidadTO.concrecion =  cursor.getString(cursor.getColumnIndex("concrecion"));
 			oportunidadTO.concrecionActual =  cursor.getString(cursor.getColumnIndex("concrecionActual"));

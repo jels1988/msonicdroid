@@ -5,9 +5,9 @@ import java.util.List;
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
-import lindley.desarrolloxcliente.to.AccionTradeTO;
-import lindley.desarrolloxcliente.to.EvaluacionTO;
-import lindley.desarrolloxcliente.to.OportunidadTO;
+import lindley.desarrolloxcliente.to.upload.AccionTradeTO;
+import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
+import lindley.desarrolloxcliente.to.upload.OportunidadTO;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
@@ -47,11 +47,8 @@ public class Compromisos_Activity extends ListBaseFragment {
          if(VISTA_CARGADA==0){
 	 		VISTA_CARGADA=1;
 	 		application = (MyApplication) getActivity().getApplicationContext();
-	 		evaluacion = application.evaluacion;
-	 		
+	 		evaluacion = application.evaluacionActual;
 	 		 processAsync();
-			
-			
          }
          
 	 }
@@ -141,6 +138,7 @@ public class Compromisos_Activity extends ListBaseFragment {
 				    	
 				    	MyApplication app = (MyApplication)context.getApplication();
 				    	
+				    	
 				    	holder.txViewAccTrade.setAdapter(app.getAdapterAccionTrade(this.detalle.get(position).listaAccionesTrade));
 
 					      if(holder.txViewAccTrade.getCount() > 1)
@@ -155,11 +153,11 @@ public class Compromisos_Activity extends ListBaseFragment {
 									
 									// TODO Auto-generated method stub
 									if(arg2 > 0){
-										oportunidadTO.descAccionTrade = (((AccionTradeTO)arg0.getSelectedItem()).getDescripcion());
-										oportunidadTO.codigoAccionTrade = (((AccionTradeTO)arg0.getSelectedItem()).getCodigo());
+										oportunidadTO.codigoAccionTrade = (((AccionTradeTO)arg0.getSelectedItem()).codigo);
+										oportunidadTO.accionTrade = (((AccionTradeTO)arg0.getSelectedItem()).descripcion);
 									}else{
-										oportunidadTO.descAccionTrade  = "";
-										oportunidadTO.codigoAccionTrade = "";
+										oportunidadTO.codigoAccionTrade  = "";
+										oportunidadTO.accionTrade = "";
 									}
 								}
 
@@ -167,8 +165,8 @@ public class Compromisos_Activity extends ListBaseFragment {
 								public void onNothingSelected(AdapterView<?> arg0) {
 									// TODO Auto-generated method stub
 									OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
-									oportunidadTO.descAccionTrade  = "";
-									oportunidadTO.codigoAccionTrade = "";
+									oportunidadTO.codigoAccionTrade  = "";
+									oportunidadTO.accionTrade = "";
 								}
 								
 							});
@@ -181,9 +179,9 @@ public class Compromisos_Activity extends ListBaseFragment {
 									OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
 									
 									if(arg2==0){
-										oportunidadTO.concrecionActual = ConstantesApp.RESPUESTA_NO;
+										oportunidadTO.concrecion = ConstantesApp.RESPUESTA_NO;
 									}else{
-										oportunidadTO.concrecionActual = ConstantesApp.RESPUESTA_SI;
+										oportunidadTO.concrecion = ConstantesApp.RESPUESTA_SI;
 									}
 								}
 
@@ -200,7 +198,7 @@ public class Compromisos_Activity extends ListBaseFragment {
 								public void onFocusChange(View v, boolean hasFocus) {
 									// TODO Auto-generated method stub
 									OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
-									oportunidadTO.soviActual = holder.txViewSOVICmp.getText().toString();
+									oportunidadTO.sovi = holder.txViewSOVICmp.getText().toString();
 								}
 							});
 						  
@@ -210,7 +208,7 @@ public class Compromisos_Activity extends ListBaseFragment {
 								public void onFocusChange(View v, boolean hasFocus) {
 									// TODO Auto-generated method stub
 									OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
-									oportunidadTO.sovi = holder.txViewSOVI.getText().toString();
+									oportunidadTO.soviActual = holder.txViewSOVI.getText().toString();
 								}
 							});
 						  
@@ -222,9 +220,9 @@ public class Compromisos_Activity extends ListBaseFragment {
 								// TODO Auto-generated method stub
 								OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
 								if(arg2==0){
-									oportunidadTO.cumplePrecio = ConstantesApp.RESPUESTA_NO;
+									oportunidadTO.respetoPrecioActual = ConstantesApp.RESPUESTA_NO;
 								}else{
-									oportunidadTO.cumplePrecio = ConstantesApp.RESPUESTA_SI;
+									oportunidadTO.respetoPrecioActual = ConstantesApp.RESPUESTA_SI;
 								}
 							}
 
@@ -243,9 +241,9 @@ public class Compromisos_Activity extends ListBaseFragment {
 									OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
 									
 									if(arg2==0){
-										oportunidadTO.cumplePrecioActual = ConstantesApp.RESPUESTA_NO;
+										oportunidadTO.respetoPrecio = ConstantesApp.RESPUESTA_NO;
 									}else{
-										oportunidadTO.cumplePrecioActual = ConstantesApp.RESPUESTA_SI;
+										oportunidadTO.respetoPrecio = ConstantesApp.RESPUESTA_SI;
 									}
 								}
 
@@ -265,14 +263,14 @@ public class Compromisos_Activity extends ListBaseFragment {
 									
 									// TODO Auto-generated method stub
 									if(arg2==0){
-										oportunidadTO.numeroSaboresActual = "2";
+										oportunidadTO.numeroSabores = "2";
 									} else if(arg2 == 1){
-										oportunidadTO.numeroSaboresActual = "3";
+										oportunidadTO.numeroSabores = "3";
 									} else if(arg2 == 2){
-										oportunidadTO.numeroSaboresActual = "4";
+										oportunidadTO.numeroSabores = "4";
 									}
 									else{
-										oportunidadTO.numeroSaboresActual = "0";
+										oportunidadTO.numeroSabores = "0";
 									}
 								}
 
@@ -288,7 +286,7 @@ public class Compromisos_Activity extends ListBaseFragment {
 								public void onClick(View v) {
 									// TODO Auto-generated method stub
 									OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
-									 String[] factores = ConstantesApp.getFechaFactoresAS400(oportunidadTO.fechaOportunidad);
+									 String[] factores = ConstantesApp.getFechaFactoresAS400(oportunidadTO.fechaCompromiso);
 									 
 									 DatePickerDialog picker = new DatePickerDialog(context, new OnDateSetListener() {
 										
@@ -299,8 +297,8 @@ public class Compromisos_Activity extends ListBaseFragment {
 											String mes = ConstantesApp.RPad(String.valueOf(monthOfYear+1),2,'0');
 											String dia = ConstantesApp.RPad(String.valueOf(dayOfMonth),2,'0');
 											String fecha = String.format("%s%s%s", year,mes, dia);
-											oportunidadTO.fechaOportunidad=fecha;
-											holder.txEditFecha.setText(ConstantesApp.formatFecha(oportunidadTO.fechaOportunidad));
+											oportunidadTO.fechaCompromiso=fecha;
+											holder.txEditFecha.setText(ConstantesApp.formatFecha(oportunidadTO.fechaCompromiso));
 										}
 									}, Integer.parseInt(factores[0]) ,Integer.parseInt(factores[1])-1, Integer.parseInt(factores[2]));
 									 
@@ -333,18 +331,18 @@ public class Compromisos_Activity extends ListBaseFragment {
 					OportunidadTO oportunidadTO = this.detalle.get(position);
 					
 					holder.txViewPuntos.setText(oportunidadTO.puntosSugeridos);
-					holder.txViewPro.setText(oportunidadTO.descripcionProducto);
-					holder.txViewLegacy.setText(oportunidadTO.codigoLegacy);
+					holder.txViewPro.setText(oportunidadTO.articulo);
+					holder.txViewLegacy.setText(oportunidadTO.legacy);
 					
 					if(oportunidadTO.concrecion.equalsIgnoreCase(ConstantesApp.RESPUESTA_SI))
 				    	  holder.cboConcrecion.setText(ConstantesApp.RESPUESTA_SI_LARGA);
 				      else
 				    	  holder.cboConcrecion.setText(ConstantesApp.RESPUESTA_NO_LARGA);
 					
-					 holder.txViewSOVI.setText(oportunidadTO.sovi);
-				     holder.txViewSOVICmp.setText(oportunidadTO.soviActual);
+					 holder.txViewSOVI.setText(oportunidadTO.soviActual);
+				     holder.txViewSOVICmp.setText(oportunidadTO.sovi);
 				     holder.txViewSabores.setText(oportunidadTO.numeroSabores);
-				     holder.txEditFecha.setText(ConstantesApp.formatFecha(oportunidadTO.fechaOportunidad));
+				     holder.txEditFecha.setText(ConstantesApp.formatFecha(oportunidadTO.fechaCompromiso));
 				    
 				 
 					  

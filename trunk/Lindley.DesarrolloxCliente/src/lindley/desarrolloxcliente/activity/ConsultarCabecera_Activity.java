@@ -6,6 +6,7 @@ import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.EvaluacionBLL;
+import lindley.desarrolloxcliente.negocio.UploadBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarEstadoProxy;
@@ -30,7 +31,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	@Inject ConsultarCabeceraProxy ConsultarCabeceraProxy;
 	@Inject ActualizarEstadoProxy actualizarEstadoProxy;
 	@Inject EvaluacionBLL evaluacionBLL;
-	
+	@Inject UploadBLL uploadBLL;
 	
 	private EfficientAdapter adap;
 	private ClienteTO cliente;
@@ -105,7 +106,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 			evaluacionBLL.delete(evaluacionId);
 			break;
 		case ACCION_EDITAR:
-			application.evaluacion = evaluacionBLL.getById(evaluacionId);
+			application.evaluacionActual = uploadBLL.listarEvaluacionById(evaluacionId);
 		default:
 			break;
 		}
