@@ -82,4 +82,7 @@ public class EvaluacionTO {
 	        @SerializedName("SKU")
 	        public List<SkuTO> skus;
 	        
+	        @Expose()
+	        public int tieneCambio;
+	        
 }

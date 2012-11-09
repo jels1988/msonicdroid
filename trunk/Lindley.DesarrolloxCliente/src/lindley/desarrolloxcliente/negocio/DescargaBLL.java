@@ -2,6 +2,7 @@ package lindley.desarrolloxcliente.negocio;
 
 import java.util.List;
 
+import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.dao.DescargaDAO;
 import lindley.desarrolloxcliente.to.download.AccionTradeProductoTO;
 import lindley.desarrolloxcliente.to.download.AccionTradeTO;
@@ -126,6 +127,45 @@ public class DescargaBLL {
 		}
 	}
 	
+	public void saveEvaluacion(EvaluacionTO evaluacionTO){
+			try{
+				dbHelper.openDataBase();
+				dbHelper.beginTransaction();
+				evaluacionTO.tieneCambio=ConstantesApp.EVALUACION_TIENE_CAMBIOS;
+				
+				if(evaluacionTO.id!=0){
+					descargaDAO.deleteEvaluacion(evaluacionTO.id);
+				}
+				
+				descargaDAO.insertEvaluacion(evaluacionTO);
+				
+				for (lindley.desarrolloxcliente.to.upload.OportunidadTO oportunidadTO : evaluacionTO.oportunidades) {
+					descargaDAO.insertEvaluacionOportunidad(evaluacionTO,oportunidadTO);
+				}
+				
+				for (lindley.desarrolloxcliente.to.upload.PosicionTO posicionTO : evaluacionTO.posiciones) {
+					descargaDAO.insertEvaluacionPosicion(evaluacionTO,posicionTO);
+				}
+				
+				
+				for (lindley.desarrolloxcliente.to.upload.PresentacionTO presentacionTO : evaluacionTO.presentaciones) {
+					descargaDAO.insertEvaluacionPresentacion(evaluacionTO,presentacionTO);
+				}
+				
+				for (lindley.desarrolloxcliente.to.upload.SkuTO skuTO : evaluacionTO.skus) {
+					descargaDAO.insertEvaluacionSkus(evaluacionTO,skuTO);
+				}
+				
+				dbHelper.setTransactionSuccessful();
+			}catch(Exception ex){
+				Log.e(TAG_LOG, "DescargaBLL.saveEvaluacion", ex);
+			} finally {
+				dbHelper.endTransaction();
+				dbHelper.close();
+			}
+		
+	}
+	
 	public void saveEvaluacion(List<EvaluacionTO> lista){
 		synchronized(MyLock)	{
 			try{
@@ -133,6 +173,7 @@ public class DescargaBLL {
 				dbHelper.beginTransaction();
 				descargaDAO.deleteEvaluacion();
 				for (EvaluacionTO evaluacionTO : lista) {
+					evaluacionTO.tieneCambio=ConstantesApp.EVALUACION_NO_TIENE_CAMBIOS;
 					descargaDAO.insertEvaluacion(evaluacionTO);
 				}
 				dbHelper.setTransactionSuccessful();

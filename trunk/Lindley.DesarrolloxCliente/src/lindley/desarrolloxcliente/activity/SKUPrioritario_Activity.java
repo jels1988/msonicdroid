@@ -12,6 +12,7 @@ import lindley.desarrolloxcliente.negocio.PresentacionBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
+import lindley.desarrolloxcliente.to.upload.OportunidadTO;
 import lindley.desarrolloxcliente.to.upload.PosicionTO;
 import lindley.desarrolloxcliente.to.upload.PresentacionTO;
 import lindley.desarrolloxcliente.to.upload.SkuTO;
@@ -106,23 +107,59 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 
 	@Override
 	protected void process() {
+		
 		evaluacion.codigoCliente = cliente.codigo;
 		evaluacion.usuarioCreacion = usuario.codigoSap;
 		evaluacion.fechaCreacion = ConstantesApp.getFechaSistemaAS400();
 		evaluacion.horaCreacion = ConstantesApp.getHoraSistemaAS400();
 		evaluacion.estado = ConstantesApp.OPORTUNIDAD_ABIERTA;
 		evaluacion.codigoFDE = cliente.cluster;
+		evaluacion.fechaCierre = "0";
+		evaluacion.horaCierre = "0";
+		evaluacion.usuarioCierre = "0";
 		
-		String cluster = cliente.cluster;
-		evaluacion.skus = oportunidadBLL.consultarSKUPresentacion(cluster);
-		adap = new EfficientAdapter(this, evaluacion.skus);
-		
-		
+
 		 List<PosicionTO> posicion = posicionBLL.consultarOportunidadesPosicion(evaluacion);
 		 evaluacion.posiciones = posicion;
 		 
 		 List<PresentacionTO> presentacion = presentacionBLL.consultarOportunidadesPresentacion(evaluacion.codigoCliente);
 		 evaluacion.presentaciones = presentacion;
+		
+		 String cluster = cliente.cluster;
+		 evaluacion.skus = oportunidadBLL.consultarSKUPresentacion(cluster);
+		adap = new EfficientAdapter(this, evaluacion.skus);
+			
+		String[] fechas = ConstantesApp.getFechaFactoresAS400(evaluacion.fechaCreacion);
+		int anio = Integer.parseInt(fechas[0]);
+		int mes = Integer.parseInt(fechas[1]);
+		
+		for (OportunidadTO oportunidadTO : evaluacion.oportunidades) {
+			oportunidadTO.anio=anio;
+			oportunidadTO.mes= mes;
+			oportunidadTO.codigoAccionTrade="0";
+		}
+		
+		for(PosicionTO posicionTO : evaluacion.posiciones){
+			posicionTO.anio=anio;
+			posicionTO.mes= mes;
+			posicionTO.fechaEncuesta=evaluacion.fechaCreacion;
+			
+		}
+		
+
+		for(PresentacionTO presentacionTO : evaluacion.presentaciones){
+			presentacionTO.anio=anio;
+			presentacionTO.mes= mes;
+			presentacionTO.fechaEncuesta=evaluacion.fechaCreacion;
+			
+		}
+		
+		
+		for(SkuTO skuTO : evaluacion.skus){
+			skuTO.anio=anio;
+			skuTO.mes= mes;
+		}
+		
 		 
 	}
 	

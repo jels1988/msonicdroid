@@ -10,10 +10,10 @@ import com.google.inject.Inject;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
-import lindley.desarrolloxcliente.negocio.EvaluacionBLL;
-import lindley.desarrolloxcliente.to.EvaluacionTO;
-import lindley.desarrolloxcliente.to.OportunidadTO;
-import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
+import lindley.desarrolloxcliente.negocio.DescargaBLL;
+import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
+import lindley.desarrolloxcliente.to.upload.OportunidadTO;
+import lindley.desarrolloxcliente.to.upload.PosicionTO;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,7 +34,7 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 	
 	private final static int ACCION_GUARDAR_EVALUACION=0;
 	
-	@Inject EvaluacionBLL evaluacionBLL;
+	@Inject DescargaBLL descargaBLL;
 	
 	private TabHost mTabHost;
     private TabManager mTabManager;
@@ -82,8 +82,8 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 		   
 		if(ACCION_GUARDAR_EVALUACION==accion){
 			MyApplication application = (MyApplication)getApplicationContext();
-			EvaluacionTO evaluacion = application.evaluacion;
-			evaluacionBLL.save(evaluacion);
+			EvaluacionTO evaluacion = application.evaluacionActual;
+			descargaBLL.saveEvaluacion(evaluacion);
 		}
 		super.processOk();
 	}
@@ -125,7 +125,7 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 				
 				
 				MyApplication application = (MyApplication)getApplicationContext();
-				EvaluacionTO evaluacion = application.evaluacion;
+				EvaluacionTO evaluacion = application.evaluacionActual;
 				
 			
 				
@@ -152,7 +152,7 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 						return false;
 					}
 					
-					if((comp.fechaOportunidad==null) || (comp.fechaOportunidad.compareTo("")==0)){
+					if((comp.fechaCompromiso==null) || (comp.fechaCompromiso.compareTo("")==0)){
 						mTabHost.setCurrentTabByTag(TAB_INVENTARIO);
 						msg = getString(R.string.evaluacion_msg_error_fecha);
 						showToast(msg);
@@ -168,7 +168,7 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 					return false; 
 				}
 				
-				for(PosicionCompromisoTO posicion : evaluacion.posiciones)
+				for(PosicionTO posicion : evaluacion.posiciones)
 				{
 					if((posicion.fechaCompromiso==null) || (posicion.fechaCompromiso.compareTo("")==0)){
 						mTabHost.setCurrentTabByTag(TAB_POSICION);

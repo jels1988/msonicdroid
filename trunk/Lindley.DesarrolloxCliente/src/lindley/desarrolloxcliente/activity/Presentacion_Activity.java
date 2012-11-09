@@ -146,8 +146,8 @@ public class Presentacion_Activity extends ListBaseFragment {
 							public void onClick(View v) {
 								// TODO Auto-generated method stub
 								PresentacionTO oportunidadTO = (PresentacionTO) holder.txViewPuntos.getTag();
-								 int[] factores = ConstantesApp.getFechaFactores(oportunidadTO.fechaCompromiso);
-								 
+								String[] factores = ConstantesApp.getFechaFactoresAS400(oportunidadTO.fechaCompromiso);
+			
 								 DatePickerDialog picker = new DatePickerDialog(context, new OnDateSetListener() {
 
 									@Override
@@ -157,13 +157,13 @@ public class Presentacion_Activity extends ListBaseFragment {
 										
 										String mes = ConstantesApp.RPad(String.valueOf(monthOfYear+1),2,'0');
 										String dia = ConstantesApp.RPad(String.valueOf(dayOfMonth),2,'0');
-										String fecha = String.format("%s/%s/%s", dia,mes, year);
+										String fecha = String.format("%s%s%s", year,mes,dia);
 										presentacionCompromisoTO.fechaCompromiso = fecha;
-										holder.txEditFecha.setText(presentacionCompromisoTO.fechaCompromiso);
+										holder.txEditFecha.setText(ConstantesApp.formatFecha(presentacionCompromisoTO.fechaCompromiso));
 									}
 									
 									
-								}, factores[0],factores[1], factores[2]);
+								}, Integer.parseInt(factores[0]) ,Integer.parseInt(factores[1])-1, Integer.parseInt(factores[2]));
 								 
 								 picker.show();
 							}
@@ -171,6 +171,7 @@ public class Presentacion_Activity extends ListBaseFragment {
 					    
 					  
 					view.setTag(holder);
+					
 			    	holder.txViewPuntos.setTag(this.detalle.get(position));
 			    	
 				}else{
@@ -182,7 +183,7 @@ public class Presentacion_Activity extends ListBaseFragment {
 				
 				PresentacionTO presentacionCompromisoTO = getItem(position);
 				holder.txViewPuntos.setText(presentacionCompromisoTO.puntosSugeridos);
-				holder.txEditFecha.setText(presentacionCompromisoTO.fechaCompromiso);
+				holder.txEditFecha.setText(ConstantesApp.formatFecha(presentacionCompromisoTO.fechaCompromiso));
 				
 				return view;
 				

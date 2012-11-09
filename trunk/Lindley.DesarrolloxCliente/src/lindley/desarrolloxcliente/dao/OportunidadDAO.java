@@ -68,7 +68,7 @@ public class OportunidadDAO {
 		
 		while(cursor.moveToNext()){
 			nuevaOportunidadTO = new lindley.desarrolloxcliente.to.upload.OportunidadTO();
-			nuevaOportunidadTO.productoId = cursor.getLong(cursor.getColumnIndex("productoId"));
+			//nuevaOportunidadTO.productoId = cursor.getLong(cursor.getColumnIndex("productoId"));
 			nuevaOportunidadTO.codigoArticulo = cursor.getString(cursor.getColumnIndex("codigoProducto"));
 			nuevaOportunidadTO.articulo = cursor.getString(cursor.getColumnIndex("descripcion"));
 			nuevaOportunidadTO.legacy = cursor.getString(cursor.getColumnIndex("legacy"));

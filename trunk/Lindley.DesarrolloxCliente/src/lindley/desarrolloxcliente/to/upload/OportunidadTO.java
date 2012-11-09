@@ -45,9 +45,9 @@ public class OportunidadTO {
 		@Expose()
 	    public long id;
 		
-		@Expose()
+		/*@Expose()
 	    public long productoId;
-
+*/
 		@Expose()
 		public boolean seleccionado;
 		
