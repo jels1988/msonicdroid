@@ -42,7 +42,19 @@
             	android:layout_weight="1"/>    
         </TableRow>
         
+         <TableRow>
+               <TextView style="@style/TextViewHead" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/posicionopen_content_observacion" android:gravity="center_vertical"/>
+               <CheckBox
+                android:id="@+id/chkCumplio"
+                android:layout_width="30dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left" />
+        </TableRow>
         
+         
+        
+         
+         
          <TableRow android:gravity="right">  
              
              
@@ -53,20 +65,28 @@
 		                android:layout_margin="2dip"
 		                android:focusable="false"
 		                android:gravity="center"
-		                android:layout_gravity="center"
+		                android:layout_gravity="right|center_vertical"
 		                android:text="@string/ver_fotoInicial" />
-		
+			
 		            <Button
 		                android:id="@+id/btnFotoExito"
 		                android:layout_width="wrap_content"
 		                android:layout_height="wrap_content"
 		                android:layout_margin="2dip"
 		                android:focusable="false"
-		                android:layout_gravity="center"
+		                android:layout_gravity="right|center_vertical"
 		                android:text="@string/ver_fotoExito" />
             
           
-
+					 <Button
+                android:id="@+id/btnFotoFinal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dip"
+                android:focusable="false"
+                  android:gravity="center"
+		                android:layout_gravity="right|center_vertical"
+                android:text="@string/ver_fotoFinal" />
        
 		        
         </TableRow>
