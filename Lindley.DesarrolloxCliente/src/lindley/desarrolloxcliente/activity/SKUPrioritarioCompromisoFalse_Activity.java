@@ -1,12 +1,13 @@
 package lindley.desarrolloxcliente.activity;
 
 import java.util.List;
+
+import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
-import roboguice.inject.InjectView;
-import com.thira.examples.actionbar.widget.ActionBar;
+import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
+import lindley.desarrolloxcliente.to.upload.SkuTO;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,35 +18,42 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import net.msonic.lib.ListActivityBase;
 
-public class SKUPrioritarioCompromisoFalse_Activity extends ListActivityBase {
+public class SKUPrioritarioCompromisoFalse_Activity extends net.msonic.lib.sherlock.ListActivityBase  {
 
-	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
-	private EfficientAdapter adap;
-	private MyApplication application;
-	ClienteTO cliente;
+private EfficientAdapter adap;
 	
-	public static final String RESPUESTA_SI = "S";
+	private  MyApplication application;
+	private ClienteTO cliente;
+	private EvaluacionTO evaluacion;
+	
+	/*public static final String RESPUESTA_SI = "S";
 	public static final String RESPUESTA_NO = "N";
 	public static final String RESPUESTA_NO_TIENE = "T";
 	
 	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
 	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
+	*/
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		inicializarRecursos();
 		super.onCreate(savedInstanceState);
-		 setContentView(R.layout.skuprioritariocompromisofalse_activity);    
-		 mActionBar.setTitle(R.string.skuprioritario_activity_title);
-		 application = (MyApplication)getApplicationContext();
-		 cliente = application.getClienteTO();
-		 mActionBar.setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
-		 mActionBar.setHomeLogo(R.drawable.header_logo);
-		 
-		 adap = new EfficientAdapter(this, application.listSKUPresentacionCompromiso);
+		
+		inicializarRecursos();
+		this.validarConexionInternet=false;
+		getSupportActionBar().setDisplayShowHomeEnabled(false);
+		
+		setTitle(R.string.skuprioritario_activity_title);
+		
+		application = (MyApplication) getApplicationContext();
+		
+		cliente = application.cliente;
+		evaluacion = application.evaluacionActual;
+		
+		setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
+		
+		 adap = new EfficientAdapter(this, evaluacion.skus);
 		 setListAdapter(adap);
 	}
 	
@@ -54,11 +62,11 @@ public class SKUPrioritarioCompromisoFalse_Activity extends ListActivityBase {
 		finish();
 	}
 	
-	public static class EfficientAdapter extends ArrayAdapter<SKUPresentacionCompromisoTO> {
+	public static class EfficientAdapter extends ArrayAdapter<SkuTO> {
     	private Activity context;
-		private List<SKUPresentacionCompromisoTO> skuPresentaciones;
+		private List<SkuTO> skuPresentaciones;
 
-		public EfficientAdapter(Activity context, List<SKUPresentacionCompromisoTO> skuPresentaciones ){
+		public EfficientAdapter(Activity context, List<SkuTO> skuPresentaciones ){
 			super(context, R.layout.skuprioritariocompromisofalse_content, skuPresentaciones);
 			this.context=context;
 			this.skuPresentaciones = skuPresentaciones;
@@ -83,52 +91,52 @@ public class SKUPrioritarioCompromisoFalse_Activity extends ListActivityBase {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						// TODO Auto-generated method stub
-						SKUPresentacionCompromisoTO skuPresentacion = (SKUPresentacionCompromisoTO) viewHolder.chkValConf.getTag();
+						SkuTO skuPresentacion = (SkuTO) viewHolder.chkValConf.getTag();
 						if(isChecked){
-							skuPresentacion.cumplio = "S";
+							skuPresentacion.marcaCumplio = ConstantesApp.RESPUESTA_SI;
 						}else{
-							skuPresentacion.cumplio = "N";
+							skuPresentacion.marcaCumplio = ConstantesApp.RESPUESTA_NO;
 						}
 					}
 				});
 				
 				view.setTag(viewHolder);
-				viewHolder.chkValConf.setTag(this.skuPresentaciones.get(position));
-				viewHolder.chkValComp.setTag(this.skuPresentaciones.get(position));
+				viewHolder.txViewSKU.setTag(this.skuPresentaciones.get(position));
+				//viewHolder.chkValComp.setTag(this.skuPresentaciones.get(position));
 			}else{
-				view = convertView;				
-				((ViewHolder) view.getTag()).chkValConf.setTag(this.skuPresentaciones.get(position));
-				((ViewHolder) view.getTag()).chkValComp.setTag(this.skuPresentaciones.get(position));
+				view = convertView;
+				((ViewHolder) view.getTag()).txViewSKU.setTag(this.skuPresentaciones.get(position));
+				
+				//((ViewHolder) view.getTag()).chkValConf.setTag(this.skuPresentaciones.get(position));
+				//((ViewHolder) view.getTag()).chkValComp.setTag(this.skuPresentaciones.get(position));
 			}
 			
 			ViewHolder holder = (ViewHolder) view.getTag();
-						
-			holder.txViewSKU.setText(this.skuPresentaciones.get(position).descripcionSKU);
+			SkuTO skuTO = this.skuPresentaciones.get(position);
 			
-			if (this.skuPresentaciones.get(position).actual.equalsIgnoreCase(RESPUESTA_NO)) {
-				holder.chkValActual.setText("NO");
-			} else if (this.skuPresentaciones.get(position).actual.equalsIgnoreCase(RESPUESTA_SI)) {
-				holder.chkValActual.setText("SI");
+			holder.txViewSKU.setText(skuTO.descripcionSKU);
+			
+			if (skuTO.marcaActual.equalsIgnoreCase(ConstantesApp.RESPUESTA_NO)) {
+				holder.chkValActual.setText(ConstantesApp.RESPUESTA_NO_LARGA);
+			} if (skuTO.marcaActual.equalsIgnoreCase(ConstantesApp.RESPUESTA_SI)) {
+				holder.chkValActual.setText(ConstantesApp.RESPUESTA_SI_LARGA);
 			}else {
-				holder.chkValActual.setText("NV");
+				holder.chkValActual.setText(ConstantesApp.RESPUESTA_NO_TIENE_LARGA);
 			}
 			
-			if (this.skuPresentaciones.get(position).compromiso.equalsIgnoreCase(RESPUESTA_NO)) {
-				holder.chkValComp.setText("NO");
-			} else if (this.skuPresentaciones.get(position).compromiso.equalsIgnoreCase(RESPUESTA_SI)) {
-				holder.chkValComp.setText("SI");
+			
+			if (skuTO.marcaCompromiso.equalsIgnoreCase(ConstantesApp.RESPUESTA_NO)) {
+				holder.chkValComp.setText(ConstantesApp.RESPUESTA_NO_LARGA);
+			} else if (skuTO.marcaCompromiso.equalsIgnoreCase(ConstantesApp.RESPUESTA_SI)) {
+				holder.chkValComp.setText(ConstantesApp.RESPUESTA_SI_LARGA);
+			}else {
+				holder.chkValComp.setText(ConstantesApp.RESPUESTA_NO_TIENE_LARGA);
 			}
 			
-			if(this.skuPresentaciones.get(position).cumplio.compareToIgnoreCase("S") == 0)
-			{
-				holder.chkValConf.setChecked(true);
-				this.skuPresentaciones.get(position).cumplio = "S";
-			}
-			else
-			{
-				holder.chkValConf.setChecked(false);
-				this.skuPresentaciones.get(position).cumplio = "N";
-			}		
+			
+			
+			holder.chkValConf.setChecked(skuTO.marcaCumplio.equals(ConstantesApp.RESPUESTA_SI));
+			
 			
 			return view;
 		}

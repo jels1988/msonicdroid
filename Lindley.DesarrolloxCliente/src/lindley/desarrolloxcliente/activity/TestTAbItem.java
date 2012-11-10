@@ -87,13 +87,13 @@ public class TestTAbItem extends ListBaseFragment {
          //07-22 23:06:43.945: D/RQ(11544): {"CLI":"602","CODR":"4210"}
          application = (MyApplication)getActivity().getApplicationContext();
 	 	 cliente = application.getClienteTO();
-	 	 codigoRegistro = getArguments().getString(CODIGO_REGISTRO);
-	 	txtViewCliente.setText(String.format("%s - %s", cliente.codigo ,cliente.nombre));
+	 	 codigoRegistro = "0";
+	 	//txtViewCliente.setText(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 	 	
          
          if(VISTA_CARGADA==0){
 	 		VISTA_CARGADA=1;
-	         processAsync();
+	         //processAsync();
          }
          
 	 }

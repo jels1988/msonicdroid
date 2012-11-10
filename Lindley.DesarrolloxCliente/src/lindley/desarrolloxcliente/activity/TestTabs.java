@@ -7,12 +7,15 @@ import roboguice.inject.InjectExtra;
 import lindley.desarrolloxcliente.R;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 
 import net.msonic.lib.sherlock.ActivityBaseFragment;
@@ -21,12 +24,7 @@ public class TestTabs extends ActivityBaseFragment {
 	TabHost mTabHost;
     TabManager mTabManager;
     
-	public final static String CODIGO_REGISTRO = "codigo_reg";
-	public final static String ORIGEN_REGISTRO = "origen_reg";
-	
-    @InjectExtra(CODIGO_REGISTRO)public String codigoRegistro;
-    @InjectExtra(ORIGEN_REGISTRO)public String origen;
-    
+
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,20 +42,62 @@ public class TestTabs extends ActivityBaseFragment {
         mTabManager.addTab(mTabHost.newTabSpec("Posici—n").setIndicator("Posici—n"),TestTAbItem.class,getIntent().getExtras());
         mTabManager.addTab(mTabHost.newTabSpec("Presentaci—n").setIndicator("Presentaci—n"),TestTAbItem.class,getIntent().getExtras());
         
+        /*for(int i=0;i<mTabHost.getTabWidget().getChildCount();i++)
+        {
+        	mTabHost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#8A4117"));
+        }
         
-        /*mTabManager.addTab(mTabHost.newTabSpec("contacts").setIndicator("Contacts"),
-                LoaderCursorSupport.CursorLoaderListFragment.class, null);
-        mTabManager.addTab(mTabHost.newTabSpec("custom").setIndicator("Custom"),
-                LoaderCustomSupport.AppListFragment.class, null);
-        mTabManager.addTab(mTabHost.newTabSpec("throttle").setIndicator("Throttle"),
-                LoaderThrottleSupport.ThrottledLoaderListFragment.class, null);
-		*/
+        mTabHost.getTabWidget().getChildAt(1).setBackgroundColor(Color.parseColor("#C35817"));
+        */
         
+        setTabColor(mTabHost);
         if (savedInstanceState != null) {
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
         }
+        
     }
 
+    private void setTabColor(TabHost tabHost) {
+        try {
+            for (int i=0; i < tabHost.getTabWidget().getChildCount();i++) {
+                TextView tv = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
+                if (tv != null) {
+                    tv.setTextColor(Color.parseColor("#ffffff"));
+                }
+                TextView tv2 = (TextView) tabHost.getCurrentTabView().findViewById(android.R.id.title); // Selected Tab
+                if (tv2 != null) {
+                    tv2.setTextColor(Color.parseColor("#ffffff"));
+                }
+            }
+        } catch (ClassCastException e) {
+            // A precaution, in case Google changes from a TextView on the tabs.
+        }
+    }
+    
+
+    
+  
+    
+    /*
+     
+     @Override
+public void onCreate(Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);
+	setContentView(R.layout.main);
+	mTabHost = (TabHost) findViewById(android.R.id.tabhost);
+	setupTab(new TextView(this), "Tab 1");
+	setupTab(new TextView(this), "Tab 2");
+	setupTab(new TextView(this), "Tab 3");
+}
+
+
+private static View createTabView(final Context context, final String text) {
+	View view = LayoutInflater.from(context).inflate(R.layout.tabs_bg, null);
+	TextView tv = (TextView) view.findViewById(R.id.tabsText);
+	tv.setText(text);
+	return view;
+} 
+     * */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

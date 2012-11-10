@@ -134,7 +134,7 @@ public class RevisionPresentacion_Activity extends ListBaseFragment {
 						@Override
 						public void onClick(View arg0) {
 							// TODO Auto-generated method stub
-							Intent skuPresentacion = new Intent(context, SKUPrioritarioCompromiso_Activity.class);
+							Intent skuPresentacion = new Intent(context, SKUPrioritarioCompromisoFalse_Activity.class);
 							context.startActivity(skuPresentacion);
 						}});
 					

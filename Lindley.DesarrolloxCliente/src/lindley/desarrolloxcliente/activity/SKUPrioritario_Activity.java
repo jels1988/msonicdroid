@@ -48,6 +48,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 	
 	@Inject	ConsultarSKUPrioritarioProxy consultarSKUPrioritarioProxy;
     @Inject GuardarNuevoDesarrolloProxy guardarNuevoDesarrolloProxy;
+    
 	@InjectView(R.id.txtViewFecha) 		TextView txtViewFecha;
 	@Inject OportunidadBLL oportunidadBLL;
 	@Inject EvaluacionBLL evaluacionBLL;
