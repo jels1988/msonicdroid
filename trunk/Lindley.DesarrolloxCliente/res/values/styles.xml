@@ -110,12 +110,23 @@
         <item name="android:textColor">@color/custom_theme_color_blanco</item>
     </style>
     
+<style name="Widget.Sherlock.ActionBar.TabText" parent="Widget">
+        <item name="android:textAppearance">@null</item>
+        <item name="android:textColor">@color/custom_theme_color_rojo</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
  <style name="Widget.Styled.ActionBar"
            parent="Widget.Sherlock.Light.ActionBar.Solid.Inverse">
         <item name="background">@drawable/background</item>
         <item name="android:background">@drawable/background</item>
         <item name="titleTextStyle">@style/TextAppearance.Sherlock.Widget.ActionBar.Title.Inverse.Custom</item>
         <item name="subtitleTextStyle">@style/TextAppearance.Sherlock.Widget.ActionBar.Subtitle.Inverse.Custom</item>
+       
          <item name="android:paddingLeft">0dip</item>
     <item name="android:paddingTop">0dip</item>
     <item name="android:paddingRight">0dip</item>
@@ -184,10 +195,10 @@
     
    
    <item name="actionBarTabStyle">@style/Widget.Sherlock.Light.ActionBar.TabView</item>
-   <item name="actionBarTabBarStyle">@style/Widget.Sherlock.Light.ActionBar.TabBar</item>
-   <item name="actionBarTabTextStyle">@style/Widget.Sherlock.Light.ActionBar.TabText</item>
-    
-
+   <!--item name="actionBarTabBarStyle">@style/Widget.Sherlock.Light.ActionBar.TabBar</item -->
+   
+   <item name="actionBarTabTextStyle">@style/Widget.Sherlock.ActionBar.TabText</item>
+   <!--item name="actionBarTabTextStyle">@style/Widget.Sherlock.Light.ActionBar.TabText.Inverse</item -->>
         
     <item name="android:windowBackground">@color/custom_theme_color_blanco</item>
 	<item name="android:colorForegroundInverse">@color/custom_theme_color_blanco</item>
