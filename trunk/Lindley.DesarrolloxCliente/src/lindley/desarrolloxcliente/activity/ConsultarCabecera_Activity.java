@@ -98,6 +98,8 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	
 	
 	
+	
+
 	@Override
 	protected void process(int accion) {
 		switch (accion) {
@@ -210,14 +212,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	    		this.context = context;
 	    		this.detalles = valores;
 		    }
-	    
 
-	    /**
-	     * Make a view to hold each row.
-	     * 
-	     * @see android.widget.ListAdapter#getView(int, android.view.View,
-	     *      android.view.ViewGroup)
-	     */
 	    public View getView(final int position, View convertView, ViewGroup parent) {
 	    	
 	    	

@@ -10,12 +10,14 @@ import lindley.desarrolloxcliente.to.upload.OportunidadTO;
 import lindley.desarrolloxcliente.to.upload.PosicionTO;
 import net.msonic.lib.sherlock.ActivityBaseFragment;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -44,10 +46,10 @@ public class RevisionTabs_Activity extends ActivityBaseFragment {
         this.inicializarRecursos();
         this.validarConexionInternet=false;
         
-        Compromisos_Activity.VISTA_CARGADA=0;
-        Posicion_Activity.VISTA_CARGADA=0;
-        Presentacion_Activity.VISTA_CARGADA=0;
-        Combos_Activity.VISTA_CARGADA=0;
+        RevisionCompromisos_Activity.VISTA_CARGADA=0;
+        RevisionPosicion_Activity.VISTA_CARGADA=0;
+        RevisionPresentacion_Activity.VISTA_CARGADA=0;
+        RevisionCombos_Activity.VISTA_CARGADA=0;
         
         
         setContentView(R.layout.frameng_tabs);
@@ -59,8 +61,8 @@ public class RevisionTabs_Activity extends ActivityBaseFragment {
         mTabManager.addTab(mTabHost.newTabSpec(TAB_INVENTARIO).setIndicator("Inventario"),RevisionCompromisos_Activity.class,getIntent().getExtras());
         mTabManager.addTab(mTabHost.newTabSpec(TAB_POSICION).setIndicator("Posici—n"),RevisionPosicion_Activity.class,getIntent().getExtras());
         mTabManager.addTab(mTabHost.newTabSpec(TAB_PRESENTACION).setIndicator("Presentaci—n"),RevisionPresentacion_Activity.class,getIntent().getExtras());
-        //mTabManager.addTab(mTabHost.newTabSpec(TAB_COMBOS).setIndicator("Combos"),Combos_Activity.class,getIntent().getExtras());
-        
+        mTabManager.addTab(mTabHost.newTabSpec(TAB_COMBOS).setIndicator("Combos"),RevisionCombos_Activity.class,getIntent().getExtras());
+        setTabColor(mTabHost);
         if (savedInstanceState != null) {
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
         }
@@ -73,6 +75,22 @@ public class RevisionTabs_Activity extends ActivityBaseFragment {
         outState.putString("tab", mTabHost.getCurrentTabTag());
     }
     
+    private void setTabColor(TabHost tabHost) {
+        try {
+            for (int i=0; i < tabHost.getTabWidget().getChildCount();i++) {
+                TextView tv = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
+                if (tv != null) {
+                    tv.setTextColor(Color.parseColor("#ffffff"));
+                }
+                TextView tv2 = (TextView) tabHost.getCurrentTabView().findViewById(android.R.id.title); // Selected Tab
+                if (tv2 != null) {
+                    tv2.setTextColor(Color.parseColor("#ffffff"));
+                }
+            }
+        } catch (ClassCastException e) {
+            // A precaution, in case Google changes from a TextView on the tabs.
+        }
+    }
     
    
 	   @Override
