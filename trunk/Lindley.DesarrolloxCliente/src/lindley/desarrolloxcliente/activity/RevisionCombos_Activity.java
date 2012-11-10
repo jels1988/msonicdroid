@@ -12,10 +12,8 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class RevisionCombos_Activity extends FragmentBase {
 
@@ -49,6 +47,15 @@ public class RevisionCombos_Activity extends FragmentBase {
 	 		application = (MyApplication) getActivity().getApplicationContext();
 	 		evaluacion = application.evaluacionActual;
 	 		
+	 		radSSSi.setEnabled(false);
+	 		radSSNo.setEnabled(false);
+	 		
+	 		radMSSi.setEnabled(false);
+	 		radMSNo.setEnabled(false);
+	 		
+	 		txtObsMS.setEnabled(false);
+	 		
+	 		
 	 		if(evaluacion.comboSS.equals(ConstantesApp.RESPUESTA_SI)){
 	 			radSSSi.setChecked(true);
 	 			radSSNo.setChecked(false);
@@ -68,8 +75,32 @@ public class RevisionCombos_Activity extends FragmentBase {
 	 		
 	 		txtObsSS.setText(evaluacion.observacionSS);
 	 		txtObsMS.setText(evaluacion.observacionMS);
+	 		
          }
          
+         txtObsMS.addTextChangedListener(new TextWatcher() {
+ 			
+ 			@Override
+ 			public void onTextChanged(CharSequence s, int start, int before, int count) {
+ 				// TODO Auto-generated method stub
+ 				
+ 			}
+ 			
+ 			@Override
+ 			public void beforeTextChanged(CharSequence s, int start, int count,
+ 					int after) {
+ 				// TODO Auto-generated method stub
+ 				
+ 			}
+ 			
+ 			@Override
+ 			public void afterTextChanged(Editable s) {
+ 				// TODO Auto-generated method stub
+ 				evaluacion.observacionMS=txtObsMS.getText().toString();
+ 			}
+ 		});
+         
+         /*
          radSSSi.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
 			@Override
@@ -108,27 +139,7 @@ public class RevisionCombos_Activity extends FragmentBase {
         
          
          
-         txtObsMS.addTextChangedListener(new TextWatcher() {
-			
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				evaluacion.observacionMS=txtObsMS.getText().toString();
-			}
-		});
+        
          
          txtObsSS.addTextChangedListener(new TextWatcher() {
 			
@@ -150,7 +161,7 @@ public class RevisionCombos_Activity extends FragmentBase {
 				// TODO Auto-generated method stub
 				evaluacion.observacionSS=txtObsSS.getText().toString();
 			}
-		});
+		});*/
          
    
          
