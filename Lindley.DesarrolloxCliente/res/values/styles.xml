@@ -2,7 +2,7 @@
 
 
 
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
 
 <!--  
@@ -112,7 +112,7 @@
     
 <style name="Widget.Sherlock.ActionBar.TabText" parent="Widget">
         <item name="android:textAppearance">@null</item>
-        <item name="android:textColor">@color/custom_theme_color_rojo</item>
+        <item name="android:textColor">@color/custom_theme_color_verde</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
@@ -146,7 +146,6 @@
     
     <style name="Widget.Sherlock.ActionBar.TabView" parent="Widget">
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:background">@drawable/tab_selector</item>
         <item name="android:paddingLeft">16dip</item>
         <item name="android:paddingRight">16dip</item>
     </style>
@@ -174,16 +173,36 @@
         <item name="android:ellipsize">marquee</item>
         <item name="android:maxLines">2</item>
     </style>
-    <style name="Widget.Sherlock.Light.ActionBar.TabText" parent="Widget.Sherlock.ActionBar.TabText">
-    </style>
-    <style name="Widget.Sherlock.Light.ActionBar.TabText.Inverse">
-        <item name="android:textColor">?attr/textColorPrimaryInverse</item>
-    </style>
 
-    <style name="TabText">
-    <item name="android:textColor">@color/custom_theme_color_blanco</item>
+<style name="Widget.MyTabText" parent="Widget.Sherlock.ActionBar.TabText">
+    <item name="android:textSize">14sp</item>
+    <item name="android:textColor">@color/custom_theme_color_amarillo</item>
 </style>
 
+
+<style name="customTabStyle" parent="Widget.Sherlock.ActionBar.TabView">
+    <item name="android:showDividers">none</item>
+    <item name="android:measureWithLargestChild">true</item>
+    <!-- This was a copy from the sdk drawable -->
+    <!-- item name="android:background">@drawable/tab_indicator</item-->
+
+    <!--item name="background">@drawable/tab_indicator</item-->
+    <item name="android:gravity">center</item>
+    <item name="android:textStyle">normal</item>
+</style>
+
+
+
+
+ <style name="customTExto" parent="Widget">
+        <item name="android:textAppearance">@null</item>
+        <item name="android:textColor">@color/custom_theme_color_rojo</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:maxLines">2</item>
+    </style>
 
 <style name="CustomTheme" parent="Theme.Sherlock.Light">
 
@@ -192,13 +211,7 @@
     <item name="subtitleTextStyle">@style/TextAppearance.Sherlock.Widget.ActionBar.Subtitle.Inverse</item>
     
     
-    
    
-   <item name="actionBarTabStyle">@style/Widget.Sherlock.Light.ActionBar.TabView</item>
-   <!--item name="actionBarTabBarStyle">@style/Widget.Sherlock.Light.ActionBar.TabBar</item -->
-   
-   <item name="actionBarTabTextStyle">@style/Widget.Sherlock.ActionBar.TabText</item>
-   <!--item name="actionBarTabTextStyle">@style/Widget.Sherlock.Light.ActionBar.TabText.Inverse</item -->>
         
     <item name="android:windowBackground">@color/custom_theme_color_blanco</item>
 	<item name="android:colorForegroundInverse">@color/custom_theme_color_blanco</item>
@@ -220,36 +233,10 @@
  	<item name="android:textViewStyle">@style/TextViewCustom</item>
  	<item name="android:buttonStyle">@style/ButtonCustom</item>
  	<item name="android:listViewStyle">@style/MyListView</item>
+ 	   <item name="actionBarTabStyle">@style/customTabStyle</item>
+        <item name="actionBarTabTextStyle">@style/customTExto</item>
 </style>
 
-    
-    
 
-
-    
-<style name="CustomThemeWhite" >
-
-    
-    <item name="android:windowBackground">@color/custom_theme_color_blanco</item>
-	<item name="android:colorForegroundInverse">@color/custom_theme_color_blanco</item>
-	<item name="android:colorBackground">@color/custom_theme_color_letra</item>
-	<item name="android:disabledAlpha">0.5</item>
-	<item name="android:backgroundDimAmount">0.6</item>
-
-  <!-- Window attributes -->
-     <item name="android:windowFrame">@null</item>
-     <item name="android:windowNoTitle">true</item>
-     <item name="android:windowFullscreen">false</item>
-     <item name="android:windowIsFloating">false</item>
-	 <item name="android:windowTitleSize">35dip</item>
-	 <item name="android:windowTitleStyle">@style/WindowTitleCustom</item>
-	 <item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackgroundCustom</item>
-     <item name="android:windowSoftInputMode">stateUnspecified|adjustUnspecified</item>
-     
- 	<item name="android:editTextStyle">@style/EditTextCustom</item>
- 	<item name="android:textViewStyle">@style/TextViewCustom</item>
- 	<item name="android:buttonStyle">@style/ButtonCustom</item>
- 	
-</style>
 
 </resources>
