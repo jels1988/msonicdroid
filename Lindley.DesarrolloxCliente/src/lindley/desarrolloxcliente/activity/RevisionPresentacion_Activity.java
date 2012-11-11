@@ -11,8 +11,6 @@ import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
 import lindley.desarrolloxcliente.to.upload.PresentacionTO;
 import net.msonic.lib.sherlock.ListBaseFragment;
 import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,9 +19,6 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
@@ -125,8 +120,7 @@ public class RevisionPresentacion_Activity extends ListBaseFragment {
 					
 					holder.txViewPuntos = (TextView) view.findViewById(R.id.txViewPuntos);
 					holder.btnSKU = (Button) view.findViewById(R.id.btnSKU);
-					holder.txEditFecha = (EditText) view.findViewById(R.id.txEditFecha);
-					holder.btnFecha = (ImageButton) view.findViewById(R.id.btnFecha);
+					holder.txEditFecha = (TextView) view.findViewById(R.id.txEditFecha);
 					
 					
 					holder.btnSKU.setOnClickListener(new OnClickListener() {
@@ -138,37 +132,7 @@ public class RevisionPresentacion_Activity extends ListBaseFragment {
 							context.startActivity(skuPresentacion);
 						}});
 					
-					
-					
-					
-					  holder.btnFecha.setOnClickListener(new OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								// TODO Auto-generated method stub
-								PresentacionTO oportunidadTO = (PresentacionTO) holder.txViewPuntos.getTag();
-								String[] factores = ConstantesApp.getFechaFactoresAS400(oportunidadTO.fechaCompromiso);
-			
-								 DatePickerDialog picker = new DatePickerDialog(context, new OnDateSetListener() {
 
-									@Override
-									public void onDateSet(DatePicker view,int year, int monthOfYear,int dayOfMonth) {
-										// TODO Auto-generated method stub
-										PresentacionTO presentacionCompromisoTO = (PresentacionTO)holder.txViewPuntos.getTag();
-										
-										String mes = ConstantesApp.RPad(String.valueOf(monthOfYear+1),2,'0');
-										String dia = ConstantesApp.RPad(String.valueOf(dayOfMonth),2,'0');
-										String fecha = String.format("%s%s%s", year,mes,dia);
-										presentacionCompromisoTO.fechaCompromiso = fecha;
-										holder.txEditFecha.setText(ConstantesApp.formatFecha(presentacionCompromisoTO.fechaCompromiso));
-									}
-									
-									
-								}, Integer.parseInt(factores[0]) ,Integer.parseInt(factores[1])-1, Integer.parseInt(factores[2]));
-								 
-								 picker.show();
-							}
-						});
-					    
 					  
 					view.setTag(holder);
 					
@@ -191,8 +155,7 @@ public class RevisionPresentacion_Activity extends ListBaseFragment {
 		 static class ViewHolder {
 				TextView txViewPuntos;
 				Button btnSKU;
-				EditText txEditFecha;
-				ImageButton btnFecha;
+				TextView txEditFecha;
 			}
 
 	 }
