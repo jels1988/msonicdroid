@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import android.content.Context;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 
 public final class ConstantesApp {
@@ -48,7 +49,7 @@ public final class ConstantesApp {
 	public static final String VARIABLE_RED_POP = "06";
 	
 	public final static boolean isSI(String estado){
-		if((estado==null) || (estado.trim().equalsIgnoreCase("")) || (estado.equalsIgnoreCase(RESPUESTA_NO))){
+		if((estado==null) || (TextUtils.isEmpty(estado)) || (estado.trim().equalsIgnoreCase("")) || (estado.equalsIgnoreCase(RESPUESTA_NO))){
 			return false;
 		}else{
 			return true;

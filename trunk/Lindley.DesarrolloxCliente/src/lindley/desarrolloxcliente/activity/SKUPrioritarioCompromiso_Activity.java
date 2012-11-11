@@ -154,7 +154,19 @@ public class SKUPrioritarioCompromiso_Activity extends  net.msonic.lib.sherlock.
 			{
 				holder.chkValActual.setText(ConstantesApp.RESPUESTA_NO_TIENE_LARGA);
 			}
-			
+			/*
+			 SkuTO skuPresentacion = (SkuTO) viewHolder.chkValActual.getTag();
+						if(arg2==0){
+							skuPresentacion.marcaActual = ConstantesApp.RESPUESTA_NO;
+							skuPresentacion.marcaCompromiso = ConstantesApp.RESPUESTA_NO;
+						}else if(arg2==1){
+							skuPresentacion.marcaActual = ConstantesApp.RESPUESTA_SI;
+							skuPresentacion.marcaCompromiso = ConstantesApp.RESPUESTA_SI;
+						}else{
+							skuPresentacion.marcaActual = ConstantesApp.RESPUESTA_NO_TIENE ;
+							skuPresentacion.marcaCompromiso = ConstantesApp.RESPUESTA_NO_TIENE;
+						} 
+			 **/
 			
 			if(this.skuPresentaciones.get(position).marcaCompromiso.compareToIgnoreCase(ConstantesApp.RESPUESTA_SI) == 0)
 			{
