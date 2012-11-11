@@ -75,7 +75,8 @@ public class Combos_Activity extends FragmentBase {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				// TODO Auto-generated method stub
-				evaluacion.comboSS=ConstantesApp.RESPUESTA_SI;
+				if(isChecked)
+					evaluacion.comboSS=ConstantesApp.RESPUESTA_SI;
 			}
 		});
          
@@ -84,7 +85,8 @@ public class Combos_Activity extends FragmentBase {
  			@Override
  			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
  				// TODO Auto-generated method stub
- 				evaluacion.comboSS=ConstantesApp.RESPUESTA_NO;
+ 				if(isChecked)
+ 					evaluacion.comboSS=ConstantesApp.RESPUESTA_NO;
  			}
  		});
          
@@ -93,7 +95,8 @@ public class Combos_Activity extends FragmentBase {
   			@Override
   			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
   				// TODO Auto-generated method stub
-  				evaluacion.comboMS=ConstantesApp.RESPUESTA_SI;
+  				if(isChecked)
+  					evaluacion.comboMS=ConstantesApp.RESPUESTA_SI;
   			}
   		});
          
@@ -102,7 +105,8 @@ public class Combos_Activity extends FragmentBase {
    			@Override
    			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
    				// TODO Auto-generated method stub
-   				evaluacion.comboMS=ConstantesApp.RESPUESTA_NO;
+   				if(isChecked)
+   					evaluacion.comboMS=ConstantesApp.RESPUESTA_NO;
    			}
    		});
         

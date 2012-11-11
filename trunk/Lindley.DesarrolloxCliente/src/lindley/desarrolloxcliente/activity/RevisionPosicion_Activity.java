@@ -16,8 +16,10 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.google.inject.Inject;
 
@@ -208,7 +210,7 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 							
 							holder.txViewAccComp = (TextView) view.findViewById(R.id.txViewAccComp);
 							holder.txEditFecha = (TextView) view.findViewById(R.id.txEditFecha);
-							
+							holder.chkCumplio = (CheckBox) view.findViewById(R.id.chkCumplio);
 						
 							
 							holder.btnFotoExito.setOnClickListener(new OnClickListener() {
@@ -303,6 +305,19 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 								}
 							});
 							
+							holder.chkCumplio.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+								
+								@Override
+								public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+									// TODO Auto-generated method stub
+									PosicionTO posicionCompromisoTO = (PosicionTO) holder.TextViewRpsta.getTag();
+									if(isChecked)
+										posicionCompromisoTO.confirmacion=ConstantesApp.RESPUESTA_SI;
+									else
+										posicionCompromisoTO.confirmacion=ConstantesApp.RESPUESTA_NO;
+								}
+							});
+							
 							view.setTag(holder);
 					    	holder.TextViewRpsta.setTag(this.detalle.get(position));
 							
@@ -334,6 +349,7 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 							holder.btnFotoExito.setText(R.string.ver_fotoExito);
 						}
 						
+						holder.chkCumplio.setChecked(ConstantesApp.isSI(posicionTO.confirmacion));
 						
 						return view;
 				  }
@@ -348,6 +364,7 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 				    	Button 	 btnFotoExito;
 				    	TextView txViewAccComp;
 				    	TextView txEditFecha;
+				    	CheckBox chkCumplio;
 				    }
 			  
 		 }

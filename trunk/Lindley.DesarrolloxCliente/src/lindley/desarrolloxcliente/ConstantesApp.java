@@ -47,6 +47,13 @@ public final class ConstantesApp {
 	public static final String VARIABLE_RED_PRECIO_MERCADO = "05";
 	public static final String VARIABLE_RED_POP = "06";
 	
+	public final static boolean isSI(String estado){
+		if((estado==null) || (estado.trim().equalsIgnoreCase("")) || (estado.equalsIgnoreCase(RESPUESTA_NO))){
+			return false;
+		}else{
+			return true;
+		}
+	}
 	public final static String getFechaSistema(){
 		return DateFormat.format("dd/MM/yyyy", new java.util.Date()).toString();
 	}
