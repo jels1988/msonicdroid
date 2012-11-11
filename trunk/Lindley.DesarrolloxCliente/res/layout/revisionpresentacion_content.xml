@@ -21,8 +21,7 @@
                 android:layout_width="40dip"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="" />
+                android:clickable="true"/>
             
             <Button
                 android:id="@+id/btnSKU"
@@ -32,7 +31,13 @@
                 android:gravity="center_vertical"
                 android:text="@string/ver_SKU" />
             
-             <LinearLayout android:layout_width="120dip" android:layout_height="match_parent" android:orientation="horizontal" android:gravity="center">
+            <TextView
+                android:id="@+id/txEditFecha"
+                android:layout_width="120dip"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_height="wrap_content"/>
+            
+             <!--LinearLayout android:layout_width="120dip" android:layout_height="match_parent" android:orientation="horizontal" android:gravity="center">
                 
                  <EditText
                 android:id="@+id/txEditFecha"
@@ -49,7 +54,7 @@
                       android:focusable="false" 
                       android:src="@drawable/btn_calendario"/>
                 
-            </LinearLayout>                    
+            </LinearLayout -->                    
             
         </TableRow>
 
