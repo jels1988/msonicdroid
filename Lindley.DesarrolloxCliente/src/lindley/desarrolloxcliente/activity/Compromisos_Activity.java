@@ -179,9 +179,9 @@ public class Compromisos_Activity extends ListBaseFragment {
 									OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
 									
 									if(arg2==0){
-										oportunidadTO.concrecion = ConstantesApp.RESPUESTA_NO;
+										oportunidadTO.concrecionActual = ConstantesApp.RESPUESTA_NO;
 									}else{
-										oportunidadTO.concrecion = ConstantesApp.RESPUESTA_SI;
+										oportunidadTO.concrecionActual = ConstantesApp.RESPUESTA_SI;
 									}
 								}
 
@@ -220,9 +220,9 @@ public class Compromisos_Activity extends ListBaseFragment {
 								// TODO Auto-generated method stub
 								OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
 								if(arg2==0){
-									oportunidadTO.respetoPrecioActual = ConstantesApp.RESPUESTA_NO;
+									oportunidadTO.respetoPrecio = ConstantesApp.RESPUESTA_NO;
 								}else{
-									oportunidadTO.respetoPrecioActual = ConstantesApp.RESPUESTA_SI;
+									oportunidadTO.respetoPrecio = ConstantesApp.RESPUESTA_SI;
 								}
 							}
 
@@ -241,9 +241,9 @@ public class Compromisos_Activity extends ListBaseFragment {
 									OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
 									
 									if(arg2==0){
-										oportunidadTO.respetoPrecio = ConstantesApp.RESPUESTA_NO;
+										oportunidadTO.respetoPrecioActual = ConstantesApp.RESPUESTA_NO;
 									}else{
-										oportunidadTO.respetoPrecio = ConstantesApp.RESPUESTA_SI;
+										oportunidadTO.respetoPrecioActual = ConstantesApp.RESPUESTA_SI;
 									}
 								}
 
@@ -263,14 +263,14 @@ public class Compromisos_Activity extends ListBaseFragment {
 									
 									// TODO Auto-generated method stub
 									if(arg2==0){
-										oportunidadTO.numeroSabores = "2";
+										oportunidadTO.numeroSaboresActual = "2";
 									} else if(arg2 == 1){
-										oportunidadTO.numeroSabores = "3";
+										oportunidadTO.numeroSaboresActual = "3";
 									} else if(arg2 == 2){
-										oportunidadTO.numeroSabores = "4";
+										oportunidadTO.numeroSaboresActual = "4";
 									}
 									else{
-										oportunidadTO.numeroSabores = "0";
+										oportunidadTO.numeroSaboresActual = "0";
 									}
 								}
 
@@ -334,16 +334,45 @@ public class Compromisos_Activity extends ListBaseFragment {
 					holder.txViewPro.setText(oportunidadTO.articulo);
 					holder.txViewLegacy.setText(oportunidadTO.legacy);
 					
-					if(oportunidadTO.concrecion.equalsIgnoreCase(ConstantesApp.RESPUESTA_SI))
+					if(oportunidadTO.concrecion.equalsIgnoreCase(ConstantesApp.RESPUESTA_SI)){
 				    	  holder.cboConcrecion.setText(ConstantesApp.RESPUESTA_SI_LARGA);
-				      else
+					}else{
 				    	  holder.cboConcrecion.setText(ConstantesApp.RESPUESTA_NO_LARGA);
+					}
+					
+					if(oportunidadTO.concrecionActual.equalsIgnoreCase(ConstantesApp.RESPUESTA_SI)){
+				    	  holder.cboConcrecionCmp.setSelection(1);
+					}else{
+						holder.cboConcrecionCmp.setSelection(0);
+					}
+					
+					if(oportunidadTO.respetoPrecio.equalsIgnoreCase(ConstantesApp.RESPUESTA_SI)){
+				    	  holder.cboCumPrecio.setSelection(1);
+					}else{
+				    	  holder.cboCumPrecio.setSelection(0);
+					}
+					
+
+					if(oportunidadTO.respetoPrecioActual.equalsIgnoreCase(ConstantesApp.RESPUESTA_SI)){
+				    	  holder.cboCumPrecioCmp.setSelection(1);
+					}else{
+				    	  holder.cboCumPrecioCmp.setSelection(0);
+					}
+					
+					if(oportunidadTO.numeroSaboresActual.equalsIgnoreCase("4")){
+				    	  holder.cboSaboresCmp.setSelection(2);
+					}else if(oportunidadTO.numeroSaboresActual.equalsIgnoreCase("3")){
+				    	  holder.cboSaboresCmp.setSelection(1);
+					}else{
+						 holder.cboSaboresCmp.setSelection(0);
+					}
 					
 					 holder.txViewSOVI.setText(oportunidadTO.soviActual);
 				     holder.txViewSOVICmp.setText(oportunidadTO.sovi);
 				     holder.txViewSabores.setText(oportunidadTO.numeroSabores);
 				     holder.txEditFecha.setText(ConstantesApp.formatFecha(oportunidadTO.fechaCompromiso));
-				    
+				     
+				     
 				 
 					  
 					  

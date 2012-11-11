@@ -6,8 +6,6 @@ import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.DescargaBLL;
 import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
-import lindley.desarrolloxcliente.to.upload.OportunidadTO;
-import lindley.desarrolloxcliente.to.upload.PosicionTO;
 import net.msonic.lib.sherlock.ActivityBaseFragment;
 import android.content.Context;
 import android.graphics.Color;
@@ -151,7 +149,7 @@ public class RevisionTabs_Activity extends ActivityBaseFragment {
 				
 				
 				
-				if(evaluacion.oportunidades == null || evaluacion.oportunidades.isEmpty())
+				if(evaluacion.oportunidades == null || evaluacion.oportunidades.isEmpty() || (RevisionCompromisos_Activity.VISTA_CARGADA==0))
 				{				
 					mTabHost.setCurrentTabByTag(TAB_INVENTARIO);
 					msg = getString(R.string.evaluacion_msg_error_inventario);
@@ -159,25 +157,9 @@ public class RevisionTabs_Activity extends ActivityBaseFragment {
 					return false;
 				}
 				
-				for(OportunidadTO comp : evaluacion.oportunidades)
-				{
-					if(comp.soviActual==null || comp.soviActual.trim().compareTo("")==0 || Integer.parseInt(comp.sovi)<=0 || Integer.parseInt(comp.soviActual)<=0)
-					{
-						mTabHost.setCurrentTabByTag(TAB_INVENTARIO);
-						msg = getString(R.string.evaluacion_msg_error_sovi);
-						showToast(msg);
-						return false;
-					}
-					
-					if((comp.fechaCompromiso==null) || (comp.fechaCompromiso.compareTo("")==0)){
-						mTabHost.setCurrentTabByTag(TAB_INVENTARIO);
-						msg = getString(R.string.evaluacion_msg_error_fecha);
-						showToast(msg);
-						return false;
-					}
-				}
 				
-				if(evaluacion.posiciones == null || evaluacion.posiciones.isEmpty() || (Posicion_Activity.VISTA_CARGADA==0))
+				
+				if(evaluacion.posiciones == null || evaluacion.posiciones.isEmpty() || (RevisionPosicion_Activity.VISTA_CARGADA==0))
 				{				
 					mTabHost.setCurrentTabByTag(TAB_POSICION);
 					msg = getString(R.string.evaluacion_msg_error_posicion);
@@ -185,18 +167,8 @@ public class RevisionTabs_Activity extends ActivityBaseFragment {
 					return false; 
 				}
 				
-				for(PosicionTO posicion : evaluacion.posiciones)
-				{
-					if((posicion.fechaCompromiso==null) || (posicion.fechaCompromiso.compareTo("")==0)){
-						mTabHost.setCurrentTabByTag(TAB_POSICION);
-						msg = getString(R.string.evaluacion_msg_error_fecha);
-						showToast(msg);
-						return false;
-					}
-				}
 				
-				
-				if(evaluacion.presentaciones == null || evaluacion.presentaciones.isEmpty() || (Presentacion_Activity.VISTA_CARGADA==0))
+				if(evaluacion.presentaciones == null || evaluacion.presentaciones.isEmpty() || (RevisionPresentacion_Activity.VISTA_CARGADA==0))
 				{				
 					mTabHost.setCurrentTabByTag(TAB_PRESENTACION);
 					msg = getString(R.string.evaluacion_msg_error_presentacion);
@@ -204,7 +176,7 @@ public class RevisionTabs_Activity extends ActivityBaseFragment {
 					return false; 
 				}
 				
-				if(Combos_Activity.VISTA_CARGADA==0){
+				if(RevisionCombos_Activity.VISTA_CARGADA==0){
 					mTabHost.setCurrentTabByTag(TAB_COMBOS);
 					msg = getString(R.string.evaluacion_msg_error_combos);
 					showToast(msg);

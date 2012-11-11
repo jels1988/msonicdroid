@@ -214,7 +214,7 @@ public class UploadDAO {
 	public void listarPosicion(EvaluacionTO evaluacionTO){
 		String SQL = "select id,evaluacionId,anio,mes,codigoVariable,soviRed,soviMaximo,soviDiferencia," +
 					"puntosSugeridos,puntosGanados,puntosBonus,fotoInicial,fotoFinal,activosLindley," +
-					"observacion,fechaCompromiso,confirmacion,origen,estado " +
+					"observacion,fechaCompromiso,confirmacion,origen,estado,tipoAgrupacion,fechaEncuesta " +
 					"from evaluacion_posicion " +
 					"where evaluacionId = ?1";
 
@@ -238,7 +238,8 @@ public class UploadDAO {
 			posicionTO.activosLindley =  cursor.getString(cursor.getColumnIndex("activosLindley"));
 			posicionTO.observacion =  cursor.getString(cursor.getColumnIndex("observacion"));
 			posicionTO.fechaCompromiso =  cursor.getString(cursor.getColumnIndex("fechaCompromiso"));
-			posicionTO.fechaEncuesta="0";
+			posicionTO.tipoAgrupacion =  cursor.getString(cursor.getColumnIndex("tipoAgrupacion"));
+			posicionTO.fechaEncuesta=cursor.getString(cursor.getColumnIndex("fechaEncuesta"));
 			posicionTO.confirmacion =  cursor.getString(cursor.getColumnIndex("confirmacion"));
 			posicionTO.origen =  cursor.getString(cursor.getColumnIndex("origen"));
 			posicionTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
@@ -265,11 +266,11 @@ public class UploadDAO {
 			presentacionTO.tipoAgrupacion =  cursor.getString(cursor.getColumnIndex("tipoAgrupacion"));
 			presentacionTO.codigoFDE =  cursor.getString(cursor.getColumnIndex("codfde"));
 			presentacionTO.codigoVariable =  cursor.getString(cursor.getColumnIndex("codigoVariable"));
-			presentacionTO.fechaEncuesta =  "0";
+			presentacionTO.fechaEncuesta =  cursor.getString(cursor.getColumnIndex("fechaEncuesta"));
 			presentacionTO.puntosSugeridos =  cursor.getString(cursor.getColumnIndex("puntosSugeridos"));
 			presentacionTO.puntosGanados =  cursor.getString(cursor.getColumnIndex("puntosGanados"));
 			presentacionTO.puntosBonus =  cursor.getString(cursor.getColumnIndex("puntosBonus"));
-			presentacionTO.fechaCompromiso =  "0";
+			presentacionTO.fechaCompromiso =  cursor.getString(cursor.getColumnIndex("fechaCompromiso"));
 			presentacionTO.confirmacion =  cursor.getString(cursor.getColumnIndex("confirmacion"));
 			presentacionTO.origen =  cursor.getString(cursor.getColumnIndex("origen"));
 			presentacionTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
