@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -202,6 +203,7 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 							
 							holder.btnFotoInicial = (Button) view.findViewById(R.id.btnFotoInicial);
 							holder.btnFotoExito = (Button) view.findViewById(R.id.btnFotoExito);
+							holder.btnFotoFinal = (Button) view.findViewById(R.id.btnFotoFinal);
 							
 							holder.txViewRed = (TextView) view.findViewById(R.id.txViewRed);
 							holder.txViewMaximo = (TextView) view.findViewById(R.id.txViewMaximo);				
@@ -246,13 +248,31 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 									// TODO Auto-generated method stub
 									final PosicionTO posicionCompromisoTO = (PosicionTO) holder.TextViewRpsta.getTag();
 									
-									if((posicionCompromisoTO.fotoInicial==null)||(posicionCompromisoTO.fotoInicial.compareTo("")==0)){
-										
-										
-										posicion_Activity.takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionCompromisoTO);
-										//((Posicion_Activity)context).takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionCompromisoTO);						
-										
-										
+									if((posicionCompromisoTO.fotoInicial==null)||(TextUtils.isEmpty(posicionCompromisoTO.fotoInicial))||(posicionCompromisoTO.fotoInicial.compareTo("")==0)){					
+										MessageBox.showSimpleDialog(context, "Error", "No existe foto registrada.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+											public void onClick(DialogInterface dialog, int which) {
+												// TODO Auto-generated method stub
+											}
+										});	
+									}else{
+
+										Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
+										intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionCompromisoTO.fotoInicial);
+										intent.putExtra(WebViewVerFoto_Activity.TITULO_FOTO, "Foto Inicial Compromiso.");
+										context.startActivity(intent);
+
+								    }						
+							     }
+							});
+							
+							holder.btnFotoFinal.setOnClickListener(new OnClickListener() {
+								
+								@Override
+								public void onClick(View v) {
+									// TODO Auto-generated method stub
+									final PosicionTO posicionCompromisoTO = (PosicionTO) holder.TextViewRpsta.getTag();
+									if((posicionCompromisoTO.fotoFinal==null)||(TextUtils.isEmpty(posicionCompromisoTO.fotoFinal)) || (posicionCompromisoTO.fotoFinal.trim().equalsIgnoreCase(""))){		
+										posicion_Activity.takePhoto(TAKE_PHOTO_FINAL_CODE, posicionCompromisoTO);
 									}else{
 
 										MessageBox.showConfirmDialog(context, "Confirmacion", "ÀDesea reemplazar la foto?", "Si",
@@ -260,27 +280,24 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 											
 											public void onClick(DialogInterface dialog, int which) {
 												// TODO Auto-generated method stub	
-												posicion_Activity.takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionCompromisoTO);
-												//((Posicion_Activity)context).takePhoto(TAKE_PHOTO_INICIAL_CODE, posicionCompromisoTO);
-												
+												posicion_Activity.takePhoto(TAKE_PHOTO_FINAL_CODE, posicionCompromisoTO);
 											}
 											
 										}, "No", new android.content.DialogInterface.OnClickListener() {
 
 											public void onClick(DialogInterface dialog, int which) {
 												// TODO Auto-generated method stub
-												
-												
 												Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
-												intent.putExtra(VerFoto_Activity.FILE_NAME, posicionCompromisoTO.fotoInicial.toString());
+												intent.putExtra(VerFoto_Activity.FILE_NAME, posicionCompromisoTO.fotoFinal);
 												context.startActivity(intent);
+												
 											}
 											
 										});  
-
-								    }						
-							     }
+									}
+								}
 							});
+							
 							
 							holder.txViewAccComp.addTextChangedListener(new TextWatcher() {
 								
@@ -362,6 +379,7 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 				    	TextView txViewPuntos;  	
 				    	Button   btnFotoInicial;
 				    	Button 	 btnFotoExito;
+				    	Button 	 btnFotoFinal;
 				    	TextView txViewAccComp;
 				    	TextView txEditFecha;
 				    	CheckBox chkCumplio;

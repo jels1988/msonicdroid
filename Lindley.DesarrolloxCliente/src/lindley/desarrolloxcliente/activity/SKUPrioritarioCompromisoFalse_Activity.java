@@ -27,14 +27,6 @@ private EfficientAdapter adap;
 	private ClienteTO cliente;
 	private EvaluacionTO evaluacion;
 	
-	/*public static final String RESPUESTA_SI = "S";
-	public static final String RESPUESTA_NO = "N";
-	public static final String RESPUESTA_NO_TIENE = "T";
-	
-	public static final String FLAG_OPEN_FECHA_ABIERTO = "1";
-	public static final String FLAG_OPEN_FECHA_CERRADA = "2";
-	*/
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -91,7 +83,7 @@ private EfficientAdapter adap;
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						// TODO Auto-generated method stub
-						SkuTO skuPresentacion = (SkuTO) viewHolder.chkValConf.getTag();
+						SkuTO skuPresentacion = (SkuTO) viewHolder.txViewSKU.getTag();
 						if(isChecked){
 							skuPresentacion.marcaCumplio = ConstantesApp.RESPUESTA_SI;
 						}else{
@@ -102,13 +94,9 @@ private EfficientAdapter adap;
 				
 				view.setTag(viewHolder);
 				viewHolder.txViewSKU.setTag(this.skuPresentaciones.get(position));
-				//viewHolder.chkValComp.setTag(this.skuPresentaciones.get(position));
 			}else{
 				view = convertView;
 				((ViewHolder) view.getTag()).txViewSKU.setTag(this.skuPresentaciones.get(position));
-				
-				//((ViewHolder) view.getTag()).chkValConf.setTag(this.skuPresentaciones.get(position));
-				//((ViewHolder) view.getTag()).chkValComp.setTag(this.skuPresentaciones.get(position));
 			}
 			
 			ViewHolder holder = (ViewHolder) view.getTag();
@@ -116,9 +104,10 @@ private EfficientAdapter adap;
 			
 			holder.txViewSKU.setText(skuTO.descripcionSKU);
 			
+			
 			if (skuTO.marcaActual.equalsIgnoreCase(ConstantesApp.RESPUESTA_NO)) {
 				holder.chkValActual.setText(ConstantesApp.RESPUESTA_NO_LARGA);
-			} if (skuTO.marcaActual.equalsIgnoreCase(ConstantesApp.RESPUESTA_SI)) {
+			} else if (skuTO.marcaActual.equalsIgnoreCase(ConstantesApp.RESPUESTA_SI)) {
 				holder.chkValActual.setText(ConstantesApp.RESPUESTA_SI_LARGA);
 			}else {
 				holder.chkValActual.setText(ConstantesApp.RESPUESTA_NO_TIENE_LARGA);
@@ -135,7 +124,7 @@ private EfficientAdapter adap;
 			
 			
 			
-			holder.chkValConf.setChecked(skuTO.marcaCumplio.equals(ConstantesApp.RESPUESTA_SI));
+			holder.chkValConf.setChecked(ConstantesApp.isSI(skuTO.marcaCumplio));
 			
 			
 			return view;
