@@ -34,6 +34,8 @@ public class DescargaDAO {
 		dbHelper.delete("evaluacion_posicion", "evaluacionId=?",new String[]{String.valueOf(id)});
 		dbHelper.delete("evaluacion_presentacion", "evaluacionId=?",new String[]{String.valueOf(id)});
 		dbHelper.delete("evaluacion_sku_presentacion", "evaluacionId=?",new String[]{String.valueOf(id)});
+		dbHelper.delete("evaluacion_posicion_compromiso", "evaluacionId=?",new String[]{String.valueOf(id)});
+		
 	}
 	
 	public long insertEvaluacion(EvaluacionTO evaluacionTO){
@@ -289,6 +291,21 @@ public class DescargaDAO {
 		
 	}
 	
+	public long insertEvaluacionPosicion(EvaluacionTO evaluacionTO, lindley.desarrolloxcliente.to.upload.PosicionCompromisoTO posicionCompromisoTO){
+ContentValues values = new ContentValues();
+		
+		values.put("evaluacionId", evaluacionTO.id);
+		values.put("tipoAgrupacion", posicionCompromisoTO.tipoAgrupacion);
+		values.put("codigoVariable", posicionCompromisoTO.codigoVariable);
+		values.put("orden", posicionCompromisoTO.orden);
+		values.put("observacion", posicionCompromisoTO.observacion);
+		values.put("estado", posicionCompromisoTO.estado);
+		
+		long id= dbHelper.insertOrThrow("evaluacion_posicion_compromiso", values);
+		posicionCompromisoTO.id = id;
+		return id;
+		
+	}
 
 	public long insertEvaluacionSkus(EvaluacionTO evaluacionTO,lindley.desarrolloxcliente.to.upload.SkuTO sku){
 		
