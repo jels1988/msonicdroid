@@ -17,7 +17,6 @@ import lindley.desarrolloxcliente.activity.CompromisoPresentacionOpen_Activity;
 import lindley.desarrolloxcliente.activity.TestTAbItem;
 import lindley.desarrolloxcliente.dao.FotoDAO;
 import lindley.desarrolloxcliente.negocio.FotoBLL;
-import lindley.desarrolloxcliente.to.AccionTradeTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.CompromisoPosicionTO;
 import lindley.desarrolloxcliente.to.CompromisoTO;
@@ -29,9 +28,6 @@ import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
-
-//import roboguice.application.RoboApplication;
-//import roboguice.config.AbstractAndroidModule;
 
 public class MyApplication extends Application {
 
@@ -53,11 +49,6 @@ public class MyApplication extends Application {
 	private ArrayList<OportunidadTO> oportunidadesDesarrollador; 
 	private ArrayList<OportunidadTO> oportunidades;
 	
-	///Agregado 10/04/2012
-	//public ArrayList<GuardarOportunidadTO> guardarOportunidades;
-	
-	
-	//public String activosLindley = "";
 	public List<SKUPresentacionTO> guardarSKUPresentacion;
 	public String anio;
 	public String mes;

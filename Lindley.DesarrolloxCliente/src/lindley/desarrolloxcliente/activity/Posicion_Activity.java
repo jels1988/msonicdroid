@@ -252,8 +252,8 @@ public class Posicion_Activity extends ListBaseFragment  {
 									
 									if(posicionCompromisoTO.codigoVariable.compareToIgnoreCase(ConstantesApp.VARIABLE_RED_ESTANDAR_ANAQUEL) == 0)
 									{
-										MyApplication application = (MyApplication)context.getApplicationContext();
-										application.compromisoPosicion=position;
+										//MyApplication application = (MyApplication)context.getApplicationContext();
+										//application.compromisoPosicion=position;
 										
 										/*
 										application.listCompromiso = posicionCompromisoTO.listCompromisos;
@@ -261,6 +261,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 											application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
 										*/
 										Intent intent = new Intent(context,VerCompromisosOpen_Activity.class);
+										intent.putExtra(VerCompromisosOpen_Activity.POSICION_KEY, position);
 										context.startActivity(intent);
 										
 									}
