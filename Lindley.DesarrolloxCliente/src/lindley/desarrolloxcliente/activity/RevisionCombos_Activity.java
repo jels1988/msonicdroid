@@ -41,7 +41,7 @@ public class RevisionCombos_Activity extends FragmentBase {
          this.validarConexionInternet=false;
      
          
-         if(VISTA_CARGADA==0){
+         //if(VISTA_CARGADA==0){
         	 
 	 		VISTA_CARGADA=1;
 	 		application = (MyApplication) getActivity().getApplicationContext();
@@ -76,7 +76,7 @@ public class RevisionCombos_Activity extends FragmentBase {
 	 		txtObsSS.setText(evaluacion.observacionSS);
 	 		txtObsMS.setText(evaluacion.observacionMS);
 	 		
-         }
+         //}
          
          txtObsMS.addTextChangedListener(new TextWatcher() {
  			

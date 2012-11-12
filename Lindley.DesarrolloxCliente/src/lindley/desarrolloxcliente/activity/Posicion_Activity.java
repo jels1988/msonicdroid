@@ -70,7 +70,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 	         inicializarRecursos();
 	         this.validarConexionInternet=false;
 	         
-	         if(VISTA_CARGADA==0){
+	         //if(VISTA_CARGADA==0){
 		 		VISTA_CARGADA=1;
 		 		application = (MyApplication) getActivity().getApplicationContext();
 		 		evaluacion = application.evaluacionActual;
@@ -78,7 +78,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 		 		txtViewFecha.setText(ConstantesApp.formatFecha(evaluacion.fechaCreacion));
 		 		processAsync();
 		 		
-	         }
+	         //}
 		 }
 		 
 		 

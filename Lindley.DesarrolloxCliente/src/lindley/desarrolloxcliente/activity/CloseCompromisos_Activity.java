@@ -2,27 +2,23 @@ package lindley.desarrolloxcliente.activity;
 
 import java.util.List;
 
-import roboguice.inject.InjectView;
-
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
 import lindley.desarrolloxcliente.to.upload.OportunidadTO;
 import net.msonic.lib.sherlock.ListBaseFragment;
+import roboguice.inject.InjectView;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
-public class RevisionCompromisos_Activity extends ListBaseFragment {
+public class CloseCompromisos_Activity extends ListBaseFragment {
 
 	private EvaluacionTO evaluacion;
 	private  MyApplication application;
@@ -70,7 +66,7 @@ public class RevisionCompromisos_Activity extends ListBaseFragment {
 		 private final Activity context;
 		 
 		   public EfficientAdapter(Activity context,List<OportunidadTO> detalle){
-				super(context, R.layout.revisioncompromisos_content, detalle);
+				super(context, R.layout.closecompromisos_content, detalle);
 				this.detalle = detalle;
 				this.context = context;
 			}
@@ -106,7 +102,7 @@ public class RevisionCompromisos_Activity extends ListBaseFragment {
 					
 						
 						LayoutInflater inflator = context.getLayoutInflater();
-						view = inflator.inflate(R.layout.revisioncompromisos_content, null);
+						view = inflator.inflate(R.layout.closecompromisos_content, null);
 						
 						final ViewHolder holder = new ViewHolder();
 						
@@ -118,9 +114,9 @@ public class RevisionCompromisos_Activity extends ListBaseFragment {
 				        
 				        holder.cboConcrecion = (TextView) view.findViewById(R.id.cboConcrecion);
 				        holder.cboConcrecionCmp = (TextView) view.findViewById(R.id.cboConcrecionCmp);
-				        holder.chkViewConcrecion = (CheckBox) view.findViewById(R.id.chkViewConcrecion);
+				        holder.chkViewConcrecion = (TextView) view.findViewById(R.id.chkViewConcrecion);
 				        
-				        holder.chkViewConcrecion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				        /*holder.chkViewConcrecion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 							@Override
 							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 								// TODO Auto-generated method stub
@@ -131,13 +127,13 @@ public class RevisionCompromisos_Activity extends ListBaseFragment {
 									oportunidadTO.concrecionCumple  = ConstantesApp.RESPUESTA_NO;
 								}
 							}
-						});
+						});*/
 				        
 				        
 				        holder.txViewSOVI =  (TextView) view.findViewById(R.id.txViewSOVI);
 				        holder.txViewSOVICmp =  (TextView) view.findViewById(R.id.txViewSOVICmp);
-				        holder.chkViewSOVI = (CheckBox) view.findViewById(R.id.chkViewSOVI);
-				        holder.chkViewSOVI.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				        holder.chkViewSOVI = (TextView) view.findViewById(R.id.chkViewSOVI);
+				       /* holder.chkViewSOVI.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 							@Override
 							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 								// TODO Auto-generated method stub
@@ -148,12 +144,12 @@ public class RevisionCompromisos_Activity extends ListBaseFragment {
 									oportunidadTO.soviCumple  = ConstantesApp.RESPUESTA_NO;
 								}
 							}
-						});
+						});*/
 				        
 				        holder.cboCumPrecio =  (TextView) view.findViewById(R.id.cboCumPrecio);
 				        holder.cboCumPrecioCmp =  (TextView) view.findViewById(R.id.cboCumPrecioCmp);
-				        holder.chkViewPrecio = (CheckBox) view.findViewById(R.id.chkViewPrecio);
-				        holder.chkViewPrecio.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				        holder.chkViewPrecio = (TextView) view.findViewById(R.id.chkViewPrecio);
+				        /*holder.chkViewPrecio.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 							@Override
 							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 								// TODO Auto-generated method stub
@@ -164,12 +160,12 @@ public class RevisionCompromisos_Activity extends ListBaseFragment {
 									oportunidadTO.respetoPrecioCumple  = ConstantesApp.RESPUESTA_NO;
 								}
 							}
-						});
+						});*/
 				        
 				        holder.txViewSabores = (TextView) view.findViewById(R.id.txViewSabores);
 				        holder.cboSaboresCmp =  (TextView) view.findViewById(R.id.cboSaboresCmp);	        
-				        holder.chkViewSabor = (CheckBox) view.findViewById(R.id.chkViewSabor);
-				        holder.chkViewSabor.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				        holder.chkViewSabor = (TextView) view.findViewById(R.id.chkViewSabor);
+				        /*holder.chkViewSabor.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 							@Override
 							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 								// TODO Auto-generated method stub
@@ -180,7 +176,7 @@ public class RevisionCompromisos_Activity extends ListBaseFragment {
 									oportunidadTO.numeroSaboresCumple  = ConstantesApp.RESPUESTA_NO;
 								}
 							}
-						});
+						});*/
 				        
 				    	holder.txViewAccTrade = (TextView) view.findViewById(R.id.txViewAccTrade);	
 				    	holder.txEditFecha = (TextView) view.findViewById(R.id.txEditFecha);	    	
@@ -214,11 +210,22 @@ public class RevisionCompromisos_Activity extends ListBaseFragment {
 				      else
 				    	  holder.cboConcrecionCmp.setText(ConstantesApp.RESPUESTA_NO_LARGA);
 					
-					holder.chkViewConcrecion.setChecked(ConstantesApp.isSI(oportunidadTO.concrecionCumple));
+					if(ConstantesApp.isSI(oportunidadTO.concrecionCumple)){
+						holder.chkViewConcrecion.setText(ConstantesApp.RESPUESTA_SI_LARGA);
+					}else{
+						holder.chkViewConcrecion.setText(ConstantesApp.RESPUESTA_NO_LARGA);
+					}
 					
 					 holder.txViewSOVI.setText(oportunidadTO.soviActual);
 				     holder.txViewSOVICmp.setText(oportunidadTO.sovi);
-				     holder.chkViewSOVI.setChecked(ConstantesApp.isSI(oportunidadTO.soviCumple));
+				     //holder.chkViewSOVI.setChecked(ConstantesApp.isSI(oportunidadTO.soviCumple));
+				     
+				     
+				     if(ConstantesApp.isSI(oportunidadTO.soviCumple)){
+							holder.chkViewSOVI.setText(ConstantesApp.RESPUESTA_SI_LARGA);
+						}else{
+							holder.chkViewSOVI.setText(ConstantesApp.RESPUESTA_NO_LARGA);
+						}
 				     
 				 	
 						if(oportunidadTO.respetoPrecio.equalsIgnoreCase(ConstantesApp.RESPUESTA_SI))
@@ -231,13 +238,24 @@ public class RevisionCompromisos_Activity extends ListBaseFragment {
 					      else
 					    	  holder.cboCumPrecioCmp.setText(ConstantesApp.RESPUESTA_NO_LARGA);
 						
-						holder.chkViewSOVI.setChecked(ConstantesApp.isSI(oportunidadTO.respetoPrecioCumple));
+						//holder.chkViewSOVI.setChecked(ConstantesApp.isSI(oportunidadTO.respetoPrecioCumple));
+						
+						 if(ConstantesApp.isSI(oportunidadTO.respetoPrecioCumple)){
+								holder.chkViewPrecio.setText(ConstantesApp.RESPUESTA_SI_LARGA);
+							}else{
+								holder.chkViewPrecio.setText(ConstantesApp.RESPUESTA_NO_LARGA);
+							}
+					     
 						
 					 holder.cboSaboresCmp.setText(oportunidadTO.numeroSaboresActual);
 				     holder.txViewSabores.setText(oportunidadTO.numeroSabores);
-				 	holder.chkViewPrecio.setChecked(ConstantesApp.isSI(oportunidadTO.respetoPrecioCumple));
-					holder.chkViewSabor.setChecked(ConstantesApp.isSI(oportunidadTO.numeroSaboresCumple));
-					
+				 	
+					 if(ConstantesApp.isSI(oportunidadTO.numeroSaboresCumple)){
+							holder.chkViewSabor.setText(ConstantesApp.RESPUESTA_SI_LARGA);
+						}else{
+							holder.chkViewSabor.setText(ConstantesApp.RESPUESTA_NO_LARGA);
+						}
+					 
 					
 				     holder.txEditFecha.setText(ConstantesApp.formatFecha(oportunidadTO.fechaCompromiso));
 				     holder.txViewAccTrade.setText(oportunidadTO.accionTrade);
@@ -258,20 +276,20 @@ public class RevisionCompromisos_Activity extends ListBaseFragment {
 			    	
 			    	TextView cboConcrecion;
 			    	TextView cboConcrecionCmp;
-			    	CheckBox chkViewConcrecion;
+			    	TextView chkViewConcrecion;
 			    	
 			    	TextView txViewSOVI;
 			    	TextView txViewSOVICmp;
-			    	CheckBox chkViewSOVI;
+			    	TextView chkViewSOVI;
 			    	
 			    	
 			    	TextView cboCumPrecio;
 			    	TextView cboCumPrecioCmp;
-			    	CheckBox chkViewPrecio;
+			    	TextView chkViewPrecio;
 			    	
 			    	TextView txViewSabores;
 			    	TextView cboSaboresCmp;
-			    	CheckBox chkViewSabor;
+			    	TextView chkViewSabor;
 			    	   	    	
 			    	TextView txViewAccTrade;    	
 			    	

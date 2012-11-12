@@ -2,8 +2,6 @@ package lindley.desarrolloxcliente.activity;
 
 import java.util.List;
 
-import roboguice.inject.InjectView;
-
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
@@ -12,6 +10,7 @@ import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
 import lindley.desarrolloxcliente.to.upload.PresentacionTO;
 import net.msonic.lib.sherlock.ListBaseFragment;
+import roboguice.inject.InjectView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +24,7 @@ import android.widget.TextView;
 
 import com.google.inject.Inject;
 
-public class RevisionPresentacion_Activity extends ListBaseFragment {
+public class ClosePresentacion_Activity extends ListBaseFragment {
 
 	private EvaluacionTO evaluacion;
 	private  MyApplication application;
@@ -131,7 +130,7 @@ public class RevisionPresentacion_Activity extends ListBaseFragment {
 						@Override
 						public void onClick(View arg0) {
 							// TODO Auto-generated method stub
-							Intent skuPresentacion = new Intent(context, SKUPrioritarioCompromisoFalse_Activity.class);
+							Intent skuPresentacion = new Intent(context, SKUPrioritarioCompromisoClose_Activity.class);
 							context.startActivity(skuPresentacion);
 						}});
 					

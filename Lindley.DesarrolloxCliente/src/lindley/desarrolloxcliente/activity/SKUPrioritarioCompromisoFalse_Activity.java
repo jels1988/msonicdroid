@@ -37,6 +37,7 @@ private EfficientAdapter adap;
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 		
 		setTitle(R.string.skuprioritario_activity_title);
+		setContentView(R.layout.skuprioritariocompromisofalse_activity);
 		
 		application = (MyApplication) getApplicationContext();
 		
@@ -51,9 +52,42 @@ private EfficientAdapter adap;
 	
 	public void btnOK_click(View view)
 	{
+		asignarConfirmacion();
 		finish();
 	}
 	
+	
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		asignarConfirmacion();
+		super.onBackPressed();
+	}
+
+	private  void asignarConfirmacion(){
+		int compromisos=0;
+		int compromisosCumple=0;
+		if(adap!=null){
+			for(SkuTO sku:adap.skuPresentaciones){
+				if(ConstantesApp.isSI(sku.marcaCompromiso)){
+					compromisos++;
+					if(ConstantesApp.isSI(sku.marcaCumplio)){
+						compromisosCumple++;
+					}
+				}
+			}
+			if(compromisos>0){
+				if(compromisosCumple>=compromisos){
+					evaluacion.presentaciones.get(0).confirmacion=ConstantesApp.RESPUESTA_SI;
+				}else{
+					evaluacion.presentaciones.get(0).confirmacion=ConstantesApp.RESPUESTA_NO;
+				}
+			}else{
+				evaluacion.presentaciones.get(0).confirmacion=ConstantesApp.RESPUESTA_NO;
+			}
+		}
+	}
 	public static class EfficientAdapter extends ArrayAdapter<SkuTO> {
     	private Activity context;
 		private List<SkuTO> skuPresentaciones;
