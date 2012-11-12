@@ -11,6 +11,7 @@ import com.google.inject.Inject;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.DescargaBLL;
+import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
 import lindley.desarrolloxcliente.to.upload.OportunidadTO;
 import lindley.desarrolloxcliente.to.upload.PosicionTO;
@@ -37,6 +38,8 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 	private final static int ACCION_GUARDAR_EVALUACION=0;
 	
 	@Inject DescargaBLL descargaBLL;
+	private  MyApplication application;
+	private ClienteTO cliente;
 	
 	private TabHost mTabHost;
     private TabManager mTabManager;
@@ -52,8 +55,17 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
         Presentacion_Activity.VISTA_CARGADA=0;
         Combos_Activity.VISTA_CARGADA=0;
         
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        
+        
+        application = (MyApplication) getApplicationContext();
+ 		cliente = application.cliente;
+        
         
         setContentView(R.layout.frameng_tabs);
+        setTitle("Creaci—n de Evaluaci—n");
+        setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
+        
         mTabHost = (TabHost)findViewById(android.R.id.tabhost);
         mTabHost.setup();
 

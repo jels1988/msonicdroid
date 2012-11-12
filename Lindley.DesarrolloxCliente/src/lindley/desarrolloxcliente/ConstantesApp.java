@@ -85,7 +85,7 @@ public final class ConstantesApp {
 	}
 	
 	public final static String getHoraSistemaAS400(){
-		return DateFormat.format("kkmm", new java.util.Date()).toString();
+		return DateFormat.format("kkmmss", new java.util.Date()).toString();
 	}
 	
 	public final static String formatPorcentaje(double number,int decimales){
@@ -159,22 +159,22 @@ public final class ConstantesApp {
 	}
 	public final static String[] getHoraFactoresAS400(String hora){
 		
-	String[] factores = new String[2];
+	String[] factores = new String[3];
 	
 		final Calendar calendar = Calendar.getInstance();
 		factores[0] = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)) ;        
 		factores[1] = String.valueOf(calendar.get(Calendar.MINUTE));        
-	
+		factores[2] = String.valueOf(calendar.get(Calendar.SECOND));      
 		
 		if(null==hora){
 			return factores;
 		}
+		String nuevaHora = hora.concat("00");
 		
-		
-		if (hora.length() >= 4) {
-			factores[0]= hora.substring(0,2);
-			factores[1] = hora.substring(2,4);
-			
+		if (nuevaHora.length() >= 6) {
+			factores[0]= nuevaHora.substring(0,2);
+			factores[1] = nuevaHora.substring(2,4);
+			factores[1] = nuevaHora.substring(4,6);
 		}
 		
 		return factores;

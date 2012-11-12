@@ -2,6 +2,8 @@ package lindley.desarrolloxcliente.activity;
 
 import java.util.List;
 
+import roboguice.inject.InjectView;
+
 import com.google.inject.Inject;
 
 import lindley.desarrolloxcliente.ConstantesApp;
@@ -36,7 +38,7 @@ public class Presentacion_Activity extends ListBaseFragment {
 	public static int VISTA_CARGADA=0;
 	
 	@Inject PresentacionBLL presentacionBLL;
-	
+	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	
 	EfficientAdapter presentaciones;
 	
@@ -58,7 +60,7 @@ public class Presentacion_Activity extends ListBaseFragment {
 	 		application = (MyApplication) getActivity().getApplicationContext();
 	 		evaluacion = application.evaluacionActual;
 	 		cliente = application.cliente;
-	 		
+	 		txtViewFecha.setText(ConstantesApp.formatFecha(evaluacion.fechaCreacion));
 	 		processAsync();
 			
          }

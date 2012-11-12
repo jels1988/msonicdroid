@@ -2,6 +2,8 @@ package lindley.desarrolloxcliente.activity;
 
 import java.util.List;
 
+import roboguice.inject.InjectView;
+
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
@@ -45,7 +47,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 	
 	@Inject PosicionBLL posicionBLL;
 	@Inject FotoBLL fotoBLL;
-	
+	@InjectView(R.id.txtViewFecha) TextView txtViewFecha;
 	
 	
 	
@@ -73,7 +75,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 		 		application = (MyApplication) getActivity().getApplicationContext();
 		 		evaluacion = application.evaluacionActual;
 		 		cliente = application.cliente;
-		 		
+		 		txtViewFecha.setText(ConstantesApp.formatFecha(evaluacion.fechaCreacion));
 		 		processAsync();
 		 		
 	         }
