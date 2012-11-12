@@ -1,6 +1,9 @@
 package lindley.desarrolloxcliente.to.upload;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lindley.desarrolloxcliente.ConstantesApp;
 
 import com.google.gson.annotations.Expose;
@@ -24,10 +27,12 @@ public class PosicionTO {
 		confirmacion =  ConstantesApp.RESPUESTA_NO;
 		origen =  ConstantesApp.OPORTUNIDAD_SISTEMA;
 		estado =  ConstantesApp.OPORTUNIDAD_ABIERTA;
+		
+		compromisos = new ArrayList<PosicionCompromisoTO>();
 	}
 	
-	@Expose()
-    public long id;
+			@Expose()
+		    public long id;
 
 			@SerializedName("EID")
 		    public long evaluacionId;
@@ -90,5 +95,7 @@ public class PosicionTO {
 	        @SerializedName("EST")
 	        public String estado;
 	        
+	        @SerializedName("COM")
+	        public List<PosicionCompromisoTO> compromisos;
     
 }

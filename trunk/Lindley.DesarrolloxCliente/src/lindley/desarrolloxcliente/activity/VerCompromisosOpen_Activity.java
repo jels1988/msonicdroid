@@ -1,93 +1,97 @@
 package lindley.desarrolloxcliente.activity;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import roboguice.inject.InjectExtra;
+
+import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.CompromisoPosicionTO;
-import lindley.desarrolloxcliente.to.EvaluacionTO;
-//import net.msonic.lib.ListActivityBase;
-//import roboguice.inject.InjectView;
+import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
+import lindley.desarrolloxcliente.to.upload.PosicionCompromisoTO;
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
-//import com.thira.examples.actionbar.widget.ActionBar;
-
 public class VerCompromisosOpen_Activity extends net.msonic.lib.sherlock.ListActivityBase {
 
-	//@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
+	public static final String POSICION_KEY="POSICION_KEY";
+	
 	private EfficientAdapter adap;
 	private MyApplication application;
-	ClienteTO cliente;
-	private int posicion=-1;
+	private ClienteTO cliente;
 	private EvaluacionTO evaluacion;
-	 
+	@InjectExtra(value=POSICION_KEY) private int posicion;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		inicializarRecursos();
-		super.onCreate(savedInstanceState);
+		 super.onCreate(savedInstanceState);
 		 setContentView(R.layout.vercompromisosopen_activity);   
 		 this.validarConexionInternet=false;
+		 
 		 setTitle(R.string.compromiso_title);
 		 application = (MyApplication)getApplicationContext();
-		 
- 		 evaluacion = application.evaluacion;
+ 		 evaluacion = application.evaluacionActual;
  		 cliente = application.cliente;
-		 posicion = application.compromisoPosicion;
 		 
 		 setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
-		 
-
-		 if(evaluacion.posiciones.get(posicion)==null){
-			 evaluacion.posiciones.get(posicion).listCompromisos = new ArrayList<CompromisoPosicionTO>();
-		 }
-		 
-		 adap = new EfficientAdapter(this, evaluacion.posiciones.get(posicion).listCompromisos);
-		 setListAdapter(adap);
+		 processAsync();
 	}
 	
+	@Override
+	protected void process() throws Exception {
+		// TODO Auto-generated method stub
+		adap = new EfficientAdapter(this, evaluacion.posiciones.get(posicion).compromisos);
+		super.process();
+	}
+
+	@Override
+	protected void processOk() {
+		// TODO Auto-generated method stub
+		setListAdapter(adap);
+		super.processOk();
+	}
+
 	public void btnGuardar_click(View view)
 	{
-		/*for(CompromisoPosicionTO comp : application.evaluacion.posiciones.get(posicion).listCompromisos)
-		{
-			if(comp.getDescripcion().equals(""))
-				comp.setDescripcion("  ");
-			
-		}*/
 		finish();
 	}
 	
-	public void btnAgregar_click(View view)
+	public void btnAdd_click(View view)
 	{
-		CompromisoPosicionTO compromiso = new CompromisoPosicionTO();
-		compromiso.setDescripcion("");
-		evaluacion.posiciones.get(posicion).listCompromisos.add(compromiso);
+		PosicionCompromisoTO compromiso = new PosicionCompromisoTO();
+		compromiso.observacion="";
+		compromiso.estado = ConstantesApp.OPORTUNIDAD_ABIERTA;
+		compromiso.codigoVariable = ConstantesApp.VARIABLE_RED_ESTANDAR_ANAQUEL;
+		compromiso.tipoAgrupacion = ConstantesApp.TIPO_AGRUPRACION_POSICION;
+		compromiso.orden = evaluacion.posiciones.get(posicion).compromisos.size();
+		evaluacion.posiciones.get(posicion).compromisos.add(compromiso);
 		adap.notifyDataSetChanged();
 	}
 	
 	public void btnQuitar_click(View view)
 	{
-		if(!evaluacion.posiciones.get(posicion).listCompromisos.isEmpty())
-			evaluacion.posiciones.get(posicion).listCompromisos.remove(evaluacion.posiciones.get(posicion).listCompromisos.size()-1);
-		adap.notifyDataSetChanged();
+		if(!evaluacion.posiciones.get(posicion).compromisos.isEmpty()){
+			evaluacion.posiciones.get(posicion).compromisos.remove(evaluacion.posiciones.get(posicion).compromisos.size()-1);
+			adap.notifyDataSetChanged();
+		}
 	}
 	
-	public static class EfficientAdapter extends ArrayAdapter<CompromisoPosicionTO> {
+	public static class EfficientAdapter extends ArrayAdapter<PosicionCompromisoTO> {
     	
 		private Activity context;
-		public List<CompromisoPosicionTO> compromisos;
+		public List<PosicionCompromisoTO> compromisos;
 		
-		public EfficientAdapter(Activity context,List<CompromisoPosicionTO> compromisos ){
+		public EfficientAdapter(Activity context,List<PosicionCompromisoTO> compromisos ){
 			super(context, R.layout.vercompromisosopen_content, compromisos);
 			this.context=context;
 			this.compromisos = compromisos;
@@ -104,17 +108,32 @@ public class VerCompromisosOpen_Activity extends net.msonic.lib.sherlock.ListAct
 				final ViewHolder viewHolder = new ViewHolder();
 				
 				viewHolder.txViewComp = (EditText) view.findViewById(R.id.txViewComp);
-						    	
-				viewHolder.txViewComp.setOnFocusChangeListener(new OnFocusChangeListener() {
+				viewHolder.txViewComp.addTextChangedListener(new TextWatcher() {
 					
 					@Override
-					public void onFocusChange(View v, boolean hasFocus) {
+					public void onTextChanged(CharSequence s, int start, int before, int count) {
 						// TODO Auto-generated method stub
-						CompromisoPosicionTO compromiso = (CompromisoPosicionTO) viewHolder.txViewComp.getTag();
-						compromiso.setDescripcion(viewHolder.txViewComp.getText().toString());
+						
+					}
+					
+					@Override
+					public void beforeTextChanged(CharSequence s, int start, int count,
+							int after) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void afterTextChanged(Editable s) {
+						// TODO Auto-generated method stub
+						PosicionCompromisoTO compromiso = (PosicionCompromisoTO) viewHolder.txViewComp.getTag();
+						
+						if(compromiso!=null){
+						compromiso.observacion = s.toString();
+						}
 					}
 				});
-				
+
 				view.setTag(viewHolder);
 				viewHolder.txViewComp.setTag(this.compromisos.get(position));
 			}else{
@@ -123,9 +142,9 @@ public class VerCompromisosOpen_Activity extends net.msonic.lib.sherlock.ListAct
 			}
 			
 			final ViewHolder holder = (ViewHolder) view.getTag();
-			final CompromisoPosicionTO compromisoTO = compromisos.get(position);
+			final PosicionCompromisoTO compromisoTO = compromisos.get(position);
 			
-			holder.txViewComp.setText(compromisoTO.getDescripcion());
+			holder.txViewComp.setText(compromisoTO.observacion);
 			return view;
 		}
 
