@@ -3,5 +3,5 @@
     
 	<item android:id="@+id/mnuDetalle" android:title="@string/consultarcabecera_menu_detalle"/>
 	<item android:id="@+id/mnuResumen" android:title="@string/consultarcabecera_menu_resumen"/>
-	<item android:id="@+id/mnuCancelar" android:title="@string/consultarcabecera_menu_cancelar"/>
+	<item android:id="@+id/mnuCerrar" android:title="@string/consultarcabecera_menu_cerrar"/>
 </menu>
