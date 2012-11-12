@@ -1,8 +1,10 @@
 package lindley.desarrolloxcliente.negocio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lindley.desarrolloxcliente.dao.UploadDAO;
+import lindley.desarrolloxcliente.to.ResumenValueTO;
 import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
 import net.msonic.lib.DBHelper;
 
@@ -100,6 +102,18 @@ public class UploadBLL {
 		}
 		
 		return cantidadEvaluaciones;
-		
 	}
+	public List<ResumenValueTO> resumenEvaluacion(long id){
+		List<ResumenValueTO> lista = new ArrayList<ResumenValueTO>();
+		try{
+			dbHelper.openDataBase();
+			lista = uploadDAO.resumenEvaluacion(id);
+		}catch(Exception ex){
+			Log.e(TAG_LOG, "UploadBLL.resumenEvaluacion", ex);
+		} finally {
+			dbHelper.close();
+		}
+		return lista;
+	}
+	
 }

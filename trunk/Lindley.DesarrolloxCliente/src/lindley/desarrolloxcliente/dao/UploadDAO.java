@@ -5,6 +5,7 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.to.PeriodoTO;
+import lindley.desarrolloxcliente.to.ResumenValueTO;
 import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
 import lindley.desarrolloxcliente.to.upload.OportunidadTO;
 import lindley.desarrolloxcliente.to.upload.PosicionCompromisoTO;
@@ -48,7 +49,7 @@ public class UploadDAO {
 	
 	public long getCantidadEvaluacionesAbiertas(String clienteCodigo){
 		
-		String SQL = "select count(*) as cantidad from evaluacion where clienteCodigo=?1";
+		String SQL = "select count(*) as cantidad from evaluacion where clienteCodigo=?1 and estado = 'A'";
 		String[] args = new String[] {String.valueOf(clienteCodigo)};
 		
 		long cantidad=0;
@@ -60,7 +61,49 @@ public class UploadDAO {
 		cursor.close();
 		return cantidad;
 	}
-
+	
+	public List<ResumenValueTO> resumenEvaluacion(long id){
+		List<ResumenValueTO> valores = new ArrayList<ResumenValueTO>();
+		
+		String SQL = "select '1.-Inventario' as Descripcion,Sum(puntosSugeridos) as puntosSugeridos,Sum(puntosGanados) as puntosGanados from evaluacion_oportunidad  where evaluacionId = ?1 " +
+						"union all " +
+						"select '2.-Posici—n' as Descripcion,Sum(puntosSugeridos) as puntosSugeridos,Sum(puntosGanados) as puntosGanados from evaluacion_posicion  where evaluacionId = ?1 " + 
+						"union all " +
+						"select '3.-Presentaci—n' as Descripcion,Sum(puntosSugeridos) as puntosSugeridos,Sum(puntosGanados) as puntosGanados from evaluacion_presentacion  where evaluacionId = ?1 ";
+		
+		String[] args = new String[] {String.valueOf(id)};
+		
+		Cursor cursor = dbHelper.rawQuery(SQL,args);
+		
+		ResumenValueTO resumenValueTO;
+		long totalSugeridos=0,totalGanados=0;
+		
+		
+		resumenValueTO = new ResumenValueTO();
+		resumenValueTO.descripcion="VARIABLE RED";
+		resumenValueTO.valor="PTOS SUGERIDOS";
+		resumenValueTO.valor2="PTOS GANADOS";
+		valores.add(resumenValueTO);
+		
+		while(cursor.moveToNext()){
+			resumenValueTO = new ResumenValueTO();
+			resumenValueTO.descripcion =  cursor.getString(cursor.getColumnIndex("Descripcion"));
+			resumenValueTO.valor =  cursor.getString(cursor.getColumnIndex("puntosSugeridos"));
+			resumenValueTO.valor2 =  cursor.getString(cursor.getColumnIndex("puntosGanados"));
+			totalSugeridos=totalSugeridos + cursor.getLong(cursor.getColumnIndex("puntosSugeridos"));
+			totalGanados=totalGanados + cursor.getLong(cursor.getColumnIndex("puntosGanados"));
+			valores.add(resumenValueTO);
+		}
+		cursor.close();
+		
+		resumenValueTO = new ResumenValueTO();
+		resumenValueTO.descripcion="TOTAL PUNTAJE";
+		resumenValueTO.valor=String.valueOf(totalSugeridos);
+		resumenValueTO.valor2=String.valueOf(totalGanados);
+		valores.add(resumenValueTO);
+		return valores;
+	}
+	
 	public EvaluacionTO listarEvaluacionById(long id){
 		
 		

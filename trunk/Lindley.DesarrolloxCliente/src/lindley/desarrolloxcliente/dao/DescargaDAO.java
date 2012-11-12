@@ -24,6 +24,22 @@ public class DescargaDAO {
 	@Inject	protected DBHelper dbHelper;
 	@Inject protected PeriodoTO periodoTO;
 	
+	public int factorCierre(String tipoAgrupacion,String codigoVariable,String fechaCierre){
+		
+		String SQL = "select factor from acelerador where tipoAgrupacion = ?1 and codigoVariable=?2 and ?3 between fechainicio and fechaFin";
+		String[] args = new String[] {tipoAgrupacion,codigoVariable,fechaCierre};
+		Cursor cursor = dbHelper.rawQuery(SQL,args);
+		
+		int factor=1;
+		
+		if(cursor.moveToNext()){
+			factor = cursor.getInt(cursor.getColumnIndex("factor"));
+		}
+		cursor.close();
+		
+		return factor;
+	}
+	
 	public void deleteEvaluacion(){
 		dbHelper.delete("evaluacion", null, null);
 	}

@@ -144,25 +144,29 @@ public class DescargaBLL {
 				descargaDAO.deleteEvaluacion(evaluacionTO.id);
 			}
 			
-		
-			
-			
 			descargaDAO.insertEvaluacion(evaluacionTO);
+			
+			int factorOportunidad = descargaDAO.factorCierre(ConstantesApp.TIPO_AGRUPRACION_INVENTARIO, ConstantesApp.VARIABLE_RED_SKU_PRIORITARIOS, evaluacionTO.fechaCierre);
 			
 			for (lindley.desarrolloxcliente.to.upload.OportunidadTO oportunidadTO : evaluacionTO.oportunidades) {
 				if(ConstantesApp.isSI(oportunidadTO.concrecionCumple) && 
 				   ConstantesApp.isSI(oportunidadTO.soviCumple) && 
 				   ConstantesApp.isSI(oportunidadTO.respetoPrecioCumple) &&
 				   ConstantesApp.isSI(oportunidadTO.numeroSaboresCumple)){
-					oportunidadTO.puntosGanados = oportunidadTO.puntosSugeridos;
+					
+					
+					oportunidadTO.puntosGanados = String.valueOf(Integer.parseInt(oportunidadTO.puntosSugeridos) * factorOportunidad);
 				}
 				descargaDAO.insertEvaluacionOportunidad(evaluacionTO,oportunidadTO);
 			}
 			
 			for (lindley.desarrolloxcliente.to.upload.PosicionTO posicionTO : evaluacionTO.posiciones) {
 				
+				int factorPosicion= descargaDAO.factorCierre(ConstantesApp.TIPO_AGRUPRACION_POSICION,posicionTO.codigoVariable, evaluacionTO.fechaCierre);
+				
+				
 				if(ConstantesApp.isSI(posicionTO.confirmacion)){
-					posicionTO.puntosGanados = posicionTO.puntosSugeridos;
+					posicionTO.puntosGanados = String.valueOf(Integer.parseInt(posicionTO.puntosSugeridos) * factorPosicion);
 				}
 				
 				descargaDAO.insertEvaluacionPosicion(evaluacionTO,posicionTO);
@@ -173,9 +177,12 @@ public class DescargaBLL {
 			
 			
 			for (lindley.desarrolloxcliente.to.upload.PresentacionTO presentacionTO : evaluacionTO.presentaciones) {
+				
+				int factorPresentacion= descargaDAO.factorCierre(ConstantesApp.TIPO_AGRUPRACION_PRESENTACION,presentacionTO.codigoVariable, evaluacionTO.fechaCierre);
 				if(ConstantesApp.isSI(presentacionTO.confirmacion)){
-					presentacionTO.puntosGanados = presentacionTO.puntosSugeridos;
+					presentacionTO.puntosGanados = String.valueOf(Integer.parseInt(presentacionTO.puntosSugeridos) * factorPresentacion);
 				}
+				
 				descargaDAO.insertEvaluacionPresentacion(evaluacionTO,presentacionTO);
 			}
 			

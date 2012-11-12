@@ -2,19 +2,19 @@ package lindley.desarrolloxcliente.activity;
 
 import java.util.List;
 
-import roboguice.inject.InjectView;
+import net.msonic.lib.sherlock.ListActivityBase;
+
+import roboguice.inject.InjectExtra;
 
 
 import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.negocio.UploadBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.ResumenValueTO;
-import lindley.desarrolloxcliente.ws.service.ConsultarResumenProxy;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,20 +23,18 @@ import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
-import net.msonic.lib.ListActivityBase;
 
 public class ConsultarResumen_Activity extends ListActivityBase {
 
-	public static final String CODIGO_REGISTRO_KEY="codigo_cliente";
+	public static final String EVALUACION_ID_KEY="evaluacion_id_key";
+	@InjectExtra(value=EVALUACION_ID_KEY) private long evaluacionId = -1;
+	@Inject UploadBLL uploadBLL;
 	
-	private String codigo_registro = null;
+	EfficientAdapter adap=null;
+	List<ResumenValueTO> detalles = null;
+	private ClienteTO cliente;
+	public  MyApplication application;
 	
-	
-	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
-	@Inject ConsultarResumenProxy consultarResumenProxy;
-	
-	ClienteTO cliente;
-	public static MyApplication application;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -44,27 +42,24 @@ public class ConsultarResumen_Activity extends ListActivityBase {
 		
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
-		Intent intent = this.getIntent();
-		codigo_registro = intent.getStringExtra(CODIGO_REGISTRO_KEY);
-		
-		
-		setContentView(R.layout.consultarresumen_activity);
-		
-		 mActionBar.setTitle(R.string.resumen_activity_title);
-		application = (MyApplication)getApplicationContext();
-	   cliente = application.getClienteTO();
-		mActionBar.setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
-        mActionBar.setHomeLogo(R.drawable.header_logo);
-        
+		  getSupportActionBar().setDisplayShowHomeEnabled(false);
+	    
+		  setContentView(R.layout.consultarresumen_activity);   
+	      setTitle(R.string.resumen_activity_title);
+	      
+	        application = (MyApplication)getApplicationContext();
+			cliente = application.cliente;
+			
+			getSupportActionBar().setSubtitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
+			
 		
 		processAsync();
 	}
 	
 	@Override
 	protected void process()  throws Exception{
-		consultarResumenProxy.codigoRegistro = codigo_registro;
-		consultarResumenProxy.execute();
+		detalles = uploadBLL.resumenEvaluacion(evaluacionId);
+		adap = new EfficientAdapter(this, detalles);
 		
 	}
 	
@@ -74,37 +69,12 @@ public class ConsultarResumen_Activity extends ListActivityBase {
 	
 	@Override
 	protected void processOk() {
-		
-		boolean isExito = consultarResumenProxy.isExito();
+		adap = new EfficientAdapter(this, detalles);
+		setListAdapter(adap);
+		super.processOk();
+	}
+	
 
-		if (isExito) {
-			int status = consultarResumenProxy.getResponse().getStatus();
-			
-			if (status == 0) {
-				List<ResumenValueTO> data = consultarResumenProxy.getResponse().datos;
-				EfficientAdapter adap = new EfficientAdapter(this,data);
-				setListAdapter(adap);
-			}else{
-				processError();
-			}
-			super.processOk();
-		}else{
-			processError();
-		}
-	}
-	
-	@Override
-	protected void processError() {
-		String message;
-		if(consultarResumenProxy.getResponse()!=null){
-			message = consultarResumenProxy.getResponse().getDescripcion();
-		}else{
-			message = error_generico_process;
-		}
-		super.processError();
-		showToast(message);
-	}
-	
 	
 	
 	
@@ -133,10 +103,6 @@ public class ConsultarResumen_Activity extends ListActivityBase {
 
 	      if (convertView == null) {
 	        convertView = mInflater.inflate(R.layout.consultarresumen_content, null);
-
-	        // Creates a ViewHolder and store references to the two children
-	        // views
-	        // we want to bind data to.
 	        holder = new ViewHolder();
 	        holder.txtId = (TextView) convertView.findViewById(R.id.txtId);
 	        holder.txtValor = (TextView) convertView.findViewById(R.id.txtValor);
@@ -144,8 +110,6 @@ public class ConsultarResumen_Activity extends ListActivityBase {
 	        
 	        convertView.setTag(holder);
 	      } else {
-	        // Get the ViewHolder back to get fast access to the TextView
-	        // and the ImageView.
 	        holder = (ViewHolder) convertView.getTag();
 	      }
 	      
