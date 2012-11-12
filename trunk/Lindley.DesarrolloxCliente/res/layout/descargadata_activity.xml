@@ -4,6 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-   <ProgressBar android:indeterminateDrawable="@drawable/my_progress_indeterminate" android:layout_height="wrap_content" android:layout_width="wrap_content"></ProgressBar>
+   <!--ProgressBar android:indeterminateDrawable="@drawable/my_progress_indeterminate" android:layout_height="wrap_content" android:layout_width="wrap_content"></ProgressBar-->
+   
+     
+                <ListView
+                    android:id="@+id/android:list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="2dip"
+                    android:layout_marginTop="2dip"
+                    android:drawSelectorOnTop="false"
+                    android:focusable="false" />
 
 </LinearLayout>
