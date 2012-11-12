@@ -67,7 +67,7 @@
             android:layout_gravity="left"
             android:layout_weight="1"
             android:focusable="false"
-            android:onClick="btnAgregar_click"
+            android:onClick="btnAdd_click"
             android:text="@string/compromiso_agregar" >
         </Button>
         
