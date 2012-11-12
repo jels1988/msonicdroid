@@ -7,6 +7,7 @@ import net.msonic.lib.MessageBox;
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.negocio.DescargaBLL;
 import lindley.desarrolloxcliente.negocio.EvaluacionBLL;
 import lindley.desarrolloxcliente.negocio.UploadBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
@@ -35,6 +36,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	@Inject ActualizarEstadoProxy actualizarEstadoProxy;
 	@Inject EvaluacionBLL evaluacionBLL;
 	@Inject UploadBLL uploadBLL;
+	@Inject DescargaBLL descargaBLL;
 	
 	private EfficientAdapter adap;
 	private ClienteTO cliente;
@@ -45,6 +47,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	public static final int ACCION_ELIMINAR = 1;
 	public static final int ACCION_EDITAR = 2;
 	public static final int ACCION_DETALLE= 3;
+	public static final int ACCION_CERRAR= 4;
 	
 	public static final int ACCION_CARGAR_EVALUACION = 2;
 	public static final int ACCION_VERIFICAR_EVALUACION = 3;
@@ -113,8 +116,14 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 			break;
 		case ACCION_EDITAR:
 			application.evaluacionActual = uploadBLL.listarEvaluacionById(evaluacionId);
+			break;
 		case ACCION_DETALLE:
 			application.evaluacionActual = uploadBLL.listarEvaluacionById(evaluacionId);
+			break;
+		case ACCION_CERRAR:
+			application.evaluacionActual = uploadBLL.listarEvaluacionById(evaluacionId);
+			descargaBLL.cerrarEvaluacion(application.evaluacionActual, application.usuario);
+			break;
 		default:
 			break;
 		}
@@ -134,8 +143,17 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 			break;
 		case ACCION_DETALLE:
 			super.processOk(accion);
-			Intent verificacionActivity = new Intent(this,RevisionTabs_Activity.class);
-			startActivity(verificacionActivity);
+			if(application.evaluacionActual.estado.compareTo(ConstantesApp.OPORTUNIDAD_ABIERTA)==0){
+				Intent verificacionActivity = new Intent(this,RevisionTabs_Activity.class);
+				startActivity(verificacionActivity);
+			}else{
+				Intent verificacionActivity = new Intent(this,CloseTabs_Activity.class);
+				startActivity(verificacionActivity);
+			}
+			break;
+		case ACCION_CERRAR:
+			super.processOk(accion);
+			processAsync();
 			break;
 		default:
 			break;
@@ -153,6 +171,10 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 			super.processOk();
 			break;
 		case ACCION_EDITAR:
+			showToast(error_generico_process);
+			super.processOk();
+			break;
+		case ACCION_CERRAR:
 			showToast(error_generico_process);
 			super.processOk();
 			break;
@@ -212,6 +234,27 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 			break;
 		case R.id.mnuDetalle:
 			 processAsync(ACCION_DETALLE);
+			break;
+		case R.id.mnuCerrar:
+			 
+			 
+			 MessageBox.showConfirmDialog(this, "Confirmaci—n: ",
+						"ÀDeseas cerrar el registro seleccionado?", "Si",
+						new android.content.DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+								processAsync(ACCION_CERRAR);
+							}
+
+						}, "No", new android.content.DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+							}
+
+						});
+			 
 			break;
 		default:
 			break;

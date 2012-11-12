@@ -2,8 +2,18 @@ package lindley.desarrolloxcliente.activity;
 
 import java.util.List;
 
+import lindley.desarrolloxcliente.ConstantesApp;
+import lindley.desarrolloxcliente.MyApplication;
+import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.negocio.FotoBLL;
+import lindley.desarrolloxcliente.negocio.PosicionBLL;
+import lindley.desarrolloxcliente.to.ClienteTO;
+import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
+import lindley.desarrolloxcliente.to.upload.PosicionTO;
+import net.msonic.lib.MessageBox;
+import net.msonic.lib.UploadFileUtil;
+import net.msonic.lib.sherlock.ListBaseFragment;
 import roboguice.inject.InjectView;
-
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,27 +29,11 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.google.inject.Inject;
 
-import lindley.desarrolloxcliente.ConstantesApp;
-import lindley.desarrolloxcliente.MyApplication;
-import lindley.desarrolloxcliente.R;
-import lindley.desarrolloxcliente.negocio.FotoBLL;
-import lindley.desarrolloxcliente.negocio.PosicionBLL;
-import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
-import lindley.desarrolloxcliente.to.upload.PosicionTO;
-import net.msonic.lib.MessageBox;
-import net.msonic.lib.UploadFileUtil;
-import net.msonic.lib.sherlock.ListBaseFragment;
-
-
-public class RevisionPosicion_Activity extends ListBaseFragment  {
+public class ClosePosicion_Activity extends ListBaseFragment  {
 
 	private EvaluacionTO evaluacion;
 	private  MyApplication application;
@@ -158,10 +152,10 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 			 private final List<PosicionTO> detalle;
 			 private final Activity context;
 			 private final ClienteTO cliente;
-			 private final RevisionPosicion_Activity posicion_Activity;
+			 private final ClosePosicion_Activity posicion_Activity;
 			 
-			  public EfficientAdapter(RevisionPosicion_Activity posicion_Activity,ClienteTO cliente,List<PosicionTO> detalle){
-					super(posicion_Activity.getActivity(), R.layout.revisionposicion_content, detalle);
+			  public EfficientAdapter(ClosePosicion_Activity posicion_Activity,ClienteTO cliente,List<PosicionTO> detalle){
+					super(posicion_Activity.getActivity(), R.layout.closeposicion_content, detalle);
 					this.detalle = detalle;
 					this.context = posicion_Activity.getActivity();
 					this.cliente=cliente;
@@ -195,7 +189,7 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 							
 							
 							LayoutInflater inflator = context.getLayoutInflater();
-							view = inflator.inflate(R.layout.revisionposicion_content, null);
+							view = inflator.inflate(R.layout.closeposicion_content, null);
 							
 							
 							final ViewHolder holder = new ViewHolder();
@@ -214,7 +208,7 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 							
 							holder.txViewAccComp = (TextView) view.findViewById(R.id.txViewAccComp);
 							holder.txEditFecha = (TextView) view.findViewById(R.id.txEditFecha);
-							holder.chkCumplio = (CheckBox) view.findViewById(R.id.chkCumplio);
+							holder.chkCumplio = (TextView) view.findViewById(R.id.chkCumplio);
 						
 							
 							holder.btnFotoExito.setOnClickListener(new OnClickListener() {
@@ -273,6 +267,22 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 								public void onClick(View v) {
 									// TODO Auto-generated method stub
 									final PosicionTO posicionCompromisoTO = (PosicionTO) holder.TextViewRpsta.getTag();
+									
+									if((posicionCompromisoTO.fotoFinal==null)||(TextUtils.isEmpty(posicionCompromisoTO.fotoFinal))||(posicionCompromisoTO.fotoFinal.compareTo("")==0)){					
+										MessageBox.showSimpleDialog(context, "Error", "No existe foto registrada.", "Aceptar", new android.content.DialogInterface.OnClickListener() {
+											public void onClick(DialogInterface dialog, int which) {
+												// TODO Auto-generated method stub
+											}
+										});	
+									}else{
+
+										Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
+										intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionCompromisoTO.fotoFinal);
+										intent.putExtra(WebViewVerFoto_Activity.TITULO_FOTO, "Foto Final Compromiso.");
+										context.startActivity(intent);
+
+								    }		
+									/*
 									if((posicionCompromisoTO.fotoFinal==null)||(TextUtils.isEmpty(posicionCompromisoTO.fotoFinal)) || (posicionCompromisoTO.fotoFinal.trim().equalsIgnoreCase(""))){		
 										posicion_Activity.takePhoto(TAKE_PHOTO_FINAL_CODE, posicionCompromisoTO);
 									}else{
@@ -296,7 +306,7 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 											}
 											
 										});  
-									}
+									}*/
 								}
 							});
 							
@@ -324,7 +334,7 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 								}
 							});
 							
-							holder.chkCumplio.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+							/*holder.chkCumplio.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 								
 								@Override
 								public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -335,7 +345,7 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 									else
 										posicionCompromisoTO.confirmacion=ConstantesApp.RESPUESTA_NO;
 								}
-							});
+							});*/
 							
 							view.setTag(holder);
 					    	holder.TextViewRpsta.setTag(this.detalle.get(position));
@@ -368,7 +378,13 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 							holder.btnFotoExito.setText(R.string.ver_fotoExito);
 						}
 						
-						holder.chkCumplio.setChecked(ConstantesApp.isSI(posicionTO.confirmacion));
+						
+						if(ConstantesApp.isSI(posicionTO.confirmacion)){
+							holder.chkCumplio.setText(ConstantesApp.RESPUESTA_SI_LARGA);
+						}else{
+							holder.chkCumplio.setText(ConstantesApp.RESPUESTA_NO_LARGA);
+						}
+						
 						
 						return view;
 				  }
@@ -384,7 +400,7 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 				    	Button 	 btnFotoFinal;
 				    	TextView txViewAccComp;
 				    	TextView txEditFecha;
-				    	CheckBox chkCumplio;
+				    	TextView chkCumplio;
 				    }
 			  
 		 }

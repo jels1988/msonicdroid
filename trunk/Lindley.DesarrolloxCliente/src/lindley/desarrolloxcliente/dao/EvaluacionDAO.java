@@ -55,7 +55,7 @@ public class EvaluacionDAO {
 		
 		List<EvaluacionTO> evaluaciones = new ArrayList<EvaluacionTO>();
 		
-		String SQL = "select * from evaluacion where clienteCodigo=?1";
+		String SQL = "select * from evaluacion where clienteCodigo=?1 order by fecha,hora desc";
 		String[] args = new String[] {String.valueOf(codigoCliente)};
 		Cursor cursor = dbHelper.rawQuery(SQL,args);
 		

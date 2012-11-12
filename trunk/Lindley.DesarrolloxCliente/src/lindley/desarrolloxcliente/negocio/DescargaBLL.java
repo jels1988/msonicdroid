@@ -4,6 +4,7 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.dao.DescargaDAO;
+import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.to.download.AccionTradeProductoTO;
 import lindley.desarrolloxcliente.to.download.AccionTradeTO;
 import lindley.desarrolloxcliente.to.download.ClienteDescargaTO;
@@ -128,6 +129,68 @@ public class DescargaBLL {
 		}
 	}
 	
+	public void cerrarEvaluacion(EvaluacionTO evaluacionTO,UsuarioTO usuarioTO){
+		try{
+			dbHelper.openDataBase();
+			dbHelper.beginTransaction();
+			
+			evaluacionTO.tieneCambio=ConstantesApp.EVALUACION_TIENE_CAMBIOS;
+			evaluacionTO.estado = ConstantesApp.OPORTUNIDAD_CERRADA;
+			evaluacionTO.fechaCierre = ConstantesApp.getFechaSistemaAS400();
+			evaluacionTO.horaCierre = ConstantesApp.getHoraSistemaAS400();
+			evaluacionTO.usuarioCierre = usuarioTO.codigoSap;
+			
+			if(evaluacionTO.id!=0){
+				descargaDAO.deleteEvaluacion(evaluacionTO.id);
+			}
+			
+		
+			
+			
+			descargaDAO.insertEvaluacion(evaluacionTO);
+			
+			for (lindley.desarrolloxcliente.to.upload.OportunidadTO oportunidadTO : evaluacionTO.oportunidades) {
+				if(ConstantesApp.isSI(oportunidadTO.concrecionCumple) && 
+				   ConstantesApp.isSI(oportunidadTO.soviCumple) && 
+				   ConstantesApp.isSI(oportunidadTO.respetoPrecioCumple) &&
+				   ConstantesApp.isSI(oportunidadTO.numeroSaboresCumple)){
+					oportunidadTO.puntosGanados = oportunidadTO.puntosSugeridos;
+				}
+				descargaDAO.insertEvaluacionOportunidad(evaluacionTO,oportunidadTO);
+			}
+			
+			for (lindley.desarrolloxcliente.to.upload.PosicionTO posicionTO : evaluacionTO.posiciones) {
+				
+				if(ConstantesApp.isSI(posicionTO.confirmacion)){
+					posicionTO.puntosGanados = posicionTO.puntosSugeridos;
+				}
+				
+				descargaDAO.insertEvaluacionPosicion(evaluacionTO,posicionTO);
+				for(PosicionCompromisoTO posicionCompromisoTO:posicionTO.compromisos){
+					descargaDAO.insertEvaluacionPosicion(evaluacionTO, posicionCompromisoTO);
+				}
+			}
+			
+			
+			for (lindley.desarrolloxcliente.to.upload.PresentacionTO presentacionTO : evaluacionTO.presentaciones) {
+				if(ConstantesApp.isSI(presentacionTO.confirmacion)){
+					presentacionTO.puntosGanados = presentacionTO.puntosSugeridos;
+				}
+				descargaDAO.insertEvaluacionPresentacion(evaluacionTO,presentacionTO);
+			}
+			
+			for (lindley.desarrolloxcliente.to.upload.SkuTO skuTO : evaluacionTO.skus) {
+				descargaDAO.insertEvaluacionSkus(evaluacionTO,skuTO);
+			}
+			
+			dbHelper.setTransactionSuccessful();
+		}catch(Exception ex){
+			Log.e(TAG_LOG, "DescargaBLL.cerrarEvaluacion", ex);
+		} finally {
+			dbHelper.endTransaction();
+			dbHelper.close();
+		}
+	}
 	public void saveEvaluacion(EvaluacionTO evaluacionTO){
 			try{
 				dbHelper.openDataBase();
