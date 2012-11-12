@@ -1,8 +1,13 @@
 package lindley.desarrolloxcliente.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.DescargaBLL;
 import lindley.desarrolloxcliente.to.PeriodoTO;
+import lindley.desarrolloxcliente.to.upload.ProcesoInfoTO;
 import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProductoProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarClienteProxy;
@@ -20,18 +25,23 @@ import lindley.desarrolloxcliente.ws.service.DescargarPuntoProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarSkuProxy;
 
 
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
 
 
 import com.actionbarsherlock.view.Window;
 import com.google.inject.Inject;
 
-import net.msonic.lib.sherlock.ActivityBase;
+import net.msonic.lib.sherlock.ListActivityBase;
 
-public class DescargaData_Activity extends ActivityBase {
+public class DescargaData_Activity extends ListActivityBase {
 
 	public static final int DESCARGAR_PRODUCTO=0;
 	public static final int DESCARGAR_OPORTUNIDAD=1;
@@ -43,27 +53,27 @@ public class DescargaData_Activity extends ActivityBase {
 	public static final int DESCARGAR_PRESENTACION=7;
 	public static final int DESCARGAR_PUNTO=8;
 	public static final int DESCARGAR_EVALUACION=9;
-	public static final int DESCARGAR_EVALUACION_OPORTUNIDAD=20;
-	public static final int DESCARGAR_EVALUACION_POSICION=21;
-	public static final int DESCARGAR_EVALUACION_PRESENTACION=22;
-	public static final int DESCARGAR_EVALUACION_SKU=23;
-	public static final int DESCARGAR_EVALUACION_POSICION_COMPROMISO=24;
+	public static final int DESCARGAR_EVALUACION_OPORTUNIDAD=10;
+	public static final int DESCARGAR_EVALUACION_POSICION=11;
+	public static final int DESCARGAR_EVALUACION_PRESENTACION=12;
+	public static final int DESCARGAR_EVALUACION_SKU=13;
+	public static final int DESCARGAR_EVALUACION_POSICION_COMPROMISO=14;
 	
-	public static final int GUARDAR_PRODUCTO=10;
-	public static final int GUARDAR_OPORTUNIDAD=11;
-	public static final int GUARDAR_SKU=12;
-	public static final int GUARDAR_ACCIONESTRADE=13;
-	public static final int GUARDAR_ACCIONESTRADEPRODUCTO=14;
-	public static final int GUARDAR_CLIENTE=15;
-	public static final int GUARDAR_POSICION=16;
-	public static final int GUARDAR_PRESENTACION=17;
-	public static final int GUARDAR_PUNTO=18;
-	public static final int GUARDAR_EVALUACION=19;
-	public static final int GUARDAR_EVALUACION_OPORTUNIDAD=120;
-	public static final int GUARDAR_EVALUACION_POSICION=121;
-	public static final int GUARDAR_EVALUACION_PRESENTACION=122;
-	public static final int GUARDAR_EVALUACION_SKU=123;
-	public static final int GUARDAR_EVALUACION_POSICION_COMPROMISO=124;
+	public static final int GUARDAR_PRODUCTO=20;
+	public static final int GUARDAR_OPORTUNIDAD=21;
+	public static final int GUARDAR_SKU=22;
+	public static final int GUARDAR_ACCIONESTRADE=23;
+	public static final int GUARDAR_ACCIONESTRADEPRODUCTO=24;
+	public static final int GUARDAR_CLIENTE=25;
+	public static final int GUARDAR_POSICION=26;
+	public static final int GUARDAR_PRESENTACION=27;
+	public static final int GUARDAR_PUNTO=28;
+	public static final int GUARDAR_EVALUACION=29;
+	public static final int GUARDAR_EVALUACION_OPORTUNIDAD=30;
+	public static final int GUARDAR_EVALUACION_POSICION=31;
+	public static final int GUARDAR_EVALUACION_PRESENTACION=32;
+	public static final int GUARDAR_EVALUACION_SKU=33;
+	public static final int GUARDAR_EVALUACION_POSICION_COMPROMISO=34;
 	
 	@Inject DescargarProductosProxy descagarProductosProxy;
 	@Inject DescargarOportunidadesProxy descargarOportunidadesProxy;
@@ -86,6 +96,9 @@ public class DescargaData_Activity extends ActivityBase {
 	private String TAG = DescargaData_Activity.class.getSimpleName();
 	@Inject SharedPreferences prefs;
 	
+	List<ProcesoInfoTO> lista =null;
+	EfficientAdapter adap = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -96,6 +109,9 @@ public class DescargaData_Activity extends ActivityBase {
 		
 		setContentView(R.layout.descargadata_activity);
 		
+		lista = new ArrayList<ProcesoInfoTO>();
+		adap = new EfficientAdapter(this,lista);
+		setListAdapter(adap);
 		
 		
 		processAsync(DESCARGAR_PRODUCTO);
@@ -109,7 +125,7 @@ public class DescargaData_Activity extends ActivityBase {
 		processAsync(DESCARGAR_PUNTO);
 		processAsync(DESCARGAR_EVALUACION);
 		
-	
+		
 	}
 	
 	
@@ -129,17 +145,228 @@ public class DescargaData_Activity extends ActivityBase {
 		Log.i("dow", String.valueOf(contadorProcesos));
 		if(contadorProcesos==0){
 			setSupportProgressBarIndeterminateVisibility(false);
+			savePreferencia(ConstantesApp.DESCARGA_REALIZADA);
 		}
 	}
 	
 	  
 		
-
+	public ProcesoInfoTO processById(int processId){
+		ProcesoInfoTO processSeleccionado=null;
+		for (ProcesoInfoTO process : lista) {
+			if(process.processId==processId){
+				processSeleccionado = process;
+			}
+		}
+		return processSeleccionado;
+	}
 	
 	
 	@Override
 	protected boolean executeAsyncPre(int accion) {
 		// TODO Auto-generated method stub
+		
+		switch (accion) {
+			case DESCARGAR_PRODUCTO:
+				ProcesoInfoTO p0 = new ProcesoInfoTO();
+				p0.processId=DESCARGAR_PRODUCTO;
+				p0.descripcion="Descargando Producto";
+				lista.add(p0);
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_PRODUCTO:
+				ProcesoInfoTO p20 = processById(GUARDAR_PRODUCTO-20);
+				p20.processId=DESCARGAR_PRODUCTO;
+				p20.descripcion="Guardando Producto";
+				adap.notifyDataSetChanged();
+				break;
+			case DESCARGAR_OPORTUNIDAD:
+				ProcesoInfoTO p1 = new ProcesoInfoTO();
+				p1.processId=DESCARGAR_OPORTUNIDAD;
+				p1.descripcion="Descargando Oportunidades";
+				lista.add(p1);
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_OPORTUNIDAD:
+				ProcesoInfoTO p21 = processById(GUARDAR_OPORTUNIDAD-20);
+				p21.processId=DESCARGAR_OPORTUNIDAD;
+				p21.descripcion="Guardando Oportunidades";
+				adap.notifyDataSetChanged();
+				break;
+			case DESCARGAR_SKU:
+				ProcesoInfoTO p2 = new ProcesoInfoTO();
+				p2.processId=DESCARGAR_SKU;
+				p2.descripcion="Descargando SKUs";
+				lista.add(p2);
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_SKU:
+				ProcesoInfoTO p22 = processById(GUARDAR_SKU-20);
+				p22.processId=DESCARGAR_SKU;
+				p22.descripcion="Guardando SKUs";
+				adap.notifyDataSetChanged();
+				break;
+			case DESCARGAR_ACCIONESTRADE:
+				ProcesoInfoTO p3 = new ProcesoInfoTO();
+				p3.processId=DESCARGAR_ACCIONESTRADE;
+				p3.descripcion="Descargando Acciones Trade";
+				lista.add(p3);
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_ACCIONESTRADE:
+				ProcesoInfoTO p23 = processById(GUARDAR_ACCIONESTRADE-20);
+				p23.processId=DESCARGAR_ACCIONESTRADE;
+				p23.descripcion="Guardando Acciones Trade";
+				adap.notifyDataSetChanged();
+				break;
+			case DESCARGAR_ACCIONESTRADEPRODUCTO:
+				ProcesoInfoTO p4 = new ProcesoInfoTO();
+				p4.processId=DESCARGAR_ACCIONESTRADEPRODUCTO;
+				p4.descripcion="Descargando Acciones Trade Producto";
+				lista.add(p4);
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_ACCIONESTRADEPRODUCTO:
+				ProcesoInfoTO p24 = processById(GUARDAR_ACCIONESTRADEPRODUCTO-20);
+				p24.processId=DESCARGAR_ACCIONESTRADEPRODUCTO;
+				p24.descripcion="Guardando Acciones Trade Producto";
+				adap.notifyDataSetChanged();
+				break;
+			case DESCARGAR_CLIENTE:
+				ProcesoInfoTO p5 = new ProcesoInfoTO();
+				p5.processId=DESCARGAR_CLIENTE;
+				p5.descripcion="Descargando Clientes";
+				lista.add(p5);
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_CLIENTE:
+				ProcesoInfoTO p25 = processById(GUARDAR_CLIENTE-20);
+				p25.processId=DESCARGAR_CLIENTE;
+				p25.descripcion="Guardando Clientes";
+				adap.notifyDataSetChanged();
+				break;
+			case DESCARGAR_POSICION:
+				ProcesoInfoTO p6 = new ProcesoInfoTO();
+				p6.processId=DESCARGAR_POSICION;
+				p6.descripcion="Descargando Posici—n";
+				lista.add(p6);
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_POSICION:
+				ProcesoInfoTO p26 = processById(GUARDAR_POSICION-20);
+				p26.processId=DESCARGAR_POSICION;
+				p26.descripcion="Guardando Posici—n";
+				adap.notifyDataSetChanged();
+				break;
+			case DESCARGAR_PRESENTACION:
+				ProcesoInfoTO p7 = new ProcesoInfoTO();
+				p7.processId=DESCARGAR_PRESENTACION;
+				p7.descripcion="Descargando Presentaci—n";
+				lista.add(p7);
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_PRESENTACION:
+				ProcesoInfoTO p27 = processById(GUARDAR_PRESENTACION-20);
+				p27.processId=DESCARGAR_PRESENTACION;
+				p27.descripcion="Guardando Presentaci—n";
+				adap.notifyDataSetChanged();
+				break;
+			case DESCARGAR_PUNTO:
+				ProcesoInfoTO p8 = new ProcesoInfoTO();
+				p8.processId=DESCARGAR_PUNTO;
+				p8.descripcion="Descargando Puntos";
+				lista.add(p8);
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_PUNTO:
+				ProcesoInfoTO p28 = processById(GUARDAR_PUNTO-20);
+				p28.processId=DESCARGAR_PUNTO;
+				p28.descripcion="Guardando Puntos";
+				adap.notifyDataSetChanged();
+				break;
+			case DESCARGAR_EVALUACION:
+				ProcesoInfoTO p9 = new ProcesoInfoTO();
+				p9.processId=DESCARGAR_EVALUACION;
+				p9.descripcion="Descargando Evaluaciones";
+				lista.add(p9);
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_EVALUACION:
+				ProcesoInfoTO p29 = processById(GUARDAR_EVALUACION-20);
+				p29.processId=DESCARGAR_EVALUACION;
+				p29.descripcion="Guardando Evaluaciones";
+				adap.notifyDataSetChanged();
+				break;
+			case DESCARGAR_EVALUACION_OPORTUNIDAD:
+				ProcesoInfoTO p10 = new ProcesoInfoTO();
+				p10.processId=DESCARGAR_EVALUACION_OPORTUNIDAD;
+				p10.descripcion="Descargando Evaluaciones Oportunidades";
+				lista.add(p10);
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_EVALUACION_OPORTUNIDAD:
+				ProcesoInfoTO p30 = processById(GUARDAR_EVALUACION_OPORTUNIDAD-20);
+				p30.processId=DESCARGAR_EVALUACION_OPORTUNIDAD;
+				p30.descripcion="Guardando Evaluaciones Oportunidades";
+				adap.notifyDataSetChanged();
+				break;
+			case DESCARGAR_EVALUACION_POSICION:
+				ProcesoInfoTO p11 = new ProcesoInfoTO();
+				p11.processId=DESCARGAR_EVALUACION_POSICION;
+				p11.descripcion="Descargando Evaluaciones Posiciones";
+				lista.add(p11);
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_EVALUACION_POSICION:
+				ProcesoInfoTO p31 = processById(GUARDAR_EVALUACION_POSICION-20);
+				p31.processId=DESCARGAR_EVALUACION_POSICION;
+				p31.descripcion="Guardando Evaluaciones Posiciones";
+				adap.notifyDataSetChanged();
+				break;
+			case DESCARGAR_EVALUACION_POSICION_COMPROMISO:
+				ProcesoInfoTO p12 = new ProcesoInfoTO();
+				p12.processId=DESCARGAR_EVALUACION_POSICION_COMPROMISO;
+				p12.descripcion="Descargando Evaluaciones Posiciones Compromiso";
+				lista.add(p12);
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_EVALUACION_POSICION_COMPROMISO:
+				ProcesoInfoTO p32 = processById(GUARDAR_EVALUACION_POSICION_COMPROMISO-20);
+				p32.processId=DESCARGAR_EVALUACION_POSICION_COMPROMISO;
+				p32.descripcion="Guardando Evaluaciones Posiciones Compromiso";
+				adap.notifyDataSetChanged();
+				break;
+				
+			
+			case DESCARGAR_EVALUACION_PRESENTACION:
+				ProcesoInfoTO p13 = new ProcesoInfoTO();
+				p13.processId=DESCARGAR_EVALUACION_PRESENTACION;
+				p13.descripcion="Descargando Evaluaciones Presentaciones";
+				lista.add(p13);
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_EVALUACION_PRESENTACION:
+				ProcesoInfoTO p33 = processById(GUARDAR_EVALUACION_PRESENTACION-20);
+				p33.processId=DESCARGAR_EVALUACION_PRESENTACION;
+				p33.descripcion="Guardando Evaluaciones Presentaciones";
+				adap.notifyDataSetChanged();
+				break;
+				
+			case DESCARGAR_EVALUACION_SKU:
+				ProcesoInfoTO p14 = new ProcesoInfoTO();
+				p14.processId=DESCARGAR_EVALUACION_SKU;
+				p14.descripcion="Descargando Evaluaciones SKUs";
+				lista.add(p14);
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_EVALUACION_SKU:
+				ProcesoInfoTO p34 = processById(GUARDAR_EVALUACION_SKU-20);
+				p34.processId=DESCARGAR_EVALUACION_SKU;
+				p34.descripcion="Guardando Evaluaciones SKUs";
+				adap.notifyDataSetChanged();
+				break;
+		}
+		
 		
 		addContadorProcesos();
 		
@@ -286,6 +513,460 @@ public class DescargaData_Activity extends ActivityBase {
 
 	@Override
 	protected void processOk(int accion) {
+		
+		switch (accion) {
+			case DESCARGAR_PRODUCTO:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_PRODUCTO);
+				boolean isExito = descagarProductosProxy.isExito();
+				if(descagarProductosProxy.getResponse()!=null){
+					int status = descagarProductosProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Producto Descargado";
+						p1.isExito=true;
+						processAsync(GUARDAR_PRODUCTO);
+					}else{
+						p1.descripcion="Error descargando producto";
+						p1.isExito=false;
+					}
+				}else{
+					p1.descripcion="Error descargando producto";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_PRODUCTO:
+			{
+				ProcesoInfoTO p1 = processById(GUARDAR_PRODUCTO-20);
+				p1.descripcion="Productos guardados";
+				p1.isExito=true;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case DESCARGAR_OPORTUNIDAD:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_OPORTUNIDAD);
+				boolean isExito = descargarOportunidadesProxy.isExito();
+				if(descagarProductosProxy.getResponse()!=null){
+					int status = descargarOportunidadesProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Oportunidades Descargadas";
+						p1.isExito=true;
+						processAsync(GUARDAR_OPORTUNIDAD);
+					}else{
+						p1.descripcion="Error descargando oportunidades";
+						p1.isExito=false;
+					}
+				}else{
+					p1.descripcion="Error descargando oportunidades";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_OPORTUNIDAD:
+			{
+				ProcesoInfoTO p1 = processById(GUARDAR_OPORTUNIDAD-20);
+				p1.descripcion="Oportunidades guardadas";
+				p1.isExito=true;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case DESCARGAR_SKU:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_SKU);
+				boolean isExito = descargarSkuProxy.isExito();
+				if(descargarSkuProxy.getResponse()!=null){
+					int status = descargarSkuProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="SKUs Descargadas";
+						p1.isExito=true;
+						processAsync(GUARDAR_SKU);
+					}else{
+						p1.descripcion="Error descargando SKUs";
+						p1.isExito=false;
+					}
+				}else{
+					p1.descripcion="Error descargando SKUs";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_SKU:
+			{
+				ProcesoInfoTO p1 = processById(GUARDAR_SKU-20);
+				p1.descripcion="SKUs guardadas";
+				p1.isExito=true;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case DESCARGAR_ACCIONESTRADE:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_ACCIONESTRADE);
+				boolean isExito = descargarAccionesTradeProxy.isExito();
+				if(descargarAccionesTradeProxy.getResponse()!=null){
+					int status = descargarAccionesTradeProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Acciones Trade Descargadas";
+						p1.isExito=true;
+						processAsync(GUARDAR_ACCIONESTRADE);
+					}else{
+						p1.descripcion="Error descargando Acciones Trade";
+						p1.isExito=false;
+					}
+				}else{
+					p1.descripcion="Error descargando Acciones Trade";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_ACCIONESTRADE:
+			{
+				ProcesoInfoTO p1 = processById(GUARDAR_ACCIONESTRADE-20);
+				p1.descripcion="Acciones Trade guardadas";
+				p1.isExito=true;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case DESCARGAR_ACCIONESTRADEPRODUCTO:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_ACCIONESTRADEPRODUCTO);
+				boolean isExito = descargarAccionesTradeProxy.isExito();
+				if(descargarAccionesTradeProxy.getResponse()!=null){
+					int status = descargarAccionesTradeProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Producto Acciones Trade Descargadas";
+						p1.isExito=true;
+						processAsync(GUARDAR_ACCIONESTRADEPRODUCTO);
+					}else{
+						p1.descripcion="Error descargando Producto Acciones Trade";
+						p1.isExito=false;
+					}
+				}else{
+					p1.descripcion="Error descargando Producto Acciones Trade";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_ACCIONESTRADEPRODUCTO:
+			{
+				ProcesoInfoTO p1 = processById(GUARDAR_ACCIONESTRADEPRODUCTO-20);
+				p1.descripcion="Producto Acciones Trade guardadas";
+				p1.isExito=true;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case DESCARGAR_CLIENTE:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_CLIENTE);
+				boolean isExito = descargarClienteProxy.isExito();
+				if(descargarClienteProxy.getResponse()!=null){
+					int status = descargarClienteProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Clientes Descargadas";
+						p1.isExito=true;
+						processAsync(GUARDAR_CLIENTE);
+					}else{
+						p1.descripcion="Error descargando Clientes";
+						p1.isExito=false;
+					}
+				}else{
+					p1.descripcion="Error descargando Clientes";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_CLIENTE:
+			{
+				ProcesoInfoTO p1 = processById(GUARDAR_CLIENTE-20);
+				p1.descripcion="Cliente guardadas";
+				p1.isExito=true;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case DESCARGAR_POSICION:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_POSICION);
+				boolean isExito = descargarPosicionProxy.isExito();
+				if(descargarPosicionProxy.getResponse()!=null){
+					int status = descargarPosicionProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Posici—n Descargadas";
+						p1.isExito=true;
+						processAsync(GUARDAR_POSICION);
+					}else{
+						p1.descripcion="Error descargando Posici—n";
+						p1.isExito=false;
+					}
+				}else{
+					p1.descripcion="Error descargando Posici—n";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_POSICION:
+			{
+				ProcesoInfoTO p1 = processById(GUARDAR_POSICION-20);
+				p1.descripcion="Posici—n guardadas";
+				p1.isExito=true;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case DESCARGAR_PRESENTACION:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_PRESENTACION);
+				boolean isExito = descargarPresentacionProxy.isExito();
+				if(descargarPresentacionProxy.getResponse()!=null){
+					int status = descargarPresentacionProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Presentaci—n Descargadas";
+						p1.isExito=true;
+						processAsync(GUARDAR_PRESENTACION);
+					}else{
+						p1.descripcion="Error descargando Presentaci—n";
+						p1.isExito=false;
+					}
+				}else{
+					p1.descripcion="Error descargando Presentaci—n";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_PRESENTACION:
+			{
+				ProcesoInfoTO p1 = processById(GUARDAR_PRESENTACION-20);
+				p1.descripcion="Presentaci—n guardadas";
+				p1.isExito=true;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			
+			case DESCARGAR_PUNTO:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_PUNTO);
+				boolean isExito = descargarPuntoProxy.isExito();
+				if(descargarPuntoProxy.getResponse()!=null){
+					int status = descargarPuntoProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Puntos Descargadas";
+						p1.isExito=true;
+						processAsync(GUARDAR_PUNTO);
+					}else{
+						p1.descripcion="Error descargando Puntos";
+						p1.isExito=false;
+					}
+				}else{
+					p1.descripcion="Error descargando Puntos";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_PUNTO:
+			{
+				ProcesoInfoTO p1 = processById(GUARDAR_PUNTO-20);
+				p1.descripcion="Puntos guardadas";
+				p1.isExito=true;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			
+			case DESCARGAR_EVALUACION:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_EVALUACION);
+				boolean isExito = descargarEvaluacionProxy.isExito();
+				if(descargarEvaluacionProxy.getResponse()!=null){
+					int status = descargarEvaluacionProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Evaluaciones Descargadas";
+						p1.isExito=true;
+						processAsync(GUARDAR_EVALUACION);
+						
+					}else{
+						p1.descripcion="Error descargando Evaluaciones";
+						p1.isExito=false;
+					}
+				}else{
+					p1.descripcion="Error descargando Evaluaciones";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_EVALUACION:
+			{
+				processAsync(DESCARGAR_EVALUACION_OPORTUNIDAD);
+				processAsync(DESCARGAR_EVALUACION_POSICION);
+				processAsync(DESCARGAR_EVALUACION_POSICION_COMPROMISO);
+				processAsync(DESCARGAR_EVALUACION_PRESENTACION);
+				processAsync(DESCARGAR_EVALUACION_SKU);
+				
+				ProcesoInfoTO p1 = processById(GUARDAR_EVALUACION-20);
+				p1.descripcion="Evaluaciones guardadas";
+				p1.isExito=true;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+
+			case DESCARGAR_EVALUACION_OPORTUNIDAD:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_EVALUACION_OPORTUNIDAD);
+				boolean isExito = descargarEvaluacionOportunidadProxy.isExito();
+				if(descargarEvaluacionOportunidadProxy.getResponse()!=null){
+					int status = descargarEvaluacionOportunidadProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Evaluaciones Descargadas Oportunidad";
+						p1.isExito=true;
+						processAsync(GUARDAR_EVALUACION_OPORTUNIDAD);
+					}else{
+						p1.descripcion="Error descargando Evaluaciones Oportunidad";
+						p1.isExito=false;
+					}
+				}else{
+					p1.descripcion="Error descargando Evaluaciones Oportunidad";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_EVALUACION_OPORTUNIDAD:
+			{
+				ProcesoInfoTO p1 = processById(GUARDAR_EVALUACION_OPORTUNIDAD-20);
+				p1.descripcion="Evaluaciones Oportunidad guardadas";
+				p1.isExito=true;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			
+			
+			
+			case DESCARGAR_EVALUACION_POSICION:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_EVALUACION_POSICION);
+				boolean isExito = descargarEvaluacionPosicionProxy.isExito();
+				if(descargarEvaluacionPosicionProxy.getResponse()!=null){
+					int status = descargarEvaluacionPosicionProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Evaluaciones Posici—n Descargadas";
+						p1.isExito=true;
+						processAsync(GUARDAR_EVALUACION_POSICION);
+					}else{
+						p1.descripcion="Error descargando Evaluaciones Posici—n";
+						p1.isExito=false;
+					}
+				}else{
+					p1.descripcion="Error descargando Evaluaciones Oportunidad";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_EVALUACION_POSICION:
+			{
+				ProcesoInfoTO p1 = processById(GUARDAR_EVALUACION_POSICION-20);
+				p1.descripcion="Evaluaciones Posici—n guardadas";
+				p1.isExito=true;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case DESCARGAR_EVALUACION_POSICION_COMPROMISO:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_EVALUACION_POSICION_COMPROMISO);
+				boolean isExito = descargarEvaluacionPosicionCompromisoProxy.isExito();
+				if(descargarEvaluacionPosicionCompromisoProxy.getResponse()!=null){
+					int status = descargarEvaluacionPosicionCompromisoProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Evaluaciones Posici—n Compromiso Descargadas";
+						p1.isExito=true;
+						processAsync(GUARDAR_EVALUACION_POSICION_COMPROMISO);
+					}else{
+						p1.descripcion="Error descargando Evaluaciones Posici—n Compromiso";
+						p1.isExito=false;
+					}
+				}else{
+					p1.descripcion="Error descargando Evaluaciones Posici—n Compromiso";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_EVALUACION_POSICION_COMPROMISO:
+			{
+				ProcesoInfoTO p1 = processById(GUARDAR_EVALUACION_POSICION_COMPROMISO-20);
+				p1.descripcion="Evaluaciones Posici—n Compromiso guardadas";
+				p1.isExito=true;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case DESCARGAR_EVALUACION_PRESENTACION:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_EVALUACION_PRESENTACION);
+				boolean isExito = descargarEvaluacionPresentacionProxy.isExito();
+				if(descargarEvaluacionPresentacionProxy.getResponse()!=null){
+					int status = descargarEvaluacionPresentacionProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Evaluaciones Presentaci—n Descargadas";
+						p1.isExito=true;
+						processAsync(GUARDAR_EVALUACION_PRESENTACION);
+					}else{
+						p1.descripcion="Error descargando Evaluaciones Posici—n Compromiso";
+						p1.isExito=false;
+					}
+				}else{
+					p1.descripcion="Error descargando Evaluaciones Posici—n Compromiso";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_EVALUACION_PRESENTACION:
+			{
+				ProcesoInfoTO p1 = processById(GUARDAR_EVALUACION_PRESENTACION-20);
+				p1.descripcion="Evaluaciones Presentaci—n guardadas";
+				p1.isExito=true;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case DESCARGAR_EVALUACION_SKU:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_EVALUACION_SKU);
+				boolean isExito = descargarEvaluacionSKUProxy.isExito();
+				if(descargarEvaluacionSKUProxy.getResponse()!=null){
+					int status = descargarEvaluacionSKUProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Evaluaciones SKUs Descargadas";
+						p1.isExito=true;
+						processAsync(GUARDAR_EVALUACION_SKU);
+					}else{
+						p1.descripcion="Error descargando Evaluaciones SKUs";
+						p1.isExito=false;
+					}
+				}else{
+					p1.descripcion="Error descargando Evaluaciones SKUs";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_EVALUACION_SKU:
+			{
+				ProcesoInfoTO p1 = processById(GUARDAR_EVALUACION_SKU-20);
+				p1.descripcion="Evaluaciones SKUs guardadas";
+				p1.isExito=true;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+		}
+		removeContadorProcesos();
+		
+		/*
 		if(accion==DESCARGAR_PRODUCTO){
 			removeContadorProcesos();
 			boolean isExito = descagarProductosProxy.isExito();
@@ -586,7 +1267,7 @@ public class DescargaData_Activity extends ActivityBase {
 		}else if(accion==GUARDAR_EVALUACION_POSICION_COMPROMISO){
 			removeContadorProcesos();
 			showToast("guardar GUARDAR_EVALUACION_POSICION_COMPROMISO");
-		}
+		}*/
 		
 		
 		
@@ -595,11 +1276,234 @@ public class DescargaData_Activity extends ActivityBase {
 	@Override
 	protected void processError(int accion) {
 		// TODO Auto-generated method stub
+		
 		removeContadorProcesos();
-		Log.d("error", "=============");
-		Log.d("error", String.valueOf(accion));
-		Log.d("error", "=============");
+		Log.d(TAG, String.format("Error descarga, Accion = ,: %s",accion));
+		
+		switch (accion) {
+			case DESCARGAR_PRODUCTO:{
+				removeContadorProcesos();
+				ProcesoInfoTO p1 = processById(DESCARGAR_PRODUCTO);
+				p1.descripcion="Error descargando producto";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_PRODUCTO:{
+				ProcesoInfoTO p1 = processById(GUARDAR_PRODUCTO-20);
+				p1.descripcion="Error guardando producto";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case DESCARGAR_OPORTUNIDAD:{
+				removeContadorProcesos();
+				ProcesoInfoTO p1 = processById(DESCARGAR_OPORTUNIDAD);
+				p1.descripcion="Error descargando oportunidades";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_OPORTUNIDAD:{
+				ProcesoInfoTO p1 = processById(GUARDAR_OPORTUNIDAD-20);
+				p1.descripcion="Error guardando oportunidades";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case DESCARGAR_SKU:{
+				removeContadorProcesos();
+				ProcesoInfoTO p1 = processById(DESCARGAR_SKU);
+				p1.descripcion="Error descargando SKUs";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_SKU:{
+				ProcesoInfoTO p1 = processById(GUARDAR_SKU-20);
+				p1.descripcion="Error guardando SKUs";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case DESCARGAR_ACCIONESTRADE:{
+				removeContadorProcesos();
+				ProcesoInfoTO p1 = processById(DESCARGAR_ACCIONESTRADE);
+				p1.descripcion="Error descargando Acciones Trade";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_ACCIONESTRADE:{
+				ProcesoInfoTO p1 = processById(GUARDAR_ACCIONESTRADE-20);
+				p1.descripcion="Error guardando Acciones Trade";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case DESCARGAR_CLIENTE:{
+				removeContadorProcesos();
+				ProcesoInfoTO p1 = processById(DESCARGAR_CLIENTE);
+				p1.descripcion="Error descargando Clientes";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_CLIENTE:{
+				ProcesoInfoTO p1 = processById(GUARDAR_CLIENTE-20);
+				p1.descripcion="Error guardando Clientes";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case DESCARGAR_POSICION:{
+				removeContadorProcesos();
+				ProcesoInfoTO p1 = processById(DESCARGAR_POSICION);
+				p1.descripcion="Error descargando Posici—n";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_POSICION:{
+				ProcesoInfoTO p1 = processById(GUARDAR_POSICION-20);
+				p1.descripcion="Error guardando Posici—n";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			
+			case DESCARGAR_PRESENTACION:{
+				removeContadorProcesos();
+				ProcesoInfoTO p1 = processById(DESCARGAR_PRESENTACION);
+				p1.descripcion="Error descargando Presentaci—n";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_PRESENTACION:{
+				ProcesoInfoTO p1 = processById(GUARDAR_PRESENTACION-20);
+				p1.descripcion="Error guardando Presentaci—n";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case DESCARGAR_PUNTO:{
+				removeContadorProcesos();
+				ProcesoInfoTO p1 = processById(DESCARGAR_PUNTO);
+				p1.descripcion="Error descargando Punto";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_PUNTO:{
+				ProcesoInfoTO p1 = processById(GUARDAR_PUNTO-20);
+				p1.descripcion="Error guardando Punto";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case DESCARGAR_EVALUACION:{
+				removeContadorProcesos();
+				ProcesoInfoTO p1 = processById(DESCARGAR_EVALUACION);
+				p1.descripcion="Error descargando Evaluaciones";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_EVALUACION:{
+				ProcesoInfoTO p1 = processById(GUARDAR_EVALUACION-20);
+				p1.descripcion="Error guardando Evaluaciones";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+		}
+		
+		
+	
+		savePreferencia(ConstantesApp.DESCARGA_NO_REALIZADA);
 		super.processError();
 	}
+	
+	private void savePreferencia(int value){
+		
+		Log.d(TAG, String.format("ConstantesApp.DESCARGA_KEY,: %s",value));
+		SharedPreferences.Editor Ed=prefs.edit();
+		Ed.putInt(ConstantesApp.DESCARGA_KEY, value);	
+		Ed.commit();
+	}
+	
+	 public static class EfficientAdapter extends ArrayAdapter<ProcesoInfoTO>{
+		 private final List<ProcesoInfoTO> detalle;
+		 private final DescargaData_Activity context;
+		 
+		 public EfficientAdapter(DescargaData_Activity context,List<ProcesoInfoTO> detalle){
+				super(context, R.layout.descargadata_content, detalle);
+				this.detalle = detalle;
+				this.context = context;
+			}
+		 
+		 
+		 
+		 public int getCount() {
+				// TODO Auto-generated method stub
+				if (detalle == null) {
+					return 0;
+				} else {
+					return detalle.size();
+				}
+			}
+			
+			public ProcesoInfoTO getItem(int position) {
+				// TODO Auto-generated method stub
+				return this.detalle.get(position);
+			}
+			
+			public long getItemId(int position) {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+			
+			public View getView(final int position, View convertView, ViewGroup parent) {
+				View view = null;	
+				
+				if (convertView == null) {
+					
+					LayoutInflater inflator = context.getLayoutInflater();
+					view = inflator.inflate(R.layout.descargadata_content, null);
+					
+					final ViewHolder holder = new ViewHolder();
+					
+					holder.txtDescripcion = (TextView) view.findViewById(R.id.txtDescripcion);
+					view.setTag(holder);
+					
+			    	holder.txtDescripcion.setTag(this.detalle.get(position));
+			    	
+				}else{
+					view = convertView;
+					((ViewHolder) view.getTag()).txtDescripcion.setTag(this.detalle.get(position));
+				}
+				
+				ViewHolder holder = (ViewHolder) view.getTag();
+				ProcesoInfoTO procesoInfoTO = getItem(position);
+				holder.txtDescripcion.setText(procesoInfoTO.descripcion);
+				
+				return view;
+				
+			}
+			
+			static class ViewHolder {
+				TextView txtDescripcion;
+				Button btnAccion;
+			}
+				
+			
+	 }
 	
 }
