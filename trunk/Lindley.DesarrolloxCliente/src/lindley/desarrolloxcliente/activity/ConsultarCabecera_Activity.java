@@ -55,8 +55,10 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-    	inicializarRecursos();
+    	
         super.onCreate(savedInstanceState);
+        inicializarRecursos();
+        this.validarConexionInternet=false;
         
         getSupportActionBar().setDisplayShowHomeEnabled(false);
         
