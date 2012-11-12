@@ -2,6 +2,8 @@ package lindley.desarrolloxcliente.activity;
 
 import java.util.List;
 
+import net.msonic.lib.MessageBox;
+
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
@@ -11,6 +13,7 @@ import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarEstadoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCabeceraProxy;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -178,14 +181,31 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
         		}
         	}
         }
-        
 	 }
 	
      @Override
      public boolean onContextItemSelected(MenuItem item) {
     	 switch (item.getItemId()) {
 		case R.id.mnuEliminar:
-			processAsync(ACCION_ELIMINAR);
+			
+			MessageBox.showConfirmDialog(this, "Confirmaci—n: ",
+					"ÀDeseas eliminar el registro seleccionado?", "Si",
+					new android.content.DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							processAsync(ACCION_ELIMINAR);
+						}
+
+					}, "No", new android.content.DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+						}
+
+					});
+			
+			
 			break;
 		case R.id.mnuEditar:
 			 processAsync(ACCION_EDITAR);
