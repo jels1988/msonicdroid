@@ -8,6 +8,7 @@ import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.ClienteBLL;
+import lindley.desarrolloxcliente.negocio.UploadBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
@@ -54,7 +55,7 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 	@InjectResource(R.string.confirm_exit_message)  String confirm_exit_message;
 	@InjectResource(R.string.confirm_exit_yes) 		String confirm_exit_yes;
 	@InjectResource(R.string.confirm_exit_no) 		String confirm_exit_no;
-	
+	@Inject UploadBLL uploadBLL;
 	
 	private EfficientAdapter adap;
 
@@ -219,6 +220,10 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 		});  
     }
     
+    public  long getCantidadEvaluacionesAbiertas(String codigo){
+    	return uploadBLL.getCantidadEvaluacionesAbiertas(codigo);
+    }
+    
     public void btnSalir_click(View view)
     {
     	MessageBox.showConfirmDialog(this, confirm_exit_title, confirm_exit_message, confirm_exit_yes, new android.content.DialogInterface.OnClickListener() {
@@ -249,7 +254,8 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 		private LayoutInflater mInflater;
 		private ConsultarCliente_Activity context;
 		private List<ClienteTO> clientes;
-
+		
+		
 		public EfficientAdapter(ConsultarCliente_Activity context, List<ClienteTO> clientes) {
 			// Cache the LayoutInflate to avoid asking for a new one each time.
 			mInflater = LayoutInflater.from(context);
@@ -365,7 +371,9 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					ClienteTO clienteTemporal = (ClienteTO) getItem(position);
-					if(clienteTemporal.evaluacionesAbiertas>0){
+					long evaluacionesAbiertas = context.getCantidadEvaluacionesAbiertas(clienteTemporal.codigo);
+					
+					if(evaluacionesAbiertas>0){
 						context.showToast("El cliente tiene una evaluaci—n abierta.");
 					}else{
 						MyApplication app = (MyApplication)context.getApplication();

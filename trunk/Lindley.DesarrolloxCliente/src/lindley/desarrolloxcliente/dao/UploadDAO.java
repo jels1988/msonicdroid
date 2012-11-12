@@ -44,8 +44,23 @@ public class UploadDAO {
 		}
 		cursor.close();
 		return cantidad;
-		
 	}
+	
+	public long getCantidadEvaluacionesAbiertas(String clienteCodigo){
+		
+		String SQL = "select count(*) as cantidad from evaluacion where clienteCodigo=?1";
+		String[] args = new String[] {String.valueOf(clienteCodigo)};
+		
+		long cantidad=0;
+		Cursor cursor = dbHelper.rawQuery(SQL,args);
+		
+		if(cursor.moveToNext()){
+			cantidad= cursor.getLong(cursor.getColumnIndex("cantidad"));
+		}
+		cursor.close();
+		return cantidad;
+	}
+
 	public EvaluacionTO listarEvaluacionById(long id){
 		
 		
