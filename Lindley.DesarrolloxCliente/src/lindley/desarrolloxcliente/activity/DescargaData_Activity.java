@@ -21,6 +21,7 @@ import lindley.desarrolloxcliente.ws.service.DescargarSkuProxy;
 
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -82,7 +83,8 @@ public class DescargaData_Activity extends ActivityBase {
 	
 	@Inject DescargaBLL descargaBLL;
 	@Inject PeriodoTO periodoTO;
-	private  static String TAG = DescargaData_Activity.class.getSimpleName();
+	private String TAG = DescargaData_Activity.class.getSimpleName();
+	@Inject SharedPreferences prefs;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

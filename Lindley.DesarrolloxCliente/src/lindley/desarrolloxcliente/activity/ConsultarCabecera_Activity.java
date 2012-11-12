@@ -46,11 +46,12 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	public  MyApplication application;
 	
 	
-	
+	//EVALUACION_ID_KEY
 	public static final int ACCION_ELIMINAR = 1;
 	public static final int ACCION_EDITAR = 2;
 	public static final int ACCION_DETALLE= 3;
 	public static final int ACCION_CERRAR= 4;
+	public static final int ACCION_RESUMEN= 5;
 	
 	public static final int ACCION_CARGAR_EVALUACION = 2;
 	public static final int ACCION_VERIFICAR_EVALUACION = 3;
@@ -279,6 +280,11 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 
 						});
 			 
+			break;
+		case R.id.mnuResumen:
+			Intent intent = new Intent(this,ConsultarResumen_Activity.class);
+			intent.putExtra(ConsultarResumen_Activity.EVALUACION_ID_KEY, evaluacionId);
+			this.startActivity(intent);
 			break;
 		default:
 			break;
