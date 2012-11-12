@@ -310,6 +310,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        
+          <activity android:name=".activity.CloseTabs_Activity" android:configChanges="keyboardHidden|orientation" android:windowSoftInputMode="adjustPan">
+            <intent-filter>            					  
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+         
          
         
          <activity android:name=".activity.Compromisos_Activity" android:configChanges="keyboardHidden|orientation">
