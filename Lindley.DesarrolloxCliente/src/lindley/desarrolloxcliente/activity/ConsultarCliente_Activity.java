@@ -1,6 +1,5 @@
 package lindley.desarrolloxcliente.activity;
 
-//import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +16,9 @@ import roboguice.inject.InjectResource;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-/*
-import android.net.Uri;
-import android.os.Environment;
-import android.provider.MediaStore;
-*/
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,13 +33,13 @@ import com.actionbarsherlock.view.MenuItem;
 import com.google.inject.Inject;
 
 import net.msonic.lib.JSONHelper;
-//import net.msonic.lib.ListActivityBase;
 import net.msonic.lib.MessageBox;
 
 public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActivityBase  {
 
 	public static final String CODIGO_CLIENTE_KEY="CODIGO_CLIENTE";
 	public static final String USUARIO_KEY="USUARIO";
+	
 	
 	@InjectExtra(value=CODIGO_CLIENTE_KEY,optional=true) String codigoCliente;
 	@InjectExtra(value=USUARIO_KEY,optional=true) String usuario;
@@ -56,6 +52,7 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 	@InjectResource(R.string.confirm_exit_yes) 		String confirm_exit_yes;
 	@InjectResource(R.string.confirm_exit_no) 		String confirm_exit_no;
 	@Inject UploadBLL uploadBLL;
+	@Inject SharedPreferences prefs;
 	
 	private EfficientAdapter adap;
 
@@ -71,20 +68,23 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
         
         
         getSupportActionBar().setDisplayShowHomeEnabled(false);
-        
         setContentView(R.layout.consultarcliente_activity);
-        
         setTitle(R.string.consultarcliente_activity_title);
-        
        
 		MyApplication application = (MyApplication)contextProvider.get().getApplicationContext();
 		
+		int descarga_realizada = prefs.getInt(ConstantesApp.DESCARGA_KEY, ConstantesApp.DESCARGA_NO_REALIZADA);
+		if(descarga_realizada==ConstantesApp.DESCARGA_NO_REALIZADA){
+			Intent intent = new Intent(this,DescargaData_Activity.class);
+			startActivity(intent);
+			return;
+		}
+	
 		
 		if(codigoCliente!=null){
 			application.codigoCliente = codigoCliente;
 			UsuarioTO usuarioTO = JSONHelper.desSerializar(usuario, UsuarioTO.class);
 			application.setUsuarioTO(usuarioTO);
-		
 			processAsync();
 		}
 		else
@@ -152,35 +152,11 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 	protected void process() {
 		// TODO Auto-generated method stub
     	adap = new EfficientAdapter(this,clienteBLL.listarByCodigo(codigoCliente));
-    	/*
-		consultarClienteProxy.setCodigo(codigoCliente);
-		consultarClienteProxy.execute();
-		*/
 	}
     
     @Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
-    	/*
-		boolean isExito = consultarClienteProxy.isExito();
-		if (isExito) {
-			int status = consultarClienteProxy.getResponse().getStatus();
-			if (status == 0) {
-				ClienteTO cliente = consultarClienteProxy.getResponse().getClienteTO();
-				MyApplication application = (MyApplication)contextProvider.get().getApplicationContext();
-				application.setClienteTO(cliente);
-				List<ClienteTO> clientes = new ArrayList<ClienteTO>();
-				clientes.add(cliente);
-				application.cliente = cliente;
-				adap = new EfficientAdapter(this, clientes);
-				setListAdapter(adap);
-			}
-			else
-			{
-				showToast(consultarClienteProxy.getResponse().getDescripcion());
-			}
-		}
-		*/
     	setListAdapter(adap);
 		super.processOk();
 	}
