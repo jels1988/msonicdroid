@@ -7,6 +7,7 @@ import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
 import lindley.desarrolloxcliente.to.upload.OportunidadTO;
+import lindley.desarrolloxcliente.to.upload.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.upload.PosicionTO;
 import lindley.desarrolloxcliente.to.upload.PresentacionTO;
 import lindley.desarrolloxcliente.to.upload.SkuTO;
@@ -88,6 +89,7 @@ public class UploadDAO {
 		
 		listarOportunidades(evaluacionTO);
 		listarPosicion(evaluacionTO);
+		listarPosicionCompromiso(evaluacionTO);
 		listarPresentacion(evaluacionTO);
 		listarSku(evaluacionTO);
 		
@@ -211,6 +213,30 @@ public class UploadDAO {
 		cursor.close();
 	}
 	
+	public void listarPosicionCompromiso(EvaluacionTO evaluacionTO){
+		String SQL = "select id,evaluacionId,tipoAgrupacion,codigoVariable,orden,observacion,estado " +
+					" from evaluacion_posicion_compromiso " +
+					"where evaluacionId = ?1";
+		
+		String[] args = new String[] {String.valueOf(evaluacionTO.id)};
+		Cursor cursor = dbHelper.rawQuery(SQL,args);
+		
+		PosicionCompromisoTO posicionCompromisoTO;
+		while(cursor.moveToNext()){
+			posicionCompromisoTO = new PosicionCompromisoTO();
+			
+			if(evaluacionTO.posiciones.get(0)!=null){
+				posicionCompromisoTO.id = cursor.getLong(cursor.getColumnIndex("id"));
+				posicionCompromisoTO.tipoAgrupacion =  cursor.getString(cursor.getColumnIndex("tipoAgrupacion"));
+				posicionCompromisoTO.codigoVariable =  cursor.getString(cursor.getColumnIndex("codigoVariable"));
+				posicionCompromisoTO.orden = cursor.getInt(cursor.getColumnIndex("orden"));
+				posicionCompromisoTO.observacion =  cursor.getString(cursor.getColumnIndex("observacion"));
+				posicionCompromisoTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
+				evaluacionTO.posiciones.get(0).compromisos.add(posicionCompromisoTO);
+			}
+		}
+		cursor.close();
+	}
 	public void listarPosicion(EvaluacionTO evaluacionTO){
 		String SQL = "select id,evaluacionId,anio,mes,codigoVariable,soviRed,soviMaximo,soviDiferencia," +
 					"puntosSugeridos,puntosGanados,puntosBonus,fotoInicial,fotoFinal,activosLindley," +

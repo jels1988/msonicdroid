@@ -14,6 +14,7 @@ import lindley.desarrolloxcliente.to.download.ProductoTO;
 import lindley.desarrolloxcliente.to.download.PuntoTO;
 import lindley.desarrolloxcliente.to.download.SkuTO;
 import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
+import lindley.desarrolloxcliente.to.upload.PosicionCompromisoTO;
 import net.msonic.lib.DBHelper;
 
 import android.util.Log;
@@ -145,6 +146,9 @@ public class DescargaBLL {
 				
 				for (lindley.desarrolloxcliente.to.upload.PosicionTO posicionTO : evaluacionTO.posiciones) {
 					descargaDAO.insertEvaluacionPosicion(evaluacionTO,posicionTO);
+					for(PosicionCompromisoTO posicionCompromisoTO:posicionTO.compromisos){
+						descargaDAO.insertEvaluacionPosicion(evaluacionTO, posicionCompromisoTO);
+					}
 				}
 				
 				
