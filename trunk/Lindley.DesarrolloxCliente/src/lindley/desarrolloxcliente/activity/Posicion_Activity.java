@@ -222,8 +222,8 @@ public class Posicion_Activity extends ListBaseFragment  {
 								public void onClick(View v) {
 									// TODO Auto-generated method stub
 									PosicionTO posicionCompromisoTO = (PosicionTO) holder.TextViewRpsta.getTag();
-									 int[] factores = ConstantesApp.getFechaFactores(posicionCompromisoTO.fechaCompromiso);
-									 
+									 String[] factores = ConstantesApp.getFechaFactoresAS400(posicionCompromisoTO.fechaCompromiso);
+								
 
 									 DatePickerDialog picker = new DatePickerDialog(context, new OnDateSetListener() {
 										
@@ -237,7 +237,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 											posicionCompromisoTO.fechaCompromiso=fecha;
 											holder.txEditFecha.setText(ConstantesApp.formatFecha(posicionCompromisoTO.fechaCompromiso));
 										}
-									}, factores[0],factores[1], factores[2]);
+									}, Integer.parseInt(factores[0]) ,Integer.parseInt(factores[1])-1, Integer.parseInt(factores[2]));
 									 
 									 picker.show();
 								}

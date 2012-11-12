@@ -134,17 +134,20 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 		int anio = Integer.parseInt(fechas[0]);
 		int mes = Integer.parseInt(fechas[1]);
 		
+		String fechaCompromiso = ConstantesApp.getFechaCompromisoAS400();
+		
 		for (OportunidadTO oportunidadTO : evaluacion.oportunidades) {
 			oportunidadTO.anio=anio;
 			oportunidadTO.mes= mes;
 			oportunidadTO.codigoAccionTrade="0";
+			oportunidadTO.fechaCompromiso = fechaCompromiso;
 		}
 		
 		for(PosicionTO posicionTO : evaluacion.posiciones){
 			posicionTO.anio=anio;
 			posicionTO.mes= mes;
 			posicionTO.fechaEncuesta=evaluacion.fechaCreacion;
-			
+			posicionTO.fechaCompromiso = fechaCompromiso;
 		}
 		
 
@@ -152,7 +155,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 			presentacionTO.anio=anio;
 			presentacionTO.mes= mes;
 			presentacionTO.fechaEncuesta=evaluacion.fechaCreacion;
-			
+			presentacionTO.fechaCompromiso = fechaCompromiso;
 		}
 		
 		
