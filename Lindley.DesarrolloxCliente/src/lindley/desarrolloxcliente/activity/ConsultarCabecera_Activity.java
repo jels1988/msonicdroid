@@ -1,5 +1,7 @@
 package lindley.desarrolloxcliente.activity;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import net.msonic.lib.MessageBox;
@@ -17,6 +19,7 @@ import lindley.desarrolloxcliente.ws.service.ConsultarCabeceraProxy;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -108,6 +111,9 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	
 	
 
+
+	String fechaCierreEvaluacion="";
+
 	@Override
 	protected void process(int accion) {
 		switch (accion) {
@@ -122,7 +128,20 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 			break;
 		case ACCION_CERRAR:
 			application.evaluacionActual = uploadBLL.listarEvaluacionById(evaluacionId);
-			descargaBLL.cerrarEvaluacion(application.evaluacionActual, application.usuario);
+			String fechaCreacion = application.evaluacionActual.fechaCreacion;
+			String[] factores = ConstantesApp.getFechaFactoresAS400(fechaCreacion);
+			GregorianCalendar calendar = new GregorianCalendar(Integer.parseInt(factores[0]),Integer.parseInt(factores[1])-1,1);
+			calendar.add(Calendar.MONTH, 1);
+			int fechaMinCierre = Integer.parseInt(DateFormat.format("yyyyMMdd", calendar).toString());
+			int fechaActual = Integer.parseInt(ConstantesApp.getFechaSistemaAS400());
+			fechaCierreEvaluacion="";
+			if(fechaActual>=fechaMinCierre){
+				descargaBLL.cerrarEvaluacion(application.evaluacionActual, application.usuario);
+
+			}else{
+				fechaCierreEvaluacion = ConstantesApp.formatFecha(String.valueOf(fechaMinCierre));
+			}
+			
 			break;
 		default:
 			break;
@@ -153,7 +172,12 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 			break;
 		case ACCION_CERRAR:
 			super.processOk(accion);
-			processAsync();
+			if(fechaCierreEvaluacion.equalsIgnoreCase("")){
+				processAsync();
+			}else{
+			 showToast("La evaluaci—n no puede cerrarse hasta el d’a: " + 	fechaCierreEvaluacion);
+			}
+			
 			break;
 		default:
 			break;

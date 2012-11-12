@@ -86,4 +86,20 @@ public class UploadBLL {
 		return cantidadEvaluaciones;
 		
 	}
+	
+	public long getCantidadEvaluacionesAbiertas(String codigoCliente){
+		long cantidadEvaluaciones=0;
+		
+		try{
+			dbHelper.openDataBase();
+			cantidadEvaluaciones = uploadDAO.getCantidadEvaluacionesAbiertas(codigoCliente);
+		}catch(Exception ex){
+			Log.e(TAG_LOG, "UploadBLL.getCantidadEvaluacionesAbiertas", ex);
+		} finally {
+			dbHelper.close();
+		}
+		
+		return cantidadEvaluaciones;
+		
+	}
 }
