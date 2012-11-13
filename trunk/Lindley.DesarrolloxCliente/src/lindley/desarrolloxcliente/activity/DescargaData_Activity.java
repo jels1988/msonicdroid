@@ -30,9 +30,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -160,6 +161,12 @@ public class DescargaData_Activity extends ListActivityBase {
 				break;
 			}
 		}
+		
+		if(processSeleccionado==null){
+			processSeleccionado = new ProcesoInfoTO();
+			processSeleccionado.processId=processId;
+		}
+		
 		return processSeleccionado;
 	}
 	
@@ -170,11 +177,14 @@ public class DescargaData_Activity extends ListActivityBase {
 		
 		switch (accion) {
 			case DESCARGAR_PRODUCTO:
-				ProcesoInfoTO p0 = new ProcesoInfoTO();
+				ProcesoInfoTO p0 = processById(DESCARGAR_PRODUCTO);
 				p0.processId=DESCARGAR_PRODUCTO;
 				p0.descripcion="Descargando Producto";
 				p0.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-				lista.add(p0);
+				if(!lista.contains(p0)){
+					lista.add(p0);
+				}
+				
 				adap.notifyDataSetChanged();
 				break;
 			case GUARDAR_PRODUCTO:
@@ -185,11 +195,13 @@ public class DescargaData_Activity extends ListActivityBase {
 				adap.notifyDataSetChanged();
 				break;
 			case DESCARGAR_OPORTUNIDAD:
-				ProcesoInfoTO p1 = new ProcesoInfoTO();
+				ProcesoInfoTO p1 = processById(DESCARGAR_OPORTUNIDAD);
 				p1.processId=DESCARGAR_OPORTUNIDAD;
 				p1.descripcion="Descargando Oportunidades";
 				p1.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-				lista.add(p1);
+				if(!lista.contains(p1)){
+					lista.add(p1);
+				}
 				adap.notifyDataSetChanged();
 				break;
 			case GUARDAR_OPORTUNIDAD:
@@ -200,11 +212,13 @@ public class DescargaData_Activity extends ListActivityBase {
 				adap.notifyDataSetChanged();
 				break;
 			case DESCARGAR_SKU:
-				ProcesoInfoTO p2 = new ProcesoInfoTO();
+				ProcesoInfoTO p2 = processById(DESCARGAR_SKU);
 				p2.processId=DESCARGAR_SKU;
 				p2.descripcion="Descargando SKUs";
 				p2.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-				lista.add(p2);
+				if(!lista.contains(p2)){
+					lista.add(p2);
+				}
 				adap.notifyDataSetChanged();
 				break;
 			case GUARDAR_SKU:
@@ -215,11 +229,13 @@ public class DescargaData_Activity extends ListActivityBase {
 				adap.notifyDataSetChanged();
 				break;
 			case DESCARGAR_ACCIONESTRADE:
-				ProcesoInfoTO p3 = new ProcesoInfoTO();
+				ProcesoInfoTO p3 = processById(DESCARGAR_ACCIONESTRADE);
 				p3.processId=DESCARGAR_ACCIONESTRADE;
 				p3.descripcion="Descargando Acciones Trade";
 				p3.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-				lista.add(p3);
+				if(!lista.contains(p3)){
+					lista.add(p3);
+				}
 				adap.notifyDataSetChanged();
 				break;
 			case GUARDAR_ACCIONESTRADE:
@@ -230,11 +246,13 @@ public class DescargaData_Activity extends ListActivityBase {
 				adap.notifyDataSetChanged();
 				break;
 			case DESCARGAR_ACCIONESTRADEPRODUCTO:
-				ProcesoInfoTO p4 = new ProcesoInfoTO();
+				ProcesoInfoTO p4 = processById(DESCARGAR_ACCIONESTRADEPRODUCTO);
 				p4.processId=DESCARGAR_ACCIONESTRADEPRODUCTO;
 				p4.descripcion="Descargando Acciones Trade Producto";
 				p4.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-				lista.add(p4);
+				if(!lista.contains(p4)){
+					lista.add(p4);
+				}
 				adap.notifyDataSetChanged();
 				break;
 			case GUARDAR_ACCIONESTRADEPRODUCTO:
@@ -245,11 +263,13 @@ public class DescargaData_Activity extends ListActivityBase {
 				adap.notifyDataSetChanged();
 				break;
 			case DESCARGAR_CLIENTE:
-				ProcesoInfoTO p5 = new ProcesoInfoTO();
+				ProcesoInfoTO p5 = processById(DESCARGAR_CLIENTE);
 				p5.processId=DESCARGAR_CLIENTE;
 				p5.descripcion="Descargando Clientes";
 				p5.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-				lista.add(p5);
+				if(!lista.contains(p5)){
+					lista.add(p5);
+				}
 				adap.notifyDataSetChanged();
 				break;
 			case GUARDAR_CLIENTE:
@@ -260,11 +280,13 @@ public class DescargaData_Activity extends ListActivityBase {
 				adap.notifyDataSetChanged();
 				break;
 			case DESCARGAR_POSICION:
-				ProcesoInfoTO p6 = new ProcesoInfoTO();
+				ProcesoInfoTO p6 = processById(DESCARGAR_POSICION);
 				p6.processId=DESCARGAR_POSICION;
 				p6.descripcion="Descargando Posici—n";
 				p6.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-				lista.add(p6);
+				if(!lista.contains(p6)){
+					lista.add(p6);
+				}
 				adap.notifyDataSetChanged();
 				break;
 			case GUARDAR_POSICION:
@@ -275,11 +297,13 @@ public class DescargaData_Activity extends ListActivityBase {
 				adap.notifyDataSetChanged();
 				break;
 			case DESCARGAR_PRESENTACION:
-				ProcesoInfoTO p7 = new ProcesoInfoTO();
+				ProcesoInfoTO p7 = processById(DESCARGAR_PRESENTACION);
 				p7.processId=DESCARGAR_PRESENTACION;
 				p7.descripcion="Descargando Presentaci—n";
 				p7.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-				lista.add(p7);
+				if(!lista.contains(p7)){
+					lista.add(p7);
+				}
 				adap.notifyDataSetChanged();
 				break;
 			case GUARDAR_PRESENTACION:
@@ -290,11 +314,13 @@ public class DescargaData_Activity extends ListActivityBase {
 				adap.notifyDataSetChanged();
 				break;
 			case DESCARGAR_PUNTO:
-				ProcesoInfoTO p8 = new ProcesoInfoTO();
+				ProcesoInfoTO p8 = processById(DESCARGAR_PUNTO);
 				p8.processId=DESCARGAR_PUNTO;
 				p8.descripcion="Descargando Puntos";
 				p8.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-				lista.add(p8);
+				if(!lista.contains(p8)){
+					lista.add(p8);
+				}
 				adap.notifyDataSetChanged();
 				break;
 			case GUARDAR_PUNTO:
@@ -305,11 +331,13 @@ public class DescargaData_Activity extends ListActivityBase {
 				adap.notifyDataSetChanged();
 				break;
 			case DESCARGAR_EVALUACION:
-				ProcesoInfoTO p9 = new ProcesoInfoTO();
+				ProcesoInfoTO p9 = processById(DESCARGAR_EVALUACION);
 				p9.processId=DESCARGAR_EVALUACION;
 				p9.descripcion="Descargando Evaluaciones";
 				p9.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-				lista.add(p9);
+				if(!lista.contains(p9)){
+					lista.add(p9);
+				}
 				adap.notifyDataSetChanged();
 				break;
 			case GUARDAR_EVALUACION:
@@ -320,11 +348,13 @@ public class DescargaData_Activity extends ListActivityBase {
 				adap.notifyDataSetChanged();
 				break;
 			case DESCARGAR_EVALUACION_OPORTUNIDAD:
-				ProcesoInfoTO p10 = new ProcesoInfoTO();
+				ProcesoInfoTO p10 = processById(DESCARGAR_EVALUACION_OPORTUNIDAD);
 				p10.processId=DESCARGAR_EVALUACION_OPORTUNIDAD;
 				p10.descripcion="Descargando Evaluaciones Oportunidades";
 				p10.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-				lista.add(p10);
+				if(!lista.contains(p10)){
+					lista.add(p10);
+				}
 				adap.notifyDataSetChanged();
 				break;
 			case GUARDAR_EVALUACION_OPORTUNIDAD:
@@ -335,11 +365,13 @@ public class DescargaData_Activity extends ListActivityBase {
 				adap.notifyDataSetChanged();
 				break;
 			case DESCARGAR_EVALUACION_POSICION:
-				ProcesoInfoTO p11 = new ProcesoInfoTO();
+				ProcesoInfoTO p11 = processById(DESCARGAR_EVALUACION_POSICION);
 				p11.processId=DESCARGAR_EVALUACION_POSICION;
 				p11.descripcion="Descargando Evaluaciones Posiciones";
 				p11.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-				lista.add(p11);
+				if(!lista.contains(p11)){
+					lista.add(p11);
+				}
 				adap.notifyDataSetChanged();
 				break;
 			case GUARDAR_EVALUACION_POSICION:
@@ -350,11 +382,13 @@ public class DescargaData_Activity extends ListActivityBase {
 				adap.notifyDataSetChanged();
 				break;
 			case DESCARGAR_EVALUACION_POSICION_COMPROMISO:
-				ProcesoInfoTO p12 = new ProcesoInfoTO();
+				ProcesoInfoTO p12 = processById(DESCARGAR_EVALUACION_POSICION_COMPROMISO);
 				p12.processId=DESCARGAR_EVALUACION_POSICION_COMPROMISO;
 				p12.descripcion="Descargando Evaluaciones Posiciones Compromiso";
 				p12.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-				lista.add(p12);
+				if(!lista.contains(p12)){
+					lista.add(p12);
+				}
 				adap.notifyDataSetChanged();
 				break;
 			case GUARDAR_EVALUACION_POSICION_COMPROMISO:
@@ -367,11 +401,13 @@ public class DescargaData_Activity extends ListActivityBase {
 				
 			
 			case DESCARGAR_EVALUACION_PRESENTACION:
-				ProcesoInfoTO p13 = new ProcesoInfoTO();
+				ProcesoInfoTO p13 = processById(DESCARGAR_EVALUACION_PRESENTACION);
 				p13.processId=DESCARGAR_EVALUACION_PRESENTACION;
 				p13.descripcion="Descargando Evaluaciones Presentaciones";
 				p13.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-				lista.add(p13);
+				if(!lista.contains(p13)){
+					lista.add(p13);
+				}
 				adap.notifyDataSetChanged();
 				break;
 			case GUARDAR_EVALUACION_PRESENTACION:
@@ -383,11 +419,13 @@ public class DescargaData_Activity extends ListActivityBase {
 				break;
 				
 			case DESCARGAR_EVALUACION_SKU:
-				ProcesoInfoTO p14 = new ProcesoInfoTO();
+				ProcesoInfoTO p14 = processById(DESCARGAR_EVALUACION_SKU);
 				p14.processId=DESCARGAR_EVALUACION_SKU;
 				p14.descripcion="Descargando Evaluaciones SKUs";
 				p14.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-				lista.add(p14);
+				if(!lista.contains(p14)){
+					lista.add(p14);
+				}
 				adap.notifyDataSetChanged();
 				break;
 			case GUARDAR_EVALUACION_SKU:
@@ -1560,6 +1598,19 @@ public class DescargaData_Activity extends ListActivityBase {
 					
 					holder.txtDescripcion = (TextView) view.findViewById(R.id.txtDescripcion);
 					holder.imgEstado = (ImageView) view.findViewById(R.id.imgEstado);
+					holder.btnProcesar = (ImageButton) view.findViewById(R.id.btnProcesar);
+					
+					holder.btnProcesar.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							ProcesoInfoTO procesoInfoTO = (ProcesoInfoTO)holder.txtDescripcion.getTag();
+							if(procesoInfoTO.processId<=DESCARGAR_EVALUACION_POSICION_COMPROMISO){
+								context.processAsync(procesoInfoTO.processId);
+							}
+						}
+					});
 					view.setTag(holder);
 					
 					
@@ -1591,6 +1642,16 @@ public class DescargaData_Activity extends ListActivityBase {
 					break;
 				}
 				
+				
+				if(procesoInfoTO.processId<=DESCARGAR_EVALUACION_POSICION_COMPROMISO){
+					if(procesoInfoTO.estado==ProcesoInfoTO.ESTADO_ERROR){
+						holder.btnProcesar.setVisibility(View.VISIBLE);
+					}else{
+						holder.btnProcesar.setVisibility(View.INVISIBLE);
+					}
+				}else{
+					holder.btnProcesar.setVisibility(View.INVISIBLE);
+				}
 				return view;
 				
 			}
@@ -1598,7 +1659,7 @@ public class DescargaData_Activity extends ListActivityBase {
 			static class ViewHolder {
 				TextView txtDescripcion;
 				ImageView imgEstado;
-				Button btnAccion;
+				ImageButton btnProcesar;
 			}
 				
 			
