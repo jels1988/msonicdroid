@@ -21,6 +21,7 @@ import lindley.desarrolloxcliente.ws.service.DescargarPosicionProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarPresentacionProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarProductosProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarOportunidadesProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarProfitProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarPuntoProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarSkuProxy;
 
@@ -60,6 +61,7 @@ public class DescargaData_Activity extends ListActivityBase {
 	public static final int DESCARGAR_EVALUACION_PRESENTACION=12;
 	public static final int DESCARGAR_EVALUACION_SKU=13;
 	public static final int DESCARGAR_EVALUACION_POSICION_COMPROMISO=14;
+	public static final int DESCARGAR_PROFIT=15;
 	
 	public static final int GUARDAR_PRODUCTO=20;
 	public static final int GUARDAR_OPORTUNIDAD=21;
@@ -76,6 +78,7 @@ public class DescargaData_Activity extends ListActivityBase {
 	public static final int GUARDAR_EVALUACION_PRESENTACION=32;
 	public static final int GUARDAR_EVALUACION_SKU=33;
 	public static final int GUARDAR_EVALUACION_POSICION_COMPROMISO=34;
+	public static final int GUARDAR_PROFIT=35;
 	
 	@Inject DescargarProductosProxy descagarProductosProxy;
 	@Inject DescargarOportunidadesProxy descargarOportunidadesProxy;
@@ -92,6 +95,7 @@ public class DescargaData_Activity extends ListActivityBase {
 	@Inject DescargarEvaluacionPresentacionProxy descargarEvaluacionPresentacionProxy;
 	@Inject DescargarEvaluacionSKUProxy descargarEvaluacionSKUProxy;
 	@Inject DescargarEvaluacionPosicionCompromisoProxy descargarEvaluacionPosicionCompromisoProxy;
+	@Inject DescargarProfitProxy descargarProfitProxy;
 	
 	@Inject DescargaBLL descargaBLL;
 	@Inject PeriodoTO periodoTO;
@@ -116,7 +120,7 @@ public class DescargaData_Activity extends ListActivityBase {
 		setListAdapter(adap);
 		
 		
-		processAsync(DESCARGAR_PRODUCTO);
+		/*processAsync(DESCARGAR_PRODUCTO);
 		processAsync(DESCARGAR_OPORTUNIDAD);
 		processAsync(DESCARGAR_SKU);
 		processAsync(DESCARGAR_ACCIONESTRADE);
@@ -125,8 +129,9 @@ public class DescargaData_Activity extends ListActivityBase {
 		processAsync(DESCARGAR_POSICION);
 		processAsync(DESCARGAR_PRESENTACION);
 		processAsync(DESCARGAR_PUNTO);
-		processAsync(DESCARGAR_EVALUACION);
+		processAsync(DESCARGAR_EVALUACION);*/
 		
+		processAsync(DESCARGAR_PROFIT);
 		
 	}
 	
@@ -435,6 +440,23 @@ public class DescargaData_Activity extends ListActivityBase {
 				p34.estado=ProcesoInfoTO.ESTADO_DB;
 				adap.notifyDataSetChanged();
 				break;
+			case DESCARGAR_PROFIT:
+				ProcesoInfoTO p15 = processById(DESCARGAR_PROFIT);
+				p15.processId=DESCARGAR_PROFIT;
+				p15.descripcion="Descargando Profit";
+				p15.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+				if(!lista.contains(p15)){
+					lista.add(p15);
+				}
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_PROFIT:
+				ProcesoInfoTO p35 = processById(GUARDAR_PROFIT-20);
+				p35.processId=DESCARGAR_PROFIT;
+				p35.descripcion="Guardando Profit";
+				p35.estado=ProcesoInfoTO.ESTADO_DB;
+				adap.notifyDataSetChanged();
+				break;
 		}
 		
 		
@@ -514,6 +536,10 @@ public class DescargaData_Activity extends ListActivityBase {
 		case DESCARGAR_EVALUACION_POSICION_COMPROMISO:
 				descargarEvaluacionPosicionCompromisoProxy.execute();
 				break;
+		case DESCARGAR_PROFIT:
+			descargarProfitProxy.execute();
+			break;
+			
 		case GUARDAR_PRODUCTO:
 			
 			descargaBLL.saveProducto(descagarProductosProxy.getResponse().productos);
@@ -572,8 +598,10 @@ public class DescargaData_Activity extends ListActivityBase {
 			descargaBLL.saveEvaluacionSkus(descargarEvaluacionSKUProxy.getResponse().skus);
 			break;
 		case GUARDAR_EVALUACION_POSICION_COMPROMISO:
-			
 			descargaBLL.saveEvaluacionPosicionCompromiso(descargarEvaluacionPosicionCompromisoProxy.getResponse().compromisos);
+			break;
+		case GUARDAR_PROFIT:
+			descargaBLL.saveProfit(descargarProfitProxy.getResponse().profit);
 			break;
 		default:
 			break;
@@ -1078,6 +1106,38 @@ public class DescargaData_Activity extends ListActivityBase {
 				break;
 			}
 			
+			case DESCARGAR_PROFIT:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_PROFIT);
+				boolean isExito = descargarProfitProxy.isExito();
+				if(descargarProfitProxy.getResponse()!=null){
+					int status = descargarProfitProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Profit Descargadas";
+						p1.isExito=true;
+						processAsync(GUARDAR_PROFIT);
+					}else{
+						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
+						p1.descripcion="Error descargando Profit";
+						p1.isExito=false;
+					}
+				}else{
+					p1.estado = ProcesoInfoTO.ESTADO_ERROR;
+					p1.descripcion="Error descargando Profit";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_PROFIT:
+			{
+				ProcesoInfoTO p1 = processById(GUARDAR_PROFIT-20);
+				p1.descripcion="Profit guardado";
+				p1.isExito=true;
+				p1.estado = ProcesoInfoTO.ESTADO_OK;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
 		}
 		removeContadorProcesos();
 		
@@ -1527,6 +1587,15 @@ public class DescargaData_Activity extends ListActivityBase {
 				removeContadorProcesos();
 				ProcesoInfoTO p1 = processById(DESCARGAR_EVALUACION);
 				p1.descripcion="Error descargando Evaluaciones";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case DESCARGAR_PROFIT:{
+				removeContadorProcesos();
+				ProcesoInfoTO p1 = processById(DESCARGAR_PROFIT);
+				p1.descripcion="Error descargando profit";
 				p1.isExito=false;
 				adap.notifyDataSetChanged();
 				break;
