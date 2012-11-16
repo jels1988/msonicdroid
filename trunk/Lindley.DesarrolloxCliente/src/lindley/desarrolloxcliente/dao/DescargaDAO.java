@@ -9,6 +9,7 @@ import lindley.desarrolloxcliente.to.download.OportunidadTO;
 import lindley.desarrolloxcliente.to.download.PosicionTO;
 import lindley.desarrolloxcliente.to.download.PresentacionTO;
 import lindley.desarrolloxcliente.to.download.ProductoTO;
+import lindley.desarrolloxcliente.to.download.ProfitTO;
 import lindley.desarrolloxcliente.to.download.PuntoTO;
 import lindley.desarrolloxcliente.to.download.SkuTO;
 import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
@@ -54,6 +55,29 @@ public class DescargaDAO {
 		
 	}
 	
+	public void deleteProfit(){
+		dbHelper.delete("profit", null, null);
+	}
+	
+	public long insertProfit(ProfitTO profitTO){
+		ContentValues values = new ContentValues();
+		
+		values.put("anio", profitTO.anio);
+		values.put("mes", profitTO.mes);
+		values.put("codigoCliente", profitTO.codigoCliente);
+		values.put("codigoArticulo", profitTO.codigoArticulo);
+		values.put("indicador", profitTO.indicador);
+		values.put("cajasFisica", profitTO.cajasFisica);
+		values.put("margenActual", profitTO.margenActual);
+		values.put("cajasFisicasFaltante", profitTO.cajasFisicasFaltante);
+		values.put("margenFaltante", profitTO.margenFaltante);
+		
+		long id= dbHelper.insertOrThrow("profit", values);
+		profitTO.id = id;
+		
+		return id;
+		
+	}
 	public long insertEvaluacion(EvaluacionTO evaluacionTO){
 		ContentValues values = new ContentValues();
 		values.put("clienteCodigo", evaluacionTO.codigoCliente);

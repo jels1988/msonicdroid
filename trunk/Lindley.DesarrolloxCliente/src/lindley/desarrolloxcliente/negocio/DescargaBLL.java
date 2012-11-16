@@ -29,6 +29,28 @@ public class DescargaBLL {
 	@Inject protected DescargaDAO descargaDAO;
 	public static String MyLock = "DescargaBLL.Lock";
 	
+	
+	
+	public void saveProfit(List<lindley.desarrolloxcliente.to.download.ProfitTO> lista){
+		synchronized(MyLock)	{
+			try{
+				dbHelper.openDataBase();
+				dbHelper.beginTransaction();
+				
+				descargaDAO.deleteProfit();
+				for (lindley.desarrolloxcliente.to.download.ProfitTO profit : lista) {
+					descargaDAO.insertProfit(profit);
+				}
+				dbHelper.setTransactionSuccessful();
+			}catch(Exception ex){
+				Log.e(TAG_LOG, "DescargaBLL.saveProfit", ex);
+			} finally {
+				dbHelper.endTransaction();
+				dbHelper.close();
+			}
+		}
+	}
+	
 	public void saveEvaluacionPosicionCompromiso(List<lindley.desarrolloxcliente.to.upload.PosicionCompromisoTO> lista){
 		synchronized(MyLock)	{
 			try{
