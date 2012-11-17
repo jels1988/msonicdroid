@@ -12,8 +12,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.thira.examples.actionbar.widget.ActionBar;
-
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
@@ -24,7 +22,7 @@ public class WebViewVerFoto_Activity extends ActivityBase {
 	public static final String NOMBRE_FOTO = "nomFoto";
 	public static final String TITULO_FOTO = "titFoto";
 	@InjectView(R.id.wvwFoto) 	WebView   wvwFoto;
-	@InjectView(R.id.actionBar) ActionBar mActionBar;
+	//@InjectView(R.id.actionBar) ActionBar mActionBar;
 	@InjectExtra(NOMBRE_FOTO) String fotoNombre;
 	@InjectExtra(TITULO_FOTO) String tituloNombre;
 	
@@ -39,13 +37,12 @@ public class WebViewVerFoto_Activity extends ActivityBase {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.webviewfoto_activity);
 		
-		 mActionBar.setTitle(tituloNombre);
-//		 mActionBar.setTitle(R.string.ver_foto_activity_title);
+		 //mActionBar.setTitle(tituloNombre);
 		 
-		 mActionBar.setHomeLogo(R.drawable.header_logo);
+		 //mActionBar.setHomeLogo(R.drawable.header_logo);
 		 application = (MyApplication)getApplicationContext();
 		 cliente = application.getClienteTO();
-		 mActionBar.setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
+		 //mActionBar.setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 		 
 		WebSettings webSettings = wvwFoto.getSettings();
 		webSettings.setJavaScriptEnabled(true);

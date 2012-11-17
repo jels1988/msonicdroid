@@ -2,13 +2,13 @@ package lindley.desarrolloxcliente.activity;
 
 import java.util.List;
 
+import net.msonic.lib.sherlock.ListActivityBase;
+
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ArticuloCanjeTO;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarArticulosCanjeProxy;
-import net.msonic.lib.ListActivityBase;
-import roboguice.inject.InjectView;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,11 +18,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
-import com.thira.examples.actionbar.widget.ActionBar;
 
 public class VerArticulosCanje_Activity extends ListActivityBase {
-
-	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
+	
 	private MyApplication application;
 	ClienteTO cliente;
 	@Inject ConsultarArticulosCanjeProxy consultarArticulosCanjeProxy;
@@ -34,11 +32,11 @@ public class VerArticulosCanje_Activity extends ListActivityBase {
 		inicializarRecursos();
 		super.onCreate(savedInstanceState);
 		 setContentView(R.layout.verarticuloscanje_activity);    
-		 mActionBar.setTitle(R.string.verproductoscanje_activity_title);
+		 //mActionBar.setTitle(R.string.verproductoscanje_activity_title);
 		 application = (MyApplication)getApplicationContext();
 		 cliente = application.getClienteTO();
-		 mActionBar.setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
-		 mActionBar.setHomeLogo(R.drawable.header_logo);
+		 //mActionBar.setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
+		 //mActionBar.setHomeLogo(R.drawable.header_logo);
 		 puntos = cliente.nroPuntos;
 		 processAsync();
 	}

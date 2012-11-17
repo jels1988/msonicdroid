@@ -3,12 +3,13 @@ package lindley.desarrolloxcliente.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.msonic.lib.sherlock.ActivityBase;
+
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.ProfitTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarProfitProxy;
-import net.msonic.lib.ActivityBase;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
@@ -17,49 +18,48 @@ import android.widget.LinearLayout;
 
 import com.google.inject.Inject;
 import com.steema.teechart.TChart;
+import com.steema.teechart.drawing.Color;
+import com.steema.teechart.drawing.StringAlignment;
 import com.steema.teechart.legend.LegendAlignment;
 import com.steema.teechart.styles.Bar;
+import com.steema.teechart.styles.Bar3D;
+import com.steema.teechart.styles.CustomBar.MarksLocation;
+import com.steema.teechart.styles.MarksStyle;
+import com.steema.teechart.styles.MultiBars;
 import com.steema.teechart.styles.Series;
 import com.steema.teechart.styles.StringList;
-import com.steema.teechart.themes.ThemesList;
-import com.thira.examples.actionbar.widget.ActionBar;
 
 public class VerProfit_Activity extends ActivityBase {
 
 	@Inject
 	ConsultarProfitProxy consultarProfitProxy;
 	private TChart chart;
+	
 	List<ProfitTO> detalle;
-	@InjectView(R.id.actionBar)
-	ActionBar mActionBar;
 
 	public static final String ANIO = "pfanio";
-	@InjectExtra(ANIO)
-	String pf_anio;
 	public static final String MES = "pfmes";
-	@InjectExtra(MES)
-	String pf_mes;
 	public static final String CLIENTE = "pfcliente";
-	@InjectExtra(CLIENTE)
-	String pf_cliente;
 	public static final String ARTICULO = "pcarticulo";
-	@InjectExtra(ARTICULO)
-	String pf_articulo;
 	public static final String NOMBRE_ARTICULO = "nomarticulo";
-	@InjectExtra(NOMBRE_ARTICULO)
-	String nombre_articulo;
+	
+	@InjectExtra(ANIO) String pf_anio;
+	@InjectExtra(MES) String pf_mes;
+	@InjectExtra(CLIENTE) String pf_cliente;
+	@InjectExtra(ARTICULO) String pf_articulo;
+	@InjectExtra(NOMBRE_ARTICULO) String nombre_articulo;
+	
+	
 	private ClienteTO cliente;
 	private MyApplication application;
 
-	@InjectResource(R.string.cajas_fisicas)
-	String cajasFisicas;
-	@InjectResource(R.string.margen_actual)
-	String margenActual;
-	@InjectResource(R.string.cajas_faltantes)
-	String cajasFaltantes;
-	@InjectResource(R.string.margen_faltante)
-	String margenFaltante;
+	@InjectResource(R.string.cajas_fisicas) String cajasFisicas;
+	@InjectResource(R.string.margen_actual) String margenActual;
+	@InjectResource(R.string.cajas_faltantes) String cajasFaltantes;
+	@InjectResource(R.string.margen_faltante) String margenFaltante;
 
+	
+	@InjectView(R.id.linearLayoutTchart) LinearLayout linearLayout;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -69,19 +69,93 @@ public class VerProfit_Activity extends ActivityBase {
 		setContentView(R.layout.profitchartview_activity);
 		application = (MyApplication) getApplicationContext();
 		cliente = application.getClienteTO();
-		mActionBar.setTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
-		mActionBar.setHomeLogo(R.drawable.header_logo);
-		LinearLayout group = (LinearLayout) findViewById(R.id.linearLayoutTchart);
-		chart = new TChart(this);
-		group.addView(chart);
 		
+		setTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
+		
+		chart = new TChart(this);
+		linearLayout.addView(chart);
+		
+		/*
 		chart.getPanel().setBorderRound(7);
 		chart.getAspect().setView3D(true);
-		
+		*/
 		//chart.getAxes().getLeft().getLabels().setValueFormat("#,##0.00;(#,##0.00)");
+		//selectTheme(1);
 		
 		
-		selectTheme(1);
+		Bar3D bar = new Bar3D(chart.getChart());
+		bar.setMultiBar(MultiBars.STACKED);
+		bar.setMarksLocation(MarksLocation.Center);
+		bar.setMarksOnBar(true);
+		bar.setMarksLocation(MarksLocation.End);
+		bar.getMarks().setStyle(MarksStyle.VALUE);
+		bar.getMarks().setTransparent(true);
+		bar.getMarks().getFont().setColor(Color.white);
+		bar.getMarks().getFont().setSize(13);
+		bar.setColor(Color.fromCode("#FF0000"));
+		bar.setTitle(cajasFisicas);
+		
+	       
+	    Bar3D bar2 = new Bar3D(chart.getChart());
+		bar2.setMultiBar(MultiBars.STACKED);
+		bar2.setMarksLocation(MarksLocation.Start);
+		bar2.setMarksOnBar(true);
+		bar2.setMarksLocation(MarksLocation.Center);
+		bar2.getMarks().setStyle(MarksStyle.VALUE);
+		bar2.getMarks().setTransparent(true);
+		bar2.getMarks().getFont().setColor(Color.white);
+		bar2.getMarks().getFont().setSize(13);
+		bar2.setColor(Color.fromCode("#6d1e7e"));
+		bar2.setTitle(margenActual);
+		
+		Bar3D bar3 = new Bar3D(chart.getChart());
+		bar3.setMultiBar(MultiBars.STACKED);
+		bar3.setMarksLocation(MarksLocation.Start);
+		bar3.setMarksOnBar(true);
+		bar3.setMarksLocation(MarksLocation.Center);
+		bar3.getMarks().setStyle(MarksStyle.VALUE);
+		bar3.getMarks().setTransparent(true);
+		bar3.getMarks().getFont().setColor(Color.white);
+		bar3.getMarks().getFont().setSize(13);
+		bar3.setColor(Color.fromCode("#6d1e7e"));
+		bar3.setTitle(cajasFaltantes);
+		
+		Bar3D bar4 = new Bar3D(chart.getChart());
+		bar4.setMultiBar(MultiBars.STACKED);
+		bar4.setMarksLocation(MarksLocation.Start);
+		bar4.setMarksOnBar(true);
+		bar4.setMarksLocation(MarksLocation.Center);
+		bar4.getMarks().setStyle(MarksStyle.VALUE);
+		bar4.getMarks().setTransparent(true);
+		bar4.getMarks().getFont().setColor(Color.white);
+		bar4.getMarks().getFont().setSize(13);
+		bar4.setColor(Color.fromCode("#6d1e7e"));
+		bar4.setTitle(margenFaltante);
+		
+
+
+	      chart.getAspect().setView3D(true);
+	      
+	      chart.getPanel().setColor(Color.WHITE);
+	      chart.getWalls().setVisible(false);
+	      chart.getAxes().getLeft().getLabels().getFont().setColor(Color.BLACK);
+	      chart.getAxes().getBottom().getLabels().getFont().setColor(Color.BLACK);
+	      chart.getHeader().getFont().setColor(Color.BLACK);
+	      chart.getHeader().getFont().setSize(15);
+	      chart.getHeader().setAlignment(StringAlignment.NEAR);
+	      chart.getLegend().setAlignment(LegendAlignment.BOTTOM);
+	      chart.getLegend().getFont().setColor(Color.BLACK);
+	      chart.getLegend().setTransparent(true);
+	      chart.getAxes().getLeft().setIncrement(10);
+	      chart.getAxes().getBottom().getGrid().setVisible(true);
+	      
+	      
+		chart.getLegend().setVisible(true);
+		chart.getLegend().setAlignment(LegendAlignment.BOTTOM);
+		chart.getHeader().setVisible(false);
+		chart.getHeader().getFont().setSize(20);
+		
+		
 		processAsync();
 	}
 
@@ -92,6 +166,7 @@ public class VerProfit_Activity extends ActivityBase {
 		finish();
 	}
 	
+	/*
 	public void selectTheme(int themeSelection) {
 
 		switch (themeSelection) {
@@ -127,7 +202,7 @@ public class VerProfit_Activity extends ActivityBase {
 			break;
 
 		}
-	}
+	}*/
 
 	@Override
 	protected void process()  throws Exception{
