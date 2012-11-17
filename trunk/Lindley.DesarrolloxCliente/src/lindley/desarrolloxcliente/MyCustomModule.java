@@ -44,6 +44,7 @@ import lindley.desarrolloxcliente.ws.service.ConsultarResumenProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarSKUPrioritarioProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProductoProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarAceleradorProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarClienteProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionOportunidadProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionPosicionCompromisoProxy;
@@ -51,6 +52,7 @@ import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionPosicionProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionPresentacionProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionSKUProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarMotivoProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarPosicionProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarPresentacionProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarProductosProxy;
@@ -108,6 +110,8 @@ public class MyCustomModule extends AbstractModule {
 		bind(DescargarEvaluacionSKUProxy.class).in(Singleton.class);
 		bind(DescargarEvaluacionPosicionCompromisoProxy.class).in(Singleton.class);
 		bind(DescargarProfitProxy.class).in(Singleton.class);
+		bind(DescargarMotivoProxy.class).in(Singleton.class);
+		bind(DescargarAceleradorProxy.class).in(Singleton.class);
 		
 		
 		bind(UploadEvaluacionesProxy.class).in(Singleton.class);
