@@ -4,6 +4,7 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.dao.DescargaDAO;
+import lindley.desarrolloxcliente.to.ResumenValueTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.to.download.AccionTradeProductoTO;
 import lindley.desarrolloxcliente.to.download.AccionTradeTO;
@@ -30,6 +31,47 @@ public class DescargaBLL {
 	public static String MyLock = "DescargaBLL.Lock";
 	
 	
+	public void saveMotivo(List<ResumenValueTO> lista){
+		synchronized(MyLock)	{
+			try{
+				dbHelper.openDataBase();
+				dbHelper.beginTransaction();
+				
+				descargaDAO.deleteMotivo();
+				
+				for (ResumenValueTO resumenValueTO : lista) {
+					descargaDAO.insertMotivo(resumenValueTO);
+				}
+				dbHelper.setTransactionSuccessful();
+			}catch(Exception ex){
+				Log.e(TAG_LOG, "DescargaBLL.saveMotivo", ex);
+			} finally {
+				dbHelper.endTransaction();
+				dbHelper.close();
+			}
+		}
+	}
+	
+	public void saveAcelerador(List<lindley.desarrolloxcliente.to.download.AceleradorTO> lista){
+		synchronized(MyLock)	{
+			try{
+				dbHelper.openDataBase();
+				dbHelper.beginTransaction();
+				
+				descargaDAO.deleteAcelerador();
+				
+				for (lindley.desarrolloxcliente.to.download.AceleradorTO aceleradorTO : lista) {
+					descargaDAO.insertAcelerador(aceleradorTO);
+				}
+				dbHelper.setTransactionSuccessful();
+			}catch(Exception ex){
+				Log.e(TAG_LOG, "DescargaBLL.saveAcelerador", ex);
+			} finally {
+				dbHelper.endTransaction();
+				dbHelper.close();
+			}
+		}
+	}
 	
 	public void saveProfit(List<lindley.desarrolloxcliente.to.download.ProfitTO> lista){
 		synchronized(MyLock)	{

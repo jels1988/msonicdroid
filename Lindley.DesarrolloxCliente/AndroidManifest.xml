@@ -35,6 +35,15 @@
             android:label="@string/app_name" 
             android:noHistory="true">
 
+  
+        </activity>
+        
+        
+          <activity
+            android:name=".activity.DescargarFotos_Activity"
+            android:label="@string/app_name" 
+            android:noHistory="true">
+
              
              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,6 +51,11 @@
             </intent-filter> 
             
         </activity>
+        
+        
+        
+        
+        
         
            <activity android:name=".activity.DescargaData_Activity" android:configChanges="keyboardHidden|orientation"/>
            <activity android:name=".activity.UploadData_Activity" android:configChanges="keyboardHidden|orientation"/>
