@@ -135,6 +135,12 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 		else if(item.getItemId()==R.id.mnuSalir){
 			finish();
 		}
+		else if(item.getItemId()==R.id.mnuDescargarFoto){
+			Intent i = new Intent(this, DescargarFotos_Activity.class);
+			startActivity(i);
+		}
+		
+		
 		return super.onOptionsItemSelected(item);
 	}
 
