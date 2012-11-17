@@ -10,6 +10,7 @@ import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.upload.ProcesoInfoTO;
 import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProductoProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarAceleradorProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarClienteProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionOportunidadProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionPosicionCompromisoProxy;
@@ -17,6 +18,7 @@ import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionPosicionProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionPresentacionProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionSKUProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarMotivoProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarPosicionProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarPresentacionProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarProductosProxy;
@@ -62,6 +64,8 @@ public class DescargaData_Activity extends ListActivityBase {
 	public static final int DESCARGAR_EVALUACION_SKU=13;
 	public static final int DESCARGAR_EVALUACION_POSICION_COMPROMISO=14;
 	public static final int DESCARGAR_PROFIT=15;
+	public static final int DESCARGAR_MOTIVO=16;
+	public static final int DESCARGAR_ACELERADOR=17;
 	
 	public static final int GUARDAR_PRODUCTO=20;
 	public static final int GUARDAR_OPORTUNIDAD=21;
@@ -79,6 +83,8 @@ public class DescargaData_Activity extends ListActivityBase {
 	public static final int GUARDAR_EVALUACION_SKU=33;
 	public static final int GUARDAR_EVALUACION_POSICION_COMPROMISO=34;
 	public static final int GUARDAR_PROFIT=35;
+	public static final int GUARDAR_MOTIVO=36;
+	public static final int GUARDAR_ACELERADOR=37;
 	
 	@Inject DescargarProductosProxy descagarProductosProxy;
 	@Inject DescargarOportunidadesProxy descargarOportunidadesProxy;
@@ -96,6 +102,8 @@ public class DescargaData_Activity extends ListActivityBase {
 	@Inject DescargarEvaluacionSKUProxy descargarEvaluacionSKUProxy;
 	@Inject DescargarEvaluacionPosicionCompromisoProxy descargarEvaluacionPosicionCompromisoProxy;
 	@Inject DescargarProfitProxy descargarProfitProxy;
+	@Inject DescargarAceleradorProxy descargarAceleradorProxy;
+	@Inject DescargarMotivoProxy descargarMotivoProxy;
 	
 	@Inject DescargaBLL descargaBLL;
 	@Inject PeriodoTO periodoTO;
@@ -120,7 +128,9 @@ public class DescargaData_Activity extends ListActivityBase {
 		setListAdapter(adap);
 		
 		
-		/*processAsync(DESCARGAR_PRODUCTO);
+		processAsync(DESCARGAR_ACELERADOR);
+		processAsync(DESCARGAR_MOTIVO);
+		processAsync(DESCARGAR_PRODUCTO);
 		processAsync(DESCARGAR_OPORTUNIDAD);
 		processAsync(DESCARGAR_SKU);
 		processAsync(DESCARGAR_ACCIONESTRADE);
@@ -129,9 +139,10 @@ public class DescargaData_Activity extends ListActivityBase {
 		processAsync(DESCARGAR_POSICION);
 		processAsync(DESCARGAR_PRESENTACION);
 		processAsync(DESCARGAR_PUNTO);
-		processAsync(DESCARGAR_EVALUACION);*/
-		
 		processAsync(DESCARGAR_PROFIT);
+		processAsync(DESCARGAR_EVALUACION);
+		
+	
 		
 	}
 	
@@ -457,6 +468,41 @@ public class DescargaData_Activity extends ListActivityBase {
 				p35.estado=ProcesoInfoTO.ESTADO_DB;
 				adap.notifyDataSetChanged();
 				break;
+			case DESCARGAR_MOTIVO:
+				ProcesoInfoTO p16 = processById(DESCARGAR_MOTIVO);
+				p16.processId=DESCARGAR_MOTIVO;
+				p16.descripcion="Descargando Motivos";
+				p16.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+				if(!lista.contains(p16)){
+					lista.add(p16);
+				}
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_MOTIVO:
+				ProcesoInfoTO p36 = processById(GUARDAR_MOTIVO-20);
+				p36.processId=DESCARGAR_MOTIVO;
+				p36.descripcion="Guardando Motivos";
+				p36.estado=ProcesoInfoTO.ESTADO_DB;
+				adap.notifyDataSetChanged();
+				break;
+			case DESCARGAR_ACELERADOR:
+				ProcesoInfoTO p17 = processById(DESCARGAR_ACELERADOR);
+				p17.processId=DESCARGAR_ACELERADOR;
+				p17.descripcion="Descargando Acelerador";
+				p17.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+				if(!lista.contains(p17)){
+					lista.add(p17);
+				}
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_ACELERADOR:
+				ProcesoInfoTO p37 = processById(GUARDAR_ACELERADOR-20);
+				p37.processId=DESCARGAR_ACELERADOR;
+				p37.descripcion="Guardando Aceleradores";
+				p37.estado=ProcesoInfoTO.ESTADO_DB;
+				adap.notifyDataSetChanged();
+				break;
+			
 		}
 		
 		
@@ -539,6 +585,14 @@ public class DescargaData_Activity extends ListActivityBase {
 		case DESCARGAR_PROFIT:
 			descargarProfitProxy.execute();
 			break;
+		
+		case DESCARGAR_MOTIVO:
+			descargarMotivoProxy.execute();
+			break;
+			
+		case DESCARGAR_ACELERADOR:
+			descargarAceleradorProxy.execute();
+			break;
 			
 		case GUARDAR_PRODUCTO:
 			
@@ -602,6 +656,14 @@ public class DescargaData_Activity extends ListActivityBase {
 			break;
 		case GUARDAR_PROFIT:
 			descargaBLL.saveProfit(descargarProfitProxy.getResponse().profit);
+			break;
+			
+		case GUARDAR_ACELERADOR:
+			descargaBLL.saveAcelerador(descargarAceleradorProxy.getResponse().aceleradores);
+			break;
+			
+		case GUARDAR_MOTIVO:
+			descargaBLL.saveMotivo(descargarMotivoProxy.getResponse().motivos);
 			break;
 		default:
 			break;
@@ -1138,6 +1200,70 @@ public class DescargaData_Activity extends ListActivityBase {
 				break;
 			}
 			
+			case DESCARGAR_ACELERADOR:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_ACELERADOR);
+				boolean isExito = descargarAceleradorProxy.isExito();
+				if(descargarAceleradorProxy.getResponse()!=null){
+					int status = descargarAceleradorProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Aceleradores Descargadas";
+						p1.isExito=true;
+						processAsync(GUARDAR_ACELERADOR);
+					}else{
+						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
+						p1.descripcion="Error descargando Aceleradores";
+						p1.isExito=false;
+					}
+				}else{
+					p1.estado = ProcesoInfoTO.ESTADO_ERROR;
+					p1.descripcion="Error descargando Aceleradores";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_ACELERADOR:
+			{
+				ProcesoInfoTO p1 = processById(GUARDAR_ACELERADOR-20);
+				p1.descripcion="Aceleradores guardados";
+				p1.isExito=true;
+				p1.estado = ProcesoInfoTO.ESTADO_OK;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case DESCARGAR_MOTIVO:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_MOTIVO);
+				boolean isExito = descargarMotivoProxy.isExito();
+				if(descargarMotivoProxy.getResponse()!=null){
+					int status = descargarMotivoProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Motivos Descargadas";
+						p1.isExito=true;
+						processAsync(GUARDAR_MOTIVO);
+					}else{
+						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
+						p1.descripcion="Error descargando Motivos";
+						p1.isExito=false;
+					}
+				}else{
+					p1.estado = ProcesoInfoTO.ESTADO_ERROR;
+					p1.descripcion="Error descargando Motivos";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_MOTIVO:
+			{
+				ProcesoInfoTO p1 = processById(GUARDAR_MOTIVO-20);
+				p1.descripcion="Motivos guardados";
+				p1.isExito=true;
+				p1.estado = ProcesoInfoTO.ESTADO_OK;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
 		}
 		removeContadorProcesos();
 		
@@ -1600,6 +1726,25 @@ public class DescargaData_Activity extends ListActivityBase {
 				adap.notifyDataSetChanged();
 				break;
 			}
+			
+			case DESCARGAR_MOTIVO:{
+				removeContadorProcesos();
+				ProcesoInfoTO p1 = processById(DESCARGAR_MOTIVO);
+				p1.descripcion="Error descargando motivos";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case DESCARGAR_ACELERADOR:{
+				removeContadorProcesos();
+				ProcesoInfoTO p1 = processById(DESCARGAR_ACELERADOR);
+				p1.descripcion="Error descargando aceleradores";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
 			case GUARDAR_EVALUACION:{
 				ProcesoInfoTO p1 = processById(GUARDAR_EVALUACION-20);
 				p1.descripcion="Error guardando Evaluaciones";

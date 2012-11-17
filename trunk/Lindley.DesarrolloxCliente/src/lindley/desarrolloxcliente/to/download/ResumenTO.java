@@ -1,19 +1,14 @@
-package lindley.desarrolloxcliente.to;
+package lindley.desarrolloxcliente.to.download;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ResumenValueTO {
-	
-	public long id;
-	
+public class ResumenTO {
+
+
 	@SerializedName("des")
 	public String descripcion;
 	
+
 	@SerializedName("val")
 	public String valor;
-	
-	@SerializedName("val2")
-	public String valor2;
-	
-	
 }

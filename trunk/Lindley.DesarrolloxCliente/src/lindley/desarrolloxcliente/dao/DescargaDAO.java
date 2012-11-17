@@ -2,8 +2,10 @@ package lindley.desarrolloxcliente.dao;
 
 
 import lindley.desarrolloxcliente.to.PeriodoTO;
+import lindley.desarrolloxcliente.to.ResumenValueTO;
 import lindley.desarrolloxcliente.to.download.AccionTradeProductoTO;
 import lindley.desarrolloxcliente.to.download.AccionTradeTO;
+import lindley.desarrolloxcliente.to.download.AceleradorTO;
 import lindley.desarrolloxcliente.to.download.ClienteDescargaTO;
 import lindley.desarrolloxcliente.to.download.OportunidadTO;
 import lindley.desarrolloxcliente.to.download.PosicionTO;
@@ -55,9 +57,49 @@ public class DescargaDAO {
 		
 	}
 	
+	
+	public void deleteMotivo(){
+		dbHelper.delete("motivo", null, null);
+	}
+	
+	public long insertMotivo(ResumenValueTO resumenValueTO){
+		
+		ContentValues values = new ContentValues();
+		values.put("codigo", resumenValueTO.valor);
+		values.put("descripcion", resumenValueTO.descripcion);
+		
+		long id= dbHelper.insertOrThrow("motivo", values);
+		resumenValueTO.id = id;
+		
+		return id;
+		
+	}
+	public void deleteAcelerador(){
+		dbHelper.delete("acelerador", null, null);
+	}
+	
+	public long insertAcelerador(AceleradorTO aceleradorTO){
+		ContentValues values = new ContentValues();
+		
+		values.put("tipoAgrupacion", aceleradorTO.tipoAgrupacion);
+		values.put("codigoVariable", aceleradorTO.codigoVariable);
+		values.put("fechaInicio", aceleradorTO.fechaInicio);
+		values.put("fechaFin", aceleradorTO.fechaFin);
+		values.put("factor", aceleradorTO.punto);
+		
+		long id= dbHelper.insertOrThrow("acelerador", values);
+		aceleradorTO.id = id;
+		
+		return id;
+		
+	}
+	
 	public void deleteProfit(){
 		dbHelper.delete("profit", null, null);
 	}
+	
+	
+
 	
 	public long insertProfit(ProfitTO profitTO){
 		ContentValues values = new ContentValues();
