@@ -13,7 +13,9 @@ import lindley.desarrolloxcliente.to.upload.OportunidadTO;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.content.Intent;
 import android.os.Bundle;
+import android.sax.StartElementListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -143,6 +145,20 @@ public class Compromisos_Activity extends ListBaseFragment {
 				    	
 				    	MyApplication app = (MyApplication)context.getApplication();
 				    	
+				    	holder.btnProfit.setOnClickListener(new OnClickListener() {
+							
+							@Override
+							public void onClick(View v) {
+								// TODO Auto-generated method stub
+								Intent i = new Intent(context, VerProfit_Activity.class);
+								i.putExtra(VerProfit_Activity.ANIO, "2012");
+								i.putExtra(VerProfit_Activity.MES, "10");
+								i.putExtra(VerProfit_Activity.CLIENTE, "5793");
+								i.putExtra(VerProfit_Activity.ARTICULO, "1015500");
+								i.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, "xxx");
+								context.startActivity(i);
+							}
+						});
 				    	
 				    	holder.txViewAccTrade.setAdapter(app.getAdapterAccionTrade(this.detalle.get(position).listaAccionesTrade));
 

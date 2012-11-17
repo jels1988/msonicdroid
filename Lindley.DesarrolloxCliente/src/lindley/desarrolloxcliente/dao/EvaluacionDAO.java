@@ -9,6 +9,7 @@ import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
+import lindley.desarrolloxcliente.to.download.ProfitTO;
 import net.msonic.lib.DBHelper;
 
 import android.content.ContentValues;
@@ -21,6 +22,36 @@ public class EvaluacionDAO {
 
 	@Inject	protected DBHelper dbHelper;
 	@Inject protected PeriodoTO periodoTO;
+	
+
+	public List<ProfitTO> consultarProfit(String anio,String mes,String codigoCliente,String codigoArticulo){
+		
+		List<ProfitTO> lista = new ArrayList<ProfitTO>();
+		
+		String SQL = "SELECT indicador,cajasFisica,margenActual,cajasFisicasFaltante,margenFaltante " +
+					"FROM profit where anio = ?1 and mes = ?2 and codigocliente=?3 and codigoArticulo=?4";
+		
+		String[] args = new String[] {anio,mes,codigoCliente,codigoArticulo};
+		Cursor cursor = dbHelper.rawQuery(SQL,args);
+		
+		ProfitTO profitTO;
+		
+		while(cursor.moveToNext()){
+			profitTO=new ProfitTO();
+			profitTO.indicador=cursor.getString(cursor.getColumnIndex("indicador"));
+			profitTO.cajasFisica=cursor.getDouble(cursor.getColumnIndex("cajasFisica"));
+			profitTO.margenActual=cursor.getDouble(cursor.getColumnIndex("margenActual"));
+			profitTO.cajasFisicasFaltante=cursor.getDouble(cursor.getColumnIndex("cajasFisicasFaltante"));
+			profitTO.margenFaltante=cursor.getDouble(cursor.getColumnIndex("margenFaltante"));
+			
+			lista.add(profitTO);
+		}
+		
+		cursor.close();
+		
+		return lista;
+	}
+	
 	
 	public long insertEvaluacion(EvaluacionTO evaluacionTO){
 		
