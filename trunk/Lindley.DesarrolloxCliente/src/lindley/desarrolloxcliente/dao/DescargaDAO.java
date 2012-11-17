@@ -1,6 +1,7 @@
 package lindley.desarrolloxcliente.dao;
 
 
+
 import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.ResumenValueTO;
 import lindley.desarrolloxcliente.to.download.AccionTradeProductoTO;
@@ -26,6 +27,8 @@ public class DescargaDAO {
 
 	@Inject	protected DBHelper dbHelper;
 	@Inject protected PeriodoTO periodoTO;
+	
+	
 	
 	public int factorCierre(String tipoAgrupacion,String codigoVariable,String fechaCierre){
 		

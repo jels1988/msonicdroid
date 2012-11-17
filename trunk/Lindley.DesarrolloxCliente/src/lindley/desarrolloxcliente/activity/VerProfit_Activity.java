@@ -1,14 +1,14 @@
 package lindley.desarrolloxcliente.activity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.msonic.lib.sherlock.ActivityBase;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.negocio.EvaluacionBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.ProfitTO;
+import lindley.desarrolloxcliente.to.download.ProfitTO;
 import lindley.desarrolloxcliente.ws.service.ConsultarProfitProxy;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectResource;
@@ -21,13 +21,10 @@ import com.steema.teechart.TChart;
 import com.steema.teechart.drawing.Color;
 import com.steema.teechart.drawing.StringAlignment;
 import com.steema.teechart.legend.LegendAlignment;
-import com.steema.teechart.styles.Bar;
 import com.steema.teechart.styles.Bar3D;
 import com.steema.teechart.styles.CustomBar.MarksLocation;
 import com.steema.teechart.styles.MarksStyle;
 import com.steema.teechart.styles.MultiBars;
-import com.steema.teechart.styles.Series;
-import com.steema.teechart.styles.StringList;
 
 public class VerProfit_Activity extends ActivityBase {
 
@@ -43,12 +40,13 @@ public class VerProfit_Activity extends ActivityBase {
 	public static final String ARTICULO = "pcarticulo";
 	public static final String NOMBRE_ARTICULO = "nomarticulo";
 	
-	@InjectExtra(ANIO) String pf_anio;
-	@InjectExtra(MES) String pf_mes;
-	@InjectExtra(CLIENTE) String pf_cliente;
-	@InjectExtra(ARTICULO) String pf_articulo;
+	@InjectExtra(ANIO) String anio;
+	@InjectExtra(MES) String mes;
+	@InjectExtra(CLIENTE) String codigoCliente;
+	@InjectExtra(ARTICULO) String codigoArticulo;
 	@InjectExtra(NOMBRE_ARTICULO) String nombre_articulo;
 	
+	@Inject EvaluacionBLL evaluacionBLL;
 	
 	private ClienteTO cliente;
 	private MyApplication application;
@@ -83,77 +81,6 @@ public class VerProfit_Activity extends ActivityBase {
 		//selectTheme(1);
 		
 		
-		Bar3D bar = new Bar3D(chart.getChart());
-		bar.setMultiBar(MultiBars.STACKED);
-		bar.setMarksLocation(MarksLocation.Center);
-		bar.setMarksOnBar(true);
-		bar.setMarksLocation(MarksLocation.End);
-		bar.getMarks().setStyle(MarksStyle.VALUE);
-		bar.getMarks().setTransparent(true);
-		bar.getMarks().getFont().setColor(Color.white);
-		bar.getMarks().getFont().setSize(13);
-		bar.setColor(Color.fromCode("#FF0000"));
-		bar.setTitle(cajasFisicas);
-		
-	       
-	    Bar3D bar2 = new Bar3D(chart.getChart());
-		bar2.setMultiBar(MultiBars.STACKED);
-		bar2.setMarksLocation(MarksLocation.Start);
-		bar2.setMarksOnBar(true);
-		bar2.setMarksLocation(MarksLocation.Center);
-		bar2.getMarks().setStyle(MarksStyle.VALUE);
-		bar2.getMarks().setTransparent(true);
-		bar2.getMarks().getFont().setColor(Color.white);
-		bar2.getMarks().getFont().setSize(13);
-		bar2.setColor(Color.fromCode("#6d1e7e"));
-		bar2.setTitle(margenActual);
-		
-		Bar3D bar3 = new Bar3D(chart.getChart());
-		bar3.setMultiBar(MultiBars.STACKED);
-		bar3.setMarksLocation(MarksLocation.Start);
-		bar3.setMarksOnBar(true);
-		bar3.setMarksLocation(MarksLocation.Center);
-		bar3.getMarks().setStyle(MarksStyle.VALUE);
-		bar3.getMarks().setTransparent(true);
-		bar3.getMarks().getFont().setColor(Color.white);
-		bar3.getMarks().getFont().setSize(13);
-		bar3.setColor(Color.fromCode("#6d1e7e"));
-		bar3.setTitle(cajasFaltantes);
-		
-		Bar3D bar4 = new Bar3D(chart.getChart());
-		bar4.setMultiBar(MultiBars.STACKED);
-		bar4.setMarksLocation(MarksLocation.Start);
-		bar4.setMarksOnBar(true);
-		bar4.setMarksLocation(MarksLocation.Center);
-		bar4.getMarks().setStyle(MarksStyle.VALUE);
-		bar4.getMarks().setTransparent(true);
-		bar4.getMarks().getFont().setColor(Color.white);
-		bar4.getMarks().getFont().setSize(13);
-		bar4.setColor(Color.fromCode("#6d1e7e"));
-		bar4.setTitle(margenFaltante);
-		
-
-
-	      chart.getAspect().setView3D(true);
-	      
-	      chart.getPanel().setColor(Color.WHITE);
-	      chart.getWalls().setVisible(false);
-	      chart.getAxes().getLeft().getLabels().getFont().setColor(Color.BLACK);
-	      chart.getAxes().getBottom().getLabels().getFont().setColor(Color.BLACK);
-	      chart.getHeader().getFont().setColor(Color.BLACK);
-	      chart.getHeader().getFont().setSize(15);
-	      chart.getHeader().setAlignment(StringAlignment.NEAR);
-	      chart.getLegend().setAlignment(LegendAlignment.BOTTOM);
-	      chart.getLegend().getFont().setColor(Color.BLACK);
-	      chart.getLegend().setTransparent(true);
-	      chart.getAxes().getLeft().setIncrement(10);
-	      chart.getAxes().getBottom().getGrid().setVisible(true);
-	      
-	      
-		chart.getLegend().setVisible(true);
-		chart.getLegend().setAlignment(LegendAlignment.BOTTOM);
-		chart.getHeader().setVisible(false);
-		chart.getHeader().getFont().setSize(20);
 		
 		
 		processAsync();
@@ -207,28 +134,14 @@ public class VerProfit_Activity extends ActivityBase {
 	@Override
 	protected void process()  throws Exception{
 		// TODO Auto-generated method stub}
-		consultarProfitProxy.anio = this.pf_anio;
-		consultarProfitProxy.mes = this.pf_mes;
-		consultarProfitProxy.codigoArticulo = this.pf_articulo;
-		consultarProfitProxy.codigoCliente = this.pf_cliente;
-		consultarProfitProxy.execute();
+		
+		detalle = evaluacionBLL.consultarProfit(anio, mes, codigoCliente, codigoArticulo);
 	}
 
 	@Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
-		boolean isExito = consultarProfitProxy.isExito();
-
-		if (isExito) {
-			int status = consultarProfitProxy.getResponse().getStatus();
-			if (status == 0) {
-				detalle = consultarProfitProxy.getResponse().ListaProfit;
-				selectSerie(detalle);
-			} else {
-				showToast(consultarProfitProxy.getResponse().getDescripcion());
-				finish();
-			}
-		}
+		selectSerie();
 		super.processOk();
 	}
 
@@ -239,15 +152,15 @@ public class VerProfit_Activity extends ActivityBase {
 		showToast(error_generico_process);
 	}
 
-	public void selectSerie(List<ProfitTO> detalle) {
+	public void selectSerie() {
 
 		chart.removeAllSeries();
 
-		ArrayList<String> indicadores = new ArrayList<String>();
+		/*ArrayList<String> indicadores = new ArrayList<String>();
 		ArrayList<String> variables = new ArrayList<String>();
 		for (ProfitTO profitTO : detalle) {
 
-			String nombreIndicadores = profitTO.nombreIndicador.toUpperCase();
+			String nombreIndicadores = profitTO.indicador.toUpperCase();
 			if (!indicadores.contains(nombreIndicadores)) {
 				indicadores.add(nombreIndicadores.toUpperCase());
 			}
@@ -256,52 +169,95 @@ public class VerProfit_Activity extends ActivityBase {
 			variables.add(margenActual);
 			variables.add(cajasFaltantes);
 			variables.add(margenFaltante);
-		}
+		}*/
 
-		int sizeIndicadores = indicadores.size();
-		StringList sLabel = new StringList(sizeIndicadores);
-		int pos = 0;
-
-		double[] varCajaFisica = new double[sizeIndicadores];
-		double[] varMargenActual = new double[sizeIndicadores];
-		double[] varCajaFaltante = new double[sizeIndicadores];
-		double[] varMargenFaltante = new double[sizeIndicadores];
 		
-		for (String nombre : indicadores) {
-			for (ProfitTO profitTO : detalle) {
+		
+		Bar3D bar = new Bar3D(chart.getChart());
+		//bar.setMultiBar(MultiBars.STACKED);
+		bar.setMarksLocation(MarksLocation.Center);
+		bar.setMarksOnBar(true);
+		bar.setMarksLocation(MarksLocation.End);
+		bar.getMarks().setStyle(MarksStyle.VALUE);
+		bar.getMarks().setTransparent(true);
+		bar.getMarks().getFont().setColor(Color.white);
+		bar.getMarks().getFont().setSize(13);
+		bar.setColor(Color.fromCode("#FF0000"));
+		bar.setTitle(cajasFisicas);
+		
+	       
+	    Bar3D bar2 = new Bar3D(chart.getChart());
+		//bar2.setMultiBar(MultiBars.STACKED);
+		bar2.setMarksLocation(MarksLocation.Start);
+		bar2.setMarksOnBar(true);
+		bar2.setMarksLocation(MarksLocation.Center);
+		bar2.getMarks().setStyle(MarksStyle.VALUE);
+		bar2.getMarks().setTransparent(true);
+		bar2.getMarks().getFont().setColor(Color.white);
+		bar2.getMarks().getFont().setSize(13);
+		bar2.setColor(Color.fromCode("#6d1e7e"));
+		bar2.setTitle(margenActual);
+		
+		Bar3D bar3 = new Bar3D(chart.getChart());
+		//bar3.setMultiBar(MultiBars.STACKED);
+		bar3.setMarksLocation(MarksLocation.Start);
+		bar3.setMarksOnBar(true);
+		bar3.setMarksLocation(MarksLocation.Center);
+		bar3.getMarks().setStyle(MarksStyle.VALUE);
+		bar3.getMarks().setTransparent(true);
+		bar3.getMarks().getFont().setColor(Color.white);
+		bar3.getMarks().getFont().setSize(13);
+		bar3.setColor(Color.fromCode("#6d1e7e"));
+		bar3.setTitle(cajasFaltantes);
+		
+		Bar3D bar4 = new Bar3D(chart.getChart());
+		//bar4.setMultiBar(MultiBars.STACKED);
+		bar4.setMarksLocation(MarksLocation.Start);
+		bar4.setMarksOnBar(true);
+		bar4.setMarksLocation(MarksLocation.Center);
+		bar4.getMarks().setStyle(MarksStyle.VALUE);
+		bar4.getMarks().setTransparent(true);
+		bar4.getMarks().getFont().setColor(Color.white);
+		bar4.getMarks().getFont().setSize(13);
+		bar4.setColor(Color.fromCode("#6d1e7e"));
+		bar4.setTitle(margenFaltante);
+		
+		
+		
 
-				if (nombre.compareTo(profitTO.nombreIndicador.toUpperCase()) == 0) {
+		for (ProfitTO profitTO : detalle) {
 
-					/*
-					BigDecimal bd = new BigDecimal(profitTO.cajasFisica * 100);
-					BigDecimal rounded = bd.setScale(0,BigDecimal.ROUND_HALF_UP);
-					varCajaFisica[indicadores.indexOf(nombre)] = rounded.doubleValue();
-
-					bd = new BigDecimal(profitTO.margenActual * 100);
-					rounded = bd.setScale(0, BigDecimal.ROUND_HALF_UP);
-					varMargenActual[indicadores.indexOf(nombre)] = rounded.doubleValue();
-
-					bd = new BigDecimal(profitTO.cajasFisicasFaltante * 100);
-					rounded = bd.setScale(0, BigDecimal.ROUND_HALF_UP);
-					varCajaFaltante[indicadores.indexOf(nombre)] = rounded.doubleValue();
-
-					bd = new BigDecimal(profitTO.margenFaltante * 100);
-					rounded = bd.setScale(0, BigDecimal.ROUND_HALF_UP);
-					varMargenFaltante[indicadores.indexOf(nombre)] = rounded.doubleValue();
-					*/
-					
-					varCajaFisica[indicadores.indexOf(nombre)] = profitTO.cajasFisica;
-					varMargenActual[indicadores.indexOf(nombre)] = profitTO.margenActual;
-					varCajaFaltante[indicadores.indexOf(nombre)] = profitTO.cajasFisicasFaltante;
-					varMargenFaltante[indicadores.indexOf(nombre)] = profitTO.margenFaltante;
-					
-				}
-			}
-			sLabel.add(pos, nombre);
-			pos++;
+				bar.add( profitTO.cajasFisica);
+				bar2.add( profitTO.margenActual);
+				bar3.add( profitTO.cajasFisicasFaltante);
+				bar4.add( profitTO.margenFaltante);
 		}
+		
 
-		Series bar = new Bar(chart.getChart());
+
+	      chart.getAspect().setView3D(true);
+	      
+	      chart.getPanel().setColor(Color.WHITE);
+	      chart.getWalls().setVisible(false);
+	      chart.getAxes().getLeft().getLabels().getFont().setColor(Color.BLACK);
+	      chart.getAxes().getBottom().getLabels().getFont().setColor(Color.BLACK);
+	      chart.getHeader().getFont().setColor(Color.BLACK);
+	      chart.getHeader().getFont().setSize(15);
+	      chart.getHeader().setAlignment(StringAlignment.NEAR);
+	      chart.getLegend().setAlignment(LegendAlignment.BOTTOM);
+	      chart.getLegend().getFont().setColor(Color.BLACK);
+	      chart.getLegend().setTransparent(true);
+	      chart.getAxes().getLeft().setIncrement(10);
+	      chart.getAxes().getBottom().getGrid().setVisible(true);
+	      
+	      
+		chart.getLegend().setVisible(true);
+		chart.getLegend().setAlignment(LegendAlignment.BOTTOM);
+		chart.getHeader().setVisible(false);
+		chart.getHeader().getFont().setSize(20);
+		
+		
+		/*Series bar = new Bar(chart.getChart());
 		bar.setTitle(variables.get(0).toString());
 		bar.setShowInLegend(true);
 		bar.add(varCajaFisica);
@@ -355,7 +311,7 @@ public class VerProfit_Activity extends ActivityBase {
 		chart.getHeader().setText("Profit Story x SKU - " + nombre_articulo);
 		chart.getHeader().getFont().setSize(20);
 		
-		//chart.getFooter().getFont().setSize(20);
+		//chart.getFooter().getFont().setSize(20);*/
 	}
 
 }
