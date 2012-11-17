@@ -7,5 +7,6 @@
 	<string name="urlwsDescargaService">http://java.cdaandino.com/rtm/DesarrolloxCliente2/DescargaService.svc</string>
 	<string name="urlwsUploadService">http://java.cdaandino.com/rtm/DesarrolloxCliente2/UploadService.svc</string>
 	<string name="urlWebView">http://java.cdaandino.com/rtm/LanzadorApp/ImageViewService.svc</string>	
-
+	<string name="urlFotosDescarga">http://java.cdaandino.com/rtm/DesarrolloxCliente2/fotos.zip</string>
+	
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:title="@string/consultarcliente_menu_descargar" android:id="@+id/mnuDescargar"></item>
+    <item android:title="@string/consultarcliente_menu_descargar_fotos" android:id="@+id/mnuDescargarFoto"></item>
     <item android:title="@string/consultarcliente_menu_enviar" android:id="@+id/mnuEnviar"></item>
     <item android:title="@string/consultarcliente_menu_salir" android:id="@+id/mnuSalir"></item>
 </menu>

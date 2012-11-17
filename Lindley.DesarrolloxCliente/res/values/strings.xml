@@ -155,6 +155,7 @@
     <string name="presentacionopen_content_fecha">Fecha Compromiso:</string>
     
     <string name="consultarcliente_menu_descargar">Descargar</string>
+    <string name="consultarcliente_menu_descargar_fotos">Descargar Fotos</string>
     <string name="consultarcliente_menu_enviar">Enviar</string>
     <string name="consultarcliente_menu_salir">Salir</string>
     
@@ -170,4 +171,8 @@
     <string name="consultarcabecera_head_fecha_cierre">Fecha Cierre</string>
     <string name="consultarcabecera_head_hora_cierre">Hora Cierre</string>
     <string name="consultarcabecera_head_estado">Estado</string>
+    
+    
+    <string name="descargafotos_descargando_activity">Descargando %s</string>
+    <string name="descargafotos_descromprimiendo_activity">Descomprimiendo %s</string>
 </resources>
