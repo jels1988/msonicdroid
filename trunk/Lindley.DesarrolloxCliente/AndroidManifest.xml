@@ -34,7 +34,11 @@
             android:name=".activity.Login_Activity"
             android:label="@string/app_name" 
             android:noHistory="true">
-
+    <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> 
+            
   
         </activity>
         
@@ -42,15 +46,9 @@
           <activity
             android:name=".activity.DescargarFotos_Activity"
             android:label="@string/app_name" 
-            android:noHistory="true">
+            android:noHistory="true"/>
 
-             
-             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> 
-            
-        </activity>
+ 
         
         
         
