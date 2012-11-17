@@ -54,6 +54,8 @@ public class DescargarFotos_Activity extends ListActivityBase {
 		super.onCreate(savedInstanceState);
 		this.inicializarRecursos();
 		this.mostrarWaitMessage=false;
+		this.validarConexionInternet=true;
+		
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.descargarfotos_activity);
 		 handler = new Handler();
