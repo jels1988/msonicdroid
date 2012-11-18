@@ -1,6 +1,7 @@
 package lindley.desarrolloxcliente.activity;
 
 import net.msonic.lib.JSONHelper;
+import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.PeriodoTO;
@@ -44,8 +45,10 @@ public class Login_Activity extends net.msonic.lib.sherlock.ActivityBase{
         setContentView(R.layout.login_activity);
         setTitle(R.string.login_activity_title);
        
-        periodoTO.anio = 2012;
-        periodoTO.mes=11;
+        String[] valoresFecha  = ConstantesApp.getFechaFactoresAS400(ConstantesApp.getFechaSistemaAS400());
+        
+        periodoTO.anio =Integer.parseInt(valoresFecha[0]);
+        periodoTO.mes =Integer.parseInt(valoresFecha[1]);
 	
 		txtUsuario.requestFocus();
 	

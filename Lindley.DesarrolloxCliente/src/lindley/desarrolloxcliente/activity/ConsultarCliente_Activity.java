@@ -10,6 +10,7 @@ import lindley.desarrolloxcliente.negocio.ClienteBLL;
 import lindley.desarrolloxcliente.negocio.UploadBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
+import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectResource;
@@ -53,6 +54,7 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 	@InjectResource(R.string.confirm_exit_no) 		String confirm_exit_no;
 	@Inject UploadBLL uploadBLL;
 	@Inject SharedPreferences prefs;
+	@Inject PeriodoTO 	periodoTO;
 	
 	private EfficientAdapter adap;
 
@@ -65,7 +67,9 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
     	
         super.onCreate(savedInstanceState);
     	this.validarConexionInternet=false;
-        
+    	 String[] valoresFecha  = ConstantesApp.getFechaFactoresAS400(ConstantesApp.getFechaSistemaAS400());
+    	 periodoTO.anio =Integer.parseInt(valoresFecha[0]);
+         periodoTO.mes =Integer.parseInt(valoresFecha[1]);
         
         getSupportActionBar().setDisplayShowHomeEnabled(false);
         setContentView(R.layout.consultarcliente_activity);
@@ -85,6 +89,8 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 			application.codigoCliente = codigoCliente;
 			UsuarioTO usuarioTO = JSONHelper.desSerializar(usuario, UsuarioTO.class);
 			application.setUsuarioTO(usuarioTO);
+			periodoTO.deposito=usuarioTO.codigoDeposito;
+			periodoTO.ruta=usuarioTO.codigoRuta;
 			processAsync();
 		}
 		else
@@ -101,9 +107,15 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 				UsuarioTO usuarioTO = JSONHelper.desSerializar(usuario, UsuarioTO.class);
 				application.setUsuarioTO(usuarioTO);
 				codigoCliente = application.codigoCliente;
+				periodoTO.deposito=usuarioTO.codigoDeposito;
+				periodoTO.ruta=usuarioTO.codigoRuta;
 				processAsync();
 			}
-		}		
+		}
+		
+		
+		
+		
     }
     
     
