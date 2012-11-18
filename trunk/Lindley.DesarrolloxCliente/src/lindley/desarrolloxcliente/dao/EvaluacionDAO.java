@@ -10,6 +10,7 @@ import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import lindley.desarrolloxcliente.to.download.ProfitTO;
+import lindley.desarrolloxcliente.to.download.ResumenTO;
 import net.msonic.lib.DBHelper;
 
 import android.content.ContentValues;
@@ -23,7 +24,27 @@ public class EvaluacionDAO {
 	@Inject	protected DBHelper dbHelper;
 	@Inject protected PeriodoTO periodoTO;
 	
-
+	
+	public List<ResumenTO> consultarMotivos(){
+		//
+		List<ResumenTO> lista = new ArrayList<ResumenTO>();
+		String SQL = "SELECT codigo,descripcion FROM motivo";
+		Cursor cursor = dbHelper.rawQuery(SQL,null);
+		
+		ResumenTO resumen;
+		
+		while(cursor.moveToNext()){
+			resumen = new ResumenTO();
+			resumen.valor=cursor.getString(cursor.getColumnIndex("codigo"));
+			resumen.descripcion=cursor.getString(cursor.getColumnIndex("descripcion"));
+			lista.add(resumen);
+		}
+		
+		cursor.close();
+		
+		return lista;
+		
+	}
 	public List<ProfitTO> consultarProfit(String anio,String mes,String codigoCliente,String codigoArticulo){
 		
 		List<ProfitTO> lista = new ArrayList<ProfitTO>();

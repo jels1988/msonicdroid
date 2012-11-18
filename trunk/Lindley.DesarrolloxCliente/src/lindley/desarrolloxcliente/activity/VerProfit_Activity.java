@@ -19,7 +19,7 @@ import com.google.inject.Inject;
 import com.steema.teechart.TChart;
 import com.steema.teechart.drawing.Color;
 import com.steema.teechart.drawing.StringAlignment;
-import com.steema.teechart.functions.Subtract;
+import com.steema.teechart.functions.Variance;
 import com.steema.teechart.legend.LegendAlignment;
 import com.steema.teechart.styles.Bar3D;
 import com.steema.teechart.styles.CustomBar.MarksLocation;
@@ -61,6 +61,7 @@ public class VerProfit_Activity extends ActivityBase {
 		// TODO Auto-generated method stub
 		inicializarRecursos();
 		super.onCreate(savedInstanceState);
+		this.validarConexionInternet=false;
 		
 		setContentView(R.layout.profitchartview_activity);
 		application = (MyApplication) getApplicationContext();
@@ -162,7 +163,7 @@ public class VerProfit_Activity extends ActivityBase {
 		
 		Bar3D bar = new Bar3D(chart.getChart());
 		//bar.setMultiBar(MultiBars.STACKED);
-		bar.setMarksLocation(MarksLocation.End);
+		bar.setMarksLocation(MarksLocation.Center);
 		bar.setMarksOnBar(true);
 		bar.getMarks().setStyle(MarksStyle.VALUE);
 		bar.getMarks().setTransparent(true);
@@ -175,7 +176,7 @@ public class VerProfit_Activity extends ActivityBase {
 	       
 	    Bar3D bar2 = new Bar3D(chart.getChart());
 		//bar2.setMultiBar(MultiBars.STACKED);
-		bar2.setMarksLocation(MarksLocation.End);
+		bar2.setMarksLocation(MarksLocation.Center);
 		bar2.setMarksOnBar(true);
 		bar2.getMarks().setStyle(MarksStyle.VALUE);
 		bar2.getMarks().setTransparent(true);
@@ -188,7 +189,7 @@ public class VerProfit_Activity extends ActivityBase {
 		
 		Bar3D bar3 = new Bar3D(chart.getChart());
 		//bar3.setMultiBar(MultiBars.STACKED);
-		bar3.setMarksLocation(MarksLocation.End);
+		bar3.setMarksLocation(MarksLocation.Center);
 		bar3.setMarksOnBar(true);
 		bar3.getMarks().setStyle(MarksStyle.VALUE);
 		bar3.getMarks().setTransparent(true);
@@ -203,7 +204,7 @@ public class VerProfit_Activity extends ActivityBase {
 		//bar4.setMultiBar(MultiBars.STACKED);
 		//bar4.setMarksLocation(MarksLocation.Start);
 		bar4.setMarksOnBar(true);
-		bar4.setMarksLocation(MarksLocation.End);
+		bar4.setMarksLocation(MarksLocation.Center);
 		bar4.getMarks().setStyle(MarksStyle.VALUE);
 		bar4.getMarks().setTransparent(true);
 		bar4.getMarks().getFont().setColor(Color.white);
@@ -237,15 +238,21 @@ public class VerProfit_Activity extends ActivityBase {
 	      chart.getLegend().setAlignment(LegendAlignment.BOTTOM);
 	      chart.getLegend().getFont().setColor(Color.BLACK);
 	      chart.getLegend().setTransparent(true);
-	      chart.getAxes().getLeft().setIncrement(10);
+	      chart.getAxes().getLeft().setIncrement(20);
 	      chart.getAxes().getBottom().getGrid().setVisible(true);
 	      
 	      
 		chart.getLegend().setVisible(true);
 		chart.getLegend().setAlignment(LegendAlignment.BOTTOM);
+		chart.getLegend().getFont().setSize(20);
 		chart.getHeader().setVisible(false);
-		chart.getHeader().getFont().setSize(20);
-		chart.getHeader().getFont().setColor(Color.BLACK);
+		
+		
+		chart.getFooter().getFont().setSize(20);
+		chart.getAxes().getLeft().setIncrement(5);
+		chart.getAxes().getLeft().getLabels().getFont().setSize(20);
+		chart.getAxes().getBottom().getLabels().getFont().setSize(20);
+		
 		//chart.getHeader().setText("Profit Story x SKU - " + nombre_articulo);
 		
 		/*Series bar = new Bar(chart.getChart());

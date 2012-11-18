@@ -20,7 +20,7 @@ public class EvaluacionTO {
 		comboMS=ConstantesApp.RESPUESTA_NO;
 	}
 	
-			@Expose()
+			@SerializedName("CID")
 	      public long id;
 	  
 		
@@ -63,6 +63,13 @@ public class EvaluacionTO {
 
 	        @SerializedName("SID")
 	        public long serverId;
+	        
+	        
+	        @SerializedName("MID")
+	        public String motivoId;
+	        
+	        @SerializedName("MOD")
+	        public String motivo;
 	        
 	        @SerializedName("ACT")
 	        public String activosLindley;

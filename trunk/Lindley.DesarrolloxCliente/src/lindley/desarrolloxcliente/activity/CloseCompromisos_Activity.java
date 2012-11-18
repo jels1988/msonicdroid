@@ -10,10 +10,12 @@ import lindley.desarrolloxcliente.to.upload.OportunidadTO;
 import net.msonic.lib.sherlock.ListBaseFragment;
 import roboguice.inject.InjectView;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -51,7 +53,7 @@ public class CloseCompromisos_Activity extends ListBaseFragment {
 
 	 @Override
 	protected void process() {
-		 oportunidades = new EfficientAdapter(getActivity(),evaluacion.oportunidades);
+		 oportunidades = new EfficientAdapter(getActivity(),evaluacion.codigoCliente,evaluacion.oportunidades);
 	 }
 	 
 	 @Override
@@ -64,11 +66,13 @@ public class CloseCompromisos_Activity extends ListBaseFragment {
 
 		 private final List<OportunidadTO> detalle;
 		 private final Activity context;
+		 private final String codigoCliente;
 		 
-		   public EfficientAdapter(Activity context,List<OportunidadTO> detalle){
+		   public EfficientAdapter(Activity context,String codigoCliente,List<OportunidadTO> detalle){
 				super(context, R.layout.closecompromisos_content, detalle);
 				this.detalle = detalle;
 				this.context = context;
+				this.codigoCliente=codigoCliente;
 			}
 		   
 		   
@@ -116,18 +120,22 @@ public class CloseCompromisos_Activity extends ListBaseFragment {
 				        holder.cboConcrecionCmp = (TextView) view.findViewById(R.id.cboConcrecionCmp);
 				        holder.chkViewConcrecion = (TextView) view.findViewById(R.id.chkViewConcrecion);
 				        
-				        /*holder.chkViewConcrecion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				        holder.btnProfit.setOnClickListener(new OnClickListener() {
+							
 							@Override
-							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+							public void onClick(View v) {
 								// TODO Auto-generated method stub
 								OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
-								if(isChecked){
-									oportunidadTO.concrecionCumple  = ConstantesApp.RESPUESTA_SI;
-								}else{
-									oportunidadTO.concrecionCumple  = ConstantesApp.RESPUESTA_NO;
-								}
+								
+								Intent i = new Intent(context, VerProfit_Activity.class);
+								i.putExtra(VerProfit_Activity.ANIO, String.valueOf(oportunidadTO.anio));
+								i.putExtra(VerProfit_Activity.MES, String.valueOf(oportunidadTO.mes) );
+								i.putExtra(VerProfit_Activity.CLIENTE, codigoCliente);
+								i.putExtra(VerProfit_Activity.ARTICULO,oportunidadTO.codigoArticulo);
+								i.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, oportunidadTO.articulo);
+								context.startActivity(i);
 							}
-						});*/
+						});
 				        
 				        
 				        holder.txViewSOVI =  (TextView) view.findViewById(R.id.txViewSOVI);

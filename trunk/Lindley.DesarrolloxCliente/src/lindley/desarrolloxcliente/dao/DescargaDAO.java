@@ -29,7 +29,11 @@ public class DescargaDAO {
 	@Inject protected PeriodoTO periodoTO;
 	
 	
-	
+	public void actualizarPuntos(String codigoCliente,long puntos){
+		
+		String[] args = new String[] {String.valueOf(puntos),codigoCliente};
+		dbHelper.execSQL("UPDATE cliente SET puntos = puntos + ?1 WHERE codigo = ?2",args);
+	}
 	public int factorCierre(String tipoAgrupacion,String codigoVariable,String fechaCierre){
 		
 		String SQL = "select factor from acelerador where tipoAgrupacion = ?1 and codigoVariable=?2 and ?3 between fechainicio and fechaFin";
@@ -143,6 +147,9 @@ public class DescargaDAO {
 		values.put("estado", evaluacionTO.estado);
 		values.put("serverId", evaluacionTO.serverId);
 		values.put("tieneCambios", evaluacionTO.tieneCambio);
+		values.put("motivoId", evaluacionTO.motivoId);
+		values.put("motivo", evaluacionTO.motivo);
+		
 		
 		long id= dbHelper.insertOrThrow("evaluacion", values);
 		

@@ -181,12 +181,12 @@ public final class ConstantesApp {
 		if(null==hora){
 			return factores;
 		}
-		String nuevaHora = hora.concat("00");
+		String nuevaHora = "00".concat(hora.concat("00"));
 		
 		if (nuevaHora.length() >= 6) {
-			factores[0]= nuevaHora.substring(0,2);
-			factores[1] = nuevaHora.substring(2,4);
-			factores[2] = nuevaHora.substring(4,6);
+			factores[0]= nuevaHora.substring(1,3);
+			factores[1] = nuevaHora.substring(3,5);
+			factores[2] = nuevaHora.substring(5,7);
 		}
 		
 		return factores;

@@ -14,6 +14,7 @@ import lindley.desarrolloxcliente.to.upload.PresentacionTO;
 import lindley.desarrolloxcliente.to.upload.SkuTO;
 import net.msonic.lib.DBHelper;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 
 import com.google.inject.Inject;
@@ -24,6 +25,16 @@ public class UploadDAO {
 	@Inject protected PeriodoTO periodoTO;
 	
 	
+	public void updateEvaluacionServerId(long id,long serverId){
+		
+		
+		ContentValues values = new ContentValues();
+		
+		values.put("serverId", serverId);
+		values.put("tieneCambios", ConstantesApp.EVALUACION_NO_TIENE_CAMBIOS);
+		dbHelper.update("evaluacion", values, "id=?", new String[]{String.valueOf(id)});
+	
+	}
 	
 	
 	public void deleteEvaluacion(long id){
@@ -107,7 +118,7 @@ public class UploadDAO {
 	public EvaluacionTO listarEvaluacionById(long id){
 		
 		
-		String SQL = "select id,clienteCodigo,activosLindley,codigoFe,usuario,fecha,hora,usuarioCierre,fechaCierre,horaCierre,estado,serverId,combosSS,combosMS,obsSS,obsMS " +
+		String SQL = "select id,clienteCodigo,activosLindley,codigoFe,usuario,fecha,hora,usuarioCierre,fechaCierre,horaCierre,estado,serverId,combosSS,combosMS,obsSS,obsMS,tieneCambios,motivoId,motivo " +
 					 "from evaluacion where id=?1";
 		
 		String[] args = new String[] {String.valueOf(id)};
@@ -139,7 +150,9 @@ public class UploadDAO {
 			
 			evaluacionTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
 			evaluacionTO.serverId =  cursor.getLong(cursor.getColumnIndex("serverId"));
-			
+			evaluacionTO.tieneCambio=cursor.getInt(cursor.getColumnIndex("tieneCambios"));
+			evaluacionTO.motivoId =  cursor.getString(cursor.getColumnIndex("motivoId"));
+			evaluacionTO.motivo =  cursor.getString(cursor.getColumnIndex("motivo"));
 			
 		}
 		cursor.close();
@@ -158,7 +171,8 @@ public class UploadDAO {
 	public List<EvaluacionTO> listarEvaluaciones(int limit){
 		List<EvaluacionTO> evaluaciones = new ArrayList<EvaluacionTO>();
 		
-		String SQL = "select id,clienteCodigo,activosLindley,codigoFe,usuario,fecha,hora,usuarioCierre,fechaCierre,horaCierre,estado,serverId,combosSS,combosMS,obsSS,obsMS " +
+		String SQL = "select id,clienteCodigo,activosLindley,codigoFe,usuario,fecha,hora,usuarioCierre,fechaCierre,horaCierre,estado,serverId," +
+					"combosSS,combosMS,obsSS,obsMS,motivoId,motivo " +
 					 "from evaluacion where tieneCambios=?1 limit " + String.valueOf(limit);
 		
 		String[] args = new String[] {String.valueOf(ConstantesApp.EVALUACION_TIENE_CAMBIOS)};
@@ -187,7 +201,8 @@ public class UploadDAO {
 			evaluacionTO.observacionMS =  cursor.getString(cursor.getColumnIndex("obsMS"));
 			
 			evaluacionTO.horaCierre =  cursor.getString(cursor.getColumnIndex("horaCierre"));
-			
+			evaluacionTO.motivo =  cursor.getString(cursor.getColumnIndex("motivo"));
+			evaluacionTO.motivoId =  cursor.getString(cursor.getColumnIndex("motivoId"));
 			evaluacionTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
 			evaluacionTO.serverId =  cursor.getLong(cursor.getColumnIndex("serverId"));
 			
@@ -201,6 +216,10 @@ public class UploadDAO {
 		
 		for (EvaluacionTO evaluacionTempTO : evaluaciones) {
 			listarPosicion(evaluacionTempTO);
+		}
+		
+		for (EvaluacionTO evaluacionTempTO : evaluaciones) {
+			listarPosicionCompromiso(evaluacionTempTO);
 		}
 		
 		for (EvaluacionTO evaluacionTempTO : evaluaciones) {

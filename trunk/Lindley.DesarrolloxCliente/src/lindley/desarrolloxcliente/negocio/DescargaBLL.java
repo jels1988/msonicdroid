@@ -193,6 +193,43 @@ public class DescargaBLL {
 		}
 	}
 	
+	public void cerrarEnCero(EvaluacionTO evaluacionTO,UsuarioTO usuarioTO){
+		try{
+			
+			evaluacionTO.fechaCierre=ConstantesApp.getFechaSistemaAS400();
+			evaluacionTO.horaCierre=ConstantesApp.getHoraSistemaAS400();
+			evaluacionTO.usuarioCierre=usuarioTO.codigoSap;
+			evaluacionTO.tieneCambio=ConstantesApp.EVALUACION_TIENE_CAMBIOS;
+			evaluacionTO.estado = ConstantesApp.OPORTUNIDAD_CERRADA;
+			
+			for (lindley.desarrolloxcliente.to.upload.OportunidadTO oportunidadTO : evaluacionTO.oportunidades) {
+				oportunidadTO.concrecionCumple=ConstantesApp.RESPUESTA_NO;
+				oportunidadTO.soviCumple=ConstantesApp.RESPUESTA_NO;
+				oportunidadTO.respetoPrecioCumple =ConstantesApp.RESPUESTA_NO;
+				oportunidadTO.respetoPrecioCumple =ConstantesApp.RESPUESTA_NO;
+				oportunidadTO.puntosGanados="0";
+			}
+			
+			for (lindley.desarrolloxcliente.to.upload.PosicionTO posicionTO : evaluacionTO.posiciones) {
+				posicionTO.confirmacion=ConstantesApp.RESPUESTA_NO;
+				posicionTO.puntosGanados="0";
+			}
+			
+			for (lindley.desarrolloxcliente.to.upload.PresentacionTO presentacionTO : evaluacionTO.presentaciones) {
+				presentacionTO.confirmacion=ConstantesApp.RESPUESTA_NO;
+				presentacionTO.puntosGanados="0";
+			}
+			
+			
+			
+			
+			saveEvaluacion(evaluacionTO);
+			
+		}catch(Exception ex){
+			Log.e(TAG_LOG, "UploadBLL.cerrarEnCero", ex);
+		}
+	}
+	
 	public void cerrarEvaluacion(EvaluacionTO evaluacionTO,UsuarioTO usuarioTO){
 		try{
 			dbHelper.openDataBase();
@@ -204,6 +241,8 @@ public class DescargaBLL {
 			evaluacionTO.horaCierre = ConstantesApp.getHoraSistemaAS400();
 			evaluacionTO.usuarioCierre = usuarioTO.codigoSap;
 			
+			long puntosGanados =0;
+			long puntosSugeridos=0;
 			if(evaluacionTO.id!=0){
 				descargaDAO.deleteEvaluacion(evaluacionTO.id);
 			}
@@ -218,8 +257,9 @@ public class DescargaBLL {
 				   ConstantesApp.isSI(oportunidadTO.respetoPrecioCumple) &&
 				   ConstantesApp.isSI(oportunidadTO.numeroSaboresCumple)){
 					
-					
-					oportunidadTO.puntosGanados = String.valueOf(Integer.parseInt(oportunidadTO.puntosSugeridos) * factorOportunidad);
+					puntosSugeridos=Integer.parseInt(oportunidadTO.puntosSugeridos) * factorOportunidad;
+					puntosGanados=+puntosSugeridos;
+					oportunidadTO.puntosGanados = String.valueOf(puntosSugeridos);
 				}
 				descargaDAO.insertEvaluacionOportunidad(evaluacionTO,oportunidadTO);
 			}
@@ -230,7 +270,9 @@ public class DescargaBLL {
 				
 				
 				if(ConstantesApp.isSI(posicionTO.confirmacion)){
-					posicionTO.puntosGanados = String.valueOf(Integer.parseInt(posicionTO.puntosSugeridos) * factorPosicion);
+					puntosSugeridos = Integer.parseInt(posicionTO.puntosSugeridos) * factorPosicion;
+					puntosGanados=+puntosSugeridos;
+					posicionTO.puntosGanados = String.valueOf(puntosSugeridos);
 				}
 				
 				descargaDAO.insertEvaluacionPosicion(evaluacionTO,posicionTO);
@@ -244,7 +286,9 @@ public class DescargaBLL {
 				
 				int factorPresentacion= descargaDAO.factorCierre(ConstantesApp.TIPO_AGRUPRACION_PRESENTACION,presentacionTO.codigoVariable, evaluacionTO.fechaCierre);
 				if(ConstantesApp.isSI(presentacionTO.confirmacion)){
-					presentacionTO.puntosGanados = String.valueOf(Integer.parseInt(presentacionTO.puntosSugeridos) * factorPresentacion);
+					puntosSugeridos = Integer.parseInt(presentacionTO.puntosSugeridos) * factorPresentacion;
+					puntosGanados=+puntosSugeridos;
+					presentacionTO.puntosGanados = String.valueOf(puntosSugeridos);
 				}
 				
 				descargaDAO.insertEvaluacionPresentacion(evaluacionTO,presentacionTO);
@@ -253,6 +297,9 @@ public class DescargaBLL {
 			for (lindley.desarrolloxcliente.to.upload.SkuTO skuTO : evaluacionTO.skus) {
 				descargaDAO.insertEvaluacionSkus(evaluacionTO,skuTO);
 			}
+			
+			descargaDAO.actualizarPuntos(evaluacionTO.codigoCliente,puntosGanados);
+			
 			
 			dbHelper.setTransactionSuccessful();
 		}catch(Exception ex){

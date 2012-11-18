@@ -1,14 +1,13 @@
 package lindley.desarrolloxcliente.activity;
 
+import net.msonic.lib.sherlock.ActivityBase;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
-import net.msonic.lib.ActivityBase;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -42,10 +41,10 @@ public class WebViewVerFoto_Activity extends ActivityBase {
 		 //mActionBar.setHomeLogo(R.drawable.header_logo);
 		 application = (MyApplication)getApplicationContext();
 		 cliente = application.getClienteTO();
-		 //mActionBar.setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
+		 setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 		 
-		WebSettings webSettings = wvwFoto.getSettings();
-		webSettings.setJavaScriptEnabled(true);
+		//WebSettings webSettings = wvwFoto.getSettings();
+		//webSettings.setJavaScriptEnabled(true);
 			    
 		wvwFoto.setWebViewClient(new WebViewClient(){
 

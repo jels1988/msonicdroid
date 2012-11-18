@@ -42,6 +42,7 @@ public class ConsultarResumen_Activity extends ListActivityBase {
 		
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		this.validarConexionInternet=false;
 		  getSupportActionBar().setDisplayShowHomeEnabled(false);
 	    
 		  setContentView(R.layout.consultarresumen_activity);   

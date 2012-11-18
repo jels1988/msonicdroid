@@ -135,5 +135,6 @@ public class OportunidadTO {
 	         @SerializedName("PRO")
 		     public String proceso;
 	         
+	         
 	         public List<AccionTradeTO> listaAccionesTrade;
 }

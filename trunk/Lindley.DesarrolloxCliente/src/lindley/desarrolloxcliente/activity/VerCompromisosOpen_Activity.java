@@ -23,12 +23,12 @@ import android.widget.EditText;
 public class VerCompromisosOpen_Activity extends net.msonic.lib.sherlock.ListActivityBase {
 
 	public static final String POSICION_KEY="POSICION_KEY";
-	
+	@InjectExtra(value=POSICION_KEY) private int posicion;
 	private EfficientAdapter adap;
 	private MyApplication application;
 	private ClienteTO cliente;
 	private EvaluacionTO evaluacion;
-	@InjectExtra(value=POSICION_KEY) private int posicion;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -220,10 +220,10 @@ public class ClosePosicion_Activity extends ListBaseFragment  {
 									
 									if(posicionCompromisoTO.codigoVariable.compareToIgnoreCase(ConstantesApp.VARIABLE_RED_ESTANDAR_ANAQUEL) == 0)
 									{
-										MyApplication application = (MyApplication)context.getApplicationContext();
-										application.compromisoPosicion=position;
 										
-										Intent intent = new Intent(context,VerCompromisosOpen_Activity.class);
+										
+										Intent intent = new Intent(context,VerCompromisosClose_Activity.class);
+										intent.putExtra(VerCompromisosOpen_Activity.POSICION_KEY, 0);
 										context.startActivity(intent);
 										
 									}
@@ -277,8 +277,9 @@ public class ClosePosicion_Activity extends ListBaseFragment  {
 									}else{
 
 										Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
-										intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionCompromisoTO.fotoFinal);
-										intent.putExtra(WebViewVerFoto_Activity.TITULO_FOTO, "Foto Final Compromiso.");
+										intent.putExtra(VerFoto_Activity.FILE_NAME, posicionCompromisoTO.fotoFinal);
+										//intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionCompromisoTO.fotoFinal);
+										//intent.putExtra(WebViewVerFoto_Activity.TITULO_FOTO, "Foto Final Compromiso.");
 										context.startActivity(intent);
 
 								    }		

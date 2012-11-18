@@ -1,8 +1,10 @@
 package lindley.desarrolloxcliente.activity;
 
+import java.util.List;
+
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.UploadBLL;
-import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
+import lindley.desarrolloxcliente.to.upload.EvaluacionProcessUploadTO;
 import lindley.desarrolloxcliente.ws.service.UploadEvaluacionesProxy;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +19,7 @@ public class UploadData_Activity extends ActivityBase {
 
 	public static final int CALCULAR_EVALUACIONES=1;
 	public static final int LISTAR_EVALUACIONES=2;
-	public static final int BORRAR_EVALUACIONES=3;
+	public static final int ACTUALIZAR_EVALUACIONES=3;
 	public static final int UPLOAD_EVALUACION=0;
 	
 	@Inject UploadEvaluacionesProxy uploadEvaluacionesProxy;
@@ -53,10 +55,23 @@ public class UploadData_Activity extends ActivityBase {
 		case UPLOAD_EVALUACION:
 			uploadEvaluacionesProxy.execute();
 			break;
-		case BORRAR_EVALUACIONES:
+		case ACTUALIZAR_EVALUACIONES:
+			
+			boolean isExito = uploadEvaluacionesProxy.isExito();
+			if(uploadEvaluacionesProxy.getResponse()!=null){
+				int status = uploadEvaluacionesProxy.getResponse().getStatus();
+				if ((isExito) && (status == 0)) {
+					List<EvaluacionProcessUploadTO> ids = uploadEvaluacionesProxy.getResponse().ids;
+					if(ids!=null){
+						uploadBLL.updateEvaluacionServerId(ids);
+					}
+				}
+			}
+			/*
 			for (EvaluacionTO evaluacionTO : uploadEvaluacionesProxy.evaluciones) {
 				uploadBLL.deleteEvaluacion(evaluacionTO.id);
-			}
+			}*/
+			
 			break;
 		default:
 			break;
@@ -80,9 +95,9 @@ public class UploadData_Activity extends ActivityBase {
 			processAsync(UPLOAD_EVALUACION);
 			break;
 		case UPLOAD_EVALUACION:
-			processAsync(BORRAR_EVALUACIONES);
+			processAsync(ACTUALIZAR_EVALUACIONES);
 			break;
-		case BORRAR_EVALUACIONES:
+		case ACTUALIZAR_EVALUACIONES:
 			processAsync(CALCULAR_EVALUACIONES);
 			break;
 		default:
