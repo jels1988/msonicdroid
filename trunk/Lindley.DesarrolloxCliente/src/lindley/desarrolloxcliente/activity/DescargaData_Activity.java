@@ -6,6 +6,7 @@ import java.util.List;
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.DescargaBLL;
+import lindley.desarrolloxcliente.negocio.UploadBLL;
 import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.upload.ProcesoInfoTO;
 import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProductoProxy;
@@ -28,6 +29,7 @@ import lindley.desarrolloxcliente.ws.service.DescargarPuntoProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarSkuProxy;
 
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,6 +46,7 @@ import android.widget.TextView;
 import com.actionbarsherlock.view.Window;
 import com.google.inject.Inject;
 
+import net.msonic.lib.MessageBox;
 import net.msonic.lib.sherlock.ListActivityBase;
 
 public class DescargaData_Activity extends ListActivityBase {
@@ -106,6 +109,7 @@ public class DescargaData_Activity extends ListActivityBase {
 	@Inject DescargarMotivoProxy descargarMotivoProxy;
 	
 	@Inject DescargaBLL descargaBLL;
+	@Inject UploadBLL uploadBLL;
 	@Inject PeriodoTO periodoTO;
 	private String TAG = DescargaData_Activity.class.getSimpleName();
 	@Inject SharedPreferences prefs;
@@ -123,24 +127,60 @@ public class DescargaData_Activity extends ListActivityBase {
 		
 		setContentView(R.layout.descargadata_activity);
 		
-		lista = new ArrayList<ProcesoInfoTO>();
-		adap = new EfficientAdapter(this,lista);
-		setListAdapter(adap);
+		long cantidadEvaluacionesPendientes = uploadBLL.getCantidadEvaluaciones();
 		
-		
-		processAsync(DESCARGAR_ACELERADOR);
-		processAsync(DESCARGAR_MOTIVO);
-		processAsync(DESCARGAR_PRODUCTO);
-		processAsync(DESCARGAR_OPORTUNIDAD);
-		processAsync(DESCARGAR_SKU);
-		processAsync(DESCARGAR_ACCIONESTRADE);
-		processAsync(DESCARGAR_ACCIONESTRADEPRODUCTO);
-		processAsync(DESCARGAR_CLIENTE);
-		processAsync(DESCARGAR_POSICION);
-		processAsync(DESCARGAR_PRESENTACION);
-		processAsync(DESCARGAR_PUNTO);
-		processAsync(DESCARGAR_PROFIT);
-		processAsync(DESCARGAR_EVALUACION);
+		if(cantidadEvaluacionesPendientes<=0){
+			boolean isConectadoInternet = isNetworkAvailable();
+	    	if(!isConectadoInternet){
+	    		
+	    		setSupportProgressBarIndeterminateVisibility(false);
+				MessageBox.showSimpleDialog(this, "Confirmaci—n", 
+						"Verificar conexi—n de Internet.", "Ok", new android.content.DialogInterface.OnClickListener(){
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						finish();
+					}
+					
+				});
+				
+	    		return;
+	    	}
+	    	Log.d(TAG, String.format("CONECTADO INTERNET %s",isConectadoInternet));
+			
+			
+			setSupportProgressBarIndeterminateVisibility(true);
+			lista = new ArrayList<ProcesoInfoTO>();
+			adap = new EfficientAdapter(this,lista);
+			setListAdapter(adap);
+			
+			
+			processAsync(DESCARGAR_ACELERADOR);
+			processAsync(DESCARGAR_MOTIVO);
+			processAsync(DESCARGAR_PRODUCTO);
+			processAsync(DESCARGAR_OPORTUNIDAD);
+			processAsync(DESCARGAR_SKU);
+			processAsync(DESCARGAR_ACCIONESTRADE);
+			processAsync(DESCARGAR_ACCIONESTRADEPRODUCTO);
+			processAsync(DESCARGAR_CLIENTE);
+			processAsync(DESCARGAR_POSICION);
+			processAsync(DESCARGAR_PRESENTACION);
+			processAsync(DESCARGAR_PUNTO);
+			processAsync(DESCARGAR_PROFIT);
+			processAsync(DESCARGAR_EVALUACION);
+			
+			
+		}else{
+			setSupportProgressBarIndeterminateVisibility(false);
+			MessageBox.showSimpleDialog(this, "Confirmaci—n", "Tiene evaluaciones pendientes, debe enviar sus evaluaciones.", "Ok", new android.content.DialogInterface.OnClickListener(){
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					finish();
+				}
+				
+			});
+		}
 		
 	
 		

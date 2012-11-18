@@ -17,6 +17,7 @@ import lindley.desarrolloxcliente.R;
 
 import com.actionbarsherlock.view.Window;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -27,6 +28,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import net.msonic.lib.Decompress;
+import net.msonic.lib.MessageBox;
 import net.msonic.lib.Decompress.UnCompressFileListener;
 import net.msonic.lib.sherlock.ListActivityBase;
 
@@ -54,8 +56,24 @@ public class DescargarFotos_Activity extends ListActivityBase {
 		super.onCreate(savedInstanceState);
 		this.inicializarRecursos();
 		this.mostrarWaitMessage=false;
-		//this.validarConexionInternet=true;
 		
+		boolean isConectadoInternet = isNetworkAvailable();
+    	if(!isConectadoInternet){
+    		
+    		setSupportProgressBarIndeterminateVisibility(false);
+			MessageBox.showSimpleDialog(this, "Confirmaci—n", 
+					"Verificar conexi—n de Internet.", "Ok", new android.content.DialogInterface.OnClickListener(){
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					finish();
+				}
+				
+			});
+			
+    		return;
+    	}
+    	
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.descargarfotos_activity);
 		 handler = new Handler();

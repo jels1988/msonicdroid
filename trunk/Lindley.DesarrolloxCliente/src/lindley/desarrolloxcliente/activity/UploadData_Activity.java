@@ -6,6 +6,7 @@ import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.UploadBLL;
 import lindley.desarrolloxcliente.to.upload.EvaluacionProcessUploadTO;
 import lindley.desarrolloxcliente.ws.service.UploadEvaluacionesProxy;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.util.Log;
 import com.actionbarsherlock.view.Window;
 import com.google.inject.Inject;
 
+import net.msonic.lib.MessageBox;
 import net.msonic.lib.sherlock.ActivityBase;
 
 public class UploadData_Activity extends ActivityBase {
@@ -35,8 +37,29 @@ public class UploadData_Activity extends ActivityBase {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		
+		
+		boolean isConectadoInternet = isNetworkAvailable();
+    	if(!isConectadoInternet){
+    		
+    		setSupportProgressBarIndeterminateVisibility(false);
+			MessageBox.showSimpleDialog(this, "Confirmaci—n", 
+					"Verificar conexi—n de Internet.", "Ok", new android.content.DialogInterface.OnClickListener(){
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					finish();
+				}
+				
+			});
+			
+    		return;
+    	}
+		
 		setContentView(R.layout.descargadata_activity);
 		setSupportProgressBarIndeterminateVisibility(true);
+		
+		
+		
 		processAsync(CALCULAR_EVALUACIONES);
 	}
 	
@@ -67,11 +90,6 @@ public class UploadData_Activity extends ActivityBase {
 					}
 				}
 			}
-			/*
-			for (EvaluacionTO evaluacionTO : uploadEvaluacionesProxy.evaluciones) {
-				uploadBLL.deleteEvaluacion(evaluacionTO.id);
-			}*/
-			
 			break;
 		default:
 			break;
