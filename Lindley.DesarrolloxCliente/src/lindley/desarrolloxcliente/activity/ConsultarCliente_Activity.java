@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,9 +58,13 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 	@Inject PeriodoTO 	periodoTO;
 	
 	private EfficientAdapter adap;
-
+	private String TAG = ConsultarCliente_Activity.class.getCanonicalName();
 	
-    /** Called when the activity is first created. */
+	
+
+
+
+	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	inicializarRecursos();
@@ -77,21 +82,26 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
        
 		MyApplication application = (MyApplication)contextProvider.get().getApplicationContext();
 		
-		int descarga_realizada = prefs.getInt(ConstantesApp.DESCARGA_KEY, ConstantesApp.DESCARGA_NO_REALIZADA);
-		if(descarga_realizada==ConstantesApp.DESCARGA_NO_REALIZADA){
-			Intent intent = new Intent(this,DescargaData_Activity.class);
-			startActivity(intent);
-			return;
-		}
-	
 		
+		application.codigoCliente = String.valueOf(Integer.parseInt(codigoCliente));
+		UsuarioTO usuarioTO = JSONHelper.desSerializar(usuario, UsuarioTO.class);
+		application.setUsuarioTO(usuarioTO);
+		periodoTO.deposito=usuarioTO.codigoDeposito;
+		periodoTO.ruta=usuarioTO.codigoRuta;
+		
+		Log.d(TAG, String.format("Usuario: %s", usuarioTO.codigoSap));
+		Log.d(TAG, String.format("anio: %s", periodoTO.anio));
+		Log.d(TAG, String.format("mes: %s", periodoTO.mes));
+		Log.d(TAG, String.format("deposito: %s", usuarioTO.codigoDeposito));
+		Log.d(TAG, String.format("ruta: %s", usuarioTO.codigoRuta));
+		Log.d(TAG, String.format("codigoCliente: %s", codigoCliente));
+		/*
 		if(codigoCliente!=null){
 			application.codigoCliente = codigoCliente;
 			UsuarioTO usuarioTO = JSONHelper.desSerializar(usuario, UsuarioTO.class);
 			application.setUsuarioTO(usuarioTO);
 			periodoTO.deposito=usuarioTO.codigoDeposito;
 			periodoTO.ruta=usuarioTO.codigoRuta;
-			processAsync();
 		}
 		else
 		{
@@ -109,10 +119,31 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 				codigoCliente = application.codigoCliente;
 				periodoTO.deposito=usuarioTO.codigoDeposito;
 				periodoTO.ruta=usuarioTO.codigoRuta;
+			}
+		}*/
+		
+		int descarga_realizada = prefs.getInt(ConstantesApp.DESCARGA_KEY, ConstantesApp.DESCARGA_NO_REALIZADA);
+		if(descarga_realizada==ConstantesApp.DESCARGA_NO_REALIZADA){
+			Intent intent = new Intent(this,DescargaData_Activity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra(DescargaData_Activity.USUARIO_KEY, usuario);
+			intent.putExtra(DescargaData_Activity.CODIGO_CLIENTE_KEY, codigoCliente);
+			startActivity(intent);
+			return;
+		}else{
+			if(application.cliente != null)
+			{
+				List<ClienteTO> clientes = new ArrayList<ClienteTO>();
+				clientes.add(application.cliente);
+				adap = new EfficientAdapter(this, clientes);
+				setListAdapter(adap);
+			}else{
+				codigoCliente = application.codigoCliente;
 				processAsync();
 			}
+			
 		}
-		
+	
 		
 		
 		

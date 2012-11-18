@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="lindley/desarrolloxcliente/activity/ConsultarPosicion_Activity.java" kind="src" path="src"/>
+	<classpathentry excluding="lindley/desarrolloxcliente/activity/ConsultarPosicion_Activity.java|lindley/desarrolloxcliente/activity/InformacionAdicional_Activity.java|lindley/desarrolloxcliente/activity/InformacionAdicionalFalse_Activity.java|lindley/desarrolloxcliente/activity/InformacionAdicionalClose_Activity.java|lindley/desarrolloxcliente/activity/CompromisoPrincipalClose_Resumen.java|lindley/desarrolloxcliente/activity/CompromisoPrincipalOpen_Resumen.java|lindley/desarrolloxcliente/activity/CompromisoPrincipalOpenFalse_Resumen.java" kind="src" path="src"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="lib" path="/Developer/Librerias/robotguice/guice-3.0-no_aop.jar"/>

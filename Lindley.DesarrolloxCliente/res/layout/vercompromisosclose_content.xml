@@ -27,9 +27,7 @@
                         
         </TableRow>
         
-             <View
-            android:layout_height="2dip"
-            android:background="#FF909090" />
+        
 
     </TableLayout>
     

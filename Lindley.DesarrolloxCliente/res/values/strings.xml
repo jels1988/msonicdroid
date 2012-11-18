@@ -164,6 +164,7 @@
     <string name="consultarcabecera_menu_detalle">Detalle</string>
     <string name="consultarcabecera_menu_resumen">Resumen</string>
     <string name="consultarcabecera_menu_cerrar">Cerrar</string>
+    <string name="consultarcabecera_menu_cerrar_cero">Cerrar en Cero</string>
     
     <string name="consultarcabecera_head_codigo">Código</string>
     <string name="consultarcabecera_head_fecha">Fecha</string>
