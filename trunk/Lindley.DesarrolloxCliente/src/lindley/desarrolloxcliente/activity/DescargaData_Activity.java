@@ -554,10 +554,7 @@ public class DescargaData_Activity extends ListActivityBase {
 	@Override
 	protected void process(int accion) throws Exception {
 		// TODO Auto-generated method stub
-		periodoTO.anio=2012;
-		periodoTO.mes=11;
-		periodoTO.deposito="30";
-		periodoTO.ruta="H1";
+		
 		
 		switch (accion) {
 		case DESCARGAR_PRODUCTO:
