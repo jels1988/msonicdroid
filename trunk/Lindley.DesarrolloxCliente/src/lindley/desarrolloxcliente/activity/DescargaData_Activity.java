@@ -3,6 +3,8 @@ package lindley.desarrolloxcliente.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import roboguice.inject.InjectExtra;
+
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.DescargaBLL;
@@ -29,7 +31,9 @@ import lindley.desarrolloxcliente.ws.service.DescargarPuntoProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarSkuProxy;
 
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,6 +55,13 @@ import net.msonic.lib.sherlock.ListActivityBase;
 
 public class DescargaData_Activity extends ListActivityBase {
 
+	public static final String CODIGO_CLIENTE_KEY="CODIGO_CLIENTE";
+	public static final String USUARIO_KEY="USUARIO";
+	
+	
+	@InjectExtra(value=CODIGO_CLIENTE_KEY,optional=true) String codigoCliente;
+	@InjectExtra(value=USUARIO_KEY,optional=true) String usuario;
+	
 	public static final int DESCARGAR_PRODUCTO=0;
 	public static final int DESCARGAR_OPORTUNIDAD=1;
 	public static final int DESCARGAR_SKU=2;
@@ -139,6 +150,7 @@ public class DescargaData_Activity extends ListActivityBase {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
+						
 						finish();
 					}
 					
@@ -155,19 +167,20 @@ public class DescargaData_Activity extends ListActivityBase {
 			setListAdapter(adap);
 			
 			
-			processAsync(DESCARGAR_ACELERADOR);
+			processAsync(DESCARGAR_CLIENTE);
+			/*processAsync(DESCARGAR_ACELERADOR);
 			processAsync(DESCARGAR_MOTIVO);
 			processAsync(DESCARGAR_PRODUCTO);
 			processAsync(DESCARGAR_OPORTUNIDAD);
 			processAsync(DESCARGAR_SKU);
 			processAsync(DESCARGAR_ACCIONESTRADE);
 			processAsync(DESCARGAR_ACCIONESTRADEPRODUCTO);
-			processAsync(DESCARGAR_CLIENTE);
+			
 			processAsync(DESCARGAR_POSICION);
 			processAsync(DESCARGAR_PRESENTACION);
 			processAsync(DESCARGAR_PUNTO);
 			processAsync(DESCARGAR_PROFIT);
-			processAsync(DESCARGAR_EVALUACION);
+			processAsync(DESCARGAR_EVALUACION);*/
 			
 			
 		}else{
@@ -204,6 +217,12 @@ public class DescargaData_Activity extends ListActivityBase {
 		if(contadorProcesos==0){
 			setSupportProgressBarIndeterminateVisibility(false);
 			savePreferencia(ConstantesApp.DESCARGA_REALIZADA);
+			Intent intent = new Intent(this,ConsultarCliente_Activity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra(DescargaData_Activity.USUARIO_KEY, usuario);
+			intent.putExtra(DescargaData_Activity.CODIGO_CLIENTE_KEY, codigoCliente);
+			startActivity(intent);
+			
 		}
 	}
 	

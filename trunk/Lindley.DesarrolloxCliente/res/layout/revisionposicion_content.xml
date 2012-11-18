@@ -43,7 +43,7 @@
         </TableRow>
         
          <TableRow>
-               <TextView style="@style/TextViewHead" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/posicionopen_content_observacion" android:gravity="center_vertical"/>
+               <TextView style="@style/TextViewHead" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/cumplio" android:gravity="center_vertical"/>
                <CheckBox
                 android:id="@+id/chkCumplio"
                 android:layout_width="30dip"
