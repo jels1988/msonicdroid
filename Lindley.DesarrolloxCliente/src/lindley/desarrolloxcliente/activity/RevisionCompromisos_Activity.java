@@ -11,10 +11,12 @@ import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
 import lindley.desarrolloxcliente.to.upload.OportunidadTO;
 import net.msonic.lib.sherlock.ListBaseFragment;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -55,7 +57,7 @@ public class RevisionCompromisos_Activity extends ListBaseFragment {
 
 	 @Override
 	protected void process() {
-		 oportunidades = new EfficientAdapter(getActivity(),evaluacion.oportunidades);
+		 oportunidades = new EfficientAdapter(getActivity(),evaluacion.codigoCliente,evaluacion.oportunidades);
 	 }
 	 
 	 @Override
@@ -68,11 +70,13 @@ public class RevisionCompromisos_Activity extends ListBaseFragment {
 
 		 private final List<OportunidadTO> detalle;
 		 private final Activity context;
+		 private final String codigoCliente;
 		 
-		   public EfficientAdapter(Activity context,List<OportunidadTO> detalle){
+		   public EfficientAdapter(Activity context,String codigoCliente,List<OportunidadTO> detalle){
 				super(context, R.layout.revisioncompromisos_content, detalle);
 				this.detalle = detalle;
 				this.context = context;
+				this.codigoCliente=codigoCliente;
 			}
 		   
 		   
@@ -133,7 +137,22 @@ public class RevisionCompromisos_Activity extends ListBaseFragment {
 							}
 						});
 				        
-				        
+				        holder.btnProfit.setOnClickListener(new OnClickListener() {
+							
+							@Override
+							public void onClick(View v) {
+								// TODO Auto-generated method stub
+								OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
+								
+								Intent i = new Intent(context, VerProfit_Activity.class);
+								i.putExtra(VerProfit_Activity.ANIO, String.valueOf(oportunidadTO.anio));
+								i.putExtra(VerProfit_Activity.MES, String.valueOf(oportunidadTO.mes) );
+								i.putExtra(VerProfit_Activity.CLIENTE, codigoCliente);
+								i.putExtra(VerProfit_Activity.ARTICULO,oportunidadTO.codigoArticulo);
+								i.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, oportunidadTO.articulo);
+								context.startActivity(i);
+							}
+						});
 				        holder.txViewSOVI =  (TextView) view.findViewById(R.id.txViewSOVI);
 				        holder.txViewSOVICmp =  (TextView) view.findViewById(R.id.txViewSOVICmp);
 				        holder.chkViewSOVI = (CheckBox) view.findViewById(R.id.chkViewSOVI);

@@ -5,6 +5,7 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.dao.UploadDAO;
 import lindley.desarrolloxcliente.to.ResumenValueTO;
+import lindley.desarrolloxcliente.to.upload.EvaluacionProcessUploadTO;
 import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
 import net.msonic.lib.DBHelper;
 
@@ -20,6 +21,25 @@ public class UploadBLL {
 	@Inject protected UploadDAO uploadDAO;
 	
 	
+	
+	
+	
+	public void updateEvaluacionServerId(List<EvaluacionProcessUploadTO> ids){
+		try{
+			dbHelper.openDataBase();
+			dbHelper.beginTransaction();
+			for (EvaluacionProcessUploadTO evaluacionProcessUploadTO : ids) {
+				uploadDAO.updateEvaluacionServerId(evaluacionProcessUploadTO.clientId, evaluacionProcessUploadTO.serverId);
+			}
+			
+			dbHelper.setTransactionSuccessful();
+		}catch(Exception ex){
+			Log.e(TAG_LOG, "UploadBLL.deleteEvaluacion", ex);
+		} finally {
+			dbHelper.endTransaction();
+			dbHelper.close();
+		}
+	}
 	public void deleteEvaluacion(long id){
 		try{
 			dbHelper.openDataBase();

@@ -209,9 +209,10 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
 						public void onClick(View v) {
 							// TODO Auto-generated method stub
 							OportunidadTO oportunidadTO = (OportunidadTO) viewHolder.chkSeleccion.getTag();
+							String[] fechas = ConstantesApp.getFechaFactoresAS400(ConstantesApp.getFechaSistemaAS400());
 							Intent profit = new Intent(context, VerProfit_Activity.class);
-							profit.putExtra(VerProfit_Activity.ANIO, "");
-							profit.putExtra(VerProfit_Activity.MES, "");
+							profit.putExtra(VerProfit_Activity.ANIO, fechas[0]);
+							profit.putExtra(VerProfit_Activity.MES, fechas[1]);
 							profit.putExtra(VerProfit_Activity.CLIENTE, codigoCliente);
 							profit.putExtra(VerProfit_Activity.ARTICULO, oportunidadTO.codigoArticulo);
 							profit.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, oportunidadTO.articulo);

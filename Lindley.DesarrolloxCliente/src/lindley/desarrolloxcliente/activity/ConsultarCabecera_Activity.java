@@ -1,5 +1,6 @@
 package lindley.desarrolloxcliente.activity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -14,8 +15,11 @@ import lindley.desarrolloxcliente.negocio.EvaluacionBLL;
 import lindley.desarrolloxcliente.negocio.UploadBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.EvaluacionTO;
+import lindley.desarrolloxcliente.to.download.ResumenTO;
 import lindley.desarrolloxcliente.ws.service.ActualizarEstadoProxy;
 import lindley.desarrolloxcliente.ws.service.ConsultarCabeceraProxy;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -52,6 +56,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	public static final int ACCION_DETALLE= 3;
 	public static final int ACCION_CERRAR= 4;
 	public static final int ACCION_RESUMEN= 5;
+	public static final int ACCION_CERRAR_EN_CERO= 6;
 	
 	public static final int ACCION_CARGAR_EVALUACION = 2;
 	public static final int ACCION_VERIFICAR_EVALUACION = 3;
@@ -61,6 +66,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	public static String codigoElimnar;
 	
 	List<EvaluacionTO> cabecera;
+	List<ResumenTO> motivos;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -78,7 +84,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 		cliente = application.cliente;
 		
 		getSupportActionBar().setSubtitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
-		
+		motivos = evaluacionBLL.consultarMotivos();
 		registerForContextMenu(getListView());
 		getListView().setFocusableInTouchMode(true);
 		 
@@ -89,6 +95,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
     @Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
+    	
     	processAsync();
 		super.onStart();
 	}
@@ -114,7 +121,8 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 
 
 	String fechaCierreEvaluacion="";
-
+	
+	
 	@Override
 	protected void process(int accion) {
 		switch (accion) {
@@ -136,13 +144,22 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 			int fechaMinCierre = Integer.parseInt(DateFormat.format("yyyyMMdd", calendar).toString());
 			int fechaActual = Integer.parseInt(ConstantesApp.getFechaSistemaAS400());
 			fechaCierreEvaluacion="";
-			if(fechaActual>=fechaMinCierre){
-				descargaBLL.cerrarEvaluacion(application.evaluacionActual, application.usuario);
-
-			}else{
-				fechaCierreEvaluacion = ConstantesApp.formatFecha(String.valueOf(fechaMinCierre));
-			}
 			
+			if(application.evaluacionActual.tieneCambio==ConstantesApp.EVALUACION_TIENE_CAMBIOS){
+				if(fechaActual>=fechaMinCierre){
+					descargaBLL.cerrarEvaluacion(application.evaluacionActual, application.usuario);
+	
+				}else{
+					fechaCierreEvaluacion = ConstantesApp.formatFecha(String.valueOf(fechaMinCierre));
+				}
+			}
+			break;
+		case ACCION_CERRAR_EN_CERO:
+			ResumenTO motivo = motivos.get(item_selected);			
+			application.evaluacionActual = uploadBLL.listarEvaluacionById(evaluacionId);
+			application.evaluacionActual.motivoId=motivo.valor;
+			application.evaluacionActual.motivo=motivo.descripcion;
+			descargaBLL.cerrarEnCero(application.evaluacionActual, application.usuario);			
 			break;
 		default:
 			break;
@@ -173,12 +190,21 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 			break;
 		case ACCION_CERRAR:
 			super.processOk(accion);
-			if(fechaCierreEvaluacion.equalsIgnoreCase("")){
-				processAsync();
-			}else{
-			 showToast("La evaluaci—n no puede cerrarse hasta el d’a: " + 	fechaCierreEvaluacion);
-			}
 			
+			if(application.evaluacionActual.tieneCambio==ConstantesApp.EVALUACION_TIENE_CAMBIOS){
+				if(fechaCierreEvaluacion.equalsIgnoreCase("")){
+					processAsync();
+				}else{
+				 showToast("La evaluaci—n no puede cerrarse hasta el d’a: " + 	fechaCierreEvaluacion);
+				}
+			}else{
+				showToast("La evaluaci—n debe ser editada antes de cerrarse");
+			}
+			break;
+		case ACCION_CERRAR_EN_CERO:
+			super.processOk(accion);
+			processAsync();
+			showToast("Evaluaci—n cerrada en cero.");
 			break;
 		default:
 			break;
@@ -218,7 +244,8 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
         	evaluacionId = evaluacionTO.id;
         	
         	if(evaluacionTO.fecha.compareTo(ConstantesApp.getFechaSistemaAS400())==0 && 
-        	   evaluacionTO.estado.compareTo(ConstantesApp.OPORTUNIDAD_ABIERTA)==0){
+        	   evaluacionTO.estado.compareTo(ConstantesApp.OPORTUNIDAD_ABIERTA)==0 && 
+        	   evaluacionTO.serverId==0){
         		getMenuInflater().inflate(R.menu.consultarcabecera_menu1, menu);
         	}else{
         		if(evaluacionTO.estado.compareTo(ConstantesApp.OPORTUNIDAD_ABIERTA)==0){
@@ -230,6 +257,63 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
         }
 	 }
 	
+	 int item_selected = 0; // select at 0
+	 
+	 @Override
+		protected Dialog onCreateDialog(int id) {
+			 
+			 List<String> lista = new ArrayList<String>();
+				
+				
+				for (ResumenTO motivo : motivos) {
+					lista.add(motivo.descripcion);
+				}
+			
+				
+				final String[] values = lista.toArray(new String[lista.size()]);
+				ArrayAdapter<String> arrAdap = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, android.R.id.text1, values);
+				
+
+				// TODO Auto-generated method stub
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setTitle("ÀCerrar en Cero?");
+				
+				builder.setSingleChoiceItems(arrAdap,item_selected, new DialogInterface.OnClickListener() {
+				    public void onClick(DialogInterface dialog, int item) {
+				    	item_selected = item;
+				    	
+				    }
+				});
+				
+				builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+					
+			        public void onClick(DialogInterface dialog, int id) {
+			        	/*if(item_selected>-1){
+				        	Intent i = new Intent(getApplicationContext(),ListaPedidosActivity.class);
+				        	i.putExtra(ListaPedidosActivity.CODIGO_CDA_KEY, codigoCda);
+				        	i.putExtra(ListaPedidosActivity.CODIGO_VENDEDOR_KEY, codigoVendedor);
+				        	i.putExtra(ListaPedidosActivity.NOMBRE_VENDEDOR_KEY, nombreVendedor);
+				        	startActivity(i);
+				        	
+			        	}*/
+			        	dialog.dismiss();
+			        	processAsync(ACCION_CERRAR_EN_CERO);
+			        }
+			    });
+
+				builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+
+			        public void onClick(DialogInterface dialog, int id) {
+			        	 dialog.dismiss();
+			        }
+			    });
+				
+				AlertDialog alert = builder.create();
+				alert.setCanceledOnTouchOutside(true);
+				return builder.create();
+				
+		 }
+	 
      @Override
      public boolean onContextItemSelected(MenuItem item) {
     	 switch (item.getItemId()) {
@@ -285,6 +369,9 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 			Intent intent = new Intent(this,ConsultarResumen_Activity.class);
 			intent.putExtra(ConsultarResumen_Activity.EVALUACION_ID_KEY, evaluacionId);
 			this.startActivity(intent);
+			break;
+		case R.id.mnuCerrarEnCero:
+			 showDialog(0);
 			break;
 		default:
 			break;

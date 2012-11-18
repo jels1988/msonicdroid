@@ -1,14 +1,14 @@
 package lindley.desarrolloxcliente.activity;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import roboguice.inject.InjectExtra;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.to.CompromisoPosicionTO;
-import net.msonic.lib.ListActivityBase;
-import roboguice.inject.InjectView;
+import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
+import lindley.desarrolloxcliente.to.upload.PosicionCompromisoTO;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,21 +17,35 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.thira.examples.actionbar.widget.ActionBar;
 
-public class VerCompromisosClose_Activity extends ListActivityBase {
+public class VerCompromisosClose_Activity  extends net.msonic.lib.sherlock.ListActivityBase {
 
-	@InjectView(R.id.actionBar)  	ActionBar 	mActionBar;
 	private EfficientAdapter adap;
 	private MyApplication application;
-	ClienteTO cliente;
+	private ClienteTO cliente;
+	private EvaluacionTO evaluacion;
+	
+	public static final String POSICION_KEY="POSICION_KEY";
+	@InjectExtra(value=POSICION_KEY) private int posicion;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		inicializarRecursos();
 		super.onCreate(savedInstanceState);
-		 setContentView(R.layout.vercompromisosclose_activity);    
+		setContentView(R.layout.vercompromisosclose_activity);    
+		this.validarConexionInternet=false;
+		 
+		
+		 setTitle(R.string.compromiso_title);
+		 application = (MyApplication)getApplicationContext();
+ 		 evaluacion = application.evaluacionActual;
+ 		 cliente = application.cliente;
+		 
+		 setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
+		 processAsync();
+		 
+		 /*
 		 mActionBar.setTitle(R.string.compromiso_title);
 		 application = (MyApplication)getApplicationContext();
 		 cliente = application.getClienteTO();
@@ -41,7 +55,21 @@ public class VerCompromisosClose_Activity extends ListActivityBase {
 		 if(application.listCompromiso == null)
 			 application.listCompromiso = new ArrayList<CompromisoPosicionTO>();
 		 adap = new EfficientAdapter(this, application.listCompromiso);
-		 setListAdapter(adap);
+		 setListAdapter(adap);*/
+	}
+	
+	@Override
+	protected void process() throws Exception {
+		// TODO Auto-generated method stub
+		adap = new EfficientAdapter(this, evaluacion.posiciones.get(posicion).compromisos);
+		super.process();
+	}
+	
+	@Override
+	protected void processOk() {
+		// TODO Auto-generated method stub
+		setListAdapter(adap);
+		super.processOk();
 	}
 	
 	public void btnGuardar_click(View view)
@@ -49,12 +77,12 @@ public class VerCompromisosClose_Activity extends ListActivityBase {
 		finish();
 	}
 		
-	public static class EfficientAdapter extends ArrayAdapter<CompromisoPosicionTO> {
+	public static class EfficientAdapter extends ArrayAdapter<PosicionCompromisoTO> {
     	
 		private Activity context;
-		public List<CompromisoPosicionTO> compromisos;
+		public List<PosicionCompromisoTO> compromisos;
 		
-		public EfficientAdapter(Activity context,List<CompromisoPosicionTO> compromisos ){
+		public EfficientAdapter(Activity context,List<PosicionCompromisoTO> compromisos ){
 			super(context, R.layout.vercompromisosclose_content, compromisos);
 			this.context=context;
 			this.compromisos = compromisos;
@@ -79,9 +107,9 @@ public class VerCompromisosClose_Activity extends ListActivityBase {
 			}
 			
 			final ViewHolder holder = (ViewHolder) view.getTag();
-			final CompromisoPosicionTO compromisoTO = compromisos.get(position);
+			final PosicionCompromisoTO compromisoTO = compromisos.get(position);
 			
-			holder.txViewComp.setText(compromisoTO.getDescripcion().toUpperCase());
+			holder.txViewComp.setText(compromisoTO.observacion);
 			return view;
 		}
 

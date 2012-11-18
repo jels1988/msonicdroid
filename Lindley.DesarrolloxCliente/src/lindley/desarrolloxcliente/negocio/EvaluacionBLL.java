@@ -13,6 +13,7 @@ import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import lindley.desarrolloxcliente.to.download.ProfitTO;
+import lindley.desarrolloxcliente.to.download.ResumenTO;
 import lindley.desarrolloxcliente.to.upload.PosicionTO;
 import lindley.desarrolloxcliente.to.upload.PresentacionTO;
 import net.msonic.lib.DBHelper;
@@ -30,6 +31,19 @@ public class EvaluacionBLL {
 	@Inject protected UploadDAO uploadDAO;
 	
 	
+	public List<ResumenTO> consultarMotivos(){
+		List<ResumenTO> motivos = new ArrayList<ResumenTO>();
+		try{
+			dbHelper.openDataBase();
+			motivos = evaluacionDAO.consultarMotivos();
+		}catch(Exception ex){
+			Log.e(TAG_LOG, "EvaluacionBLL.consultarMotivos", ex);
+		} finally {
+			dbHelper.close();
+		}	
+		
+		return motivos;
+	}
 	public List<ProfitTO> consultarProfit(String anio,String mes,String codigoCliente,String codigoArticulo){
 		
 		List<ProfitTO> profit = new ArrayList<ProfitTO>();

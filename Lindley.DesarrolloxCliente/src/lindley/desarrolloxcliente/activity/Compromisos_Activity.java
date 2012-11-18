@@ -15,7 +15,6 @@ import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Intent;
 import android.os.Bundle;
-import android.sax.StartElementListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -65,7 +64,7 @@ public class Compromisos_Activity extends ListBaseFragment {
 
 	 @Override
 	protected void process() {
-		 oportunidades = new EfficientAdapter(getActivity(),evaluacion.oportunidades);
+		 oportunidades = new EfficientAdapter(getActivity(),evaluacion.oportunidades,evaluacion.codigoCliente);
 	 }
 	 
 	 @Override
@@ -78,11 +77,13 @@ public class Compromisos_Activity extends ListBaseFragment {
 
 		 private final List<OportunidadTO> detalle;
 		 private final Activity context;
-		 
-		   public EfficientAdapter(Activity context,List<OportunidadTO> detalle){
+		 private final String codigoCliente;
+			 
+		   public EfficientAdapter(Activity context,List<OportunidadTO> detalle,String codigoCliente){
 				super(context, R.layout.compromisoopen_content, detalle);
 				this.detalle = detalle;
 				this.context = context;
+				this.codigoCliente=codigoCliente;
 			}
 		   
 		   
@@ -150,12 +151,14 @@ public class Compromisos_Activity extends ListBaseFragment {
 							@Override
 							public void onClick(View v) {
 								// TODO Auto-generated method stub
+								OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
+								
 								Intent i = new Intent(context, VerProfit_Activity.class);
-								i.putExtra(VerProfit_Activity.ANIO, "2012");
-								i.putExtra(VerProfit_Activity.MES, "10");
-								i.putExtra(VerProfit_Activity.CLIENTE, "5793");
-								i.putExtra(VerProfit_Activity.ARTICULO, "1015500");
-								i.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, "xxx");
+								i.putExtra(VerProfit_Activity.ANIO, String.valueOf(oportunidadTO.anio));
+								i.putExtra(VerProfit_Activity.MES, String.valueOf(oportunidadTO.mes) );
+								i.putExtra(VerProfit_Activity.CLIENTE, codigoCliente);
+								i.putExtra(VerProfit_Activity.ARTICULO,oportunidadTO.codigoArticulo);
+								i.putExtra(VerProfit_Activity.NOMBRE_ARTICULO, oportunidadTO.articulo);
 								context.startActivity(i);
 							}
 						});

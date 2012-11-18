@@ -129,7 +129,7 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 			}
 			else
 			{
-				this.posicionCompromisoFotoTO.fotoInicial = file_name;
+				this.posicionCompromisoFotoTO.fotoFinal = file_name;
 				fotoBLL.save(file_name);
 			}
 		}
@@ -226,10 +226,11 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 									
 									if(posicionCompromisoTO.codigoVariable.compareToIgnoreCase(ConstantesApp.VARIABLE_RED_ESTANDAR_ANAQUEL) == 0)
 									{
-										MyApplication application = (MyApplication)context.getApplicationContext();
-										application.compromisoPosicion=position;
+										/*MyApplication application = (MyApplication)context.getApplicationContext();
+										application.compromisoPosicion=position;*/
 										
-										Intent intent = new Intent(context,VerCompromisosOpen_Activity.class);
+										Intent intent = new Intent(context,VerCompromisosClose_Activity.class);
+										intent.putExtra(VerCompromisosOpen_Activity.POSICION_KEY, 0);
 										context.startActivity(intent);
 										
 									}
