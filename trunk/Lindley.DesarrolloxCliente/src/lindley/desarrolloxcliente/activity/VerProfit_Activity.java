@@ -9,7 +9,6 @@ import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.EvaluacionBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.download.ProfitTO;
-import lindley.desarrolloxcliente.ws.service.ConsultarProfitProxy;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
@@ -20,16 +19,15 @@ import com.google.inject.Inject;
 import com.steema.teechart.TChart;
 import com.steema.teechart.drawing.Color;
 import com.steema.teechart.drawing.StringAlignment;
+import com.steema.teechart.functions.Subtract;
 import com.steema.teechart.legend.LegendAlignment;
 import com.steema.teechart.styles.Bar3D;
 import com.steema.teechart.styles.CustomBar.MarksLocation;
 import com.steema.teechart.styles.MarksStyle;
-import com.steema.teechart.styles.MultiBars;
+import com.steema.teechart.styles.StringList;
 
 public class VerProfit_Activity extends ActivityBase {
 
-	@Inject
-	ConsultarProfitProxy consultarProfitProxy;
 	private TChart chart;
 	
 	List<ProfitTO> detalle;
@@ -69,7 +67,7 @@ public class VerProfit_Activity extends ActivityBase {
 		cliente = application.getClienteTO();
 		
 		setTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
-		
+		setSubTitle("Profit Story x SKU - " + nombre_articulo);
 		chart = new TChart(this);
 		linearLayout.addView(chart);
 		
@@ -77,9 +75,9 @@ public class VerProfit_Activity extends ActivityBase {
 		chart.getPanel().setBorderRound(7);
 		chart.getAspect().setView3D(true);
 		*/
-		//chart.getAxes().getLeft().getLabels().setValueFormat("#,##0.00;(#,##0.00)");
+		chart.getAxes().getLeft().getLabels().setValueFormat("#,##0.00;(#,##0.00)");
 		//selectTheme(1);
-		
+		StringList sLabel = new StringList(4);
 		
 		
 		
@@ -155,73 +153,65 @@ public class VerProfit_Activity extends ActivityBase {
 	public void selectSerie() {
 
 		chart.removeAllSeries();
-
-		/*ArrayList<String> indicadores = new ArrayList<String>();
-		ArrayList<String> variables = new ArrayList<String>();
-		for (ProfitTO profitTO : detalle) {
-
-			String nombreIndicadores = profitTO.indicador.toUpperCase();
-			if (!indicadores.contains(nombreIndicadores)) {
-				indicadores.add(nombreIndicadores.toUpperCase());
-			}
-
-			variables.add(cajasFisicas);
-			variables.add(margenActual);
-			variables.add(cajasFaltantes);
-			variables.add(margenFaltante);
-		}*/
-
 		
+		StringList sLabel = new StringList(4);
+		sLabel.add(0, "Proyecto CFS");
+		sLabel.add(1, "Ideal");
+		sLabel.add(2, "A–o Pasado");
+		sLabel.add(3, "Winner");
 		
 		Bar3D bar = new Bar3D(chart.getChart());
 		//bar.setMultiBar(MultiBars.STACKED);
-		bar.setMarksLocation(MarksLocation.Center);
-		bar.setMarksOnBar(true);
 		bar.setMarksLocation(MarksLocation.End);
+		bar.setMarksOnBar(true);
 		bar.getMarks().setStyle(MarksStyle.VALUE);
 		bar.getMarks().setTransparent(true);
 		bar.getMarks().getFont().setColor(Color.white);
-		bar.getMarks().getFont().setSize(13);
+		bar.getMarks().getFont().setSize(20);
 		bar.setColor(Color.fromCode("#FF0000"));
+		bar.setValueFormat("###,###");
 		bar.setTitle(cajasFisicas);
-		
+		bar.setLabels(sLabel);
 	       
 	    Bar3D bar2 = new Bar3D(chart.getChart());
 		//bar2.setMultiBar(MultiBars.STACKED);
-		bar2.setMarksLocation(MarksLocation.Start);
+		bar2.setMarksLocation(MarksLocation.End);
 		bar2.setMarksOnBar(true);
-		bar2.setMarksLocation(MarksLocation.Center);
 		bar2.getMarks().setStyle(MarksStyle.VALUE);
 		bar2.getMarks().setTransparent(true);
 		bar2.getMarks().getFont().setColor(Color.white);
-		bar2.getMarks().getFont().setSize(13);
+		bar2.getMarks().getFont().setSize(20);
 		bar2.setColor(Color.fromCode("#6d1e7e"));
+		bar2.setValueFormat("###,###");
 		bar2.setTitle(margenActual);
+		bar2.setLabels(sLabel);
 		
 		Bar3D bar3 = new Bar3D(chart.getChart());
 		//bar3.setMultiBar(MultiBars.STACKED);
-		bar3.setMarksLocation(MarksLocation.Start);
+		bar3.setMarksLocation(MarksLocation.End);
 		bar3.setMarksOnBar(true);
-		bar3.setMarksLocation(MarksLocation.Center);
 		bar3.getMarks().setStyle(MarksStyle.VALUE);
 		bar3.getMarks().setTransparent(true);
 		bar3.getMarks().getFont().setColor(Color.white);
-		bar3.getMarks().getFont().setSize(13);
-		bar3.setColor(Color.fromCode("#6d1e7e"));
+		bar3.getMarks().getFont().setSize(20);
+		bar3.setColor(Color.fromCode("#66CD00"));
+		bar3.setValueFormat("###,###");
 		bar3.setTitle(cajasFaltantes);
+		bar3.setLabels(sLabel);
 		
 		Bar3D bar4 = new Bar3D(chart.getChart());
 		//bar4.setMultiBar(MultiBars.STACKED);
-		bar4.setMarksLocation(MarksLocation.Start);
+		//bar4.setMarksLocation(MarksLocation.Start);
 		bar4.setMarksOnBar(true);
-		bar4.setMarksLocation(MarksLocation.Center);
+		bar4.setMarksLocation(MarksLocation.End);
 		bar4.getMarks().setStyle(MarksStyle.VALUE);
 		bar4.getMarks().setTransparent(true);
 		bar4.getMarks().getFont().setColor(Color.white);
-		bar4.getMarks().getFont().setSize(13);
-		bar4.setColor(Color.fromCode("#6d1e7e"));
+		bar4.getMarks().getFont().setSize(20);
+		bar4.setValueFormat("###,###");
+		bar4.setColor(Color.fromCode("#00688B"));
 		bar4.setTitle(margenFaltante);
-		
+		bar4.setLabels(sLabel);
 		
 		
 
@@ -242,7 +232,7 @@ public class VerProfit_Activity extends ActivityBase {
 	      chart.getAxes().getLeft().getLabels().getFont().setColor(Color.BLACK);
 	      chart.getAxes().getBottom().getLabels().getFont().setColor(Color.BLACK);
 	      chart.getHeader().getFont().setColor(Color.BLACK);
-	      chart.getHeader().getFont().setSize(15);
+	      chart.getHeader().getFont().setSize(20);
 	      chart.getHeader().setAlignment(StringAlignment.NEAR);
 	      chart.getLegend().setAlignment(LegendAlignment.BOTTOM);
 	      chart.getLegend().getFont().setColor(Color.BLACK);
@@ -255,7 +245,8 @@ public class VerProfit_Activity extends ActivityBase {
 		chart.getLegend().setAlignment(LegendAlignment.BOTTOM);
 		chart.getHeader().setVisible(false);
 		chart.getHeader().getFont().setSize(20);
-		
+		chart.getHeader().getFont().setColor(Color.BLACK);
+		//chart.getHeader().setText("Profit Story x SKU - " + nombre_articulo);
 		
 		/*Series bar = new Bar(chart.getChart());
 		bar.setTitle(variables.get(0).toString());
