@@ -3,8 +3,6 @@ package lindley.desarrolloxcliente.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import roboguice.inject.InjectExtra;
-
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.DescargaBLL;
@@ -30,10 +28,7 @@ import lindley.desarrolloxcliente.ws.service.DescargarProfitProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarPuntoProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarSkuProxy;
 
-
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -55,12 +50,6 @@ import net.msonic.lib.sherlock.ListActivityBase;
 
 public class DescargaData_Activity extends ListActivityBase {
 
-	public static final String CODIGO_CLIENTE_KEY="CODIGO_CLIENTE";
-	public static final String USUARIO_KEY="USUARIO";
-	
-	
-	@InjectExtra(value=CODIGO_CLIENTE_KEY,optional=true) String codigoCliente;
-	@InjectExtra(value=USUARIO_KEY,optional=true) String usuario;
 	
 	public static final int DESCARGAR_PRODUCTO=0;
 	public static final int DESCARGAR_OPORTUNIDAD=1;
@@ -217,12 +206,12 @@ public class DescargaData_Activity extends ListActivityBase {
 		if(contadorProcesos==0){
 			setSupportProgressBarIndeterminateVisibility(false);
 			savePreferencia(ConstantesApp.DESCARGA_REALIZADA);
-			Intent intent = new Intent(this,ConsultarCliente_Activity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			/*Intent intent = new Intent(this,ConsultarCliente_Activity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 			intent.putExtra(DescargaData_Activity.USUARIO_KEY, usuario);
 			intent.putExtra(DescargaData_Activity.CODIGO_CLIENTE_KEY, codigoCliente);
-			startActivity(intent);
-			
+			startActivity(intent);*/
+			finish();
 		}
 	}
 	
