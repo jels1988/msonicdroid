@@ -2,6 +2,8 @@ package lindley.desarrolloxcliente.activity;
 
 import java.util.List;
 
+import roboguice.inject.InjectView;
+
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.UploadBLL;
 import lindley.desarrolloxcliente.to.upload.EvaluacionProcessUploadTO;
@@ -10,14 +12,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.actionbarsherlock.view.Window;
 import com.google.inject.Inject;
 
 import net.msonic.lib.MessageBox;
-import net.msonic.lib.sherlock.ActivityBase;
+import net.msonic.lib.sherlock.ListActivityBase;
 
-public class UploadData_Activity extends ActivityBase {
+public class UploadData_Activity extends ListActivityBase {
 
 	public static final int CALCULAR_EVALUACIONES=1;
 	public static final int LISTAR_EVALUACIONES=2;
@@ -26,6 +29,7 @@ public class UploadData_Activity extends ActivityBase {
 	
 	@Inject UploadEvaluacionesProxy uploadEvaluacionesProxy;
 	@Inject UploadBLL uploadBLL;
+	@InjectView(R.id.txtTitulo) TextView txtTitulo;
 	
 	private long cantidadEvaluaciones=0;
 	
@@ -55,11 +59,8 @@ public class UploadData_Activity extends ActivityBase {
     		return;
     	}
 		
-		setContentView(R.layout.descargadata_activity);
+		setContentView(R.layout.uploaddata_activity);
 		setSupportProgressBarIndeterminateVisibility(true);
-		
-		
-		
 		processAsync(CALCULAR_EVALUACIONES);
 	}
 	
@@ -100,7 +101,10 @@ public class UploadData_Activity extends ActivityBase {
 	protected void processOk(int accion) {
 		switch (accion) {
 		case CALCULAR_EVALUACIONES:
+			
+			txtTitulo.setText(String.format("Evaluaciones Pendientes %s", cantidadEvaluaciones));
 			Log.d("Evaluaciones Pendientes", String.valueOf(cantidadEvaluaciones));
+			
 			if(cantidadEvaluaciones>0){
 				processAsync(LISTAR_EVALUACIONES);
 				Intent servicioFoto = new Intent("lindley.desarrolloxcliente.uploadFileService");
