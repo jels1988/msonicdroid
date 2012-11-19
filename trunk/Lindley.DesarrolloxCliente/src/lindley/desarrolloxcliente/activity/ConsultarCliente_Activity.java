@@ -125,9 +125,7 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 		int descarga_realizada = prefs.getInt(ConstantesApp.DESCARGA_KEY, ConstantesApp.DESCARGA_NO_REALIZADA);
 		if(descarga_realizada==ConstantesApp.DESCARGA_NO_REALIZADA){
 			Intent intent = new Intent(this,DescargaData_Activity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.putExtra(DescargaData_Activity.USUARIO_KEY, usuario);
-			intent.putExtra(DescargaData_Activity.CODIGO_CLIENTE_KEY, codigoCliente);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent);
 			return;
 		}else{
@@ -153,6 +151,47 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
     
    
     @Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+    	Log.d(TAG, "onRestart");
+    	MyApplication application = (MyApplication)contextProvider.get().getApplicationContext();
+    	if(application.cliente != null)
+		{
+			List<ClienteTO> clientes = new ArrayList<ClienteTO>();
+			clientes.add(application.cliente);
+			adap = new EfficientAdapter(this, clientes);
+			setListAdapter(adap);
+		}else{
+			codigoCliente = application.codigoCliente;
+			processAsync();
+		}
+		super.onRestart();
+	}
+
+
+
+
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		Log.d(TAG, "onStart");
+		super.onStart();
+	}
+
+
+
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		Log.d(TAG, "onResume");
+		super.onResume();
+	}
+
+
+
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
     	   MenuInflater menuInflater = new MenuInflater(this);
