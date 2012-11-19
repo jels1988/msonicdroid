@@ -260,8 +260,8 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 									}else{
 
 										Intent intent = new Intent("lindley.desarrolloxcliente.verfoto");
-										intent.putExtra(WebViewVerFoto_Activity.NOMBRE_FOTO, posicionCompromisoTO.fotoInicial);
-										intent.putExtra(WebViewVerFoto_Activity.TITULO_FOTO, "Foto Inicial Compromiso.");
+										intent.putExtra(VerFoto_Activity.FILE_NAME, posicionCompromisoTO.fotoInicial);
+										//intent.putExtra(WebViewVerFoto_Activity.TITULO_FOTO, "Foto Inicial Compromiso.");
 										context.startActivity(intent);
 
 								    }						
