@@ -157,7 +157,7 @@ public class DescargaData_Activity extends ListActivityBase {
 			
 			
 			processAsync(DESCARGAR_CLIENTE);
-			/*processAsync(DESCARGAR_ACELERADOR);
+			processAsync(DESCARGAR_ACELERADOR);
 			processAsync(DESCARGAR_MOTIVO);
 			processAsync(DESCARGAR_PRODUCTO);
 			processAsync(DESCARGAR_OPORTUNIDAD);
@@ -169,7 +169,7 @@ public class DescargaData_Activity extends ListActivityBase {
 			processAsync(DESCARGAR_PRESENTACION);
 			processAsync(DESCARGAR_PUNTO);
 			processAsync(DESCARGAR_PROFIT);
-			processAsync(DESCARGAR_EVALUACION);*/
+			processAsync(DESCARGAR_EVALUACION);
 			
 			
 		}else{
