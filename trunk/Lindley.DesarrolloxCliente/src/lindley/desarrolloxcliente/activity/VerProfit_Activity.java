@@ -19,7 +19,6 @@ import com.google.inject.Inject;
 import com.steema.teechart.TChart;
 import com.steema.teechart.drawing.Color;
 import com.steema.teechart.drawing.StringAlignment;
-import com.steema.teechart.functions.Variance;
 import com.steema.teechart.legend.LegendAlignment;
 import com.steema.teechart.styles.Bar3D;
 import com.steema.teechart.styles.CustomBar.MarksLocation;
@@ -78,7 +77,7 @@ public class VerProfit_Activity extends ActivityBase {
 		*/
 		chart.getAxes().getLeft().getLabels().setValueFormat("#,##0.00;(#,##0.00)");
 		//selectTheme(1);
-		StringList sLabel = new StringList(4);
+		//StringList sLabel = new StringList(4);
 		
 		
 		
@@ -162,66 +161,64 @@ public class VerProfit_Activity extends ActivityBase {
 		sLabel.add(3, "Winner");
 		
 		Bar3D bar = new Bar3D(chart.getChart());
-		//bar.setMultiBar(MultiBars.STACKED);
 		bar.setMarksLocation(MarksLocation.Center);
-		bar.setMarksOnBar(true);
-		bar.getMarks().setStyle(MarksStyle.VALUE);
-		bar.getMarks().setTransparent(true);
-		bar.getMarks().getFont().setColor(Color.white);
+		bar.getMarks().getFont().setColor(Color.BLACK);
 		bar.getMarks().getFont().setSize(20);
 		bar.setColor(Color.fromCode("#FF0000"));
 		bar.setValueFormat("###,###");
 		bar.setTitle(cajasFisicas);
-		bar.setLabels(sLabel);
+		//bar.setLabels(sLabel);
 	       
 	    Bar3D bar2 = new Bar3D(chart.getChart());
-		//bar2.setMultiBar(MultiBars.STACKED);
-		bar2.setMarksLocation(MarksLocation.Center);
-		bar2.setMarksOnBar(true);
-		bar2.getMarks().setStyle(MarksStyle.VALUE);
-		bar2.getMarks().setTransparent(true);
-		bar2.getMarks().getFont().setColor(Color.white);
+		bar2.getMarks().getFont().setColor(Color.BLACK);
 		bar2.getMarks().getFont().setSize(20);
 		bar2.setColor(Color.fromCode("#6d1e7e"));
 		bar2.setValueFormat("###,###");
 		bar2.setTitle(margenActual);
-		bar2.setLabels(sLabel);
+		//bar2.setLabels(sLabel);
 		
 		Bar3D bar3 = new Bar3D(chart.getChart());
-		//bar3.setMultiBar(MultiBars.STACKED);
-		bar3.setMarksLocation(MarksLocation.Center);
-		bar3.setMarksOnBar(true);
-		bar3.getMarks().setStyle(MarksStyle.VALUE);
-		bar3.getMarks().setTransparent(true);
-		bar3.getMarks().getFont().setColor(Color.white);
+		bar3.getMarks().getFont().setColor(Color.BLACK);
 		bar3.getMarks().getFont().setSize(20);
 		bar3.setColor(Color.fromCode("#66CD00"));
 		bar3.setValueFormat("###,###");
 		bar3.setTitle(cajasFaltantes);
-		bar3.setLabels(sLabel);
+		//bar3.setLabels(sLabel);
 		
 		Bar3D bar4 = new Bar3D(chart.getChart());
 		//bar4.setMultiBar(MultiBars.STACKED);
 		//bar4.setMarksLocation(MarksLocation.Start);
-		bar4.setMarksOnBar(true);
-		bar4.setMarksLocation(MarksLocation.Center);
-		bar4.getMarks().setStyle(MarksStyle.VALUE);
-		bar4.getMarks().setTransparent(true);
-		bar4.getMarks().getFont().setColor(Color.white);
+		//bar4.setMarksOnBar(true);
+		//bar4.setMarksLocation(MarksLocation.Center);
+		//bar4.getMarks().setStyle(MarksStyle.VALUE);
+		//bar4.getMarks().setTransparent(true);
+		bar4.getMarks().getFont().setColor(Color.BLACK);
 		bar4.getMarks().getFont().setSize(20);
 		bar4.setValueFormat("###,###");
 		bar4.setColor(Color.fromCode("#00688B"));
 		bar4.setTitle(margenFaltante);
-		bar4.setLabels(sLabel);
+		//bar4.setLabels(sLabel);
 		
+		
+		
+		Bar3D bar5 = new Bar3D(chart.getChart());
+		bar5.setShowInLegend(false);
+		bar5.setLabels(sLabel);
+		
+		bar5.add();
+		bar5.add();
+		bar5.add();
+		bar5.add();
+
+
+		chart.addSeries(bar);
 		
 
 		for (ProfitTO profitTO : detalle) {
-
-				bar.add( profitTO.cajasFisica);
-				bar2.add( profitTO.margenActual);
-				bar3.add( profitTO.cajasFisicasFaltante);
-				bar4.add( profitTO.margenFaltante);
+				bar.add(profitTO.cajasFisica);
+				bar2.add(profitTO.margenActual);
+				bar3.add(profitTO.cajasFisicasFaltante);
+				bar4.add(profitTO.margenFaltante);
 		}
 		
 
@@ -232,6 +229,8 @@ public class VerProfit_Activity extends ActivityBase {
 	      chart.getWalls().setVisible(false);
 	      chart.getAxes().getLeft().getLabels().getFont().setColor(Color.BLACK);
 	      chart.getAxes().getBottom().getLabels().getFont().setColor(Color.BLACK);
+	      
+	      
 	      chart.getHeader().getFont().setColor(Color.BLACK);
 	      chart.getHeader().getFont().setSize(20);
 	      chart.getHeader().setAlignment(StringAlignment.NEAR);
@@ -240,7 +239,6 @@ public class VerProfit_Activity extends ActivityBase {
 	      chart.getLegend().setTransparent(true);
 	      chart.getAxes().getLeft().setIncrement(20);
 	      chart.getAxes().getBottom().getGrid().setVisible(true);
-	      
 	      
 		chart.getLegend().setVisible(true);
 		chart.getLegend().setAlignment(LegendAlignment.BOTTOM);

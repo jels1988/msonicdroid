@@ -125,6 +125,11 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 	
 	@Override
 	protected void process(int accion) {
+		String fechaCreacion = "0";
+		String[] factores = null;
+		GregorianCalendar calendar = null;
+		int fechaMinCierre = 0;
+		int fechaActual = 0;
 		switch (accion) {
 		case ACCION_ELIMINAR:
 			evaluacionBLL.delete(evaluacionId);
@@ -137,12 +142,13 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 			break;
 		case ACCION_CERRAR:
 			application.evaluacionActual = uploadBLL.listarEvaluacionById(evaluacionId);
-			String fechaCreacion = application.evaluacionActual.fechaCreacion;
-			String[] factores = ConstantesApp.getFechaFactoresAS400(fechaCreacion);
-			GregorianCalendar calendar = new GregorianCalendar(Integer.parseInt(factores[0]),Integer.parseInt(factores[1])-1,1);
+			fechaCreacion = application.evaluacionActual.fechaCreacion;
+			factores = ConstantesApp.getFechaFactoresAS400(fechaCreacion);
+			calendar = new GregorianCalendar(Integer.parseInt(factores[0]),Integer.parseInt(factores[1])-1,1);
 			calendar.add(Calendar.MONTH, 1);
-			int fechaMinCierre = Integer.parseInt(DateFormat.format("yyyyMMdd", calendar).toString());
-			int fechaActual = Integer.parseInt(ConstantesApp.getFechaSistemaAS400());
+			
+			fechaMinCierre = Integer.parseInt(DateFormat.format("yyyyMMdd", calendar).toString());
+			fechaActual = Integer.parseInt(ConstantesApp.getFechaSistemaAS400());
 			fechaCierreEvaluacion="";
 			
 			if(application.evaluacionActual.tieneCambio==ConstantesApp.EVALUACION_TIENE_CAMBIOS){
@@ -155,11 +161,26 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 			}
 			break;
 		case ACCION_CERRAR_EN_CERO:
-			ResumenTO motivo = motivos.get(item_selected);			
 			application.evaluacionActual = uploadBLL.listarEvaluacionById(evaluacionId);
-			application.evaluacionActual.motivoId=motivo.valor;
-			application.evaluacionActual.motivo=motivo.descripcion;
-			descargaBLL.cerrarEnCero(application.evaluacionActual, application.usuario);			
+			fechaCreacion = application.evaluacionActual.fechaCreacion;
+			factores = ConstantesApp.getFechaFactoresAS400(fechaCreacion);
+			calendar = new GregorianCalendar(Integer.parseInt(factores[0]),Integer.parseInt(factores[1])-1,1);
+			calendar.add(Calendar.MONTH, 1);
+			fechaMinCierre = Integer.parseInt(DateFormat.format("yyyyMMdd", calendar).toString());
+			fechaActual = Integer.parseInt(ConstantesApp.getFechaSistemaAS400());
+			fechaCierreEvaluacion="";
+			
+				if(fechaActual>=fechaMinCierre){
+					//descargaBLL.cerrarEvaluacion(application.evaluacionActual, application.usuario);
+					ResumenTO motivo = motivos.get(item_selected);			
+					application.evaluacionActual = uploadBLL.listarEvaluacionById(evaluacionId);
+					application.evaluacionActual.motivoId=motivo.valor;
+					application.evaluacionActual.motivo=motivo.descripcion;
+					descargaBLL.cerrarEnCero(application.evaluacionActual, application.usuario);
+	
+				}else{
+					fechaCierreEvaluacion = ConstantesApp.formatFecha(String.valueOf(fechaMinCierre));
+				}
 			break;
 		default:
 			break;
@@ -203,8 +224,17 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 			break;
 		case ACCION_CERRAR_EN_CERO:
 			super.processOk(accion);
-			processAsync();
-			showToast("Evaluaci—n cerrada en cero.");
+			
+			
+			
+				if(fechaCierreEvaluacion.equalsIgnoreCase("")){
+					processAsync();
+				}else{
+				 showToast("La evaluaci—n no puede cerrarse hasta el d’a: " + 	fechaCierreEvaluacion);
+				}
+	
+			
+			
 			break;
 		default:
 			break;
