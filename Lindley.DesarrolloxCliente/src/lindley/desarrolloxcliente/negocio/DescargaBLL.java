@@ -52,6 +52,28 @@ public class DescargaBLL {
 		}
 	}
 	
+	
+	public void saveArticulo(List<lindley.desarrolloxcliente.to.download.ArticuloTO> lista){
+		synchronized(MyLock)	{
+			try{
+				dbHelper.openDataBase();
+				dbHelper.beginTransaction();
+				
+				descargaDAO.deleteArticuloCanje();
+				
+				for (lindley.desarrolloxcliente.to.download.ArticuloTO articuloTO : lista) {
+					descargaDAO.insertArticuloCanje(articuloTO);
+				}
+				dbHelper.setTransactionSuccessful();
+			}catch(Exception ex){
+				Log.e(TAG_LOG, "DescargaBLL.saveArticulo", ex);
+			} finally {
+				dbHelper.endTransaction();
+				dbHelper.close();
+			}
+		}
+	}
+	
 	public void saveAcelerador(List<lindley.desarrolloxcliente.to.download.AceleradorTO> lista){
 		synchronized(MyLock)	{
 			try{

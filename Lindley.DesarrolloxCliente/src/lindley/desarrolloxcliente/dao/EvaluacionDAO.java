@@ -9,6 +9,7 @@ import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
+import lindley.desarrolloxcliente.to.download.ArticuloTO;
 import lindley.desarrolloxcliente.to.download.ProfitTO;
 import lindley.desarrolloxcliente.to.download.ResumenTO;
 import net.msonic.lib.DBHelper;
@@ -24,6 +25,31 @@ public class EvaluacionDAO {
 	@Inject	protected DBHelper dbHelper;
 	@Inject protected PeriodoTO periodoTO;
 	
+	
+	
+	public List<ArticuloTO> consultarArticulos(int puntos){
+		//
+		List<ArticuloTO> lista = new ArrayList<ArticuloTO>();
+		
+		String SQL = "SELECT codigo,descripcion,puntos FROM articulo_canje where puntos<?1 order by puntos DESC";
+		String[] args = new String[] {String.valueOf(puntos)};
+		Cursor cursor = dbHelper.rawQuery(SQL,args);
+		
+		ArticuloTO articuloTO;
+		
+		while(cursor.moveToNext()){
+			articuloTO = new ArticuloTO();
+			articuloTO.codigoArticulo=cursor.getString(cursor.getColumnIndex("codigo"));
+			articuloTO.descripcionArticulo=cursor.getString(cursor.getColumnIndex("descripcion"));
+			articuloTO.puntosCanje=cursor.getString(cursor.getColumnIndex("puntos"));
+			lista.add(articuloTO);
+		}
+		
+		cursor.close();
+		
+		return lista;
+		
+	}
 	
 	public List<ResumenTO> consultarMotivos(){
 		//

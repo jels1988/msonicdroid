@@ -12,6 +12,7 @@ import lindley.desarrolloxcliente.to.upload.ProcesoInfoTO;
 import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProductoProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarAceleradorProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarArticuloCanjeProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarClienteProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionOportunidadProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarEvaluacionPosicionCompromisoProxy;
@@ -69,6 +70,7 @@ public class DescargaData_Activity extends ListActivityBase {
 	public static final int DESCARGAR_PROFIT=15;
 	public static final int DESCARGAR_MOTIVO=16;
 	public static final int DESCARGAR_ACELERADOR=17;
+	public static final int DESCARGAR_ARTICULO_CANJE=18;
 	
 	public static final int GUARDAR_PRODUCTO=20;
 	public static final int GUARDAR_OPORTUNIDAD=21;
@@ -88,6 +90,7 @@ public class DescargaData_Activity extends ListActivityBase {
 	public static final int GUARDAR_PROFIT=35;
 	public static final int GUARDAR_MOTIVO=36;
 	public static final int GUARDAR_ACELERADOR=37;
+	public static final int GUARDAR_ARTICULO_CANJE=38;
 	
 	@Inject DescargarProductosProxy descagarProductosProxy;
 	@Inject DescargarOportunidadesProxy descargarOportunidadesProxy;
@@ -107,6 +110,7 @@ public class DescargaData_Activity extends ListActivityBase {
 	@Inject DescargarProfitProxy descargarProfitProxy;
 	@Inject DescargarAceleradorProxy descargarAceleradorProxy;
 	@Inject DescargarMotivoProxy descargarMotivoProxy;
+	@Inject DescargarArticuloCanjeProxy descargarArticuloCanjeProxy;
 	
 	@Inject DescargaBLL descargaBLL;
 	@Inject UploadBLL uploadBLL;
@@ -156,6 +160,7 @@ public class DescargaData_Activity extends ListActivityBase {
 			setListAdapter(adap);
 			
 			
+			processAsync(DESCARGAR_ARTICULO_CANJE);
 			processAsync(DESCARGAR_CLIENTE);
 			processAsync(DESCARGAR_ACELERADOR);
 			processAsync(DESCARGAR_MOTIVO);
@@ -206,11 +211,6 @@ public class DescargaData_Activity extends ListActivityBase {
 		if(contadorProcesos==0){
 			setSupportProgressBarIndeterminateVisibility(false);
 			savePreferencia(ConstantesApp.DESCARGA_REALIZADA);
-			/*Intent intent = new Intent(this,ConsultarCliente_Activity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-			intent.putExtra(DescargaData_Activity.USUARIO_KEY, usuario);
-			intent.putExtra(DescargaData_Activity.CODIGO_CLIENTE_KEY, codigoCliente);
-			startActivity(intent);*/
 			finish();
 		}
 	}
@@ -550,7 +550,23 @@ public class DescargaData_Activity extends ListActivityBase {
 				p37.estado=ProcesoInfoTO.ESTADO_DB;
 				adap.notifyDataSetChanged();
 				break;
-			
+			case DESCARGAR_ARTICULO_CANJE:
+				ProcesoInfoTO p18 = processById(DESCARGAR_ARTICULO_CANJE);
+				p18.processId=DESCARGAR_ARTICULO_CANJE;
+				p18.descripcion="Descargando Articulos Canje";
+				p18.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+				if(!lista.contains(p18)){
+					lista.add(p18);
+				}
+				adap.notifyDataSetChanged();
+				break;
+			case GUARDAR_ARTICULO_CANJE:
+				ProcesoInfoTO p38 = processById(GUARDAR_ACELERADOR-20);
+				p38.processId=DESCARGAR_ARTICULO_CANJE;
+				p38.descripcion="Guardando Articulos Canje";
+				p38.estado=ProcesoInfoTO.ESTADO_DB;
+				adap.notifyDataSetChanged();
+				break;
 		}
 		
 		
@@ -638,7 +654,10 @@ public class DescargaData_Activity extends ListActivityBase {
 		case DESCARGAR_ACELERADOR:
 			descargarAceleradorProxy.execute();
 			break;
-			
+		
+		case DESCARGAR_ARTICULO_CANJE:
+			descargarArticuloCanjeProxy.execute();
+			break;
 		case GUARDAR_PRODUCTO:
 			
 			descargaBLL.saveProducto(descagarProductosProxy.getResponse().productos);
@@ -709,6 +728,9 @@ public class DescargaData_Activity extends ListActivityBase {
 			
 		case GUARDAR_MOTIVO:
 			descargaBLL.saveMotivo(descargarMotivoProxy.getResponse().motivos);
+			break;
+		case GUARDAR_ARTICULO_CANJE:
+			descargaBLL.saveArticulo(descargarArticuloCanjeProxy.getResponse().articulo);
 			break;
 		default:
 			break;
@@ -1309,6 +1331,39 @@ public class DescargaData_Activity extends ListActivityBase {
 				break;
 			}
 			
+			
+			case DESCARGAR_ARTICULO_CANJE:{
+				ProcesoInfoTO p1 = processById(DESCARGAR_ARTICULO_CANJE);
+				boolean isExito = descargarArticuloCanjeProxy.isExito();
+				if(descargarArticuloCanjeProxy.getResponse()!=null){
+					int status = descargarArticuloCanjeProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Articulos Canje Descargado";
+						p1.isExito=true;
+						processAsync(GUARDAR_ARTICULO_CANJE);
+					}else{
+						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
+						p1.descripcion="Error descargando Articulos Canje";
+						p1.isExito=false;
+					}
+				}else{
+					p1.estado = ProcesoInfoTO.ESTADO_ERROR;
+					p1.descripcion="Error descargando Articulos Canje";
+					p1.isExito=false;
+				}
+				adap.notifyDataSetChanged();
+				break;
+			}
+			case GUARDAR_ARTICULO_CANJE:
+			{
+				ProcesoInfoTO p1 = processById(GUARDAR_ARTICULO_CANJE-20);
+				p1.descripcion="Articulos Canje guardados";
+				p1.isExito=true;
+				p1.estado = ProcesoInfoTO.ESTADO_OK;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
 		}
 		removeContadorProcesos();
 		
@@ -1793,6 +1848,23 @@ public class DescargaData_Activity extends ListActivityBase {
 			case GUARDAR_EVALUACION:{
 				ProcesoInfoTO p1 = processById(GUARDAR_EVALUACION-20);
 				p1.descripcion="Error guardando Evaluaciones";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case DESCARGAR_ARTICULO_CANJE:{
+				removeContadorProcesos();
+				ProcesoInfoTO p1 = processById(DESCARGAR_ARTICULO_CANJE);
+				p1.descripcion="Error descargando articulos canje";
+				p1.isExito=false;
+				adap.notifyDataSetChanged();
+				break;
+			}
+			
+			case GUARDAR_ARTICULO_CANJE:{
+				ProcesoInfoTO p1 = processById(GUARDAR_ARTICULO_CANJE-20);
+				p1.descripcion="Error guardando articulos canje";
 				p1.isExito=false;
 				adap.notifyDataSetChanged();
 				break;

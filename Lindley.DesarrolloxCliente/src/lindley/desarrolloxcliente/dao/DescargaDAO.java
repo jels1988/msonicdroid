@@ -7,6 +7,7 @@ import lindley.desarrolloxcliente.to.ResumenValueTO;
 import lindley.desarrolloxcliente.to.download.AccionTradeProductoTO;
 import lindley.desarrolloxcliente.to.download.AccionTradeTO;
 import lindley.desarrolloxcliente.to.download.AceleradorTO;
+import lindley.desarrolloxcliente.to.download.ArticuloTO;
 import lindley.desarrolloxcliente.to.download.ClienteDescargaTO;
 import lindley.desarrolloxcliente.to.download.OportunidadTO;
 import lindley.desarrolloxcliente.to.download.PosicionTO;
@@ -81,6 +82,25 @@ public class DescargaDAO {
 		return id;
 		
 	}
+	
+	public void deleteArticuloCanje(){
+		dbHelper.delete("articulo_canje", null, null);
+	}
+	
+	public long insertArticuloCanje(ArticuloTO articuloTO){
+		ContentValues values = new ContentValues();
+		
+		values.put("codigo", articuloTO.codigoArticulo);
+		values.put("descripcion", articuloTO.descripcionArticulo);
+		values.put("puntos", articuloTO.puntosCanje);
+		
+		long id= dbHelper.insertOrThrow("articulo_canje", values);
+		articuloTO.id = id;
+		
+		return id;
+		
+	}
+	
 	public void deleteAcelerador(){
 		dbHelper.delete("acelerador", null, null);
 	}
