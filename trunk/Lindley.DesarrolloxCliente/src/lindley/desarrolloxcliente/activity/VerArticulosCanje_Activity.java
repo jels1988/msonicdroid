@@ -2,13 +2,15 @@ package lindley.desarrolloxcliente.activity;
 
 import java.util.List;
 
+import com.google.inject.Inject;
+
+import roboguice.inject.InjectExtra;
+
 import net.msonic.lib.sherlock.ListActivityBase;
 
-import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
-import lindley.desarrolloxcliente.to.ArticuloCanjeTO;
-import lindley.desarrolloxcliente.to.ClienteTO;
-import lindley.desarrolloxcliente.ws.service.ConsultarArticulosCanjeProxy;
+import lindley.desarrolloxcliente.negocio.EvaluacionBLL;
+import lindley.desarrolloxcliente.to.download.ArticuloTO;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,14 +19,21 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.google.inject.Inject;
 
 public class VerArticulosCanje_Activity extends ListActivityBase {
 	
-	private MyApplication application;
-	ClienteTO cliente;
-	@Inject ConsultarArticulosCanjeProxy consultarArticulosCanjeProxy;
-	int puntos = 0;
+	
+	public static final String CODIGO_CLIENTE_KEY="CODIGO_CLIENTE_KEY";
+	public static final String NOMBRE_CLIENTE_KEY="NOMBRE_CLIENTE_KEY";
+	public static final String PUNTOS_CLIENTE_KEY="PUNTOS_CLIENTE_KEY";
+	
+	
+	@InjectExtra(CODIGO_CLIENTE_KEY) String codigoCliente;
+	@InjectExtra(NOMBRE_CLIENTE_KEY) String nombreCliente;
+	@InjectExtra(PUNTOS_CLIENTE_KEY) int puntosCliente;
+	@Inject EvaluacionBLL evaluacionBLL;
+	
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,74 +41,34 @@ public class VerArticulosCanje_Activity extends ListActivityBase {
 		inicializarRecursos();
 		super.onCreate(savedInstanceState);
 		 setContentView(R.layout.verarticuloscanje_activity);    
-		 //mActionBar.setTitle(R.string.verproductoscanje_activity_title);
-		 application = (MyApplication)getApplicationContext();
-		 cliente = application.getClienteTO();
-		 //mActionBar.setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
-		 //mActionBar.setHomeLogo(R.drawable.header_logo);
-		 puntos = cliente.nroPuntos;
+		 setTitle(R.string.verproductoscanje_activity_title);
+		 setSubTitle(String.format("%s - %s", codigoCliente ,nombreCliente));
 		 processAsync();
 	}
 	
-	@Override
-	protected boolean executeAsyncPre() {
-		// TODO Auto-generated method stub
-		boolean tieneError=false;
-		
-		if( puntos == 0 ){		
-			showToast("El cliente no cuenta con puntos.");			
-			tieneError=true;
-			finish();
-		}
-		
-		return !tieneError;
-	}
 
+
+	EfficientAdapter adapter = null;
 	@Override
 	protected void process()  throws Exception{
-		consultarArticulosCanjeProxy.puntos = this.puntos;
-		consultarArticulosCanjeProxy.execute();
+		List<ArticuloTO> articulos = evaluacionBLL.consultarArticulos(puntosCliente);
+		adapter = new EfficientAdapter(this, articulos);
 	}
 	
 	@Override
 	protected void processOk() {
-		boolean isExito = consultarArticulosCanjeProxy.isExito();
-
-		if (isExito) {
-			int status = consultarArticulosCanjeProxy.getResponse().getStatus();
-			if (status == 0) {
-				List<ArticuloCanjeTO> listArticuloCanjeTO = consultarArticulosCanjeProxy.getResponse().listArticuloCanje;
-				EfficientAdapter adapter = new EfficientAdapter(this, listArticuloCanjeTO);
-				setListAdapter(adapter);
-				super.processOk();
-			} else {
-				processError();
-			}
-
-		} else {
-			processError();
-		}
+		setListAdapter(adapter);
+		super.processOk();
 
 	}
 
-	@Override
-	protected void processError() {
-		String message;
-		if (consultarArticulosCanjeProxy.getResponse() != null) {
-			message = consultarArticulosCanjeProxy.getResponse().getDescripcion();
-		} else {
-			message = error_generico_process;
-		}
-		super.processError();
-		showToast(message);
-	}
-	
-	public static class EfficientAdapter extends ArrayAdapter<ArticuloCanjeTO> {
+
+	public static class EfficientAdapter extends ArrayAdapter<ArticuloTO> {
     	
 		private Activity context;
-		public List<ArticuloCanjeTO> listArticuloCanje;
+		public List<ArticuloTO> listArticuloCanje;
 		
-		public EfficientAdapter(Activity context,List<ArticuloCanjeTO> listArticuloCanje ){
+		public EfficientAdapter(Activity context,List<ArticuloTO> listArticuloCanje ){
 			super(context, R.layout.verarticuloscanje_content, listArticuloCanje);
 			this.context=context;
 			this.listArticuloCanje = listArticuloCanje;
@@ -128,7 +97,7 @@ public class VerArticulosCanje_Activity extends ListActivityBase {
 			
 			final ViewHolder holder = (ViewHolder) view.getTag();
 			
-			final ArticuloCanjeTO articuloCanje = this.listArticuloCanje.get(position);
+			final ArticuloTO articuloCanje = this.listArticuloCanje.get(position);
 			
 			holder.txViewArticulo.setText(articuloCanje.descripcionArticulo);
 			holder.txViewPuntos.setText(articuloCanje.puntosCanje);

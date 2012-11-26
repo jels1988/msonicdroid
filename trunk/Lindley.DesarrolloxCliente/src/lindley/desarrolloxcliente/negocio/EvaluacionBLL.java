@@ -12,6 +12,7 @@ import lindley.desarrolloxcliente.to.OportunidadTO;
 import lindley.desarrolloxcliente.to.PosicionCompromisoTO;
 import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
+import lindley.desarrolloxcliente.to.download.ArticuloTO;
 import lindley.desarrolloxcliente.to.download.ProfitTO;
 import lindley.desarrolloxcliente.to.download.ResumenTO;
 import lindley.desarrolloxcliente.to.upload.PosicionTO;
@@ -30,6 +31,21 @@ public class EvaluacionBLL {
 	@Inject protected EvaluacionDAO evaluacionDAO;
 	@Inject protected UploadDAO uploadDAO;
 	
+	
+	
+	public List<ArticuloTO> consultarArticulos(int puntos){
+		List<ArticuloTO> articulos = new ArrayList<ArticuloTO>();
+		try{
+			dbHelper.openDataBase();
+			articulos = evaluacionDAO.consultarArticulos(puntos);
+		}catch(Exception ex){
+			Log.e(TAG_LOG, "EvaluacionBLL.consultarArticulos", ex);
+		} finally {
+			dbHelper.close();
+		}	
+		
+		return articulos;
+	}
 	
 	public List<ResumenTO> consultarMotivos(){
 		List<ResumenTO> motivos = new ArrayList<ResumenTO>();

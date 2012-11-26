@@ -464,7 +464,11 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
+					ClienteTO clienteTemporal = (ClienteTO) getItem(position);
 					Intent intent = new Intent("lindley.desarrolloxcliente.verarticuloscanje");
+					intent.putExtra(VerArticulosCanje_Activity.CODIGO_CLIENTE_KEY, clienteTemporal.codigo);
+					intent.putExtra(VerArticulosCanje_Activity.NOMBRE_CLIENTE_KEY, clienteTemporal.nombre);
+					intent.putExtra(VerArticulosCanje_Activity.PUNTOS_CLIENTE_KEY, clienteTemporal.nroPuntos);
 					context.startActivity(intent);					
 				}
 			});
