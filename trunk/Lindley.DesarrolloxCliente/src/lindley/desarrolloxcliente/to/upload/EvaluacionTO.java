@@ -92,4 +92,7 @@ public class EvaluacionTO {
 	        @Expose()
 	        public int tieneCambio;
 	        
+	        @Expose()
+	        public String cliente;
+	        
 }

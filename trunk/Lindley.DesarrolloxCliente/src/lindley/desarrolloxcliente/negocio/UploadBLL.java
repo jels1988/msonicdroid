@@ -73,6 +73,24 @@ public class UploadBLL {
 		return evaluacion;
 	}
 
+	public List<EvaluacionTO> listarEvaluaciones(){
+		
+		List<EvaluacionTO> evaluaciones=null;
+		
+		try{
+			dbHelper.openDataBase();
+			
+			evaluaciones = uploadDAO.listarEvaluaciones();
+			
+		}catch(Exception ex){
+			Log.e(TAG_LOG, "UploadBLL.listarEvaluaciones", ex);
+		} finally {
+			dbHelper.close();
+		}
+		
+		return evaluaciones;
+	}
+
 	public List<EvaluacionTO> listarEvaluaciones(int limit){
 		
 		List<EvaluacionTO> evaluaciones=null;

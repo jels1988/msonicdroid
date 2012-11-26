@@ -168,12 +168,14 @@ public class UploadDAO {
 		
 	}
 	
-	public List<EvaluacionTO> listarEvaluaciones(int limit){
+	
+	public List<EvaluacionTO> listarEvaluaciones(){
+		
 		List<EvaluacionTO> evaluaciones = new ArrayList<EvaluacionTO>();
 		
-		String SQL = "select id,clienteCodigo,activosLindley,codigoFe,usuario,fecha,hora,usuarioCierre,fechaCierre,horaCierre,estado,serverId," +
-					"combosSS,combosMS,obsSS,obsMS,motivoId,motivo " +
-					 "from evaluacion where tieneCambios=?1 limit " + String.valueOf(limit);
+		String SQL = "select c.nombre,e.id,e.clienteCodigo,e.activosLindley,e.codigoFe,e.usuario,e.fecha,e.hora,e.usuarioCierre,e.fechaCierre,e.horaCierre,e.estado,e.serverId," +
+					"e.combosSS,e.combosMS,e.obsSS,e.obsMS,e.motivoId,e.motivo,e.tieneCambios " +
+					 "from evaluacion e inner join cliente c on e.clienteCodigo = c.codigo where tieneCambios=?1";
 		
 		String[] args = new String[] {String.valueOf(ConstantesApp.EVALUACION_TIENE_CAMBIOS)};
 		
@@ -205,6 +207,54 @@ public class UploadDAO {
 			evaluacionTO.motivoId =  cursor.getString(cursor.getColumnIndex("motivoId"));
 			evaluacionTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
 			evaluacionTO.serverId =  cursor.getLong(cursor.getColumnIndex("serverId"));
+			evaluacionTO.cliente = cursor.getString(cursor.getColumnIndex("nombre"));
+			evaluacionTO.tieneCambio = cursor.getInt(cursor.getColumnIndex("tieneCambios"));
+			
+			evaluaciones.add(evaluacionTO);
+		}
+		cursor.close();
+		
+		return evaluaciones;
+	}
+	
+	public List<EvaluacionTO> listarEvaluaciones(int limit){
+		List<EvaluacionTO> evaluaciones = new ArrayList<EvaluacionTO>();
+		
+		String SQL = "select c.nombre,e.id,e.clienteCodigo,e.activosLindley,e.codigoFe,e.usuario,e.fecha,e.hora,e.usuarioCierre,e.fechaCierre,e.horaCierre,e.estado,e.serverId," +
+					"e.combosSS,e.combosMS,e.obsSS,e.obsMS,e.motivoId,e.motivo " +
+					 "from evaluacion e inner join cliente c on e.clienteCodigo = c.codigo where tieneCambios=?1 limit " + String.valueOf(limit);
+		
+		String[] args = new String[] {String.valueOf(ConstantesApp.EVALUACION_TIENE_CAMBIOS)};
+		
+		Cursor cursor = dbHelper.rawQuery(SQL,args);
+		
+		EvaluacionTO evaluacionTO;
+		
+		while(cursor.moveToNext()){
+			evaluacionTO = new EvaluacionTO();
+			evaluacionTO.id = cursor.getLong(cursor.getColumnIndex("id"));
+			evaluacionTO.codigoCliente =  cursor.getString(cursor.getColumnIndex("clienteCodigo"));
+			evaluacionTO.activosLindley =  cursor.getString(cursor.getColumnIndex("activosLindley"));
+			evaluacionTO.codigoFDE =  cursor.getString(cursor.getColumnIndex("codigoFe"));
+			evaluacionTO.usuarioCreacion =  cursor.getString(cursor.getColumnIndex("usuario"));
+			evaluacionTO.fechaCreacion =  cursor.getString(cursor.getColumnIndex("fecha"));
+			evaluacionTO.horaCreacion =  cursor.getString(cursor.getColumnIndex("hora"));
+			
+			evaluacionTO.usuarioCierre =  cursor.getString(cursor.getColumnIndex("usuarioCierre"));
+			evaluacionTO.fechaCierre =  cursor.getString(cursor.getColumnIndex("fechaCierre"));
+			evaluacionTO.horaCierre =  cursor.getString(cursor.getColumnIndex("horaCierre"));
+			
+			evaluacionTO.comboSS =  cursor.getString(cursor.getColumnIndex("combosSS"));
+			evaluacionTO.comboMS =  cursor.getString(cursor.getColumnIndex("combosMS"));
+			evaluacionTO.observacionSS =  cursor.getString(cursor.getColumnIndex("obsSS"));
+			evaluacionTO.observacionMS =  cursor.getString(cursor.getColumnIndex("obsMS"));
+			
+			evaluacionTO.horaCierre =  cursor.getString(cursor.getColumnIndex("horaCierre"));
+			evaluacionTO.motivo =  cursor.getString(cursor.getColumnIndex("motivo"));
+			evaluacionTO.motivoId =  cursor.getString(cursor.getColumnIndex("motivoId"));
+			evaluacionTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
+			evaluacionTO.serverId =  cursor.getLong(cursor.getColumnIndex("serverId"));
+			evaluacionTO.cliente = cursor.getString(cursor.getColumnIndex("nombre"));
 			
 			evaluaciones.add(evaluacionTO);
 		}
