@@ -63,7 +63,9 @@ public class EvaluacionTO {
 
 	        @SerializedName("SID")
 	        public long serverId;
-	        
+
+	        @SerializedName("FLP")
+	        public int proceso;
 	        
 	        @SerializedName("MID")
 	        public String motivoId;

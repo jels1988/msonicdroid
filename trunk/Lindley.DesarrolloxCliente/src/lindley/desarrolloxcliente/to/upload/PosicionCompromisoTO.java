@@ -26,4 +26,6 @@ public class PosicionCompromisoTO {
 	    @SerializedName("EST")
         public String estado;
 	    
+	    @SerializedName("FLP")
+        public int proceso;
 }

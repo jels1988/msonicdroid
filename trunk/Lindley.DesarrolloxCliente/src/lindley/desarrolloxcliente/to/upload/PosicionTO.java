@@ -97,5 +97,8 @@ public class PosicionTO {
 	        
 	        @SerializedName("COM")
 	        public List<PosicionCompromisoTO> compromisos;
+	        
+	        @SerializedName("FLP")
+	        public int proceso;
     
 }

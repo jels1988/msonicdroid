@@ -25,5 +25,9 @@ public class OportunidadTO {
 	
 	@SerializedName("LEG")
 	public String legacy;
+	
+	@SerializedName("ORD")
+	public int orden;
+	
 
 }
