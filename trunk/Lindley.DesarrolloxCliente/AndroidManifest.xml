@@ -74,7 +74,7 @@
             </intent-filter>
         </activity>
                 
-        <activity android:name=".activity.ConsultarOportunidad_Activity" android:configChanges="keyboardHidden|orientation" android:noHistory="true">
+        <activity android:name=".activity.ConsultarOportunidad_Activity" android:configChanges="keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="lindley.desarrolloxcliente.consultaroportunidad" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
