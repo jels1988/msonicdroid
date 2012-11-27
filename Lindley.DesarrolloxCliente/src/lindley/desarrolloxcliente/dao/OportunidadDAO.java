@@ -55,7 +55,7 @@ public class OportunidadDAO {
 					"oc.concrecion,oc.sovi,oc.respetaPrecio,oc.numeroSabores,oc.fechaProceso " +
 					 "from oportunidad_cliente oc inner join producto p " +
 					 "on oc.codigoProducto = p.codigo " +
-					 "where oc.anio = ? and oc.mes = ? and oc.codigoCliente = ?";
+					 "where oc.anio = ? and oc.mes = ? and oc.codigoCliente = ? order by orden asc";
 		
 
 		String[] args = new String[] {String.valueOf(periodoTO.anio),

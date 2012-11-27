@@ -221,7 +221,7 @@ public class UploadDAO {
 		List<EvaluacionTO> evaluaciones = new ArrayList<EvaluacionTO>();
 		
 		String SQL = "select c.nombre,e.id,e.clienteCodigo,e.activosLindley,e.codigoFe,e.usuario,e.fecha,e.hora,e.usuarioCierre,e.fechaCierre,e.horaCierre,e.estado,e.serverId," +
-					"e.combosSS,e.combosMS,e.obsSS,e.obsMS,e.motivoId,e.motivo " +
+					"e.combosSS,e.combosMS,e.obsSS,e.obsMS,e.motivoId,e.motivo,e.proceso " +
 					 "from evaluacion e inner join cliente c on e.clienteCodigo = c.codigo where tieneCambios=?1 limit " + String.valueOf(limit);
 		
 		String[] args = new String[] {String.valueOf(ConstantesApp.EVALUACION_TIENE_CAMBIOS)};
@@ -255,6 +255,7 @@ public class UploadDAO {
 			evaluacionTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
 			evaluacionTO.serverId =  cursor.getLong(cursor.getColumnIndex("serverId"));
 			evaluacionTO.cliente = cursor.getString(cursor.getColumnIndex("nombre"));
+			evaluacionTO.proceso = cursor.getInt(cursor.getColumnIndex("proceso"));
 			
 			evaluaciones.add(evaluacionTO);
 		}
@@ -288,7 +289,7 @@ public class UploadDAO {
 		String SQL = "select id,evaluacionId,anio,mes, codigoProducto,producto," +
 							"concrecion,concrecionActual,concrecionCumple,sovi,soviActual,soviCumple," +
 							"respetaPrecio,respetaPrecioActual,respetaPrecioCumple,numeroSabores,numeroSaboresActual,codigoAccion,accion, " +
-							"numeroSaboresCumple,puntosSugeridos,puntosBonus,puntosGanados,fechaProceso,legacy,confirmacion,origen,estado " +
+							"numeroSaboresCumple,puntosSugeridos,puntosBonus,puntosGanados,fechaProceso,legacy,confirmacion,origen,estado,proceso " +
 							"from evaluacion_oportunidad " +
 							"where evaluacionId = ?1";
 		
@@ -333,6 +334,7 @@ public class UploadDAO {
 			oportunidadTO.origen =  cursor.getString(cursor.getColumnIndex("origen"));
 			oportunidadTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
 			oportunidadTO.legacy =  cursor.getString(cursor.getColumnIndex("legacy"));
+			oportunidadTO.proceso = cursor.getInt(cursor.getColumnIndex("proceso"));
 			
 			evaluacionTO.oportunidades.add(oportunidadTO);
 		}
@@ -341,7 +343,7 @@ public class UploadDAO {
 	}
 	
 	public void listarPosicionCompromiso(EvaluacionTO evaluacionTO){
-		String SQL = "select id,evaluacionId,tipoAgrupacion,codigoVariable,orden,observacion,estado " +
+		String SQL = "select id,evaluacionId,tipoAgrupacion,codigoVariable,orden,observacion,estado,proceso " +
 					" from evaluacion_posicion_compromiso " +
 					"where evaluacionId = ?1";
 		
@@ -359,6 +361,7 @@ public class UploadDAO {
 				posicionCompromisoTO.orden = cursor.getInt(cursor.getColumnIndex("orden"));
 				posicionCompromisoTO.observacion =  cursor.getString(cursor.getColumnIndex("observacion"));
 				posicionCompromisoTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
+				posicionCompromisoTO.proceso = cursor.getInt(cursor.getColumnIndex("proceso"));
 				evaluacionTO.posiciones.get(0).compromisos.add(posicionCompromisoTO);
 			}
 		}
@@ -367,7 +370,7 @@ public class UploadDAO {
 	public void listarPosicion(EvaluacionTO evaluacionTO){
 		String SQL = "select id,evaluacionId,anio,mes,codigoVariable,soviRed,soviMaximo,soviDiferencia," +
 					"puntosSugeridos,puntosGanados,puntosBonus,fotoInicial,fotoFinal,activosLindley," +
-					"observacion,fechaCompromiso,confirmacion,origen,estado,tipoAgrupacion,fechaEncuesta " +
+					"observacion,fechaCompromiso,confirmacion,origen,estado,tipoAgrupacion,fechaEncuesta,proceso " +
 					"from evaluacion_posicion " +
 					"where evaluacionId = ?1";
 
@@ -396,6 +399,7 @@ public class UploadDAO {
 			posicionTO.confirmacion =  cursor.getString(cursor.getColumnIndex("confirmacion"));
 			posicionTO.origen =  cursor.getString(cursor.getColumnIndex("origen"));
 			posicionTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
+			posicionTO.proceso = cursor.getInt(cursor.getColumnIndex("proceso"));
 			evaluacionTO.posiciones.add(posicionTO);
 		}
 		cursor.close();
@@ -404,7 +408,7 @@ public class UploadDAO {
 	public void listarPresentacion(EvaluacionTO evaluacionTO){
 		String SQL = "select id,evaluacionId,anio,mes,tipoAgrupacion,codfde,codigoVariable,fechaEncuesta," +
 				"puntosSugeridos,puntosGanados,puntosBonus,fechaCompromiso,confirmacion," +
-				"origen,estado " +
+				"origen,estado,proceso " +
 				"from evaluacion_presentacion " +
 				"where evaluacionId = ?1";
 		
@@ -427,6 +431,7 @@ public class UploadDAO {
 			presentacionTO.confirmacion =  cursor.getString(cursor.getColumnIndex("confirmacion"));
 			presentacionTO.origen =  cursor.getString(cursor.getColumnIndex("origen"));
 			presentacionTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
+			presentacionTO.proceso = cursor.getInt(cursor.getColumnIndex("proceso"));
 			evaluacionTO.presentaciones.add(presentacionTO);
 		}
 		cursor.close();
@@ -434,7 +439,7 @@ public class UploadDAO {
 	
 	public void listarSku(EvaluacionTO evaluacionTO){
 		String SQL = "select id,evaluacionId,anio,mes,tipoAgrupacion,codfde,codigoVariable,skuId," +
-				"sku,marca,marcaCompromiso,confirmacion,estado " +
+				"sku,marca,marcaCompromiso,confirmacion,estado,proceso " +
 				"from evaluacion_sku_presentacion " +
 				"where evaluacionId = ?1";
 
@@ -455,6 +460,7 @@ public class UploadDAO {
 			skuTO.marcaCompromiso =  cursor.getString(cursor.getColumnIndex("marcaCompromiso"));
 			skuTO.marcaCumplio =  cursor.getString(cursor.getColumnIndex("confirmacion"));
 			skuTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
+			skuTO.proceso = cursor.getInt(cursor.getColumnIndex("proceso"));
 			evaluacionTO.skus.add(skuTO);
 		}
 		

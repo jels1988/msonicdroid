@@ -169,7 +169,7 @@ public class DescargaDAO {
 		values.put("tieneCambios", evaluacionTO.tieneCambio);
 		values.put("motivoId", evaluacionTO.motivoId);
 		values.put("motivo", evaluacionTO.motivo);
-		
+		values.put("proceso", evaluacionTO.proceso);
 		
 		long id= dbHelper.insertOrThrow("evaluacion", values);
 		
@@ -231,7 +231,7 @@ public class DescargaDAO {
 		values.put("marcaCompromiso", sku.marcaCompromiso);
 		values.put("confirmacion", sku.marcaCumplio);
 		values.put("estado", sku.estado);
-		
+		values.put("proceso", sku.proceso);
 		long id= dbHelper.insertOrThrow("evaluacion_sku_presentacion", values);
 		sku.id = id;
 		return id;
@@ -256,7 +256,7 @@ public class DescargaDAO {
 		values.put("confirmacion", presentacionTO.confirmacion);
 		values.put("origen", presentacionTO.origen);
 		values.put("estado", presentacionTO.estado);
-		
+		values.put("proceso", presentacionTO.proceso);
 		
 		long id= dbHelper.insertOrThrow("evaluacion_presentacion", values);
 		presentacionTO.id = id;
@@ -275,6 +275,7 @@ public class DescargaDAO {
 		values.put("orden", posicionCompromisoTO.orden);
 		values.put("observacion", posicionCompromisoTO.observacion);
 		values.put("estado", posicionCompromisoTO.estado);
+		values.put("proceso", posicionCompromisoTO.proceso);
 		
 		long id= dbHelper.insertOrThrow("evaluacion_posicion_compromiso", values);
 		posicionCompromisoTO.id = id;
@@ -310,6 +311,7 @@ public class DescargaDAO {
 		values.put("origen", posicionTO.origen);
 		values.put("estado", posicionTO.estado);
 		values.put("tipoAgrupacion", posicionTO.tipoAgrupacion);
+		values.put("proceso", posicionTO.proceso);
 		
 		long id= dbHelper.insertOrThrow("evaluacion_posicion", values);
 		posicionTO.id = id;
@@ -512,7 +514,7 @@ ContentValues values = new ContentValues();
 		values.put("origen", oportunidadTO.origen);
 		values.put("estado", oportunidadTO.estado);
 		values.put("legacy", oportunidadTO.legacy);
-		
+		values.put("proceso", oportunidadTO.proceso);
 		
 		long id= dbHelper.insertOrThrow("evaluacion_oportunidad", values);
 		oportunidadTO.id = id;
@@ -554,6 +556,9 @@ ContentValues values = new ContentValues();
 		values.put("numeroSabores", oportunidadTO.numeroSabores);
 		values.put("legacy", oportunidadTO.legacy);
 		values.put("fechaProceso", 0);
+		values.put("orden", oportunidadTO.orden);
+		
+		
 		
 		long id= dbHelper.insertOrThrow("oportunidad_cliente", values);
 		

@@ -65,5 +65,9 @@ public class PresentacionTO {
 
     @SerializedName("EST")
     public String estado;
+    
+    @SerializedName("FLP")
+    public int proceso;
+
 
 }

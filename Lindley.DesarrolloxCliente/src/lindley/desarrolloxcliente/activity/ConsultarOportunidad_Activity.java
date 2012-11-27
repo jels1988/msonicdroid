@@ -128,7 +128,9 @@ public class ConsultarOportunidad_Activity extends net.msonic.lib.sherlock.ListA
     	}else{
     		Intent intent = new Intent("lindley.desarrolloxcliente.skuprioritario");
     		startActivity(intent);
+    		finish();
     	}
+    	
     }
     
     @Override

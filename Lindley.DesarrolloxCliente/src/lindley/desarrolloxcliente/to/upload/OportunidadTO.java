@@ -132,8 +132,8 @@ public class OportunidadTO {
 	         @SerializedName("LEG")
 	        public String legacy;
 	         
-	         @SerializedName("PRO")
-		     public String proceso;
+	         @SerializedName("FLP")
+		     public int proceso;
 	         
 	         
 	         public List<AccionTradeTO> listaAccionesTrade;
