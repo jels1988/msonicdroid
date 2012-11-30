@@ -125,6 +125,9 @@ public class DescargaDAO {
 		dbHelper.delete("profit", null, null);
 	}
 	
+	public void deleteProfitCliente(String codigoCliente){
+		dbHelper.delete("profit", "codigoCliente=?", new String[]{codigoCliente});
+	}
 	
 
 	

@@ -11,4 +11,7 @@ public class DescargaRequest {
 	public String deposito;
 	@SerializedName("rut")
 	public String ruta;
+	
+	@SerializedName("cli")
+	public String cliente;
 }
