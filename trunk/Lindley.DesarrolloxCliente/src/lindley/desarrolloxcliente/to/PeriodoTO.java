@@ -9,5 +9,5 @@ public class PeriodoTO {
 	
 	public String deposito;
 	public String ruta;
-	
+	public String cliente;
 }

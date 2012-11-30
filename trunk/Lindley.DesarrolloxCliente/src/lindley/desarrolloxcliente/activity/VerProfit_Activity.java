@@ -6,15 +6,21 @@ import net.msonic.lib.sherlock.ActivityBase;
 
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
+import lindley.desarrolloxcliente.negocio.DescargaBLL;
 import lindley.desarrolloxcliente.negocio.EvaluacionBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
+import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.download.ProfitTO;
+import lindley.desarrolloxcliente.ws.service.DescargarProfitClienteProxy;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.Window;
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.google.inject.Inject;
 import com.steema.teechart.TChart;
 import com.steema.teechart.drawing.Color;
@@ -22,7 +28,6 @@ import com.steema.teechart.drawing.StringAlignment;
 import com.steema.teechart.legend.LegendAlignment;
 import com.steema.teechart.styles.Bar3D;
 import com.steema.teechart.styles.CustomBar.MarksLocation;
-import com.steema.teechart.styles.MarksStyle;
 import com.steema.teechart.styles.StringList;
 
 public class VerProfit_Activity extends ActivityBase {
@@ -31,6 +36,7 @@ public class VerProfit_Activity extends ActivityBase {
 	
 	List<ProfitTO> detalle;
 
+	
 	public static final String ANIO = "pfanio";
 	public static final String MES = "pfmes";
 	public static final String CLIENTE = "pfcliente";
@@ -44,6 +50,9 @@ public class VerProfit_Activity extends ActivityBase {
 	@InjectExtra(NOMBRE_ARTICULO) String nombre_articulo;
 	
 	@Inject EvaluacionBLL evaluacionBLL;
+	@Inject DescargaBLL descargaBLL;
+	@Inject PeriodoTO 	periodoTO;
+	@Inject DescargarProfitClienteProxy descargarProfitClienteProxy;
 	
 	private ClienteTO cliente;
 	private MyApplication application;
@@ -55,14 +64,20 @@ public class VerProfit_Activity extends ActivityBase {
 
 	
 	@InjectView(R.id.linearLayoutTchart) LinearLayout linearLayout;
+	
+	boolean unIntento=false;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		inicializarRecursos();
 		super.onCreate(savedInstanceState);
 		this.validarConexionInternet=false;
-		
+		this.mostrarWaitMessage=false;
+		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.profitchartview_activity);
+		
+		
 		application = (MyApplication) getApplicationContext();
 		cliente = application.getClienteTO();
 		
@@ -70,17 +85,7 @@ public class VerProfit_Activity extends ActivityBase {
 		setSubTitle("Profit Story x SKU - " + nombre_articulo);
 		chart = new TChart(this);
 		linearLayout.addView(chart);
-		
-		/*
-		chart.getPanel().setBorderRound(7);
-		chart.getAspect().setView3D(true);
-		*/
 		chart.getAxes().getLeft().getLabels().setValueFormat("#,##0.00;(#,##0.00)");
-		//selectTheme(1);
-		//StringList sLabel = new StringList(4);
-		
-		
-		
 		processAsync();
 	}
 
@@ -91,54 +96,70 @@ public class VerProfit_Activity extends ActivityBase {
 		finish();
 	}
 	
-	/*
-	public void selectTheme(int themeSelection) {
+	MenuItem menuEnviar;
+	
+	
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		// TODO Auto-generated method stub
+		
+		
+		
+		menuEnviar = menu.add("Refresh");
+		menuEnviar
+            .setIcon(R.drawable.reload)
+            .setVisible(false)
+            .setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(final com.actionbarsherlock.view.MenuItem item) {
+					// TODO Auto-generated method stub
+					setSupportProgressBarIndeterminateVisibility(true);
+					unIntento=false;
+					item.setVisible(false);
+					processAsync();
+					return true;
+				}
+			})
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
-		switch (themeSelection) {
-		case 0: // Opera Theme Selected
-			ThemesList.applyTheme(chart.getChart(), 0);
-			break;
-		case 1: // Black is back Theme Selected
-			ThemesList.applyTheme(chart.getChart(), 1);
-			break;
-		case 2: // Default Theme Selected
-			ThemesList.applyTheme(chart.getChart(), 2);
-			break;
-		case 3: // Excel Theme Selected
-			ThemesList.applyTheme(chart.getChart(), 3);
-			break;
-		case 4: // Classic Theme Selected
-			ThemesList.applyTheme(chart.getChart(), 4);
-			break;
-		case 5: // XP Theme Selected
-			ThemesList.applyTheme(chart.getChart(), 5);
-			break;
-		case 6: // Web Theme Selected
-			ThemesList.applyTheme(chart.getChart(), 6);
-			break;
-		case 7: // Business Theme Selected
-			ThemesList.applyTheme(chart.getChart(), 7);
-			break;
-		case 8: // BlueSky Theme Selected
-			ThemesList.applyTheme(chart.getChart(), 8);
-			break;
-		case 9: // Grayscale Theme Selected
-			ThemesList.applyTheme(chart.getChart(), 9);
-			break;
+		return true;
+	
+	}
+	
 
-		}
-	}*/
+
+	@Override
+	protected boolean executeAsyncPre() {
+		// TODO Auto-generated method stub
+		return super.executeAsyncPre();
+	}
 
 	@Override
 	protected void process()  throws Exception{
 		// TODO Auto-generated method stub}
-		
+		periodoTO.cliente=codigoCliente;
 		detalle = evaluacionBLL.consultarProfit(anio, mes, codigoCliente, codigoArticulo);
+		
+		if(!unIntento){
+			unIntento=true;
+			if(detalle.size()<=0){
+				descargarProfitClienteProxy.execute();
+				descargaBLL.saveProfitCliente(codigoCliente, descargarProfitClienteProxy.getResponse().profit);
+				detalle = evaluacionBLL.consultarProfit(anio, mes, codigoCliente, codigoArticulo);
+			}
+		}
+		
 	}
+	
 
+
+	
+	
 	@Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
+		menuEnviar.setVisible(true);
+		setSupportProgressBarIndeterminateVisibility(false);
 		selectSerie();
 		super.processOk();
 	}
@@ -146,9 +167,15 @@ public class VerProfit_Activity extends ActivityBase {
 	@Override
 	protected void processError() {
 		// TODO Auto-generated method stub
+		menuEnviar.setVisible(true);
+		setSupportProgressBarIndeterminateVisibility(false);
 		super.processError();
-		showToast(error_generico_process);
+		showToast("Error descargando profit, por favor reintente.");
 	}
+
+
+
+
 
 	public void selectSerie() {
 

@@ -95,6 +95,27 @@ public class DescargaBLL {
 		}
 	}
 	
+	
+	public void saveProfitCliente(String codigoCliente, List<lindley.desarrolloxcliente.to.download.ProfitTO> lista){
+		synchronized(MyLock)	{
+			try{
+				dbHelper.openDataBase();
+				dbHelper.beginTransaction();
+				
+				descargaDAO.deleteProfitCliente(codigoCliente);
+				for (lindley.desarrolloxcliente.to.download.ProfitTO profit : lista) {
+					descargaDAO.insertProfit(profit);
+				}
+				dbHelper.setTransactionSuccessful();
+			}catch(Exception ex){
+				Log.e(TAG_LOG, "DescargaBLL.saveProfitCliente", ex);
+			} finally {
+				dbHelper.endTransaction();
+				dbHelper.close();
+			}
+		}
+	}
+	
 	public void saveProfit(List<lindley.desarrolloxcliente.to.download.ProfitTO> lista){
 		synchronized(MyLock)	{
 			try{
