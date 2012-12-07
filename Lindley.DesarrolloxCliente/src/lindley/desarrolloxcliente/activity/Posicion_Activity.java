@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,7 +101,7 @@ public class Posicion_Activity extends ListBaseFragment  {
 			super.processOk();
 		}
 
-		private PosicionTO posicionCompromisoFotoTO;
+		//PosicionTO posicionCompromisoFotoTO;
 		
 		
 		@Override
@@ -126,12 +127,12 @@ public class Posicion_Activity extends ListBaseFragment  {
 		public void savePhoto(int accion){
 			if(TAKE_PHOTO_INICIAL_CODE==accion)
 			{
-				this.posicionCompromisoFotoTO.fotoInicial = file_name;
+				application.posicionCompromisoFotoTO.fotoInicial = file_name;
 				fotoBLL.save(file_name);
 			}
 			else
 			{
-				this.posicionCompromisoFotoTO.fotoInicial = file_name;
+				application.posicionCompromisoFotoTO.fotoInicial = file_name;
 				fotoBLL.save(file_name);
 			}
 		}
@@ -139,10 +140,12 @@ public class Posicion_Activity extends ListBaseFragment  {
 
 
 		public void takePhoto(int accion,PosicionTO posicionTO ){
-	    	
-	    	this.posicionCompromisoFotoTO = posicionTO;
+			
+			application.posicionCompromisoFotoTO = posicionTO;
 	    	file_name = UploadFileUtil.GenerarFileName(12,"jpg");
 	    	 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	    	 
+	    	
 	    	intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(ConstantesApp.getTempFile(getActivity(),file_name))); 
 	    	intent.putExtra(MediaStore.EXTRA_MEDIA_TITLE, "TITULO");
 	    	//getActivity().startActivityForResult(intent, accion);

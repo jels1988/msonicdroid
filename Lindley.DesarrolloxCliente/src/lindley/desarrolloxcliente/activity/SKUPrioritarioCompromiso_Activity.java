@@ -122,8 +122,8 @@ public class SKUPrioritarioCompromiso_Activity extends  net.msonic.lib.sherlock.
 				
 				ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(context.getApplicationContext(),
 																					R.array.confirmacion,
-																					android.R.layout.simple_spinner_item);
-				adap.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+																					R.layout.simple_spinner_item);
+				//adap.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 				viewHolder.chkValComp.setAdapter(adap);
 				
 				

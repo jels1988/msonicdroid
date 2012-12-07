@@ -28,12 +28,13 @@ import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionCompromisoTO;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
+import lindley.desarrolloxcliente.to.upload.PosicionTO;
 
 public class MyApplication extends Application {
 
 	
 	
-	
+	public PosicionTO posicionCompromisoFotoTO;
 	
 	@Inject protected FotoBLL fotoBLL;
 	@Inject protected FotoDAO fotoDAO; 

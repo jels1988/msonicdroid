@@ -78,11 +78,11 @@ public class RevisionTabs_Activity extends ActivityBaseFragment {
             for (int i=0; i < tabHost.getTabWidget().getChildCount();i++) {
                 TextView tv = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
                 if (tv != null) {
-                    tv.setTextColor(Color.parseColor("#ffffff"));
+                    tv.setTextColor(Color.parseColor("#FF0000"));
                 }
                 TextView tv2 = (TextView) tabHost.getCurrentTabView().findViewById(android.R.id.title); // Selected Tab
                 if (tv2 != null) {
-                    tv2.setTextColor(Color.parseColor("#ffffff"));
+                    tv2.setTextColor(Color.parseColor("#FF0000"));
                 }
             }
         } catch (ClassCastException e) {
