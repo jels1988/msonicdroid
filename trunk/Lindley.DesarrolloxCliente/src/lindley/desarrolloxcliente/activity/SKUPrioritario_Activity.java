@@ -315,9 +315,10 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 
 				ArrayAdapter<CharSequence> adap = ArrayAdapter.createFromResource(context.getApplicationContext(),
 																				R.array.sku_estados,
-																				android.R.layout.simple_spinner_item);
+																				R.layout.simple_spinner_item);
 				
-				adap.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+				//adap.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+				
 				viewHolder.chkValActual.setAdapter(adap);
 				
 				view.setTag(viewHolder);

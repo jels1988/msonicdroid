@@ -98,7 +98,7 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 			super.processOk();
 		}
 
-		private PosicionTO posicionCompromisoFotoTO;
+		//private PosicionTO posicionCompromisoFotoTO;
 		
 		
 		@Override
@@ -124,12 +124,12 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 		public void savePhoto(int accion){
 			if(TAKE_PHOTO_INICIAL_CODE==accion)
 			{
-				this.posicionCompromisoFotoTO.fotoInicial = file_name;
+				application.posicionCompromisoFotoTO.fotoInicial = file_name;
 				fotoBLL.save(file_name);
 			}
 			else
 			{
-				this.posicionCompromisoFotoTO.fotoFinal = file_name;
+				application.posicionCompromisoFotoTO.fotoFinal = file_name;
 				fotoBLL.save(file_name);
 			}
 		}
@@ -138,7 +138,7 @@ public class RevisionPosicion_Activity extends ListBaseFragment  {
 
 		public void takePhoto(int accion,PosicionTO posicionTO ){
 	    	
-	    	this.posicionCompromisoFotoTO = posicionTO;
+			application.posicionCompromisoFotoTO = posicionTO;
 	    	file_name = UploadFileUtil.GenerarFileName(12,"jpg");
 	    	 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 	    	intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(ConstantesApp.getTempFile(getActivity(),file_name))); 
