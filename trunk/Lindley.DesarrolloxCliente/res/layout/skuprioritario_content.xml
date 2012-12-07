@@ -27,7 +27,8 @@
                 android:id="@+id/chkValActual"
                 android:layout_width="30dip"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal" />
+                android:layout_gravity="center_vertical|center_horizontal" 
+                />
 
         </TableRow>
 

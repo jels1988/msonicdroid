@@ -30,6 +30,11 @@
     android:focusable="false"
     android:onClick="btnLogin_click"></Button>
     
+   <Spinner
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:entries="@array/numero_sabores" />
+
 </LinearLayout>
 
     
