@@ -46,6 +46,7 @@
 	<item name="android:textColor">@color/custom_theme_color_letra</item>
 </style>
 
+
 <style name="TextViewCustom" parent="@android:style/Widget.TextView">
  	<item name="android:focusable">false</item>
  	<item name="android:focusableInTouchMode">false</item>
@@ -99,6 +100,11 @@
 <style name="MyListView" parent="@android:style/Widget.ListView">
  	<item name="android:cacheColorHint">#00000000</item>
 </style>
+
+<style name="SpinnerCustom" parent="@android:style/Widget.Spinner">
+	<item name="android:textColor">@color/custom_theme_color_letra</item>
+</style>
+
 
 <style name="TextAppearance.Sherlock.Widget.ActionBar.Title.Inverse.Custom" parent="Widget">
     <item name="android:textSize">@dimen/abs__action_bar_title_text_size</item>
@@ -204,7 +210,7 @@
         <item name="android:maxLines">2</item>
     </style>
 
-<style name="CustomTheme" parent="Theme.Sherlock.Light">
+<style name="CustomTheme" parent="@style/Theme.Sherlock.Light">
 
      <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
     <item name="titleTextStyle">@style/TextAppearance.Sherlock.Widget.ActionBar.Title.Inverse</item>
@@ -233,8 +239,10 @@
  	<item name="android:textViewStyle">@style/TextViewCustom</item>
  	<item name="android:buttonStyle">@style/ButtonCustom</item>
  	<item name="android:listViewStyle">@style/MyListView</item>
- 	   <item name="actionBarTabStyle">@style/customTabStyle</item>
-        <item name="actionBarTabTextStyle">@style/customTExto</item>
+ 	<item name="android:spinnerStyle">@style/SpinnerCustom</item>
+ 	
+ 	<item name="actionBarTabStyle">@style/customTabStyle</item>
+    <item name="actionBarTabTextStyle">@style/customTExto</item>
 </style>
 
 

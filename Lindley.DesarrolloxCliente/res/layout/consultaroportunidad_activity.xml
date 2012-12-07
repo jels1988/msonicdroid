@@ -64,7 +64,8 @@
                     <TextView
                         style="@style/TextViewLabel"
                         android:layout_width="50dip"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text=" " />
 
                     <TextView
                         style="@style/TextViewLabel"
