@@ -4,12 +4,14 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.to.PosicionTO;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import net.msonic.lib.ResponseBase;
 
 public class ConsultarPosicionSugeridoResponse extends ResponseBase {
 
+	@Expose()
 	@SerializedName("POS")
 	private List<PosicionTO> listaPosicion;
 

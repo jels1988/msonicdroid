@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import lindley.desarrolloxcliente.ConstantesApp;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class PresentacionCompromisoTO {
@@ -21,7 +22,8 @@ public class PresentacionCompromisoTO {
     }
     
 	public long id;
-  
+	
+	@Expose()
     @SerializedName("LSKU")
     //public ArrayList<SKUPresentacionTO> listaSKU;
     public ArrayList<SKUPresentacionCompromisoTO> listaSKU;

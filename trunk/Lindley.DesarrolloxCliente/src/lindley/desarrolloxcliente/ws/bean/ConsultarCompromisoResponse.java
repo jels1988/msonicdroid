@@ -4,10 +4,13 @@ import java.util.List;
 
 import net.msonic.lib.ResponseBase;
 import lindley.desarrolloxcliente.to.CompromisoTO;
+
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ConsultarCompromisoResponse extends ResponseBase {
 
+	@Expose()
 	@SerializedName("CMP")
 	private List<CompromisoTO> listaCompromiso;
 

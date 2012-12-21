@@ -1,9 +1,11 @@
 package lindley.desarrolloxcliente.ws.bean;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ConsultarCabeceraRequest {
 
+	@Expose()
 	@SerializedName("COD")
 	private String codigoCliente;
 

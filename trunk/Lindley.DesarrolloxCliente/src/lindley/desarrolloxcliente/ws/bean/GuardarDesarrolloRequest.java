@@ -2,6 +2,7 @@ package lindley.desarrolloxcliente.ws.bean;
 
 import java.util.List;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import lindley.desarrolloxcliente.to.InformacionAdicionalTO;
@@ -11,18 +12,23 @@ import lindley.desarrolloxcliente.to.PresentacionCompromisoTO;
 
 public class GuardarDesarrolloRequest {
 	
+	@Expose()
 	@SerializedName("CSIS")
 	private List<OportunidadTO> oportunidadSistema;
 	
+	@Expose()
 	@SerializedName("CDES")
 	private List<OportunidadTO> oportunidadDesarrollador;
 
+	@Expose()
 	@SerializedName("INF")
 	private InformacionAdicionalTO informacion;
 		
+	@Expose()
 	@SerializedName("POS")
 	public List<PosicionCompromisoTO> listPosicion;
 
+	@Expose()
 	@SerializedName("PRE")
 	public List<PresentacionCompromisoTO> listPresentacion;
 	

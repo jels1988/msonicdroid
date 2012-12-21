@@ -1,5 +1,6 @@
 package lindley.desarrolloxcliente.to;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class PosicionTO {
@@ -9,21 +10,27 @@ public class PosicionTO {
 		seleccionado = true;
 	}
 	
+	@Expose()
 	@SerializedName("CVAR")
 	private String codigoVariable;
 	
+	@Expose()
 	@SerializedName("DVAR")
 	private String descripcionVariable;
 	
+	@Expose()
 	@SerializedName("RED")
 	private String red;
 
+	@Expose()
 	@SerializedName("PMX")
 	private String ptoMaximo;
 
+	@Expose()
 	@SerializedName("DIF")
 	private String diferencia;
 
+	@Expose()
 	@SerializedName("PTO")
 	private String puntosSugeridos;
 	
