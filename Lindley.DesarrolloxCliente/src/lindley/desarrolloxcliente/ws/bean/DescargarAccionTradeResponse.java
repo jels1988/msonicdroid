@@ -6,10 +6,12 @@ import net.msonic.lib.ResponseBase;
 
 import lindley.desarrolloxcliente.to.download.AccionTradeTO;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class DescargarAccionTradeResponse extends ResponseBase {
 
+	@Expose()
 	@SerializedName("TRA")
 	public List<AccionTradeTO> acciones;
 }

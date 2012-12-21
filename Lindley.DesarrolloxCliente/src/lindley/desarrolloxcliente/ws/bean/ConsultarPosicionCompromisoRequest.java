@@ -1,12 +1,15 @@
 package lindley.desarrolloxcliente.ws.bean;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ConsultarPosicionCompromisoRequest {
 
+	@Expose()
 	@SerializedName("CLI")
 	private String codigoCliente;
 
+	@Expose()
 	@SerializedName("CODR")
 	private String codigoGestion;
 

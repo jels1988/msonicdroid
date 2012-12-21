@@ -1,30 +1,37 @@
 package lindley.desarrolloxcliente.to;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class DesarrolloClienteTO {
 
+	@Expose()
 	@SerializedName("COD")
 	private String codigo;
 	
+	@Expose()
 	@SerializedName("FEC")
 	private String fecha;
 
+	@Expose()
 	@SerializedName("HOR")
 	private String hora;
 
 //	@SerializedName("CRB")
 //	private String userCrea;
 
+	@Expose()
 	@SerializedName("FCC")
 	private String fechaCierre;
 
+	@Expose()
 	@SerializedName("HCC")
 	private String horaCierre; 
 
 //	@SerializedName("UCE")
 //	private String userCierra;
 
+	@Expose()
 	@SerializedName("EST")
 	private String estado;
 

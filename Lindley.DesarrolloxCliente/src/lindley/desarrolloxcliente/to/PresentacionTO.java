@@ -2,6 +2,8 @@ package lindley.desarrolloxcliente.to;
 
 import java.util.ArrayList;
 import lindley.desarrolloxcliente.to.SKUPresentacionTO;
+
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class PresentacionTO {
@@ -12,18 +14,23 @@ public class PresentacionTO {
         seleccionado = true;
     }
     
+	@Expose()
     @SerializedName("CVAR")
     private String codigoVariable;
 
+	@Expose()
     @SerializedName("DVAR")
     private String descripcionVariable;
 
+	@Expose()
     @SerializedName("LSKU")
     private ArrayList<SKUPresentacionTO> listaSKU;
 
+	@Expose()
     @SerializedName("PTO")
     private String puntosSugeridos;
 
+	@Expose()
     @SerializedName("FDE")
     private String codigoFDE;
     

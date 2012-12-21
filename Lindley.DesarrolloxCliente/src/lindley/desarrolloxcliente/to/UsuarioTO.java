@@ -2,6 +2,7 @@ package lindley.desarrolloxcliente.to;
 
 import java.util.HashMap;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class UsuarioTO {
@@ -75,33 +76,43 @@ public class UsuarioTO {
 		this.opcionPermisos = opcionPermisos;
 	}
 	
+	@Expose()
 	@SerializedName("NOM")
 	public String nombres;
 	
+	@Expose()
 	@SerializedName("CSP")
 	public String codigoSap;
 	
+	@Expose()
 	@SerializedName("Rol")
 	public String rol;
 	
+	@Expose()
 	@SerializedName("CDDEP")
 	public String codigoDeposito;
 	
+	@Expose()
 	@SerializedName("PWD")
 	public String password;
 	
+	@Expose()
 	@SerializedName("CDRUT")
 	public String codigoRuta;
 	
+	@Expose()
 	@SerializedName("MPER")
 	public HashMap<String,String> moduloPermisos;
 	
+	@Expose()
 	@SerializedName("OPER")
 	public HashMap<String,String> opcionPermisos;
 	
+	@Expose()
 	@SerializedName("RolId")
 	public String rolId;
 	
+	@Expose()
 	@SerializedName("CSB")
 	public String codigoBasis;
 

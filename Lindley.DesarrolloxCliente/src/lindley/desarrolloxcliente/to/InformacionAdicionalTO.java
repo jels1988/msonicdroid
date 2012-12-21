@@ -1,27 +1,35 @@
 package lindley.desarrolloxcliente.to;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class InformacionAdicionalTO {
 
+	@Expose()
 	@SerializedName("CSS")
 	private String comboSS;
 	
+	@Expose()
 	@SerializedName("OBSSS")
 	private String observacionSS;
 	
+	@Expose()
 	@SerializedName("CMS")
 	private String comboMS;
 	
+	@Expose()
 	@SerializedName("OBS")
 	private String observacion;
 	
+	@Expose()
 	@SerializedName("USR")
 	private String codigoUsuario;
 	
+	@Expose()
 	@SerializedName("CLI")
 	private String codigoCliente;
 	
+	@Expose()
 	@SerializedName("AGR")
 	private String tipoAgrupacion;
 

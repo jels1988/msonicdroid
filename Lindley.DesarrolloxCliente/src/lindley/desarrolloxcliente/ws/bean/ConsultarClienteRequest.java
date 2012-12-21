@@ -1,18 +1,23 @@
 package lindley.desarrolloxcliente.ws.bean;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ConsultarClienteRequest {
 
+	@Expose()
 	@SerializedName("RUC")
 	private String ruc;
 	
+	@Expose()
 	@SerializedName("DNI")
 	private String dni;
 	
+	@Expose()
 	@SerializedName("COD")
 	private String codigo;
 
+	@Expose()
 	@SerializedName("RZS")
 	private String razonSocial;
 	

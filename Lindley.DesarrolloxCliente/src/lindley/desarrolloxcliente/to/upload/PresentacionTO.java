@@ -23,49 +23,64 @@ public class PresentacionTO {
 	@Expose()
     public long id;
 
-			@SerializedName("EID")
-		    public long evaluacionId;
-			
+	@Expose()
+	@SerializedName("EID")
+	public long evaluacionId;
+	
+	@Expose()
 	@SerializedName("ANI")
     public int anio;
 
+	@Expose()
     @SerializedName("MES")
     public int mes;
 
+	@Expose()
     @SerializedName("TPA")
     public String tipoAgrupacion;
 
+	@Expose()
     @SerializedName("CVR")
     public String codigoVariable;
     
+	@Expose()
     @SerializedName("FDE")
     public String codigoFDE;
     
+	@Expose()
     @SerializedName("FEN")
     public String fechaEncuesta;
     
+	@Expose()
     @SerializedName("PSG")
     public String puntosSugeridos;
 
+	@Expose()
     @SerializedName("PBN")
     public String puntosBonus;
 
+	@Expose()
     @SerializedName("PGN")
     public String puntosGanados;
 
+	@Expose()
     @SerializedName("FCO")
     public String fechaCompromiso;
 
  
+	@Expose()
     @SerializedName("CON")
     public String confirmacion;
 
+	@Expose()
     @SerializedName("ORG")
     public String origen;
 
+	@Expose()
     @SerializedName("EST")
     public String estado;
     
+	@Expose()
     @SerializedName("FLP")
     public int proceso;
 
