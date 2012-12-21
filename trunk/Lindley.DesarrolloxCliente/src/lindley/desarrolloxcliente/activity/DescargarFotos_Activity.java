@@ -199,6 +199,10 @@ public class DescargarFotos_Activity extends ListActivityBase {
 			//in this case, going to save it on the root directory of the
 			//sd card.
 			File SDCardRoot = new File(Environment.getExternalStorageDirectory(),this.getPackageName());
+			
+			if(!SDCardRoot.exists()){
+				SDCardRoot.mkdir();
+			}
 			//create a new file, specifying the path, and the filename
 			//which we want to save the file as.
 			File file = new File(SDCardRoot,"fotos.zip");
@@ -224,6 +228,7 @@ public class DescargarFotos_Activity extends ListActivityBase {
 				//add the data in the buffer to the file in the file output stream (the file on the sd card
 			
 				fileOutput.write(buffer, 0, bufferLength);
+				fileOutput.flush();
 				//add up the size so we know how much is downloaded
 				downloadedSize += bufferLength;
 				handler.post(new Runnable() {
