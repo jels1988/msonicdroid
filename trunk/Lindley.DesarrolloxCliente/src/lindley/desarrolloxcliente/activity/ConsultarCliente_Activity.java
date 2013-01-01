@@ -1,6 +1,4 @@
 package lindley.desarrolloxcliente.activity;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import lindley.desarrolloxcliente.ConstantesApp;
@@ -165,12 +163,15 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 		Log.d(TAG, String.format("codigoCliente: %s", codigoCliente));
 		
 		int descarga_realizada = prefs.getInt(ConstantesApp.DESCARGA_KEY, ConstantesApp.DESCARGA_NO_REALIZADA);
+		String codigo_ruta = prefs.getString(ConstantesApp.RUTA_KEY, "");
 		
-		if(descarga_realizada==ConstantesApp.DESCARGA_NO_REALIZADA){
+		if((descarga_realizada==ConstantesApp.DESCARGA_NO_REALIZADA) || codigo_ruta.compareTo(usuarioTO.codigoRuta)!=0) {
+			
 			Intent intent = new Intent(this,DescargaData_Activity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent);
 			return;
+			
 		}else{
 			codigoCliente = application.codigoCliente;
 			processAsync();
