@@ -190,7 +190,7 @@ public class DescargarFotos_Activity extends ListActivityBase {
 
 			//set up some things on the connection
 			urlConnection.setRequestMethod("GET");
-			urlConnection.setDoOutput(true);
+			//urlConnection.setDoOutput(true);
 
 			//and connect!
 			urlConnection.connect();

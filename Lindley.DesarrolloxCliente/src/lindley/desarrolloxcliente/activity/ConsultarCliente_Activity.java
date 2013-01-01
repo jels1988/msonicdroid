@@ -80,21 +80,7 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
         setContentView(R.layout.consultarcliente_activity);
         setTitle(R.string.consultarcliente_activity_title);
        
-		MyApplication application = (MyApplication)contextProvider.get().getApplicationContext();
-		
-		
-		application.codigoCliente = String.valueOf(Integer.parseInt(codigoCliente));
-		UsuarioTO usuarioTO = JSONHelper.desSerializar(usuario, UsuarioTO.class);
-		application.setUsuarioTO(usuarioTO);
-		periodoTO.deposito=usuarioTO.codigoDeposito;
-		periodoTO.ruta=usuarioTO.codigoRuta;
-		
-		Log.d(TAG, String.format("Usuario: %s", usuarioTO.codigoSap));
-		Log.d(TAG, String.format("anio: %s", periodoTO.anio));
-		Log.d(TAG, String.format("mes: %s", periodoTO.mes));
-		Log.d(TAG, String.format("deposito: %s", usuarioTO.codigoDeposito));
-		Log.d(TAG, String.format("ruta: %s", usuarioTO.codigoRuta));
-		Log.d(TAG, String.format("codigoCliente: %s", codigoCliente));
+	
 		/*
 		if(codigoCliente!=null){
 			application.codigoCliente = codigoCliente;
@@ -122,25 +108,7 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 			}
 		}*/
 		
-		int descarga_realizada = prefs.getInt(ConstantesApp.DESCARGA_KEY, ConstantesApp.DESCARGA_NO_REALIZADA);
-		if(descarga_realizada==ConstantesApp.DESCARGA_NO_REALIZADA){
-			Intent intent = new Intent(this,DescargaData_Activity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(intent);
-			return;
-		}else{
-			if(application.cliente != null)
-			{
-				List<ClienteTO> clientes = new ArrayList<ClienteTO>();
-				clientes.add(application.cliente);
-				adap = new EfficientAdapter(this, clientes);
-				setListAdapter(adap);
-			}else{
-				codigoCliente = application.codigoCliente;
-				processAsync();
-			}
-			
-		}
+		
 	
 		
 		
@@ -154,7 +122,21 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 	protected void onRestart() {
 		// TODO Auto-generated method stub
     	Log.d(TAG, "onRestart");
-    	MyApplication application = (MyApplication)contextProvider.get().getApplicationContext();
+    
+		super.onRestart();
+	}
+
+
+
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		// TODO Auto-generated method stub
+		Log.d(TAG, "onStart");
+		
+		/*
+		MyApplication application = (MyApplication)contextProvider.get().getApplicationContext();
     	if(application.cliente != null)
 		{
 			List<ClienteTO> clientes = new ArrayList<ClienteTO>();
@@ -164,18 +146,48 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 		}else{
 			codigoCliente = application.codigoCliente;
 			processAsync();
+		}*/
+		
+	MyApplication application = (MyApplication)contextProvider.get().getApplicationContext();
+		
+		
+		application.codigoCliente = String.valueOf(Integer.parseInt(codigoCliente));
+		UsuarioTO usuarioTO = JSONHelper.desSerializar(usuario, UsuarioTO.class);
+		application.setUsuarioTO(usuarioTO);
+		periodoTO.deposito=usuarioTO.codigoDeposito;
+		periodoTO.ruta=usuarioTO.codigoRuta;
+		
+		Log.d(TAG, String.format("Usuario: %s", usuarioTO.codigoSap));
+		Log.d(TAG, String.format("anio: %s", periodoTO.anio));
+		Log.d(TAG, String.format("mes: %s", periodoTO.mes));
+		Log.d(TAG, String.format("deposito: %s", usuarioTO.codigoDeposito));
+		Log.d(TAG, String.format("ruta: %s", usuarioTO.codigoRuta));
+		Log.d(TAG, String.format("codigoCliente: %s", codigoCliente));
+		
+		int descarga_realizada = prefs.getInt(ConstantesApp.DESCARGA_KEY, ConstantesApp.DESCARGA_NO_REALIZADA);
+		
+		if(descarga_realizada==ConstantesApp.DESCARGA_NO_REALIZADA){
+			Intent intent = new Intent(this,DescargaData_Activity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+			return;
+		}else{
+			codigoCliente = application.codigoCliente;
+			processAsync();
+			/*if(application.cliente != null)
+			{
+				List<ClienteTO> clientes = new ArrayList<ClienteTO>();
+				clientes.add(application.cliente);
+				adap = new EfficientAdapter(this, clientes);
+				setListAdapter(adap);
+			}else{
+				codigoCliente = application.codigoCliente;
+				processAsync();
+			}*/
+			
 		}
-		super.onRestart();
-	}
-
-
-
-
-	@Override
-	protected void onStart() {
-		// TODO Auto-generated method stub
-		Log.d(TAG, "onStart");
-		super.onStart();
+    	
+		
 	}
 
 
@@ -260,7 +272,7 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
     protected void onDestroy() {
     	// TODO Auto-generated method stub    	
     	super.onDestroy();
-    	System.exit(1);
+    	//System.exit(1);
     }
     
 	

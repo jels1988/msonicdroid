@@ -173,7 +173,7 @@ public class DescargaData_Activity extends ListActivityBase {
 			processAsync(DESCARGAR_POSICION);
 			processAsync(DESCARGAR_PRESENTACION);
 			processAsync(DESCARGAR_PUNTO);
-			processAsync(DESCARGAR_PROFIT);
+			//processAsync(DESCARGAR_PROFIT);
 			processAsync(DESCARGAR_EVALUACION);
 			
 			

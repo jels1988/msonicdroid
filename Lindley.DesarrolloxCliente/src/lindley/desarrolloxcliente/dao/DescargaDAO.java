@@ -2,6 +2,7 @@ package lindley.desarrolloxcliente.dao;
 
 
 
+import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.ResumenValueTO;
 import lindley.desarrolloxcliente.to.download.AccionTradeProductoTO;
@@ -30,10 +31,23 @@ public class DescargaDAO {
 	@Inject protected PeriodoTO periodoTO;
 	
 	
-	public void actualizarPuntos(String codigoCliente,long puntos){
+	public void actualizarPuntos(String codigo,long puntos){
 		
-		String[] args = new String[] {String.valueOf(puntos),codigoCliente};
-		dbHelper.execSQL("UPDATE cliente SET puntos = puntos + ?1 WHERE codigo = ?2",args);
+	
+		ContentValues values = new ContentValues();
+		values.put("puntos", puntos);
+		
+		dbHelper.update("cliente", values, "codigo=?",new String[] {codigo});
+		
+		/*
+		 
+		 	
+		ContentValues values = new ContentValues();
+		
+		values.put("serverId", serverId);
+		values.put("tieneCambios", ConstantesApp.EVALUACION_NO_TIENE_CAMBIOS);
+		dbHelper.update("evaluacion", values, "id=?", new String[]{String.valueOf(id)}); 
+		 * */
 	}
 	public int factorCierre(String tipoAgrupacion,String codigoVariable,String fechaCierre){
 		

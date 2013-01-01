@@ -4,6 +4,7 @@ import java.util.List;
 
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.dao.DescargaDAO;
+import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.ResumenValueTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.to.download.AccionTradeProductoTO;
@@ -32,7 +33,7 @@ public class DescargaBLL {
 	
 	
 	public void saveMotivo(List<ResumenValueTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -49,12 +50,12 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+			//}
 	}
 	
 	
 	public void saveArticulo(List<lindley.desarrolloxcliente.to.download.ArticuloTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -71,11 +72,11 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+			//}
 	}
 	
 	public void saveAcelerador(List<lindley.desarrolloxcliente.to.download.AceleradorTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -92,12 +93,12 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+			//}
 	}
 	
 	
 	public void saveProfitCliente(String codigoCliente, List<lindley.desarrolloxcliente.to.download.ProfitTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -113,11 +114,11 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+			//}
 	}
 	
 	public void saveProfit(List<lindley.desarrolloxcliente.to.download.ProfitTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -133,11 +134,11 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+			//}
 	}
 	
 	public void saveEvaluacionPosicionCompromiso(List<lindley.desarrolloxcliente.to.upload.PosicionCompromisoTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -153,11 +154,11 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+			//}
 	}
 	
 	public void saveEvaluacionSkus(List<lindley.desarrolloxcliente.to.upload.SkuTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -173,11 +174,11 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+			//}
 	}
 	
 	public void saveEvaluacionPresentacion(List<lindley.desarrolloxcliente.to.upload.PresentacionTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -193,11 +194,11 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+			//}
 	}
 	
 	public void saveEvaluacionPosicion(List<lindley.desarrolloxcliente.to.upload.PosicionTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -213,11 +214,11 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+			//}
 	}
 	
 	public void saveEvaluacionOportunidad(List<lindley.desarrolloxcliente.to.upload.OportunidadTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -233,7 +234,7 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+			//}
 	}
 	
 	public void cerrarEnCero(EvaluacionTO evaluacionTO,UsuarioTO usuarioTO){
@@ -273,7 +274,7 @@ public class DescargaBLL {
 		}
 	}
 	
-	public void cerrarEvaluacion(EvaluacionTO evaluacionTO,UsuarioTO usuarioTO){
+	public void cerrarEvaluacion(EvaluacionTO evaluacionTO,UsuarioTO usuarioTO,ClienteTO clienteTO){
 		try{
 			dbHelper.openDataBase();
 			dbHelper.beginTransaction();
@@ -341,7 +342,7 @@ public class DescargaBLL {
 				descargaDAO.insertEvaluacionSkus(evaluacionTO,skuTO);
 			}
 			
-			descargaDAO.actualizarPuntos(evaluacionTO.codigoCliente,puntosGanados);
+			descargaDAO.actualizarPuntos(clienteTO.codigo,clienteTO.nroPuntos + puntosGanados);
 			
 			
 			dbHelper.setTransactionSuccessful();
@@ -395,7 +396,7 @@ public class DescargaBLL {
 	}
 	
 	public void saveEvaluacion(List<EvaluacionTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -411,11 +412,11 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+			//}
 	}
 	
 	public void saveProducto(List<ProductoTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			
 		
 			try{
@@ -432,11 +433,11 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+			//}
 	}
 	
 	public void saveOportunidad(List<OportunidadTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -451,11 +452,11 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+			//}
 	}
 	
 	public void saveSku(List<SkuTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -470,11 +471,11 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+			//}
 	}
 	
 	public void saveAccionTrade(List<AccionTradeTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -489,12 +490,12 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+			//}
 	}
 	
 	
 	public void saveAccionTradeProducto(List<AccionTradeProductoTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -509,11 +510,11 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+			//}
 	}
 	
 	public void saveCliente(List<ClienteDescargaTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -528,12 +529,12 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+			//}
 	}
 	
 	
 	public void savePosicion(List<PosicionTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -548,11 +549,11 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+			//}
 	}
 	
 	public void savePresentacion(List<PresentacionTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -567,11 +568,11 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+		//}
 	}
 	
 	public void savePunto(List<PuntoTO> lista){
-		synchronized(MyLock)	{
+		//synchronized(MyLock)	{
 			try{
 				dbHelper.openDataBase();
 				dbHelper.beginTransaction();
@@ -586,7 +587,7 @@ public class DescargaBLL {
 				dbHelper.endTransaction();
 				dbHelper.close();
 			}
-		}
+		//}
 	}
 	
 }
