@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lindley.desarrolloxcliente.ConstantesApp;
+import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.DescargaBLL;
 import lindley.desarrolloxcliente.negocio.UploadBLL;
 import lindley.desarrolloxcliente.to.PeriodoTO;
+import lindley.desarrolloxcliente.to.UsuarioTO;
 import lindley.desarrolloxcliente.to.upload.ProcesoInfoTO;
 import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProductoProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarAccionesTradeProxy;
@@ -120,16 +122,22 @@ public class DescargaData_Activity extends ListActivityBase {
 	
 	List<ProcesoInfoTO> lista =null;
 	EfficientAdapter adap = null;
+	private  MyApplication application;
+	private UsuarioTO usuarioTO;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		inicializarRecursos();
 		this.mostrarWaitMessage=false;
+		application = (MyApplication)getApplicationContext();
+		usuarioTO = application.usuario;
+		
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		
 		setContentView(R.layout.descargadata_activity);
+		
 		
 		long cantidadEvaluacionesPendientes = uploadBLL.getCantidadEvaluaciones();
 		
@@ -210,7 +218,7 @@ public class DescargaData_Activity extends ListActivityBase {
 		Log.i("dow", String.valueOf(contadorProcesos));
 		if(contadorProcesos==0){
 			setSupportProgressBarIndeterminateVisibility(false);
-			savePreferencia(ConstantesApp.DESCARGA_REALIZADA);
+			savePreferencia(ConstantesApp.DESCARGA_REALIZADA,usuarioTO.codigoRuta);
 			finish();
 		}
 	}
@@ -1873,15 +1881,16 @@ public class DescargaData_Activity extends ListActivityBase {
 		
 		
 	
-		savePreferencia(ConstantesApp.DESCARGA_NO_REALIZADA);
+		savePreferencia(ConstantesApp.DESCARGA_NO_REALIZADA,usuarioTO.codigoRuta);
 		super.processError();
 	}
 	
-	private void savePreferencia(int value){
+	private void savePreferencia(int value,String ruta){
 		
 		Log.d(TAG, String.format("ConstantesApp.DESCARGA_KEY,: %s",value));
 		SharedPreferences.Editor Ed=prefs.edit();
 		Ed.putInt(ConstantesApp.DESCARGA_KEY, value);	
+		Ed.putString(ConstantesApp.RUTA_KEY, ruta);	
 		Ed.commit();
 	}
 	

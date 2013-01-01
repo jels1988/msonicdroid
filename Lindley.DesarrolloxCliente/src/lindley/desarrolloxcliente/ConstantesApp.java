@@ -10,7 +10,8 @@ import android.text.format.DateFormat;
 
 public final class ConstantesApp {
 
-	public static final String DESCARGA_KEY="DESCARGA";
+	public static final String DESCARGA_KEY="DESCARGA_KEY";
+	public static final String RUTA_KEY="RUTA_KEY";
 	public static final int DESCARGA_REALIZADA=1;
 	public static final int DESCARGA_NO_REALIZADA=0;
 	
