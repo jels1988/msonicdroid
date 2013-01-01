@@ -153,7 +153,7 @@ public class ConsultarCabecera_Activity extends net.msonic.lib.sherlock.ListActi
 			
 			if(application.evaluacionActual.tieneCambio==ConstantesApp.EVALUACION_TIENE_CAMBIOS){
 				if(fechaActual>=fechaMinCierre){
-					descargaBLL.cerrarEvaluacion(application.evaluacionActual, application.usuario);
+					descargaBLL.cerrarEvaluacion(application.evaluacionActual, application.usuario,application.cliente);
 	
 				}else{
 					fechaCierreEvaluacion = ConstantesApp.formatFecha(String.valueOf(fechaMinCierre));
