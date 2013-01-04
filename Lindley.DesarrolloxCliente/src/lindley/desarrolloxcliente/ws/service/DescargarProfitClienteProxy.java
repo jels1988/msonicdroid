@@ -13,8 +13,8 @@ import com.google.inject.Inject;
 public class DescargarProfitClienteProxy extends ProxyBase<DescargarProfitResponse> {
 	@InjectResource(R.string.urlwsDescargaService)protected String urlWS;
 	@Inject protected PeriodoTO periodoTO;
-	
-
+	public int anio=0;
+	public int mes=0;
 	
 	@Override
 	protected String getUrl() {
@@ -28,8 +28,16 @@ public class DescargarProfitClienteProxy extends ProxyBase<DescargarProfitRespon
 	protected String requestText() {
 		// TODO Auto-generated method stub
 		DescargaRequest descargaRequest = new DescargaRequest();
-		descargaRequest.anio=periodoTO.anio;
-		descargaRequest.mes=periodoTO.mes;
+		if(anio==0)
+			descargaRequest.anio=periodoTO.anio;
+		else
+			descargaRequest.anio=anio;
+		
+		if(mes==0)
+			descargaRequest.mes=periodoTO.mes;
+		else
+			descargaRequest.mes=mes;
+		
 		descargaRequest.deposito=periodoTO.deposito;
 		descargaRequest.ruta=periodoTO.ruta;
 		descargaRequest.cliente=periodoTO.cliente;

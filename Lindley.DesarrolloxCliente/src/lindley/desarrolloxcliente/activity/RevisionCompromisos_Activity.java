@@ -143,7 +143,6 @@ public class RevisionCompromisos_Activity extends ListBaseFragment {
 							public void onClick(View v) {
 								// TODO Auto-generated method stub
 								OportunidadTO oportunidadTO = (OportunidadTO) holder.txViewPuntos.getTag();
-								
 								Intent i = new Intent(context, VerProfit_Activity.class);
 								i.putExtra(VerProfit_Activity.ANIO, String.valueOf(oportunidadTO.anio));
 								i.putExtra(VerProfit_Activity.MES, String.valueOf(oportunidadTO.mes) );
