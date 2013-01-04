@@ -112,17 +112,6 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 		
 		
     }
-    
-    
-    
-   
-    @Override
-	protected void onRestart() {
-		// TODO Auto-generated method stub
-    	Log.d(TAG, "onRestart");
-    
-		super.onRestart();
-	}
 
 
 
@@ -175,7 +164,8 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 		}else{
 			codigoCliente = application.codigoCliente;
 			processAsync();
-			/*if(application.cliente != null)
+			/*
+			if(application.cliente != null)
 			{
 				List<ClienteTO> clientes = new ArrayList<ClienteTO>();
 				clientes.add(application.cliente);
@@ -268,13 +258,6 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 		super.processError();
 		showToast(error_generico_process);
 	}
-    
-    @Override
-    protected void onDestroy() {
-    	// TODO Auto-generated method stub    	
-    	super.onDestroy();
-    	//System.exit(1);
-    }
     
 	
     @Override

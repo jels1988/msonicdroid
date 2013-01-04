@@ -302,11 +302,13 @@ public class DescargaBLL {
 				   ConstantesApp.isSI(oportunidadTO.numeroSaboresCumple)){
 					
 					puntosSugeridos=Integer.parseInt(oportunidadTO.puntosSugeridos) * factorOportunidad;
-					puntosGanados=+puntosSugeridos;
+					puntosGanados=puntosGanados+puntosSugeridos;
 					oportunidadTO.puntosGanados = String.valueOf(puntosSugeridos);
 				}
 				descargaDAO.insertEvaluacionOportunidad(evaluacionTO,oportunidadTO);
 			}
+			
+			Log.d(TAG_LOG, String.format("Puntos Ganados Inventario: %s", puntosGanados));
 			
 			for (lindley.desarrolloxcliente.to.upload.PosicionTO posicionTO : evaluacionTO.posiciones) {
 				
@@ -315,7 +317,7 @@ public class DescargaBLL {
 				
 				if(ConstantesApp.isSI(posicionTO.confirmacion)){
 					puntosSugeridos = Integer.parseInt(posicionTO.puntosSugeridos) * factorPosicion;
-					puntosGanados=+puntosSugeridos;
+					puntosGanados=puntosGanados+puntosSugeridos;
 					posicionTO.puntosGanados = String.valueOf(puntosSugeridos);
 				}
 				
@@ -325,22 +327,29 @@ public class DescargaBLL {
 				}
 			}
 			
+			Log.d(TAG_LOG, String.format("Puntos Ganados Posicion: %s", puntosGanados));
 			
 			for (lindley.desarrolloxcliente.to.upload.PresentacionTO presentacionTO : evaluacionTO.presentaciones) {
 				
 				int factorPresentacion= descargaDAO.factorCierre(ConstantesApp.TIPO_AGRUPRACION_PRESENTACION,presentacionTO.codigoVariable, evaluacionTO.fechaCierre);
 				if(ConstantesApp.isSI(presentacionTO.confirmacion)){
 					puntosSugeridos = Integer.parseInt(presentacionTO.puntosSugeridos) * factorPresentacion;
-					puntosGanados=+puntosSugeridos;
+					puntosGanados=puntosGanados+puntosSugeridos;
 					presentacionTO.puntosGanados = String.valueOf(puntosSugeridos);
 				}
 				
 				descargaDAO.insertEvaluacionPresentacion(evaluacionTO,presentacionTO);
 			}
 			
+			Log.d(TAG_LOG, String.format("Puntos Ganados Presentacion: %s", puntosGanados));
+			
 			for (lindley.desarrolloxcliente.to.upload.SkuTO skuTO : evaluacionTO.skus) {
 				descargaDAO.insertEvaluacionSkus(evaluacionTO,skuTO);
 			}
+			
+			Log.d(TAG_LOG, String.format("Puntos Actuales: %s", clienteTO.nroPuntos));
+			Log.d(TAG_LOG, String.format("Puntos Ganados: %s", puntosGanados));
+			Log.d(TAG_LOG, String.format("Total Puntos: %s", clienteTO.nroPuntos + puntosGanados));
 			
 			descargaDAO.actualizarPuntos(clienteTO.codigo,clienteTO.nroPuntos + puntosGanados);
 			

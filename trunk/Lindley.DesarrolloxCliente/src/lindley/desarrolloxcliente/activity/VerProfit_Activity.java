@@ -143,6 +143,8 @@ public class VerProfit_Activity extends ActivityBase {
 		if(!unIntento){
 			unIntento=true;
 			if(detalle.size()<=0){
+				descargarProfitClienteProxy.anio = Integer.parseInt(anio);
+				descargarProfitClienteProxy.mes = Integer.parseInt(mes);
 				descargarProfitClienteProxy.execute();
 				descargaBLL.saveProfitCliente(codigoCliente, descargarProfitClienteProxy.getResponse().profit);
 				detalle = evaluacionBLL.consultarProfit(anio, mes, codigoCliente, codigoArticulo);
@@ -158,7 +160,9 @@ public class VerProfit_Activity extends ActivityBase {
 	@Override
 	protected void processOk() {
 		// TODO Auto-generated method stub
-		menuEnviar.setVisible(true);
+		if(menuEnviar!=null)
+			menuEnviar.setVisible(true);
+		
 		setSupportProgressBarIndeterminateVisibility(false);
 		selectSerie();
 		super.processOk();
