@@ -293,7 +293,7 @@ public class DescargaBLL {
 			
 			descargaDAO.insertEvaluacion(evaluacionTO);
 			
-			int factorOportunidad = descargaDAO.factorCierre(ConstantesApp.TIPO_AGRUPRACION_INVENTARIO, ConstantesApp.VARIABLE_RED_SKU_PRIORITARIOS, evaluacionTO.fechaCierre);
+			int factorOportunidad = descargaDAO.factorCierre(ConstantesApp.TIPO_AGRUPRACION_INVENTARIO, ConstantesApp.VARIABLE_RED_SKU_PRIORITARIOS, evaluacionTO.fechaCreacion);
 			
 			for (lindley.desarrolloxcliente.to.upload.OportunidadTO oportunidadTO : evaluacionTO.oportunidades) {
 				if(ConstantesApp.isSI(oportunidadTO.concrecionCumple) && 
@@ -312,7 +312,7 @@ public class DescargaBLL {
 			
 			for (lindley.desarrolloxcliente.to.upload.PosicionTO posicionTO : evaluacionTO.posiciones) {
 				
-				int factorPosicion= descargaDAO.factorCierre(ConstantesApp.TIPO_AGRUPRACION_POSICION,posicionTO.codigoVariable, evaluacionTO.fechaCierre);
+				int factorPosicion= descargaDAO.factorCierre(ConstantesApp.TIPO_AGRUPRACION_POSICION,posicionTO.codigoVariable, evaluacionTO.fechaCreacion);
 				
 				
 				if(ConstantesApp.isSI(posicionTO.confirmacion)){
@@ -331,7 +331,7 @@ public class DescargaBLL {
 			
 			for (lindley.desarrolloxcliente.to.upload.PresentacionTO presentacionTO : evaluacionTO.presentaciones) {
 				
-				int factorPresentacion= descargaDAO.factorCierre(ConstantesApp.TIPO_AGRUPRACION_PRESENTACION,presentacionTO.codigoVariable, evaluacionTO.fechaCierre);
+				int factorPresentacion= descargaDAO.factorCierre(ConstantesApp.TIPO_AGRUPRACION_PRESENTACION,presentacionTO.codigoVariable, evaluacionTO.fechaCreacion);
 				if(ConstantesApp.isSI(presentacionTO.confirmacion)){
 					puntosSugeridos = Integer.parseInt(presentacionTO.puntosSugeridos) * factorPresentacion;
 					puntosGanados=puntosGanados+puntosSugeridos;
