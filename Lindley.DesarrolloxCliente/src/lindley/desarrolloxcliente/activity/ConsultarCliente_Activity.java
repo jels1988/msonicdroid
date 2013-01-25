@@ -16,6 +16,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -66,7 +69,7 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	inicializarRecursos();
-    
+    	
     	
         super.onCreate(savedInstanceState);
     	this.validarConexionInternet=false;
@@ -76,7 +79,11 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
         
         getSupportActionBar().setDisplayShowHomeEnabled(false);
         setContentView(R.layout.consultarcliente_activity);
-        setTitle(R.string.consultarcliente_activity_title);
+        
+        String titulo = getString(R.string.consultarcliente_activity_title);
+        
+        setTitle(titulo + " - " + "Vrs." + String.valueOf(getVersion())) ;
+        
        
 	
 		/*
@@ -114,6 +121,17 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
     }
 
 
+    private int getVersion() {
+        int version = -1;
+        try {
+            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_META_DATA);
+            version = pInfo.versionCode;
+        } catch (NameNotFoundException e1) {
+            Log.e(this.getClass().getSimpleName(), "Name not found", e1);
+        }
+        return version;
+    }
+    
 
 
 	@Override

@@ -7,13 +7,19 @@ import roboguice.inject.InjectView;
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.R;
 import lindley.desarrolloxcliente.negocio.UploadBLL;
+import lindley.desarrolloxcliente.service.UploadDataService;
 import lindley.desarrolloxcliente.to.upload.EvaluacionProcessUploadTO;
 import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
 import lindley.desarrolloxcliente.ws.service.UploadEvaluacionesProxy;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningServiceInfo;
+import android.app.Application;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +45,9 @@ public class UploadData_Activity extends ListActivityBase {
 	public static final int ACTUALIZAR_EVALUACIONES_PROCESAR=3;
 	public static final int UPLOAD_EVALUACION=0;
 	
+	
+	BroadcastReceiver mReceiverStart;
+	
 	@Inject UploadEvaluacionesProxy uploadEvaluacionesProxy;
 	@Inject UploadBLL uploadBLL;
 	@InjectView(R.id.txtTitulo) TextView txtTitulo;
@@ -53,12 +62,13 @@ public class UploadData_Activity extends ListActivityBase {
 		this.mostrarWaitMessage=false;
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		
+
 		
 		boolean isConectadoInternet = isNetworkAvailable();
     	if(!isConectadoInternet){
     		
     		setSupportProgressBarIndeterminateVisibility(false);
+    		if(menuEnviar!=null) menuEnviar.setVisible(true);
 			MessageBox.showSimpleDialog(this, "Confirmaci—n", 
 					"Verificar conexi—n de Internet.", "Ok", new android.content.DialogInterface.OnClickListener(){
 				@Override
@@ -73,12 +83,100 @@ public class UploadData_Activity extends ListActivityBase {
     	}
 		
 		setContentView(R.layout.uploaddata_activity);
-		setSupportProgressBarIndeterminateVisibility(true);
-		processAsync();
+		
 	}
+	boolean isRegistered = false;
 	
+	@Override
+    protected void onPause() {
+		if(isRegistered){
+	        unregisterReceiver(mReceiverStart);
+	        isRegistered = false;
+		}
+		
+        super.onPause();
+    }
+	
+	 public  boolean isServiceRunning(String serviceClassName){
+		 
+	        final ActivityManager activityManager = (ActivityManager)getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
+	        final List<RunningServiceInfo> services = activityManager.getRunningServices(Integer.MAX_VALUE);
+
+	        for (RunningServiceInfo runningServiceInfo : services) {
+	        	Log.d(TAG, runningServiceInfo.service.getClassName());
+	            if (runningServiceInfo.service.getClassName().equals(serviceClassName)){
+	                return true;
+	            }
+	        }
+	        return false;
+	     }
+	 
+	
+	public static String TAG = UploadData_Activity.class.getCanonicalName();
+	 @Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		openOptionsMenu();
+		
+		
+		 mReceiverStart = new BroadcastReceiver() {
+	        	
+				@Override
+				public void onReceive(Context context, Intent intent) {
+					// TODO Auto-generated method stub
+					
+					Log.d(TAG, intent.getAction());
+					Log.d(TAG, "SERVICE NOTIFICACION");
+					
+					String action = intent.getAction();
+					
+					closeContextMenu();
+					
+					
+					if(action.compareTo(UploadDataService.NOTIFICACION_START_SERVICE)==0){
+						setSupportProgressBarIndeterminateVisibility(true);
+						if(menuEnviar!=null) menuEnviar.setVisible(false);
+					}else if(action.compareTo(UploadDataService.NOTIFICACION_STOP_SERVICE)==0){
+						setSupportProgressBarIndeterminateVisibility(false);
+						if(menuEnviar!=null) menuEnviar.setVisible(true);
+					}else if(action.compareTo(UploadDataService.NOTIFICACION_EVALUACION_SEND_SERVICE)==0){
+						processAsync();
+					}
+					 
+				}
+	            
+	        };
+	        isRegistered = true;
+	        IntentFilter filter = new IntentFilter();
+	        filter.addAction(UploadDataService.NOTIFICACION_START_SERVICE);
+	        filter.addAction(UploadDataService.NOTIFICACION_STOP_SERVICE);
+	        filter.addAction(UploadDataService.NOTIFICACION_EVALUACION_SEND_SERVICE);
+	        
+	        
+	        
+	        this.registerReceiver(mReceiverStart,filter);
+	        
+	        
+	    	
+			if(isServiceRunning(UploadDataService.class.getName())){
+				setSupportProgressBarIndeterminateVisibility(true);
+				if(menuEnviar!=null) menuEnviar.setVisible(false);
+			}else{
+				setSupportProgressBarIndeterminateVisibility(false);
+				if(menuEnviar!=null) menuEnviar.setVisible(true);
+			}
+			
+			processAsync();
+	        
+	}
+
+	 
 	MenuItem menuEnviar;
 
+	
+	
+	
 	@Override
 	protected void process() throws Exception {
 			List<EvaluacionTO> evaluaciones = uploadBLL.listarEvaluaciones();
@@ -94,7 +192,7 @@ public class UploadData_Activity extends ListActivityBase {
 		
 		txtTitulo.setText(String.format("Evaluaciones Pendientes %s", adapter.detalle.size()));
 		setListAdapter(adapter);
-		setSupportProgressBarIndeterminateVisibility(false);
+		//setSupportProgressBarIndeterminateVisibility(false);
 		super.processOk();
 	}
 
@@ -115,6 +213,9 @@ public class UploadData_Activity extends ListActivityBase {
 				public boolean onMenuItemClick(final com.actionbarsherlock.view.MenuItem item) {
 					// TODO Auto-generated method stub
 					
+					Intent i = new Intent(context,UploadDataService.class);
+					startService(i);
+					/*
 					MessageBox.showConfirmDialog(context, 
 											"confirmacion", 
 											"ÀDese enviar las evaluaciones pendientes?", 
@@ -135,7 +236,7 @@ public class UploadData_Activity extends ListActivityBase {
 													// TODO Auto-generated method stub
 													
 												}
-											});
+											});*/
 					
 					
 					return true;
@@ -156,7 +257,7 @@ public class UploadData_Activity extends ListActivityBase {
 			cantidadEvaluaciones = uploadBLL.getCantidadEvaluaciones();
 			break;
 		case LISTAR_EVALUACIONES:
-			uploadEvaluacionesProxy.evaluciones = uploadBLL.listarEvaluaciones(10);
+			uploadEvaluacionesProxy.evaluciones = uploadBLL.listarEvaluaciones(1);
 			break;
 		case UPLOAD_EVALUACION:
 			uploadEvaluacionesProxy.execute();
@@ -205,7 +306,7 @@ public class UploadData_Activity extends ListActivityBase {
    				startService(servicioFoto);
 			}else{
 				menuEnviar.setVisible(true);
-				setSupportProgressBarIndeterminateVisibility(false);
+				//setSupportProgressBarIndeterminateVisibility(false);
 			}
 			break;
 		case LISTAR_EVALUACIONES:
@@ -225,7 +326,8 @@ public class UploadData_Activity extends ListActivityBase {
 	
 	@Override
 	protected void processError(int accion) {
-		setSupportProgressBarIndeterminateVisibility(false);
+		menuEnviar.setVisible(true);
+		//setSupportProgressBarIndeterminateVisibility(false);
 		// TODO Auto-generated method stub
 		Log.d("error", "=============");
 		Log.d("error", String.valueOf(accion));
