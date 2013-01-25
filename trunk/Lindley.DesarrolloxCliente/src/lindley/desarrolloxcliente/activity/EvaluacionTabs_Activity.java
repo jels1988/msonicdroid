@@ -174,7 +174,7 @@ public class EvaluacionTabs_Activity extends ActivityBaseFragment {
 				
 				for(OportunidadTO comp : evaluacion.oportunidades)
 				{
-					if(comp.soviActual==null || comp.soviActual.trim().compareTo("")==0 || Integer.parseInt(comp.sovi)<=0 || Integer.parseInt(comp.soviActual)<=0)
+					if(comp.soviActual==null || comp.soviActual.trim().compareTo("")==0 || Integer.parseInt(comp.sovi)<0 || Integer.parseInt(comp.soviActual)<0)
 					{
 						mTabHost.setCurrentTabByTag(TAB_INVENTARIO);
 						msg = getString(R.string.evaluacion_msg_error_sovi);

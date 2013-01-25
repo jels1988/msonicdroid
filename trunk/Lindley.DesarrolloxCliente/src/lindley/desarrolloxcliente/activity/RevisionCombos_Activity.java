@@ -54,7 +54,7 @@ public class RevisionCombos_Activity extends FragmentBase {
 	 		radMSNo.setEnabled(false);
 	 		
 	 		txtObsMS.setEnabled(false);
-	 		
+	 		txtObsSS.setEnabled(false);
 	 		
 	 		if(evaluacion.comboSS.equals(ConstantesApp.RESPUESTA_SI)){
 	 			radSSSi.setChecked(true);

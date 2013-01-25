@@ -3,10 +3,16 @@ package lindley.desarrolloxcliente;
 import java.io.File;
 import java.util.Calendar;
 
+import lindley.desarrolloxcliente.service.UploadDataService;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+import android.util.Log;
 
 public final class ConstantesApp {
 
@@ -182,9 +188,16 @@ public final class ConstantesApp {
 		if(null==hora){
 			return factores;
 		}
-		String nuevaHora = "00".concat(hora.concat("00"));
 		
-		if (nuevaHora.length() >= 6) {
+		hora = "000000" + hora;
+		hora = hora.substring(hora.length()-7);
+		
+		if (hora.length() >= 6) {
+			factores[0]= hora.substring(0,2);
+			factores[1] = hora.substring(2,4);
+			factores[2] = hora.substring(4,6);
+		}else{
+			String nuevaHora = "00".concat(hora.concat("00"));
 			factores[0]= nuevaHora.substring(1,3);
 			factores[1] = nuevaHora.substring(3,5);
 			factores[2] = nuevaHora.substring(5,7);
@@ -202,4 +215,29 @@ public final class ConstantesApp {
 		    }
 		    return new File(path, file_name); 
 		    }
+	 
+	 
+	   public static void scheduledService(String TAG,Context context){
+		   
+		   
+		   boolean alarmUp = (PendingIntent.getBroadcast(context, 0, 
+			        new Intent(context,UploadDataService.class), 
+			        PendingIntent.FLAG_NO_CREATE) != null);
+		   
+		   if(!alarmUp){
+			   Log.d(TAG, "Alarma no configurada");
+			   
+			   Calendar cur_cal = Calendar.getInstance();
+		        cur_cal.setTimeInMillis(System.currentTimeMillis());
+		        cur_cal.add(Calendar.MINUTE, 1);
+		        Log.d(TAG, "Set time:"+cur_cal.getTime());
+		        
+		        Intent i = new Intent(context,UploadDataService.class);
+		        PendingIntent p = PendingIntent.getService(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+		        
+				AlarmManager alarm = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+				alarm.setRepeating(AlarmManager.RTC_WAKEUP, cur_cal.getTimeInMillis(), (1*60*1000), p);
+		   }
+	   }
+
 }
