@@ -16,7 +16,7 @@ import net.msonic.lib.ProxyBase;
 public class UploadEvaluacionesProxy extends ProxyBase<UploadEvaluacionesResponse>{
 
 	public UploadEvaluacionesProxy(){
-		//this.timeOut=120 * 1000;
+		this.timeOut=90 * 1000;
 	}
 	@InjectResource(R.string.urlwsUploadService)protected String urlWS;
 	@Inject UploadBLL uploadBLL;
