@@ -214,6 +214,10 @@ public class UploadDataService extends ServiceBase {
 					proceso.isExito=true;
 				}
 				
+				Intent intent = new Intent();
+				intent.setAction(NOTIFICACION_EVALUACION_SEND_SERVICE);
+				sendBroadcast(intent);
+				
 				break;
 				
 			}	
