@@ -176,4 +176,12 @@
     
     <string name="descargafotos_descargando_activity">Descargando %s</string>
     <string name="descargafotos_descromprimiendo_activity">Descomprimiendo %s</string>
+    
+    <string name="downloaddata_activity_sincronizar_inicio">Sincronizando %s</string>
+     <string name="downloaddata_activity_sincronizar_descargando">Descargando  %s</string>
+     <string name="downloaddata_activity_sincronizar_guardando">Guardando %s</string>
+     <string name="downloaddata_activity_sincronizar_error">Error sincronizando %s</string>
+     <string name="downloaddata_activity_sincronizar_ok">Éxito Sincronizando %s</string>
+    
+     
 </resources>
