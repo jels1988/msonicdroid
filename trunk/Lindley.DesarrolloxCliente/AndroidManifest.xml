@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="lindley.desarrolloxcliente"
-    android:versionCode="4"
-    android:versionName="1.3" >
+    android:versionCode="9"
+    android:versionName="9" >
 
    
 	 <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
@@ -287,12 +287,16 @@
             </intent-filter>
         </activity>           
             
-        <service android:name=".service.UploadFileService" android:exported="false" android:process=":remote">
+        <service android:name=".service.UploadFileService" android:exported="false">
             
             <intent-filter>
                 <action android:name="lindley.desarrolloxcliente.uploadFileService" />                					  
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            
+        </service>
+        
+        <service android:name=".service.UploadDataService" android:exported="false">
             
         </service>
         
