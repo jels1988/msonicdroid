@@ -3,6 +3,8 @@ package lindley.desarrolloxcliente.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import roboguice.inject.InjectResource;
+
 import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.MyApplication;
 import lindley.desarrolloxcliente.R;
@@ -53,6 +55,7 @@ import net.msonic.lib.sherlock.ListActivityBase;
 
 public class DescargaData_Activity extends ListActivityBase {
 
+	public final static int DIFERENCIA=100;
 	
 	public static final int DESCARGAR_PRODUCTO=0;
 	public static final int DESCARGAR_OPORTUNIDAD=1;
@@ -74,25 +77,25 @@ public class DescargaData_Activity extends ListActivityBase {
 	public static final int DESCARGAR_ACELERADOR=17;
 	public static final int DESCARGAR_ARTICULO_CANJE=18;
 	
-	public static final int GUARDAR_PRODUCTO=20;
-	public static final int GUARDAR_OPORTUNIDAD=21;
-	public static final int GUARDAR_SKU=22;
-	public static final int GUARDAR_ACCIONESTRADE=23;
-	public static final int GUARDAR_ACCIONESTRADEPRODUCTO=24;
-	public static final int GUARDAR_CLIENTE=25;
-	public static final int GUARDAR_POSICION=26;
-	public static final int GUARDAR_PRESENTACION=27;
-	public static final int GUARDAR_PUNTO=28;
-	public static final int GUARDAR_EVALUACION=29;
-	public static final int GUARDAR_EVALUACION_OPORTUNIDAD=30;
-	public static final int GUARDAR_EVALUACION_POSICION=31;
-	public static final int GUARDAR_EVALUACION_PRESENTACION=32;
-	public static final int GUARDAR_EVALUACION_SKU=33;
-	public static final int GUARDAR_EVALUACION_POSICION_COMPROMISO=34;
-	public static final int GUARDAR_PROFIT=35;
-	public static final int GUARDAR_MOTIVO=36;
-	public static final int GUARDAR_ACELERADOR=37;
-	public static final int GUARDAR_ARTICULO_CANJE=38;
+	public static final int GUARDAR_PRODUCTO=DESCARGAR_PRODUCTO+DIFERENCIA;
+	public static final int GUARDAR_OPORTUNIDAD=DESCARGAR_OPORTUNIDAD+DIFERENCIA;
+	public static final int GUARDAR_SKU=DESCARGAR_SKU+DIFERENCIA;
+	public static final int GUARDAR_ACCIONESTRADE=DESCARGAR_ACCIONESTRADE+DIFERENCIA;
+	public static final int GUARDAR_ACCIONESTRADEPRODUCTO=DESCARGAR_ACCIONESTRADEPRODUCTO+DIFERENCIA;
+	public static final int GUARDAR_CLIENTE=DESCARGAR_CLIENTE+DIFERENCIA;
+	public static final int GUARDAR_POSICION=DESCARGAR_POSICION+DIFERENCIA;
+	public static final int GUARDAR_PRESENTACION=DESCARGAR_PRESENTACION+DIFERENCIA;
+	public static final int GUARDAR_PUNTO=DESCARGAR_PUNTO+DIFERENCIA;
+	public static final int GUARDAR_EVALUACION=DESCARGAR_EVALUACION+DIFERENCIA;
+	public static final int GUARDAR_EVALUACION_OPORTUNIDAD=DESCARGAR_EVALUACION_OPORTUNIDAD+DIFERENCIA;
+	public static final int GUARDAR_EVALUACION_POSICION=DESCARGAR_EVALUACION_POSICION+DIFERENCIA;
+	public static final int GUARDAR_EVALUACION_PRESENTACION=DESCARGAR_EVALUACION_PRESENTACION+DIFERENCIA;
+	public static final int GUARDAR_EVALUACION_SKU=DESCARGAR_EVALUACION_SKU+DIFERENCIA;
+	public static final int GUARDAR_EVALUACION_POSICION_COMPROMISO=DESCARGAR_EVALUACION_POSICION_COMPROMISO+DIFERENCIA;
+	public static final int GUARDAR_PROFIT=DESCARGAR_PROFIT+DIFERENCIA;
+	public static final int GUARDAR_MOTIVO=DESCARGAR_MOTIVO+DIFERENCIA;
+	public static final int GUARDAR_ACELERADOR=DESCARGAR_ACELERADOR+DIFERENCIA;
+	public static final int GUARDAR_ARTICULO_CANJE=DESCARGAR_ARTICULO_CANJE+DIFERENCIA;
 	
 	@Inject DescargarProductosProxy descagarProductosProxy;
 	@Inject DescargarOportunidadesProxy descargarOportunidadesProxy;
@@ -120,6 +123,14 @@ public class DescargaData_Activity extends ListActivityBase {
 	private String TAG = DescargaData_Activity.class.getSimpleName();
 	@Inject SharedPreferences prefs;
 	
+	
+	@InjectResource(R.string.downloaddata_activity_sincronizar_inicio) 			String downloaddata_activity_sincronizar_inicio;
+	@InjectResource(R.string.downloaddata_activity_sincronizar_descargando) 	String downloaddata_activity_sincronizar_descargando;
+	@InjectResource(R.string.downloaddata_activity_sincronizar_guardando) 		String downloaddata_activity_sincronizar_guardando;
+	@InjectResource(R.string.downloaddata_activity_sincronizar_error) 			String downloaddata_activity_sincronizar_error;
+	@InjectResource(R.string.downloaddata_activity_sincronizar_ok) 				String downloaddata_activity_sincronizar_ok;
+	
+	
 	List<ProcesoInfoTO> lista =null;
 	EfficientAdapter adap = null;
 	private  MyApplication application;
@@ -132,6 +143,8 @@ public class DescargaData_Activity extends ListActivityBase {
 		this.mostrarWaitMessage=false;
 		application = (MyApplication)getApplicationContext();
 		usuarioTO = application.usuario;
+		
+		
 		
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
@@ -152,7 +165,7 @@ public class DescargaData_Activity extends ListActivityBase {
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
 						
-						finish();
+						//finish();
 					}
 					
 				});
@@ -164,10 +177,14 @@ public class DescargaData_Activity extends ListActivityBase {
 			
 			setSupportProgressBarIndeterminateVisibility(true);
 			lista = new ArrayList<ProcesoInfoTO>();
-			adap = new EfficientAdapter(this,lista);
-			setListAdapter(adap);
+			
+			processAsync();
+			
+			//adap = new EfficientAdapter(this,lista);
+			//setListAdapter(adap);
 			
 			
+			/*
 			processAsync(DESCARGAR_ARTICULO_CANJE);
 			processAsync(DESCARGAR_CLIENTE);
 			processAsync(DESCARGAR_ACELERADOR);
@@ -181,8 +198,8 @@ public class DescargaData_Activity extends ListActivityBase {
 			processAsync(DESCARGAR_POSICION);
 			processAsync(DESCARGAR_PRESENTACION);
 			processAsync(DESCARGAR_PUNTO);
-			//processAsync(DESCARGAR_PROFIT);
 			processAsync(DESCARGAR_EVALUACION);
+			*/
 			
 			
 		}else{
@@ -203,8 +220,8 @@ public class DescargaData_Activity extends ListActivityBase {
 	
 	
     
+	/*
 	private int contadorProcesos=0;
-	
 	private synchronized void addContadorProcesos(){
 		contadorProcesos++;
 		Log.i("up", String.valueOf(contadorProcesos));
@@ -221,28 +238,174 @@ public class DescargaData_Activity extends ListActivityBase {
 			savePreferencia(ConstantesApp.DESCARGA_REALIZADA,usuarioTO.codigoRuta);
 			finish();
 		}
+	}*/
+	
+	
+private int contadorProcesos=0;
+	
+	private synchronized void addContadorProcesos(){
+		contadorProcesos++;
+		Log.i("up", String.valueOf(contadorProcesos));
+		if(contadorProcesos>0){
+			setSupportProgressBarIndeterminateVisibility(true);
+		}
 	}
+	
+	private synchronized void removeContadorProcesos(){
+		contadorProcesos--;
+		Log.i("dow", String.valueOf(contadorProcesos));
+		if(contadorProcesos==0){
+			setSupportProgressBarIndeterminateVisibility(false);
+			
+			int contador=0;
+			
+			for (ProcesoInfoTO proceso : lista) {
+				if(proceso.isExito)
+				contador++;
+			}
+			
+			if(contador==lista.size()){
+				setSupportProgressBarIndeterminateVisibility(false);
+				savePreferencia(ConstantesApp.DESCARGA_REALIZADA,usuarioTO.codigoRuta);
+				finish();
+			}
+		}
+	}
+
 	
 	  
 		
-	public synchronized ProcesoInfoTO processById(int processId){
-		ProcesoInfoTO processSeleccionado=null;
-		for (ProcesoInfoTO process : lista) {
-			if(process.processId==processId){
-				processSeleccionado = process;
-				break;
-			}
-		}
+
+	
+	
+	@Override
+	protected void process() throws Exception {
+		// TODO Auto-generated method stub
 		
-		if(processSeleccionado==null){
-			processSeleccionado = new ProcesoInfoTO();
-			processSeleccionado.processId=processId;
-		}
+		ProcesoInfoTO p0 = new ProcesoInfoTO();
+		p0.processId=DESCARGAR_PRODUCTO;		
+		p0.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Producto");
+		p0.estado=ProcesoInfoTO.ESTADO_INICIO;
+		lista.add(p0);
 		
-		return processSeleccionado;
+		
+		ProcesoInfoTO p1 = new ProcesoInfoTO();
+		p1.processId=DESCARGAR_OPORTUNIDAD;
+		p1.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Oportunidades");
+		p1.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p1);
+		
+		ProcesoInfoTO p2 = new ProcesoInfoTO();
+		p2.processId=DESCARGAR_SKU;
+		p2.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Skus");
+		p2.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p2);
+		
+		ProcesoInfoTO p3 = new ProcesoInfoTO();
+		p3.processId=DESCARGAR_ACCIONESTRADE;
+		p3.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Acciones trade");
+		p3.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p3);
+		
+		ProcesoInfoTO p4 = new ProcesoInfoTO();
+		p4.processId=DESCARGAR_ACCIONESTRADEPRODUCTO;
+		p4.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Acciones Trade Producto");
+		p4.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p4);
+		
+		ProcesoInfoTO p5 = new ProcesoInfoTO();
+		p5.processId=DESCARGAR_CLIENTE;
+		p5.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Cliente");
+		p5.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p5);
+		
+
+		ProcesoInfoTO p6 = new ProcesoInfoTO();
+		p6.processId=DESCARGAR_POSICION;
+		p6.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Posici—n");
+		p6.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p6);
+		
+		ProcesoInfoTO p7 = new ProcesoInfoTO();
+		p7.processId=DESCARGAR_PRESENTACION;
+		p7.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Presentaci—n");
+		p7.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p7);
+		
+		ProcesoInfoTO p8 = new ProcesoInfoTO();
+		p8.processId=DESCARGAR_PUNTO;
+		p8.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Puntos");
+		p8.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p8);
+		
+		ProcesoInfoTO p9 = new ProcesoInfoTO();
+		p9.processId=DESCARGAR_EVALUACION;
+		p9.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Evaluaciones");
+		p9.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p9);
+		
+		/*
+		ProcesoInfoTO p10 = new ProcesoInfoTO();
+		p10.processId=DESCARGAR_EVALUACION_OPORTUNIDAD;
+		p10.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Evaluaciones Oportunidades");
+		p10.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p10);
+		
+		ProcesoInfoTO p11 = new ProcesoInfoTO();
+		p11.processId=DESCARGAR_EVALUACION_POSICION;
+		p11.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Evaluaciones Posiciones");
+		p11.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p11);
+		
+		ProcesoInfoTO p12 = new ProcesoInfoTO();
+		p12.processId=DESCARGAR_EVALUACION_POSICION_COMPROMISO;
+		p12.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Evaluaciones Posiciones Compromiso");
+		p12.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p12);
+		
+		
+
+		ProcesoInfoTO p13 = new ProcesoInfoTO();
+		p13.processId=DESCARGAR_EVALUACION_PRESENTACION;
+		p13.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Evaluaciones Posiciones Presentaciones");
+		p13.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p13);
+		
+		
+		ProcesoInfoTO p14 = new ProcesoInfoTO();
+		p14.processId=DESCARGAR_EVALUACION_SKU;
+		p14.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Evaluaciones Skus");
+		p14.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p14);
+		*/
+		
+		
+		ProcesoInfoTO p15 = new ProcesoInfoTO();
+		p15.processId=DESCARGAR_MOTIVO;
+		p15.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Motivos");
+		p15.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p15);
+		
+		ProcesoInfoTO p16 = new ProcesoInfoTO();
+		p16.processId=DESCARGAR_ACELERADOR;
+		p16.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Acelerador");
+		p16.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p16);
+		
+		ProcesoInfoTO p17 = new ProcesoInfoTO();
+		p17.processId=DESCARGAR_ARTICULO_CANJE;
+		p17.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Articulos Canje");
+		p17.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p17);
+		
+		
+		
+		
+		adap = new EfficientAdapter(this,lista);
 	}
 	
 	
+	/*
 	@Override
 	protected boolean executeAsyncPre(int accion) {
 		// TODO Auto-generated method stub
@@ -582,7 +745,313 @@ public class DescargaData_Activity extends ListActivityBase {
 		
 		return super.executeAsyncPre(accion);
 	}
+	*/
+	
+	@Override
+	protected void processOk() {
+		// TODO Auto-generated method stub
+		
+		
+		setListAdapter(adap);		
 
+		for (ProcesoInfoTO proceso : lista) {
+			processAsync(proceso.processId);
+		}
+		
+		ProcesoInfoTO p18 = new ProcesoInfoTO();
+		p18.processId=DESCARGAR_EVALUACION_OPORTUNIDAD;
+		p18.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Evaluaci—n Oportunidad");
+		p18.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p18);
+		
+		ProcesoInfoTO p19 = new ProcesoInfoTO();
+		p19.processId=DESCARGAR_EVALUACION_POSICION;
+		p19.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Evaluaci—n Posici—n");
+		p19.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p19);
+		
+		ProcesoInfoTO p20 = new ProcesoInfoTO();
+		p20.processId=DESCARGAR_EVALUACION_POSICION_COMPROMISO;
+		p20.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Evaluaci—n Posici—n Compromiso");
+		p20.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p20);
+		
+		ProcesoInfoTO p21 = new ProcesoInfoTO();
+		p21.processId=DESCARGAR_EVALUACION_PRESENTACION;
+		p21.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Evaluaci—n Posici—n Presentaci—n");
+		p21.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p21);
+		
+		ProcesoInfoTO p22 = new ProcesoInfoTO();
+		p22.processId=DESCARGAR_EVALUACION_SKU;
+		p22.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Evaluaci—n Skus");
+		p22.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p22);
+		
+		super.processOk();
+	}
+	
+	
+	
+	public synchronized ProcesoInfoTO processById(int processId){
+		ProcesoInfoTO processSeleccionado=null;
+		for (ProcesoInfoTO process : lista) {
+			if(process.processId==processId || process.processId==processId-DIFERENCIA){
+				processSeleccionado = process;
+				break;
+			}
+		}
+		
+		/*
+		if(processSeleccionado==null){
+			processSeleccionado = new ProcesoInfoTO();
+			processSeleccionado.processId=processId;
+		}*/
+		
+		return processSeleccionado;
+	}
+	
+	
+	@Override
+	protected boolean executeAsyncPre(int accion) {
+		ProcesoInfoTO proceso = processById(accion);	
+		
+		
+		switch (accion) {
+		case DESCARGAR_PRODUCTO:
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Producto");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+			break;
+		case GUARDAR_PRODUCTO:			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "Producto");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+			
+			break;
+		case DESCARGAR_OPORTUNIDAD:
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Oportunidades");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+			break;
+		case GUARDAR_OPORTUNIDAD:			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "Oportunidades");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+			
+			break;
+		case DESCARGAR_SKU:
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "SKUs");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+			
+			break;
+		case GUARDAR_SKU:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "SKUs");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+			
+			break;
+		case DESCARGAR_ACCIONESTRADE:
+			
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Acciones Trade");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+			
+			
+			break;
+		case GUARDAR_ACCIONESTRADE:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "Acciones Trade");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+			
+			break;
+		case DESCARGAR_ACCIONESTRADEPRODUCTO:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Acciones Trade Producto");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+			
+
+			break;
+		case GUARDAR_ACCIONESTRADEPRODUCTO:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "Acciones Trade Producto");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+			
+
+			break;
+		case DESCARGAR_CLIENTE:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Clientes");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+			
+			break;
+		case GUARDAR_CLIENTE:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "Clientes");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+			
+	
+			break;
+		case DESCARGAR_POSICION:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Posici—n");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+			
+			
+			break;
+			
+			
+		case GUARDAR_POSICION:
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "Posici—n");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+			
+			break;
+		case DESCARGAR_PRESENTACION:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Presentaci—n");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+			
+		
+			break;
+		case GUARDAR_PRESENTACION:
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "Presentaci—n");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+			break;
+		case DESCARGAR_PUNTO:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Puntos");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+			
+			break;
+		case GUARDAR_PUNTO:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "Puntos");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+
+			break;
+		case DESCARGAR_EVALUACION:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Evaluaciones");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+
+			break;
+		case GUARDAR_EVALUACION:
+			
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "Evaluaciones");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+
+			
+			
+			break;
+		case DESCARGAR_EVALUACION_OPORTUNIDAD:
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Evaluaciones Oportunidades");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+			
+			break;
+		case GUARDAR_EVALUACION_OPORTUNIDAD:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "Evaluaciones Oportunidades");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+			
+			
+			break;
+		case DESCARGAR_EVALUACION_POSICION:
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Evaluaciones Posiciones");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+			
+			break;
+		case GUARDAR_EVALUACION_POSICION:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "Evaluaciones Posiciones");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+			
+			break;
+		case DESCARGAR_EVALUACION_POSICION_COMPROMISO:
+
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Evaluaciones Posiciones Compromiso");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+			
+			break;
+		case GUARDAR_EVALUACION_POSICION_COMPROMISO:
+			
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "Evaluaciones Posiciones Compromiso");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+			
+			break;
+			
+		
+		case DESCARGAR_EVALUACION_PRESENTACION:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Evaluaciones Presentaciones");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+			
+			
+			break;
+		case GUARDAR_EVALUACION_PRESENTACION:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "Evaluaciones Presentaciones");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+			
+			break;
+			
+		case DESCARGAR_EVALUACION_SKU:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Evaluaciones SKUs");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+			
+			
+
+			break;
+		case GUARDAR_EVALUACION_SKU:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "Evaluaciones SKUs");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+			
+			break;
+		
+		case DESCARGAR_MOTIVO:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Evaluaciones Motivos");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+	
+			break;
+		case GUARDAR_MOTIVO:
+
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "Evaluaciones Motivos");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+			
+			break;
+		case DESCARGAR_ACELERADOR:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Evaluaciones Acelerador");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+			
+			break;
+		case GUARDAR_ACELERADOR:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "Evaluaciones Aceleradores");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+			
+			break;
+		case DESCARGAR_ARTICULO_CANJE:
+			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Articulos Canje");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+			
+			break;
+		case GUARDAR_ARTICULO_CANJE:
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "Articulos Canje");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+			
+			break;
+	}
+		
+		
+		
+		adap.notifyDataSetChanged();
+		addContadorProcesos();
+		return true;
+	}
+	
 	@Override
 	protected void process(int accion) throws Exception {
 		// TODO Auto-generated method stub
@@ -748,81 +1217,81 @@ public class DescargaData_Activity extends ListActivityBase {
 
 	@Override
 	protected void processOk(int accion) {
+		Log.i("processOk - accion:", String.valueOf(accion));		
 		
 		switch (accion) {
 			case DESCARGAR_PRODUCTO:{
-				ProcesoInfoTO p1 = processById(DESCARGAR_PRODUCTO);
+				ProcesoInfoTO p1 = processById(accion);
 				boolean isExito = descagarProductosProxy.isExito();
 				if(descagarProductosProxy.getResponse()!=null){
 					int status = descagarProductosProxy.getResponse().getStatus();
 					if ((isExito) && (status == 0)) {
-						p1.descripcion="Producto Descargado";
+						p1.descripcion="Producto descargados";
 						p1.isExito=true;
-						processAsync(GUARDAR_PRODUCTO);
+						processAsync(p1.processId+DIFERENCIA);
 					}else{
-						p1.descripcion="Error descargando producto";
+						p1.descripcion=String.format(downloaddata_activity_sincronizar_error, "Producto");
 						p1.isExito=false;
 						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
 					}
 				}else{
-					p1.descripcion="Error descargando producto";
+					p1.descripcion=String.format(downloaddata_activity_sincronizar_error, "Producto");
 					p1.isExito=false;
 					p1.estado = ProcesoInfoTO.ESTADO_ERROR;
 				}
-				adap.notifyDataSetChanged();
 				break;
 			}
 			case GUARDAR_PRODUCTO:
 			{
-				ProcesoInfoTO p1 = processById(GUARDAR_PRODUCTO-20);
-				p1.descripcion="Productos guardados";
-				p1.isExito=true;
-				p1.estado = ProcesoInfoTO.ESTADO_OK;
-				adap.notifyDataSetChanged();
+				
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "Producto");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
+				
+				
 				break;
 			}
 			
 			case DESCARGAR_OPORTUNIDAD:{
-				ProcesoInfoTO p1 = processById(DESCARGAR_OPORTUNIDAD);
+				ProcesoInfoTO p1 = processById(accion);
 				boolean isExito = descargarOportunidadesProxy.isExito();
 				if(descargarOportunidadesProxy.getResponse()!=null){
 					int status = descargarOportunidadesProxy.getResponse().getStatus();
 					if ((isExito) && (status == 0)) {
 						p1.descripcion="Oportunidades Descargadas";
 						p1.isExito=true;
-						processAsync(GUARDAR_OPORTUNIDAD);
+						processAsync(p1.processId+DIFERENCIA);
 					}else{
-						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
-						p1.descripcion="Error descargando oportunidades";
+						p1.descripcion=String.format(downloaddata_activity_sincronizar_error, "oportunidades");
 						p1.isExito=false;
+						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
 					}
 				}else{
-					p1.estado = ProcesoInfoTO.ESTADO_ERROR;
-					p1.descripcion="Error descargando oportunidades";
+					p1.descripcion=String.format(downloaddata_activity_sincronizar_error, "oportunidades");
 					p1.isExito=false;
+					p1.estado = ProcesoInfoTO.ESTADO_ERROR;
 				}
-				adap.notifyDataSetChanged();
+				
 				break;
 			}
 			case GUARDAR_OPORTUNIDAD:
 			{
-				ProcesoInfoTO p1 = processById(GUARDAR_OPORTUNIDAD-20);
-				p1.descripcion="Oportunidades guardadas";
-				p1.isExito=true;
-				p1.estado = ProcesoInfoTO.ESTADO_OK;
-				adap.notifyDataSetChanged();
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "Oportunidades");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
+				
 				break;
 			}
 			
 			case DESCARGAR_SKU:{
-				ProcesoInfoTO p1 = processById(DESCARGAR_SKU);
+				ProcesoInfoTO p1 = processById(accion);
 				boolean isExito = descargarSkuProxy.isExito();
 				if(descargarSkuProxy.getResponse()!=null){
 					int status = descargarSkuProxy.getResponse().getStatus();
 					if ((isExito) && (status == 0)) {
 						p1.descripcion="SKUs Descargadas";
 						p1.isExito=true;
-						processAsync(GUARDAR_SKU);
+						processAsync(p1.processId+DIFERENCIA);
 					}else{
 						p1.descripcion="Error descargando SKUs";
 						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
@@ -833,28 +1302,28 @@ public class DescargaData_Activity extends ListActivityBase {
 					p1.estado = ProcesoInfoTO.ESTADO_ERROR;
 					p1.isExito=false;
 				}
-				adap.notifyDataSetChanged();
+				
 				break;
 			}
 			case GUARDAR_SKU:
 			{
-				ProcesoInfoTO p1 = processById(GUARDAR_SKU-20);
-				p1.descripcion="SKUs guardadas";
-				p1.isExito=true;
-				p1.estado = ProcesoInfoTO.ESTADO_OK;
-				adap.notifyDataSetChanged();
+				
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "SKUs");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
+	
 				break;
 			}
 			
 			case DESCARGAR_ACCIONESTRADE:{
-				ProcesoInfoTO p1 = processById(DESCARGAR_ACCIONESTRADE);
+				ProcesoInfoTO p1 = processById(accion);
 				boolean isExito = descargarAccionesTradeProxy.isExito();
 				if(descargarAccionesTradeProxy.getResponse()!=null){
 					int status = descargarAccionesTradeProxy.getResponse().getStatus();
 					if ((isExito) && (status == 0)) {
 						p1.descripcion="Acciones Trade Descargadas";
 						p1.isExito=true;
-						processAsync(GUARDAR_ACCIONESTRADE);
+						processAsync(p1.processId+DIFERENCIA);
 					}else{
 						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
 						p1.descripcion="Error descargando Acciones Trade";
@@ -865,28 +1334,28 @@ public class DescargaData_Activity extends ListActivityBase {
 					p1.descripcion="Error descargando Acciones Trade";
 					p1.isExito=false;
 				}
-				adap.notifyDataSetChanged();
+				
 				break;
 			}
 			case GUARDAR_ACCIONESTRADE:
 			{
-				ProcesoInfoTO p1 = processById(GUARDAR_ACCIONESTRADE-20);
-				p1.descripcion="Acciones Trade guardadas";
-				p1.isExito=true;
-				p1.estado = ProcesoInfoTO.ESTADO_OK;
-				adap.notifyDataSetChanged();
+				
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "Acciones Trade");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
+
 				break;
 			}
 			
 			case DESCARGAR_ACCIONESTRADEPRODUCTO:{
-				ProcesoInfoTO p1 = processById(DESCARGAR_ACCIONESTRADEPRODUCTO);
+				ProcesoInfoTO p1 = processById(accion);
 				boolean isExito = descargarAccionesTradeProductoProxy.isExito();
 				if(descargarAccionesTradeProductoProxy.getResponse()!=null){
 					int status = descargarAccionesTradeProductoProxy.getResponse().getStatus();
 					if ((isExito) && (status == 0)) {
 						p1.descripcion="Producto Acciones Trade Descargadas";
 						p1.isExito=true;
-						processAsync(GUARDAR_ACCIONESTRADEPRODUCTO);
+						processAsync(p1.processId+DIFERENCIA);
 					}else{
 						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
 						p1.descripcion="Error descargando Producto Acciones Trade";
@@ -897,28 +1366,28 @@ public class DescargaData_Activity extends ListActivityBase {
 					p1.descripcion="Error descargando Producto Acciones Trade";
 					p1.isExito=false;
 				}
-				adap.notifyDataSetChanged();
+				
 				break;
 			}
 			case GUARDAR_ACCIONESTRADEPRODUCTO:
 			{
-				ProcesoInfoTO p1 = processById(GUARDAR_ACCIONESTRADEPRODUCTO-20);
-				p1.descripcion="Producto Acciones Trade guardadas";
-				p1.isExito=true;
-				p1.estado = ProcesoInfoTO.ESTADO_OK;
-				adap.notifyDataSetChanged();
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "Producto Acciones Trade");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
+				
+		
 				break;
 			}
 			
 			case DESCARGAR_CLIENTE:{
-				ProcesoInfoTO p1 = processById(DESCARGAR_CLIENTE);
+				ProcesoInfoTO p1 = processById(accion);
 				boolean isExito = descargarClienteProxy.isExito();
 				if(descargarClienteProxy.getResponse()!=null){
 					int status = descargarClienteProxy.getResponse().getStatus();
 					if ((isExito) && (status == 0)) {
 						p1.descripcion="Clientes Descargadas";
 						p1.isExito=true;
-						processAsync(GUARDAR_CLIENTE);
+						processAsync(p1.processId+DIFERENCIA);
 					}else{
 						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
 						p1.descripcion="Error descargando Clientes";
@@ -929,28 +1398,27 @@ public class DescargaData_Activity extends ListActivityBase {
 					p1.descripcion="Error descargando Clientes";
 					p1.isExito=false;
 				}
-				adap.notifyDataSetChanged();
+				
 				break;
 			}
 			case GUARDAR_CLIENTE:
 			{
-				ProcesoInfoTO p1 = processById(GUARDAR_CLIENTE-20);
-				p1.descripcion="Cliente guardadas";
-				p1.isExito=true;
-				p1.estado = ProcesoInfoTO.ESTADO_OK;
-				adap.notifyDataSetChanged();
+				
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "Cliente");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
 				break;
 			}
 			
 			case DESCARGAR_POSICION:{
-				ProcesoInfoTO p1 = processById(DESCARGAR_POSICION);
+				ProcesoInfoTO p1 = processById(accion);
 				boolean isExito = descargarPosicionProxy.isExito();
 				if(descargarPosicionProxy.getResponse()!=null){
 					int status = descargarPosicionProxy.getResponse().getStatus();
 					if ((isExito) && (status == 0)) {
 						p1.descripcion="Posici—n Descargadas";
 						p1.isExito=true;
-						processAsync(GUARDAR_POSICION);
+						processAsync(p1.processId+DIFERENCIA);
 					}else{
 						p1.descripcion="Error descargando Posici—n";
 						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
@@ -961,28 +1429,27 @@ public class DescargaData_Activity extends ListActivityBase {
 					p1.descripcion="Error descargando Posici—n";
 					p1.isExito=false;
 				}
-				adap.notifyDataSetChanged();
+				
 				break;
 			}
 			case GUARDAR_POSICION:
 			{
-				ProcesoInfoTO p1 = processById(GUARDAR_POSICION-20);
-				p1.descripcion="Posici—n guardadas";
-				p1.isExito=true;
-				p1.estado = ProcesoInfoTO.ESTADO_OK;
-				adap.notifyDataSetChanged();
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "Posici—n");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
+
 				break;
 			}
 			
 			case DESCARGAR_PRESENTACION:{
-				ProcesoInfoTO p1 = processById(DESCARGAR_PRESENTACION);
+				ProcesoInfoTO p1 = processById(accion);
 				boolean isExito = descargarPresentacionProxy.isExito();
 				if(descargarPresentacionProxy.getResponse()!=null){
 					int status = descargarPresentacionProxy.getResponse().getStatus();
 					if ((isExito) && (status == 0)) {
 						p1.descripcion="Presentaci—n Descargadas";
 						p1.isExito=true;
-						processAsync(GUARDAR_PRESENTACION);
+						processAsync(p1.processId+DIFERENCIA);
 					}else{
 						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
 						p1.descripcion="Error descargando Presentaci—n";
@@ -993,29 +1460,28 @@ public class DescargaData_Activity extends ListActivityBase {
 					p1.descripcion="Error descargando Presentaci—n";
 					p1.isExito=false;
 				}
-				adap.notifyDataSetChanged();
+				
 				break;
 			}
 			case GUARDAR_PRESENTACION:
 			{
-				ProcesoInfoTO p1 = processById(GUARDAR_PRESENTACION-20);
-				p1.descripcion="Presentaci—n guardadas";
-				p1.isExito=true;
-				p1.estado = ProcesoInfoTO.ESTADO_OK;
-				adap.notifyDataSetChanged();
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "Presentaci—n");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
+				
 				break;
 			}
 			
 			
 			case DESCARGAR_PUNTO:{
-				ProcesoInfoTO p1 = processById(DESCARGAR_PUNTO);
+				ProcesoInfoTO p1 = processById(accion);
 				boolean isExito = descargarPuntoProxy.isExito();
 				if(descargarPuntoProxy.getResponse()!=null){
 					int status = descargarPuntoProxy.getResponse().getStatus();
 					if ((isExito) && (status == 0)) {
 						p1.descripcion="Puntos Descargadas";
 						p1.isExito=true;
-						processAsync(GUARDAR_PUNTO);
+						processAsync(p1.processId+DIFERENCIA);
 					}else{
 						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
 						p1.descripcion="Error descargando Puntos";
@@ -1026,29 +1492,29 @@ public class DescargaData_Activity extends ListActivityBase {
 					p1.descripcion="Error descargando Puntos";
 					p1.isExito=false;
 				}
-				adap.notifyDataSetChanged();
+				
 				break;
 			}
 			case GUARDAR_PUNTO:
 			{
-				ProcesoInfoTO p1 = processById(GUARDAR_PUNTO-20);
-				p1.descripcion="Puntos guardadas";
-				p1.isExito=true;
-				p1.estado = ProcesoInfoTO.ESTADO_OK;
-				adap.notifyDataSetChanged();
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "Puntos");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
+				
+		
 				break;
 			}
 			
 			
 			case DESCARGAR_EVALUACION:{
-				ProcesoInfoTO p1 = processById(DESCARGAR_EVALUACION);
+				ProcesoInfoTO p1 = processById(accion);
 				boolean isExito = descargarEvaluacionProxy.isExito();
 				if(descargarEvaluacionProxy.getResponse()!=null){
 					int status = descargarEvaluacionProxy.getResponse().getStatus();
 					if ((isExito) && (status == 0)) {
 						p1.descripcion="Evaluaciones Descargadas";
 						p1.isExito=true;
-						processAsync(GUARDAR_EVALUACION);
+						processAsync(p1.processId+DIFERENCIA);
 						
 					}else{
 						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
@@ -1060,35 +1526,37 @@ public class DescargaData_Activity extends ListActivityBase {
 					p1.descripcion="Error descargando Evaluaciones";
 					p1.isExito=false;
 				}
-				adap.notifyDataSetChanged();
+				
 				break;
 			}
 			case GUARDAR_EVALUACION:
 			{
+				
 				processAsync(DESCARGAR_EVALUACION_OPORTUNIDAD);
 				processAsync(DESCARGAR_EVALUACION_POSICION);
 				processAsync(DESCARGAR_EVALUACION_POSICION_COMPROMISO);
 				processAsync(DESCARGAR_EVALUACION_PRESENTACION);
 				processAsync(DESCARGAR_EVALUACION_SKU);
 				
-				ProcesoInfoTO p1 = processById(GUARDAR_EVALUACION-20);
-				p1.descripcion="Evaluaciones guardadas";
-				p1.isExito=true;
-				p1.estado = ProcesoInfoTO.ESTADO_OK;
-				adap.notifyDataSetChanged();
+				
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "Evaluaciones");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
+				
+				
 				break;
 			}
 			
 
 			case DESCARGAR_EVALUACION_OPORTUNIDAD:{
-				ProcesoInfoTO p1 = processById(DESCARGAR_EVALUACION_OPORTUNIDAD);
+				ProcesoInfoTO p1 = processById(accion);
 				boolean isExito = descargarEvaluacionOportunidadProxy.isExito();
 				if(descargarEvaluacionOportunidadProxy.getResponse()!=null){
 					int status = descargarEvaluacionOportunidadProxy.getResponse().getStatus();
 					if ((isExito) && (status == 0)) {
 						p1.descripcion="Evaluaciones Descargadas Oportunidad";
 						p1.isExito=true;
-						processAsync(GUARDAR_EVALUACION_OPORTUNIDAD);
+						processAsync(p1.processId+DIFERENCIA);
 					}else{
 						p1.descripcion="Error descargando Evaluaciones Oportunidad";
 						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
@@ -1104,11 +1572,11 @@ public class DescargaData_Activity extends ListActivityBase {
 			}
 			case GUARDAR_EVALUACION_OPORTUNIDAD:
 			{
-				ProcesoInfoTO p1 = processById(GUARDAR_EVALUACION_OPORTUNIDAD-20);
-				p1.descripcion="Evaluaciones Oportunidad guardadas";
-				p1.isExito=true;
-				p1.estado = ProcesoInfoTO.ESTADO_OK;
-				adap.notifyDataSetChanged();
+				
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "Evaluaciones Oportunidad");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
+		
 				break;
 			}
 			
@@ -1116,14 +1584,14 @@ public class DescargaData_Activity extends ListActivityBase {
 			
 			
 			case DESCARGAR_EVALUACION_POSICION:{
-				ProcesoInfoTO p1 = processById(DESCARGAR_EVALUACION_POSICION);
+				ProcesoInfoTO p1 = processById(accion);
 				boolean isExito = descargarEvaluacionPosicionProxy.isExito();
 				if(descargarEvaluacionPosicionProxy.getResponse()!=null){
 					int status = descargarEvaluacionPosicionProxy.getResponse().getStatus();
 					if ((isExito) && (status == 0)) {
 						p1.descripcion="Evaluaciones Posici—n Descargadas";
 						p1.isExito=true;
-						processAsync(GUARDAR_EVALUACION_POSICION);
+						processAsync(p1.processId+DIFERENCIA);
 					}else{
 						p1.descripcion="Error descargando Evaluaciones Posici—n";
 						p1.isExito=false;
@@ -1134,28 +1602,28 @@ public class DescargaData_Activity extends ListActivityBase {
 					p1.isExito=false;
 					p1.estado = ProcesoInfoTO.ESTADO_ERROR;
 				}
-				adap.notifyDataSetChanged();
+				
 				break;
 			}
 			case GUARDAR_EVALUACION_POSICION:
 			{
-				ProcesoInfoTO p1 = processById(GUARDAR_EVALUACION_POSICION-20);
-				p1.descripcion="Evaluaciones Posici—n guardadas";
-				p1.isExito=true;
-				p1.estado = ProcesoInfoTO.ESTADO_OK;
-				adap.notifyDataSetChanged();
+
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "Evaluaciones Posici—n");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
+			
 				break;
 			}
 			
 			case DESCARGAR_EVALUACION_POSICION_COMPROMISO:{
-				ProcesoInfoTO p1 = processById(DESCARGAR_EVALUACION_POSICION_COMPROMISO);
+				ProcesoInfoTO p1 = processById(accion);
 				boolean isExito = descargarEvaluacionPosicionCompromisoProxy.isExito();
 				if(descargarEvaluacionPosicionCompromisoProxy.getResponse()!=null){
 					int status = descargarEvaluacionPosicionCompromisoProxy.getResponse().getStatus();
 					if ((isExito) && (status == 0)) {
 						p1.descripcion="Evaluaciones Posici—n Compromiso Descargadas";
 						p1.isExito=true;
-						processAsync(GUARDAR_EVALUACION_POSICION_COMPROMISO);
+						processAsync(p1.processId+DIFERENCIA);
 					}else{
 						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
 						p1.descripcion="Error descargando Evaluaciones Posici—n Compromiso";
@@ -1166,28 +1634,27 @@ public class DescargaData_Activity extends ListActivityBase {
 					p1.descripcion="Error descargando Evaluaciones Posici—n Compromiso";
 					p1.isExito=false;
 				}
-				adap.notifyDataSetChanged();
+				
 				break;
 			}
 			case GUARDAR_EVALUACION_POSICION_COMPROMISO:
 			{
-				ProcesoInfoTO p1 = processById(GUARDAR_EVALUACION_POSICION_COMPROMISO-20);
-				p1.descripcion="Evaluaciones Posici—n Compromiso guardadas";
-				p1.isExito=true;
-				p1.estado = ProcesoInfoTO.ESTADO_OK;
-				adap.notifyDataSetChanged();
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "Evaluaciones Posici—n Compromiso");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
+				
 				break;
 			}
 			
 			case DESCARGAR_EVALUACION_PRESENTACION:{
-				ProcesoInfoTO p1 = processById(DESCARGAR_EVALUACION_PRESENTACION);
+				ProcesoInfoTO p1 = processById(accion);
 				boolean isExito = descargarEvaluacionPresentacionProxy.isExito();
 				if(descargarEvaluacionPresentacionProxy.getResponse()!=null){
 					int status = descargarEvaluacionPresentacionProxy.getResponse().getStatus();
 					if ((isExito) && (status == 0)) {
 						p1.descripcion="Evaluaciones Presentaci—n Descargadas";
 						p1.isExito=true;
-						processAsync(GUARDAR_EVALUACION_PRESENTACION);
+						processAsync(p1.processId+DIFERENCIA);
 					}else{
 						p1.descripcion="Error descargando Evaluaciones Posici—n Compromiso";
 						p1.isExito=false;
@@ -1203,23 +1670,23 @@ public class DescargaData_Activity extends ListActivityBase {
 			}
 			case GUARDAR_EVALUACION_PRESENTACION:
 			{
-				ProcesoInfoTO p1 = processById(GUARDAR_EVALUACION_PRESENTACION-20);
-				p1.descripcion="Evaluaciones Presentaci—n guardadas";
-				p1.isExito=true;
-				adap.notifyDataSetChanged();
-				p1.estado = ProcesoInfoTO.ESTADO_OK;
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "Evaluaciones Presentaci—n");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
+				
+				
 				break;
 			}
 			
 			case DESCARGAR_EVALUACION_SKU:{
-				ProcesoInfoTO p1 = processById(DESCARGAR_EVALUACION_SKU);
+				ProcesoInfoTO p1 = processById(accion);
 				boolean isExito = descargarEvaluacionSKUProxy.isExito();
 				if(descargarEvaluacionSKUProxy.getResponse()!=null){
 					int status = descargarEvaluacionSKUProxy.getResponse().getStatus();
 					if ((isExito) && (status == 0)) {
 						p1.descripcion="Evaluaciones SKUs Descargadas";
 						p1.isExito=true;
-						processAsync(GUARDAR_EVALUACION_SKU);
+						processAsync(p1.processId+DIFERENCIA);
 					}else{
 						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
 						p1.descripcion="Error descargando Evaluaciones SKUs";
@@ -1235,15 +1702,15 @@ public class DescargaData_Activity extends ListActivityBase {
 			}
 			case GUARDAR_EVALUACION_SKU:
 			{
-				ProcesoInfoTO p1 = processById(GUARDAR_EVALUACION_SKU-20);
-				p1.descripcion="Evaluaciones SKUs guardadas";
-				p1.isExito=true;
-				p1.estado = ProcesoInfoTO.ESTADO_OK;
-				adap.notifyDataSetChanged();
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "Evaluaciones SKUs");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
+				
+		
 				break;
 			}
 			
-			case DESCARGAR_PROFIT:{
+			/*case DESCARGAR_PROFIT:{
 				ProcesoInfoTO p1 = processById(DESCARGAR_PROFIT);
 				boolean isExito = descargarProfitProxy.isExito();
 				if(descargarProfitProxy.getResponse()!=null){
@@ -1273,17 +1740,17 @@ public class DescargaData_Activity extends ListActivityBase {
 				p1.estado = ProcesoInfoTO.ESTADO_OK;
 				adap.notifyDataSetChanged();
 				break;
-			}
+			}*/
 			
 			case DESCARGAR_ACELERADOR:{
-				ProcesoInfoTO p1 = processById(DESCARGAR_ACELERADOR);
+				ProcesoInfoTO p1 = processById(accion);
 				boolean isExito = descargarAceleradorProxy.isExito();
 				if(descargarAceleradorProxy.getResponse()!=null){
 					int status = descargarAceleradorProxy.getResponse().getStatus();
 					if ((isExito) && (status == 0)) {
 						p1.descripcion="Aceleradores Descargadas";
 						p1.isExito=true;
-						processAsync(GUARDAR_ACELERADOR);
+						processAsync(p1.processId+DIFERENCIA);
 					}else{
 						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
 						p1.descripcion="Error descargando Aceleradores";
@@ -1294,28 +1761,28 @@ public class DescargaData_Activity extends ListActivityBase {
 					p1.descripcion="Error descargando Aceleradores";
 					p1.isExito=false;
 				}
-				adap.notifyDataSetChanged();
+				
 				break;
 			}
 			case GUARDAR_ACELERADOR:
 			{
-				ProcesoInfoTO p1 = processById(GUARDAR_ACELERADOR-20);
-				p1.descripcion="Aceleradores guardados";
-				p1.isExito=true;
-				p1.estado = ProcesoInfoTO.ESTADO_OK;
-				adap.notifyDataSetChanged();
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "Aceleradores SKUs");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
+				
+		
 				break;
 			}
 			
 			case DESCARGAR_MOTIVO:{
-				ProcesoInfoTO p1 = processById(DESCARGAR_MOTIVO);
+				ProcesoInfoTO p1 = processById(accion);
 				boolean isExito = descargarMotivoProxy.isExito();
 				if(descargarMotivoProxy.getResponse()!=null){
 					int status = descargarMotivoProxy.getResponse().getStatus();
 					if ((isExito) && (status == 0)) {
 						p1.descripcion="Motivos Descargadas";
 						p1.isExito=true;
-						processAsync(GUARDAR_MOTIVO);
+						processAsync(p1.processId+DIFERENCIA);
 					}else{
 						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
 						p1.descripcion="Error descargando Motivos";
@@ -1326,29 +1793,29 @@ public class DescargaData_Activity extends ListActivityBase {
 					p1.descripcion="Error descargando Motivos";
 					p1.isExito=false;
 				}
-				adap.notifyDataSetChanged();
+				
 				break;
 			}
 			case GUARDAR_MOTIVO:
 			{
-				ProcesoInfoTO p1 = processById(GUARDAR_MOTIVO-20);
-				p1.descripcion="Motivos guardados";
-				p1.isExito=true;
-				p1.estado = ProcesoInfoTO.ESTADO_OK;
-				adap.notifyDataSetChanged();
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "Motivos SKUs");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
+				
+				
 				break;
 			}
 			
 			
 			case DESCARGAR_ARTICULO_CANJE:{
-				ProcesoInfoTO p1 = processById(DESCARGAR_ARTICULO_CANJE);
+				ProcesoInfoTO p1 = processById(accion);
 				boolean isExito = descargarArticuloCanjeProxy.isExito();
 				if(descargarArticuloCanjeProxy.getResponse()!=null){
 					int status = descargarArticuloCanjeProxy.getResponse().getStatus();
 					if ((isExito) && (status == 0)) {
 						p1.descripcion="Articulos Canje Descargado";
 						p1.isExito=true;
-						processAsync(GUARDAR_ARTICULO_CANJE);
+						processAsync(p1.processId+DIFERENCIA);
 					}else{
 						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
 						p1.descripcion="Error descargando Articulos Canje";
@@ -1359,21 +1826,23 @@ public class DescargaData_Activity extends ListActivityBase {
 					p1.descripcion="Error descargando Articulos Canje";
 					p1.isExito=false;
 				}
-				adap.notifyDataSetChanged();
+				
 				break;
 			}
 			case GUARDAR_ARTICULO_CANJE:
 			{
-				ProcesoInfoTO p1 = processById(GUARDAR_ARTICULO_CANJE-20);
-				p1.descripcion="Articulos Canje guardados";
-				p1.isExito=true;
-				p1.estado = ProcesoInfoTO.ESTADO_OK;
-				adap.notifyDataSetChanged();
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "Articulos Canje");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
+				
 				break;
 			}
 			
 		}
+		
 		removeContadorProcesos();
+		adap.notifyDataSetChanged();
+		Log.i("processOk", String.valueOf(accion));
 		
 		/*
 		if(accion==DESCARGAR_PRODUCTO){
@@ -1687,200 +2156,166 @@ public class DescargaData_Activity extends ListActivityBase {
 		// TODO Auto-generated method stub
 		
 		removeContadorProcesos();
+		Log.i("processError - accion:", String.valueOf(accion));
+		ProcesoInfoTO proceso = processById(accion);
+		proceso.estado=ProcesoInfoTO.ESTADO_ERROR;
+		proceso.isExito=false;
+		
 		Log.d(TAG, String.format("Error descarga, Accion = ,: %s",accion));
 		
 		switch (accion) {
 			case DESCARGAR_PRODUCTO:{
-				removeContadorProcesos();
-				ProcesoInfoTO p1 = processById(DESCARGAR_PRODUCTO);
-				p1.descripcion="Error descargando producto";
-				p1.isExito=false;
-				p1.estado = ProcesoInfoTO.ESTADO_ERROR;
-				adap.notifyDataSetChanged();
+				proceso.descripcion="Error descargando producto";
 				break;
 			}
 			case GUARDAR_PRODUCTO:{
-				ProcesoInfoTO p1 = processById(GUARDAR_PRODUCTO-20);
-				p1.descripcion="Error guardando producto";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				proceso.descripcion="Error guardando producto";
 				break;
 			}
 			case DESCARGAR_OPORTUNIDAD:{
-				removeContadorProcesos();
-				ProcesoInfoTO p1 = processById(DESCARGAR_OPORTUNIDAD);
-				p1.descripcion="Error descargando oportunidades";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				proceso.descripcion="Error descargando oportunidades";
 				break;
 			}
 			case GUARDAR_OPORTUNIDAD:{
-				ProcesoInfoTO p1 = processById(GUARDAR_OPORTUNIDAD-20);
-				p1.descripcion="Error guardando oportunidades";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				
+				proceso.descripcion="Error guardando oportunidades";
+				
 				break;
 			}
 			case DESCARGAR_SKU:{
-				removeContadorProcesos();
-				ProcesoInfoTO p1 = processById(DESCARGAR_SKU);
-				p1.descripcion="Error descargando SKUs";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				proceso.descripcion="Error descargando SKUs";
 				break;
 			}
 			case GUARDAR_SKU:{
-				ProcesoInfoTO p1 = processById(GUARDAR_SKU-20);
-				p1.descripcion="Error guardando SKUs";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				
+				proceso.descripcion="Error guardando SKUs";
+				
 				break;
 			}
 			
 			case DESCARGAR_ACCIONESTRADE:{
-				removeContadorProcesos();
-				ProcesoInfoTO p1 = processById(DESCARGAR_ACCIONESTRADE);
-				p1.descripcion="Error descargando Acciones Trade";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				
+				proceso.descripcion="Error descargando Acciones Trade";
+				
 				break;
 			}
 			case GUARDAR_ACCIONESTRADE:{
-				ProcesoInfoTO p1 = processById(GUARDAR_ACCIONESTRADE-20);
-				p1.descripcion="Error guardando Acciones Trade";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				
+				proceso.descripcion="Error guardando Acciones Trade";
+				
 				break;
 			}
 			
 			case DESCARGAR_CLIENTE:{
-				removeContadorProcesos();
-				ProcesoInfoTO p1 = processById(DESCARGAR_CLIENTE);
-				p1.descripcion="Error descargando Clientes";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				
+				proceso.descripcion="Error descargando Clientes";
+				
 				break;
 			}
 			case GUARDAR_CLIENTE:{
-				ProcesoInfoTO p1 = processById(GUARDAR_CLIENTE-20);
-				p1.descripcion="Error guardando Clientes";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				
+				proceso.descripcion="Error guardando Clientes";
+				
 				break;
 			}
 			
 			case DESCARGAR_POSICION:{
-				removeContadorProcesos();
-				ProcesoInfoTO p1 = processById(DESCARGAR_POSICION);
-				p1.descripcion="Error descargando Posici—n";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				
+				proceso.descripcion="Error descargando Posici—n";
+				
 				break;
 			}
 			case GUARDAR_POSICION:{
-				ProcesoInfoTO p1 = processById(GUARDAR_POSICION-20);
-				p1.descripcion="Error guardando Posici—n";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				
+				proceso.descripcion="Error guardando Posici—n";
+				
 				break;
 			}
 			
 			
 			case DESCARGAR_PRESENTACION:{
-				removeContadorProcesos();
-				ProcesoInfoTO p1 = processById(DESCARGAR_PRESENTACION);
-				p1.descripcion="Error descargando Presentaci—n";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				
+				proceso.descripcion="Error descargando Presentaci—n";
+				
 				break;
 			}
 			case GUARDAR_PRESENTACION:{
-				ProcesoInfoTO p1 = processById(GUARDAR_PRESENTACION-20);
-				p1.descripcion="Error guardando Presentaci—n";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				
+				proceso.descripcion="Error guardando Presentaci—n";
+				
 				break;
 			}
 			case DESCARGAR_PUNTO:{
-				removeContadorProcesos();
-				ProcesoInfoTO p1 = processById(DESCARGAR_PUNTO);
-				p1.descripcion="Error descargando Punto";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				
+				proceso.descripcion="Error descargando Punto";
+				
 				break;
 			}
 			case GUARDAR_PUNTO:{
-				ProcesoInfoTO p1 = processById(GUARDAR_PUNTO-20);
-				p1.descripcion="Error guardando Punto";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				
+				proceso.descripcion="Error guardando Punto";
+				
 				break;
 			}
 			
 			case DESCARGAR_EVALUACION:{
-				removeContadorProcesos();
-				ProcesoInfoTO p1 = processById(DESCARGAR_EVALUACION);
-				p1.descripcion="Error descargando Evaluaciones";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				
+				proceso.descripcion="Error descargando Evaluaciones";
+				
 				break;
 			}
 			
 			case DESCARGAR_PROFIT:{
-				removeContadorProcesos();
-				ProcesoInfoTO p1 = processById(DESCARGAR_PROFIT);
-				p1.descripcion="Error descargando profit";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				
+				proceso.descripcion="Error descargando profit";
+				
 				break;
 			}
 			
 			case DESCARGAR_MOTIVO:{
-				removeContadorProcesos();
-				ProcesoInfoTO p1 = processById(DESCARGAR_MOTIVO);
-				p1.descripcion="Error descargando motivos";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				
+				proceso.descripcion="Error descargando motivos";
+				
 				break;
 			}
 			
 			case DESCARGAR_ACELERADOR:{
-				removeContadorProcesos();
-				ProcesoInfoTO p1 = processById(DESCARGAR_ACELERADOR);
-				p1.descripcion="Error descargando aceleradores";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				
+				proceso.descripcion="Error descargando aceleradores";
+			
 				break;
 			}
 			
 			case GUARDAR_EVALUACION:{
-				ProcesoInfoTO p1 = processById(GUARDAR_EVALUACION-20);
-				p1.descripcion="Error guardando Evaluaciones";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+
+				proceso.descripcion="Error guardando Evaluaciones";
+
 				break;
 			}
 			
 			case DESCARGAR_ARTICULO_CANJE:{
-				removeContadorProcesos();
-				ProcesoInfoTO p1 = processById(DESCARGAR_ARTICULO_CANJE);
-				p1.descripcion="Error descargando articulos canje";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				
+				proceso.descripcion="Error descargando articulos canje";
+				
 				break;
 			}
 			
 			case GUARDAR_ARTICULO_CANJE:{
-				ProcesoInfoTO p1 = processById(GUARDAR_ARTICULO_CANJE-20);
-				p1.descripcion="Error guardando articulos canje";
-				p1.isExito=false;
-				adap.notifyDataSetChanged();
+				
+				proceso.descripcion="Error guardando articulos canje";
+				
 				break;
 			}
+			
+			
+			
+			
 		}
 		
 		
-	
+		adap.notifyDataSetChanged();
+		Log.i("processError", String.valueOf(accion));
+		
 		savePreferencia(ConstantesApp.DESCARGA_NO_REALIZADA,usuarioTO.codigoRuta);
 		super.processError();
 	}
