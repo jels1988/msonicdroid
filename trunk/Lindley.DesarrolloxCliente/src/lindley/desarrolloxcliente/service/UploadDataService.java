@@ -27,15 +27,6 @@ public class UploadDataService extends ServiceBase {
 	public static final String NOTIFICACION_STOP_SERVICE="lindley.desarrolloxcliente.service.UploadDataService.stop";
 	public static String TAG = UploadDataService.class.getCanonicalName();
 	
-	
-	/*
-	public static final int CALCULAR_EVALUACIONES=1;
-	public static final int LISTAR_EVALUACIONES=2;
-	public static final int ACTUALIZAR_EVALUACIONES=3;
-	public static final int ACTUALIZAR_EVALUACIONES_PROCESAR=3;
-	public static final int UPLOAD_EVALUACION=0;
-	*/
-	
 	public final static int DIFERENCIA=100;
 	public final static int UPLOAD_EVALUACION=0;
 	
@@ -50,9 +41,6 @@ public class UploadDataService extends ServiceBase {
 	
 	
 	List<ProcesoInfoTO> lista =null;
-	
-	
-	
 	
 	
 	@Override
@@ -86,11 +74,18 @@ public class UploadDataService extends ServiceBase {
 	}
 	
 	private synchronized void removeContadorProcesos(){
-		contadorProcesos--;
+		
+		if(intentosEnvio<MAX_INTENTOS_ENVIO){
+			processAsync();
+		}else{
+			stoppeService();
+		}
+		
+		/*contadorProcesos--;
 		Log.i(TAG,String.format("removeContadorProcesos: %s",contadorProcesos));
+
 		if(contadorProcesos==0){
 			int contador=0;
-			
 			for (ProcesoInfoTO proceso : lista) {
 				if(proceso.isExito)
 				contador++;
@@ -105,14 +100,14 @@ public class UploadDataService extends ServiceBase {
 					stoppeService();
 				}
 			}
-		}
+		}*/
 	}
 	private void stoppeService(){
 		
 		Log.i(TAG,"Stopping Service");
 		stopSelf();
 		Log.i(TAG,"Stopped Service");
-		
+
 		Intent intent = new Intent();
 		intent.setAction(NOTIFICACION_STOP_SERVICE);
 		sendBroadcast(intent); 
@@ -202,11 +197,6 @@ public class UploadDataService extends ServiceBase {
 							if(ids!=null){
 								uploadBLL.updateEvaluacionServerId(ids);
 								
-								long cantidadEvaluaciones = uploadBLL.getCantidadEvaluaciones();
-								
-								if(cantidadEvaluaciones>0){
-									processAsync();
-								}
 							}
 						}
 					}
@@ -214,16 +204,30 @@ public class UploadDataService extends ServiceBase {
 					proceso.isExito=true;
 				}
 				
-				Intent intent = new Intent();
-				intent.setAction(NOTIFICACION_EVALUACION_SEND_SERVICE);
-				sendBroadcast(intent);
+				
+				
 				
 				break;
 				
 			}	
 		}
 		
-		removeContadorProcesos();
+		
+		Intent intent = new Intent();
+		intent.setAction(NOTIFICACION_EVALUACION_SEND_SERVICE);
+		sendBroadcast(intent);
+		
+		
+		long cantidadEvaluaciones = uploadBLL.getCantidadEvaluaciones();
+		
+		if(cantidadEvaluaciones>0){
+			processAsync();
+		}else{
+			removeContadorProcesos();
+		}
+		
+		
+		
 	}
 	
 	@Override
