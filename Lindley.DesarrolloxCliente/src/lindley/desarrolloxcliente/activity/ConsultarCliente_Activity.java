@@ -44,8 +44,8 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 	public static final String USUARIO_KEY="USUARIO";
 	
 	
-	@InjectExtra(value=CODIGO_CLIENTE_KEY,optional=true) String codigoCliente;
-	@InjectExtra(value=USUARIO_KEY,optional=true) String usuario;
+	//@InjectExtra(value=CODIGO_CLIENTE_KEY,optional=true) String codigoCliente;
+	//@InjectExtra(value=USUARIO_KEY,optional=true) String usuario;
 	
 	@Inject ClienteBLL clienteBLL;
 		
@@ -58,9 +58,39 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 	@Inject SharedPreferences prefs;
 	@Inject PeriodoTO 	periodoTO;
 	
+	String codigoCliente;
+	
 	private EfficientAdapter adap;
 	private String TAG = ConsultarCliente_Activity.class.getCanonicalName();
 	
+	
+	
+	
+	private lindley.desarrolloxcliente.lazanadorapp.to.ClienteTO clienteSeleccionado;
+	private void cargarDataLanzador(){
+		
+		if(clienteBLL==null){
+			
+			Log.d(TAG, "clienteBLL is null");
+		}
+		clienteSeleccionado = clienteBLL.consultarCliente();
+		
+		if(clienteSeleccionado==null){
+			MessageBox.showSimpleDialog(this, "Confirmaci—n","Seleccionar Cliente", "Ok",new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					finish();
+				}
+			});
+		}
+		
+	
+		UsuarioTO usuarioAppTO = clienteBLL.consultarUsuario();
+		MyApplication application = (MyApplication)contextProvider.get().getApplicationContext();
+		application.setUsuarioTO(usuarioAppTO);
+		
+	}
 	
 
 
@@ -71,6 +101,7 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
     	inicializarRecursos();
     	
     	
+    	
         super.onCreate(savedInstanceState);
     	this.validarConexionInternet=false;
     	 String[] valoresFecha  = ConstantesApp.getFechaFactoresAS400(ConstantesApp.getFechaSistemaAS400());
@@ -79,7 +110,10 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
         
         getSupportActionBar().setDisplayShowHomeEnabled(false);
         setContentView(R.layout.consultarcliente_activity);
+        cargarDataLanzador();
         
+        
+    	
         String titulo = getString(R.string.consultarcliente_activity_title);
         
         setTitle(titulo + " - " + "Vrs." + String.valueOf(getVersion())) ;
@@ -140,25 +174,14 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 		// TODO Auto-generated method stub
 		Log.d(TAG, "onStart");
 		
-		/*
-		MyApplication application = (MyApplication)contextProvider.get().getApplicationContext();
-    	if(application.cliente != null)
-		{
-			List<ClienteTO> clientes = new ArrayList<ClienteTO>();
-			clientes.add(application.cliente);
-			adap = new EfficientAdapter(this, clientes);
-			setListAdapter(adap);
-		}else{
-			codigoCliente = application.codigoCliente;
-			processAsync();
-		}*/
+
 		
 	MyApplication application = (MyApplication)contextProvider.get().getApplicationContext();
 		
 		
-		application.codigoCliente = String.valueOf(Integer.parseInt(codigoCliente));
-		UsuarioTO usuarioTO = JSONHelper.desSerializar(usuario, UsuarioTO.class);
-		application.setUsuarioTO(usuarioTO);
+		application.codigoCliente = clienteSeleccionado.codigoCliente;
+		UsuarioTO usuarioTO = application.usuario; //JSONHelper.desSerializar(usuario, UsuarioTO.class);
+		//application.setUsuarioTO(usuarioTO);
 		periodoTO.deposito=usuarioTO.codigoDeposito;
 		periodoTO.ruta=usuarioTO.codigoRuta;
 		
@@ -167,7 +190,7 @@ public class ConsultarCliente_Activity extends net.msonic.lib.sherlock.ListActiv
 		Log.d(TAG, String.format("mes: %s", periodoTO.mes));
 		Log.d(TAG, String.format("deposito: %s", usuarioTO.codigoDeposito));
 		Log.d(TAG, String.format("ruta: %s", usuarioTO.codigoRuta));
-		Log.d(TAG, String.format("codigoCliente: %s", codigoCliente));
+		Log.d(TAG, String.format("codigoCliente: %s", application.codigoCliente));
 		
 		int descarga_realizada = prefs.getInt(ConstantesApp.DESCARGA_KEY, ConstantesApp.DESCARGA_NO_REALIZADA);
 		String codigo_ruta = prefs.getString(ConstantesApp.RUTA_KEY, "");
