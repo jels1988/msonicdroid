@@ -92,7 +92,12 @@ public class EvaluacionTO {
 	@Expose()
 	        @SerializedName("ACT")
 	        public String activosLindley;
-	        
+	
+	
+	@Expose()
+    @SerializedName("TAC")
+    public String tipoActivoLindley;
+	
 	@Expose()
 	        @SerializedName("FDE")
 	        public String codigoFDE;

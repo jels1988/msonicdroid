@@ -16,6 +16,7 @@ import lindley.desarrolloxcliente.to.download.PresentacionTO;
 import lindley.desarrolloxcliente.to.download.ProductoTO;
 import lindley.desarrolloxcliente.to.download.PuntoTO;
 import lindley.desarrolloxcliente.to.download.SkuTO;
+import lindley.desarrolloxcliente.to.download.TipoActivoTO;
 import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
 import lindley.desarrolloxcliente.to.upload.PosicionCompromisoTO;
 import net.msonic.lib.DBHelper;
@@ -31,6 +32,27 @@ public class DescargaBLL {
 	@Inject protected DescargaDAO descargaDAO;
 	public static String MyLock = "DescargaBLL.Lock";
 	
+	
+	public void saveTipoActivo(List<TipoActivoTO> lista){
+		//synchronized(MyLock)	{
+			try{
+				dbHelper.openDataBase();
+				dbHelper.beginTransaction();
+				
+				descargaDAO.deleteTipoActivo();
+				
+				for (TipoActivoTO tipoActivoTO : lista) {
+					descargaDAO.insertTipoActivo(tipoActivoTO);
+				}
+				dbHelper.setTransactionSuccessful();
+			}catch(Exception ex){
+				Log.e(TAG_LOG, "DescargaBLL.saveTipoActivo", ex);
+			} finally {
+				dbHelper.endTransaction();
+				dbHelper.close();
+			}
+			//}
+	}
 	
 	public void saveMotivo(List<ResumenValueTO> lista){
 		//synchronized(MyLock)	{
@@ -387,6 +409,7 @@ public class DescargaBLL {
 				
 				
 				for (lindley.desarrolloxcliente.to.upload.PresentacionTO presentacionTO : evaluacionTO.presentaciones) {
+					
 					descargaDAO.insertEvaluacionPresentacion(evaluacionTO,presentacionTO);
 				}
 				

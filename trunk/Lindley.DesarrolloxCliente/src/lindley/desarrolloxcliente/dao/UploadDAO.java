@@ -118,7 +118,7 @@ public class UploadDAO {
 	public EvaluacionTO listarEvaluacionById(long id){
 		
 		
-		String SQL = "select id,clienteCodigo,activosLindley,codigoFe,usuario,fecha,hora,usuarioCierre,fechaCierre,horaCierre,estado,serverId,combosSS,combosMS,obsSS,obsMS,tieneCambios,motivoId,motivo " +
+		String SQL = "select id,clienteCodigo,activosLindley,codigoFe,usuario,fecha,hora,usuarioCierre,fechaCierre,horaCierre,estado,serverId,combosSS,combosMS,obsSS,obsMS,tieneCambios,motivoId,motivo,tipoActivo " +
 					 "from evaluacion where id=?1";
 		
 		String[] args = new String[] {String.valueOf(id)};
@@ -132,6 +132,7 @@ public class UploadDAO {
 			evaluacionTO.id = cursor.getLong(cursor.getColumnIndex("id"));
 			evaluacionTO.codigoCliente =  cursor.getString(cursor.getColumnIndex("clienteCodigo"));
 			evaluacionTO.activosLindley =  cursor.getString(cursor.getColumnIndex("activosLindley"));
+			evaluacionTO.tipoActivoLindley =  cursor.getString(cursor.getColumnIndex("tipoActivo"));
 			evaluacionTO.codigoFDE =  cursor.getString(cursor.getColumnIndex("codigoFe"));
 			evaluacionTO.usuarioCreacion =  cursor.getString(cursor.getColumnIndex("usuario"));
 			evaluacionTO.fechaCreacion =  cursor.getString(cursor.getColumnIndex("fecha"));
@@ -174,7 +175,7 @@ public class UploadDAO {
 		List<EvaluacionTO> evaluaciones = new ArrayList<EvaluacionTO>();
 		
 		String SQL = "select c.nombre,e.id,e.clienteCodigo,e.activosLindley,e.codigoFe,e.usuario,e.fecha,e.hora,e.usuarioCierre,e.fechaCierre,e.horaCierre,e.estado,e.serverId," +
-					"e.combosSS,e.combosMS,e.obsSS,e.obsMS,e.motivoId,e.motivo,e.tieneCambios " +
+					"e.combosSS,e.combosMS,e.obsSS,e.obsMS,e.motivoId,e.motivo,e.tieneCambios,e.tipoActivo " +
 					 "from evaluacion e inner join cliente c on e.clienteCodigo = c.codigo where tieneCambios=?1";
 		
 		String[] args = new String[] {String.valueOf(ConstantesApp.EVALUACION_TIENE_CAMBIOS)};
@@ -208,6 +209,7 @@ public class UploadDAO {
 			evaluacionTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
 			evaluacionTO.serverId =  cursor.getLong(cursor.getColumnIndex("serverId"));
 			evaluacionTO.cliente = cursor.getString(cursor.getColumnIndex("nombre"));
+			evaluacionTO.tipoActivoLindley = cursor.getString(cursor.getColumnIndex("tipoActivo"));
 			evaluacionTO.tieneCambio = cursor.getInt(cursor.getColumnIndex("tieneCambios"));
 			
 			evaluaciones.add(evaluacionTO);
@@ -221,7 +223,7 @@ public class UploadDAO {
 		List<EvaluacionTO> evaluaciones = new ArrayList<EvaluacionTO>();
 		
 		String SQL = "select c.nombre,e.id,e.clienteCodigo,e.activosLindley,e.codigoFe,e.usuario,e.fecha,e.hora,e.usuarioCierre,e.fechaCierre,e.horaCierre,e.estado,e.serverId," +
-					"e.combosSS,e.combosMS,e.obsSS,e.obsMS,e.motivoId,e.motivo,e.proceso " +
+					"e.combosSS,e.combosMS,e.obsSS,e.obsMS,e.motivoId,e.motivo,e.proceso,e.tipoActivo " +
 					 "from evaluacion e inner join cliente c on e.clienteCodigo = c.codigo where tieneCambios=?1 limit " + String.valueOf(limit);
 		
 		String[] args = new String[] {String.valueOf(ConstantesApp.EVALUACION_TIENE_CAMBIOS)};
@@ -235,6 +237,7 @@ public class UploadDAO {
 			evaluacionTO.id = cursor.getLong(cursor.getColumnIndex("id"));
 			evaluacionTO.codigoCliente =  cursor.getString(cursor.getColumnIndex("clienteCodigo"));
 			evaluacionTO.activosLindley =  cursor.getString(cursor.getColumnIndex("activosLindley"));
+			evaluacionTO.tipoActivoLindley = cursor.getString(cursor.getColumnIndex("tipoActivo"));
 			evaluacionTO.codigoFDE =  cursor.getString(cursor.getColumnIndex("codigoFe"));
 			evaluacionTO.usuarioCreacion =  cursor.getString(cursor.getColumnIndex("usuario"));
 			evaluacionTO.fechaCreacion =  cursor.getString(cursor.getColumnIndex("fecha"));
@@ -408,7 +411,7 @@ public class UploadDAO {
 	public void listarPresentacion(EvaluacionTO evaluacionTO){
 		String SQL = "select id,evaluacionId,anio,mes,tipoAgrupacion,codfde,codigoVariable,fechaEncuesta," +
 				"puntosSugeridos,puntosGanados,puntosBonus,fechaCompromiso,confirmacion," +
-				"origen,estado,proceso " +
+				"origen,estado,proceso,tipoMarcado " +
 				"from evaluacion_presentacion " +
 				"where evaluacionId = ?1";
 		
@@ -432,6 +435,7 @@ public class UploadDAO {
 			presentacionTO.origen =  cursor.getString(cursor.getColumnIndex("origen"));
 			presentacionTO.estado =  cursor.getString(cursor.getColumnIndex("estado"));
 			presentacionTO.proceso = cursor.getInt(cursor.getColumnIndex("proceso"));
+			presentacionTO.tipoMarcado = cursor.getString(cursor.getColumnIndex("tipoMarcado"));
 			evaluacionTO.presentaciones.add(presentacionTO);
 		}
 		cursor.close();

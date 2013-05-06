@@ -11,6 +11,7 @@ import lindley.desarrolloxcliente.negocio.PosicionBLL;
 import lindley.desarrolloxcliente.negocio.PresentacionBLL;
 import lindley.desarrolloxcliente.to.ClienteTO;
 import lindley.desarrolloxcliente.to.UsuarioTO;
+import lindley.desarrolloxcliente.to.download.TipoActivoTO;
 import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
 import lindley.desarrolloxcliente.to.upload.OportunidadTO;
 import lindley.desarrolloxcliente.to.upload.PosicionTO;
@@ -22,16 +23,22 @@ import net.msonic.lib.MessageBox;
 import roboguice.inject.InjectResource;
 import roboguice.inject.InjectView;
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -84,6 +91,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 		
 		setSubTitle(String.format("%s - %s", cliente.codigo ,cliente.nombre));
 		
+		/*
 		MessageBox.showConfirmDialog(this, "Posicion: ",
 				"", "Activos de Lindley",
 				new android.content.DialogInterface.OnClickListener() {
@@ -103,7 +111,64 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 						processAsync();
 					}
 
-				});
+				});*/
+		
+		
+		final Dialog dialog = new Dialog(this);
+		dialog.setContentView(R.layout.activosdialog);
+		dialog.setTitle("Tipo de Activo Lindley?");
+		final Context demo = this;
+		
+		final ListView lstTipo = (ListView)dialog.findViewById(R.id.lstTipo);
+		final Spinner spTipoActivo = (Spinner) dialog.findViewById(R.id.spTipoActivo);
+		spTipoActivo.setOnItemSelectedListener(new OnItemSelectedListener() {
+			
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				if(arg2==0){
+					List<TipoActivoTO> tipos = posicionBLL.consultarTipoActivo(ConstantesApp.RESPUESTA_SI);
+ 					DialogAdapter  d = new DialogAdapter(demo, tipos);
+ 					lstTipo.setAdapter(d);
+				}else{
+					List<TipoActivoTO> tipos = posicionBLL.consultarTipoActivo(ConstantesApp.RESPUESTA_NO);
+ 					DialogAdapter  d = new DialogAdapter(demo, tipos);
+ 					lstTipo.setAdapter(d);
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		Button btnAceptar = (Button)dialog.findViewById(R.id.btnAceptar);
+		btnAceptar.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(spTipoActivo.getSelectedItemPosition()==0){
+					evaluacion.activosLindley = ConstantesApp.RESPUESTA_SI;
+				}else{
+					evaluacion.activosLindley = ConstantesApp.RESPUESTA_NO;
+				}
+				
+				DialogAdapter adapter = (DialogAdapter)lstTipo.getAdapter();
+				
+				if(adapter.codigo!=null && adapter.codigo.compareTo("")!=0){
+					evaluacion.tipoActivoLindley=adapter.codigo;
+					Log.d("sss", evaluacion.tipoActivoLindley);
+					processAsync();
+					dialog.dismiss();
+				}
+			}
+		});
+		
+		dialog.show();
+		
 	}
 
 	@Override
@@ -267,6 +332,75 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 		showToast(error_generico_process);
 	}
 	
+	
+	public static class DialogAdapter extends ArrayAdapter<TipoActivoTO>{
+		private Context context;
+		private List<TipoActivoTO> tipos;
+		public String codigo;
+		
+		public DialogAdapter(Context context,List<TipoActivoTO> tipos) {
+			super(context, R.layout.skuprioritario_content, tipos);
+			this.context = context;
+			this.tipos = tipos;
+			
+		}
+		
+		public View getView(int position, View convertView, ViewGroup parent) {
+			// TODO Auto-generated method stub
+			
+			View view = null;
+			if (convertView == null) {
+				LayoutInflater inflator = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+				view = inflator.inflate(R.layout.activosdialog_content, null);
+				final ViewHolder2 viewHolder = new ViewHolder2();
+
+				viewHolder.rdOpcion = (RadioButton) view.findViewById(R.id.rdOpcion);
+				
+
+				
+				view.setTag(viewHolder);
+				viewHolder.rdOpcion.setTag(this.tipos.get(position));
+				
+				
+				viewHolder.rdOpcion.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						
+						for (TipoActivoTO tipoActivoTO : tipos) {
+							tipoActivoTO.seleccionado=false;
+							codigo="";
+						}
+						
+						TipoActivoTO tipo = (TipoActivoTO) viewHolder.rdOpcion.getTag();
+						tipo.seleccionado=true;
+						codigo=tipo.codigo;
+						notifyDataSetChanged();
+					}
+				});
+				
+				
+			} else {
+				view = convertView;
+				((ViewHolder2) view.getTag()).rdOpcion.setTag(this.tipos.get(position));
+			}
+
+			ViewHolder2 holder = (ViewHolder2) view.getTag();
+			TipoActivoTO tipoActivoTO = tipos.get(position);
+			holder.rdOpcion.setChecked(tipoActivoTO.seleccionado);
+			holder.rdOpcion.setText(tipoActivoTO.descripcion);
+
+			return view;
+		}
+		
+		static class ViewHolder2 {
+			RadioButton rdOpcion;
+		}
+
+
+	}
+	
 	public static class EfficientAdapter extends ArrayAdapter<SkuTO> {
 		private Activity context;
 		private List<SkuTO> skuPresentaciones;
@@ -351,6 +485,7 @@ public class SKUPrioritario_Activity extends net.msonic.lib.sherlock.ListActivit
 			TextView txViewSKU;
 			Spinner chkValActual;
 		}
-
+		
+		
 	}
 }

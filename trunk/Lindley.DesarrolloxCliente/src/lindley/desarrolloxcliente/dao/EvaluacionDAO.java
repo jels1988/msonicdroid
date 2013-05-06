@@ -120,7 +120,7 @@ public class EvaluacionDAO {
 		values.put("combosMS", evaluacionTO.combosMS);
 		values.put("obsMS", evaluacionTO.observacionMS);
 		values.put("tieneCambios", ConstantesApp.EVALUACION_TIENE_CAMBIOS);
-		
+		values.put("tipoActivo", evaluacionTO.tipoActivoLindley);
 		
 		long id= dbHelper.insertOrThrow("evaluacion", values);
 		
@@ -144,6 +144,7 @@ public class EvaluacionDAO {
 			evaluacionTO.serverId=cursor.getLong(cursor.getColumnIndex("serverId"));
 			evaluacionTO.codigoCliente = cursor.getString(cursor.getColumnIndex("clienteCodigo"));
 			evaluacionTO.activosLindley = cursor.getString(cursor.getColumnIndex("activosLindley"));
+			evaluacionTO.tipoActivoLindley = cursor.getString(cursor.getColumnIndex("tipoActivo"));
 			evaluacionTO.codigoFe = cursor.getString(cursor.getColumnIndex("codigoFe"));
 			evaluacionTO.usuarioCrea = cursor.getString(cursor.getColumnIndex("usuario"));
 			evaluacionTO.fecha = cursor.getString(cursor.getColumnIndex("fecha"));
@@ -173,6 +174,7 @@ public class EvaluacionDAO {
 			evaluacionTO.id=id;
 			evaluacionTO.codigoCliente = cursor.getString(cursor.getColumnIndex("clienteCodigo"));
 			evaluacionTO.activosLindley = cursor.getString(cursor.getColumnIndex("activosLindley"));
+			evaluacionTO.tipoActivoLindley = cursor.getString(cursor.getColumnIndex("tipoActivo"));
 			evaluacionTO.codigoFe = cursor.getString(cursor.getColumnIndex("codigoFe"));
 			evaluacionTO.usuarioCrea = cursor.getString(cursor.getColumnIndex("usuario"));
 			evaluacionTO.fecha = cursor.getString(cursor.getColumnIndex("fecha"));

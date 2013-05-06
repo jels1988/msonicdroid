@@ -2,7 +2,6 @@ package lindley.desarrolloxcliente.dao;
 
 
 
-import lindley.desarrolloxcliente.ConstantesApp;
 import lindley.desarrolloxcliente.to.PeriodoTO;
 import lindley.desarrolloxcliente.to.ResumenValueTO;
 import lindley.desarrolloxcliente.to.download.AccionTradeProductoTO;
@@ -18,6 +17,7 @@ import lindley.desarrolloxcliente.to.download.ProfitTO;
 import lindley.desarrolloxcliente.to.download.PuntoTO;
 import lindley.desarrolloxcliente.to.download.SkuTO;
 import lindley.desarrolloxcliente.to.upload.EvaluacionTO;
+import lindley.desarrolloxcliente.to.download.TipoActivoTO;
 import net.msonic.lib.DBHelper;
 
 import android.content.ContentValues;
@@ -168,6 +168,7 @@ public class DescargaDAO {
 		ContentValues values = new ContentValues();
 		values.put("clienteCodigo", evaluacionTO.codigoCliente);
 		values.put("activosLindley", evaluacionTO.activosLindley);
+		values.put("tipoActivo", evaluacionTO.tipoActivoLindley);
 		values.put("codigoFe", evaluacionTO.codigoFDE);
 		values.put("usuario", evaluacionTO.usuarioCreacion);
 		values.put("fecha", evaluacionTO.fechaCreacion);
@@ -477,7 +478,7 @@ ContentValues values = new ContentValues();
 		values.put("confirmacion", presentacionTO.confirmacion);
 		values.put("origen", presentacionTO.origen);
 		values.put("estado", presentacionTO.estado);
-		
+		values.put("tipoMarcado", presentacionTO.tipoMarcado);
 		
 		long id= dbHelper.insertOrThrow("evaluacion_presentacion", values);
 		presentacionTO.id = id;
@@ -731,4 +732,22 @@ ContentValues values = new ContentValues();
 		dbHelper.delete("punto", null, null);
 	}
 	
+	
+	public void deleteTipoActivo(){
+		dbHelper.delete("tipo_activo", null, null);
+	}
+	
+	public long insertTipoActivo(TipoActivoTO tipoActivoTO){
+		
+		ContentValues values = new ContentValues();
+		values.put("codigoActivo", tipoActivoTO.codigo);
+		values.put("descripcion", tipoActivoTO.descripcion);
+		values.put("tipo", tipoActivoTO.tipo);
+		
+		long id= dbHelper.insertOrThrow("tipo_activo", values);
+		
+		return id;
+		
+		
+	}
 }

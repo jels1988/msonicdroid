@@ -59,6 +59,12 @@ public final class ConstantesApp {
 	public static final String VARIABLE_RED_PRECIO_MERCADO = "05";
 	public static final String VARIABLE_RED_POP = "06";
 	
+	
+	public static final String TIPO_MARCADO_NORMAL = "01";
+	public static final String TIPO_MARCADO_FRIO = "02";
+	
+	
+	
 	public final static boolean isSI(String estado){
 		if((estado==null) || (TextUtils.isEmpty(estado)) || (estado.trim().equalsIgnoreCase("")) || (estado.equalsIgnoreCase(RESPUESTA_NO))){
 			return false;
