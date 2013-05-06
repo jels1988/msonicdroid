@@ -29,6 +29,7 @@ public class EvaluacionTO {
 	
 	public String codigoCliente;
 	public String activosLindley;
+	public String tipoActivoLindley;
 	public String codigoFe; //cluster
 	//public String codigoUsuario;
 	

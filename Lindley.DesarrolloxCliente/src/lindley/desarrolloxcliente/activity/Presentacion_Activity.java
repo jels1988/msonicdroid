@@ -22,11 +22,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import net.msonic.lib.sherlock.ListBaseFragment;
 
@@ -129,7 +132,7 @@ public class Presentacion_Activity extends ListBaseFragment {
 					holder.btnSKU = (Button) view.findViewById(R.id.btnSKU);
 					holder.txEditFecha = (EditText) view.findViewById(R.id.txEditFecha);
 					holder.btnFecha = (ImageButton) view.findViewById(R.id.btnFecha);
-					
+					holder.spTipoMarcado =(Spinner) view.findViewById(R.id.spTipoMarcado);
 					
 					holder.btnSKU.setOnClickListener(new OnClickListener() {
 
@@ -141,7 +144,25 @@ public class Presentacion_Activity extends ListBaseFragment {
 						}});
 					
 					
-					
+					holder.spTipoMarcado.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+						@Override
+						public void onItemSelected(AdapterView<?> arg0,View arg1, int arg2, long arg3) {
+							// TODO Auto-generated method stub
+							PresentacionTO oportunidadTO = (PresentacionTO) holder.txViewPuntos.getTag();
+							if(arg2==0){
+								oportunidadTO.tipoMarcado=ConstantesApp.TIPO_MARCADO_NORMAL;
+							}else{
+								oportunidadTO.tipoMarcado=ConstantesApp.TIPO_MARCADO_FRIO;
+							}
+						}
+
+						@Override
+						public void onNothingSelected(AdapterView<?> arg0) {
+							// TODO Auto-generated method stub
+							
+						}
+					});
 					
 					  holder.btnFecha.setOnClickListener(new OnClickListener() {
 							@Override
@@ -187,6 +208,12 @@ public class Presentacion_Activity extends ListBaseFragment {
 				holder.txViewPuntos.setText(presentacionCompromisoTO.puntosSugeridos);
 				holder.txEditFecha.setText(ConstantesApp.formatFecha(presentacionCompromisoTO.fechaCompromiso));
 				
+				if(presentacionCompromisoTO.tipoMarcado.compareTo(ConstantesApp.TIPO_MARCADO_NORMAL)==0){
+					holder.spTipoMarcado.setSelection(0);
+				}else{
+					holder.spTipoMarcado.setSelection(1);
+				}
+				
 				return view;
 				
 			}
@@ -195,6 +222,7 @@ public class Presentacion_Activity extends ListBaseFragment {
 				Button btnSKU;
 				EditText txEditFecha;
 				ImageButton btnFecha;
+				Spinner spTipoMarcado;
 			}
 
 	 }

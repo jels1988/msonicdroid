@@ -32,6 +32,7 @@ import lindley.desarrolloxcliente.ws.service.DescargarOportunidadesProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarProfitProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarPuntoProxy;
 import lindley.desarrolloxcliente.ws.service.DescargarSkuProxy;
+import lindley.desarrolloxcliente.ws.service.DescargarTipoActivoProxy;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -76,6 +77,7 @@ public class DescargaData_Activity extends ListActivityBase {
 	public static final int DESCARGAR_MOTIVO=16;
 	public static final int DESCARGAR_ACELERADOR=17;
 	public static final int DESCARGAR_ARTICULO_CANJE=18;
+	public static final int DESCARGAR_TIPO_ACTIVO=19;
 	
 	public static final int GUARDAR_PRODUCTO=DESCARGAR_PRODUCTO+DIFERENCIA;
 	public static final int GUARDAR_OPORTUNIDAD=DESCARGAR_OPORTUNIDAD+DIFERENCIA;
@@ -96,6 +98,7 @@ public class DescargaData_Activity extends ListActivityBase {
 	public static final int GUARDAR_MOTIVO=DESCARGAR_MOTIVO+DIFERENCIA;
 	public static final int GUARDAR_ACELERADOR=DESCARGAR_ACELERADOR+DIFERENCIA;
 	public static final int GUARDAR_ARTICULO_CANJE=DESCARGAR_ARTICULO_CANJE+DIFERENCIA;
+	public static final int GUARDAR_TIPO_ACTIVO=DESCARGAR_TIPO_ACTIVO+DIFERENCIA;
 	
 	@Inject DescargarProductosProxy descagarProductosProxy;
 	@Inject DescargarOportunidadesProxy descargarOportunidadesProxy;
@@ -116,6 +119,7 @@ public class DescargaData_Activity extends ListActivityBase {
 	@Inject DescargarAceleradorProxy descargarAceleradorProxy;
 	@Inject DescargarMotivoProxy descargarMotivoProxy;
 	@Inject DescargarArticuloCanjeProxy descargarArticuloCanjeProxy;
+	@Inject DescargarTipoActivoProxy descargarTipoActivoProxy;
 	
 	@Inject DescargaBLL descargaBLL;
 	@Inject UploadBLL uploadBLL;
@@ -282,6 +286,7 @@ private int contadorProcesos=0;
 	protected void process() throws Exception {
 		// TODO Auto-generated method stub
 		
+		
 		ProcesoInfoTO p0 = new ProcesoInfoTO();
 		p0.processId=DESCARGAR_PRODUCTO;		
 		p0.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Producto");
@@ -344,41 +349,6 @@ private int contadorProcesos=0;
 		p9.estado=ProcesoInfoTO.ESTADO_DESCARGA;
 		lista.add(p9);
 		
-		/*
-		ProcesoInfoTO p10 = new ProcesoInfoTO();
-		p10.processId=DESCARGAR_EVALUACION_OPORTUNIDAD;
-		p10.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Evaluaciones Oportunidades");
-		p10.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-		lista.add(p10);
-		
-		ProcesoInfoTO p11 = new ProcesoInfoTO();
-		p11.processId=DESCARGAR_EVALUACION_POSICION;
-		p11.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Evaluaciones Posiciones");
-		p11.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-		lista.add(p11);
-		
-		ProcesoInfoTO p12 = new ProcesoInfoTO();
-		p12.processId=DESCARGAR_EVALUACION_POSICION_COMPROMISO;
-		p12.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Evaluaciones Posiciones Compromiso");
-		p12.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-		lista.add(p12);
-		
-		
-
-		ProcesoInfoTO p13 = new ProcesoInfoTO();
-		p13.processId=DESCARGAR_EVALUACION_PRESENTACION;
-		p13.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Evaluaciones Posiciones Presentaciones");
-		p13.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-		lista.add(p13);
-		
-		
-		ProcesoInfoTO p14 = new ProcesoInfoTO();
-		p14.processId=DESCARGAR_EVALUACION_SKU;
-		p14.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Evaluaciones Skus");
-		p14.estado=ProcesoInfoTO.ESTADO_DESCARGA;
-		lista.add(p14);
-		*/
-		
 		
 		ProcesoInfoTO p15 = new ProcesoInfoTO();
 		p15.processId=DESCARGAR_MOTIVO;
@@ -400,6 +370,11 @@ private int contadorProcesos=0;
 		
 		
 		
+		ProcesoInfoTO p18 = new ProcesoInfoTO();
+		p18.processId=DESCARGAR_TIPO_ACTIVO;
+		p18.descripcion=String.format(downloaddata_activity_sincronizar_inicio, "Tipo Activo");
+		p18.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+		lista.add(p18);
 		
 		adap = new EfficientAdapter(this,lista);
 	}
@@ -818,6 +793,14 @@ private int contadorProcesos=0;
 		
 		
 		switch (accion) {
+		case DESCARGAR_TIPO_ACTIVO:
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Tipo Activo");
+			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
+			break;
+		case GUARDAR_TIPO_ACTIVO:			
+			proceso.descripcion=String.format(downloaddata_activity_sincronizar_guardando, "Tipo Activo");
+			proceso.estado=ProcesoInfoTO.ESTADO_DB;
+			break;
 		case DESCARGAR_PRODUCTO:
 			proceso.descripcion=String.format(downloaddata_activity_sincronizar_descargando, "Producto");
 			proceso.estado=ProcesoInfoTO.ESTADO_DESCARGA;
@@ -1058,6 +1041,9 @@ private int contadorProcesos=0;
 		
 		
 		switch (accion) {
+		case DESCARGAR_TIPO_ACTIVO:
+			descargarTipoActivoProxy.execute();
+			break;
 		case DESCARGAR_PRODUCTO:
 			descagarProductosProxy.execute();
 			break;
@@ -1134,6 +1120,10 @@ private int contadorProcesos=0;
 		
 		case DESCARGAR_ARTICULO_CANJE:
 			descargarArticuloCanjeProxy.execute();
+			break;
+		case GUARDAR_TIPO_ACTIVO:
+			
+			descargaBLL.saveTipoActivo(descargarTipoActivoProxy.getResponse().tipos);
 			break;
 		case GUARDAR_PRODUCTO:
 			
@@ -1838,6 +1828,38 @@ private int contadorProcesos=0;
 				break;
 			}
 			
+			
+			case DESCARGAR_TIPO_ACTIVO:{
+				ProcesoInfoTO p1 = processById(accion);
+				boolean isExito = descargarTipoActivoProxy.isExito();
+				if(descargarTipoActivoProxy.getResponse()!=null){
+					int status = descargarTipoActivoProxy.getResponse().getStatus();
+					if ((isExito) && (status == 0)) {
+						p1.descripcion="Tipo Activo Descargado";
+						p1.isExito=true;
+						processAsync(p1.processId+DIFERENCIA);
+					}else{
+						p1.estado = ProcesoInfoTO.ESTADO_ERROR;
+						p1.descripcion="Error descargando Tipo Activo";
+						p1.isExito=false;
+					}
+				}else{
+					p1.estado = ProcesoInfoTO.ESTADO_ERROR;
+					p1.descripcion="Error descargando Tipo Activo";
+					p1.isExito=false;
+				}
+				
+				break;
+			}
+			case GUARDAR_TIPO_ACTIVO:
+			{
+				ProcesoInfoTO p1 = processById(accion);
+				p1.descripcion=String.format(downloaddata_activity_sincronizar_ok, "Tipo Activo");
+				p1.estado=ProcesoInfoTO.ESTADO_OK;
+				
+				break;
+			}
+			
 		}
 		
 		removeContadorProcesos();
@@ -2308,6 +2330,19 @@ private int contadorProcesos=0;
 			}
 			
 			
+			case DESCARGAR_TIPO_ACTIVO:{
+				
+				proceso.descripcion="Error descargando tipo activo";
+				
+				break;
+			}
+			
+			case GUARDAR_TIPO_ACTIVO:{
+				
+				proceso.descripcion="Error guardando tipo activo";
+				
+				break;
+			}
 			
 			
 		}

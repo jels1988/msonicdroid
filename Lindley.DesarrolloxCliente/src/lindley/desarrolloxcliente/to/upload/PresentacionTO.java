@@ -13,7 +13,7 @@ public class PresentacionTO {
 	        puntosSugeridos = "0";
 	        puntosBonus = "0";
 	        puntosGanados="0";
-	        
+	        tipoMarcado=ConstantesApp.TIPO_MARCADO_NORMAL;
 	        confirmacion =  ConstantesApp.RESPUESTA_NO;
 			origen =  ConstantesApp.OPORTUNIDAD_SISTEMA;
 			estado =  ConstantesApp.OPORTUNIDAD_ABIERTA;
@@ -85,4 +85,7 @@ public class PresentacionTO {
     public int proceso;
 
 
+	@Expose()
+    @SerializedName("TMR")
+    public String tipoMarcado;
 }
