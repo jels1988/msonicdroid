@@ -1,5 +1,10 @@
 package lindley.desarrolloxcliente.negocio;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 import lindley.desarrolloxcliente.dao.ClienteDAO;
@@ -11,6 +16,7 @@ import net.msonic.lib.JSONHelper;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Environment;
 import android.util.Log;
 
 import com.google.inject.Inject;
@@ -41,7 +47,7 @@ public class ClienteBLL {
 	
 	
 
-	public void compartirCliente(ClienteTO clienteTO){
+	public void compartirClienteXX(ClienteTO clienteTO){
 		Context contextLanzadorAplicaciones = null;
 		
 		try {
@@ -63,6 +69,7 @@ public class ClienteBLL {
 	}
 	
 	public lindley.desarrolloxcliente.lazanadorapp.to.ClienteTO consultarCliente(){
+		/*
 		Log.d(TAG_LOG, "consultarCliente");
 		Context contextLanzadorAplicaciones = null;
 		
@@ -87,7 +94,50 @@ public class ClienteBLL {
 			
 			clienteTO.codigoCliente =  String.valueOf(Integer.valueOf(clienteTO.codigoCliente));
 		}
-		return clienteTO;
+		return clienteTO;*/
+		
+		Log.d(TAG_LOG, "consultarCliente");
+		
+		lindley.desarrolloxcliente.lazanadorapp.to.ClienteTO clienteTO=null;
+		 File root = Environment.getExternalStorageDirectory();
+		//Get the text file
+		 File file = new File(root,"LANZADOR_APP_CLIENTE_SELECCIONADO");
+		 StringBuilder text = new StringBuilder();
+		 BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(file));
+			
+			 String line;
+			    while ((line = br.readLine()) != null) {
+			        text.append(line);
+			    }
+			    
+			    String clienteJSON = text.toString();
+			    
+			    if(clienteJSON==null){
+					Log.d(TAG_LOG, "Clientes no existe");
+					clienteTO = null;
+				}else{
+					Log.d(TAG_LOG, clienteJSON);
+					clienteTO = JSONHelper.desSerializar(clienteJSON, lindley.desarrolloxcliente.lazanadorapp.to.ClienteTO.class);
+				}    
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if(br!=null){ 
+				try {
+					br.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		 return clienteTO;
 			
 	}
 	
